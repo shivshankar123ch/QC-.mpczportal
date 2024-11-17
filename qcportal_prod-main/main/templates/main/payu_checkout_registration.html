@@ -1,0 +1,334 @@
+{% load static%}
+
+<html lang="en">
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static '/assets/img/mp-logo_0.png' %}" />
+    <title>
+        Quality Monitoring Portal
+    </title>
+    <!--  Social tags      -->
+    <meta name="description"
+        content="Quality Monitering Portal | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state" />
+    <meta name="keywords"
+        content="Quality Monitering Portal | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="Quality Monitering Portal| Energy Department, Government of Madhya Pradesh" />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet'" />
+    <!-- Nucleo Icons -->
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="{% static '/kit.fontawesome.com/42d5adcbca.js' %}" crossorigin="anonymous"></script>
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static '/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/rcastyle.css' %}" rel="stylesheet" />
+    <!-- Anti-flicker snippet (recommended)  -->
+
+    <script>
+        (function (a, s, y, n, c, h, i, d, e) {
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function () {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function () {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
+            'GTM-K9BGS8K': true
+        });
+    </script>
+    <!-- Analytics-Optimize Snippet -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '{% static ' / www.google - analytics.com / analytics.js ' %}', 'ga');
+        ga('create', 'UA-46172202-22', 'auto', {
+            allowLinker: true
+        });
+        ga('set', 'anonymizeIp', true);
+        ga('require', 'GTM-K9BGS8K');
+        ga('require', 'displayfeatures');
+        ga('require', 'linker');
+        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
+    </script>
+    <!-- end Analytics-Optimize Snippet -->
+</head>
+
+
+
+
+
+<body onload="document.payuForm.submit()">
+
+    <div class="ed-paymentinfo-main">
+        <div class="ed-paymentinfo-items">
+            <div class="container h-100">
+                <div class="row m-0 h-100">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 p-0 h-100">
+                        <div class="ed-paymentimg">
+                            <div class="ed-imgbox-main">
+                                <div class="ed-imgbox-block">
+                                    <img src="{% static '/assets/images/mpeb_zone1.png' %}"
+                                        src="ed-loginins-info1.png" />
+                                </div>
+                                <div class="ed-imgbox-block">
+                                    <img src="{% static '/assets/images/mpeb_zone2.png' %}"
+                                        src="ed-loginins-info1.png" />
+                                </div>
+                                <div class="ed-imgbox-block">
+                                    <img src="{% static '/assets/images/mpeb_zone3.png' %}"
+                                        src="ed-loginins-info1.png" />
+                                </div>
+                                <!-- <img src="{% static '/assets/images/mpeb_logo2.png' %}" style="width:100%; height: 50%; margin-top: -35px;" alt="main_logo">  -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 p-0 h-100">
+                        <div class="ed-paymentinfo-blcok">
+                            <div class="ed-paymentinfo-details">
+                                <div class="ed-paymentinfo-inner">
+                                    <h2>
+                                        Payment Details
+                                    </h2>
+                                    <div class="table-responsive">
+                                        <form action='https://secure.payu.in/_payment' method='post'>
+                                            <input type="hidden" name="key" value="GHeH7D" />
+                                            <input type="hidden" name="txnid" value="{{txnid}}" readonly />
+                                            <input type="hidden" name="amount" value={{amount}} />
+                                            <input type="hidden" name="furl"
+                                                value="https://qcportal.mpcz.in/payment/failure" /></td>
+                                            <!-- <input type="hidden" name="service_provider" value="{{posted.service_provider}}" size="64" /> -->
+                                            <input type="hidden" name="firstname" value="{{firstname}}" />
+                                            <input type="hidden" name="userzone" value="{{userzone}}" />
+                                            <input type="hidden" name="lastname" value="" />
+                                            <input type="hidden" name="phone" value="{{phone}}" />
+                                            <input type="hidden" name="hash" value="{{ posted }}" />
+                                            <input type="hidden" name="surl"
+                                                value="https://qcportal.mpcz.in/payment/success" />
+                                            <input type="hidden" name="productinfo" value="{{productinfo}}" />
+                                            <input type="hidden" name="email" value="{{email}}" />
+                                            <table
+                                                class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Transaction Id</th>
+                                                        <td>{{txnid}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Transaction Amount</th>
+                                                        <td>{{amount}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <td>{{firstname}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Phone No</th>
+                                                        <td>{{phone}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Email Id</th>
+                                                        <td>{{email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Purpose</th>
+                                                        <td>{{productinfo}}</td>
+                                                    </tr>
+                                                      <tr>
+                                                        <th>User Zone</th>
+                                                        <td>{{user_zone_c}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>  
+                                </div>
+                                <div class="form-group">
+                                    <div class="btn-actionblock text-center">
+                                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                        <button class="btn ed-submit ed-formSubmit" type="submit" title="submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                <form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--   Core JS Files   -->
+    <!-- <script>
+        var ns = " ";
+
+        function generateOTP() {
+            console.log("jjjjjjj");
+            let mobile_data = document.getElementById('mobile').value;
+            console.log(mobile_data);
+            console.log(mobile_data.length);
+
+            if (mobile_data.length === 10) {
+                $.post("https://qcportal.mpcz.in/api/otp_generate", {
+                        contact: mobile_data,
+
+                    },
+                    function(data, status) {
+                        console.log(data.message);
+                        ns += data.otp;
+                        ///console.log(ns);
+                        if (data.message == "Your otp has been sent to your registered mobile number") {
+                            alert(data.message);
+                            //document.getElementById('otpNumber').innerHTML = "Your otp is " + " " + data.otp;
+                            return false;
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+            } else {
+                console.log("something issue ");
+            }
+
+        }
+
+        function validateForm() {
+            let mobile = document.forms["myForm"]["mobile"].value;
+            let phoneNumber = document.getElementById('mobile').value;
+            let phoneRGEX = /^[6789]\d{9}$/;
+            let phoneResult = phoneRGEX.test(phoneNumber);
+            let Otps = document.forms["myForm"]["otp"].value;
+            console.log(Otps);
+            console.log("mmm");
+            //let otpumber = document.getElementById('otp123').value;
+            let Captcha = document.forms["myForm"]["captcha"].value;
+
+
+
+            if (mobile == " ") {
+                document.getElementById('mobileNumber').innerHTML = "Please fill the required details ";
+                return false;
+            } else {
+                if (phoneResult == false) {
+                    document.getElementById('mobileNumber').innerHTML = " Please fill the valid Mobile number ";
+                    return false;
+                } else {
+                    //generateOTP();
+                    document.getElementById('mobileNumber').innerHTML = " ";
+                }
+            }
+
+            // if (otp == " ") {
+            //     document.getElementById('otpNumber9').innerHTML = "Please fill the required details ";
+            //     return false;
+            // } else {
+            //     document.getElementById('otpNumber9').innerHTML = " ";
+            // }
+
+
+
+            if (Otps == "") {
+                console.log("gd otp");
+                document.getElementById('otpNumber9').innerHTML = "Please fill the required details ";
+                return false;
+            } else {
+                console.log("ngd otp");
+                document.getElementById('otpNumber9').innerHTML = " ";
+                // if (otpumber !== ns) {
+                //     document.getElementById('otpNumber9').innerHTML = "Your OTP number " + "\n " + ns;
+                //     return false;
+                // } else {
+
+                //     document.getElementById('otpNumber9').innerHTML = " ";
+
+                // }
+
+            }
+
+
+
+
+            if (Captcha == " ") {
+                document.getElementById('captchaInput').innerHTML = "Please fill the required details ";
+                return false;
+            } else {
+                document.getElementById('captchaInput').innerHTML = " ";
+            }
+            let captcha_number1 = document.getElementById("capt").value;
+            let capcha_number2 = document.getElementById("textinput").value;
+            if (captcha_number1 !== capcha_number2) {
+                document.getElementById('captchaInput').innerHTML = " Captcha Code not match ";
+                return false;
+            } else {
+                console.log("hh ");
+                document.getElementById('captchaInput').innerHTML = " ";
+            }
+
+
+        }
+    </script> -->
+    <script>
+    </script>
+    <script src="{% static '/assets/js/core/popper.min.js' %} "></script>
+    <script src="{% static '/assets/js/core/bootstrap.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
+    <!-- Kanban scripts -->
+    <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %} "></script>
+    <!-- AJAX Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"></script>
+
+    <!-- Jquery Link -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf("Win ") > -1;
+        if (win && document.querySelector("#sidenav-scrollbar ")) {
+            var options = {
+                damping: "0.5 ",
+            };
+            Scrollbar.init(document.querySelector("#sidenav-scrollbar "), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js "></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static '/assets/js/argon-dashboard.min28b5.js' %} "></script>
+</body>
+
+</html>

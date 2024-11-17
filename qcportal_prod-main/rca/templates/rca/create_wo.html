@@ -1,0 +1,121 @@
+{% extends 'rca/RCA_base.html' %} {% load static %} {% block heading %} Create Work Order {% endblock heading %} {% block Create_PO %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock Create_PO %}
+    <!-- <head>
+    <script type="text/javascript" src="/static/assets/js/Validation/rcaCreate.js"></script>
+  </head> -->
+    {% block body %}
+    <script type="text/javascript" src="/static/assets/js/Validation/rcaCreate.js"></script>
+    <form action="/rca/rca_order" method="POST" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="ed-card-inner">
+            <div class="card-header">
+                <h2>Create RCA Order</h2>
+            </div>
+            <div class="card-body">
+                <div class="ed-form-block">
+                    <div class="ed-form-title">
+                        <h6>
+                            <span class="ed-text">
+                                Order Details
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="ed-form-body">
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Tendor Specification No
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="dispatch_num" id="dispatch_num" required="required"
+                                onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                                class="form-control ed-textbox">
+                            <span id="tendor" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Material Specification (like 11/.433 KV)
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="specific" required="required" onkeyup="validateForm()"
+                                onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox">
+                            <span id="materilall" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Bid Opened Date
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="date" id="bid_open_date1" name="bid_open_date" required="required"
+                                onclick="validateForm()" class="form-control ed-textbox">
+                            <span id="date" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                RCA Vendor
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select name="vendor" id="vendor1" onclick="validateForm()" onfocus="validateForm()"
+                                onchange="validateForm()" required="required" class="form-control ed-textbox">
+                                <option selected value="">Select RCA Vendor </option>
+                                {% for name in vendor %}
+                                <option value='{{name.CompanyName_E}}'>{{name.CompanyName_E}}</option>
+                                {% endfor %}
+                            </select>
+                            <span id="ven_1" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Order Date
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="date" id="order_date1" name="order_date" required="required"
+                                onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                                class="form-control ed-textbox">
+                            <span id="order" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-action text-right">
+                                <a href="/rca/rca_order_add_schedule">
+                                    <input type="submit" name="submit" onclick="validateForm()" value="Save And Next"
+                                        class="btn ed-submit ed-next" autocomplete="off">
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        let dtElem = document.getElementById('bid_open_date1');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem1 = document.getElementById('order_date1');
+        let maxDate1 = new Date();
+        dtElem1.max = formatDate(maxDate1);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    {% endblock body %}

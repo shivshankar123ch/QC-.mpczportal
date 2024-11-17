@@ -1,0 +1,90 @@
+{% extends 'vendor/RCA_vendor_base.html' %} {% load static%} 
+{% block body %}
+<main class="main-content  mt-0">
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 d-flex flex-column mx-lg-0 mx-auto">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left">
+                                <h4 class=" text info font-weight-bolder">Registration and Factory Inspection Payment Details</h4>
+                                <!-- <p class="mb-0">All <span style="color: red;">(*)</span> marked fields are mandatory</p> -->
+                                <form action="/rca/rca_payment" method="post" class="row g-3 needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">Registration Fee</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="2000" width="100" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">CGST On Registration Fees</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="180" width="100" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">SGST On Registration Fees</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="180" width="100" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="labelName text-capitalize">Total Registration Fee Including GST(A)</label>
+                                        <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="2360" width="100" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">Factory Inspection Fee</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="10000" width="100" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">CGST On Factory Inspection Fee</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="900" width="100" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="labelName text-capitalize">SGST On Factory Inspection Fee</label>
+                                            <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="900" width="100" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="labelName text-capitalize">Total Factory Inspection Fee Including GST(B)</label>
+                                        <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="11800" width="100" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="labelName text-capitalize">Total Amount(A+B)</label>
+                                        <input type="text" id="protocol" name="protocol" class="form-control" placeholder="" readonly="readonly" value="14160" width="100" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="labelName text-capitalize">Payment options</label>
+                                        <div class="col-sm-12"> <input id="paymentMode1" name="paymentMode" data-validate="required" type="radio" value="ONLINE" checked/> <strong>Online payment </strong>(can also be paid by credit/debit card)</div>
+                                    </div>
+                                  
+                                    <div class="text-center" class="labelName text-capitalize">
+                                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                        <button class="btn btn-primary text-capitalize fw-bold custom" type="submit" title="Send">Make Payment</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- <div class="col-5 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('{% static '/assets/img/mpeb_wrapper.jpg' %}');
+          background-size: cover;">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock body %}

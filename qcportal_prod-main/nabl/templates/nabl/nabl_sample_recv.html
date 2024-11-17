@@ -1,0 +1,232 @@
+{% extends 'nabl/nabl_Base.html' %}
+
+{% load static %}
+
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button"
+  aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1 font-weight-bold" style="font-weight: bold; font-size: medium; ">Dashboard</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/basic">
+        <span class="sidenav-mini-icon"> BI </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/rejected_doc">
+        <span class="sidenav-mini-icon"> RD </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/UpdateNablProfile">
+        <span class="sidenav-mini-icon"> AS </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update Profile </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/profile_status">
+        <span class="sidenav-mini-icon">PS</span>
+        <span class="sidenav-normal">Profile Status</span>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link " href="#">
+        <span class="sidenav-mini-icon"> Noti </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link active" href="/nabl/nabl_trf">
+        <span class="sidenav-mini-icon">T M R</span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">RCA Material Report </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/nabl_out_physical">
+        <span class="sidenav-mini-icon">Phy Test Out</span>
+        <span class="sidenav-normal">Physical Tested Outward</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/nabl_out_physical_view">
+        <span class="sidenav-mini-icon">Phy Test View</span>
+        <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">
+        <span class="sidenav-mini-icon">LO</span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock active %}
+
+
+{% block body %}
+<div class="card-header pb-0 pt-3 bg-transparent table-responsive">
+  <h6 class="text-capitalize">TRF Details</h6>
+  <div class="card-body pt-0 pb-10">
+
+    <div class="row table-responsive">
+      <table class="table table-bordered table-responsive">
+        <tr style="vertical-align: top;">
+          <th class="table-dark" style=" width: 20%;">Customer Organization Name</th>
+          <td style=" width: 80%;"><b>{{TRF_obj.customer_Organization_name}}</b></td>
+        </tr>
+        <tr style="vertical-align: top;">
+          <th class="table-dark" style=" width: 20%;">Customer Organization Address</th>
+          <td style=" width: 80%;"><b>{{TRF_obj.customer_Organization_address}}</b></td>
+        </tr>
+        <tr>
+          <th class="table-dark">Name of Sample Product</th>
+          <td><b>{{TRF_obj.name_of_sample_product}}</b></td>
+        </tr>
+        <tr>
+          <th class="table-dark">Sample Description Condition</th>
+          <td><b>{{TRF_obj.sample_description_condition}}</b></td>
+        </tr>
+        <tr>
+          <th class="table-dark">Test Request Form</th>
+          {% if not TRF_obj.TRFAreastore_file %}
+            <td><a onclick="alert('TRF not uploaded')">View</a></td>
+          {% else %}
+            <td><b><a style="color: blue;" href="{{TRF_obj.TRFAreastore_file.url}}" target="_blank"> View </a></b></td>
+          {% endif %}
+        </tr>
+        <tr>
+        </tr>
+      </table>
+
+      <h6 class="text-capitalize">Material Details</h6>
+      <table class="table table-striped">
+        <thead class="table table-dark" style="vertical-align: top;">
+          <tr class="text-center" style="vertical-align: top;">
+            <th scope="col">S.No.</th>
+            <th scope="col">Material <br>Serial No.</th>
+            <th scope="col">Physical Test</th>
+            <th scope="col">Remark</th>
+            <th scope="col">Result</th>
+            <th scope="col">Upload Report</th>
+            <th scope="col">Preview</th>
+            <th scope="col" colspan="2" style="text-align:center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sc in sc_obj %}
+          <form method="POST" action="/nabl/nabl_sample_recv2/{{sc.material_serial_number}}/{{sc.ro_id}}/{{sc.Gatepass.id}}"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <tr style="text-align: center;" class="text-center">
+              <td>{{forloop.counter}}</td>
+              <td><input size=10 type="text" name="mat_id" id="mat_id" value="{{sc.XMRList}}" readonly="readonly"></td>
+              <td>
+
+                {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+                <button type="button" style="background-color: #5e72e4" class="btn btn-primary "><a class="text-white"
+                    href="/nabl/nabl_sample_reject/{{sc.XMRList}}/{{sc.ro_id}}/{{sc.Gatepass.id}}">Physical Reject / Accept</a> </button>
+                {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+                <button type="button" style="background-color: #f5365c" class="btn btn-primary "><a class="text-white"
+                    href="/nabl/nabl_sample_reject/{{sc.XMRList}}/{{sc.ro_id}}/{{sc.Gatepass.id}}">View Rejected</a> </button>
+                {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+                <button type="button" style="background-color: #2dce89" class="btn btn-primary "><a class="text-white"
+                    href="/nabl/nabl_sample_reject/{{sc.XMRList}}/{{sc.ro_id}}/{{sc.Gatepass.id}}">View Accepted</a> </button>
+                {% endif %}
+              </td>
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td><input type="text" name="remark" id="remark" disabled></td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td><input type="text" name="remark" id="remark" disabled></td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td><input type="text" name="remark" id="remark" required="required"></td>
+              {% endif %}
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td>
+                <select disabled>
+                  <option value="">None</option>
+                </select>
+              </td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td>
+                <select disabled>
+                  <option value="">None</option>
+                </select>
+              </td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td>
+                <select name="result" id="result" required="required">
+                  <option value=1>Pass</option>
+                  <option value=0>Fail</option>
+                </select>
+              </td>
+              {% endif %}
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td><input type="file" disabled></td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td><input type="file" disabled></td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td><input type="file" id="uploadPDF" name="myFile" required="required"></td>
+              {% endif %}
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td><a onclick="alert('Report not uploaded')">Preview Report</a></td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td> <a onclick="alert('Report not uploaded')">Preview Report</a></td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td>
+                <script>
+                  function PreviewImage() {
+                    pdffile = document.getElementById("uploadPDF").files[0];
+                    pdffile_url = URL.createObjectURL(pdffile);
+                    $('#viewer').attr('src', pdffile_url);
+                  }
+                </script>
+                <input type="button" value="Preview" onclick="PreviewImage();" />
+                <div style="clear:both">
+                  <iframe id="viewer" frameborder="0" scrolling="no" width="700" height="300"></iframe>
+                </div>
+              </td>
+              {% endif %}
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td><input type="submit" disabled></td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td><input type="submit" disabled></td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td><input type="submit" value="Submit" class="btn btn-primary"></td>
+              {% endif %}
+
+              {% if sc.phy_rejected == 0 and sc.phy_accepted == 0 %}
+              <td></td>
+              {% elif sc.phy_rejected == 1 and sc.phy_accepted == 0 %}
+              <td></td>
+              {% elif sc.phy_rejected == 0 and sc.phy_accepted == 1 %}
+              <td><input type="hidden" id="rating" name="rating" value="{{sc.material_rating}}" class="btn btn-primary">
+              </td>
+              {% endif %}
+
+            </tr>
+          </form>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  {% endblock body %}
+  
+  <script type="text/javascript"
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+   

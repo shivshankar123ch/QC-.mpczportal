@@ -1,0 +1,37 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %} {% block a %} <span class="ms-1 font-weight-bold">{{a.Name}}</span> {% endblock %}
+
+<h3 class="card-title m-2"> <b> Deregister For Payment</b></h3>
+<form class="form-inline my-2 my-lg-0" action="{% url 'comm_dergisterd' %}" method="POST">
+    {% csrf_token %}
+    <form action="/action_page.php">
+
+        <!-- <div class="col-md-3" style="float: right;"><input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search" name="search">
+ <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></div> -->
+        <div class="table-responsive">
+            <!DOCTYPE html>
+
+            <h2></h2>
+
+
+            <label for="fname">Name:</label><br>
+            <input type="text" id="fname" name="Name" value="{{n}}" readonly><br>
+
+            <label for="fname">Mobile:</label><br>
+            <input type="text" name="Mobile" value="{{m}}" readonly><br>
+
+
+            <label for="fname">Bank Name:</label><br>
+            <input type="text" id="bank_name" name="bank_name" value="HDFC" readonly><br>
+
+            <label for="fname">Payment:</label><br>
+            <input type="text" id="Netamount_Debited" name="Netamount_Debited" value="1000" placeholder="1000" readonly><br>
+            <br>
+            <a href="/ca/fa_dergisterd"><input type="Deregisterd" class="btn btn-info" value="Deregisterd" onclick="return confirm('Registerd successfully');"></a>
+
+            <!-- <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" value="Doe"><br><br>
+            <input type="submit" value="Submit"> -->
+            <p></p>
+
+        </div><br>&nbsp; </form>
+    {% endblock body %}

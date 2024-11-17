@@ -1,0 +1,289 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %}
+<form action="/tkc/tkc_gatepass_letter/{{gatepass_data.id}}" method="POST" enctype='multipart/form-data'
+    onsubmit="return validation()">
+    <style>
+        table {
+            border: 1px solid #000;
+
+        }
+
+        thead tr th {
+            border-bottom: 1px solid #000;
+        }
+
+        .fontw {
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+    </style>
+<style>
+    .hidden {
+    display: none !important;
+}
+</style>
+
+    {% csrf_token %}
+    <div class="card-body">
+        <div class="">
+            {% comment %}
+            <table class="table w-100">
+                <tbody>
+                    <tr>
+                        <td class="border-0 p-0">
+                            <img src="{{gate_pass_data.offer.wo.Discom.Discom_Header.url}}" class="cgm-logo"
+                                style="width:100%" alt="User profile" />
+        </div>
+        </td>
+        </tr>
+        </tbody>
+        </table> {% endcomment %}
+        <div class="table-responsives" style="background-color: #fff; padding: 25px;" xs>
+            <table class="table table-bordered" cellspacing="0" id="printableTable">
+                <thead>
+                    <tr>
+                        <th colspan="3" style="text-align:center;">
+                            <h3> <span>TKC (Site Store) Gatepass</span></h3>
+                            <span style="font-size:35px;"><u>
+                                    
+                                   Lab.Name :- &#160;  {{gatepass_data.nabl_user.CompanyName_E}}
+                            </span></u><br>
+                            <h5><u> Lab. Contact Number :- &#160; {{gatepass_data.nabl_user.ContactNo}}</u></h5>
+                            
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3">&#160;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Gatepass Number :</b> {{gatepass_data.gatepass_num}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Gatekeeper Name :</b> {{gatepass_data.gatekeeper_name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Driver Name :</b> {{gatepass_data.driver_name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Vehicle number: </b> {{gatepass_data.vehicle_no}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Driver Contact: </b> {{gatepass_data.driver_phone}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="fontw">
+                            <b>Gatepass Date: </b> {{gatepass_data.gatepass_date}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">&#160; </td>
+                    </tr>
+                    <tr>
+                        <td width="8%" class="fontw">Sr. No.</td>
+                        <td width="52%" style="text-align: center;" class="fontw">Material Name </td>
+                        <td width="40%" style="text-align: center;" class="fontw"> Material Serial Number/Batch Number
+                        </td>
+                    </tr>
+                    {% for data in offer_data %}
+                    <tr>
+                        <td class="fontw">{{forloop.counter}}</td>
+                        <td class="fontw" style="text-align: left;"><b>{{data.offer.wo_material.material_name}}</b></td>
+                        <td class="project_progress fontw" style="text-align: center;">
+                            {% if data.serial_no %}
+                            {{data.serial_no}}
+                            {% else %}
+                            {{data.batch_no}}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3">&#160; </td>
+                    </tr>
+                    <tr>
+                        <td class="fontw" colspan="3">
+                            <b>TKC Company Name :</b> {{offer_data1.supplier.CompanyName_E}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fontw" colspan="3">
+                            <b>Name of Site Store Incharge :</b> {{gatepass_data.site_store.autherised_person}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fontw" colspan="3">
+                            <b>Site Store Mob No :</b> {{gatepass_data.site_store.contact_no}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fontw" colspan="3">
+                            <b>Site Store Address :</b> {{gatepass_data.site_store.Store_Address}}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="60%" colspan="2"></td>
+                        <td width="40%" class="fontw" style="text-align:center;padding-top: 70px;">
+                            <span><b>Signature</b></span>
+                            <br>
+                            <span>{{gatepass_data.site_store.autherised_person}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group mt-3" id="printpagebutton">
+        <div class="row">
+            <div class="col-sm-12" >
+                <div class="text-center"><br>
+                    <button class="Button Button--outline" type="button" onclick="printDiv()">Print</button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="text-left">
+                    <label class="m-0">Upload Sign Gatepass letter Documents </label>
+                    <div class="d-flex">
+                        <!-- <input type="text" name="gatepass_data_id" value="{{gatepass_data.id}}"> -->
+                        <input type="file" class="form-control"  required name="gatepass" id="gatepass">
+                        <button type="submit" class="btn ed-submit ed-formsubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-sm-3">
+            <div class="text-right">
+                <label class="d-block mb-4"> </label>
+            
+            </div>
+            </div> -->
+        </div>
+    </div>
+    </div>
+</form>
+
+
+<style>
+    .resize-none {
+        resize: none;
+        overflow: none;
+        box-shadow: none;
+        box-shadow: none !important;
+        overflow: hidden !important;
+    }
+</style>
+{% comment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> {% endcomment %}
+<!-- Bootstrap Datatable js -->
+{% comment %}
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> {% endcomment %}
+{% comment %}
+ {% endcomment %}
+<!-- <script>
+    function printDiv() {
+    // Hide elements
+    document.getElementById('sidenav-main').style.display = 'none';
+    document.getElementById('headerMenu').style.display = 'none';
+    // document.getElementById('contantBlock').style.display='none'; 
+    document.getElementById('printpagebutton').style.display = 'none';
+    $('#contantBlock').css('padding', '0');
+    $('.ed-footer-block').hide();
+
+    // Perform the print action (currently commented out)
+    // window.print();
+    
+    // Show elements again
+    document.getElementById('sidenav-main').style.display = 'block';
+    document.getElementById('headerMenu').style.display = 'block';
+    // document.getElementById('contantBlock').style.display='block'; 
+    document.getElementById('printpagebutton').style.display = 'block';
+    $('#contantBlock').removeAttr('style');
+    $('.ed-footer-block').block();
+}
+
+</script> -->
+<!-- <script>
+    function printDiv() {
+    // Hide elements
+    // document.getElementById('sidenav-main').style.display = 'none';
+    $('#sidenav-main, #headerMenu, #printpagebutton').hide();
+    $('#contantBlock').css('padding', '0');
+    $('.ed-footer-block').hide();
+
+    // Perform the print action
+    window.print();
+    
+    // Show elements again
+    $('#sidenav-main, #headerMenu, #printpagebutton').show();
+    
+    $('#contantBlock').css('padding', ''); // Reset padding
+    $('.ed-footer-block').show();
+}
+
+</script> -->
+<!-- <script>
+  function printDiv() {
+    // Save initial display values
+    var sidenavDisplay = $('#sidenav-main').css('display');
+    var headerMenuDisplay = $('#headerMenu').css('display');
+    var printButtonDisplay = $('#printpagebutton').css('display');
+
+    // Hide elements
+    $('#sidenav-main, #headerMenu, #printpagebutton').hide();
+    $('#contantBlock').css('padding', '0');
+    $('.ed-footer-block').hide();
+
+    // Perform the print action
+    window.print();
+    
+    // Show elements again
+    $('#sidenav-main').css('display', sidenavDisplay);
+    $('#headerMenu').css('display', headerMenuDisplay);
+    $('#printpagebutton').css('display', printButtonDisplay);
+    $('#contantBlock').css('padding', ''); // Reset padding
+    $('.ed-footer-block').show();
+}
+
+</script> -->
+
+<script>
+    function printDiv() {
+    // Save initial display values
+    var sidenavDisplay = $('#sidenav-main').css('display');
+    var headerMenuDisplay = $('#headerMenu').css('display');
+    var printButtonDisplay = $('#printpagebutton').css('display');
+
+    // Hide elements
+    $('#sidenav-main, #headerMenu, #printpagebutton').hide();
+    $('#contantBlock').css('padding', '0');
+    $('.ed-footer-block').hide();
+
+    // Perform the print action
+    window.print();
+
+    // Restore elements after printing (delayed to ensure printing starts)
+    setTimeout(function() {
+        $('#sidenav-main').css('display', sidenavDisplay);
+        $('#headerMenu').css('display', headerMenuDisplay);
+        $('#printpagebutton').css('display', printButtonDisplay);
+        $('#contantBlock').css('padding', ''); // Reset padding
+        $('.ed-footer-block').show();
+    }, 100); // Delay in milliseconds, adjust as needed
+}
+
+</script>
+{% endblock body%}

@@ -1,0 +1,262 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>View Material</h2>
+  </div>
+  <div class="card-body mb-4">
+    <div class="forms-informations">
+      <div class="ed-form-block">
+        <div class="ed-form-title">
+          <h6>
+            <span class="ed-text"> Work Order Information </span>
+          </h6>
+        </div>
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label"> Work Order No </label>
+            <input type="text" class="form-control ed-textbox" value="MP{{ro.rca_cell.user_zone}}00{{ ro.wo.id}}"
+              readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label"> RCA Vendor Company name </label>
+            <input type="text" class="form-control ed-textbox" value="{{ ro.wo.vendor_id.CompanyName_E}}" readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label"> Material </label>
+            <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body mb-4">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered display text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Rating</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <!-- <th> Rate </th> -->
+              <!-- <th> Total amount </th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+            <tr>
+              <td>{{data.rating}}</td>
+              <td>{{data.description}}</td>
+              <td>{{data.quantity}}</td>
+              <!-- <td>{{data.rate}}</td>
+                      <td>{{data.total_rate}}</td> -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body mb-4">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered  text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Gate Pass No.</th>
+              <th>Gate Pass Date</th>
+              <th>Created By</th>
+              <!-- <th scope="col-9"> Rate </th> -->
+              <!-- <th scope="col-9"> Total amount </th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for det in gp %}
+            <tr>
+              <td>{{det.as_issue_gp_num}}</td>
+              <td>{{det.as_issue_gp_date}}</td>
+              <td>{{det.as_issue_pr_name}}</td>
+              <!-- <td>{{data.rate}}</td>
+              <td>{{data.total_rate}}</td> -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <form action="/po/rca_di_view_accepted/{{ro.id}}" method="POST" onsubmit="return submitForm()">
+    {% csrf_token %}
+    <div class="card-body mb-4">
+      <div class="ed-tableinfo-block">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered display text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>Rating</th>
+                <th>
+                  XMR Code <br />
+                  (<input type="checkbox" id="XMR_Code" onclick="sel_all()" name="sel_btn" />
+                  <small>select All</small>)
+                </th>
+                <th>XMR Type</th>
+                <!-- <th scope="col-3"> Action </th> -->
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for data in xmr %}
+              <tr>
+                <td>{{data.material.rating}}</td>
+                <td>
+                  {% if not data.xmr_type_submitted%} {{data.xmr}} &nbsp; &nbsp;
+                  <input type="checkbox" name="xmr_det" id="{{data.id}}" value="{{data.id}}"
+                    onchange="uncheck_all(id)" />
+                  {% else %} {{data.xmr}} {% endif %}
+                </td>
+                <td class="xmr_type">
+                  {% if not data.xmr_type_submitted %}
+                  <input type="checkbox" name="options1" class="{{data.id}}" id="options1{{data.id}}"
+                    value="{{data.id}}" onchange="xmrtype(id,'{{data.id}}')" />
+                  New design
+                  <input type="checkbox" name="options2" class="{{data.id}}" value="{{data.id}}"
+                    id="options2{{data.id}}" onchange="xmrtype(id,'{{data.id}}')" />
+                  Old L1
+                  <input type="checkbox" name="options3" class="{{data.id}}" value="{{data.id}}"
+                    id="options3{{data.id}}" onchange="xmrtype(id,'{{data.id}}')" />
+                  Old L2
+                  <input type="checkbox" name="options4" class="{{data.id}}" value="{{data.id}}"
+                    id="options4{{data.id}}" onchange="xmrtype(id,'{{data.id}}')" />
+                  Non Star(Old design)
+                  {% else %}
+                  {% if data.new_design == 1 %}
+                  New Design
+                  {% elif data.old_l1 == 1 %}
+                  Old L1
+                  {% elif data.old_l2 == 1 %}
+                  Old L2
+                  {% elif data.design_non_star == 1 %}
+                  Non Star(Old Design)
+                  {% endif %}
+                  {% endif %}
+                </td>
+                <!-- <td> 
+                  {% if not data.xmr_type_submitted %}
+                  <input type="submit" class="btn btn-primary" value="Save">
+                  {% else %}
+                  Submitted<br>
+                  {% endif %}
+                </td> -->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-action text-right">
+          <button id="submit" type="Submit" class="btn btn-secondary ed-formSubmit">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  function sel_all() {
+    let sel = document.getElementById("XMR_Code").checked;
+    let acc_col = document.getElementsByName("xmr_det");
+
+    if (sel == true) {
+      for (let i of acc_col) {
+        i.checked = true;
+      }
+    } else {
+      for (let i of acc_col) {
+        i.checked = false;
+      }
+    }
+  }
+
+  function uncheck_all(id) {
+    let key = document.getElementById(id);
+    let checkboxes = document.getElementsByClassName(id);
+
+    if (key.checked == false) {
+      for (i of checkboxes) {
+        i.checked = false;
+      }
+    }
+  }
+
+  function xmrtype(id, value) {
+    let key = document.getElementById(value);
+    let checkboxes = document.getElementsByClassName(value);
+
+    for (i of checkboxes) {
+      i.checked = false;
+      if (key.checked == true && i.id == id) {
+        i.checked = true;
+      }
+    }
+  }
+
+  function submitForm() {
+    let xmr_code = document.getElementsByName("xmr_det");
+    let count = 0;
+
+    if (xmr_code.length == 0) {
+      alert("no pending xmr type");
+      return false;
+    }
+    let status = false;
+    for (i of xmr_code) {
+      if (i.checked == true) {
+        status = true;
+        break;
+      }
+    }
+    if (status == false) {
+      alert("please select xmr first.");
+      return false;
+    } else {
+      for (i of xmr_code) {
+        if (i.checked == true) {
+          let xmr_type = document.getElementsByClassName(i.id);
+          let count = 0;
+          for (j of xmr_type) {
+            if (j.checked != true) {
+              count++;
+            }
+
+            if (count == xmr_type.length) {
+              status = false;
+            }
+          }
+        }
+      }
+      if (status == false) {
+        alert("Please select XMR Type of selected XMR.");
+        status = false;
+        return false;
+      } else {
+
+
+        return true;
+      }
+    }
+  }
+</script>
+{% endblock body %}

@@ -1,0 +1,224 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static %}
+{% block active %}
+<ul class="navbar">
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/basic">
+            <span class="sidenav-mini-icon"> BI </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/rejected_doc">
+            <span class="sidenav-mini-icon"> RD </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/UpdateNablProfile">
+            <span class="sidenav-mini-icon"> AS </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update Profile </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+        </a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link " href="#">
+            <span class="sidenav-mini-icon"> Noti </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+        </a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link active" href="/nabl/nabl_trf">
+            <span class="sidenav-mini-icon">T M R</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">Material Report </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical">
+            <span class="sidenav-mini-icon">Phy Test Out</span>
+            <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical_view">
+            <span class="sidenav-mini-icon">Phy Test View</span>
+            <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <span class="sidenav-mini-icon">LO</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+        </a>
+    </li>
+</ul>
+{% endblock active %}
+{% block body %}
+<div class="card-header pb-0 pt-3 bg-transparent table-responsive">
+    <h6 class="text-capitalize">Gatepass and TRF Details</h6>
+      <table class="table table-striped">
+        <thead class="table table-dark" style="vertical-align: top;">
+        <tr class="text-center" style="vertical-align: top;">
+            <th class="w-15">
+                Gatepass No.
+            </th>
+            <th class="w-15">
+                Site Store Name
+            </th>
+            <th class="w-15">
+                Quantity
+            </th>
+            <th class="w-15">
+                View Gatepass
+            </th>
+            <th class="w-15">
+                View TRF
+            </th>
+        </tr>
+        </thead>
+        <tbody class="text-center" style="vertical-align: top;">
+            <tr>
+                <td><b>{{gp_obj.gatepass_num}}</b></td>
+                <td><b>{{gp_obj.aname}}</b></td>
+                <td><b>{{outward_qty}}</b></td>
+                {% if gp_obj.gatepass %}
+                <td><b><a href="{{gp_obj.gatepass.url}}" target="_blank">View Gatepass</a></b></td>
+                {% else %}
+                <td>Gatepass not uploaded</td>
+                {% endif %}
+
+                {% if po_trf_obj.TRFAreastore_file %}
+                <td><b><a href="{{po_trf_obj.TRFAreastore_file.url}}" target="_blank">View TRF</a></b></td>
+                {% else %}
+                <td>TRF not uploaded</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+      <h6 class="text-capitalize">Material Details</h6>
+      <table class="table table-striped">
+        <thead class="table table-dark" style="vertical-align: top;">
+          <tr class="text-center" style="vertical-align: top;">
+            <th class="w-5">
+                S.No.
+            </th>
+            <th class="w-15">
+                Material/ Item Serial No.
+            </th>
+            <th class="w-15">
+                Item Name
+            </th>
+            <th class="w-15">
+                Company Name
+            </th>
+            <th class="w-15">
+                Physical Verification
+            </th>
+            
+            <th class="w-15">
+                Machine Result
+            </th>
+            <th class="w-15">
+                Remark
+            </th>
+            <th class="w-20">
+                Upload Report
+            </th>
+            <th class="w-20">
+                Preview
+            </th>
+            <th class="w-20">
+                Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-center" style="vertical-align: top;">
+            {% for userdata in sctcp_obj %}
+            <form method="POST" action="/nabl/cp_nabl_trf_view2_resampling/{{userdata.Gatepass.id}}/{{userdata.TRF_Id}}/{{userdata.material_serial_number}}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <tr>
+                    <td><b>{{forloop.counter}}</b></td>
+                    <td><b>{{userdata.material_serial_number}}</b></td>
+                    <td><b>{{userdata.material_name}}</b></td>
+                    <td><b>{{userdata.company_name}}</b></td>
+                    <td>
+                        {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                            <button type="button" class="btn btn-danger "><a class="text-white" href="/nabl/cp_nabl_sample_reject_resampling/{{userdata.Gatepass.id}}/{{userdata.TRF_Id}}/{{userdata.material_serial_number}}">Physical Reject / Accept</a> </button>
+                        {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                            <button type="button" class="btn btn-primary "><a class="text-white" href="/nabl/cp_nabl_sample_reject_resampling/{{userdata.Gatepass.id}}/{{userdata.TRF_Id}}/{{userdata.material_serial_number}}">Physical Reject / Accept</a> </button>
+                        {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                            <button type="button" class="btn btn-success "><a class="text-white" href="/nabl/cp_nabl_sample_reject_resampling/{{userdata.Gatepass.id}}/{{userdata.TRF_Id}}/{{userdata.material_serial_number}}">Physical Reject / Accept</a> </button>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                        {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                        {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                        <select name="result" id="result" required="required">
+                            <option value=1>Pass</option>
+                            <option value=0>Fail</option>
+                        </select>
+                        {% endif %}
+                        
+                    </td>
+                    
+                <td>
+                    {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                        <input type="text" name="remark" id="remark" required="required">
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                        <input type="file" id="uploadPDF" name="myFile" required="required">
+                    {% endif %}
+                </td>
+                
+                <td>
+                    {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                    <script>
+                        function PreviewImage() {
+                            pdffile = document.getElementById("uploadPDF").files[0];
+                            pdffile_url = URL.createObjectURL(pdffile);
+                            $('#viewer').attr('src', pdffile_url);
+                        }
+                        </script>
+                        <input type="button" value="Preview" onclick="PreviewImage();" />
+                        <div style="clear:both">
+                        <iframe id="viewer" frameborder="0" scrolling="no" width="300" height="200"></iframe>
+                        </div>
+                    {% endif %}
+                </td>
+                
+                <td>
+                    {% if userdata.phy_rejected == 1 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 0 %}
+                    {% elif userdata.phy_rejected == 0 and userdata.phy_accepted == 1 %}
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    {% endif %}
+                </td>
+                
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  {% endblock body %}
+

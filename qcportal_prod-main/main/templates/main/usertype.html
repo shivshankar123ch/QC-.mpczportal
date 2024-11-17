@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>MPMKVVCL</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% static 'assets/images/mpg.jpeg' %}">
+   <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+   <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'assets/css/font-awesome.css' %}">
+   <link rel="stylesheet" href="{% static 'static/assets/css/bootstrap-datepicker.css' %}">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    * {box-sizing: border-box;}
+    body {font-family: Verdana, sans-serif;}
+    .mySlides {display: none;}
+    img {vertical-align: middle;}
+    
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+    }
+    /* The dots/bullets/indicators */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    
+    .active {
+      background-color: #717171;
+    }
+    
+    /* Fading animation */
+    .fade {
+      -webkit-animation-name: fade;
+      -webkit-animation-duration: 1.5s;
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+    
+    @-webkit-keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+    
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+    
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+      .text {font-size: 11px}
+    }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height:200;
+      
+    }
+    .m-t{
+      margin-top: 15%;
+    }
+    .container2{
+      width:60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    </style>  
+</head>
+<body>
+<div style="background-color: darkgoldenrod;">
+<img src="{% static 'assets/images/mp.png' %}" style="width:8%; margin-left: 12%;">
+<h2><p style="margin-top: -5%; margin-left: 37%;color: darkblue;"><i><b>Energy Department</b><h4 style="margin-left: 37%;color: navy;"><b>(Government of Madhya Pradesh)</h4></b></i></p></h2>
+
+<img src="{% static 'assets/images/ashok.png' %}" style="width:6%; margin-left: 75%; margin-top: -8.4%;" >
+</div>
+<div style="margin-top: 5%;">
+
+    
+    <div>
+      <img src="{% static 'assets/images/pmc1.jpg' %}"  style="width:28%" height="200" background-position: center;>
+    </div>
+    
+    </div>
+  
+<!-- <div class="row justify-content-md-center">
+<div class="col-md-7 row justify-content-md-center"> -->
+
+<div class="signup-form" style="margin-left: 27%;"> 
+<div class="form-group form-button">
+    <div class="form-row">
+      <a href="reg_first">
+        <div class="col-lg-6">
+            <button  type="submit" class="btn btn-secondary btn1" style="width: 200px;">Vendor</button>
+        </div>
+      </a>
+      <a href="login">
+        <div class="col-lg-6">
+            <button type="submit" class="btn btn-secondary btn2" style="width: 200px;">NABL</button>
+        </div>
+        </a>
+        <a href="reg_first">
+          <div class="col-lg-6">
+              <button type="submit" class="btn btn-secondary btn2" style="width: 200px;">TKC</button>
+          </div>
+          </a>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap-datepicker.min.js' %}"></script>
+<script>
+        function myFunction() {
+          document.getElementById("demo").innerHTML = "We are Working on Dashboard";
+        }
+</script>
+<script>
+      var slideIndex = 0;
+      showSlides();
+      
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 1000); // Change image every 1 seconds
+      }
+</script>
+<script type="text/javascript">
+  $( ".btn1" ).click(function() {
+    $( ".btn1" ).css('background', 'green');
+	$( ".btn2" ).css('background', 'rgba(0,0,255,0.1)');
+  });
+  $( ".btn2" ).click(function() {
+    $( ".btn2" ).css('background', 'green');
+	$( ".btn1" ).css('background', 'rgba(0,0,255,0.1)');
+  });
+</script>
+</body>
+</html>

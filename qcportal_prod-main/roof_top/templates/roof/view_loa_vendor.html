@@ -1,0 +1,44 @@
+
+{% extends 'roof/agentBase.html' %} {% load static %} {% block body %}{% load static %}
+<div class="container">
+  <h2>LOA Details</h2>
+  <div class="panel panel-default">
+      <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+      <div class="table-responsive">
+         <table class="table table-bordered table-hover">
+              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                    
+                    <th>
+                        Name Of Agency
+                    </th>
+             
+                    <th>
+                      LOA
+                    </th>
+                    <th>
+                      View Annexure </th>
+
+                      <th>
+                        Vendor Related Document </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+                <tr>
+                  <td>{{data.user_name}}</td>
+
+             
+                 
+                  <td class="text-center"> <a href="{{data.signed_loa_file.url}} " target="_blank" class="fas fa-eye text-secondary">View</a></td>
+                  <td  class="text-center"> <a href="{{data.annexure.url}} " target="_blank" class="fas fa-eye text-secondary">View</a></td>
+                  <td class="text-center"> <a href="{{data.vendor_document.url}} " target="_blank" class="fas fa-eye text-secondary">View</a></td>
+                  {%  endfor %}
+              <tr></tr>
+                </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock body %}

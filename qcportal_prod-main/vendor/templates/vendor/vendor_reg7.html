@@ -1,0 +1,72 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+<base href="/vendor/basic">
+<style>
+    .button {
+        background-color: #007bff;
+        /* Green */
+        border: none;
+        color: 2px solid white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 25px;
+    }
+    
+    .button1 {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid darkblue;
+        width: 155px;
+    }
+    
+    .button1:hover {
+        background-color: darkblue;
+        color: white;
+        border: 1px solid white;
+    }
+    /* .alert {
+    border-radius: 8px!important;
+} */
+</style>
+
+
+<div class="card  mx-auto mb-3" style="max-width: 50rem;border-radius: 40px;margin-top: 60px;">
+
+</div>
+
+
+
+<form class="multisteps-form__form mb-8">
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0 labelName text-capitalize">Vendor Registration</h5>
+    <p class="mb-0 text-sm font-weight-bolder labelName text-capitalize">Instructions</p>
+    <div class="multisteps-form__content">
+        <h2></h2>
+        <ul>
+            <li>All files should be in PDF format. (.pdf extension)</li>
+            <li>Maximum file size (for each) should be 2 MB.</li>
+            <li>All documents must be self attested by authorised signatory with company’s seal.</li>
+            <li>All documents must be in coloured format.</li>
+        </ul>
+    </div>
+    <div class="button-row d-flex mt-4">
+        <button class="btn btn-primary text-capitalize fw-bold custom ms-auto mb-0" type="button" title="Next"><a href="/vendor/vendor_reg_eight" style="color: white;">Save & Next</a></button>
+    </div>
+    <!-- </div> -->
+</form>
+<!-- </div> -->
+<!-- </div> -->
+{% endblock body %}

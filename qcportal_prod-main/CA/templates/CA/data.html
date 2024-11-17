@@ -1,0 +1,9 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %} {% block a %} 
+<span class="ms-1 font-weight-bold"></span> {% endblock a %} 
+
+<h4 class="card-title m-2" style="color: red;"> <b>
+    {% if msg1 %}
+    {{ msg1 }}
+    {% endif %}
+</b></h4>
+    {% endblock body %}

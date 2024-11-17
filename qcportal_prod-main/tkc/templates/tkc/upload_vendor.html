@@ -1,0 +1,98 @@
+{% extends 'tkc/creater_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<p class=MsoNormal style='margin-bottom:0in;line-height:normal;text-autospace:
+    none'><b><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'> <u>SUBMISSION OF VENDOR DETAILS :-</u></span></b></p>
+
+               <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <tr>
+                      <th style="width:30%">
+                           Vendor Authentication Id
+                      </th>
+                       <th style="width:30%">
+                          Purchase Material Name
+                      </th>
+                      <th style="width:20%">
+                          Material Quantity (Number)
+                      </th>
+                    </tr>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>VENDOR DETAILS</span></u></b></p>
+                    {% for data in all_vendor %}
+                    <tr>
+                            <td><b>MPCZ00{{data.TKC.User_Id}}</b></td>
+                        <td><b>{{data.material_name}}</b></td>
+                         <td><b>{{data.quantity}}</b></td>
+                  </tr>
+                    {% endfor %}
+                </table>
+              </div>
+
+  <div id="welcomeDiv"  style="display:none;" class="answer_list" >
+  <form   action="/tkc/add_vendor" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> Upload Vendor Details </label>
+                     </th>
+                      <th style="width:50%"><b></b></th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1"> Select Vendor  <span style="color: red;">*</span> </label> </td>
+                  <td>
+                          <select name="v_id" id="Schedule">
+                              <option value="" Selected> <b>Choose Vendor</b></option>
+                              {% for vendor in vendor %}
+                              <option value="{{vendor.User_Id}}" > <b>{{vendor.CompanyName_E}}</b></option>
+                              {% endfor %}
+                          </select></td>
+
+                 </tr>
+                <tr>
+                    <td><label for="exampleInputEmail1">Vendor Material </label> </td>
+                    <td>
+                        <select name="material" id="unit">
+                        <option value="" Selected> <b>Choose Material</b></option>
+                        <option value="DTR">DTR</option>
+                        <option value="Cable">Cable </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <label for="exampleInputEmail1">Select Work Order </label> </td>
+                    <td>
+                        <select name="w_id" id="priority">
+                        <option value="" Selected> <b>Choose Work Order</b></option>
+                             {% for data in data %}
+                              <option value="{{data.id}}" Selected> <b>MPCZ00{{data.id}}</b></option>
+                              {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Enter Material Quantity: </label> </td>
+                   <td><input type="Number" name="quantity" id="exampleInputEmail1"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1"> Upload Vendor Details</button>
+          </form>
+          </div>
+        <input type="button" class="btn btn-primary m-3"  value="Add Vendor" onclick="showDiv()"/>
+          <!-- /.card-body -->
+<script>
+function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+}
+
+</script>
+{% endblock body %}

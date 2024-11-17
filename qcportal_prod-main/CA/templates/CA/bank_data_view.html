@@ -1,0 +1,202 @@
+{% extends 'CA/commercial_sales.html' %} {% load static %} 
+ {% block a %} <span class="ms-1 font-weight-bold"></span> {% endblock a %}
+{% block body %}
+<style>
+
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    float: left;
+    margin-top: 30px;
+    margin-right: 30px;
+    width : 200px;
+}
+
+    
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-top: 65px;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+</style>
+<div class = "row">
+    <div class = "col-md-3">
+    <h4>Old Bank Details</h4>
+    <label class= "mt-4">Bank Name: </label>
+    <input class="form-control" type="text" readonly value="{{old_bank_data.Bank_name}}"/>
+    <label>Account Holder Name: </label>
+    <input class="form-control" type="text" readonly value="{{old_bank_data.Account_Holder_Name}}"/>
+    <label>Account Number: </label>
+    <input class="form-control" type="text" readonly value="{{old_bank_data.Account_Number}}"/>
+    <label>IFSC: </label>
+    <input class="form-control" type="text" readonly value="{{old_bank_data.IFSC}}"/>
+    </div>
+
+    <div class = "col-md-1"></div>
+
+    <div class = "col-md-3">
+        <h4>New Bank Details</h4>
+        <label class= "mt-4">Bank Name: </label>
+        <input class="form-control" type="text" readonly value="{{new_bank_data.bank_name}}"/>
+        <label>Account Holder Name: </label>
+        <input class="form-control" type="text" readonly value="{{new_bank_data.account_Holder_Name}}"/>
+        <label>Account Number: </label>
+        <input class="form-control" type="text" readonly value="{{new_bank_data.account_Number}}"/>
+        <label>IFSC: </label>
+        <input class="form-control" type="text" readonly value="{{new_bank_data.ifsc}}"/>
+        </div>
+
+        <div class = "col-md-1"></div>
+
+    <div class = "col-md-4">
+      {% if new_bank_data.passbook_image %}
+        <h4 class= "mb-5">New Bank Cancelled Cheque </h4>
+        <!-- <a href="/ca/view_passbook_image/{{new_bank_data.passbook_image.url}}"> -->
+            <img id="myImg"  alt="Snow" style="width:100%;max-width:300px" src={{new_bank_data.passbook_image.url}}>
+        <!-- </a> -->
+      {% else %}
+      <input class="form-control" type="text" readonly value="Bank Passbook/check Image not available "/>
+      {% endif %}
+
+
+      
+    </div>
+  
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="img01">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+</div>
+
+
+
+
+<br>
+<br>
+<div >
+  
+    <a href="/ca/ca_bank_approved/{{old_bank_data.User_Id}}/{{new_bank_data.id}}">
+        <button type="submit" class="btn btn-secondary">Approve</button>
+    </a>
+  
+  
+    <form action = "/ca/ca_bank_reject/{{old_bank_data.User_Id}}/{{new_bank_data.id}}" method = "POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-secondary">Reject</button>
+      <input type = "text" class="form-control btn " placeholder = "Remark for rejection" required name = "reject_remark">
+  
+    </form>
+  
+</div>
+
+
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    </script>
+
+{% endblock body %}
+
+

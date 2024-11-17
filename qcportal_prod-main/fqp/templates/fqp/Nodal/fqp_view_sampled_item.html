@@ -1,0 +1,81 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+
+  <!-- Main content -->
+   <section class="content">
+     
+  
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Sampled Material</h3>
+
+         
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                    
+                     <th>
+                         item Name 
+                     </th>
+                     <th>
+                         Serial Number
+                     </th>
+                     <th>
+                      Site Store
+                  </th>
+                
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        <b>{{name.Offer_Material.TKCVendor.Material_id.Material_Specification}}</b>
+                     </td>
+                    
+                     <td>
+                             {{name.Item_Serial_No}}
+                     </td>
+
+                     <td>
+                      {{name.Store_Address}}
+              </td>
+                  
+                   
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+     
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

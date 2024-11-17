@@ -1,0 +1,197 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                       Vendor Details
+                                    </h2>
+                                </div>
+
+   <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Company Name</th>
+                <th>Person Name</th>
+                <th>Item code</th>
+                <th>Material Specification Name</th>
+                <th>GTP Drawing</th>
+                <th>Submit date</th>
+                <th>Other Docs</th>
+                <th>Action</th>
+                <th>View Acceptance/Rejection Doc</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Data in Vendor %}
+            <tr>
+                  <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{Data.Vendor.CompanyName_E}}
+                </td>
+                 <td>
+                    {{Data.Vendor.Authorised_person_E}}
+                </td>
+                <td>
+                    {% if wo_discom == "CZ" %}
+                        {{Data.Material_id.item_code}}
+                    {% elif wo_discom == "EZ" %}
+                        {{Data.Material_id.item_code_ez}}
+                    {% elif wo_discom == "WZ" %}
+                       {{Data.Material_id.item_code_wz}}
+                    {% endif %}
+                    </td>
+                <td>
+                    {{Data.Material_id.Material_Specification}}
+                </td>
+                 <td>
+                     {% if Data.vendor_gtp_file %}
+                          <a target="_blank" href="{{Data.vendor_gtp_file.url}}">
+                                                        <button class="btn ed-submit btn-success">
+                                                            <span class="ed-submit-text">
+                                                                 View
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                        {% else %}
+                        <button class="btn ed-submit btn-success">
+                                                            <span class="ed-submit-text">
+                                                                 View
+                                                            </span>
+                                                        </button>
+                        {% endif %}
+                </td>
+
+                <td>{{Data.TKCVendor_Submit_At}}</td>
+                <td>
+                    {% if Data.vendor_other_docs %}
+                         <a target="_blank" href="{{Data.vendor_other_docs.url}}">
+                                                       <button class="btn ed-submit btn-success">
+                                                           <span class="ed-submit-text">
+                                                                View
+                                                           </span>
+                                                       </button>
+                                                           </a>
+                       {% else %}
+                       <button class="btn ed-submit btn-success">
+                                                           <span class="ed-submit-text">
+                                                                View
+                                                           </span>
+                                                       </button>
+                       {% endif %}
+               </td>
+                <td>{% if  Data.TKCVendor_Approved_Status == 0 %}
+                        <form action="/fqp/vendor_approval/{{Data.TKCWoInfo.id}}/{{Data.id}}" onsubmit="return validateForm()" name="myForm" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                     <div class="orderaction-items">
+                         <div class="radio-groups-items">
+                             <label class="radio-groups">
+                                <input type="radio" name="action" value="1"/>
+                                 Accept
+                             </label>
+                             <label class="radio-groups">
+                           <input type="radio" name="action" value="0" checked/>
+                                 Reject
+                             </label>
+                         </div>
+                         <div class="form-group">
+                            
+                             <input type="text" name="remark" class="form-control ed-textbox" required>
+                         </div>
+
+                         
+                         <div class="form-group">
+                            <label>Acceptance/Rejection Document</label>
+                            <input type="file" name="other_gtp_doc" class="form-control ed-textbox" required>
+                        </div>
+                        
+                     </div>
+                    <button type="submit" class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Submit
+                                                            </span>
+                                                        </button>
+                        </form>
+                    
+
+                    {% elif Data.TKCVendor_Approved_Status == -1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                               Rejected
+                                                        </span>
+                                                       </a>
+                     {% elif Data.TKCVendor_Approved_Status == 1 %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                               Approved
+                                                        </span>
+                                                       </a>
+
+                    {% endif %}
+                   
+                </td>
+                <td>
+                    {% if Data.other_acceptance_rejection_doc %}
+                    <a href = {{Data.other_acceptance_rejection_doc.url}}>
+                        <button class="btn ed-submit btn-success">
+                            <span class="ed-submit-text">
+                                 View
+                            </span>
+                        </button>
+                    </a>
+                    {% else %}
+                    <span class="ed-submit-text">
+                        <button class="btn ed-submit btn-success">
+                            <span class="ed-submit-text">
+                                Not Uploaded
+                            </span>
+                        </button>
+                         
+                 </span>
+                {% endif %}
+                </td>
+
+                <td>
+                    {% if  Data.TKCVendor_Approved_Remark %}
+                     <span class="ed-submit-text">
+                         {{ Data.TKCVendor_Approved_Remark}}
+                     </span>
+                     {% endif %}
+                </td>
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

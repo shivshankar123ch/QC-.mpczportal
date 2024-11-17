@@ -1,0 +1,114 @@
+{% extends 'po/procurement_base.html' %}
+{% load static %}
+{% block pagetitle %} Procurement generated  {% endblock pagetitle %}
+
+<HEAD>
+<style>
+
+    #options {
+	align-content:center;
+	align-items:center;
+    text-align: center;
+}
+
+</style>
+
+</HEAD>
+
+{% block body %}
+<form method="POST" action="/po/procurement_previous_po" style="background: white;">
+	{% csrf_token %}
+    <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+
+<div class="mx-auto" style="width: 85%;">
+
+<TABLE cellpadding=0 cellspacing=0 class="t0">
+<TR>
+	<TD style="width: 650px;" class="tr0 td0"><P class="p6 ft10">No. <NOBR>MD/MK/<b>{{procurement.tendor_no}}</b></NOBR></P></TD>
+	<TD class="tr0 td1"><P class="p7 ft10">Bhopal, dated:- <b>{{date}}</b></P></TD>
+</TR>
+</TABLE>
+
+<TABLE cellpadding=0 cellspacing=0 class="t0">
+<TR>
+	<TD class="tr1 td0"><P class="p6 ft11">To,</P></TD>
+	<TD class="tr1 td1"><P class="p6 ft12">&nbsp;</P></TD>
+</TR>
+<TR>
+	<TD class="tr2 td0"><P class="p8 ft0">{{ vendor.CompanyName_E }}</P></TD>
+	<TD class="tr2 td1"><P class="p6 ft12">&nbsp;</P></TD>
+</TR>
+<TR>
+	<TD class="tr3 td0"><P class="p8 ft11"> <NOBR>{{address.Company_add_1}}</NOBR></P></TD>
+	<TD class="tr3 td1"><P class="p6 ft0">Email:- <A href="mailto:agarwal.industries@ymail.com">{{vendor.Email_Id}}</A></P></TD>
+</TR>
+<TR>
+	<TD class="tr3 td0"><P class="p8 ft11">{{address.Company_add_2}} {{address.Company_dist }} {{address.Company_state }} {{address.Company_pin_code }}</P></TD>
+	<TD class="tr3 td1"><P class="p9 ft0"></P></TD>
+</TR>
+</TABLE>
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:normal'><b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>Sub:  Order for supply of “<b>{{ procurement.item_name }}</b>” against Tender Specification No. <b>{{ procurement.tendor }}</b> (Opened on 27.08.2021). </span></b></p>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>Ref:</span></b><span lang=EN-IN style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'>     </span><span style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'> Your offer submitted against TS. No. MD/MK/<b> {{ procurement.tendor_no }}</b></span><span lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'> (Opened Date : <b> {{ date }}</b>)</b></span><span style='font-size:12.0pt;font-family:"Times New Roman",serif'></span></p>
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:normal'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>             </span></p>
+
+    <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>Dear
+    Sirs,</span></p>
+
+    <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+    {% for data_lst, data_details in data_po %}
+        <p><b>{{ data_lst }} : </b></p>
+
+		<div class="description">
+			{{ data_details | safe }}
+		</div>
+    {% endfor %}
+
+
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+    
+        }
+    </script>
+
+
+<center>
+    <div  id="cert-footer" style="margin-left: 60%;" >
+        <div id="cert-issued-by">
+          <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : DGM(procurement)<br>Date : {{td}}<br>Reason : SystemVerified<br>MPMKVVCL(Bhopal) </p>
+          <!-- <p style="background-image: url('/static/assets/images/check-mark-green.png');"> Signed By : GM(works),<br>Date : 28-02-22,<br>Reason : System Verifief,<br>Location : MPMKVVCL </p> -->
+        </div>
+      
+    <div id="options">
+        <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="print po" onclick="printpage()"/>
+        <a href="/procurement_previous_po"> <button  id="printpagebutton1" type="Submit" style="margin-top: 10px; height:60px; width:105px" class="btn btn-primary btn-sm">Generate PO</button> </a>
+    </div>
+    
+</center>
+
+</div>
+
+
+</form>
+{% endblock body %}

@@ -1,0 +1,43 @@
+{% extends 'vendor/RCA_vendor_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %} {% block rca_bg_order_list %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rca_bg_order_list %}
+    <div class="container table-responsive">
+        <h5>RCA BG Order List</h5>
+        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-responsive table-bordered">
+            <thead class="table table-dark">
+                <tr>
+                    <th class="text-center" style=" width: 10px;">
+                        S.No.
+                    </th>
+                    <th scope="col-2" style="text-align: center;">Vendor</th>
+                    <th scope="col-2" style="text-align: center;">RCA No.</th>
+                    <th scope="col-3" style="text-align: center;">Date</th>
+                    <th scope="col-3" style="text-align: center;">Action</th>
+                    <!-- <th scope="col-3" style="text-align: center;">BG Status</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in data %}
+                <tr>
+                    <td style="text-align: center;">{{forloop.counter}}</td>
+                    <td style="text-align: center;"><b>{{ info.vendor_id.CompanyName_E}}</b></td>
+                    <td style="text-align: center;"><b>MP{{info.rca_cell.user_zone}}WO{{ info.id}}</b></td>
+                    <td style="text-align: center;"><b>{{ info.ordr_date }}</b></td>
+                    <td style="text-align: center;"><a href="/vendor/add_bg_save/{{info.id}}" class="fas fa-eye text-primary"> View</a></td>
+
+                    <!-- <td style="text-align: center;">
+                        {% if not info.rca_bg_status %}
+                        <b class="fas fa-eye text-info"> Not Submitted</b></td>
+                    {% else %}
+                    <b class="fas fa-eye text-primary"> Submitted</b> {% endif %} -->
+                </tr>
+                {% endfor %}
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock body %}

@@ -1,0 +1,435 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} {% block update_profile %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock update_profile %}
+
+    <form action="/tkc/update_profile" method="POST">
+        {% csrf_token %}
+
+        <div class="ed-information mb-2">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card ed-card-block">
+                        <div class="card-header">
+                            <h2>
+                                Update profile
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="ed-tableinfo-block mb-2">
+                                <h2>
+                                    Basic Data
+                                </h2>
+                                <div class="table-responsive">
+                                    <table
+                                        class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-5">
+                                                    S.No.
+                                                </th>
+                                                <th class="w-45">
+                                                    Title
+                                                </th>
+
+                                                <th class="w-20">
+                                                    Value
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>ID</td>
+                                                <td><input type="text" name="one" value="{{basic.User_Id}}"
+                                                        class="form-control" readonly='readonly'>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>2</td>
+                                                <td>DISCOM</td>
+                                                <td>
+                                                    <input type="text" name="zero" value="{{basic.User_zone}}"
+                                                        class="form-control" readonly>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Type of Business</td>
+                                                <td><input type="text" name="two" value="{{basic.Type_of_business}}"
+                                                        class="form-control" readonly></td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>4</td>
+                                                <td>User Type</td>
+                                                <td><input type="text" name="three" value="{{basic.User_type}}"
+                                                        class="form-control" readonly='readonly'>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Name Of Company/Firm</td>
+                                                <td><input type="text" name="four" value="{{basic.CompanyName_E}}"
+                                                        class="form-control" readonly></td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Authorised Person</td>
+                                                <td><input type="text" name="five" value="{{basic.Authorised_person_E}}"
+                                                        class="form-control" readonly></td>
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Contact Number</td>
+                                                <td><input type="text" name="six" value="{{basic.ContactNo}}"
+                                                        class="form-control" readonly>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>8</td>
+                                                <td>Email ID</td>
+                                                {% if company.Email_Id == 'None' %}
+                                                <td><input type="text" name="seven" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold">
+                                                </td>
+
+                                                {% else %}
+                                                <td><input type="text" name="seven" value="{{basic.Email_Id}}"
+                                                        class="form-control"></td>
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>9</td>
+                                                <td>Company/Firm PAN Card</td>
+                                                {% if company.Company_Pan_No == 'None' %}
+                                                <td><input type="text" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" name="eight"
+                                                        id="pan" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold"
+                                                        onfocus="validateForm()" onchange="validateForm()"></td>
+
+                                                {% else %}
+                                                <td><input type="text" name="eight" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                                                        value="{{company.Company_Pan_No}}" class="form-control"
+                                                        readonly></td>
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>10</td>
+                                                <td>Company/Firm Gumasta Number
+                                                </td>
+                                                {% if company.Company_Gumastha_No == 'None' %}
+                                                <td><input type="text" name="nine" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+
+                                                {% else %}
+                                                <td><input type="text" name="nine"
+                                                        value="{{company.Company_Gumastha_No}}" class="form-control"
+                                                        readonly></td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>Company/Firm GST Number
+                                                </td>
+                                                {% if company.Company_Gst_No == 'None' %}
+                                                <td><input type="text" name="ten" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required
+                                                        readonly></td>
+
+                                                {% else %}
+                                                <td><input type="text" name="ten" value="{{company.Company_Gst_No}}"
+                                                        class="form-control" required readonly></td>
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>12</td>
+                                                <td>Company/Firm FAX Number
+                                                </td>
+                                                {% if company.Company_Fax == 'None' %}
+                                                <td><input type="text" name="twelve" pattern="^\d{10}$" maxlength="10"
+                                                        minlength="5" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+
+
+                                                {% else %}
+                                                <td><input type="text" name="twelve" value="{{company.Company_Fax}}"
+                                                        class="form-control" required readonly></td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="ed-tableinfo-block mb-2">
+                                <h2>
+                                    Permanent Address
+                                </h2>
+                                <div class="table-responsive">
+                                    <table
+                                        class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5% ">
+                                                    S.No.</th>
+                                                <th style="width: 45% ">
+                                                    Title </th>
+
+                                                <th style="width: 20% ">
+                                                    Value </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Address 1</td>
+                                            {% if company.Company_add_1 == 'None' %}
+                                            <td><input type="text" name="thireteen" placeholder="Not Fill"
+                                                    class="btn btn-secondary bg-warning text-bold" required>
+                                            </td>
+
+                                            {% else %}
+                                            <td><input type="text" name="thireteen" value="{{company.Company_add_1}}"
+                                                    placeholder="{{company.Company_add_1}}" class="form-control"
+                                                    required></td>
+                                            {% endif %}
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Address 2</td>
+                                            {% if company.Company_add_2 == 'None' %}
+                                            <td><input type="text" name="fourteen" placeholder="Not Fill"
+                                                    class="btn btn-secondary bg-warning text-bold" required>
+                                            </td>
+
+                                            {% else %}
+                                            <td><input type="text" name="fourteen"
+                                                    placeholder="{{company.Company_add_2}}"
+                                                    value="{{company.Company_add_2}}" class="form-control" required>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Pin Code</td>
+                                            {% if company.Company_pin_code == 'None' %}
+                                            <td><input type="text" name="fifteen" placeholder="Not Fill"
+                                                    class="btn btn-secondary bg-warning text-bold" required>
+                                            </td>
+
+                                            {% else %}
+                                            <td><input type="text" name="fifteen"
+                                                    placeholder="{{company.Company_pin_code}}"
+                                                    value="{{company.Company_pin_code}}" class="form-control" required>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>District</td>
+                                            {% if company.Company_dist == 'None' %}
+                                            <td><input type="text" name="sixteen" placeholder="Not Fill"
+                                                    class="btn btn-secondary bg-warning text-bold" required>
+                                            </td>
+
+                                            {% else %}
+                                            <td><input type="text" name="sixteen" placeholder="{{company.Company_dist}}"
+                                                    value="{{company.Company_dist}}" class="form-control" required>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>5</td>
+                                            <td>State</td>
+                                            {% if company.Company_state == 'None' %}
+                                            <td><input type="text" name="seventeen" placeholder="Not Fill"
+                                                    class="btn btn-secondary bg-warning text-bold" required>
+                                            </td>
+
+                                            {% else %}
+                                            <td><input type="text" name="seventeen"
+                                                    placeholder="{{company.Company_state}}"
+                                                    value="{{company.Company_state}}" class="form-control" required>
+                                            </td>
+                                            {% endif %}
+
+                                        </tr>
+                                        <tr>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="ed-tableinfo-block mb-2">
+                                    <h2>
+                                        Communication Address
+                                    </h2>
+                                    <div class="table-responsive">
+                                        <table
+                                            class="table table-striped table-bordered ed-table-block ed-centertable text-center "
+                                            ID="Table2">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:5% ">
+                                                        S.No.
+                                                    </th>
+                                                    <th style="width: 45% ">
+                                                        Title </th>
+
+                                                    <th style="width: 20% ">
+                                                        Value </th>
+                                            </thead>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Address 1
+                                                </td>
+                                                {% if company.Company_t_add_1 == 'None' %}
+                                                <td><input type="text" name="eighteen"
+                                                        class="btn btn-secondary bg-warning text-bold"
+                                                        placeholder="Not Fill" required>
+                                                </td>
+
+                                                {% else %}
+
+                                                <td><input type="text" name="eighteen"
+                                                        placeholder="{{company.Company_t_add_1}}"
+                                                        value="{{company.Company_t_add_1}}" class="form-control"
+                                                        required>
+                                                </td>
+
+                                                {% endif %}
+
+
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Address 2
+                                                </td>
+                                                {% if company.Company_t_add_2 == 'None' %}
+                                                <td><input type="text" name="nineteen" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+                                                {% else %}
+
+                                                <td><input type="text" name="nineteen"
+                                                        placeholder="{{company.Company_t_add_2}}"
+                                                        value="{{company.Company_t_add_2}}" class="form-control"
+                                                        required>
+                                                </td>
+
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Pin Code</td>
+                                                {% if company.Company_t_pin_code == 'None' %}
+                                                <td><input type="text" name="twenty" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+                                                {% else %}
+                                                <td><input type="text" name="twenty"
+                                                        placeholder="{{company.Company_t_pin_code}}"
+                                                        value="{{company.Company_t_pin_code}}" class="form-control"
+                                                        required>
+                                                </td>
+
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>District</td>
+                                                {% if company.Company_t_dist == 'None' %}
+                                                <td><input type="text" name="twentyone" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+
+                                                {% else %}
+                                                <td><input type="text" name="twentyone"
+                                                        placeholder="{{company.Company_t_dist}}"
+                                                        value="{{company.Company_t_dist}}" class="form-control"
+                                                        required>
+                                                </td>
+
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>5</td>
+                                                <td>State</td>
+                                                {% if company.Company_t_state == 'None' %}
+                                                <td><input type="text" name="twentytwo" placeholder="Not Fill"
+                                                        class="btn btn-secondary bg-warning text-bold" required>
+                                                </td>
+
+                                                {% else %}
+                                                <td><input type="text" name="twentytwo"
+                                                        placeholder="{{company.Company_t_state}}"
+                                                        value="{{company.Company_t_state}}" class="form-control"
+                                                        required>
+                                                </td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <button type="Submit" class="btn ed-submits ed-submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endblock body %}

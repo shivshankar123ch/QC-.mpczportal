@@ -1,0 +1,460 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>Work Order Information </h2>
+    </div> 
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center"> 
+                    <tbody >
+                        <tr>
+                            <td>Work Order No</td>
+                            <td><b>MP{{ro.wo.rca_cell.user_zone}}00{{ ro.wo.id}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>RCA Vendor Company name</td>
+                            <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+                        </tr>
+                        <tr>
+                            <td> Material </td>
+                            <td><b>{{ ro.wo.wo_specification}}</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+
+
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">  
+                    <thead class="table-dark">
+                        <tr>
+                            <th> Rating </th>
+                            <th> Description </th>
+                            <th> Quantity </th>
+                            <!--<th> Rate </th>-->
+                            <!--<th> Total amount </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!--<td>{{data.rate}}</td>-->
+                            <!--<td>{{data.total_rate}}</td>-->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">  
+                    <thead class="table-dark">
+                        <tr>
+                            <th> Rating </th>
+                            <th> XMR Code </th>
+                            <th> XMR Type </th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in xmr_t %}
+                        <tr>
+                            <td>{{data.material.rating}}</td>
+                            <td>{{data.xmr}}</td>
+                            <td>
+                                {% if data.new_design == 1 %}
+                                <b>New Design</b>
+                                {% elif data.old_l1 == 1 %}
+                                <b>Old L1</b>
+                                {% elif data.old_l2 == 1 %}
+                                <b>Old L2</b>
+                                {% elif data.design_non_star == 1 %}
+                                <b>Non Star(Old Design)</b>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+            
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">  
+                    <thead class="table-dark">
+                        <tr> 
+                            <th>XMR Repaired</th>
+                            <th>XMR Type</th>
+                            <th>No Load Loss</th>
+                            <th>Full Load Loss</th>
+                            <th>No Load Loss %</th>
+                            <th>Full Load Loss%</th>
+                            <th>Remark</th>
+                            <th>File Upload</th>
+                            <!-- <th>Submit</th> -->
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in xmr %}
+                        <tr>
+                            <form action="/po/power_analyser_inward_accepted/{{ro.id}}" enctype="multipart/form-data"
+                                method="POST">
+                                {% csrf_token %}
+
+                                <td style="width: 150px;">
+                                    {% if not a.pa_result_submitted %}
+                                    {{a.xmr}} &nbsp; &nbsp; <input id="{{a.xmr}}" type="checkbox" name="xmr_det" value="{{a.id}}">
+                                    {% else %}
+                                    <b>{{a.xmr}}</b>
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if a.new_design == 1 %}
+                                    <b>New Design</b>
+                                    {% elif a.old_l1 == 1 %}
+                                    <b>Old L1</b>
+                                    {% elif a.old_l2 == 1 %}
+                                    <b>Old L2</b>
+                                    {% elif a.design_non_star == 1 %}
+                                    <b>Non Star(Old Design)</b>
+                                    {% endif %}
+                                </td>   
+                                <td>
+                                    {% if a.new_design and a.pa_result_submitted %}
+                                    <b>{{a.pa_no_loss}}</b>
+                                
+                                    {% elif a.new_design and not a.pa_result_submitted %}
+                                     <b></b>
+
+                                    {% elif a.design_non_star and a.pa_result_submitted %}
+                                    <b>{{a.pa_no_loss}}</b>
+                    
+                                    {% elif a.design_non_star and not a.pa_result_submitted %}
+                                    <b></b>
+
+                                    {% elif a.old_l1 and a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l1 and not a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l2 and a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l2 and not a.pa_result_submitted %}
+                                    <b>N.A.</b>
+                                
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if not a.pa_result_submitted %}
+                                    <!--<input type="number" step="0.001" name="bb{{a.xmr}}" class="form-control ed-textbox {{a.id}}">-->
+                                     <b></b>
+                                    {% else %}
+                                    <b>{{a.pa_max_loss}}</b>
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if a.new_design and a.pa_result_submitted %}
+                                    <b>{{a.pa_no_loss_per|floatformat:2}}</b>
+                                
+                                    {% elif a.new_design and not a.pa_result_submitted %}
+                                    <b></b>
+
+                                    {% elif a.design_non_star and a.pa_result_submitted %}
+                                    <b>{{a.pa_no_loss_per|floatformat:2}}</b>
+                       
+                                    {% elif a.design_non_star and not a.pa_result_submitted %}
+                                    <b></b>
+
+                                    {% elif a.old_l1 and a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l1 and not a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l2 and a.pa_result_submitted %}
+                                    <b>N.A.</b>
+
+                                    {% elif a.old_l2 and not a.pa_result_submitted %}
+                                    <b>N.A.</b>
+                                
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if not a.pa_result_submitted %}
+                                    <b></b>
+                                    {% else %}
+                                    <b>{{a.pa_max_loss_per|floatformat:2}}</b>
+                                    {% endif %}
+                                </td> 
+
+                                <td>
+                                    {% if not a.pa_result_submitted %}
+                                    <input type="text"  name="{{a.xmr}}" class="form-control ed-textbox {{a.id}}" >
+                                    {% else %}
+                                    <b>{{a.pa_remark}}</b>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <!--{% if not a.pa_report_flag %}-->
+                                    <!--<input type="file" name="power_report" id="power_report"-->
+                                    <!--    accept="application/pdf" -->
+                                    <!--    class="form-control {{a.id}}">-->
+
+
+                                    <!--{% else %}-->
+                                    <!--<a href="{{a.analyser_rprt.url}} " target="_blank" class="fas fa-eye text-secondary">View-->
+                                    <!--    file</a>-->
+
+
+                                    <!--{% endif %}-->
+                                    
+                                    {% if not a.pa_result_submitted %}
+                                    <b></b>
+
+                                    {% else %}
+                                    <a href="/po/power_analyzer_api_report/{{a.id}}/{{a.ro.id}}"> View </a>
+
+                                    {% endif %}
+
+                                </td>
+            
+                                <!-- 
+                                <td>
+
+                                    {% if not a.pa_result_submitted %}
+                                    <input type="submit" class="btn btn-primary" value="Save">
+                                    {% else %}
+                                    <b>Submitted</b>
+                                    {% endif %}
+
+                                </td> -->
+
+
+                                <td>
+                                    {% if a.pa_result_submitted %}
+
+                                    {% if a.pa_result == 1 and a.new_design and a.pa_max_loss_per <= 10 %}
+                                    <span class="text-success">Pass</span>
+
+                                    {% elif a.pa_result == 1 and a.new_design and a.pa_max_loss_per > 10 and a.pa_max_loss_per <= 15 %}
+                                    <span  class="text-danger">Pass (With 10% of repairing charges as penalty) </span>
+
+                                    {% elif a.pa_result == 1 and a.new_design and a.pa_max_loss_per > 15 %}
+                                    <span  class="text-success">Pass (marked as white band )</span>
+
+
+                                    {% elif a.pa_result == 1 and a.design_non_star and a.pa_max_loss_per <= 10 %}
+                                    <span class="text-success">Pass</span>
+
+                                    {% elif a.pa_result == 1 and a.design_non_star and a.pa_max_loss_per > 10 and a.pa_max_loss_per <= 15 %}
+                                    <span  class="text-danger">Pass (With 10% of repairing charges as penalty) </span>
+
+                                    {% elif a.pa_result == 1 and a.design_non_star and a.pa_max_loss_per > 15 %}
+                                    <span  class="text-success">Pass (marked as white band )</span>
+
+                                    {% elif a.pa_result == 1 and a.old_l1 and a.pa_max_loss_per <= 10 %}
+                                    <span  class="text-success">Pass</span>
+
+                                    {% elif a.pa_result == 1 and a.old_l1 and a.pa_max_loss_per > 10 and a.pa_max_loss_per <= 15 %}
+                                    <span  class="text-success">Pass (With 10% of repairing charges as penalty) <span>
+
+                                    {% elif a.pa_result == -1 and a.old_l1 and a.pa_max_loss_per > 15 %}
+                                    <span  class="text-danger">Fail </span>
+                                    
+                                    {% elif a.pa_result == 1 and a.old_l2 and a.pa_max_loss_per <= 10 %}
+                                    <span  class="text-success">Pass</span>
+                
+                                    {% elif a.pa_result == 1 and a.old_l2 and a.pa_max_loss_per > 10 and a.pa_max_loss_per <= 15 %}
+                                    <span>Pass (With 10% of repairing charges as penalty) </span>
+
+                                    {% elif a.pa_result == -1 and a.old_l2 and a.pa_max_loss_per > 15 %}
+                                    <span  class="text-danger">Fail </span>
+
+                                    {% endif %}
+                                    {% endif %}
+                                </td> 
+                            
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">  
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Rating</th>
+                            <th>Power Analyzer Approved</th>
+                            <th>UE</th>
+                            <th>Forwarded to CGM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for p,r,s,t in tzip %}
+                     <tr>
+                        
+                            <td>
+                               {{p}}
+        
+                            </td>
+                            
+                            
+        
+                            <td>
+                              {{r}}
+                            </td>
+        
+        
+                           
+        
+                            <td >
+                               {{s}}
+                            </td>
+                          
+        
+                            <td>
+                                {% if t == 1 %}
+                                <p>Quantity Matched</p>
+                                {% else %}
+                                <p>Quantity Not Matched</p>
+                                {% endif %}
+                            </td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        </div>
+        </div>  
+        
+        <div class="ed-tableinfo-block mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">  
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Release No.</th>
+                            <th>Power Analyzer Approved</th>
+                            <th>UE</th>
+                            <th>Forwarded to CGM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for p,r,s,t in rzip %}
+                     <tr>
+                        
+                            <td>
+                                RO{{p}}
+        
+                            </td>
+                            
+                            
+        
+                            <td>
+                              {{r}}
+                            </td>
+        
+        
+                           
+        
+                            <td >
+                               {{s}}
+                            </td>
+                          
+        
+                            <td>
+                                {% if t == 1 %}
+                                <p>Forwarded to CGM</p>
+                                {% else %}
+                                <p>Not Forwarded to CGM</p>
+                                {% endif %}
+                            </td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        </div>
+        </div>   
+
+
+        
+ 
+    <div class="form-group">
+        <div class="text-right"> 
+            <button type="Submit" class="btn btn-secondary btn-sm" onclick="return submitform()">Submit</button>
+        </div>
+    </div>
+</div>
+</div>
+</form>
+
+
+<script>
+function submitform() {
+    
+    let xmr_det = document.getElementsByName('xmr_det');
+    let status = true;
+    let count = 0;
+
+    for(i of xmr_det){
+       if(i.checked == true){
+        count++
+        let all_field = document.getElementsByClassName(i.value);
+        for(j of all_field){
+           if(j.value == "" || undefined){
+              status = false;
+              alert(`please fill all fields for selected XMR "${i.id}"`);
+              return false;
+           }
+        }
+       }
+}
+
+   
+  if(xmr_det.length == 0 ){
+        alert("You have not any pandding XMR.");
+        return false;
+       }else if(count == 0){
+         alert("Please check the XMR first.");
+         return false;
+       }
+       else if(status == true){
+        return true;
+       }else{
+        return false;
+       }  
+}
+
+</script>
+
+{% endblock body %}

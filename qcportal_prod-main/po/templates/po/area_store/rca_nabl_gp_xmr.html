@@ -1,0 +1,225 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} NABL Approved Inward {% endblock heading %}
+{% block body %}
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan=2>Work Order Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Work Order No</td>
+                            <td>MPCZ00{{ material.wo.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>RCA Vendor Company name</td>
+                            <td>{{ material.wo.vendor_id.CompanyName_E }}</td>
+                        </tr>
+                        <tr>
+                            <td> Material </td>
+                            <td>{{ material.wo.wo_specification }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th> Rating </th>
+                            <th> Description </th>
+                            <th> Quantity </th>
+                            <!-- <th> Rate </th>
+                            <th> Total amount </th> --> 
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for data in data1 %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!-- <td>{{data.rate}}</td>
+                            <td>{{data.total_rate}}</td> -->
+                        </tr> 
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th> Gatepass ID. </th>
+                            <th> Gatepass Inward No. </th>
+                            <th> Gatekeeper Name </th>
+                            <th> Vehicle No. </th>
+                            <th> Driver Name </th>
+                            <th> Driver Phone </th>
+                            <th> Gatepass Inward Date: </th>
+                            <th> Material Received By: </th>
+                            <th> Outward Quantity: </th>
+                            <!-- <th> Driver ID: </th> --> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in gp %}
+                        <tr>
+
+                            <td>{{data.id}}</td>
+                            <td>{{data.lotp_in_num}}</td>
+                            <td>{{data.lotp_in_gk_name}}</td>
+                            <td>{{data.lotp_in_vehicle_no}}</td>
+                            <td>{{data.lotp_in_driver_name}}</td>
+                            <td>{{data.lotp_in_driver_phone}}</td>
+                            <td>{{data.lotp_in_date}}</td>
+                            <td>{{data.lotp_in_rec_by}}</td>
+                            <td>{{data.lotp_in_quantity}}</td>
+                           
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>  
+                            <!-- <th><input type="checkbox"></th> -->
+                            <th>XMR</th>
+                            <th>Rating</th>
+                            <th>Gatepass No.</th>
+                            <th>Uneconomical/Repaired Status</th>
+                            <th>XMR Type </th>
+                            <th>XMR Received</th>
+                            <!-- <th>Remark</th> -->
+                            <!-- <th>Action</th> --> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in xmr %}
+                        <tr>
+                            <form action="/po/rca_nabl_gp_xmr_add/{{material.id}}" method="POST">
+                                {% csrf_token %}
+                                <!-- <td><input type="checkbox"></td> -->
+                                <td>{{a.xmr}}</td>
+
+                                <td>{{a.material.rating}}</td>
+
+                                <td>{{a.as_nabl_lotgp.id}}</td> 
+                                <td>
+
+                                    {% if a.uneco_status == 1 %}
+                                    Uneconomical<br>
+
+                                    {% else %}
+                                     Repaired <br>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+                                    {% if a.new_design == 1 %}
+                                    New Design
+                                    {% elif a.old_l1 == 1 %}
+                                    Old L1
+                                    {% elif a.old_l2 == 1 %}
+                                    Old L2
+                                    {% elif a.design_non_star == 1 %}
+                                    Non Star(Old Design)
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if a.as_nabl_approve_flag %}
+                                    Received
+                                    {% else %}
+                                    <label>
+                                        <input type="checkbox" id="xmr_det" name="xmr_det" value="{{a.id}}">
+                                    </label>
+                                    {% endif %}
+
+                                </td>
+
+                                <!-- 
+                    <td>
+                        {% if not a.xmr_rej_gp_flag %}
+                        <textarea class="form-control" id="task" name={{a.xmr}} rows="1"
+                            style=" margin-top:-10px; margin-x:-30px;" placeholder="Write Remark"></textarea>
+                        {% else %}
+                        {{a.xmr_rej_gp_remark}}
+                        {% endif %}
+                    </td> -->
+
+
+
+
+
+
+
+                        </tr>
+                        {% endfor %}  
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        
+        <div class="form-group">
+            <div class="form-action text-right">
+                    <button type="Submit" class="btn ed-submit ed-formSubmit">Submit</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+     
+ 
+
+
+
+
+                {% endblock body %}

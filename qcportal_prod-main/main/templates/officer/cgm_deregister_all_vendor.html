@@ -1,0 +1,74 @@
+
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+
+
+<div class="container">
+  <h4>Blacklisted Contractor</h4>
+  <div class="panel panel-default">
+      <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+      <div class="table-responsive">
+         <table class="table table-bordered table-hover">
+              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                    <th>
+                         Serial Number
+                    </th>
+                    <th>
+                        Name Of Company
+                    </th>
+                    <th>
+                        Name Of Authorised Person
+                    </th>
+                    <th>
+                        Contact Number
+                    </th>
+                    <th>
+                        User Type
+                    </th>
+                    <th>
+                        User Zone
+                    </th>
+                   
+                 
+                  
+                    <th>
+                        Recommended Order
+                    </th>
+
+             
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                  <td>{{data.CompanyName_E}}</td>
+                  <td>{{data.Authorised_person_E}}</td>
+                  <td>{{data.ContactNo}}</td>
+                  
+                  
+                  <td>{{data.User_type}}</td>
+                  <td>{{data.User_zone}}</td>
+          
+                  <td>As per mail</td>
+
+                  
+                  
+                  
+                  
+                
+                   
+              <tr></tr>
+              {%  endfor %}
+                </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock body %}

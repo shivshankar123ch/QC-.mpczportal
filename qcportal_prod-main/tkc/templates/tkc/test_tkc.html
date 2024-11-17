@@ -1,0 +1,96 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<head>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reg8.js' %}"></script>
+</head>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+                    <h5 class="font-weight-bolder">
+                        Contractor Registration
+                    </h5>
+                    <p class="mb-0">
+                        All <span style="color: red">(*)</span> marked fields are mandatory
+                    </p>
+                </div>
+                <div class="card-body table-responsive">
+                  <table id="example2" class="table">
+                    <thead>
+                      <tr>
+                       
+                        <th>
+                        Profile Status
+                      </th>  
+                      <th>
+                        Status on DGM(works)
+                    </th>
+                    <th>
+                      Status on DGM(finance)
+                  </th>
+                  
+                  <th>
+                  Status on GM(works)
+                  </th>
+                  
+                  <th>
+                  Final Reg Number
+                    </th>
+                   
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for data in data11 %}
+                    <tr>
+                      {% if data.Complete_Details == 1 %}
+                      <td><span class="badge badge-success badge-sm">Complete</span></td>
+                   
+                     
+                           {% else %}
+                           <td><span class="badge badge-warning badge-sm">Pending(upload document)</span></td>
+                           {% endif %}
+                      {% if data.work_approval == 1  %}
+                      <td><span class="badge badge-success badge-sm">Approve</span></td>
+                           {% elif data.work_approval == 2  %}
+                           <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                           {% else %}
+                           <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                           {% endif %}
+                  
+                           {% if data.finance_approval == 1  %}
+                           <td><span class="badge badge-success badge-sm">Approve</span></td>
+                           {% elif data.finance_approval == 2  %}
+                           <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                          
+                                {% else %}
+                                <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                {% endif %}
+                  
+                               
+                                          {% if data.cgm_approval == 1  %}
+                                          <td><span class="badge badge-success badge-sm">Approve</span></td>
+                                          {% elif data.cgm_approval == 2  %}
+                                          <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                                         
+                                               {% else %}
+                                               <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                               {% endif %}
+                  
+                                               {% if data.Authentication_id%}
+                                               <td><span class="badge badge-success badge-sm">{{data.Authentication_id}}</span></td>
+                                            
+                                              
+                                                    {% else %}
+                                                    <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                                    {% endif %}
+                      </tr>
+                      {%  endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

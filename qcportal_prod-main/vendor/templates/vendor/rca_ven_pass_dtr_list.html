@@ -1,0 +1,166 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Transformer Pass DTR List
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th> PO No. </th>
+                            <th> Allotment No. </th>
+                            <th> Rating </th>
+                            <th> Description </th>
+                            <th> Quantity </th>
+                            <!--<th> Rate </th>-->
+                            <!--<th scope="col-9"> Total amount </th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>MP{{data.ro.wo.rca_cell.user_zone}}WO{{data.ro.wo.id}}</td>
+                            <td>MP{{data.ro.wo.rca_cell.user_zone}}RO{{data.ro.id}}</td>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!--<td>{{data.rate}}</td>-->
+                            <!--<td>{{data.total_rate}}</td>-->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ed-tableinfo-block mb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th class="w-5"> S.No. </th>
+                            <th class="w-5"> Rating </th>
+                            <th class="w-15">XMR Code </th>
+                            <th class="w-5"> XMR Type </th>
+                            <th class="w-5"> XMR Repaired/Uneconomical </th>
+                            <th class="w-5"> XMR Dispatched </th>
+                            <th class="w-5"> XMR Inwarded </th>
+                            <th class="w-5"> Areastore Inspection Status </th>
+                            <th class="w-10"> Power Analyzer Status </th>
+                            <th class="w-10"> Nabl Physical Inspection </th>
+                            <th class="w-10"> Nabl Machine Inspection </th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in xmr_t %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{data.material.rating}}</td> 
+                            <td style="white-space: nowrap !important;">{{data.xmr}}</td> 
+                            <td>
+                                {% if data.new_design == 1 %}
+                                New Design
+                                {% elif data.old_l1 == 1 %}
+                                Old L1
+                                {% elif data.old_l2 == 1 %}
+                                Old L2
+                                {% elif data.design_non_star == 1 %}
+                                Non Star(Old Design)
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if data.uneco_status == 1 %}
+                                Uneconomical<br>
+
+                                {% else %}
+                                 Repaired <br>
+
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if data.vendor_send == 1 %}
+                                Dispatched
+                                {% elif data.vendor_send == 0 %}
+                                Not Dispatched
+                                
+                                {% endif %}
+                              </td>
+                        
+                              <td>
+                                {% if data.as_accepted == 1 %}
+                                Inwarded
+                                {% elif data.as_accepted == 0 %}
+                                Not Inwarded
+                                
+                                {% endif %}
+                            </td>
+                        
+                        
+                              <td>
+                                {% if data.physical_status == 1 %}
+                                Approved
+                                {% elif data.physical_status == -1 %}
+                                Rejected
+                                {% elif data.physical_status == 0 %}
+                                Pending
+                                {% endif %}
+                              </td>
+                        
+                              <td>
+                                {% if data.pa_result == 1 %}
+                                Approved
+                                {% elif data.pa_result == -1 %}
+                                Rejected
+                                {% elif data.pa_result == 0 %}
+                                Pending
+                                {% endif %}
+                              </td>
+                        
+                              <td>
+                                {% if data.ph_reject_by_nabl == 1  %}
+                                Approved
+                                {% elif data.ph_reject_by_nabl == -1 %}
+                                Rejected
+                                {% elif data.ph_reject_by_nabl ==  0 %}
+                                Pending
+                                {% endif %}
+                              </td>
+                        
+                        
+                        
+                              <td>
+                                {% if data.single_reject_by_nabl == 1 %}
+                                Approved
+                                {% elif data.single_reject_by_nabl == -1 %}
+                                Rejected
+                                {% elif data.single_reject_by_nabl == 0 %}
+                                Pending
+                                {% endif %}
+                              </td>
+                    
+                            
+
+
+
+        </tr>
+        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock body %}

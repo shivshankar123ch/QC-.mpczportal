@@ -1,0 +1,115 @@
+{% extends 'officer/gm_work_base.html' %} {% load cart %} {% load static %}
+{% block body %}
+
+<!-- <style> -->
+<!-- .ed-tableinfo-block .dataTables_length { -->
+<!-- display: block; -->
+<!-- } -->
+
+<!-- .ed-tableinfo-block .dataTables_paginate span .paginate_button.current { -->
+<!-- background: #e5e9ed; -->
+<!-- color: #fff; -->
+<!-- border-color: #1b1c1c; -->
+<!-- } -->
+<!-- </style> -->
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>Vendor Status</h2>
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped ed-table-block text-center"
+          id="gm_works_vendor_complete_status">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>User Type</th>
+              <th>Name Of Company</th>
+              <th>Name of Authorized Person</th>
+
+              <th>Contact Number</th>
+              <th>DGM(W&P) Status</th>
+              <th>DGM(Finance) Status</th>
+              <th>CGM Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>
+                <span>
+                  VENDOR
+                </span>
+              </td>
+
+              <td>{{data.CompanyName_E}}</td>
+              <td>{{data.Authorised_person_E}}</td>
+              <!-- <td>{{data.Uploaded_Date}}</td> -->
+              <td>{{data.ContactNo}}</td>
+              {% if data.work_approval == 1 %}
+              <td>
+                <button class="btn ed-submit btn-success">Approve</button>
+              </td>
+              {% elif data.work_approval == 2 %}
+              <td>
+                <button class="btn ed-submit btn-danger">Rejected</button>
+              </td>
+              {% else %}
+              <td>
+                <button class="btn ed-submit btn-warning">Pending</button>
+              </td>
+
+              {% endif %}
+              {% if data.finance_approval == 1 %}
+              <td>
+                <button class="btn ed-submit btn-success">Approve</button>
+              </td>
+
+              {% elif data.finance_approval == 2 %}
+              <td>
+                <button class="btn ed-submit btn-danger">Rejected</button>
+              </td>
+
+              {% else %}
+              <td>
+                <button class="btn ed-submit btn-warning">Pending</button>
+              </td>
+
+              {% endif %}
+              {% if data.cgm_approval == 1 %}
+              <td>
+                <button class="btn ed-submit btn-success">Approve</button>
+              </td>
+
+              {% elif data.cgm_approval == 2 %}
+              <td>
+                <button class="btn ed-submit btn-danger">Rejected</button>
+              </td>
+              {% else %}
+              <td>
+                <button class="btn ed-submit btn-warning">Pending</button>
+              </td>
+              {% endif %}
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock body %}
+
+<!-- <script> -->
+<!-- $(document).ready(function () { -->
+<!-- $("#gm_works_vendor_complete_status").DataTable(); -->
+<!-- }); -->
+<!-- </script> -->

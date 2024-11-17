@@ -1,0 +1,85 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+  <!-- Main content -->
+   <section class="content">
+     
+    <form action="/tkc/select_material_for_getpass/{{dataid}}" method="post">
+      {% csrf_token %}
+      
+
+
+     <!-- Default box -->
+      
+    
+       <div class="card-body">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                     <th>
+                        Select Received Materials 
+                    </th>
+                  
+                     <th>
+                         Item Name 
+                     </th>
+                     <th>
+                         Serial Number/Betch Number
+                     </th>
+                  
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+               
+
+                       <td>{% if name.accepted == 1 %} Sent  <input type="checkbox" name="{{name.id}}" value="1" checked hidden>  
+                        
+                        {% else %}
+                        <input type="checkbox" name="{{name.id}}" value="2" >
+                   {% endif %}</td>
+
+                       <td>
+                        <b>{{name.offer.wo_material.material_name}}</b>
+                     </td>
+                    
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                   
+            
+
+                
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+        <center><button class="btn-lg">Submit</button></center>
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

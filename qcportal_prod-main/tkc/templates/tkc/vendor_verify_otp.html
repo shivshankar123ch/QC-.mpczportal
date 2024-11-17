@@ -1,0 +1,53 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<form action="/tkc/vendor_otp_verify" method="POST">
+    {% csrf_token %}
+
+
+    <div class="ed-information mb-2">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Vendor otp verify
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="ed-form-block">
+                    <div class="ed-form-title">
+                        <h6>
+                            <span class="ed-text">
+                                verify OTP
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="ed-form-body">
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Mobile OTP
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="otp" class="form-control input1 ed-textbox" placeholder="Enter OTP"
+                                required="required">
+                        </div>
+                        <div class="form-group">
+                            <div class="text-right">
+                                <button id="loginButton" onclick="validcap()" type="submit"
+                                    class="btn ed-submits ed-formsubmit">
+                                    Submit For Approval
+                                </button>
+                                <!-- <span class="text-muted text-sm">Haven't received it?<a href="login"> Resend a new code</a>.</span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+{% endblock body %}

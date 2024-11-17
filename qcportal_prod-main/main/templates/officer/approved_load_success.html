@@ -1,0 +1,58 @@
+{% extends 'officer/RoofTop_Approver_base.html' %} {% load static %} {% block body %}
+
+
+<style>
+    .button {
+        background-color: #007bff;
+        /* Green */
+        border: none;
+        color: 2px solid white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    
+    .button1 {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid darkblue;
+        width: 155px;
+    }
+    
+    .button1:hover {
+        background-color: darkblue;
+        color: white;
+        border: 1px solid white;
+    }
+</style>
+
+
+<script type="text/javascript" src="/static/assets/js/Validation/vendor_reg8.js"></script>
+<script type="text/javascript">
+    window.history.forward();
+
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+
+<form class="multisteps-form__form mb-4" action="vendor_reg_eight" name="myForm" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+
+    <h3 class="font-weight-bolder mb-0 mt-10 text-center">LOA has been successfully Approved </h3>
+
+
+</form>
+</div>
+
+
+
+
+
+{% endblock body %}

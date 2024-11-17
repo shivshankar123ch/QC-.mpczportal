@@ -1,0 +1,268 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% extends 'CA/commercial_sales.html' %} {% load static %} {% block body %} 
+
+<h3 class="card-title m-2"> <b> Welcome to Report Section</b></h3>
+
+<div class="container-fluid py-4">
+
+    <div class="ca_reportsinfo-block">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">
+                                                Monthly Transaction Report
+                                            </p>
+
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{request.session.total_approved_vendor}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="{% url 'commercial_ca_txn_report' %}" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <a href="">
+                                                <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">Collection Agents List</p>
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{approve_nabl}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="{% url 'commercial_all_ca_list' %}" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">Total Invoice Generated</p>
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{approve_nabl}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="#" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">Total Deregistered CA's</p>
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{approve_nabl}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="{% url 'commercial_ca_total_deregister' %}" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">Total Security Refunds</p>
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{approve_nabl}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="{% url 'commercial_ca_total_security_refund' %}" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="card reportscard-block  mb-4">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="texttitle">Bank Details Update</p>
+                                            <!-- <h5 class="font-weight-bolder">
+                                                {{approve_nabl}}
+                                            </h5>
+                                            <p class="mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+
+                                            </p> -->
+                                            <p class="download">
+                                                <a href="{% url 'commercial_bank_change_requests_IT' %}" class="links">
+                                                    Click Here </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div
+                                            class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex;">
+        <!-- <p style="margin-right: 177px">
+        <label for="start">Select month:</label>
+            <input type="month" id="start" name="start"
+            min="2022-06" value="2022-08">
+        </p>
+        <button type="submit" onclick="getmonth();"> </button> -->
+
+
+
+    </div>
+
+    {% endblock body %}
+
+
+    <script>
+        function getmonth() {
+            var start = $('#start').val();
+            alert('HELLO');
+        }
+    </script>
+<style>
+    .reportscard-block {
+    border-radius: 4px;
+    position: relative;
+}
+
+.reportscard-block .texttitle {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+}
+
+.reportscard-block .download {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 12px;
+    color: #596cff;
+    margin: 0;
+}
+
+.reportscard-block .download .links {
+    color: #596cff;
+}
+
+.reportscard-block .icon-shapee {
+    width: 34px;
+}
+
+.reportscard-block .icon-shape {
+    width: 54px;
+    height: 54px;
+}
+
+.reportscard-block .icon-shape i {
+    font-size: 26px !important;
+}
+</style>

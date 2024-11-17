@@ -1,0 +1,117 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+  {% endblock rejected_doc %}
+  <!---trial start here-->
+  <!-- <div>
+  <p style="align-items:Center;color: rgb(4, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+    {% if msg %}
+    {{ msg }}
+    {% endif %}
+</p>
+</div> -->
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 140px;
+}
+</style>
+
+
+  <div class="ed-card-inner">
+    <div class="card-header">
+      <h2>
+        Material Offer  
+      </h2>
+    </div>
+    <div class="card-body">
+
+      <form class="multisteps-form__form mb-8" action="/vendor/vendor_dispatch_b2/{{data.id}}" method="POST">
+        {% csrf_token %}
+        <!--single form panel-->
+        <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+        <!-- <h5 class="font-weight-bolder mb-0 m-5"> Material Offer </h5> -->
+        <!-- <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p> -->
+        <div class="forms-informations">
+          <div class="ed-form-block p-0 border-0">
+            <div class="ed-form-body">
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Material Specification
+                </label>
+                <input type="text" class="form-control ed-textbox" name="category" id="exampleInputEmail1"
+                  placeholder="{{data.specification}}" disabled>
+                <!-- <span id="Work_experience" class="text-danger font-weight-bold"></span> -->
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Unit Of Measurement
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{data.unit}}" disabled>
+              </div>
+
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Total Order Quantity
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{data.Quantity}}" disabled>
+              </div>
+
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Remaining Quantity to be deliver
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" value="{{data.remaining_qty}}" id="remaining_qty"
+                  placeholder="{{data.remaining_qty}}" disabled>
+              </div>
+
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Enter Offer Item Quantity
+                </label>
+                <input type="number" name="quantity" class="form-control ed-textbox" 
+                  id="offer_quantity" placeholder="Enter Offer Item Quantity" onblur="validationRemainingQty()">
+              </div>
+
+
+              <div class="form-group mt-2">
+                <div class="btn-actionblock text-right">
+                  <button class="btn btn-primary" value="Submit" type="submit" title="Submit" onsubmit="return validationRemainingQty()">
+                    Save And Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    function validationRemainingQty(){
+    var remaining_qty = document.getElementById("remaining_qty").value;
+    var offer_quantity = document.getElementById("offer_quantity").value;
+    
+  if(remaining_qty >= offer_quantity){
+     }
+     else{
+      alert("Please entered Offer Quantity should not more then Remaining Quantity")
+      return false;
+     }
+
+    }
+    
+    
+  </script>
+
+
+
+
+
+
+  {% endblock body %}

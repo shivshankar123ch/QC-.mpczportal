@@ -1,0 +1,80 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block heading %}
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
+{% endblock heading %} {% block body %}
+
+<!-- <body onkeydown="return (event.keyCode != 116)">  
+    <h1>  
+        Click this page to set focus.  
+    </h1>  
+</body>  -->
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>Items for Sampling</h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-3">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                <thead class="table-dark">
+                    <tr>
+                    <th>S.No</th>
+                    <th>Item Name</th>
+                    <th>Item Code</th>
+                    <th>Item For Sampling</th>
+                    <th>Area Store</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i, j, a in final_zip %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                      {{j.area_store_id.offer_item.material.specification}}
+                  </td>                    
+                    <td>
+                        {{j.area_store_id.material_sample_code}}
+                    </td>
+                    <td>{{i}}</td>
+                    <td>{{a}}</td>
+
+                    {% comment %}
+                    <td>{{j.material_sample_code}}</td>
+                    {% endcomment %}
+                    </tr>
+                    {% endfor%}
+                </tbody>
+                </table>
+
+        <form method="POST" action="/po/sample_select_submit/{{Di_id}}/{{final_random_sample_mat}}">
+          {% csrf_token %}
+          <div class="form-group form-action">
+            <div class="text-right">
+                <button type="submit" class="btn btn-secondary bg-dark">
+                Submit
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+  </div>
+</div> 
+</div>
+
+
+
+        <script>
+          {
+            function ValidateRating(event, inputText) {
+              event.preventDefault();
+              //remaining function logic goes here
+            }
+          }
+        </script>
+
+
+      {% endblock body %}

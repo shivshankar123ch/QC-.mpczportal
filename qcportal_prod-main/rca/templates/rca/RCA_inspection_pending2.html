@@ -1,0 +1,257 @@
+{% extends 'rca/RCA_inspection_officer_base.html' %}
+
+{% load static %}
+
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1">RCA Inspecting Officer</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+    <li class="nav-item active">
+      <a class="nav-link active" href="/rca/rca_inspection_pending">
+        <span class="sidenav-mini-icon"> PO </span>
+        <span class="sidenav-normal"> Pending Inspection</span>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link " href="/rca/rca_inspection_complete">
+        <span class="sidenav-mini-icon"> CO </span>
+        <span class="sidenav-normal"> Complete Inspection</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock active %}
+
+
+{% block body %}
+
+<h5>Pending Inspection 2</h5>
+
+<form action="" method="POST">
+{% csrf_token %}
+
+<div class="table-responsive text-nowrap">
+    <table class="table table-striped" style="width:80%" border="1">
+  <tr>
+    <th>Work Order No.:</th>
+    <td><b>MPCZ004</b></td>
+  </tr>
+  <tr>
+    <th>Area Store Name:</th>
+    <td>
+      <b>Bhopal</b>
+    </td>
+  </tr>
+  <tr>
+    <th>Vendor:</th>
+    <td>
+           <b>Ramesh Rai</b>
+    </td>
+  </tr>
+  <tr>
+    <th>Material:</th>
+    <td>
+      <b>DTR</b>
+    </td>
+  </tr>
+  <tr>
+    <th>Specification:</th>
+      <td><b>11 KV CT Ratio</b></td>
+  </tr>
+</table>
+</div>
+
+<div class="table-responsive text-nowrap">
+    <table class="table table-striped" style="width:80%" border="1">
+<thead>
+  <tr>
+    <th>Xmer Code:</th>
+    <th> Recoverable/Uneconomical</th>
+    <th> Correct/Wrong</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+      <td><b>121234563</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <td><b>242536134</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <td><b>134256734</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+       <td><b>716152728</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <td><b>651275127</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+       <td><b>653526735</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <td><b>375281935</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+       <td><b>125465612</b></td>
+      <td><label>Recoverable</label></td>
+      <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+      </td>
+  </tr>
+  <tr>
+      <td><b>425261722</b></td>
+      <td><label>UnRecoverable</label></td>
+    <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+    </td>
+  </tr>
+       <td><b>425163719</b></td>
+       <td><label>UnRecoverable</label></td>
+    <td>
+        <select name="coinco" id="coinco">
+          <option value="" selected>Select Option</option>
+          <option value="Correct" >Correct</option>
+          <option value="Incorrect" >Incorrect</option>
+        </select>
+    </td>
+
+  </tr>
+
+</tbody>
+</table>
+</div>
+
+<a href="" class="btn btn-primary btn-sm" style="width:180px;"> Submit Report</a>
+
+</form>
+
+{% endblock body %}
+
+
+
+
+
+
+<tbody>
+  <tr>
+      <td><b>121234563</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+      <td><b>242536134</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+      <td><b>134256734</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+       <td><b>716152728</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+      <td><b>651275127</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+       <td><b>653526735</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+      <td><b>375281935</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+       <td><b>125465612</b></td>
+      <td><label>Recoverable</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+      <td><b>425261722</b></td>
+      <td><label>Uneconomical</label></td>
+      <td><b>Correct</b></td>
+  </tr>
+  <tr>
+       <td><b>425163719</b></td>
+      <td><label>Uneconomical</label></td>
+      <td><b>InCorrect</b></td>
+  </tr>
+
+</tbody>

@@ -1,0 +1,154 @@
+{% extends 'officer/RoofTop_Approver_base.html' %}
+{% load static %}
+{% load cart %}
+{% block body %}
+
+            <div class="card-body table-responsive">
+              <h3 class="card-title m-2 table-responsive"> <b> All Released LOA</b></h3>
+              <div>
+              <table class="table table-bordered table-hover bg-white " cellspacing="0" border="2" >
+                <thead class="bg-dark">
+                  <tr>
+                    <th style="color: white; ">
+                        S NO.</th>
+
+                        <th style="width:1%;color: white;  ">
+                         Firm/Agency Name</th>
+						
+							<th style="color: white;  ">
+                          Loa Issued Date </th>	
+                        
+        
+                            <th style="color: white;  ">
+                              View LOA </th>
+
+                              <th style="color: white;  ">
+                                View Annexure </th>
+
+                              
+                                <th style="color: white;  ">
+                                  Vendor Related Document </th>
+
+
+                              <th style="color: white;  ">
+                                Details </th>
+
+                                <th style="color: white;  ">
+                                  Action </th>
+                                  
+                                  <th style="color: white;  ">Remark</th>
+
+                                  <th style="color: white;  ">Upload Digitaly Singned LOA</th>
+
+                                  <th style="color: white;  ">Submit</th>
+
+
+                            
+                 
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in data %}
+                 
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.user_name}}</td>
+					
+					<td>{{data.Doc_issue_date|date:"d-M-Y"}}</td>
+                    
+                    <td> <a href="{{data.loa_file.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+
+                    <td> <a href="{{data.annexure.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                    <td> <a href="{{data.vendor_document.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+
+                   
+                    <td> <a href="/all_pending_loa_for_approvel_evaluate/{{data.user_id}}">View Details</a></td>
+                    <!-- <td>
+                      {% if data.Primary_verification_Status_approver == 1 %}
+                      <b>Accepted</b>
+                      {% else %}
+                      <div class="custom-control custom-radio">
+                          <input type="radio" class="form-check-input" id="radio1" name={{name|add:forloop.counter0}} value="OK"  required>
+                          <label class="form-check-label" for="radio1">Accepted</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                          <input type="radio" class="form-check-input" id="radio2" name={{name|add:forloop.counter0}} value="NOT">
+                          <label class="form-check-label" for="radio1">Rejected</label>
+                      </div>
+                      {% endif %}
+                  </td> -->
+                  <form action="/all_pending_loa_for_approvel_evaluate_save/{{data.user_id}}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <td>
+                    {% if data.Primary_verification_Status_approver == 1 %}
+                    <b>Accepted</b>
+                      {% else %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="a" value="OK" id="flexRadioDefault1"  onchange="checkData();"   onclick="checkData();">
+                      <label class="form-check-label font-weight-bold" for="flexRadioDefault2">
+                        Accepted
+                      </label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio"  id="flexRadioDefault2" name="a" value="NOT" onchange="validateData();"   onclick="validateData();">
+                      <label class="form-check-label font-weight-bold" for="flexRadioDefault2">
+                        Rejected
+                      </label>
+                  </div>
+                  {% endif %}
+                  
+                  </td>
+
+                <td>  <input type="text" id="remark" name="remark">   </td> 
+                
+                <td> <input type="file"  id="v_upload_file_2" name="four" accept="application/pdf"> </td>
+
+                <td><button type="submit" class="btn btn-primary btn-sm">Submit</button></td>
+                    </form>
+            {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
+    
+   
+     
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </div>
+
+  </div>
+</section>
+<script>
+      function validateData(){
+        console.log("jlkk");
+        var fileInput1 = document.getElementById('flexRadioDefault1').value;
+        var fileInput2 = document.getElementById('flexRadioDefault2').value;
+        console.log(fileInput1);
+        console.log(fileInput2);
+        if(fileInput2 == "NOT"){
+                  document.getElementById("v_upload_file_2").style.display = "none";
+        }else{
+          console.log("456");
+        }
+        // if(fileInput1 == "OK"){
+        //    document.getElementById("v_upload_file_2").style.display = "block";
+        // }
+      }
+      function checkData(){
+        var fileInput1 = document.getElementById('flexRadioDefault1').value;
+        if(fileInput1 == "OK"){
+           document.getElementById("v_upload_file_2").style.display = "block";
+        }
+      }
+</script>
+<!-- /.content -->
+
+{% endblock body %}

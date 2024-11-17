@@ -1,0 +1,129 @@
+{% extends 'CA/ae_dashboard.html' %} {% load static %} {% block body %}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<script type="text/javascript" src="{% static '/assets/js/Validation/reg_second.js' %}"></script>
+
+
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+<style>.TransactionsData-table {}
+
+    .TransactionsData-table .dataTables_length {
+        display: none;
+    }
+    
+    .multisteps-form__content .mst-title {
+        margin-bottom: -30px;
+    }</style>
+
+
+<!--single form panel-->
+<!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+<h5 class="font-weight-bolder mb-0 text-info"></h5>
+<!-- <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p> -->
+<div class="multisteps-form__content">
+    <div class="row mt-3">
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-sm-6 mst-title">
+            <label for="v_company_name">All Security Refunds CA's List<span style="color: red;"></span></label>
+
+            <span id="nameOfAauthorizedEnglish" class="text-danger font-weight-bold"></span>
+        </div>
+
+
+
+    </div>
+    <!-- <form class="form-inline my-2 my-lg-0" action="{% url 'uploaded_data' %}">
+    <div class="col-md-3" style="float: right;"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button  class="btn  my-2 my-sm-0  text-light bg-dark" type="submit">Search</button></div>
+</form> -->
+    <div class="col-12  table-responsive TransactionsData-table ">
+        <table class="table table-bordered table-hover" id="TransactionsData" data-page-length='25'>
+            <thead class="font-weight-bold text-light bg-dark ">
+                <tr>
+                    <th scope="col">Sr.N.</th>
+                    <th scope="col">Agent ID</th>
+                    <th scope="col">Agent Name</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Email Id</th>
+                    <th scope="col">Refund Amount</th>
+                    <!-- <th scope="col">Customer_payment_year</th>
+      <th scope="col">Is_commission</th>
+      <th scope="col">Gst_ammount</th>
+      <th scope="col">Collection_agent_id</th>
+      <th scope="col">Collection_agent_Name</th>
+      <th scope="col">Contractor_id</th>
+      <th scope="col">Is_process</th> -->
+                    <!-- <th scope="col">Is_Gst</th> -->
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for data1 in data %}
+                <tr>
+                    <th>{{forloop.counter}}</th>
+                    <th>{{data1.2}}</th>
+                    <th>{{data1.14}}</th>
+                    <th>{{data1.7}}</th>
+                    <th>{{data1.6}}</th>
+                    <th>{{data1.4}}</th>
+                    <!-- <th>{{data1.Customer_payment_year}}</th>
+      <th>{{data1.Is_commission}}</th>
+      <th>{{data1.Gst_ammount}}</th>
+      <th>{{data1.Collection_agent_id}}</th>
+      <th>{{data1.Collection_agent_Name}}</th>
+      <th>{{data1.Contractor_id}}</th> -->
+                    <!-- <th>{{data1.Is_process}}</th>
+    <th>{{data1.Is_Gst}}</th> -->
+
+
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+    <div class="button-row d-flex mt-4">
+        <!-- <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Accept"><a href="/ca/agents_details_ae" style="color: white;">Accept</a>
+        <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Reject"><a href="/ca/agents_details_ae" style="color: white;">Reject</a> -->
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Accept</a></button> -->
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Reject</a></button> -->
+    </div><br>
+    <!-- <div><a href="/ca/transaction_upload"><input type="submit" class="btn btn-info" value="Upload" onclick="return confirm('file successfully uploaded');"></a></div>
+    <div><a href="/ca/all_collection_agentdata"><input type="button" class="btn btn-info" value="View" style="float: right;"></a></div> -->
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#TransactionsData').DataTable();
+        });
+    </script>
+    
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+    </body>
+    {% endblock body %}

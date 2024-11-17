@@ -1,0 +1,61 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+{% block body %}
+<div class="card card-default width-90 m-4" style="width:85%">
+          <div class="card-header">
+            <h3 class="card-title">Bank Details </h3>
+          </div>
+     <form   action="/fqp/bank_review/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%"><b>MPCZ000{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+                   <tr>
+                   <tr>
+                  <td> <label for="exampleInputEmail1"> Supplier Name </label> </td>
+                    <td><b>{{data.supplier.CompanyName_E}}</b>
+                </tr>
+                 <tr>
+                  <td> <label for="exampleInputEmail1"> Bank Name </label> </td>
+                    <td><b>{{data.Bank.Bank_name}}</b>
+                </tr>
+                     <tr>
+                  <td>   <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                         <td>   <b>{{data.Bank.Account_Holder_Name}}</b></td>
+
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Account No </label> </td>
+                   <td><b>{{data.Bank.Account_Number}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> IFSC Code </label> </td>
+                  <td><b>{{data.Bank.IFSC}}</b></td>
+                </tr>
+                <tr>
+                <td>
+                    <label for="exampleInputEmail1">Remark </label>  </td>
+                       <td>
+                    <input type="text" name= "remark" id="remark" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' placeholder="">
+                    <span id="bank_no" class="text-danger font-weight-bold"></span>
+                      </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Submit To approval</button>
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+    </div>
+{% endblock body %}

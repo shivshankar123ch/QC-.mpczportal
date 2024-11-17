@@ -1,0 +1,320 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>Area Store Inward View</h2>
+  </div>
+  <div class="card-body mb-4">
+    <div class="forms-informations">
+      <div class="ed-form-block">
+        <div class="ed-form-title">
+          <h6>
+            <span class="ed-text"> Work Order Information </span>
+          </h6>
+        </div>
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label"> Work Order No </label>
+            <input
+              type="text"
+              class="form-control ed-textbox"
+              value="MP{{ro.rca_cell.user_zone}}00{{ ro.wo.id}}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label class="ed-form-label"> RCA Vendor Company name </label>
+            <input
+              type="text"
+              class="form-control ed-textbox"
+              value="{{ ro.wo.vendor_id.CompanyName_E}}"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label class="ed-form-label"> Material </label>
+            <input
+              type="text"
+              class="form-control ed-textbox"
+              value="{{ ro.wo.wo_specification}}"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body mb-4">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table
+          class="table table-striped table-bordered display text-center"
+        >
+          <thead class="table-dark">
+            <tr>
+              <th class="text-center">Rating</th>
+              <th class="text-center">Description</th>
+              <th class="text-center">Quantity</th>
+              <!-- <th class="text-center"> Rate </th> -->
+              <!-- <th class="text-center"> Total amount </th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+            <tr>
+              <td>{{data.rating}}</td>
+              <td>{{data.description}}</td>
+              <td>{{data.quantity}}</td>
+              <!--<td>{{data.rate}}</td>-->
+              <!--<td>{{data.total_rate}}</td>-->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body mb-4">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table
+          class="table table-striped table-bordered display text-center"
+        >
+          <thead class="table-dark">
+            <tr>
+              <th class="text-center">Rating</th>
+              <th class="text-center">XMR Code</th>
+              <th class="text-center">XMR Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in xmr %}
+            <tr>
+              <td>{{data.material.rating}}</td>
+              <td>{{data.xmr}}</td>
+              <td>
+                {% if data.new_design == 1 %} 
+                New Design 
+                {% elif data.old_l1 == 1 %}
+                Old L1
+                {% elif data.old_l2 == 1 %} 
+                Old L2
+                {% elif data.design_non_star == 1 %}
+                Non Star(Old Design)
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col-3"> DRR No. </th>
+                <th scope="col-3"> DRR Date: </th>
+                <th scope="col-9"> Challan No: </th>
+                <th scope="col-9"> Challan Date: </th>
+                <th scope="col-9"> Vehicle No: </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in drr %}
+            <tr>
+                <td>{{data.id}}</td>
+                <td>{{data.drr_date}}</td>
+                <td>{{data.drr_challan_no}}</td>
+                <td>{{data.drr_challan_date}}</td>
+                <td>{{data.drr_vehicle}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+
+    <form
+      action="/po/drr_details/{{ro.id}}"
+      method="POST"
+      name="myForm"
+    >
+      {% csrf_token %}
+
+      <div class="card-body mb-4">
+        <div class="forms-informations">
+          <div class="ed-form-block">
+            <div class="ed-form-title">
+              <h6>
+                <span class="ed-text"> Vehicle Information </span>
+              </h6>
+            </div>
+            <div class="ed-form-body">
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Release No
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  value="MP{{ro.rca_cell.user_zone}}00{{ ro.id}}"
+                  class="form-control ed-textbox"
+                  readonly
+                />
+                <!-- <span id="date" class="d-block ed-warningtext text-danger" ></span> -->
+                <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                <!-- <option value="" selected>{{ro.id}}</option>    -->
+                <!-- </select> -->
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  DRR Date
+                  <span style="text-transform: lowercase">(dd-mm-yyyy)</span>
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="date"
+                  id="drr_date"
+                  name="drr_date"
+                  required="required"
+                  class="form-control ed-textbox get-pass"
+                  onkeypress="return false"
+                />
+                <span
+                  id="date"
+                  class="d-block ed-warningtext text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Challan No
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="challan_no"
+                  id="dispatch_num"
+                  required="required"
+                  class="form-control ed-textbox get-pass"
+                />
+                <span
+                  id="tendor"
+                  class="d-block ed-warningtext text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Challan Date
+                  <span style="text-transform: lowercase">(dd-mm-yyyy)</span>
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="date"
+                  id="order_date1"
+                  name="challan_date"
+                  required="required"
+                  class="form-control ed-textbox get-pass"
+                  onkeypress="return false"
+                />
+                <span
+                  id="order"
+                  class="d-block ed-warningtext text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Vehicle No
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="vehicle"
+                  required="required"
+                  class="form-control ed-textbox get-pass"
+                />
+                <span
+                  id="materilall"
+                  class="d-block ed-warningtext text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Quantity
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  required="required"
+                  class="form-control ed-textbox get-pass"
+                />
+                <span
+                  id="materilall"
+                  class="d-block ed-warningtext text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <div class="form-action text-right">
+                  <input
+                    type="submit"
+                    name="submit"
+                    value="Add DRR Info"
+                    class="btn btn-primary ed-formSubmit mr-2"
+                    autocomplete="off"
+                  />
+                  <!-- <a
+                    class="btn ed-submit ed-next"
+                    href="/po/rca_as_repaired_inward/{{ro.id}}"
+                    > -->
+                    <button class="btn btn-secondary ed-next" onclick="return validateForm()">Next</button> 
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#order_date1').attr('max', today);
+  $('#drr_date').attr('max', today);
+</script>
+
+<script>
+   
+    function validateForm(){
+        let gate_pass =  document.getElementsByClassName("form-control ed-textbox get-pass");
+        let count = 0; 
+        for(i of gate_pass){
+            count += 1;
+        if(i.value == ""){
+            if(count == gate_pass.length){
+                    window.location.href="/po/rca_as_repaired_inward/{{ro.id}}";  
+                    return true;
+            }
+        }else{
+            alert("Please Add DTR first");
+            return false;
+        }
+    }
+    }
+</script>
+{% endblock body %}

@@ -1,0 +1,236 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink {
+background-color: #007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px; width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page
+content) / .tabcontent { color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;} #General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details {background-color:
+white;} #Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg10.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="roof_top_upload" name="myForm" style="margin-left: 30px;" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <!-- <h4 class="font-weight-bolder mb-0 text-center mt-6">M.P. MADHYA KSHETRA VIDYUT VITARAN CO. LTD.</h4>
+    <h5 class="mb-0 text-sm text-center">PETTY CASH VOUCHER
+    </h5> -->
+    <!-- </br>
+    </br> -->
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Gate Pass Details-Organization: Area Store {{ ro.store.Name }}
+            </h2>
+        </div>
+        <div class="card-body mb-2"> 
+            <div class="ed-form-body">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Gate Pass Num
+                    </label>
+                    <input type="text" name="gatePass" value="{{ gp.id }}" class="form-control ed-textbox"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        From organization
+                    </label>
+                    <input type="text" name="gatePass" value="{{ ro.store.Name }}" class="form-control ed-textbox"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Date
+                    </label>
+                    <input type="text" value="{{gp.gatepass_date}}" class="form-control ed-textbox"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Work Order No
+                    </label>
+                    <input type="text" value="MP{{info.rca_cell.user_zone}}WO{{ ro.wo.id}}" class="form-control ed-textbox"> 
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Allotment No
+                    </label>
+                    <input type="text" value="MP{{info.rca_cell.user_zone}}RO{{ ro.id}}" class="form-control ed-textbox"> 
+                </div> 
+            </div> 
+
+
+        <div class="mb-2"> 
+            <h4 class="mb-5">
+                To organization
+            </h4>
+
+            <div class="ed-form-body">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        To organization
+                    </label>
+                    <input type="text" value="{{ ro.wo.vendor_id.CompanyName_E }}" class="form-control ed-textbox"> 
+                </div> 
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Gate Keeper Name
+                    </label>
+                    <input type="text" value="{{ gp.gatekeeper_name }}" class="form-control ed-textbox" readonly>  
+                </div> 
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        vehicle No.
+                    </label>
+                    <input type="text" value="{{ gp.vehicle_no }}" class="form-control ed-textbox" readonly>  
+                </div> 
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Driver Name
+                    </label>
+                    <input type="text" value="{{ gp.driver_name }}" class="form-control ed-textbox" readonly>  
+                </div> 
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Material Received By
+                    </label>
+                    <input type="text" value="{{ gp.material_rec_by}}" class="form-control ed-textbox" readonly>  
+                </div> 
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Driver Phone No.
+                    </label>
+                    <input type="text" value="{{ gp.driver_phone }}" class="form-control ed-textbox" readonly>  
+                </div> 
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Person ID Proof
+                    </label>
+                    <select class="form-control ed-textbox">
+                        <option>Aadhaar Card</option>
+                    </select> 
+                </div> 
+            </div>
+        </div>
+                 
+     
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                    <thead>
+                        <tr>
+                            <th class="text-center"> Rating </th>
+                            <th class="text-center"> XMR </th>
+                            <th class="text-center"> XMR Type </th>
+                            <!--<th class="text-center"> Uneconomical/ Repaired Status </th>-->
+                            <th class="text-center"> Rejection Type </th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        {% for data in xmr %}
+                        <tr> 
+                            <td>{{data.material.rating}}</td> 
+                            
+                            <td>{{data.xmr}}</td> 
+                            
+                            <td>
+                                {% if data.new_design == 1 %}
+                                <b>New Design</b>
+                                {% elif data.old_l1 == 1 %}
+                                <b>Old L1</b>
+                                {% elif data.old_l2 == 1 %}
+                                <b>Old L2</b>
+                                {% elif data.design_non_star == 1 %}
+                                <b>Non Star(Old Design)</b>
+                                {% endif %}
+                            </td> 
+                            <!--<td> -->
+                            <!--    {% if data.uneco_status == 1 %}-->
+                            <!--    <b>Uneconomical</b><br> -->
+                            <!--    {% else %}-->
+                            <!--    <b> Repaired </b><br> -->
+                            <!--    {% endif %} -->
+                            <!--</td> -->
+                            <td> 
+                                {% if data.physical_status == -1 %}
+                                <b>Areastore Physical Inspection Rejection </b><br>
+
+                                {% elif data.pa_result == -1 %}
+                                <b>Power Analyzer Rejection </b><br>  
+                                
+                                {% elif data.ph_reject_by_nabl == -1 %}
+                                <b>NABL Physical Rejection </b><br>
+
+                                {% elif data.machine_reject_by_nabl == -1 %}
+                                <b>NABL Lot Rejection </b><br>
+
+                                {% elif data.single_reject_by_nabl == -1 %}
+                                <b>NABL Machine Single Rejection </b><br>
+                                
+                                {% endif %}
+                            </td> 
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        
+        <div id="options" class="text-center mt-3">
+            <input id="printpagebutton" class="ed-submit ed-formsubmit" type="button" value="print order" onclick="printpage()" />  
+    
+    </div>
+    </div>
+</form>  
+
+
+ <style>
+     .edrca-sidenav-block {
+    display: none;
+}
+
+.edrca-header-block {
+    display: none;
+}
+
+.edrca-contant-block {
+    padding: 10px;
+}
+.ed-footer-block  {
+    display:none;
+}
+ </style>
+<!---trial end here-->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap Datatable js -->
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    function printpage() {
+        var printButton = document.getElementById("printpagebutton");
+        document.getElementById("printpagebutton").style.display="none";
+        window.print()
+        printButton.style.visibility = 'visible';
+        document.getElementById("printpagebutton").style.display="none";
+
+    }
+</script>
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent = document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display="none" ; }
+    tablinks=d ocument.getElementsByClassName( "tablink"); for (i=0 ; i < tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; } document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element with
+    id="defaultOpen" and click on it document.getElementById( "defaultOpen").click(); {% endblock script %}

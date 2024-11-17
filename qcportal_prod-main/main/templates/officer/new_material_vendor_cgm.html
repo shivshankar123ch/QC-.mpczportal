@@ -1,0 +1,70 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %} {% block Pending_Verification %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<li class="nav-item active" style="list-style-type:none;">
+    {% endblock Pending_Verification %}
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                All Pending Verification Contractor
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-5">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="new_material_vendor_cgm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="w-5">
+                                    S.No.
+                                </th>
+                                <th>Name Of Company</th>
+                                <th>Name of Authorized Person</th>
+                                <th>Registration Date</th>
+                                <th>Email</th>
+                                <th>Contact Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in data %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.CompanyName_E}}</td>
+                                <td>{{data.Authorised_person_E}}</td>
+                                <td>{{data.Uploaded_Date|date:"d-M-Y"}}</td>
+                                <td>{{data.Email_Id}}</td>
+                                <td>{{data.ContactNo}}</td>
+                                <td>
+                                    <a href="/new_material_vendor_cgm_evaluate/{{data.User_Id}}" class="ed-links ">
+                                        <span class="btn btn-primary">
+                                            View Details
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+    $('#new_material_vendor_cgm').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+    </script>
+    {% endblock body %}

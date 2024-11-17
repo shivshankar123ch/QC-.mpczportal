@@ -1,0 +1,112 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+<div class="card card-default width-75">
+     <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Item Name</th>
+                <th>Item Specification</th>
+                <th>Item Unit </th>
+                <th>Serial No </th>
+                <th>Action</th>
+                <th>Approval Status</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in item %}
+            <tr>
+                  <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Name}}
+                </td>
+                  <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Specification}}
+                </td>
+                  <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Specification}}
+                </td>
+                 <td>
+                    {{data.Item_Serial_No}}
+                </td>
+
+                <td>{% if not data.Physical_Status %}
+                       <form action="/fqp/physical_inspection/{{data.id}}" onsubmit="return validateForm()" name="myForm" method="POST">
+                                    {% csrf_token %}
+                     <div class="orderaction-items">
+                         <div class="radio-groups-items">
+                             <label class="radio-groups">
+                                <input type="radio" name="action" value="1"/>
+                                 Accept
+                             </label>
+                             <label class="radio-groups">
+                           <input type="radio" name="action" value="0" checked/>
+                                 Reject
+                             </label>
+                         </div>
+                         <div class="form-group">
+                             <input type="text" name="remark" class="form-control ed-textbox">
+                         </div>
+                     </div>
+                    <button type="submit" class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Submit
+                                                            </span>
+                                                        </button>
+                        </form>
+                    {% else %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                             Already Physical Inspection Completed
+                                                        </span>
+                                                       </a>
+                    {% endif %}
+                </td>
+                    <td>{% if  data.Physical_Status == 0 and offer.Received_Status == 1 %}
+                        <a href=""  class="btn ed-submit btn-info">
+                                                        <span class="ed-submit-text">
+                                                              Pending
+                                                        </span>
+                                                       </a>
+                    {% elif data.Physical_Status == -1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                            Rejected
+                                                        </span>
+                                                       </a>
+                     {% elif data.Physical_Status == 1 %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                              Approved
+                                                        </span>
+                                                       </a>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if  data.Physical_Remark %}
+                     <span class="ed-submit-text">
+
+                         <b>{{ data.Physical_Remark}}</b>
+                     </span>
+                     {% endif %}
+                </td>
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+
+</div>
+
+{% endblock body %}

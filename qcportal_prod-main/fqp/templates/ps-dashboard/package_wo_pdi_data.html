@@ -1,0 +1,98 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Pre Delivery Inspections List
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <div class="ed-tableinfo-block ">
+            <div class="table-responsive">
+                <table class="table  table-bordered  text-center display" id="vendor_purchase_B">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5 text-center">S.No.</th>
+                            <th class=" text-center">Offer No.</th>
+                            <th class=" text-center">TKC</th>
+                            <th class=" text-center">Vendor</th>
+                            <th class=" text-center">PDI Date</th>
+                            <th class=" text-center">PDI Report</th>
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            {% for i in pdi_data %}
+                            <tr>
+                            <td>
+                               <b> {{forloop.counter}}</b>
+                            </td>
+
+                            <td>
+                               <b> {{i.offer_no}}</b>
+                            </td>
+                            <td>
+                               <b> {{i.wo.supplier.CompanyName_E}}</b>
+                            </td>
+       
+
+                            <td>
+                              <b> {{i.TKCVendor.Vendor.CompanyName_E}}</b>
+                            </td>
+
+                            <td>
+                              <b>{{i.PDI.perform_date}}</b>
+                             </td>
+                            {% if i.PDI.pdi_report %}
+                            <td>
+                                <a href="{{i.PDI.pdi_report.url}}">
+                                    <button class="btn  btn-info btn-sm">
+                                        <span>
+                                            View
+                                        </span>
+                                    </button>
+                                </a>
+                            {% else %}
+                            <button class="btn  btn-info btn-sm">
+                                <span>
+                                    Report Not Uploaded
+                                </span>
+                            </button>
+
+                            {% endif %}
+                            
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script>
+    $(document).ready( function () {
+    $('#vendor_purchase_B').DataTable();
+} );
+ </script> 
+
+
+{% endblock body %}

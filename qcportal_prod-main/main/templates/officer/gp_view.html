@@ -1,0 +1,122 @@
+{% extends 'po/area_store/areastore_base.html' %} 
+{% load static %}
+{% block pagetitle %}Gatepass inward{% endblock pagetitle %}
+
+{% block fa %}
+<ul class="nav nav-treeview">
+  <li class="nav-item">
+    <a href="/po/area_process" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>Open Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/po/area_stock" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>In Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/gp_inward" class="nav-link">
+      <i class="far fa fa-circle nav-icon"></i>
+      <p>Gatepass Inward</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="far fa fa-check-circle nav-icon"></i>
+      <p>Gatepass View</p>
+    </a>
+  </li>
+</ul>
+{% endblock fa %}
+
+{% block body %}
+
+<div class="ed-card-inner">
+  <div class="card-header">
+      <h2>
+          View GP
+      </h2>
+  </div>
+  <div class="card-body">
+      <div class="ed-tableinfo-block">
+        {% csrf_token %}
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+              <thead>
+                  <tr>
+                      <th class="text-center">
+                        Material View
+                      </th>
+                      <th class="text-center">
+                        Specification
+                      </th>
+                      <!-- 
+                        <th scope="col">Name</th>
+                      --> 
+                      <th class="text-center">
+                        Vehicle_number
+                      </th>
+                      <th class="text-center">
+                        Driver_name
+                      </th>
+                      <th class="text-center">
+                        Date
+                      </th>
+                      <th class="text-center">
+                        Submitted_by
+                      </th>
+                      <th class="text-center">
+                        Test_Request_Form_by
+                      </th>
+                      <th class="text-center">
+                        Material Number List
+                      </th>
+                      <th class="text-center">
+                        Allot no.
+                      </th>
+                      <th class="text-center">
+                        Material id.
+                      </th>
+                      <th class="text-center">
+                        Start date
+                      </th>
+                      <th class="text-center">
+                        End Date
+                      </th> 
+                    </tr>
+                </thead>
+                <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.select_material }}</td>
+
+                    <td>{{ emp.select_specification }}</td>
+
+<!--                    <th>{{ emp.emp_name }}</th>-->
+
+                    <td>{{ emp.Vehicle_number }}</td>
+                    <td>{{ emp.Driver_name }}</td>
+                    <td>{{ emp.Date }}</td>
+                    <td>{{ emp.Submitted_by }}</td>
+                    <td>{{ emp.Test_Request_Form_by }}</td>
+
+                    <td>{{ emp.material_number_list }}</td>
+
+                    <td>{{ emp.Allot_no }}</td>
+                    <td>{{ emp.Material_id }}</td>
+                    <td>{{ emp.Start_date }}</td>
+                    <td>{{ emp.End_Date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+</div>
+</div>
+ 
+
+{% endblock body %}

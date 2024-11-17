@@ -1,0 +1,643 @@
+{% extends 'po/area_store/areastore_base.html' %}
+  {% load static %}
+  {% block heading %} RO / Allotment  {% endblock heading %}
+{% block body %}
+<form method="POST" action="/rca/rca_base" style="background: white;">
+    {% csrf_token %}
+
+
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <div class="ed-card-inner">
+        <div class="card-body">
+            <div id="printid">
+                <table cellpadding=0 cellspacing=0 class="cgm-region-block" style="width:93% ;margin-left:5%; right:2%;">
+                    <tr>
+                        <td class="cgm-region-td" style="width:100%">
+                            <table cellpadding=0 cellspacing=0 class="cgm-region-container" style="width:100%">
+                                <tr>
+                                    <td colspan="2" style="width:100%">
+                                        <div class="cgm-logo-block">
+                                            {% if vd.rca_cell.Region.Region_Name_E == 'Gwalior' %}
+                                            <img src="{% static 'assets/images/header1.png' %}" alt="͝" class="cgm-logo"
+                                                style="width:100%">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'Bhopal' %}
+                                            <img src="{% static 'assets/images/header1.png' %}" alt="͝" class="cgm-logo"
+                                                style="width:100%">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'JABALPUR' %}
+                                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                                alt="͝">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'SHAHDOL' %}
+                                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                                alt="͝">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'REWA' %}
+                                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                                alt="͝">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'SAGAR' %}
+                                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                                alt="͝">
+											{% elif vd.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                                <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                                    style="width:100%">
+                                            {% elif vd.rca_cell.Region.Region_Name_E == 'Ujjain' %}
+                                                <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                                        style="width:100%">
+
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:100%;">
+                                        {% if vd.wo.rca_cell.Region.Region_Name_E == 'Bhopal' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/BR/RCA-Cell/Or.
+                                                            No-MPCZWO{{vd.wo.id}}/<b>Allotment No-{{vd.id}}</b></NOBR>
+                                                    </p>
+                                                </TD>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        {{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Gwalior' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/GR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPCZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'JABALPUR' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/JR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPEZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'REWA' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/RR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPEZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SHAHDOL' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/ShR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPEZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SAGAR' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/SR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPEZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+										{% elif vd.wo.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/IR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPWZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Ujjain' %}
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                            <tr>
+                                                <td class="text-left" style="width: 65%;">
+                                                    <p class="text-left" style="font-size:12px;text-align: left;">
+                                                        No. <NOBR>CGM/UR/RCA/TS-({{vd.wo.dispatch_no}})/Or.
+                                                            No-MPWZWO{{vd.wo.id}}<b></b>/<b>Allotment No-{{vd.id}}</b>
+                                                        </NOBR>
+                                                    </p>
+
+                                                </td>
+                                                <td class="text-right" style="width: 35%;">
+                                                    <p class="text-right" style="font-size:12px; text-align: right;">
+                                                        <b>{{ vd.store.Name }}</b>, Dated:- <b>{{vd.ro_order_date}}</b>
+                                                    </p>
+                                                </td>
+                                            </TR>
+                                        </table>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <table cellpadding=0 cellspacing=0 class="cgm-region-information" style="width:100%;">
+                                            <tr>
+                                                <td style="width:100%">
+                                                    <p class="mb-1" style="font-size:12px; margin:0px; word-break: break-all; white-space: normal;">To,</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:100%">
+                                                    <p style="font-size:12px; margin-bottom:4px; word-break: break-all; white-space: normal;">
+                                                        <b>M/s</b> {{ vd.wo.vendor_id.CompanyName_E }}
+                                                        <br>Address:{{ vd.wo.vendor_id.Company_add_1 }}
+                                                        <br>Email:{{ vd.wo.vendor_id.Email_Id }}
+                                                        <NOBR>{{add1}}</NOBR>
+                                                        <!--  Email:- <a href="mailto:agarwal.industries@ymail.com">{{vd.vendor_id.Email_Id}}</a> -->
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:100%">
+                                                    <p style="font-size:12px; margin-bottom:6px; word-break: break-all; white-space: normal;">
+                                                        {{address.Company_add_2}} {{address.Company_dist }}
+                                                        {{address.Company_state }}
+                                                        {{address.Company_pin_code }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <p style="font-size:12px; margin-bottom:6px; word-break: break-all; white-space: normal;">
+                                                        <b>
+                                                            Sub: &nbsp;&nbsp;
+                                                        </b>
+                                                        Release / Allotment against Rate contract Award for fail BGP
+                                                        transformer against TS-<b>{{vd.wo.dispatch_no }}</b>
+                                                    </p>
+                                                    <p class='application-info' style="font-size:12px;text-align:justify;margin-bottom: 4px; word-break: break-all; white-space: normal;">
+                                                        <span class="text-dear mb-2">Dear Sir/Madam</span> <br>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        In reference to the above subject matter failed distribution transformer
+                                                        of
+                                                        beyond guarantee period, as per
+                                                        details given below are being alloted to your firm for repair under Rate
+                                                        contract award from Area store {{ vd.store.Name }}.
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="schedule-info" style="width:100%; margin-bottom: 10px;">
+                                                        <table class="schedule-table"
+                                                            style="width:70%; border: 1px solid #ddd;margin: 0 auto;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th
+                                                                        style="font-size:12px; width: 15%; border-bottom: 1px solid #ddd; border-right: 1px solid #ddd;padding: 6px 10px;">
+                                                                        Rating
+                                                                    </th>
+                                                                    <th class="schedule-wd3"
+                                                                        style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;padding: 6px 10px;">
+                                                                        Description
+                                                                    </th>
+                                                                    <th class="schedule-wd3"
+                                                                        style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;padding: 6px 10px;">
+                                                                        Quantity
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for data in material %}
+                                                                <tr>
+                                                                    <td class="schedule-wd3"
+                                                                        style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd; padding: 8px 10px;">
+                                                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                                                            {{data.rating}}
+                                                                        </p>
+                                                                    </td>
+                                                                    <td class="schedule-wd7"
+                                                                        style="font-size:12px; width: 85%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;padding: 6px 10px;">
+                                                                        <p style="font-size:12px; margin: 0;text-align: justify; word-break: break-all; white-space: normal;">
+                                                                            {{data.description}}
+                                                                        </p>
+                                                                    </td>
+                                                                    <td class="schedule-wd7"
+                                                                        style="font-size:12px; width: 85%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;padding: 6px 10px;">
+                                                                        <p style="font-size:12px; margin: 0; text-align: center; word-break: break-all; white-space: normal;">
+                                                                            {{data.quantity}}
+
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- <p class="thanks-text" style="font-size:12px;margin-top:10px;">Thanking you
+                                                    !</p> -->
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p class='application-info' style="font-size:12px;text-align:justify; margin-bottom: 5px; word-break: break-all; white-space: normal;">
+                                                        Repairing work should be carried out strictly as per Technical
+                                                        Specification and
+                                                        Terms and Condition indicated in various annexure/Schedules of the
+                                                        subject
+                                                        Rate
+                                                        contract. Lump sum
+                                                        repair charges shall be payable as per the Price indicated in
+                                                        <b>"{{schedule.schedule_name}}"</b>
+                                                        of RCA. You are advised to take-up the repairing work as per the period
+                                                        specified under
+                                                        clause 8
+                                                        <b>"{{schedule.description_name}}"</b> (Terms and conditions) of RCA.
+                                                    </p>
+
+                                                    <p class='application-info' style="font-size:12px;text-align:justify; margin-bottom: 5px; word-break: break-all; white-space: normal;">
+                                                        IDENTIFICATION MARK ON TRANSFORMER:- A 75 mm wide blue band of paint all
+                                                        around the
+                                                        transformer and
+                                                        radiator on all the transformers repaired first time shall be provided
+                                                        invariably
+                                                        approximately at
+                                                        the 3/4th of the height of transformer from bottom rank for
+                                                        identification
+                                                        of the
+                                                        repaired
+                                                        transformer easily. The shades of this blue paint shall be canary blue
+                                                        colour of ISI
+                                                        No.5 shade No.
+                                                        309.This paint will also be provided after proper treatment of the
+                                                        surface
+                                                        of the
+                                                        transformer. For
+                                                        subsequent (2nd) repairs the colour band shall be kept yellow and for
+                                                        3rd
+                                                        repair the
+                                                        color shall be
+                                                        red. Rest of the procedure shall remain as above.
+                                                    </p>
+
+                                                    <p class='application-info' style="font-size:12px;text-align:justify; margin-bottom: 5px; word-break: break-all; white-space: normal;">
+                                                        The allotment is subject to the conditon that if WGP failed
+                                                        transformers
+                                                        availale in
+                                                        the Area Store {{ vd.store.Name }} are to be lifted first and the same
+                                                        shall
+                                                        be returned
+                                                        to Area
+                                                        Store {{ vd.store.Name }} after repairs along with BGP repaired
+                                                        transformers.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table style="width:100%; border: 0px solid #ddd;">
+                                                        <tr>
+                                                            <td style="width:100%; border: 0px solid #ddd; text-align: right; padding-top: 40px;">
+                                                                <div style=" display: inline-block; "> 
+                                                                    {% if vd.wo.rca_cell.Region.Region_Name_E == 'Gwalior' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (GR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPMKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Bhopal' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (BR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPMKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'JABALPUR' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        Chief Engineer (JR)
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SHAHDOL' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        Chief Engineer (ShR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'REWA' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        Chief Engineer (RR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SAGAR' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        Chief Engineer (SR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+																	{% elif vd.wo.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (IR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPaKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Ujjain' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        CHIEF GENERAL MANAGER (UR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        MPPaKVVCL
+                                                                    </h4>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <table class="table copy-table-block mt-2"
+                                                        style="width:100%; border: 1px solid #ddd;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2"
+                                                                    style="font-size:12px; width: 100%;  border-bottom: 1px solid #ddd;padding: 8px 10px;">
+                                                                    Copy to:-
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for data in copy %}
+                                                            <tr>
+                                                                <td class="copy-wd2"
+                                                                    style="font-size:12px; width: 8%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                    <p style="margin: 0;font-size:12px; word-break: break-all; white-space: normal;">
+                                                                        <b>{{forloop.counter}}</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="copy-wd8"
+                                                                    style="font-size:12px; width: 92%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                    <p style="margin: 0; font-size:12px; word-break: break-all; white-space: normal;">
+                                                                        {{data.copy_name}}
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table style="width:100%; border: 0px solid #ddd;">
+                                                        <tr>
+                                                            <td style="width:100%; border: 0px solid #ddd; text-align: right; padding-top: 40px;">
+                                                                <div style=" display: inline-block; "> 
+                                                                    {% if vd.wo.rca_cell.Region.Region_Name_E == 'Gwalior' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (GR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPMKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Bhopal' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (BR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                        MPMKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'JABALPUR' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        Chief Engineer (JR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SHAHDOL' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        Chief Engineer (ShR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'REWA' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        Chief Engineer (RR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'SAGAR' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        Chief Engineer (SR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPoKVVCL
+                                                                    </h4>
+																	{% elif vd.wo.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (IR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPaKVVCL
+                                                                    </h4>
+                                                                    {% elif vd.wo.rca_cell.Region.Region_Name_E == 'Ujjain' %}
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        CHIEF GENERAL MANAGER (UR)
+                                                                    </h4>
+                                                                    <h4
+                                                                        style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center; word-break: break-all; white-space: normal;">
+                                                                        MPPaKVVCL
+                                                                    </h4>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div class="print-action-block">
+                <div id="options">
+                    <!--<input id="printpagebutton" onclick=window.print() class="btn btn-primary btn-print" type="button" value="Print"
+                    onclick="printpage()" /> -->
+                    <input onclick="printDiv('printid')" type="button" value="print" class="btn btn-primary btn-sm" > 
+                    <a href="/rca/rca_base">
+                        <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm"> Go To
+                            Home
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script>
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+    }
+
+    function add_fields() {
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+    }
+
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+    }
+    function add_fields1() {
+        document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+    }
+</script>
+<style>
+    .print-action-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* .print-action-block .btn-print {
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin: 0 10px;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        font-weight: 300;
+    } */
+</style>
+        {% endblock body %}

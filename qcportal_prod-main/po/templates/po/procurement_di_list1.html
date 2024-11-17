@@ -1,0 +1,75 @@
+{% extends 'po/procurement_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %} {% block procurement_di_list %}
+<li class="nav-item active" style="list-style-type:none;">
+    {% endblock procurement_di_list %}
+
+    <div class="container">
+        <h5 class="font-weight-bolder">Issue DI</h5>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-responsive">
+                    <thead class="table table-dark">
+                        <tr>
+                            <th class="text-center" style="width: 10px;">
+                                S.No.
+                            </th>
+                            <th style="width: 15%">
+                                PO No
+                            </th>
+                            <th style="width: 15%">
+                                Item Category
+                            </th>
+                            <th>
+                                item Name
+                            </th>
+                            <th class="text-center">
+                                item Quantity
+                            </th>
+                            <th class="text-center" style="width: 40%">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for name in data%}
+                        <tr>
+                            <td class="text-center">
+                                {{ forloop.counter }}
+                            </td>
+                            <td>
+                                <b>MPCZ00{{name.id}}</b>
+                            </td>
+                            <td>
+                                {{name.item_category}}
+                            </td>
+                            <td class="project_progress">
+                                {{name.item_name}}
+                            </td>
+                            <td class="text-center">
+                                {{name.item_quantity}}
+                            </td>
+                            <td class="project-actions text-right">
+                                {% if name.offer_approved %}
+                                <a class="btn btn-primary btn-sm" href="/po/procurement_Di_Issue/{{name.id}}">
+                              Issue Dispatch Instruction
+                          </a>
+                                <a class="btn btn-primary btn-sm mr-3" href="/po/vendor_offer_view/{{name.id}}"> View offer </a> {% endif %} {% if name.Po_doc %}
+                                <a class="btn btn-primary btn-sm mr-3" href="{{name.Po_doc.url}} ">PO </a> {% else %}
+                                <a class="btn btn-primary btn-sm mr-3" href="#"> PO</a> {% endif %}
+                                <a class="btn btn-success btn-sm mr-3" href="/po/procurement_status/{{name.id}}">Status</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %}

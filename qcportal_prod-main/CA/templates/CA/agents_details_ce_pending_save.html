@@ -1,0 +1,108 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %} {% block a %} <span class="ms-1 font-weight-bold">{{a.Name}}</span> {% endblock %}
+
+
+<h3 class="card-title m-2"> <b> Details Of Pending Transactions</b></h3>
+<form action="agents_details_ce_pending_save/{{data1.id}}" method="POST">
+    {% csrf_token %}
+
+    <!-- <div class="col-md-3" style="float: right;"><input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search" name="search">
+ <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></div> -->
+    <div class="table-responsive">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead class="bg-dark" style="color: white;">
+                <tr>
+                    <th style="width:1%;color: white;">checkbox.</th>
+
+                    <th style="width:1%;color: white;">S.No.</th>
+                    <th style="width:5%">Name</th>
+                    <th style="width:5%">CUSTOMER_ID </th>
+                    <th style="width:5%">CUSTOMER_NAME </th>
+                    <th style="width:1%">CUSTOMER_BILL_AMOUNT </th>
+
+
+                    <th style="width:2%">CUSTOMER_PAYMENT_DATE </th>
+
+                    <th style="width:2%">CUSTOMER_PAYMENT_MONTH </th>
+
+                    <th style="width:2%">CUSTOMER_PAYMENT_YEAR </th>
+
+                    <th style="width:5%">IS_COMMISSION </th>
+
+                    <th style="width:2%">COMMISION_AMOUNT </th>
+
+                    <th style="width:2%">GST_AMOUNT </th>
+                    <th style="width:10%">COLLECTION_AGENT_NAME </th>
+                    <th style="width:5%">COLLECTION_AGENT_ID </th>
+                    <th style="width:5%">CONTRACTOR_ID </th>
+                    <th style="width:2%">IS_PROCESS </th>
+                    <th style="width:2%">IS_GST </th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for data in data1 %}
+                <tr>
+                    <td>
+
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="ok">
+                    </td>
+                    <td>{{forloop.counter}}</td>
+                    <td><b>{{data.Name}}</b></td>
+                    <td><b>{{data.Customomer_Id}}</b></td>
+                    <td><b>{{data.Customer_name}}</b></td>
+                    <td><b>{{data.Customer_bill_amount}}</b></td>
+                    <td><b>{{data.Customer_payment_date}}</b></td>
+                    <td><b>{{data.Customer_payment_month}}</b></td>
+                    <td><b>{{data.Customer_payment_year}}</b></td>
+                    <td><b>{{data.Is_commission}}</b></td>
+                    <td><b>{{data.commission_amount}}</b></td>
+                    <td><b>{{data.Gst_ammount}}</b></td>
+                    <td><b>{{data.Collection_agent_Name}}</b></td>
+                    <td><b>{{data.Collection_agent_id}}</b></td>
+                    <td><b>{{data.Contractor_id}}</b></td>
+                    <td><b>{{data.Is_process}}</b></td>
+                    <td><b>{{data.Is_Gst}}</b></td>
+
+
+                    <!-- <td> <a href="/ca/agents_all_details_ae/{{data.User_Id}}"> View </a></td> -->
+                    <!-- <td> <a href="/ca/agents_all_details_ae/{{data.User_Id}}"> Fill Form </a></td> -->
+
+
+                </tr>
+                {% endfor %}
+
+
+
+
+
+            </tbody>
+
+        </table>
+
+</form>
+
+<!-- pagination -->
+
+<div class="pagination">
+    <span class="step-links">
+                    {% if data1.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ data1.previous_page_number }}" >previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ data1.number }} of {{ data1.paginator.num_pages }}.
+                    </span> {% if data1.has_next %}
+    <a href="?page={{ data1.next_page_number }}">next</a>&nbsp;
+    <a href="?page={{ data1.paginator.num_pages }}"> last &raquo;</a> {% endif %}
+    </span>
+</div>
+<!-- pagination -->
+
+</div><br>&nbsp;
+<div>
+    <a href="/ca/gen_invoice_ca"><input type="submit" class="btn btn-info" value="Generate invoice" onclick="return confirm('file successfully uploaded');"></a>
+</div>
+
+{% endblock body %}

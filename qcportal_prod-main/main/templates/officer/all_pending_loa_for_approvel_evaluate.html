@@ -1,0 +1,94 @@
+{% extends 'officer/RoofTop_Approver_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>User All Basic Data</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+                <thead class="text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th><b>Serial Number</b></th>
+                        <th><b>Report Name</b></th>
+                        <th><b>Value</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>User Type</td>
+                        <td>{{data.user_type}}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Agency/Firm Name</td>
+                        <td>{{data.agency_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Authorised Person Name</td>
+                        <td>{{data.name_of_auth}}</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Contact Number</td>
+                        <td>{{data.contact}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Email ID</td>
+                        <td>{{data.email}}</td>
+                    </tr>
+                  
+                    <tr>
+                        <td>6 </td>
+                        <td>Address</td>
+                        <td>{{data.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>7 </td>
+                        <td>GST</td>
+                        <td>{{data.gst}}</td>
+                    </tr>
+                 
+                  
+
+
+
+                  
+                <tr></tr>
+                </tbody>
+            </table>
+        </div>
+     
+        <form action="/all_pending_loa_for_approvel_evaluate_save/{{doc_id}}" method="POST">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                <thead class="text-light bg-dark" style="font-size: 15px;">
+                        <tr>
+                            <th> Agency Name</th>
+                            <th> View LOA </th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% with name=100 %} {% for data in abc %}
+                        <tr>
+                            <td><b>{{data.user_name}}</b></td>
+                       
+                          <td> <a href="{{data.loa_file.url}} " target="_self" class="fas fa-eye text-secondary"></a></td>
+                                 
+                           
+                    </tr>
+                    {% endfor %} {% endwith %}                  
+                    <tr></tr>
+                     </tbody>
+                </table>
+            </div>
+           
+        </form>
+    </div>
+</div>
+{% endblock body %}

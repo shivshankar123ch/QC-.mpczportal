@@ -1,0 +1,60 @@
+ {% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default width-75">
+          <div class="card-header">
+            <h3 class="card-title">Upload Letter Of Award </h3>
+          </div>
+     <form   action="/fqp/upload_loa_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Selected Contractor Authentication Id :</label><br>
+                  <b>{{data.id}}</b>
+                    </div>
+              </div>
+              <!-- /.col -->
+
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Tendor &amp; Enquiry No :</label><br>
+                     <b>{{data.tendor_no}}</b>
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                     <div class="form-group">
+                      <label for="exampleInputEmail1"> NIT Number : </label><br>
+                      <b>{{data.nit_no}}</b>
+                   </div>
+            </div>
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">  LOA Number : </label><br>
+                      <b>{{data.wo_no}}</b>
+                   </div>
+            </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Upload Letter Of Award  </label>
+                     <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+                </div>
+            </div>
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1"> Upload LOA</button>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+
+     </form>
+</div>
+{% endblock body %}

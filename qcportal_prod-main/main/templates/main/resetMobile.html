@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(document).on('submit','#signupForm',function(e){
+      e.preventDefault();
+      alert(e)
+    })
+})
+</script>  
+<style>
+.button {
+  background-color: #007bff; /* Green */
+  border: none;
+  color: 2px solid white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.button1 {
+  background-color: #007bff; 
+  color: white; 
+  border: 1px solid darkblue;
+  width: 155px;
+}
+
+.button1:hover {
+  background-color: darkblue;
+  color: white;
+  border: 1px solid white;
+}
+</style>
+</head>
+<body>
+<div class="border border-primary col-lg-4 mx-auto rounded p-4 m4 t-9" style="border: 2px solid darkblue;margin-top: 94px;">
+  <p class="alert alert-success" style="background-color: darkblue;color: white;text-align: center;font-size: 30px;">Reset Mobile Number</p>
+   <form action="/nabl/nabl_reg7" method="POST">
+    <div class="col-lg-12">
+
+
+      {% block content %}
+      <div class="container">
+          <div class="row">
+              <div class="col-md-8">
+                  <form action="" method="POST">
+                      {% csrf_token %}
+                      {{form.as_p}}
+                      <button>Reset password</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+      {% endblock %}
+
+
+
+  </div>
+       <div class="form-group text-center">
+           <input type="Submit" class="btn button button1 btn-outline-primary" value="Submit" class="form-control btn btn-success">
+        </div>
+   </form>
+</div>
+
+</body>
+</html>

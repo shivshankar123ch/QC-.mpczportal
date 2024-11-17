@@ -1,0 +1,146 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+  [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+}
+.table th{
+  text-align: center !important;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 195px;
+}
+</style>
+
+      
+
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        All Rejected Di List
+      </h2>
+    </div>
+    <div class="card-body">
+      <p style="align-items:Center;color: #008000	;font-size: medium; text-align: center; font-weight: 700;">
+        {% if offer.Quantity == already_dispatch_qty %}
+        {% if msg1 %}
+        {{ msg1 }}
+        {% endif %}
+        {% endif %}
+    </p>
+      <div class="ed-tableinfo-block mb-4">
+        <div class="table-responsive">
+          <table class="table table-striped display table-bordered text-center " id="po_view_DI_list">
+            <thead class="table-dark">
+              <tr>
+                <th class="w-5">Sr No.</th>
+                <th>
+                  WO No
+                </th>
+                <th>
+                  OFFER No
+                </th>
+                <th>
+                  TKC
+                </th>
+                <th>
+                  DI Subject
+                </th>
+                <th>
+                  ERP DI No.
+                </th>
+                <th>
+                  Rejected DI Letter
+                </th>
+                <th>
+                        Action
+                    </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in wo_di_objects %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>
+                  {{i.wo.Contract_Number}}
+                </td>
+                <td>
+                  {{i.offer_no}}
+                </td>
+                <td>
+                  {{i.wo.supplier.CompanyName_E}}
+                </td>
+                <td>
+                  {{i.di_subject}}
+                </td>
+                <td>
+                  {{i.erp_di_number}}
+                </td>
+
+                <td>
+                  {% if i.created_di_doc %}
+                  <a class="btn btn-sm btn-primary" href="{{i.created_di_doc.url}}">
+                    View DI
+                  </a>
+                  {% else %}
+                  <a class="btn btn-sm btn-danger">
+                    Not Uploaded by creator
+                  </a>
+                  {% endif %}
+                </td>
+
+                <!-- <td>
+                        {{i.material.specification}}
+                   </td> -->
+                <td>
+                  {% if i.revised_di_created == False %}
+                <a href= "/fqp/di_offers_list/{{i.wo.id}}">
+                    <span class="btn btn-sm btn-primary">Create DI Again</span> 
+                </a>
+                {% elif i.revised_di_created == True %}
+                <span class="btn btn-sm btn-primary">Revised DI Already Created</span> 
+                {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div> 
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
+</div> <!-- Main content -->
+
+<script>
+  $(document).ready(function () {
+       $('#po_view_DI_list').DataTable({
+           pagingType: 'full_numbers',
+       });
+   });
+</script>
+
+{% endblock body %}>

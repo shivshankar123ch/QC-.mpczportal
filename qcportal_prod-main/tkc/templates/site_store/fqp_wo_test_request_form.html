@@ -1,0 +1,548 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        .ntl-form-block {
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            padding: 40px 0;
+        }
+    </style>
+<form method="POST" action="/tkc/tkc_wo_test_request_form_submit/{{material.offer_no}}" enctype="multipart/form-data" >
+	{% csrf_token %}
+    <div id="printableArea" class="ntl-form-block">
+        <div class="container ntl-form-container">
+           
+            <div class="fomr-info-block">
+                
+                <h2 class="ntl-titles">
+                    TEST REQUEST FORM 
+                </h2>
+
+                <ul class="forms-counters">
+                    <li class="nav-item">
+                        <div class="form-group flex-box">
+                            <label class="lable-text">Name of Customer Organization:</label>
+                            <input id="customer_Organization_name" name="customer_Organization_name" type="text" class="form-control textbox" />
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="form-group flex-box">
+                            <label class="lable-text">Address of Customer Organization:</label>
+                            <input id="customer_Organization_address" name="customer_Organization_address" type="text" class="form-control textbox" />
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="form-group flex-boxmain">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Contact Person’s Name:</label>
+                                        <input id="contact_person_name" name="contact_person_name" type="text" class="form-control textbox" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Designation:</label>
+                                        <input id="contact_person_designation" name="contact_person_designation" type="text" class="form-control textbox" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group flex-boxmain">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Contact Person’s Mobile No.:</label>
+                                        <input id="mobile_no" name="mobile_no" type="text" class="form-control textbox" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Email Id:</label>
+                                        <input id="email_id" name="email_id" type="text" class="form-control textbox" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="form-group flex-boxmain">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Item Code Sample/Product :</label>
+                                        <input id="name_of_sample_product" name="name_of_sample_product"  type="text" class="form-control textbox" value="{{material.TKCVendor.Material_id.item_code}}" readonly="readonly"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="form-group flex-boxmain">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Gate pass no</label>
+                                        <input id="customer_ref_gatepass_no" name="customer_ref_gatepass_no" type="text" value="{{gate_pass_number.id}}" class="form-control textbox" readonly = "readonly" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">dated</label>
+                                        <input id="dated" style="width:231px" size="1" name="dated" type="text"  value="{{gate_pass_number.gatepass_date}}"  class="form-control textbox" readonly = "readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                   
+                    <li class="nav-item">
+                        <div class="form-group flex-boxmain">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Upload test request form :</label>
+                                        <input id="trf_file" name="trf_file"  type="file" class="form-control textbox" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </div>
+    </div>
+        <center>
+                <button type="submit" class="btn btn-primary btn-sm mb-4 mt-4" onclick="alert('Test Request Form is submitted')" value="Submit">Submit</button>
+        </center>
+    <script>
+        function ruleoptions1() {
+            document.getElementById('ruleINfo').style.display = 'block';
+        }
+        function ruleoptions2() {
+            document.getElementById('ruleINfo').style.display = 'none';
+        }
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+
+
+<script>
+
+
+function windowprint(){  
+        document.getElementById('edSidebar').style.display='none';
+        document.getElementById('edHeader').style.display='none';
+        document.getElementById('printoptions').style.display='none'; 
+        document.getElementById('notes').style.display='none'; 
+         
+        $('#edContainer').css('padding','0');
+        $('.ed-textbox').css('border','0');
+        $('.ed-pagetitle-block').hide();
+        $('.ed-footer-block').hide();  
+        window.print();   
+        document.getElementById('edHeader').style.display='block'; 
+        document.getElementById('edSidebar').style.display='block'; 
+        document.getElementById('printoptions').style.display='block';
+        document.getElementById('notes').style.display='block';  
+        $('#edContainer').removeAttr('style');
+        $('.ed-textbox').css('border-width','1px');
+        $('.ed-pagetitle-block').show();
+        $('.ed-footer-block').show();  
+    }
+
+</script>
+
+
+
+
+
+
+
+    <style>
+        
+        .ntl-form-block .ntl-form-container {
+            border: 1px solid #000;
+            padding: 40px;
+        }
+
+        .ntl-form-block .ntl-imgbox {
+            margin: 0 0 35px;
+        }
+
+        .ntl-form-block .ntl-imgbox img {
+            width: 100%;
+        }
+
+        .ntl-form-block .fomr-info-block {
+            position: relative;
+        }
+
+        .ntl-form-block .fomr-info-block .ntl-titles {
+            font-size: 22px;
+            text-transform: capitalize;
+            font-weight: 600;
+            text-align: center;
+            margin: 0 0 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters {
+            margin: 16px 0 10px;
+            padding: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .nav-item {
+            list-style: number;
+            padding-left: 8px;
+            font-weight: 400;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group {
+            margin: 0 0 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box {
+            display: inline-block;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box.lable-text {}
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box .lable-text {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+            white-space: nowrap;
+            margin-right: 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .textbox {
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px dotted #000;
+            border-radius: 0;
+            display: block !important;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .forms-countersinner {
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li.nav-item {}
+
+        .ntl-form-block .fomr-info-block .forms-counters .forms-countersinner .nav-item {
+            list-style: lower-alpha;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table {
+            width: 100%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table {
+            border: 1px solid #212529;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th,
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table td {
+            border: 1px solid #212529;
+            padding: 10px 10px;
+            vertical-align: middle;
+            white-space: normal !important;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th {
+            font-weight: 400;
+            width: 2%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th.infos {
+            width: 6%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table td {
+            width: 35%;
+        }
+
+
+        .ntl-form-block .fomr-info-block .forms-counters .rule-info {
+            display: block;
+            padding: 0;
+            margin: 0 0 6px;
+            padding-left: 25px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .rule-info .list-item {
+            padding-left: 8px;
+            list-style: lower-alpha;
+        }
+
+        .custome-checkbox {
+            display: block;
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            height: 40px;
+            width: 80px;
+            float: right;
+        }
+
+        .custome-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 40px;
+            width: 80px;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+
+
+        .custome-checkbox input:checked~.checkmark {
+            background-color: transparent;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custome-checkbox input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .custome-checkbox .checkmark:after {
+            left: 30px;
+            top: 8px;
+            width: 8px;
+            height: 18px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .custome-checkbox1 {
+            display: block;
+            position: relative;
+            padding-left: 0;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            padding-right: 90px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .custome-checkbox1 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 40px;
+            width: 50px;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+
+
+        .custome-checkbox1 input:checked~.checkmark1 {
+            background-color: transparent;
+        }
+
+        .checkmark1:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custome-checkbox1 input:checked~.checkmark1:after {
+            display: block;
+        }
+
+        .custome-checkbox1 .checkmark1:after {
+            left: 22px;
+            top: 8px;
+            width: 8px;
+            height: 18px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+
+        .ntl-form-block .fomr-info-block .aggrement-info {
+            margin: 40px 0 0;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 0px;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info .aggrement-item {
+            display: inline-block;
+            overflow: hidden;
+            margin: 10px 0 30px;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info .aggrement-item .form-control {
+            display: inline-block;
+            width: auto;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px dotted #000;
+            border-radius: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info {
+            margin: 0 0;
+            position: relative;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items .tetxbox {
+            display: inline-block;
+            width: auto;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px solid #000;
+            border-radius: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items label {
+            display: block;
+            font-weight: 500;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info {
+            margin: 0 auto;
+            margin-top: 80px;
+            max-width: 600px;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info h4 {
+            font-size: 24px;
+            text-align: center;
+            margin: 0 0 15px;
+            text-decoration: underline;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list {
+            padding: 0;
+            margin: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list .nav-item {
+            list-style: number;
+            padding-left: 10px;
+            font-weight: 500;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list .nav-item p {
+            line-height: 24px;
+            font-weight: 400;
+            font-size: 14px;
+            margin: 0 0 3px;
+        }
+
+        .ntl-form-block .test-table1 {
+            border: 1px solid #212529;
+        }
+
+        .ntl-form-block .test-table1 td,
+        .ntl-form-block .test-table1 th {
+            border: 1px solid #212529;
+            padding: 10px 10px;
+            vertical-align: middle;
+        }
+
+        .ntl-form-block .test-table1 th {
+            font-weight: 400;
+            width: 5%;
+        }
+
+        .ntl-form-block .test-table1 th.infos {
+            width: 10%;
+        }
+
+        .ntl-form-block .test-table1 td {
+            width: 35%;
+        }
+    </style>
+</form>
+</body>
+</html>
+{% endblock body %}

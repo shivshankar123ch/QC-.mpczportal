@@ -1,0 +1,115 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 160px;
+}
+</style>
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">DI Reject</h3>
+
+         <!-- <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div> -->
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center">
+             <thead class="table-dark">
+                 <tr>
+                     <th >
+                         Sr No.
+                     </th>
+                     <th >
+                         PO No.
+                     </th>
+                     <th >
+                      DI No.
+                      </th>
+                      <th>
+                        Vendor Name 
+                    </th>
+                     <th>
+                         Item Name 
+                     </th>
+                     <th>
+                         Item Quantity
+                     </th>
+                     <th>
+                        View DI
+                    </th>
+                     <th>
+                        Outward Gatepass
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        <b>{{name.po.po_no}}</b>
+                     </td>
+                     <td>
+                      <b>{{name.di_master.erp_di_number}}</b>
+                     </td>
+
+                     <td>
+                      <b>{{name.po.vendor.CompanyName_E}}</b>
+                     </td>
+                    
+                     <td class="project_progress">
+                             {{name.offer_item.material.specification}}
+                     </td>
+                     <td>
+                          {{name.deliverable_qty}}
+                     </td>
+                     <td>
+
+                        <a class="btn btn-info btn-sm" target="_blank" href="{{name.di_master.di_doc.url}}" >View DI</a>
+                    </td>
+                    {% if name.gatepass == 1 %}
+                    <td><button class="btn btn-success btn-sm">Outward Gatepass created</button></td>
+                    {% else %}
+                       <td>
+                         <a  href="/po/reject_di_material_view/{{name.id}}"><button class="btn btn-primary btn-sm">Create Outward Gatepass</button></a>
+                       </td>
+                       <!-- <td> <a class="btn btn-primary btn-sm float-left" href="/po/select_material_for_getpass/{{name.id}}">Create Gatepass</a><td> -->
+                    {% endif %}
+                        <td> <a  href="/po/select_received_material/{{name.id}}/{{name.di_master.erp_di_number}}"><button class="btn btn-info btn-sm">View New Items</button></a><td></td>
+
+                   </tr>
+             {% endfor %}
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

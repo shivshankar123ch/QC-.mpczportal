@@ -1,0 +1,317 @@
+{% extends base_template_name %}
+    {% load static %} 
+    {% block body %} 
+
+    {% block basic %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock basic %}
+
+    <div class="ed-infocontant"> 
+        <div class="card ed-card-block"> 
+            <div class="card-header">
+                <h2>
+                    FQP Work-Order Task Intimation List
+                </h2>
+            </div>
+            <div class="card-body"> 
+                <div id="infomodel" class="modal fade" role="dialog">
+                    <div class="modal-dialog estimate_datamodel" style="margin-top: 110px !important;">
+ 
+
+
+                        
+                    </div>
+                </div> 
+    
+                <div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered text-center">
+                            <thead class="table-dark">
+                                <tr>  
+                                    <th class="w-45">Particular</th>
+                                    <th class="w-50">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for wd in wo_task_data %}
+                                <tr>
+                                    <th>Work-order No. and Date</th>  
+                                    <td>{{wd.wo.Contract_Number}} - {{wd.wo.Contract_Date|date:"d/m/Y"}}</td>
+                                </tr>
+                                <tr>
+                                    
+                                    <th>Work-order Description.</th>
+                                    <td>{{wd.wo.Header.Contract_Description}}</td>
+                                </tr>
+                                <tr>
+                                    <th>TKC Name</th>
+                                    <td>{{wd.wo.supplier.CompanyName_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Work-order Amount (In rupees)</th>
+                                    <td>{{wd.wo.loa_amount|default:"---"}}</td>
+                                </tr>
+                                <tr>
+                                    <th>View Work-Order</th>
+                                    <td>
+                                        {% if wd.wo.Wo_Digital %}
+                                            <a class="btn ed-submits btn-info"
+                                            href="{{wd.wo.Wo_Digital.url}}" target="_blank">View Work Order</a> 
+                                        
+                                        {% else %}
+                                            <a class="btn ed-submits btn-info"
+                                            href="#">Work Order Not Uploaded</a> 
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <!-- <tr><th><h3>Task detail</h3></th></tr>                             -->
+                            {% for td in wo_task_data %}
+                            <tr>
+                                <th colspan="2" class="" style="background: #212529; padding:2px;">
+                                    <!-- <h3>Task detail</h3> -->
+                                 
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th>GIS Feeder Id/Task Id</th>
+                                <td>{{td.gis_feeder_id}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Region</th>
+                                <td>{{td.region.Region_Name_E}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Circle</th>
+                                <td>{{td.circle.Circle_Name_E}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Division</th>
+                                <td>{{td.division.Division_Name_E}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Distribution center / zone</th>
+                                <td>{{td.distribution_center.DC_Name_E}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>ERP Estimate Number</th>
+                                <td>{{td.erp_estimate_no}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>ERP GBPA Number</th>
+                                <td>{{td.erp_gbpa_no}}</td>
+                            </tr>
+
+
+                            <tr>
+                                <th>Package name and number</th>
+                                <td>{{td.package_name_and_no}}</td>
+                            </tr>
+
+<tr>
+    <th>Description Of work/Task</th>
+    <td>{{td.description_of_work}}</td>
+</tr>
+
+                            <tr>
+                                <th>Feeder Name on which work proposed </th>
+                                <td>{{td.feeder_name_on_which_work_proposed}}</td>
+                            </tr>
+                            <tr>
+                                <th>Substation Name on which work proposed </th>
+                                <td>{{td.substation_name_on_which_work_proposed}}</td>
+                            </tr>
+
+
+                                {% endfor %}      
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+     
+    
+                <div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+                    <h4>
+                        FQP Intimation List
+                    </h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered text-center">
+                            <thead class="table-dark">
+                                <tr>   
+                                    <th class="W-5 text-center">S.No.</th>
+                                    <th>FQP Intimation Number and Date</th>
+                                    <th>Milestone</th>
+                                    <th>Work Execution Detail</th>
+                                    <th>Brief Description Of Work</th>
+                                    <th>Work Execution Image 1</th>
+                                    <th>Work Execution Image 2</th>
+                                    <th>Date Of Execution</th>
+                                    <th>Date Of Readines</th>
+                                    <th>Date Of Completion</th>
+                                    <!-- <th>Propose Date Of Work</th> -->
+                                    <th>FQP Status</th>
+                                    <th>View Observations</th>
+                                    <th style="width:25%;">Milestone Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                 {% for data in wo_fqpi_data %}
+                                 <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.intimation_unique_no}}</td>
+                                    <td>{{data.wotask_milestone.milestone.milestone_name}}</td>
+                                    <td>{{data.work_execution_detail}}</td>
+                                    <td>{{data.brief_description_of_work}}</td>
+                                    <td>
+                                        {% if data.work_execution_milestone_image1 %}
+                                        <a class="btn ed-submits btn-info"
+                                            href="{{data.work_execution_milestone_image1.url}}" target="_blank">View Image</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-info" href="#">Image Not Uploaded</a>
+
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if data.work_execution_milestone_image2 %}
+                                        <a class="btn ed-submits btn-info"
+                                            href="{{data.work_execution_milestone_image2.url}}" target="_blank">View Image</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-info" href="#">Image Not Uploaded</a>
+
+                                        {% endif %}
+                                    </td>
+
+                                    <td>{{data.date_of_execution}}</td>
+                                    <td>{{data.date_of_readines}}</td>
+                                    <td>{{data.date_of_completion}}</td>
+                                    <!-- <td>{{data.prapose_date_of_work}}</td> -->
+                                    <td>
+
+                                        {% if data.intimation_status == 1 %}
+                                        <a class="btn ed-submits btn-success" href="#">OK</a>
+
+                                        {% elif data.intimation_status == 2 %}
+                                        <a class="btn ed-submits btn-danger" href="#">NOT OK</a>
+                                        {% elif data.intimation_status == 0 %}
+                                        <a class="btn ed-submits btn-warning" href="#">Pending</a>
+
+                                        {% endif %}
+
+
+                                    </td>
+                                    <!-- <td>{{data.intimation_status}}</td> -->
+                                    <td>
+                                        <a class="btn ed-submits btn-info"
+                                            href="/fqp/officer_new_fqpintimation_observation_detail?fqpintimationid={{data.id}}&woid={{data.wo_id}}&wotaskid={{data.wo_task_id}}">View
+                                            Observation Detail</a>
+
+                                    </td>
+
+
+                          
+
+                                                <td> 
+                                                    {% for mcat in fqpinti_mile_cat_data %}
+                                                    {% if mcat.fqpintimation_id == data.id %}
+                                                    <span class="border d-block p-2 mb-2 bg-white">
+                                                        {{mcat.milestone_category.milestone_category_name}}
+                                                    </span>
+                                                    {% endif %}
+                                                    {% endfor %}
+     
+                                        </td>
+
+
+
+
+
+                                    </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>   
+                    </div>
+                </div>
+        </div>
+    </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    .ed-tableinfo-block .ed-table-block td table th {
+        white-space: nowrap;
+    }
+     
+     .ed-tableinfo-block .ed-table-block td table td {
+        white-space: nowrap;
+    }
+     
+    </style>
+                                        
+    
+    
+    
+     
+    
+    <script type="text/javascript">
+      
+        function myFunc(cone){
+          let x = document.getElementsByClassName(cone);
+          let acc = document.getElementById("accept"+cone);
+          // let rej = document.getElementById("reject"+cone);
+          // console.log(x)
+          if(x.length == 1){
+            if(acc.checked == true){
+                let model = document.getElementById('InspectionModal');
+                let modal_yes = document.getElementById('modal_yes');
+                let modal_no = document.getElementById('modal_no');
+                let btn = document.getElementById(cone);
+                let inspection_info_input_id = document.getElementById('inspection_info_input_id');
+                let modal_inspction_submit = document.getElementById('modal_inspction_submit').innerText;
+                 let modal_yes = document.getElementById('modal_yes');
+                 let modal_no = document.getElementById('model_no');
+                // btn.setAttribute("type", "button");
+                btn.setAttribute("data-toggle", "modal");
+                btn.setAttribute("data-target", "#InspectionModal");
+                inspection_info_input_id.innerText = modal_inspction_submit;
+    
+                // document.getElementById("modal_yes").addEventListener("click", model_submit);
+                // document.getElementById("model_no").addEventListener("click", model_submit);
+                //      function modal_submit(){
+            
+          
+                //        btn.setAttribute("type", "submit");
+             
+    
+                // }     
+              }
+          }
+        }
+        
+    
+    
+        
+    
+        </script>
+    
+    {% endblock body %}

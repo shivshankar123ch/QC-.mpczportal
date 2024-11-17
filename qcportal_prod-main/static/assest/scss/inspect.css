@@ -1,0 +1,34 @@
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase {
+    width: auto;
+}
+
+.ed-wrapper-contant.ed-wrapper-collpase {}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-logo {
+    padding: 10px 8px;
+}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-logo .ed-navbar-profile {
+    display: none;
+}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav {}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav .nav-item {}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav .nav-item .nav-link {
+    padding: 8px 14px;
+}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav .nav-item .nav-link .nav-text { 
+    display: none;
+}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav .nav-item .nav-link .nav-text .ed-right-angel {
+    display: none;
+}
+
+.ed-wrapper-block .ed-sidebar-block.ed-sidebar-collpase .navbar-nav .nav-item .nav-link .nav-icon {}
+
+

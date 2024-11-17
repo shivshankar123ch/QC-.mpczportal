@@ -1,0 +1,90 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            All Discoms DI's List
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <div class="ed-tableinfo-block ">
+            <div class="table-responsive">
+                <table class="table  table-bordered text-center display" id="vendor_purchase_B">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5 text-center">S.No.</th>
+                            <th class=" text-center">Discom</th>
+                            <th class=" text-center">Approved DI's</th>
+                            <th class=" text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for i in discom_list %}
+                        <tr>
+                        
+                            
+                            <td>
+                               <b> {{forloop.counter}}</b>
+                            </td>
+
+                            <td>
+                                <b>{% if i == 'CZ' %}
+                                    Central Zone (CZ)
+                                    {% elif i == 'EZ' %}
+                                    East Zone (EZ)
+                                    {% elif i == 'WZ' %}
+                                    West Zone (WZ)
+                                    {% endif %}</b>
+                            </td>
+
+                            <td>
+                               <b> {% if i == 'CZ' %}
+                                {{cz_di_data}}
+                            {% elif i == 'EZ' %}
+                                {{ez_di_data}}
+                            {% elif i == 'WZ' %}
+                                {{wz_di_data}}
+                            {% endif %}</b>
+                            </td>
+
+                            <td>
+                                <a href="/fqp/Dispatch-Instruction-Discom-Data/{{i}}" class="ed-links">
+                                    <button class="btn btn-info btn-sm">
+                                        <span >
+                                            View DI's
+                                        </span>
+                                    </button> 
+                                </a>
+                            </td>
+                            </tr>
+                       
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready( function () {
+    $('#vendor_purchase_B').DataTable();
+} );
+</script>
+
+
+{% endblock body %}

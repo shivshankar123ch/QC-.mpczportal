@@ -1,0 +1,730 @@
+<html lang="en">
+{% load static %}
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static '/assets/img/icons8-light-bulb-64.png' %}">
+    <link rel="icon" type="image/png" href="/static/assets/img/mp-logo_0.png" />
+    <title>RCA Vendor | Dashboard</title>
+    <meta name="description"
+        content="RCA Cell | Dashboard | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state" />
+    <meta name="keywords"
+        content="RCA Cell | Dashboard | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="RCA Cell | Dashboard | Energy Department, Government of Madhya Pradesh" />
+    <meta property="og:site_name" content="Creative Tim" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet'" />
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css" rel="stylesheet' %}" />
+    <script src="{% static '/kit.fontawesome.com/42d5adcbca.js' %}" crossorigin="anonymous"></script>
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/rcastyle.css' %}" rel="stylesheet" />
+    <!-- <style>
+        .async-hide {
+            opacity: 0 !important
+        }
+        
+        .custom {
+            width: 160px !important;
+        }
+        
+        #content {
+            display: none;
+        }
+        
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 120px;
+            height: 120px;
+            margin: -76px 0 0 -76px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            -webkit-animation: spin 12s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        } 
+        
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+        
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+        
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+    </style> -->
+
+
+</head>
+<script>
+    window.onload = function () {
+        function showPage() {
+
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 1000);
+        }
+        myFunction();
+    }
+</script>
+</head>
+
+<body class="g-sidenav-show   bg-gray-100">
+    <div id="loader"></div>
+
+    <!-- <body class="g-sidenav-show   bg-gray-100"> -->
+
+    <body>
+        <div id="loader"></div>
+        <!-- <div id="content">
+        <div class="min-height-300 bg-primary position-absolute w-100"></div> -->
+        <aside class="edrca-sidenav-block" id="sidenav-main"><div class="edrca-overlay-block" id="edrca-overlay"></div>
+            <div class="edrca-sidenav-header">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'dashboard/dist/img/logo.png' %}" class="img-fluid" alt="logo">
+                    <span class="edrca-text">
+                        RCA(Vendor)
+                    </span>
+                </a>
+            </div>
+            <div class="edrca-menucontant-block">
+                <ul class="navbar-nav edrca-navbar-nav">
+                    <li class="nav-item">
+                        <a href="#dashboardsExamples" class="nav-link">
+                            <span class="iconbox">
+                                <svg version="1.1" x="0px" y="0px" viewBox="0 0 26.39 26.39"
+                                    style="enable-background:new 0 0 26.39 26.39;" xml:space="preserve">
+                                    <g>
+                                        <g id="c14_house">
+                                            <path d="M3.588,24.297c0,0-0.024,0.59,0.553,0.59c0.718,0,6.652-0.008,6.652-0.008l0.01-5.451c0,0-0.094-0.898,0.777-0.898h2.761
+                c1.031,0,0.968,0.898,0.968,0.898l-0.012,5.434c0,0,5.628,0,6.512,0c0.732,0,0.699-0.734,0.699-0.734V14.076L13.33,5.913
+                l-9.742,8.164C3.588,14.077,3.588,24.297,3.588,24.297z" />
+                                            <path
+                                                d="M0,13.317c0,0,0.826,1.524,2.631,0l10.781-9.121l10.107,9.064c2.088,1.506,2.871,0,2.871,0L13.412,1.504L0,13.317z" />
+                                            <polygon points="23.273,4.175 20.674,4.175 20.685,7.328 23.273,9.525 		" />
+                                        </g>
+                                        <g id="Capa_1_216_">
+                                        </g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="textitem">
+                                <!-- {{ data.employ_name }} -->
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-toggle="dropdown" href="#vrExamples">
+                            <span class="iconbox">
+                                <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 368.553 368.553" style="enable-background:new 0 0 368.553 368.553;" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path d="M239.68,0H42.695v368.553h283.164V86.811L239.68,0z M244.057,25.7l56.288,56.701h-56.288V25.7z M57.695,353.553V15
+                h171.362v82.401h81.802v256.151H57.695V353.553z"></path>
+                                            <rect x="86.435" y="82.401" width="121.875" height="15"></rect>
+                                            <rect x="86.435" y="151.122" width="195.685" height="15"></rect>
+                                            <rect x="86.435" y="219.843" width="195.685" height="15"></rect>
+                                            <rect x="86.435" y="288.563" width="195.685" height="15"></rect>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="textitem">
+                                Basic Details
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu ed-menudropdown-block">
+                            <li class="menu-item">
+                                <a class="menu-link"  href="/rca/rca_basic">
+                                    Basics Info
+                                </a>
+                            </li>
+                            
+                            <li class="menu-item">
+                                <a class="menu-link"  href="/rca/update_profile">
+                                    Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-toggle="dropdown" href="#">
+                            <span class="iconbox">
+                                <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 368.553 368.553" style="enable-background:new 0 0 368.553 368.553;" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path d="M239.68,0H42.695v368.553h283.164V86.811L239.68,0z M244.057,25.7l56.288,56.701h-56.288V25.7z M57.695,353.553V15
+                h171.362v82.401h81.802v256.151H57.695V353.553z"></path>
+                                            <rect x="86.435" y="82.401" width="121.875" height="15"></rect>
+                                            <rect x="86.435" y="151.122" width="195.685" height="15"></rect>
+                                            <rect x="86.435" y="219.843" width="195.685" height="15"></rect>
+                                            <rect x="86.435" y="288.563" width="195.685" height="15"></rect>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="textitem">
+                                RCA Order
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu ed-menudropdown-block">
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/RCA_vendor_order/">
+                                    All RCA
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link"  href="/vendor/rca_bg_order_list/">
+                                    RCA BG submit
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link"  href="/vendor/rca_vendor_bg_accept_list/">
+                                    RCA BG Accepted
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/RCA_vendor_release_order/"> 
+                                    All RO / Allotment
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link"  href="/vendor/RCA_vendor_dtr_order_list/">
+                                    View DTR Issued
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/repaired_dtr_by_vendor"> 
+                                    Repaired DTR dispatch
+                                </a>
+                            </li>
+                             
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/rca_ven_pass_order_list">
+                                    Transformer Status
+                                </a>
+                            </li>
+
+
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/add_bg/">
+                                    Additional RCA BG Submit
+                                </a>
+                            </li>
+
+                            
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/add_bg_accept_list">
+                                    Additional BG Status
+                                </a>
+                            </li>
+                            
+                            <!-- <li class="menu-item">
+                                <a class="menu-link" href="/vendor/rca_ven_fail_order_list">
+                                    Transformer Rejection Status
+                                </a>
+                            </li> -->
+                            
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mpeb_login">
+                            <span class="iconbox">
+                                <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 310 310" style="enable-background:new 0 0 310 310;" xml:space="preserve">
+                                    <g id="XMLID_15_">
+                                        <path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341
+            C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531
+            c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170
+            c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z"></path>
+                                        <path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100
+            C140,123.284,146.716,130,155,130z"></path>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="textitem">
+                                Logout
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        
+        <main class="">
+            <div class="edrca-header-block" id="headerMenu">
+                <div class="edrca-container-block">
+                    <div class="edrca-leftblock">
+                        <ul class="navbar-nav">
+                            <li class="nav-item mnav-item">
+                                <a class="navbar-brand" href="#">
+                                    <img src="{% static 'dashboard/dist/img/logo.png' %}" class="img-fluid" alt="logo">
+                                    <span class="edrca-text">
+                                        RCA(Vendor)
+                                    </span>
+                                </a>      
+                            </li>
+                            
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMenu">
+                                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                    alt="navbar Icon">
+                            </a>
+                        </li>
+                        <li class="nav-item mnav-item">
+                            <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMMenu">
+                                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                    alt="navbar Icon">
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                    <div class="edrca-rightblock">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link edrca-profilemenu">
+                                    <span class="edrca-imgbox">
+                                        <img src="{% static 'assets/images/avatar.jpg' %}" class="img-fluid"
+                                            alt="Profile Icon">
+                                    </span>
+                                    <span class="nav-text">{{ data.employ_name }}</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a href="javascript:;" class="nav-link edrca-zones">
+                                    EZ
+                                </a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a href="/mpeb_login " class="nav-link edrca-logoutmenu" data-toggle="tooltip"
+                                    title="Logout!">
+                                    <img src="{% static 'assets/images/logout.png' %}" class="img-fluid" alt="navbar Icon">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+ 
+
+            <div class="edrca-contant-block" id="contantBlock">
+                <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+                <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+    
+                <div class="card ed-card-block">
+                    {% block body %}
+                    <!-- <h5> Please Check details on the left side nav pannel bar</h5> -->
+                    {% endblock body %}
+                </div>
+                <!--  ------------------------------------------ Block Body End -----------------------------   -->
+                <!--  ------------------------------------------ Block Body End -----------------------------   -->
+                <footer class="ed-footer-block ">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="ed-copyright-text text-left">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>, All Rights Reserved By
+                                    <a href="#" class="links">MPMKVVCL.</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ed-copyright-text text-right">
+                                    Developed and Maintained by IT Cell, Madhya
+                                    Pradesh Madhya Kshetra Vidyut Vitran Co. Ltd. Nishtha Parisar Govindpura,
+                                    Bhopal.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+
+
+             
+  
+        <script src="{% static '/assets/js/core/popper.min.js' %} "></script>
+        <script src="{% static '/assets/js/core/bootstrap.min.js' %} "></script>
+        <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
+        <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
+        <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %} "></script>
+        <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %} "></script>
+        <script src="{% static '/assets/js/plugins/chartjs.min.js' %} "></script>
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
+
+        
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/popper.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+
+        <script>
+            var ctx1 = document.getElementById("chart-line ").getContext("2d ");
+
+            var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+            gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+            gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+            gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+            new Chart(ctx1, {
+                type: "line ",
+                data: {
+                    labels: ["Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "],
+                    datasets: [{
+                        label: "Mobile apps ",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        borderColor: "#5e72e4 ",
+                        backgroundColor: gradientStroke1,
+                        borderWidth: 3,
+                        fill: true,
+                        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                        maxBarThickness: 6
+
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                padding: 10,
+                                color: '#fbfbfb',
+                                font: {
+                                    size: 11,
+                                    family: "Open Sans ",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: false,
+                                drawOnChartArea: false,
+                                drawTicks: false,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#ccc',
+                                padding: 20,
+                                font: {
+                                    size: 11,
+                                    family: "Open Sans ",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                    },
+                },
+            });
+        </script>
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
+                }
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+        <script async defer src="{% static '/js/buttons.js' %} "></script>
+        <script src="{% static '/assets/js/argon-dashboard.min28b5.js' %} "></script>
+
+
+        <script>
+            $(document).ready(function () { 
+               $('#toggelMenu').click(function () { 
+                   $('#sidenav-main').toggleClass('ed-header-collpase');
+                   $('#headerMenu').toggleClass('ed-sidebar-collpase');
+                   $('#contantBlock').toggleClass('ed-wrapper-collpase');
+               });
+               $('#toggelMMenu').click(function () { 
+                   $('#sidenav-main').addClass('ed-sidenav-open'); 
+               });
+               $('#edrca-overlay').click(function () { 
+                   $('#sidenav-main').removeClass('ed-sidenav-open');  
+               });
+           });
+        
+           </script>
+    </body>
+
+</html>

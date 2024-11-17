@@ -1,0 +1,34 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} Vendor Dashboard{% endblock pagetitle %}
+
+{% block body %}
+
+<table class="table table-striped m-4 " border="2" style="width:80%">
+    <thead class="bg-primary">
+      <tr>
+        <th scope="col-1">#</th>
+        <th scope="col-2">Work Order No.</th>
+        <th scope="col-2">Vendor</th>
+        <th scope="col-2">Release Order No.</th>
+        <!-- <th scope="col-3">Store Name</th> -->
+        <th scope="col-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+       {% for info in data %}
+      <tr>
+         <td>{{forloop.counter}}</td>
+         <td><b>MPCZWO{{ info.wo.id}}</b></td>
+          <td><b>{{ info.wo.vendor_id.CompanyName_E}}</b></td>
+        <td><b>RO00{{ info.id}}</b></td>
+        <!-- <td></b>{{ info.store.Name }}</b></td> -->
+        <td><a href="/vendor/rca_ven_di_issue_view/{{info.id}}" class="fas fa-eye text-secondary">View{{info.id}}</a></td>
+        <!-- <td><a href="/rca/repaired_dtr_view/{{info.id}}" class="fas fa-eye text-secondary">View</a></td> -->
+         </tr>
+         
+          {% endfor %}
+    </tbody>
+</table>
+
+{% endblock body %}

@@ -1,0 +1,207 @@
+{% extends 'officer/dgm_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h5>All Pending NABL</h5>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>User All Basics Data</h5>
+        </div>
+        <!-- <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="color:black;">
+                <thead class="font-weight-bold" style="font-size: 15px;background-color:#212543;color: white;">
+                    <tr>
+                        <th><b>Serial Number</b></th>
+                        <th><b>Report Name</b></th>
+                        <th><b>Value</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Type of Business</td>
+                        <td>
+                            <b>{{data.Type_of_business}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Authorised Person Name</td>
+                        <td>
+                            <b>{{data.Authorised_person_E}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Company Name</td>
+                        <td>
+                            <b>{{data.CompanyName_E}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Contact Number</td>
+                        <td>
+                            <b>{{data.ContactNo}}</b>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Email ID</td>
+                        <td>
+                            <b>{{data.Email_Id}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Vendor Type</td>
+                        <td>
+                            <b>{{data.User_type}}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Company GST No</td>
+                        <td>{{CompanyData.Company_Gst_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Pan Card No</td>
+                        <td>{{CompanyData.Company_Pan_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Company Gumastha No</td>
+                        <td>{{CompanyData.Company_Gumastha_No}}</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Company Registration_Date</td>
+                        <td>{{CompanyData.Registration_Date}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="font-weight-bold text-light bg-dark text-center"
+                            style="font-size: 15px;"> Company Address</td>
+                    <tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Add 1</td>
+                        <td>{{CompanyData.Company_add_1}}</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td> Add 2</td>
+                        <td>{{CompanyData.Company_add_2}}</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Pin Code</td>
+                        <td>{{CompanyData.Company_pin_code}}</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>District</td>
+                        <td>{{CompanyData.Company_dist}}</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>State</td>
+                        <td>{{CompanyData.Company_state}}</td>
+                    </tr>
+                   
+
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <h5>Document Uploaded By NABL</h5>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="color:black;">
+                <thead class="text-light bg-dark" style="font-size: 15px;background-color:#212543;color: white;">
+                    <!-- <table class="table table-bordered table-hover bg-white " cellspacing="0">
+              <thead class="bg-dark"> -->
+                    <tr>
+                        <th> Product Name </th>
+                        <th> Material_Name_for_testing </th>
+                  
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for data in mat1 %}
+                    <tr>
+                        <td><b>{{data.Material_Name}}</b></td>
+                        <td><b>{{data.Material_Specification_Name}}</b></td>
+                       
+
+
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <form action="/nabl_dgm_qc_evaluate_save/{{data.User_Id}}" method="POST">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" style="color:black;">
+                    <thead class="font-weight-bold" style="font-size: 15px;background-color:#212543;color: white;">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> View Document</th>
+                            <th> Decision</th>
+                            <th> Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data2 in doc %}
+                        <tr>
+                            <td>
+                                {{data2.Types_of_Docs}}</h5>
+                            </td>
+                            <td>{{data2.Document_Name}}</td>
+                            <td class="text-center"> <a href="{{data2.Ddocfile.url}}"  target="_self">View</a></td>
+
+
+                            <td>{% if data2.Primary_verification_Status == 1 %} Accepted  <input type="radio" name="{{data2.id}}" value="1" checked hidden> {% elif data2.Primary_verification_Status == 2 %}Rejected  <input type="radio" name="{{data2.id}}" value="2" checked hidden>
+                    
+                                {% else %}
+                                 <input  type="radio" name="{{data2.id}}" value="1" checked >Accept&nbsp;&nbsp;<input type="radio" name="{{data2.id}}" value="2"> Reject
+                            {% endif %}</td>
+        
+                             <td>
+                              {% if data.Primary_remark %}
+                              <input type="text" name="a{{data2.id}}" placeholder="Remark" value="{{data2.Primary_remark}}" readonly>
+                              
+                              
+        
+                              {% else %}
+                              <input type="text" name="a{{data2.id}}" placeholder="Remark" >
+                              {% endif %}
+                               
+                             </td>
+                   <tr>        
+                        {% endfor %} 
+
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="button-row d-flex mt-4">
+                <button class="btn bg-gradient-light mb-0 js-btn-prev" type="reset" title="Go Back">Reset</button>
+                <button class="btn bg-gradient-primary ms-auto mb-0"
+                    onclick="return confirm('Are you sure you want to submit ?');" type="submit"
+                    title="Submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

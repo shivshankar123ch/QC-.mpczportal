@@ -1,0 +1,48 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="card card-default width-75">
+          <div class="card-header">
+            <h3 class="card-title">Upload Letter Of Credit Details </h3>
+          </div>
+     <form   action="/tkc/upload_loc_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+               <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%"><b>MPCZ000{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1"> Tendor &amp; Enquiry No :<span style="color: red;">*</span> </label> </td>
+                  <td> <b>{{data.tendor_no}}</b></td>
+                </tr>
+
+                    <tr>
+                  <td> <label for="exampleInputEmail1"> NIT Number :<span style="color: red;">*</span> </label> </td>
+                  <td> <b>{{data.nit_no}}</b></td>
+                </tr>
+                  <tr>
+                  <td> <label for="exampleInputEmail1">  LOA Number :<span style="color: red;">*</span> </label> </td>
+                  <td> <b>{{data.wo_no}}</b></td>
+                </tr>
+                    <tr>
+                  <td> <label for="exampleInputEmail1">   Upload LOC : <span style="color: red;">*</span> </label> </td>
+                  <td> <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder=""></td>
+                </tr>
+                </tbody>
+              </table>
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1"> Upload LOC</button>
+            <!-- /.row -->
+            <!-- /.row -->
+           </form>
+          </div>
+        </div>
+</div>
+{% endblock body %}
+

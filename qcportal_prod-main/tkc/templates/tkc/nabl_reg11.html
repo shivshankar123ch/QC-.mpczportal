@@ -1,0 +1,105 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %}
+{% block body %}
+
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/assets/js/Validation/"></script>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    
+    
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    <h4 class="text-info font-weight-bolder">Choose Signature Type</h4>
+
+                                    <form class="row g-3 needs-validation" action="/nabl/nabl_reg12" method="Post">
+                                        {% csrf_token %}
+                                        <div class="col-md-12">
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="opinions" id="radio-1" checked>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                              Online Verification (Verification will be done through Aadhar after
+                                              registration through Mobile No., Aadhar No.)
+                                            </label>
+                                          </div>
+
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="opinions" id="radio-1">
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                              Digital Signature (Token of digital signature verified by CA)
+                                            </label>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked  required="required">
+                                          <label class="form-check-label">Please check all the details before digital signing as once the digital
+                                            signature is implemented no further changes can be allowed. Do you want to continue with
+                                            digital signature?</label>
+                                        </div> 
+                                        </div>
+                                        <div class=" mt-4">
+                                        <button type="submit" class="btn bg-gradient-primary ms-auto mb-0">Save & Next</button>
+                                        </div>
+                                    
+                                        <!-- <div class="button-row d-flex mt-4">
+                                             <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                            <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send"> <a href="nabl_reg12" class="text-white">Save & Next</a></button> -->
+                                            <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send"> Save & Next</button>
+                                        </div> --> 
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 d-lg-flex d-none h-100 my-auto pe-0 position-fixed top-0 end-0 text-center justify-content-center flex-column">
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        let dtElem = document.getElementById('dob');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+        //trial here
+        let dtElem2 = document.getElementById('dir_dob');
+        let maxDate2 = new Date();
+        dtElem2.max = formatDate(maxDate2);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+</body>
+{% endblock body %}
+
+{% endblock title %}

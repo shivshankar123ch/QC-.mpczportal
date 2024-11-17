@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/css/style.css">
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap-datepicker.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #b5abef;
+            margin: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .logpad {
+            max-width: 340px;
+            background: linear-gradient(180deg, #181818, #181818, rgba(81, 81, 81, .7));
+            margin: auto;
+            padding: 50px;
+            margin-top: 90px;
+            text-align: center;
+            border-radius: 3px 25px;
+        }
+        
+        .logpad span:first-child {
+            font-family: Valeyola;
+            color: #ebca71;
+            font-size: 44px;
+        }
+        
+        .logpad span:last-child {
+            font-family: Gabriola;
+            color: #fde7ab;
+            font-size: 44px;
+        }
+        
+        .logpad input {
+            border: none;
+            outline: none;
+            background: none;
+            border-bottom: 2px solid #fde7ab;
+            width: 100%;
+            padding: 10px 0;
+            color: #fde7ab;
+            font-family: "Century Gothic";
+            font-size: 18px;
+            margin-bottom: 20px;
+            transition: .5s;
+        }
+        
+        .logbox {
+            color: #fde7ab;
+            font-family: "Century Gothic";
+            text-align: left;
+        }
+        
+        .logo img {
+            margin-top: -110px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid rgb(24, 24, 24);
+        }
+        
+        .logpad button {
+            color: #181818;
+            background-color: #ebca71;
+            font-size: 21px;
+            font-family: Lithos Pro;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            margin: 20px 0;
+            transition: .3s;
+            border-radius: 3px 20px;
+        }
+        
+        .logpad button:hover {
+            background-color: #fde7ab;
+        }
+        
+        .logpad input:focus {
+            background: none;
+            border-bottom: 2px solid #fff;
+        }
+        
+        @media(max-width: 720px) {
+            .logpad {
+                max-width: 240px;
+            }
+            body {
+                background-size: 300% 200%;
+                background-position: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logpad">
+        <div class="logo">
+            <img src="https://images.pexels.com/photos/1214205/pexels-photo-1214205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="100" width="100">
+        </div>
+        <div>
+            <span>W&P Officer Login</span>
+        </div>
+        <form action="works_base" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="text" id="Email" name="Email" placeholder="Email">
+
+            </div>
+            <div class="input-group mb-3">
+                <input type="Password" id="Password" name="Password" placeholder="Password">
+
+            </div>
+            <div class="row">
+                <!-- <div class="col-8">
+            <div class="icheck-primary">
+            </div>
+          </div> -->
+                <!-- /.col -->
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+</body>
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+
+</body>
+
+</html>

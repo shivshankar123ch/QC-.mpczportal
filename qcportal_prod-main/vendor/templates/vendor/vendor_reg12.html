@@ -1,0 +1,235 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of
+body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink
+{ background-color:
+#007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px;
+width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page
+content) / .tabcontent
+{ color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;}
+#General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details
+{background-color: white;}
+#Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+
+<head>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg12.js"></script>
+    <script type="text/javascript" src="/static/assets/js/jscdn/jquery_cdn.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+
+<form class="multisteps-form__form mb-8" action="vendor_reg_twelve" name="myForm" onsubmit="return validateForm()"
+    method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Financial Details
+            </h2>
+        </div>
+
+        <div class="card-body">
+            <div class="venreg-blocks">
+                <ul class="technical-listems">
+                    <li class="nav-item">
+                        <h6>
+                            PAN CARD DETAILS
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Name On Pan Card
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control ed-textbox" id="v_pan_name_t"
+                                            required="required" name="thirteen" onblur="panNameValidation()">
+                                        <span id="pan_name" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Pan Card Number
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control ed-textbox text-uppercase" id="panCard"
+                                            maxlength="10" value="{{pan_details.Company_Pan_No}}"  name="fourteen" placeholder="{{pan_details.Company_Pan_No}}"
+                                            onblur="panNumberValidation()">
+                                        <span id="pan_card" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Issue Date
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="date" class="form-control ed-textbox" name="fifteen"
+                                            id="v_date_issue_t" onblur="errorFrom(id)" onkeypress=" return false ">
+                                        <span id="v_date_issue_t_span"
+                                            class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload File(In .Pdf Format)
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" accept="application/pdf" name="sixteen"
+                                            id="inputNameChoseDoc">
+                                        <span id="upload1" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            ACTIVE GST NO. (ALONG WITH COPY OF CURRENT PAID CHALLAN AND ITS RECEIPT
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            State
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control ed-textbox" name="twenty" id="inputName"
+                                            required="required" onblur="errorFrom(id)">
+                                        <span id="inputName_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Active GST Serial Number
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control ed-textbox text-uppercase" maxlength="16"
+                                            minlength="10" required="required" name="twenty_one" id="inputName_12">
+                                        <span id="gst_no" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload File(In .Pdf Format)
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" accept="application/pdf" name="twenty_two" id="inputName_31"
+                                            required="required">
+                                        <span id="inputname_31_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <h6>
+                            PREVIOUS LAST THREE YEARS TAX RETURN
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload File(In .Pdf Format)
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" accept="application/pdf" name="five" id="inputName_2">
+                                        <span id="inputName_2_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+
+                    <li class="nav-item">
+                        <h6>
+                            AUDITED BALANCESHEET FOR ANY ONE YEAR DURING LAST THREE YEARS HAVING POSITIVE WORKING CAPITAL
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload File(In .Pdf Format)
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" accept="application/pdf" name="four" id="inputName_231">
+                                        <span id="inputName_231_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-group mt-2">
+                <div class="btn-actionblock text-right">
+                    <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_eleven">Prev</a></button>         -->
+                    <button class="btn ed-submit ed-formsubmit" value="Submit" type="submit" title="Next">
+                        Save & Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> 
+
+
+
+<script>
+    let dtElem = document.getElementById('v_date_issue_t');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent
+= document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display="none" ; } tablinks=d ocument.getElementsByClassName( "tablink" ); for (i=0 ; i <
+    tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; }
+    document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element
+    with id="defaultOpen" and click on it document.getElementById( "defaultOpen" ).click(); $(document).ready(function()
+    { var currentItem=1 ; $( '#insert-more' ).click(function(){ currentItem++; $( '#items' ).val(currentItem); var
+    strToAdd='<tr id="row1"><th>Select Material<div><select id="food-zone-user' +currentItem+ '" name="food-zone-user'
+    +currentItem+ '" class=" multiselect-ui form-control ed-textbox user-input form-control ed-textbox form-control ed-textbox-submit" required="required"><option value="select-option-user-three" disabled selected hidden selected>Power Transformer</option><option value="5MVA, 33/11 KV">Transformer</option><option value="8MVA, 33/11 KV">Conductor</option><option value="2500 KVA, 33/11 KVA">Cable</option><option value="1.6 MVA, 33/11 KV">Meter</option></div></th><th>Select Material Specification<div><select id="food-zone-user1'
+    +currentItem+ '" name="food-zone-user1'
+    +currentItem+ '" class=" multiselect-ui form-control ed-textbox user-input form-control ed-textbox form-control ed-textbox-submit" required="required"><option value="select-option-user-three" disabled selected hidden selected>Material Specification</option><option value="63 KVA, 11/0.4 KV">63 KVA, 11/0.4 KV</option><option value="200 KVA, 33/0.4 KV">200 KVA, 33/0.4 KV</option><option value="16 KVA, 11/0.4 KV">16 KVA, 11/0.4 KV</option><option value="630 KVA, 33/0.433 KV">630 KVA, 33/0.433 KV</option><option value="100 KVA, 11/0.4 KV">100 KVA, 11/0.4 KV</option><option value="200 KVA, 11/0.4 KV">200 KVA, 11/0.4 KV</option><option value="315 KVA, 11/0.4 KV">315 KVA, 11/0.4 KV</option><option value="25 KVA, 11/0.4 KV">25 KVA, 11/0.4 KV</option></div></th><th>Type tests upload file<input type="file" name="v_upload_file_media'
+    +currentItem+ '" id="v_upload_file_media'
+    +currentItem+ '" class="form-control ed-textbox" required="required"></th><th>GTP upload file<input type="file" name="v_upload_file_media'
+    +currentItem+ '" id="v_upload_file_media'
+    +currentItem+ '" class="form-control ed-textbox" required="required"></th><th>others upload file<input type="file" name="v_upload_file_media'
+    +currentItem+ '" id="v_upload_file_media'
+    +currentItem+ '" class="form-control ed-textbox" required="required"></th><th><input type="button"  class="button btn btn-primary" value="View"></th><th><input type="button"  onclick="rowData()" class="button btn btn-primary" value="Delete"></th></tr>'
+    ; $( '#myTable' ).append(strToAdd); }); }); function yearfun() { if ($( ".op1" ).val()==$ ( ".op2" ).val()) {
+    $( ".defultSetequal1" ).attr( "selected" , "true" ); alert( "Please Select Different year" ) } else if ($( ".op1"
+    ).val()==$ ( ".op3" ).val()) { $( ".defultSetequal3" ).attr( "selected" , "true" );
+    alert( "Please Select Different year" ) } else if ($( ".op2" ).val()==$ ( ".op3" ).val()) { $( ".defultSetequal2"
+    ).attr( "selected" , "true" ); alert( "Please Select Different year" ) } } {% endblock script %}

@@ -1,0 +1,1296 @@
+{% extends 'po/po_finance/pofinance_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+
+{% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<style>
+    .ed-tableinfo-block .ed-table-block td {
+    min-width: 170px;
+}
+
+.ed-tableinfo-block .ed-table-block td:first-child {
+    min-width: unset;
+}
+</style>
+
+<div class="ed-information mb-4">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                Work Order Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-3">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-left">
+                        <tr>
+                            <th>Work Order No.:<span style="color: red;">*</span></th>
+                            <td>{{wo_data.Contract_Number}}
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th>Work Order Description.: <span style="color: red;">*</span></th>
+                            <td>{{wo_data.Header.Contract_Description}}
+                                <span id="date" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Work Order Date: <span style="color: red;">*</span> </th>
+                            <td>
+                                {{wo_data.Contract_Date}}
+                                <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>TKC Name<span style="color: red;">*</span> </th>
+                            <td>
+                                {{wo_data.supplier.CompanyName_E}}
+                                <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Work Order Amount (In Rupees)<span style="color: red;">*</span> </th>
+                            <td>
+                                {{wo_amt.Amount__sum|default:"0"}} Rupees
+                                <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Already Passed Amount (In Rupees): <span style="color: red;">*</span> </th>
+                            <td>
+                                {{in_amount.total_invoice_amount__sum|default:"0"}} Rupees
+                                <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                            </td>
+                        </tr>
+
+                        <!-- <tr>
+                    <th>View WO. Details: <span style="color: red;">*</span> </th>
+                    <td>
+                        {% if wo_data.Po_doc %}
+                        <a class="btn ed-submits btn-success" href="{{wo_data.Po_doc.url}}" target="_blank">View Digital Work-Order </a>
+                        {% else %}
+                        <a class="btn ed-submits btn-success" href="#">Digital Work-Order Not Uploaded </a>
+                        {% endif %}
+                    </br>
+                            
+                    {% if wo_data.Wo_Agreement %}
+                    <a class="btn ed-submits btn-success" href="{{wo.Wo_Agreement.url}}" target="_blank">View Work-Order Agreement</a>
+                    {% else %}
+                    <a class="btn ed-submits btn-primary" href="#">Work-Order Agreement Not Uploaded</a>
+                    {% endif %}
+                    </td>
+                    </tr> -->
+
+                        <!-- <tr>
+                        <th>Create New Invoice: <span style="color: red;">*</span> </th>
+                        <td> 
+                            <a class="btn ed-submits btn-primary" onclick="msg()"
+                            href="/tkc/tkc_invoice_generate/?woid={{wo_data.id}}">Create Invoice</a> 
+                            <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                        </td>
+                    </tr> -->
+                    </table>
+                </div>
+            </div>
+            <!-- <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+                <div class="table-responsive">
+                    <table id="example2" class="table table-bordered table-hover ed-table-block">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>WO. No.</th>
+                                <th>Invoice No.</th>
+                                <th>Invoice Type</th>
+                                <th>Invoice Date</th>
+                                <th>Invoice Document</th>
+                                <th>Bg Document</th>
+                                <th>Bg Acceptance letter</th>
+                                <th>Amount Without taxes (In Rupees)</th>
+                                <th>Invoice SGST Amount (In Rupees)</th>
+                                <th>Invoice CGST Amount (In Rupees)</th>
+                                <th>Invoice Total Amount (In Rupees)</th>
+                                <th>Supporting Doc. Name</th>
+                                <th>Supporting Document</th>
+                                <th>Remark</th>
+
+                                <th style="min-width: 120px;">Invoice Status</th>
+                                <th>Submission Date</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in in_data %}
+                            <tr>
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{i.work_order.Contract_Number|default:"---"}}
+                                </td>
+                                <td>
+                                    {{i.invoice_number|default:"---"}}
+                                </td>
+                                <td>
+                                    {{i.invoicetype.invoice_type|default:"---"}}
+                                </td>
+
+                                <td>
+                                    {{i.invoice_date}}
+                                </td>
+                                <td>
+                                    {% if i.invoice_pdf %}
+                                    <a class="btn ed-submits btn-info" href="{{i.invoice_pdf.url}}"
+                                        target="_blank">Invoice
+                                        Document</a>
+                                    {% else %}
+
+                                    <a class="text-danger" href="#">Invoice Document not Uploaded </a>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    {% if i.bg_document %}
+                                    <a class="btn ed-submits btn-info" href="{{i.bg_document.url}}" target="_blank">BG
+                                        Document</a>
+                                    {% else %}
+                                    <a class="text-danger" href="#">BG Document Not Uploded</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.bg_acceptance_letter %}
+                                    <a class="btn ed-submits btn-info" href="{{i.bg_acceptance_letter.url}}"
+                                        target="_blank">BG Letter</a>
+                                    {% else %}
+
+                                    <a class="text-danger" href="#">BG Letter not Uploaded </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{i.invoice_amount_withought_taxes|default:"0"}} Rupees
+                                </td>
+                                <td>
+                                    {{i.invoice_amount_sgst|default:"0"}} Rupees
+                                </td>
+                                <td>
+                                    {{i.invoice_amount_cgst|default:"0"}} Rupees
+                                </td>
+                                <td>
+                                    {{i.total_invoice_amount|default:"0"}} Rupees
+                                </td>
+
+                                <td>
+                                    {{i.supporting_document_name|default:"---"}}
+                                </td>
+                                <td>
+                                    {% if i.supporting_document %}
+                                    <a class="btn ed-submits btn-info" href="{{i.supporting_document.url}}"
+                                        target="_blank">Supporting Document</a>
+                                    {% else %}
+                                    <a class="text-danger" href="#">
+                                        Supporting Document Not Uploaded
+                                    </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{i.remark}}
+                                </td>
+
+                                <td>
+                                    {% if i.status == 0 %}
+                                    <a class="btn ed-submits btn-warning">Pending</a>
+                                    {% elif i.status == 1 %}
+                                    <a class="btn ed-submits btn-success">Approved</a>
+                                    {% elif i.status == 3 %}
+                                    <a class="btn ed-submits btn-info">Forwarded For Scrutiny</a>
+                                    {% elif i.status == 4 %}
+                                    <a class="btn ed-submits btn-info">Pending For Acceptance</a>
+                                    {% elif i.status == 5 %}
+                                    <a class="btn ed-submits btn-primary">Forwarded To Finance</a>
+                                    {% else %}
+                                    <a class="btn ed-submits btn-danger">Rejected</a>
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+                                    {{i.invoice_submission_date|date:"Y-m-d"}}
+                                </td>
+
+
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>  -->
+        </div>
+    </div> 
+
+
+<!--      
+    <div class="card ed-card-block mb-3">
+        <div class="card-header">
+            <h2>
+                B).Invoice Submitted Data
+            </h2>
+        </div> 
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            GIS Task ID No
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            ERP Project No
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Region
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Circle
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Invoice Type
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Invoice Date
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Invoice Number
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Invoice Amount (EX Works)
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                            onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                            value="{{data.invoice_amount_withought_taxes}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            CGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_sgst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.invoice_amount_cgst}}">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            SGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_sgst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.invoice_amount_sgst}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            IGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_igst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.invoice_amount_igst}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Total Invoice Amount
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" name="total_invoice_amount" id="total_inv_amt" required
+                            class="form-control ed-textbox" placeholder="" value="{{data.total_invoice_amount}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Claim Amount(EX Works)
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_cgst" id="inv_amt_cgst" onblur="total_amt()"
+                            class="form-control ed-textbox" placeholder="" required pattern="\d+(\.\d+)?"
+                            value="{{data.claim_amount_ex}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            CGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_cgst" id="inv_amt_cgst" onblur="total_amt()"
+                            class="form-control ed-textbox" placeholder="" required pattern="\d+(\.\d+)?"
+                            value="{{data.claim_amount_cgst}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            SGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_sgst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.claim_amount_sgst}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            IGST
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_igst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.claim_amount_igst}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Total Claim Amount
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_igst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.total_claim_amount}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Less Advance
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_igst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.less_advance}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Net Payable
+                            <span class="text-danger">* </span>
+                        </label>
+                        <input type="number" step="0.01" name="invoice_amount_igst" id="inv_amt_sgst" onblur="total_amt()"
+                            class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?"
+                            value="{{data.net_payable}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  -->
+
+
+
+<div class="card ed-card-block mb-2">
+    <div class="card-header">
+        <h2>
+            Invoice Submitted Data
+        </h2>
+    </div> 
+    <div class="card-body"> 
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+            <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Invoice Number </th>
+                            <th>Invoice Date </th>
+                            <th>GIS Task ID No </th>
+                            <th> ERP Project No </th>
+                            <th> Region</th>
+                            <th>Circle </th>
+                            <th>Invoice Type </th>
+                            <th> Invoice Amount (EX Works)</th>
+                            <th> CGST</th>
+                            <th>SGST </th>
+                            <th> IGST</th>
+                            <th> Total Invoice Amount </th> 
+                            <th> Claim Amount(EX Works) </th> 
+                            <th>CGST </th> 
+                            <th> SGST</th> 
+                            <th> IGST</th> 
+                            <th> Total Claim Amount</th> 
+                            <th> Less Advance </th> 
+                            <th> Net Payable</th>  
+                            <th> 
+                                Document 1
+                            </th>  
+                            <th> 
+                                Document 2
+                            </th>  
+                            <th> 
+                                Document 3
+                            </th>  
+                            <th> 
+                                Document 4
+                            </th>  
+                            <th> 
+                                GM Document 
+                            </th>  
+                            <th> 
+                                GM Remark 
+                            </th>   
+                            <th> 
+                                DGM Document 
+                            </th>  
+                            <th> 
+                                DGM Remark 
+                            </th>       
+                            <th> 
+                                CGM Document 
+                            </th>  
+                            <th> 
+                                CGM Remark 
+                            </th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                                <td>{{invce_data.invoice_number}}</td>
+                                <td> {{invce_data.invoice_submission_date}}</td>
+                                <td> {{invce_data.gis_task_no}}</td>
+                                <td> {{invce_data.erp_no}}</td>
+                                <td> {{invce_data.region}}</td>
+                                <td>{{invce_data.circle}} </td>
+                                <td> {{invce_data.invoicetype}}</td>
+                                <td> {{invce_data.invoice_amount_withought_taxes}}</td>
+                                <td> {{invce_data.invoice_amount_cgst}}</td>
+                                <td> {{invce_data.invoice_amount_sgst}}</td>
+                                <td> {{invce_data.invoice_amount_sgst}}</td>
+                                <td> {{invce_data.total_invoice_amount}}</td>
+                                <td> {{invce_data.claim_amount_ex}}</td>u
+                                <td> {{invce_data.claim_amount_cgst}}</td>
+                                <td> {{invce_data.claim_amount_sgst}}</td>
+                                <td> {{invce_data.claim_amount_igst}}</td>
+                                <td>{{invce_data.total_claim_amount}} </td>
+                                <td> {{invce_data.less_advance}}</td>
+                                <td> {{invce_data.net_payable}}</td>
+                            <td> 
+                                <a class="btn btn-info btn-sm" href="">Link 1</a>
+                            </td>
+                            <td> 
+                                <a class="btn btn-info btn-sm" href="">Link 2</a>
+                            </td>
+                            <td> 
+                                <a class="btn btn-info btn-sm" href="">Link 3</a>
+                            </td>
+                            <td> 
+                                <a class="btn btn-info btn-sm" href="">Link 4</a>
+                            </td> 
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+
+
+<!--     
+<div class="card ed-card-block mb-3">
+    <div class="card-header">
+        <h2>
+            C).Uploaded Documents
+        </h2>
+    </div>
+    <div class="card-body"> 
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Document 1
+                            <span class="text-danger">* </span>
+                        </label>
+                        <a class="btn btn-info btn-sm" href="">Link 1</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Document 2
+                            <span class="text-danger">* </span>
+                        </label>
+                        <a class="btn btn-info btn-sm" href="">Link 2</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Document 3
+                            <span class="text-danger">* </span>
+                        </label>
+                        <a class="btn btn-info btn-sm" href="">Link 3</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Document 4
+                            <span class="text-danger">* </span>
+                        </label>
+                        <a class="btn btn-info btn-sm" href="">Link 4</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    D).Select Offier and Document upload
+                </h2>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Select Officer
+                    <span class="text-danger">* </span>
+                </label>
+                <select name="officer" id=""> Select officer
+                    <option style="width:250px;">Please Select Officer</option>
+                    {% for name in officer_list %}
+                    <option value="{{name.employ_id}}" style="width:250px;"></option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        CGM Remark
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                        onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                        value="{{data.invoice_amount_withought_taxes}}">
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Upload Document
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="file" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                        onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                        value="{{data.invoice_amount_withought_taxes}}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Name of the Document
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax"
+                        onblur="total_amt()" class="form-control ed-textbox" required placeholder=""
+                        value="{{data.invoice_amount_withought_taxes}}">
+                </div>
+            </div>
+        </div> -->
+    <!-- </div>
+</div> -->
+
+
+
+
+
+
+
+
+<div class="card ed-card-block mb-2">
+    <div class="card-header">
+        <h2>
+            Action Taken History
+        </h2>
+    </div> 
+    <div class="card-body"> 
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+            <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                                <th>Forwarded by(name) </th>
+                                <th>Forwarded  date </th>
+                                <th>Remark By GM </th>
+                                <th> Document Upload By GM</th>
+                                <th>Forwarded by(name) </th>
+                                <th>Forwarded  date </th>
+                                <th>Remark By GM </th>
+                                <th> Document Upload By GM</th>
+                                <th>Submit By  </th>
+                                <th>Submit Date  </th>
+                                <th>Remark By DGM </th>
+                                <th> Document Upload By DGM</th>  
+                                <th>Forwarded by (name) </th>
+                                <th>Forwarded (Date) </th>
+                                <th> Document Upload By CFO</th>
+                                <th>Remark  </th>
+                                <th>Forwarded by (name) </th>
+                                <th>Forwarded (Date) </th>
+                                <th> Document Upload By DGMCBPU</th>
+                                <th>Remark By DGMCBPU</th> 
+                                <th>Forwarded by (name) </th>
+                                <th>Forwarded (Date) </th>
+                                <th> Document Upload AO Bills</th>
+                                <th>Remark By AO Bills</th>
+                                <th>Forwarded by (name) </th>
+                                <th>Forwarded (Date) </th>
+                                <th> Document Upload By DGM EM</th>
+                                <th>Remark DGM EM</th>
+                                <th style="min-width: 140px;"> Bill Status </th> 
+
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 2 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_submit_name}}
+                            {% endif %}
+                        </td>
+                        
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 2 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 2 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_remark}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 2 or invce_data.gm_circle_submit_status == 3 %}
+                            
+                            <a class="btn btn-info btn-sm" href="{{invce_data.doc_by_gm_circle.url}}">{{invce_data.doc_name_gm_circle}}</a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_submit_name}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_action_sec}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.gm_circle_remark_sec}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            <a class="btn btn-info btn-sm" href="{{invce_data.doc_by_gm_circle_sec.url}}">{{invce_data.doc_name_gm_circle_sec}}</a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.dgm_circle_submit_status == 1 %}
+                            {{invce_data.officer_select_by_gm_circle}}
+                            {% endif %}
+                         </td>
+                        <td>
+                            {% if invce_data.dgm_circle_submit_status == 1 %}
+                            {{invce_data.dgm_circle_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.dgm_circle_submit_status == 1 %}
+                            {{invce_data.dgm_circle_remark}}
+                            {% endif %}
+                         </td>
+                        <td>
+                            {% if invce_data.dgm_circle_submit_status == 1 %}
+                            <a class="btn btn-info btn-sm" href="{{invce_data.doc_by_dgm_circle.url}}">{{invce_data.doc_name_dgm_circle}}</a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 and invce_data.dgm_circle_submit_status == 1 %}
+                            {{invce_data.cfoproject_submit_name}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.cfoproject_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.No_Doc|default:"None"}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.cfoproject_remark}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.officer_select_by_cfoproject}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.dgmcbpu_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.No_Doc|default:"None"}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.dgmcbpu_remark}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.officer_select_by_dgmcbpu}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.aocbpu_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.No_Doc|default:"None"}}
+                            {% endif %}
+                        </td>    
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.aocbpu_remark}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.dgmem_submit_name}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.dgmem_action}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.No_Doc|default:"None"}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 or invce_data.gm_circle_submit_status == 3 %}
+                            {{invce_data.dgmem_remark}}
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if invce_data.gm_circle_submit_status == 1 and invce_data.dgm_circle_submit_status == 0 %}
+                                <a class="btn ed-submits btn-primary">Forwarded to {{invce_data.officer_select_by_gm_circle}}</a>
+                            {% elif invce_data.gm_circle_submit_status == 1 and invce_data.dgm_circle_submit_status == 1 %}
+                                <a class="btn ed-submits btn-primary">Submitted By {{invce_data.officer_select_by_gm_circle}}</a>
+                            {% elif invce_data.gm_circle_submit_status == 3 and invce_data.dgm_circle_submit_status == 1 and invce_data.cfoproject_submit_status == 0 %}
+                                <a class="btn ed-submits btn-primary">Forworded To CFO</a>
+                            {% elif invce_data.gm_circle_submit_status == 3 and invce_data.dgm_circle_submit_status == 2  and invce_data.cfoproject_submit_status == 0 %}
+                                <a class="btn ed-submits btn-danger">Rejected</a>
+                            {% elif invce_data.cfoproject_submit_status == 1 and invce_data.dgmcbpu_submit_status == 0 %}
+                                <a class="btn ed-submits btn-primary">Forworded To DGMCBPU</a>
+                            {% elif invce_data.dgmcbpu_submit_status == 1 and invce_data.aocbpu_submit_status == 0 %}
+                                <a class="btn ed-submits btn-primary">Forworded To AO BILLS</a>
+                            {% elif invce_data.aocbpu_submit_status == 1 and invce_data.dgmem_submit_status == 0 %}
+                                <a class="btn ed-submits btn-primary">Forworded To DGM EM</a>
+                            {% elif invce_data.dgmem_submit_status == 1 %}
+                                <a class="btn ed-submits btn-success">Paid</a>
+                            {% elif invce_data.gm_circle_submit_status == 1 and invce_data.dgm_circle_submit_status == 2 %}
+                                <a class="btn ed-submits btn-danger">Rejected</a>
+                            {% elif invce_data.dgmcbpu_submit_status == 2 %}
+                                <a class="btn ed-submits btn-danger">Rejected</a>
+                            {% elif invce_data.aocbpu_submit_status == 2 %}
+                                <a class="btn ed-submits btn-danger">Rejected</a>
+                            {% elif invce_data.gm_circle_submit_status == 2 %}
+                                <a class="btn ed-submits btn-danger">Rejected</a>
+                            {% else %}
+                                <a class="btn ed-submits btn-warning">Pending</a>
+                            {% endif %}
+                        </td>
+                        <!-- {% if invce_data.dgmproject_submit_status == 1 and invce_data.cgmproject_submit_status == 1 and invce_data.cfoproject_submit_status == 1 and invce_data.dgmcbpu_submit_status == 1 %}
+                             
+                            
+                            <td>1</td>
+                            <td>Amita Tiwari</td>
+                            <td>10-08-2023</td>
+                            <td>Remark </td>
+                            <td>Submit By</td>
+                            <td>10-08-2023 </td>
+                            <td>Remark</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-success">Approved By DGM CBPU</a></td>
+                        {% elif invce_data.dgmproject_submit_status == 2 and invce_data.cgmproject_submit_status == 1 %}
+                            
+                            <td>1</td>
+                            <td>Amita Tiwari</td>
+                            <td>10-08-2023</td>
+                            <td>Remark</td>
+                            <td>Submit By</td>
+                            <td>10-08-2023 </td>
+                            <td>Remark</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-danger">Rejected By DGM</a></td>
+                        {% elif invce_data.dgmproject_submit_status == 1 and invce_data.cgmproject_submit_status == 1 and  invce_data.cfoproject_submit_status == 1 %}                            
+                            <td>1</td>
+                            <td>Amita Tiwari</td>
+                            <td>10-08-2023</td>
+                            <td>Remark</td>
+                            <td>Submit By</td>
+                            <td>10-08-2023 </td>
+                            <td>Remark</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-primary">Forwarded by CFO</a></td>
+                        {% elif invce_data.cgmproject_submit_status == 1 and invce_data.dgmproject_submit_status == 1 %}                            
+                            <td>1</td>
+                            <td>Amita Tiwari</td>
+                            <td>10-08-2023</td>
+                            <td>Remark</td>
+                            <td>Submit By</td>
+                            <td>10-08-2023 </td>
+                            <td>Remark</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-success">Approved</a></td>
+                        {% elif invce_data.cgmproject_submit_status == 1 %}                            
+                            <td>1</td>
+                            <td>Amita Tiwari</td>
+                            <td>10-08-2023</td>
+                            <td>Remark</td>
+                            <td>Submit By</td>
+                            <td>10-08-2023 </td>
+                            <td>Remark</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-primary">Forwarded</a></td>
+                        {% else %}
+                            <td>1</td>
+                            <td>Nil </td>
+                            <td>nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td>Nil</td>
+                            <td>Nil </td>
+                            <td><a class="btn ed-submits btn-warning">Pending</a></td>
+                        {% endif %} -->
+                    </tr>
+                </table>
+            </div>  
+        </div>   
+        <form action = "/fqp/tkc_dgmcbpu_current_invoice_list/?woid1={{wo_data.id}}&invoice_id1={{invce_data.id}}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="row mt-4">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Select Officer
+                        <span class="text-danger">* </span>
+                    </label> 
+                    <select name="officer_select_by_dgmcbpu" class="form-control ed-textbox">
+                        <option style="width:250px;">Please Select Officer</option>
+                        {% for name in officer_lov %}
+                            <option value="{{name.employ_id}}" style="width:250px;">{{name.employ_login_id}}</option>
+                        {% endfor %}
+                        <!-- <option> </option>
+                        <option> </option>
+                        <option> </option>
+                        <option> </option> -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Remark
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="hidden" name="cgmproject_submit_status" value="{{invce_data.cgmproject_submit_status}}">
+                    <input type="hidden" name="dgmproject_submit_status" value="{{invce_data.dgmproject_submit_status}}">
+                    <input type="hidden" name="cfoproject_submit_status" value="{{invce_data.cfoproject_submit_status}}">
+                    <input type="text" name="dgmcbpu_remark"  class="form-control ed-textbox">
+                </div>
+            </div>  
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="text-right">
+                        <!-- <button class="btn ed-submit ed-formsubmit">forward</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+    </div>
+</div>
+
+
+
+<div class="card ed-card-block mb-2">
+    <div class="card-header">
+        <h2>
+            Invoice passing datils
+        </h2>
+    </div> 
+    <div class="card-body"> 
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+            <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>   
+                            <th> ERP Voucher Number  </th>
+                            <th> Inpvoice verfiy amount with text </th> 
+                            <th> Inpvoice CGST amount  </th>
+                            <th>Inpvoice SGST amount  </th>
+                            <th>Inpvoice IGST amount  </th>
+                            <th> Labour welfare cess </th>
+                            <th> Liquidity damage Amount </th>
+                            <th> Mob. ADV. Recovery amount </th>
+                            <th> Material. ADV. Recovery amount </th>
+                            <th> Recovery of intrest on advanced </th>
+                            <th> Retaintion amount </th>
+                            <th> Other recovery amount </th>
+                            <th> Miscelleneous recovery amount</th> 
+                            <th> Final net payable amount </th>
+                            <th> Remark  </th>   
+
+                        </tr>
+                    </thead>
+                    {% if invce_data.aocbpu_submit_status == 0 %}
+                    <tr>
+                        <td> Nil</td>
+                        <td> Nil </td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                        <td> Nil</td>
+                    </tr>
+                    {% elif invce_data.aocbpu_submit_status == 1 %}
+                    <tr>
+                        <td> 1</td>
+                        <td> {{invce_data.aocbpu_erp_voucher_number}}</td>
+                        <td> {{invce_data.aocbpu_invoice_verfiy_amount}}</td>
+                        <td> {{invce_data.aocbpu_invoice_cgst_amount}}</td>
+                        <td> {{invce_data.aocbpu_invoice_sgst_amount}}</td>
+                        <td> {{invce_data.aocbpu_invoice_igst_amount}}</td>
+                        <td> {{invce_data.aocbpu_labour_welfare_cess}}</td>
+                        <td> {{invce_data.aocbpu_liquidity_damage_amount}}</td>
+                        <td> {{invce_data.aocbpu_mob_adv_recovery_amount}}</td>
+                        <td> {{invce_data.aocbpu_material_adv_recovery_amount}}</td>
+                        <td> {{invce_data.aocbpu_recovery_of_intrest_on_advanced}}</td>
+                        <td> {{invce_data.aocbpu_retention_amount}}</td>
+                        <td> {{invce_data.aocbpu_other_recovery_amount}}</td>
+                        <td> {{invce_data.aocbpu_miscelleneous_recovery_amount}}</td>
+                        <td> {{invce_data.aocbpu_final_net_payable_amount}}</td>
+                        <td> {{invce_data.aocbpu_remark}}</td>
+                    </tr>
+
+                    {% endif %}
+
+                </table>
+            </div>  
+        </div>   
+        <!-- <-----lk-----> 
+        <!-- <div class="row mt-4">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Select Officer
+                        <span class="text-danger">* </span>
+                    </label> 
+                    <select  class="form-control ed-textbox">
+                        <option style="width:250px;">Please Select Officer</option>
+                        {% for name in officer_lov %}
+                            <option value="{{name.employ_id}}" style="width:250px;">{{name.employ_login_id}}</option>
+                        {% endfor %}
+                        <option> </option>
+                        <option> </option>
+                        <option> </option>
+                        <option> </option>
+                    </select>
+                </div>
+            </div> -->
+
+            <!-- <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Remark
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name=""  class="form-control ed-textbox">
+                </div>
+            </div>   
+            <-----lk-----> 
+    
+            </div>
+
+        {% if invce_data.cfoproject_submit_status == 1 %}
+        <div class="row"> 
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="text-left">
+                        <button value="2" name="dgmcbpu_submit_status" class="btn ed-submit ed-formsubmit">Reject & Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="text-right">
+                        <button value="1" name="dgmcbpu_submit_status" class="btn ed-submit ed-formsubmit">
+                            Approved &
+                            Submit    
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %} 
+    </div>
+</div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="form-group">
+<label class="ed-form-label">
+    Select Officer
+    <span class="text-danger">* </span>
+</label> 
+<select name="circle_officer" id="" class="form-control ed-textbox" required>
+  <option  style="width:250px;">Please Select Officer</option>
+    {% for name in officer_list %}
+  <option value="{{name.employ_id}}" style="width:250px;">{{name.employ_login_id}}</option>
+    {% endfor %} 
+</select>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

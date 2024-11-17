@@ -1,0 +1,101 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %} {% block vendor_dispatch_open %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock vendor_dispatch_open %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Open Purchase Order
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered  table-striped display" id="vendor_dispatch_Open">
+                        <thead class="table table-dark">
+                            <tr>
+                                <th class="text-center">
+                                    S.No.</th>
+                                <th scope="col">PO. No.</th>
+                                <th scope="col">Item Category</th>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Item Quantity</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for name in data%}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="customCheck1">
+                                        </div>
+                                        <p class="text-xs font-weight-bold ms-2 mb-0">{{ forloop.counter }}</p>
+                                    </div>
+                                </td>
+                                <td class="font-weight-bold">
+                                    <span class="my-2 text-xs">MPCZ00{{name.id}}</span>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <div class="d-flex align-items-center">
+                                        <button
+                                            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i
+                                                class="fas fa-check" aria-hidden="true"></i></button>
+                                        <span>{{name.item_category}}</span>
+                                    </div>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <div class="d-flex align-items-center">
+                                        <!-- <img src="../../../assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image"> -->
+                                        <span>{{name.item_name}}</span>
+                                    </div>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <span class="my-2 text-xs">{{name.item_quantity}}</span>
+                                </td>
+                                <td class="text-xs font-weight-bold project-actions text-right">
+                                    {% if name.bg_approved and name.gtp_approved and not name.vendor_offer %}
+                                    <a class="btn btn-primary text-capitalize fw-bold view_button"
+                                        href="/vendor/vendor_dispatch_b/{{name.id}}">
+                                        Submit Material Offer
+                                    </a> {% endif %}
+                                    <a class="btn btn-info text-capitalize fw-bold view_button"
+                                        href="{{name.Po_doc.url}} ">View</a>
+                                    <a class="btn btn-primary text-capitalize fw-bold view_button"
+                                        href="/vendor/vendor_procurement_status/{{name.id}}">
+                                        Status
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<!---trial end here-->
+<script>
+    $(document).ready(function () {
+        $('#vendor_dispatch_Open').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+{% endblock body %}

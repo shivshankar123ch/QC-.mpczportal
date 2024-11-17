@@ -1,0 +1,127 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+   .ed-tableinfo-block .dataTables_length {
+   display: block;
+}
+
+.ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+   background: #e5e9ed;
+   color: #fff;
+   border-color: #1b1c1c;
+}
+</style>
+
+<div class="ed-information mb-4">
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card ed-card-block">
+            <div class="card-header">
+               <h2>
+                  Offer Materials Details 
+               </h2>
+            </div>
+            <div class="card-body pb-5">
+               <div class="ed-tableinfo-block ed-orderinfo-block">
+                  <div class="table-responsive">
+                     <table  class="table table-bordered table-hover display table-striped" id="view_di" >
+                        <thead class="table-dark">
+                           <tr>
+                              <th style="width:3%">
+                                 Sr No
+                              </th>
+                              <th style="width:7%">
+                                 DI No.
+                              </th>
+                              <th style="width:15%">
+                                 Item
+                              </th>
+                              <th style="width:10%">
+                                 Item Code
+                              </th>
+                              <th style="width:10%">
+                                 Offer Quantity
+                              </th>
+                              <th style="width:15%">
+                                 Vendor
+                              </th>
+                              <th style="width:10%">
+                                 Site Store
+                              </th>
+                              <th style="width:10%">
+                                 Seria; No.s
+                              </th>
+                           </tr>
+                        </thead>
+                        <!-- <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+                           text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+                            font-family:"Times New Roman",serif'>OFFER DETAILS</span></u></b></p> -->
+                        {% for i in offer_material_data %}
+                        <tr>
+                           <td>
+                              {{ forloop.counter }}
+                           </td>
+                           <td>{{i.tkc_di.erp_di_number}}</td>
+                           <td>{{i.wo_material.material_name}}</td>
+                           <td>{{i.wo_material.item_code}}</td>
+                           <td>{{i.quantity}}</td>
+                           <td>{{i.TKCVendor.Vendor.CompanyName_E}}</td>
+                           <td>{{i.site_store}}</td>
+                           <td>{{i.input_serial_number}}</td>
+                           <!-- <td>
+                              {% if  offer.Material_Offer_Submit_Approved_Remark %}
+                               <span class="ed-submit-text">
+                                   {{ offer.Material_Offer_Submit_Approved_Remark}}
+                               </span>
+                               {% endif %}
+                              </td> -->
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                     </table>
+                     <div>
+                     {% if dispatch_status == 0 %}
+                     <form action = "/tkc/dispatch_all_di_items/{{di_data.id}}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h4>Please Upload the below mentioned Documents For DI Dispatch</h4>
+                           <label> L/R copy or R/R and Delivery challan
+                              <input type = "file" required name = "lr_copy_or_rr_and_delivery_challan">
+                           </label>
+                           <label> Packing list of materials
+                              <input type = "file" required name = "packing_list_of_materials">
+                           </label>
+                           <label> Insurance Policy/Certificate
+                              <input type = "file" required name = "insurance_policy_certificate">
+                           </label>
+                           <label> Material Guarantee Certificate
+                              <input type = "file" required name = "material_guarantee_certificate">
+                           </label>
+                                     
+                              <button class="btn ed-submit btn-info m-1" type = "submit">
+                              Dispatch items
+                              </button>
+                     </form>
+                     {% elif dispatch_status == 1 %}
+                        <button class="btn ed-submit btn-info m-1">
+                        Already Dispatched
+                        </button>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- --------------------- Step 4 -------------------------------- -->
+            <!-- --------------------- Step 4 -------------------------------- -->
+         </div>
+      </div>
+   </div>
+</div>
+
+<script>
+   $(document).ready( function () {
+   $('#view_di').DataTable();
+} );
+</script>
+{% endblock body %}

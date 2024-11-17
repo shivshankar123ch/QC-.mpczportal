@@ -1,0 +1,125 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+</style>
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        View Di List
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-tableinfo-block mb-4">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered ed-table-block ed-centertable text-center example" id="po_view_DI_list">
+            <thead>
+              <tr>
+                <th class="w-5">Sr No.</th>
+                <th>
+                  PO No
+                </th>
+                <th>
+                  Vendor Name
+                </th>
+                <th>
+                  DI Subject
+                </th>
+                <th>
+                  ERP DI No.
+                </th>
+                <th>
+                        Action
+                    </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for name in data%}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>
+                  {{name.po_no}}
+                </td>
+                <td>
+                  {{name.vendor.CompanyName_E}}
+                </td>
+                <td>
+                  {{name.di_subject}}
+                </td>
+                <td>
+                  {{name.erp_di_number}}
+                </td>
+                <!-- <td>
+                        {{name.material.specification}}
+                   </td> -->
+                <td class="project-actions text-center">
+                  <!-- <a class="btn btn-primary btn-sm" href="/po/vendor_ins_approved/{{name.po.id}}/{{name.id}}" onclick="return confirm('Are you sure you want to accept ?');">
+                              Accept
+                          </a> -->
+                  {% if name.di_send_to_approval_status == False %}
+                  <a class="btn ed-submits btn-primary" href="/po/send_di_for_approval/{{name.id}}/{{name.erp_di_number}}">
+                    Send For Approval
+                  </a>
+                  {% else %}
+                  <a class="btn ed-submits btn-success" href="">
+                    Already offer sent
+                  </a>
+                  {% endif %}
+                  {% if name.di_digital_upload_status == 1 %}
+                  <!-- <a class="btn ed-submits btn-success" href="/po/creater_view_di/{{name.id}}/{{name.erp_di_number}}"
+                    class="btn btn-success mr-3"> -->
+                    <a class="btn ed-submits btn-success" href="{{name.di_doc.url}}"
+                    class="btn btn-success mr-3">
+                    View DI </a>
+                  {% else %}
+                  <a class="btn ed-submits btn-success" href="">
+                    DI Not Approved
+                  </a>
+                  {% endif %}
+                  <!-- <a class="btn btn-success btn-sm" href="/po/vendor_offer_view/{{name.po.id}}/{{name.id}}" class="btn btn-success mr-3"> View Offer</a> -->
+                  <!-- <a class="btn btn-success btn-sm" href="/po/procurement_status/{{name.po.id}}">Status</a> -->
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      
+  <div class="text-info">
+    {% if msg1 %}
+    {{ msg1 }}
+    {% endif %}
+  </div>
+    </div>
+  </div>
+</div> 
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
+</div> <!-- Main content -->
+
+<script>
+  $(document).ready(function () {
+       $('#po_view_DI_list').DataTable({
+           pagingType: 'full_numbers',
+       });
+   });
+</script>
+
+{% endblock body %}>

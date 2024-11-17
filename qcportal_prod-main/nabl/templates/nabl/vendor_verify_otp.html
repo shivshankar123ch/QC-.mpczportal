@@ -1,0 +1,26 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} 
+{% block body %}
+
+                            <form action="vendor_otp_verify" method="POST">
+                                {% csrf_token %}
+
+                                <div class="form-group col-md-12">
+                                    <label for="mobile" style="font-size: 15px;">Mobile OTP<span style="color: red;">*</span></label>
+                                    <input type="text" name="otp" class="form-control input1" placeholder="Enter OTP" required="required">
+                                </div>
+
+                             
+
+                                <div class="text-center">
+                                    <button id="loginButton" onclick="validcap()" type="submit" class="btn bg-gradient-warning w-10">Submit</button>
+                                    <!-- <span class="text-muted text-sm">Haven't received it?<a href="login"> Resend a new code</a>.</span> -->
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock body %}

@@ -1,0 +1,391 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Purchase Order {% endblock pagetitle %}
+{% block body %}
+
+<form method="POST" action="/po/send_to_approval/{{po.id}}">
+    {% csrf_token %}
+    
+    <div class="pocertificate-block"> 
+        <div class="card ed-card-block">
+            <div id="printid" class="options-print">
+                <div class="card-body">
+                    <div class="po-logo"> 
+                        {% if po.discom.Discom_Header %}
+                        <img src="{{po.discom.Discom_Header.url}}" class="img-fluid cgm-logo" alt="User profile" />
+                        {% endif %}
+                    </div>
+                    <table cellpadding=0 cellspacing=0 class="table cgm-region-regions mb-4">
+                        <tr>
+                            <td class="text-left w-55 pl-0">
+                                <!--
+                                    <p class="p6 ft10">
+                                        No.<NOBR>CGM/BR/RCA-Cell/TS-{{vd.dispatch_no}}/<b><b>Order No-MPCZWO{{vd.id}}</b></NOBR>
+                                    </p>
+                                -->
+                                <p class="m-0 text-left">
+                                    No.<NOBR>
+                                        {{po.po_prefix}}<b>
+                                            /{{po.po_no}}</b></NOBR>
+                                </p>
+                                <!-- <P class="p6 ft10"><NOBR> Work Order No-- <b>MPCZOO{{vd.id}}</b></NOBR>
+                                                            </P> -->
+                            </td>
+                            <td class="text-right w-45 text-right  pr-0">
+                                <p class="m-0 text-right">
+                                    <!-- Bhopal,  -->
+                                    Dated:-{{po.erp_created_date}}
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p class="">
+                        To,
+                    </p>
+                    <p class="">
+                        <b>{{ po.vendor.CompanyName_E }}</b>
+                        <br>
+                        <b>
+                            Address :-
+                        </b>
+                        <span class="pl-2">
+                            {{company.Company_add_1}}
+                            {{company.Company_add_2}}
+                            {{company.Company_dist}}
+                            {{company.Company_state }}
+                            {{company.Company_pin_code }}
+                        </span>
+                    </p>
+                    <p>
+                        <b> Email :- </b>
+                        <span class="pl-2">
+                            <a href="">{{po.vendor.Email_Id}}</a>
+                        </span> 
+                    </p>
+                    <!--
+                        <tr>
+                            <td style="width:100%">
+                                <p class="mt-2" style="font-size:12px; margin-top: 10px;">
+                                    {{company.Company_add_2}} {{company.Company_dist }}
+                                    {{company.Company_state }}
+                                    {{company.Company_pin_code }}
+                                </p>
+                            </td>
+                        </tr>
+                    -->
+
+                    <p class="mt-3">
+                        <b> Sub :- </b>
+                        <span class="pl-2">
+                            {{po.po_subject}}
+                        </span>
+                    </p>
+
+
+                    <h4 class="mt-2">
+                        Terms & Conditions
+                    </h4>
+                    <p class="mt-1">
+                        {{po.term_and_condition|safe}}
+                    </p>
+
+
+                    <h4 class="mt-2">
+                        Material Information
+                    </h4>
+
+                    <table class="table table-bordered ed-material-info">
+                        <thead>
+                            <tr>
+                                <th class="w-5">
+                                    Sr No.
+                                </th>
+                                <th class="w-20">
+                                    Material Specification
+                                </th>
+                                <th class="w-10">
+                                    Item Code
+                                </th>
+                                <th class="w-10">
+                                    Unit
+                                </th>
+                                <th class="w-10">
+                                    Quantity
+                                </th>
+                                <th class="w-20">
+                                    Unit F.O.R Destination Price
+                                    Excluding
+                                    GST(In Rs)
+                                </th>
+                                <th class="w-15">
+                                    Total Tax(In %)
+                                </th>
+                                <th class="w-15">
+                                    Total Value Of Order Including GST
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in Material %}
+                            <tr>
+                                <td>
+                                    <p>
+                                        {{forloop.counter}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.specification}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.item_code}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.unit}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.Quantity}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.Amount}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.tax}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{data.total_amount}}
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                    <h4 class="mt-2">
+                        Encl. As above
+                    </h4>
+
+                    <table class="table table-bordered ed-Schedule-info">
+                        <thead>
+                            <tr>
+                                <th class="w-10">
+                                    Schedule No.
+                                </th>
+                                <th class="w-90">
+                                    Schedule Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for name in schedule %}
+                            <tr>
+                                <td>
+                                    <p>
+                                        {{name.schedule_name}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{name.schedule_description}}
+
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="ed-authorise-info mt-5">
+                        <div class="ed-authorise-inner float-right">
+                            <h6>
+                                <!-- CHIEF GENERAL MANAGER (PROCUREMENT) -->
+                                <!-- {{po.region_discom.Po_Main_Sign}} -->
+                                {{sign}}
+                            </h6>
+                            <h6>
+                                <!-- MPMKVVCL, BHOPAL -->
+                                <!-- O/o {{po.discom.Discom_Short_Name}} -->
+                                <!-- O/o {{po.region_discom.Region_Name_E}} -->
+                                O/o {{p_name}}
+                                
+                            </h6>
+                        </div>
+                    </div>
+
+
+                    <h4 class="mt-2 copy-title">
+                        Copy to :-
+                    </h4>
+
+                    <table class="table table-bordered ed-copy-info">
+                        <tbody>
+                            {% for data in copy %}
+                            <tr>
+                                <th class="w-5">
+                                    <p>
+                                        {{forloop.counter}}
+                                    </p>
+                                </th>
+                                <td class="w-90">
+                                    <p>
+                                        {{data.copy}}
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="ed-authorise-info mt-5">
+                        <div class="ed-authorise-inner float-right">
+                            <h6>
+                                <!-- CHIEF GENERAL MANAGER (PROCUREMENT) -->
+                                <!-- {{po.region_discom.Po_Copy_To_Sign}} -->
+                                {{copy_sign}}
+                            </h6>
+                            <h6>
+                                <!-- O/o {{po.discom.Discom_Short_Name}} -->
+                                <!-- O/o {{po.region_discom.Region_Name_E}} -->
+                                O/o {{p_name}}
+                                <!-- MPMKVVCL, BHOPAL -->
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-action mb-5" id="printactions">
+                    <div id="options" class="text-center ">
+                        <input onclick="windoPrint()" type="button" value="View PO"
+                            class="btn ed-submits ed-formSubmit btn-print">
+                        <!--
+                            <input id="printpagebutton" class="btn btn-primary btn-print" type="button" value="Print Order" onclick="printpage()" />
+                        -->
+                        <input type="submit" class="btn ed-submits btn-primary btn-print" value="Send To Approval" onclick="return(confirm('Are you sure you want to send this PO To Approver ?'))" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // function printpage() { 
+    //     var printButton1 = document.getElementById("printpagebutton1");
+    //     var printButton = document.getElementById("printpagebutton"); 
+    //     printButton1.style.visibility = 'hidden';
+    //     printButton.style.visibility = 'hidden'; 
+    //     window.print()
+    //     printButton.style.visibility = 'visible';
+    //     printButton1.style.visibility = 'visible';
+    // }
+
+    function add_fields() {
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+    }
+
+    // function printpage() { 
+    //     var printButton1 = document.getElementById("printpagebutton1");
+    //     var printButton = document.getElementById("printpagebutton"); 
+    //     printButton1.style.visibility = 'hidden';
+    //     printButton.style.visibility = 'hidden'; 
+    //     window.print()
+    //     printButton.style.visibility = 'visible';
+    //     printButton1.style.visibility = 'visible';
+    // }
+    function add_fields1() {
+        document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+    }
+</script>
+<script>
+    function check() {
+        console.log("fireeererer")
+        alert("Purchase Order send to the approval")
+    }
+
+
+
+    function windoPrint() {
+        document.getElementById('printactions').style.display = 'none';
+        $('#edContainer').css('padding','0');
+        $('#edHeader').hide();
+        $('#edSidebar').hide();
+        $('.ed-footer-block').hide(); 
+        $('.ed-pagetitle-block').hide();
+        window.print();
+        document.getElementById('printactions').style.display = 'block';
+        $('#edContainer').css('padding-top','95px');
+        $('#edContainer').css('padding-left','265px');
+        $('#edContainer').css('padding-right','0px');
+        $('#edContainer').css('padding-bottom','16px');
+        $('#edHeader').show();
+        $('#edSidebar').show(); 
+        $('.ed-footer-block').show();
+        $('.ed-pagetitle-block').show();
+    
+    }
+</script>
+
+
+
+<style>
+    /* .ed-wrapper-block .ed-sidebar-block {
+        display: none;
+    }
+
+    .ed-wrapper-block .ed-wrapper-contant {
+        padding: 10px;
+    }
+
+    .ed-wrapper-block .ed-header-block {
+        display: none;
+    }
+
+    .ed-pagetitle-block {
+        display: none;
+    }
+
+    .ed-footer-block {
+        display: none;
+    } */
+    p{
+    white-space: normal;
+    word-break: break-all !important;
+    }
+    td{
+        padding:3px;
+        white-space: normal;
+        word-break: break-all !important;
+    }
+    th{
+        padding:3px;
+        white-space: normal;
+        word-break: break-all !important;
+    }
+</style>
+
+<script>
+    // function printDiv(divName) {
+    //     var printContents = document.getElementById(divName).innerHTML;
+    //     var originalContents = document.body.innerHTML;
+    //     document.body.innerHTML = printContents;
+    //     window.print();
+    //     document.body.innerHTML = originalContents;
+    // }
+</script>
+
+
+{% endblock body %}

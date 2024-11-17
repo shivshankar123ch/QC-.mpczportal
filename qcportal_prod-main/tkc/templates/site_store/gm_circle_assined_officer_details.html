@@ -1,0 +1,164 @@
+{% extends 'officer/circle_base.html' %} {% load static %} {% block body %} 
+
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                        WO Details
+                                    </h2>
+                                </div>
+               <div class="card-body pb-5">
+                   <div class="ed-tableinfo-block ed-orderinfo-block">
+                       <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                      <tr>
+                          <th style="width:10%">
+                               Work Order No
+                          </th>
+                          <th style="width:10%">
+                            DI No
+                       </th>
+                          <th style="width:30%">
+                               DI Description
+                          </th>
+                          <th style="width:30%">
+                            View DI
+                       </th>
+                             <th style="width:30%">
+                        LR/RR Delivery Challan
+                   </th>
+                   <th style="width:30%">
+                    Packing List Of Materials
+               </th>
+               <th style="width:30%">
+                Insurance Policy Certificate
+           </th>
+           <th style="width:30%">
+            Material Guarantee Certificate
+       </th>
+                          <th style="width:20%">
+                               Contractor
+                          </th>
+                           <th style="width:20%">
+                               Item Name
+                          </th>
+
+                          <th style="width:20%">
+                        Quantity
+                       </th>
+
+                       <th style="width:20%">
+                        Site Store Name
+                       </th>
+
+                       <th style="width:20%" >Assines Officer</th>
+
+
+                       <th style="width:20%">
+                        Officer Number
+                       </th>
+
+                       <th style="width:20%">
+                        Assined Date
+                       </th>
+
+
+
+                       <th style="width:20%">
+                        PV Date
+                       </th>
+
+
+                         
+                         
+                   
+                        
+                        </tr>
+                    </thead>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>WO Details</span></u></b></p>
+                    {% for Supply in data %}
+                    <tr>
+                         <td><b>{{Supply.offer_no.wo.Contract_Number}}</b></td>
+                            <td><b>{{Supply.offer_no.tkc_di.erp_di_number}}</b></td>
+                            <td><b>{{Supply.offer_no.tkc_di.di_subject}}</b></td>
+                            <td> <a href="{{Supply.offer_no.tkc_di.tkc_di_doc.url}}"  target="_blank">View</a></td>
+
+                         {% if Supply.offer_no.tkc_di.lr_copy_or_rr_and_delivery_challan %}
+                            <td> <a href="{{Supply.tkc_di.lr_copy_or_rr_and_delivery_challan.url}}"  target="_blank">View</a></td>
+                            {% else %}
+                            <td><h6>Not uploaded</h6></td>
+                            {% endif %}
+
+                            {% if Supply.offer_no.tkc_di.packing_list_of_materials %}
+                            <td> <a href="{{Supply.tkc_di.packing_list_of_materials.url}}"  target="_blank">View</a></td>
+                            {% else %}
+                            <td><h6>Not uploaded</h6></td>
+                            {% endif %}
+
+                            {% if Supply.offer_no.tkc_di.insurance_policy_certificate %}
+                            <td> <a href="{{Supply.tkc_di.insurance_policy_certificate.url}}"  target="_blank">View</a></td>
+                            {% else %}
+                            <td><h6>Not uploaded</h6></td>
+                            {% endif %}
+
+
+                            {% if Supply.offer_no.tkc_di.material_guarantee_certificate %}
+                            <td> <a href="{{Supply.tkc_di.material_guarantee_certificate.url}}"  target="_blank">View</a></td>
+                            {% else %}
+                            <td><h6>Not uploaded</h6></td>
+                            {% endif %}
+                         <td><b>{{Supply.offer_no.wo.supplier.CompanyName_E}}</b></td>
+                        <td><b>{{Supply.offer_no.wo_material.material_name}}</b></td>
+                        <td><b>{{Supply.offer_no.quantity}}</b></td>
+
+                        <td><b>{{Supply.offer_no.site_store_fk.Store_Address}}</b></td>
+
+                        <td><b>{{Supply.name}}</b></td>
+
+                        <td><b>{{Supply.mobile}}</b></td>
+
+                        <td><b>{{Supply.assine_date}}</b></td>
+                        <td><b>{{Supply.verification_date}}</b></td>
+
+                        
+                     
+                     
+
+
+
+
+
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+                    </div>
+   </div>
+
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'officer/dgm_onm_login.html' %}
+{% load static %}
+{% block heading %} MRC Format {% endblock heading %}
+{% block body %}
+<form action="/tkc/upload_digi_tkc_mrc_onm_di/{{tr.id}}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="ed-information">
+        <div class="card ed-card-block">
+            <div class="ed-card-inner">
+                <div class="card-header">
+                    <h2>
+                        Digitally Signed
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <h6>
+                        Upload digitally signed pdf here 
+                    </h6>
+                <div class="input-group row">
+                    <div class="col-6">
+                    <input type="file" class="form-control" name="digi_pdf_tkc" id="signedpdf" accept="application/pdf" required>
+                    </div>
+                </div>
+                 
+                <div class="form-group">
+                    <div class="text-right"> 
+                        <a href="/tkc/tkc_mrc_sign_list_onm_di/{{tr.id}}" class=""><button type="submit" class="btn ed-submits  ed-formSubmit" value="Submit" onclick="filevalidtion()">Submit</button></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </div>  
+      
+    </div>
+</form>
+
+
+<script>
+    function filevalidtion() {
+      var x = document.getElementById("signedpdf");
+      console.log(x.value); 
+
+      if(x.value == ""){
+        alert('Please Upload File !!');
+        return false;
+      }
+      
+    }
+    </script>
+
+{% endblock body %}

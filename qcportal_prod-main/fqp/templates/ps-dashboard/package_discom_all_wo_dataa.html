@@ -1,0 +1,87 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Work Orders Details For Package : {{package_name}}
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <div class="ed-tableinfo-block ">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered  text-center" id="vendor_purchase_B">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5 text-center">S.No.</th>
+                            <th>Work Order No.</th>
+                            <th>TKC Company Name</th>
+                            <th>Total Offered Material</th>
+                            <th>Total Pre Delivery Inspections</th>
+                            <th>Total Dispatch Instructions</th>
+                            <th>View Work Order</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i,j in data_dict.items %}
+                        <tr>
+                            <td>
+                                {{forloop.counter}}
+                            </td>
+
+                            <td>
+                                {{i}}
+                             </td>
+
+                            <td>
+                               {{j.0}}
+                            </td>
+                            
+                            <td>
+                                <a href = "/fqp/Work-Order-Offer-Details/{{j.5}}/{{package_id}}">
+                                {{j.1}}
+                                </a>
+                             </td>
+
+                             <td>
+                            <a href = "/fqp/Work-Order-pdi-Details/{{j.5}}/{{package_id}}">
+                                {{j.2}}
+                            </a>
+
+                             </td>
+
+                             <td>
+                            <a href = "/fqp/Work-Order-di-Details/{{j.5}}/{{package_id}}">
+
+                                {{j.3}}
+                             </td>
+                            </a>
+
+
+                             <td>
+                                <a href="{{j.4.url}}">
+                                    <button class="btn  btn-info btn-sm">
+                                        <span class="ed-submit-text">
+                                            View
+                                        </span>
+                                    </button>
+                                </a>
+                             </td>
+
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

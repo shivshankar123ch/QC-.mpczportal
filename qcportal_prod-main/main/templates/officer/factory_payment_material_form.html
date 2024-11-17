@@ -1,0 +1,51 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %} {% block Approval_Nabl %}
+                                        <li class="nav-item active" style="list-style-type:none;">
+										{% endblock Approval_Nabl %}
+<div class="container"> 
+    <h5 class="font-weight-bolder">Vednor Material </h5>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-responsive">
+                <thead class="table table-dark">
+                    <tr>
+                        <th class="text-center" style="10px;">
+                            S.No.
+                        </th>
+                        <th>
+                            Material Name
+                        </th>
+                        <th>
+                            Material Specification
+                        </th>
+                        <th>
+                            Material Test Doc
+                        </th>
+                        <th class="text-center">
+                            Material GTP Doc:
+
+                    
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.Material_Name}}</td>
+                        <td>{{data.Material_Specification}}</td>
+                        <td> <a href="{{data.Material_Test_Doc.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                        <td> <a href="{{data.Material_GTP_Doc.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                       
+
+                    </tr>
+                    {% endfor %}
+					<tr>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

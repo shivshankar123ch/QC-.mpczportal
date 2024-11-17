@@ -1,0 +1,151 @@
+{% extends 'officer/auditor_base.html' %} {% load static %} {% block body %}
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Vendor Pending History
+            </h2>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group" id="printbtn">
+                <div class="text-right">
+                    <button class="btn ed-submits btn-info" onclick="windowprint()" >
+                        Print
+                    </button> 
+                </div>
+            </div>
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered display text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>
+                                    Name Of Company
+                                </th>
+                                <th>
+                                    Name of Authorized Person
+                                </th>
+                                <th>
+                                    Registration Date
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+
+                                <th style="width:1%;color: white; ">
+                                    DGM(W&P) Status </th>
+                
+                                    <th style="width:1% ;color: white; ">
+                                    DGM(Finance) Status </th>
+
+
+                                    <th style="width:1% ;color: white; ">
+                                        View Status </th>
+
+                                  
+
+                                     
+
+                            
+                              
+                        </thead>
+                        <tbody>
+                            {% for data,new in new_data %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.CompanyName_E}}</td>
+                                <td>{{data.Authorised_person_E}}</td>
+                                <td> {{data.reg_date|date:"d-M-Y"}}</td>
+                                <td>{{data.Email_Id}}</td>
+                                <td>{{data.ContactNo}}</td>
+
+                                {% if data.work_approval == 0  %}
+                            
+
+                                <td><span class="badge badge-warning badge-sm" style="font-size: 18px;" >{{new}}</span></td>
+                        
+                        
+                                    
+                                {% else %}
+                                <td><h6>Not Pending</h6>
+                                    
+                                </td>
+                                 
+                                {% endif %} 
+            
+                            {% if data.finance_approval == 0  %}
+
+                            <td><span class="badge badge-warning badge-sm" style="font-size: 18px;" >{{new}}</span></td>
+
+                            
+                          
+
+                                {% else %}
+                                <td><h6>Not Pending</h6>
+                                    
+                                </td>
+                                
+                                {% endif %} 
+
+                                   
+    
+                                <td>
+                                    <a href="/new_dashboard_history_vendor/{{data.CompanyName_E}}" target="_self" class="ed-links">
+                                        <span class="btn btn-sm btn-info">
+                                            View Details
+                                        </span>
+                                    </a>
+                                </td>
+                               
+
+                                
+
+                               
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+   
+
+
+    <script>
+
+     function windowprint(){ 
+        //  alert();
+        document.getElementById('printbtn').style.display='none';
+        document.getElementById('sidenav-main').style.display='none';
+        document.getElementById('headerMenu').style.display='none';
+        $('#contantBlock').css('padding','0'); 
+        // $('.ed-pagetitle-block').hide();
+        $('.ed-footer-block').hide(); 
+        //  alert();
+        window.print();
+        document.getElementById('sidenav-main').style.display='block';
+        document.getElementById('printbtn').style.display='block';
+        document.getElementById('headerMenu').style.display='block';
+        $('#contantBlock').removeAttr('style');
+        $('.ed-footer-block').show(); 
+        // $('.ed-pagetitle-block').show();
+        // $('.ed-footer-block').hide();  
+        //  alert();     
+    }   
+
+
+    </script>
+
+  
+    {% endblock body %}

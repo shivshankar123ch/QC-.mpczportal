@@ -1,0 +1,195 @@
+{% extends 'officer/discom_base.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script> 
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                User All Data
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-2">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                        <thead>
+                            <tr>
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>Document Name</th>
+                                <th> Document No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Type of Business</td>
+                                <td>{{data.Type_of_business}}</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Authorised Person Name</td>
+                                <td>{{data.Authorised_person_E}}</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Company Name</td>
+                                <td>{{data.CompanyName_E}}</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Contact Number</td>
+                                <td>{{data.ContactNo}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Email ID</td>
+                                <td>{{data.Email_Id}}</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td> Type</td>
+                                <td>{{data.User_code}}</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Company GST No</td>
+                                <td>{{data.Company_Gst_No}}</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Pan Card No</td>
+                                <td>{{data.Company_Pan_No}}</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Company Gumastha No</td>
+                                <td>{{data.Company_Gumastha_No}}</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Company Registration_Date</td>
+                                <td>{{data.Registration_Date}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="background: #263544; color: #fff;"> Company Address</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>Add 1</td>
+                                <td>{{data.Company_add_1}}</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td> Add 2</td>
+                                <td>{{data.Company_add_2}}</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>Pin Code</td>
+                                <td>{{data.Company_pin_code}}</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>District</td>
+                                <td>{{data.Company_dist}}</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>State</td>
+                                <td>{{data.Company_state}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <form action="/vendor_cgm_evaluate_save/{{data.User_Id}}" method="POST">
+                {% csrf_token %}
+
+                <div class="ed-tableinfo-block mb-2">
+                    <h4>Basics Document</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                            <thead>
+                                <tr>
+                                    <th> Document Name </th>
+                                    <th> Document Number </th>
+                                    <th> View Document</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in doc %}
+                                <tr>
+                                    <td>{{data.Types_of_Docs}}</td>
+                                    <td>{{data.Document_Number}}</td>
+
+                                    <td> <a href="{{data.Ddocfile.url}} " target="_self"
+                                            ><span class="btn btn-info btn-sm">View</span></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
+
+
+
+
+
+
+<!-- {% for fac in factory %}
+                        <div class="card-body col-12 mt-4">
+                               <table class="table table-bordered table-hover">
+                                  <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                                    <tr>
+                                          <th width="5%"> S. No.</th>
+                                        <th colspan="2">
+                                             Company Details
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       <tr>
+                                            <td>1</td>
+                                            <td>Area Of Land Occupied By Factory (sq. ft.)</td>
+                                              <td>   {{fac.Area_of_land}}    </td>
+                                        </tr>
+                                         <tr> <td>2</td>
+                                            <td>Number Of Working Shift in Factory *</td>
+                                              <td>{{fac.No_of_Shifts}}</td>
+                                        </tr>
+                                         <tr>
+                                              <td>3</td>
+                                            <td>Other Personnel Working In Factory *</td>
+                                              <td>{{fac.Outsourced_person}}</td>
+                                        </tr>
+                                         <tr>
+                                              <td>4</td>
+                                            <td>Buit Up Area Of Factory (sq. ft.)*</td>
+                                              <td>{{fac.Area_built_up}}</td>
+                                        </tr>
+                                          <tr>
+                                               <td>5</td>
+                                            <td>Product Capacity Per Annum(QUANTITY) *</td>
+                                              <td>{{fac.Yearly_Production}}</td>
+                                        </tr>
+
+                        {% endfor %}
+                     <tr>
+                   </tr>
+                </tbody>
+                </table>
+            </div> -->
+
+<!-- </section> -->
+<!-- /.content -->
+{% endblock body %}

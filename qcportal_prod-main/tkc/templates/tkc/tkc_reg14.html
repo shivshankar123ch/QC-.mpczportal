@@ -1,0 +1,105 @@
+{% extends 'tkc/creater_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}
+{% block css %}
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #10707f;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: inherit;
+}
+ {% endblock css %}
+{% block body %}
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+ <form   action="tkc_reg_fourteen" method="POST">
+      {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h2 class="card-title">Choose Signature Type</h2>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+<div class=" card-body col-lg-12">
+<!-- <h4 class="heading">By uploading any document, all the pages related to that document will have to be re-uploaded.</h4> -->
+</div>
+<div class="card-body">
+      <div class="form-group" type="radio">
+        <article>
+            <!-- <h5>After reporting any service, you will have to upload the necessary documents to you.</h5> -->
+            <p></p>
+            <ul>
+                <input type="radio" name="opinions" id="radio-1" checked/>
+                <label for="radio-1"></label>
+                <label for="radio-1">Online Verification (Verification will be done through Aadhar after registration through Mobile No., Aadhar No.)</label><br>
+                <input type="radio" name="opinions" id="radio-2" />
+                <label for="radio-1"></label>
+                <label for="radio-1">Digital Signature (Token of digital signature verified by CA)</label>
+            </ul>
+        <div>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked  required><h6>Please check all the details before digital signing as once the digital signature is implemented no further changes can be allowed. Do you want to continue with digital signature?</h6>
+        </div>
+
+            <button class="button btn btn-primary" onclick="" disabled>Previous</button>
+            <!-- <button  style="margin-top: 10px;" class="button btn btn-primary" onclick="">Next and Save</button> -->
+            
+
+            <button type="Submit" class="btn-success btn btn-primary float-right">Submit</button>
+            </a>
+        </article>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+    <div class="row card-body">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <input type="reset" value="Seva Prabhandan pe Jaye" class="btn btn-secondary">
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+
+
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
+
+{% endblock body %}

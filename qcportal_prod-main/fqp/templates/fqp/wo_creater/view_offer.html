@@ -1,0 +1,81 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+</style>
+               <div class="ed-infocontant">
+                <div class="ed-information mb-4">
+                    <div class="card ed-card-block">
+                        <div class="card-header">
+                            <h2>
+                                View Order information
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="ed-tableinfo-block ed-orderinfo-block">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered display" id="view_offer">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th class="wc1">Sr. No.</th>
+                                                <th>Wo No</th>
+                                                <th style="min-width:300px;">Wo Subject</th>
+                                                <th style="min-width:130px;">Offer Date</th>
+                                                <th style="min-width:200px;">Offer No.</th>                                                
+                                                <th>TKC</th>
+                                                <th style="min-width:200px;">Material Name</th>
+                                                <th style="min-width:80px;" >Item Code</th>
+                                                <th>Vendor</th>
+                                                <th>Quantity</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for data,qun in offer %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{data.wo.Contract_Number}} </td>
+                                                <td>{{data.wo.Header.Contract_Description}}</td>
+                                                <td>{{data.created_at|date}}</td> 
+                                                <td>{{data.offer_no}}</td>
+                                                <td>{{data.supplier.CompanyName_E}}</td>
+                                                <td>{{data.wo_material.material_name}}</td>
+                                                <td>{{data.wo_material.item_code}}</td>
+                                                <td>{{data.TKCVendor.Vendor.CompanyName_E}}</td>
+                                                <td>{{qun}}</td>
+                                                
+                                               
+                                                
+                                            </tr>
+                                       {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<script>
+  $(document).ready(function () {
+    $('#view_offer').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+</script>
+
+
+
+
+{% endblock body %}

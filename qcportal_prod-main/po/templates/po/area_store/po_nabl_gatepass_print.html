@@ -1,0 +1,275 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Gatepass Outward {% endblock heading %}
+{% block body %}
+
+ 
+ 
+
+<div class="ed-card-inner"> 
+    <!-- <div class="card-header">
+        <h2>
+            DI Details
+        </h2>
+    </div> -->
+    <div class="card-body">     
+        <div class="ed-form-block border-0 p-0">
+            <div class="ed-form-body">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        PO No
+                    </label>
+                    <input type="text" class="form-control ed-textbox" value="{{ data.po.po_no}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Vendor Company name
+                    </label>
+                    <input type="text" class="form-control ed-textbox" value="{{ data.po.vendor.CompanyName_E}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Material
+                    </label>
+                    <input type="text" class="form-control ed-textbox" value="{{ data.offer_item.material.specification}}"
+                        readonly>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ed-tableinfo-block mb-2">
+            <h5 class="">Gatepass Material Details</h5>
+            <div class="table-responsive">
+                <form  action="/vendor/vendor_dispatch_b_sd_save/{{data.id}}"
+                    name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table table-striped ed-table-block">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>
+                                    Material Name
+                                </th>
+                                <th>
+                                    Material Serial Number
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in material %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.area_store_id.offer_item.material.specification}}</td>
+                                <td>{{data.serial_no}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+
+
+
+        <form action="/po/create_po_gatepass/{{data.id}}" method="POST" enctype="multipart/form-data" name="myForm"
+            onsubmit="return validateForm()">
+            {% csrf_token %}
+
+            <div class="ed-form-block border-0 p-0">
+                <div class="ed-form-body border-0 p-0">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            DI Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ data.di_master.erp_di_number}}"
+                            readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            NABL Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ data.di_master.nabl_name}}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            NABL Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ data.di_master.nabl_number}}"
+                            readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Gatepass Date (mm/dd/yyyy)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="date" id="gatepass_date" name="gatepass_date" onkeyup="validateForm()"
+                            value="{{data1.gatepass_date}}" onfocus="validateForm()" class="form-control ed-textbox"
+                            onchange="validateForm()" readonly>
+                        <span id="date" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Gatepass No
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="gatepass_no" id="gatepass_num" placeholder=""
+                            value="{{data1.gatepass_num}}" class="form-control ed-textbox" onkeyup="validateForm()"
+                            onfocus="validateForm()" readonly onchange="validateForm()">
+                        <span id="tendor" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Gatekeeper Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="gk_name" placeholder="" class="form-control ed-textbox"
+                            value="{{data1.gatekeeper_name}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Vehicle No
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="vehicle_no" placeholder="" class="form-control ed-textbox"
+                            value="{{data1.vehicle_no}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Driver Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="driver_name" placeholder="" class="form-control ed-textbox"
+                            value="{{data1.driver_name}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Driver Phone
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="driver_phone" placeholder="" class="form-control ed-textbox"
+                            value="{{data1.driver_phone}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material Received By
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="mat_rece_by" class="form-control ed-textbox"
+                            value="{{data1.material_rec_by}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Outward Quantity
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="outward_qty" class="form-control ed-textbox"
+                            value="{{data1.outward_quantity}}" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger d-block ed-warning"></span>
+                    </div>
+                    </form>
+
+
+                    <div class="" id="formgroups"> 
+                        <div class="form-group">
+                            <div id="options" class="text-center"> 
+                                <a class="btn ed-submit btn-info" href="/po/po_trf_create">Back</a>
+                                <input id="printpagebutton"  class="btn ed-submit ed-formSubmit" type="button" value="print gatepass" onclick="windowPrint()" /> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-right" id="options1"> 
+                                    <form action="/po/po_nabl_gatepass_upload/{{gp_id}}" method="POST"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="file" id="gp_file" name="gp_file" required="required">
+                                        <input type="submit" id="sub" class="btn ed-submit ed-formSubmit mr-2" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                </div> 
+            </div> 
+        </div>  
+    </div>  
+
+
+
+                    <script>
+                        let dtElem = document.getElementById('bid_open_date');
+                        let maxDate = new Date();
+                        dtElem.max = formatDate(maxDate);
+
+                        function formatDate(date) {
+                            let dd = String(date.getDate()).padStart(2, '0');
+                            let mm = String(date.getMonth() + 1).padStart(2, '0');
+                            let yyyy = date.getFullYear();
+                            return `${yyyy}-${mm}-${dd}`;
+                        }
+                    </script>
+                    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+                    <!-- Bootstrap Datatable js -->
+                    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+   
+    <script>
+          
+        function windowPrint(){
+            document.getElementById('formgroups').style.display='none';
+            document.getElementById('sidenav-main').style.display='none';
+            document.getElementById('headerMenu').style.display='none';
+            document.getElementById('contantBlock').style.paddingLeft='10px'; 
+            document.getElementById('contantBlock').style.paddingTop='10px'; 
+            $('.ed-footer-block ').hide(); 
+            $('.ed-card-block').css('box-shadow','none');  
+            window.print();
+            document.getElementById('formgroups').style.display='block';
+            document.getElementById('sidenav-main').style.display='block';
+            document.getElementById('headerMenu').style.display='block';
+            document.getElementById('contantBlock').style.paddingLeft='275px'; 
+            document.getElementById('contantBlock').style.paddingTop='85px'; 
+            $('.ed-footer-block ').hide();
+            $('.ed-card-block').css('box-shadow','0px 0px 6px 1px rgb(30 30 30 / 10%');
+        }
+
+
+
+    </script>
+
+
+
+
+
+    {% endblock body %}
+

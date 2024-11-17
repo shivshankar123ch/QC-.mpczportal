@@ -1,0 +1,568 @@
+{% extends 'po/po_finance/pofinance_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<style type="text/css">
+    th {
+        min-width: 130px;
+    }
+</style>
+
+<div class="ed-information mb-4">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Purchase-Order Invoice
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="ed-tableinfo-block ed-orderinfo-block">
+                        <div class="table-responsive mb-3">
+                            <table class="table table-striped table-bordered ed-table-block ed-centertable text-left">
+                                <tr>
+                                    <th>Po. No.:<span style="color: red;">*</span></th>
+                                    <td>{{po_data.po_no}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Po. Subject: <span style="color: red;">*</span></th>
+                                    <td>
+                                        {{po_data.po_subject}}
+                                        <span id="date" class="text-danger font-weight-bold text-sm-left"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Po. Date: <span style="color: red;">*</span> </th>
+                                    <td>
+                                        {{po_data.erp_created_date}}
+                                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Firm Name:<span style="color: red;">*</span> </th>
+                                    <td>
+                                        {{po_data.vendor.CompanyName_E}}
+                                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Po. Amount (In Rupees): <span style="color: red;">*</span> </th>
+                                    <td>  
+                                        {{pomd.total_amount__sum}} 
+
+                                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"></span>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>PO. Approved Amount (In Rupees): <span style="color: red;">*</span> </th>
+                                    <td>
+                                        {{in_amount.total_invoice_amount__sum|default:"0"}} 
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                    style="font-size: 100%;"></span>
+                                    </td>
+                                    </tr>
+
+                                <tr>
+                                    <th>View Purchase Order: <span style="color: red;">*</span> </th>
+                                    <td>
+                                        <a class="btn ed-submits ed-formSubmit" href="{{po_data.Po_doc.url}}"
+                                            target="_blank">View Purchase Order
+                                            <span id="materilall" class="text-danger font-weight-bold text-sm-left"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="ed-tableinfo-block ed-orderinfo-block">
+                        <div class="table-responsive mb-3">
+                            <table class="table table-striped table-bordered ed-table-block ed-centertable text-center"
+                                id="example2">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Po. No.</th>
+                                        <th>Invoice No.</th>
+                                        <th>Invoice Type</th>
+                                        <th>Invoice Date</th>
+                                        <th>Invoice Document</th>
+                                        <th>Bg Document</th>
+                                        <th>Bg Acceptance letter</th>
+                                        <th>Amount Without taxes (In Rupees)</th>
+                                        <th>Invoice SGST Amount (In Rupees)</th>
+                                        <th>Invoice CGST Amount (In Rupees)</th>
+                                        <th>Invoice Total Amount (In Rupees)</th>
+                                        <th>Additional Document Detail</th>
+                                        <th>Additional Document</th>
+                                        <th>Remark</th>
+                                        <!-- <th>Invoice Total Amount (in cr.)</th> -->
+                                        <!-- <th>Order Type</th> -->
+                                        <th  style="min-width: 120px;">Invoice Status</th>
+                                        <th>Submission Date</th>
+                                        <th style="min-width: 120px;">Review Remark</th>
+                                        <th style="min-width: 120px;">Review Document</th>
+                                        <th style="min-width: 120px;">Review Status</th>
+                                        <th>Approver Remark</th>
+                                        <th>Approver Document</th>
+                                        <th style="min-width: 160px;">Approver Action/Status</th>
+                                        <th>CFO Remark</th>
+                                        <th>CFO Document</th>
+                                        <th style="min-width: 160px;">CFO Action/Status</th>
+                                        <th>CBPU Remark</th>
+                                        <th>CBPU Document</th>
+                                        <th style="min-width: 160px;">CBPU Action/Status</th>
+                                        <th>AO BILLS Remark</th>
+                                        <th>AO BILLS Document</th>
+                                        <th style="min-width: 160px;">AO BILLS Action/Status</th>
+                                        <th>DGM(EM) Remark</th>
+                                        <th>DGM(EM) Document</th>
+                                        <th style="min-width: 160px;">DGM(EM) Action/Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in in_data %}
+                                    <tr>
+                                        <td><input type="hidden" name="invoice_id" value="{{i.id}}">
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td>
+                                            {{i.purchase_order.po_no|default:"---"}}
+                                        </td>
+                                        <td>
+                                            {{i.invoice_number|default:"---"}}
+                                        </td>
+                                        <td>
+                                            {{i.invoicetype.invoice_type|default:"---"}}
+                                        </td>
+                                        
+                                        <td>
+                                            {{i.invoice_date}}
+                                        </td>
+                                        <td>
+                                        {% if i.invoice_pdf %}
+                                        <a class="btn ed-submits btn-info" href="{{i.invoice_pdf.url}}" target="_blank">Invoice
+                                                Document</a>
+                                            {% else %}
+                                            
+                                            <a class="text-danger" href="#" >Invoice Document not Uploaded </a>
+                                            {% endif %}
+                                            
+                                        </td>
+                                        <td>
+                                            {% if i.bg_document %}
+                                            <a class="btn ed-submits btn-info" href="{{i.bg_document.url}}" target="_blank">BG
+                                                Document</a>
+                                                {% else %}
+                                                <a class="text-danger" href="#">BG Document Not Uploded</a>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if i.bg_acceptance_letter %}
+                                                <a class="btn ed-submits btn-info"
+                                                href="{{i.bg_acceptance_letter.url}}" target="_blank">BG Letter</a>
+                                                {% else %}
+                                                
+                                                <a class="text-danger" href="#">BG Letter not Uploaded </a>
+                                                {% endif %}
+                                            </td>
+                                         
+                                            <td>
+                                                {{i.invoice_amount_withought_taxes|default:"0"}} 
+                                            </td>
+                                            <td>
+                                                {{i.invoice_amount_sgst|default:"0"}} 
+                                            </td>
+                                            <td>
+                                                {{i.invoice_amount_cgst|default:"0"}} 
+                                            </td>
+                                            <td>
+                                                {{i.total_invoice_amount|default:"0"}} 
+                                            </td>
+                                            
+                                            <td>
+                                                {{i.supporting_document_name|default:"---"}}
+                                            </td>
+                                            <td>
+                                                {% if i.supporting_document %}
+                                                <a class="btn ed-submits btn-info" href="{{i.supporting_document.url}}"
+                                                target="_blank">Additional Document</a>
+                                                {% else %}
+                                                <a class="text-danger" href="#">
+                                                    Additional Document Not Uploaded
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{i.remark}}
+                                            </td>
+                                            <!-- <td>
+                                                {{i.order_type}}
+                                            </td> -->
+                                            <td>
+                                                {% if i.status == 0 %}
+                                                <a class="btn ed-submits btn-warning">Pending</a>
+                                                {% elif i.status == 1 %}
+                                                <a class="btn ed-submits btn-success">Approved</a>
+                                                {% elif i.status == 3 %}
+                                                <a class="btn ed-submits btn-info">Forwarded For Scrutiny</a>
+                                                {% elif i.status == 4 %}
+                                                <a class="btn ed-submits btn-info">Pending For Acceptance</a>
+                                                {% elif i.status == 5 %}
+                                                <a class="btn ed-submits btn-primary">Forwarded To Finance</a>
+                                                {% else %}
+                                                <a class="btn ed-submits btn-danger">Rejected</a>
+                                                {% endif %}
+    
+                                            </td>
+    
+   
+                                        <td>
+                                            {{i.invoice_submission_date|date:"Y-m-d"}}
+                                            </td>
+
+                                        <td>
+                                            {{i.gm_remark|default:"---"}}
+                                        </td>
+
+                                        {% if i.gm_document %}
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" href="{{i.gm_document.url}}"
+                                                target="_blank">Creator Document</a>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <!-- <a class="btn ed-submits btn-success" href="#">DGM/CBPU Document</a> -->
+                                            ---
+                                        </td>
+                                        {% endif %}
+
+                                        <td>
+                                            {% if i.gm_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.gm_status == 2 %}
+
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.gm_status == 0 and i.status == 3 %}
+
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button>
+
+                                            {% else %}
+                                            ---
+                                            <!-- <button type="submit" class="btn btn-primary" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button> -->
+                                            {% endif %}
+                                        </td>
+
+
+
+                                        <td>
+                                            {{i.cgm_remark|default:"---"}}
+                                        </td>
+
+                                        {% if i.cgm_document %}
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" href="{{i.cgm_document.url}}"
+                                                target="_blank">Approver Document</a>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <!-- <a class="btn ed-submits btn-success" href="#">AU/BILLS Document</a> -->
+                                        </td>
+                                        {% endif %}
+
+                                        <td>
+                                            {% if i.cgm_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.cgm_status == 2 %}
+
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.cgm_status == 0 and i.status == 4 %}
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button>
+                                            {% else %}
+                                            ---
+                                            {% endif %}
+                                        </td>
+
+                                        
+                                        <td>
+                                            {{i.cfo_remark|default:"---"}}
+                                        </td>
+
+                                        {% if i.cfo_document %}
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" href="{{i.cfo_document.url}}"
+                                                target="_blank">CFO Document</a>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <!-- <a class="btn ed-submits btn-success" href="#">DGM/CBPU Document</a> -->
+                                            ---
+                                        </td>
+                                        {% endif %}
+
+                                        <td>
+                                            {% if i.cfo_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.cfo_status == 2 or i.cfo_status == 3 %}
+
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.cfo_status == 0 and i.status == 5 %}
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button>
+
+                                            {% else %}
+                                            ---
+                                            <!-- <button type="submit" class="btn btn-primary" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button> -->
+                                            {% endif %}
+                                        </td>
+
+
+
+                                        <td>
+                                            {{i.dgm_cbpu_remark|default:"---"}}
+                                        </td>
+
+                                        {% if i.dgm_cbpu_document %}
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" href="{{i.dgm_cbpu_document.url}}"
+                                                target="_blank">DGM/CBPU Document</a>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            ---
+                                            <!-- <a class="btn ed-submits btn-success" href="#">AU/BILLS Document</a> -->
+                                        </td>
+                                        {% endif %}
+
+                                        <td>
+                                            {% if i.dgm_cbpu_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.dgm_cbpu_status == 2 or i.dgm_cbpu_status == 3 %}
+
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.cfo_status == 0 and i.dgm_cbpu_status == 0 %}
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button>
+                                            {% else %}
+                                            ---
+                                            {% endif %}
+                                        </td>
+
+
+
+
+
+
+                                        <form action="/po/po_aubills_invoice_list/" onsubmit="return validateForm()"
+                                        name="myForm" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <td>
+                                            {% if i.ao_bills_status == 1 or i.ao_bills_status == 2 or i.ao_bills_status == 3 %}
+                                             {{i.ao_bills_remark|default:"---"}}
+                                             <hr>
+                                             {% endif %}
+                                            {% if i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 0 or i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 3 %}
+                                             <input type="hidden" name="invoice_id" value="{{i.id}}">
+                                            <input type="hidden" name="dgm_em_status" value="{{i.dgm_em_status}}">
+                                            <input type="text" class="form-control ed-textbox" name="ao_bills_remark"
+                                                required>
+                                                {% endif %}
+                                        </td>
+
+                                        
+                                        <td>
+                                            {% if i.ao_bills_status == 1 or i.ao_bills_status == 2 or i.ao_bills_status == 3 %}
+                                        {% if i.ao_bills_document %}
+                                            <a class="btn ed-submits btn-primary" href="{{i.ao_bills_document.url}}"
+                                                target="_blank">AO BILLS Document</a>
+                                        {% else %}
+                                        ---
+                                        <!-- <a class="btn ed-submits btn-success" href="#">Approver Document Not Uploded</a> -->
+                                        {% endif %}
+                                        <hr>
+                                        {% endif %}
+                                    {% if i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 0 or i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 3 %}
+                                        <input type="hidden" name="po_id" value="{{i.purchase_order_id}}">
+                                        <div class="" style="overflow: hidden;">
+                                            <input type="file" name="ao_bills_document" placeholder="" accept="application/pdf" required>                                                  
+                                        </div>
+                                        {% endif %}
+                                        </td>
+                                        
+                                        <td>
+                                            {% if i.ao_bills_status == 1 or i.ao_bills_status == 2 or i.ao_bills_status == 3 %}
+                                            {% if i.ao_bills_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.ao_bills_status == 2 or i.ao_bills_status == 3 %}
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.ao_bills_status == 0 and i.status == 5 and i.dgm_cbpu_status == 1 %}
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                            </button>
+                                            {% else %}
+                                            ---
+                                            {% endif %}
+                                        
+                                            <hr>
+                                            {% endif %}
+                                        {% if i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 0 or i.status == 5 and i.dgm_cbpu_status == 1 and i.ao_bills_status == 3 %}
+                                            <button value="1" name="ao_bills_status"
+                                            class="btn ed-submits btn-success">ACCEPT</button>
+                                            <button value="2" name="ao_bills_status"
+                                            class="btn ed-submits btn-danger">REJECT</button>
+                                        {% endif %}                                                
+                                        </td>
+                                        </form>
+
+
+
+
+
+
+
+                                        <td>
+                                            {{i.dgm_em_remark|default:"---"}}
+                                        </td>
+
+                                        {% if i.dgm_em_document %}
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" href="{{i.dgm_em_document.url}}"
+                                                target="_blank">DGM/EM Document</a>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            ---
+                                            <!-- <a class="btn ed-submits btn-success" href="#">DGM/EM Document</a> -->
+                                        </td>
+                                        {% endif %}
+
+                                        <td>
+                                            {% if i.dgm_em_status == 1 %}
+                                            <button type="submit" class="btn ed-submits ed-submitNext" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    FORWARDED
+                                                </span>
+                                            </button>
+                                            {% elif i.dgm_em_status == 2 or i.dgm_em_status == 3 %}
+
+                                            <button type="submit" class="btn ed-submits btn-danger" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    REJECTED
+                                                </span>
+                                            </button>
+                                            {% elif i.dgm_em_status == 0 and i.ao_bills_status == 1 %}
+                                            <button type="submit" class="btn btn-warning" id="nextStep1" disabled>
+                                                <span class="ed-submit-text">
+                                                    PENDING
+                                                </span>
+                                                {% else %}
+                                                ---
+                                            </button>
+                                            {% endif %}
+                                        </td>
+
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+    function status_Func(id) {
+        let x = document.getElementById(id).value;
+        let y = document.getElementById("CO_" + id);
+
+        if (x == 5) {
+            y.setAttribute("hidden", true);
+            y.removeAttribute("required", '');
+        } else {
+            y.removeAttribute("hidden", false);
+            y.setAttribute('required', '');
+        }
+
+    }
+</script> -->
+{% endblock body %}

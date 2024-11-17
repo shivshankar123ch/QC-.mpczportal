@@ -1,0 +1,187 @@
+{% extends 'officer/dgm_base.html' %} {% load static %} {% block body %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body table-responsive table-bordered table-hover">
+                    <div class="card-header">
+                        <h3 class="card-title">Uploaded All Document </h3>
+                    </div>
+                    <div class="card-body ">
+                        <h3 class=p-3>User All Basics Data</h3>
+                        <table id="example2 " class="table table-bordered table-hover table-responsive ">
+                            <thead>
+                                <tr>
+                                    <th style="width:10% ">
+                                        Serial Number</th>
+                                    <th style="width: 40% ">
+                                        Report Name </th>
+                                    <th style="width:40% ">
+                                        Value </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Type of Business</td>
+                                    <td><b>{{data.Type_of_business}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Authorised Person Name</td>
+                                    <td><b>{{data.Authorised_person_E}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Company Name</td>
+                                    <td><b>{{data.CompanyName_E}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Contact Number</td>
+                                    <td><b>{{data.ContactNo}}</b></td>
+
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Email ID</td>
+                                    <td><b>{{data.Email_Id}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Vendor Type</td>
+                                    <td><b>{{data.User_type}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                        <h3 class="card-title m-2"> <b> Document Verified by DGM(Work and Finance Department </b></h3>
+                        <table class="table table-bordered table-hover bg-white " cellspacing="0">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th> Document Name </th>
+                                    <th> Document Number </th>
+                                    <th> Issued Date </th>
+                                    <th> Expired Date </th>
+                                    <th> View Document</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for data in doc %}
+                                <tr class="bg-light">
+                                    <td><b>{{data.Types_of_Docs}}</b></td>
+                                    <td><b>{{data.Document_Number}}</b></td>
+                                    <td><b>{{data.Doc_issue_date}}</b></td>
+                                    <td><b>{{data.Doc_expiry_date}}</b></td>
+                                    <td> <a href="" class="btn btn-success mr-3">View</a></td>
+                                    <tr>
+                                        <tr class="bg-grey">
+                                            <td colspan="1">
+                                                <b>Approved By DGM(Work)</b>
+                                            </td>
+                                            <td colspan="1">
+                                                <b> DGM(Work) Remark</b>
+                                            </td>
+                                            {% if data.Primary_remark %}
+                                            <td colspan="5"><b>{{data.Primary_remark}}</b></textarea>
+                                            </td>
+                                            {% else %}
+                                            <td colspan="5"><b>Not any remark</b></td>
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered table-hover bg-white " cellspacing="0">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th style="width:15%"> Document Name </th>
+                                    <th style="width:10%"> Year </th>
+                                    <th style="width:10%"> View Document</th>
+                                    <th style="width:20%"> Action </th>
+                                    <th style="width:45%"> Remark </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in doc1 %}
+                                <tr class="bg-light">
+                                    {% if data.Status == 1 %}
+                                    <td><b>{{data.document_name}}</b></td>
+                                    {% else %}
+                                    <td><b>Income Tax Return</b></td>
+                                    {% endif %}
+                                    <td><b>{{data.Financial_year}}</b></td>
+                                    <td> <a href="{{data.Balance_Sheet.url}} " class="btn btn-success mr-3">View</a></td>
+                                    <td>
+                                        <b>Approved By DGM(Finance)</b>
+                                    </td>
+                                    {% if data.Primary_remark %}
+                                    <td><b>{{data.Primary_remark}}</b></textarea>
+                                    </td>
+                                    {% else %}
+                                    <td><b>Not any remark</b></td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+</section>
+<!-- /.content -->
+</div>
+</form>
+{% if not data.factory_approval_status %}
+<form action="/factory_initiate/{{data.User_Id}}" method="POST">
+    {% csrf_token %}
+    <div class="row card-body">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <input type="reset" value="Go Back" class="btn btn-secondary"> GO Back
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                <button type="Submit" class="btn-success"> Factory Inspection  Fee Initiate </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %} {% if data.factory_approval_payment and not data.factory_approval %}
+<form action="/factory_inspection_initiate/{{data.User_Id}}" method="POST">
+    {% csrf_token %}
+    <div class="row card-body">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <input type="reset" value="Go Back" class="btn btn-secondary"> GO Back
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                <button type="Submit" class="btn-success"> Factory Inspection Initiate </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %} {%endblock body %}

@@ -1,0 +1,48 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>All Selected Student</h2>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center">
+                            Sr.No.
+                        </th>
+                        <th>
+                            User
+                        </th>
+                        <th>
+                            score
+                        </th>
+                        <th class="text-center">
+                            Gender
+                        </th>
+                        <th class="text-center">
+                            category
+                        </th>
+                         <th class="text-center">
+                            Selection category
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td class="text-center">{{data.id}}</td>
+                        <td>{{data.user}}</td>
+                        <td>{{data.score}}</td>
+                        <td class="text-cenetr">{{data.gender}}</td>
+                        <td class="text-center">{{data.category}}</td>
+                        <td class="text-center">{{data.select_category}}</td>
+                    </tr>
+                    {% endfor %}
+                <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

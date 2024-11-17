@@ -1,0 +1,61 @@
+{% extends 'officer/user_wnp_base.html' %}
+  {% load static %}
+
+{% block body %}
+<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">All Pending Vendor</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th style="width:5%">
+                           Serial Number
+                      </th>
+                      <th style="width:30%">
+                          Name Of Company
+                      </th>
+                      <th style="width: 30%">
+                          Name of Authorized Person
+                      </th>
+                        <th style="width:15%">
+                          Registration Date
+                      </th>
+                      <th style="width:20%">
+                        Action
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for data in data %}
+                  <tr>
+                      <td>{{forloop.counter}}</td>
+                    <td>{{data.CompanyName_E}}</td>
+                    <td>{{data.Authorised_person_E}}</td>
+                    <td>{{data.Uploaded_Date}}</td>
+                      <td> <a href="/vendor_wnp_evaluate/{{data.User_Id}}">Detail View</a></td>
+                    </tr>
+                    {%  endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock body %}

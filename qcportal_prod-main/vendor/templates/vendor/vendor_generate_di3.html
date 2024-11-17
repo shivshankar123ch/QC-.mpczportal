@@ -1,0 +1,87 @@
+{% extends 'vendor/vendorBase.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+          <div class="card-header">
+            <h3 class="card-title">Vendor Offer Letter</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              <</button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+     <form   action="/vendor_dispatch_b2/{{data.id}}" method="POST">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1"> Purchase Order No</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="MPCZ00{{data.id}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+                  <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Item Category</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_category}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+
+                       <div class="form-group">
+                      <label for="exampleInputEmail1"> Class Of Item</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_class}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+                 <div class="form-group">
+                      <label for="exampleInputEmail1"> Item Name</label>
+                     <input type="text"  name="name" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_name}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Total  Quantity In PO </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_quantity}}" disabled>
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Item Quantity </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_quantity}}" disabled>
+                   </div>
+                  </div>
+                      {% for data in dispatch_info %}
+                     <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">Dispatch Item Serial No</label>
+                     <input type="number" name={{forloop.counter0}} class="form-control" id="exampleInputEmail1" placeholder={{data.serial_number}} disabled>
+                   </div>
+                    </div>
+                  {% endfor %}
+
+
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">Offer Letter No</label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="MPCZO00{{offer.id}}" disabled>
+                   </div>
+                     </div>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+
+        </div>
+     </form>
+</div>
+ {% endblock body %}

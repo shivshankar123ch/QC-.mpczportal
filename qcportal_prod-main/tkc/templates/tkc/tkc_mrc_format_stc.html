@@ -1,0 +1,555 @@
+{% extends 'officer/dgm_stc_login.html' %}
+{% load static %}
+{% block heading %} MRC Format {% endblock heading %}
+{% block body %}
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+  {% comment %} <script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+      window.history.forward();
+    }
+  </script> {% endcomment %}
+</head>
+<body>
+
+
+
+
+    <style>
+        .table td, .table th {
+            border: 0;
+        }
+        .table-bordered td {
+            border: 1px solid #dee2e6 !important;
+            vertical-align: middle;
+            padding: 8px 0.75rem;
+        }
+    </style>
+
+
+    <div class="mrcser-block">
+        <table style="border: 1px solid #ccc; margin:0 auto; margin-left:0%; width:100%;background:#fff;">
+            <tr>
+                <td style="padding: 40px; border:0px solid #000;">
+        
+                    <table style="border: 0; width:100%; margin-bottom:20px;">
+                        <tr>
+                            <td style="padding: 4px;">
+                                <div class="cgm-logo-block">
+                                    {% if data.offer.wo.zone == 'CZ' %}
+                                    <img src="{% static 'assets/images/header.png' %}" alt="͝" class="cgm-logo"
+                                        style="width:100%">
+                                    {% elif data.offer.wo.zone == 'WZ' %}
+                                    <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                        style="width:100%">
+                                    {% elif data.offer.wo.zone == 'EZ' %}
+                                    <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                        style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                        alt="͝">
+                                    
+                                    {% endif %}
+                                </div>
+                                <h4 style="text-align: center; text-transform: uppercase; font-size: 24px;
+                                font-weight: 700; margin: -8px 0 0;">
+                                    Material Received certificate
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                           
+                    </table>
+        
+                    {% comment %} <table style="border: 0; width:100%; margin-bottom:0px;">
+                        <tr>
+                            <td style="text-align: left; width: 60%;">
+                                <b>Order :</b> MD/MK/04/P-II/TS-{{ mr.ro.wo.dispatch_no }}/985 dtd {{mr.ro.wo.ordr_date }}
+                            </td>
+                            <td style="text-align: right; width: 40%;">
+                                Report Date: {{ mr.mrc_date }}
+                            </td>
+                        </tr>
+                    </table> {% endcomment %}
+
+                    {% comment %} <div class="container">
+                    <div class="mrcser-item">
+                    <div class="logo-block">
+                    <img src="" class="img-fluid w-full w-100" />
+                    </div>
+
+                    {% endcomment %}
+
+                <table class="table mrcser-tableinfo">
+                    {% comment %} <tr>
+                        <td>
+                            Book No. .......................
+                        </td>
+                        <td class="text-right">
+                            Page No. .......................
+                        </td>
+                    </tr> {% endcomment %}
+
+
+                    <tr>
+                        <td class="text-right"> </td>
+                            
+                        <td class="text-right">
+                            <div class="d-inline-block text-left">
+                                <span class="text-left ">
+                                    {% comment %} MRC No. IPDS/ .....................(Circle):-{{data.offer.circle}} <br> {% endcomment %}
+                                    MRC No {{data.id}},(Circle):-{{data.offer.circle.Circle_Name_E}} 
+                                </span> <br>
+                                <span>
+                                    Date :- {{data.date}} <br>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            (i) Circle:-{{data.offer.circle.Circle_Name_E}} , Lot No / Offer No:- {{data.offer.offer_no}} <br>
+                            
+                            {% comment %} {% for i in cc %} {% endcomment %}
+                            {% comment %} (ii) Name of the Contractor :- M/s {{i.CompanyName_E}}
+                             {% endcomment %}
+                            (ii) Name of the Contractor :- M/s {{data.offer.supplier.CompanyName_E}}
+
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </td>
+                        <td> 
+                            (iii) LoA No:- {{data.offer.wo.Contract_Number}} & Date : {{data.offer.wo.Contract_Date}} <br> 
+                            (iv) Contractor Store at:-{{data.offer.site_store}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                           
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td colspan="2" class="w-40">
+                                        Details of material with Capacity/Size
+                                    </td>
+                                    <td class="w-60">
+                                        {{data.offer.wo_material.material_name}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Name of Manufacturer
+                                    </td>
+                                    <td>
+                                        {{data.offer.TKCVendor.Vendor}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">
+                                        Dispatch Instruction <br> DI
+                                    </td>
+                                    <td> DI No.</td>
+                                        
+                                        <td class="w-20">{{data.offer.tkc_di.erp_di_number}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Date </td>
+                                    <td>{{data.offer.tkc_di.created_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Qty. </td>
+                                    <td>{{data.offer.quantity}}</td>
+                                </tr>
+                                
+                                {% comment %} <tr>
+                                    <td colspan="2">
+                                        Invoice No.
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Date
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr> 
+                                 <tr>
+                                    <td colspan="2">
+                                        Invoice No.
+                                    </td>
+                                    <td>
+                                        {{info.invoice_no}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Date
+                                    </td>
+                                    <td>
+                                        {{info.offer.date}}
+
+                                    </td>
+                                </tr> {% endcomment %}
+                                {% comment %} {% for i in ss %} {% endcomment %}
+                            </table>
+                            <table class="mt-2 mb-2 table table-bordered table-received">
+                                <tr>
+                                    <th rowspan="5">    
+                                        Receiving Details
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        Date of Delivery
+                                    </th>
+                                    <th>
+                                        Lorry No.
+                                    </th>
+                                    <th>
+                                        Challan No. & Date
+                                    </th>
+                                    <th>
+                                        Qty. Dispatched as per Challan
+                                    </th>
+                                </tr>   
+                                
+                                {% for i in ss %}
+                                <tr>
+                                    <td>{{i.drr_date}}</td>
+                                    <td>{{i.drr_vehicle}}</td>
+                                    <td>{{i.drr_challan_no}} & {{i.drr_challan_date}}</td>
+                                    <td>{{i.drr_quantity}}</td>
+                                </tr>
+                                {% endfor %} 
+                                
+                            </table>
+
+                                {% comment %} {% endfor %} {% endcomment %}
+
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td rowspan="4">
+                                        NABL Test Result
+                                    </td>
+                                    <td>
+                                        Sampled Qty
+                                    </td>
+                                    <td>
+                                        {{data.offer.quantity}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Passed Qty
+                                    </td>
+                                    <td>
+                                        {{acc_mat}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Failed Qty
+                                    </td>
+                                    <td>
+                                        {{rej_mat}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Damaged Due To Test
+                                    </td>
+                                    <td>
+                                        0
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Qty. Accepted
+                                    </td>
+                                    <td>
+                                        {{data.offer.quantity}}
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Qty. Rejected
+                                    </td>
+                                    <td>
+                                        0
+
+                                    </td>
+                                </tr>
+                                {% comment %} <tr>
+                                    <td colspan="2">
+                                        MAS page no. and s.no.
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr> {% endcomment %}
+                                <tr>
+                                    <td colspan="2">
+                                        Details of inspection report
+                                    </td>
+                                    <td>
+
+                                        <a href="javascript:;" class="ed-links mr-2">
+                                            <label class="ed-textinfo text-info"> 
+                                              Physical inspection 
+                                            </label>
+                                          </a>
+                                          ,
+                                        <a href="javascript:;" class="ed-links mr-2">
+                                            <label class="ed-textinfo text-info"> 
+                                              NABL inspection 
+                                            </label>
+                                          </a>
+                                        ,
+                                        <a href="javascript:;" class="ed-links ">
+                                            <label class="ed-textinfo text-info"> 
+                                              PDI inspection 
+                                            </label>    
+                                          </a>
+                                      </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Remark
+                                    </td>
+                                    <td>
+                                        {{data.remark}}
+
+                                    </td>
+                                </tr>
+                            </table>
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <ul class="listinfo mb-4">
+                                <li class="nav-item">
+                                    The Above material have been received in good conditions & verified on
+                                    DT.{{sss.drr_date}} at Contractor store.
+                                </li>
+
+                                {% comment %} <li class="nav-item">
+                                    Check & found the entry of above material in mas register on the page no
+                                    .......................... and s.No. ................
+                                </li> {% endcomment %}
+                                <li class="nav-item">
+                                    (ii) Physically above quantity of material handed over to TKC for security and
+                                    utilization of material in this project.
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        {% comment %} <td>
+                            <div class="text-left">
+                                Store Incharge <br>
+                                Sign & Seal(TKC)
+                            </div>
+                        </td> {% endcomment %}
+                        <td colspan='2'>
+                            <div class="text-right pr-4">
+                                <div class="text-center d-inline-block">
+                                    DGM(STC) <br>
+                                (Nodal Officer) <br>
+                                {% if data.offer.wo.zone == 'CZ' %}
+                                {{data.offer.circle.Circle_Name_E}} <br>
+                                MPMKVVCL , Bhopal 
+                                
+                                {% elif data.offer.wo.zone == 'WZ' %}
+                                {{data.offer.circle.Circle_Name_E}} <br>
+                                MPPKVVCL , Indore 
+                                
+                                {% elif data.offer.wo.zone == 'EZ' %}
+                                {{data.offer.circle.Circle_Name_E}} <br>
+                                MPPoKVVCL , Jabalpur 
+                                
+                                {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table class="table-projectm" style="width:100%;">
+                                <tr>
+                                    {% comment %} <td class="text-left">
+                                        Project Manager <br>
+                                        Sign & Seal(TKC)
+                                    </td>
+
+                                    <td class="text-center">
+                                        PMA(RE) <br>
+                                        Sign & Seal
+                                    </td> {% endcomment %}
+                                    <td class="text-right">
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </table> 
+    </div>
+
+    <div class="form-group mt-3" id="printbtn">
+        <div class="text-center">
+            <button class="btn btn-info" onclick="windowprint()">
+                Print
+            </button>
+        </div>
+    </div>
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    
+
+<script>
+    function windowprint(){
+        
+        document.getElementById('printbtn').style.display='none';
+        document.getElementById('edSidebar').style.display='none';
+        document.getElementById('edHeader').style.display='none';
+        $('#edContainer').css('padding','0');
+        $('.ed-pagetitle-block').hide();
+        $('.ed-footer-block').hide();
+        
+        window.print();
+        document.getElementById('printbtn').style.display='block'; 
+        document.getElementById('edHeader').style.display='block'; 
+        document.getElementById('edSidebar').style.display='block';  
+        $('#edContainer').removeAttr('style');
+        $('.ed-pagetitle-block').show();
+        $('.ed-footer-block').hide();
+
+
+
+
+
+
+
+    }
+
+</script>
+
+    <style>
+        .mrcser-block {
+            position: relative;
+        }
+
+        .mrcser-block .mrcser-item {
+            position: relative;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo {
+            width: 100%;
+        }
+
+        .mrcser-block .mrcser-item .logo-block {
+            position: relative;
+            margin: 0 0 10px;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo td {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px;
+            line-height: 32px;
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo td .listinfo {
+            padding-left: 12px;
+            list-style: upper-roman;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo td .listinfo .nav-item {
+            width: 100%;
+            margin: 0 0 4px;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo td .table-projectm {
+            width: 100%;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo td .table-projectm td {
+            width: 33.333%;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo .table-bordered {
+            width: 100%;
+        }
+
+        .mrcser-block .mrcser-item .mrcser-tableinfo .table-bordered td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .w-40 {
+            width: 40%;
+        }
+
+        .w-60 {
+            width: 60%;
+        }
+
+        .w-20 {
+            width: 20%;
+        }
+        .table-received {
+            border: 1px solid #dee2e6 !important;
+        }
+        
+        .table-received th, .table-received td {
+            vertical-align: middle;
+        }
+        
+        .table-received {}
+        
+        .table-received th {border: 1px solid #dee2e6 !important;}
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+{% endblock body %}

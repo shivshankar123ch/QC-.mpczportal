@@ -1,0 +1,180 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} 
+<title>API Display</title>
+    
+</head>
+<body>
+    
+    
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}{% if 'success' in message.tags %} red-text{% endif %}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+
+   <div class="ed-information mb-2"> 
+    <form method="post">
+    {% comment %} action="{% url 'contractor-display' %}" onsubmit="return confirm ('Are you sure?')"> {% endcomment %}
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Details of Application
+                        </h2>
+                    </div>
+                
+                    {% comment %} {% for i in consumer %} {% endcomment %}
+                    <div class="card-body"> 
+                        <table  class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td width="20%"><b>Application No</b></td>
+                                    <td width="30%">{{i.consumerApplicationNo}}</td>
+                                    <td width="25%"><b>CGST @ 9%</b></td>
+                                    <td width="25%">{{i.cgst}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Applicant Name</b></td>
+                                    <td width="30%">{{i.consumerName}}</td>
+                                    <td width="25%"><b>SGST @ 9%</b></td>
+                                    <td width="25%">{{i.sgst}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Task Name</b></td>
+                                    <td width="30%">{{i.shortDescriptionOfWork}}</td>
+                                    <td width="25%"><b>Applicant Email</b></td>
+                                    <td width="25%">{{i.consumer_email_id}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Approved By</b></td>
+                                    <td width="30%">{{i.approved_by}}</td>
+                                    <td width="25%"><b>Address</b></td>
+                                    <td width="25%">{{i.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Scheme</b></td>
+                                    <td width="30%">{{i.schema}}</td>
+                                    <td width="25%"><b>Load in KVA</td>
+                                    <td width="25%">{{i.kvaload}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Deposit Amount</b></td>
+                                    <td width="30%">{{i.deposit_amount}}</td>
+                                    <td width="25%"><b>ERP Estimate No</b></td>
+                                    <td width="25%">{{i.erp_no}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%"><b>Opening Bid Date</b></td>
+                                    <td width="25%">{{i.bid_created}}</td>
+                                    <td width="25%"><b>Closing Bid Date</b></td>
+                                    <td width="25%">{{i.bid_expiry}}</td>
+                                </tr>
+                                <tr>
+                                    <td width="20%"><b>Supervision Amount</b></td>
+                                    <td width="30%">{{i.supervision_amount}}</td>
+                                    {% comment %} <td width="25%"><b>TO CHAR</b></td>
+                                    <td width="25%">{{i.TO_CHAR}}</td> {% endcomment %}
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="ed-form-block p-0 border-0">
+                            <div class="ed-form-body p-0 border-0"> 
+                              
+                               
+                                <div class="form-group d-flex" style="align-items:center;"> 
+                                    <label class="ed-form-label d-inline" style="white-space:nowrap; margin-right:10px;"><b>Enter Bid Amount</b></label> 
+                                    <input type="text" class="form-control ed-textbox d-inline-block" autocomplete="off" id="bidAmount_1" name= "bid_amount" required  style="max-width:260px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                {% comment %} <div class="form-group mt-3  d-flex" style="align-items:center;"> 
+                                    <input type="checkbox" class="ed-form-label ed-textbox mr-2 mb-4 " name= "bg_no" required />
+                                    <label class="ed-form-label mb-0"></label>
+                                </div> {% endcomment %}
+
+                                
+
+                                <div class="form-group">
+                                    <label class="ed-checkbox-block"> 
+                                        मैं समबंधित कार्य को मेरे द्वारा दर्ज़ बिड मूल्य पर करने के समबन्ध में अपनी सहमति प्रदान करता हूँ | मैं इस तथ्य से भली-भांति परिचित हूं कि किसी भी झूठी सूचना/जाली दस्तावेजों को प्रस्तुत करने से किसी भी स्तर पर 
+                                        मेरी बिड को अस्वीकार कर दिया जाएगा | बिड दर्ज करने के पश्चात करने अगर मैं कार्य करने के  लिए मना करता हूँ तो मध्य प्रदेश मध्य क्षेत्र विद्युत वितरण कंपनी लिमिटेड,भोपाल को मुझें ब्लैकलिस्टेड करने का अधिकार होगा |
+                                        <input class="form-check-input" type="checkbox" name= "bg_no" required id="checkBox_1">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group form-action">
+                                    <div class="text-center">
+                                         <button type="submit"   class="btn ed-submits ed-formSubmit">
+                                            {% comment %} id="submits" onclick="fillMsg_1()" {% endcomment %}
+                                        Submit
+                                        </button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .ed-form-block .ed-form-body .form-group .ed-form-label {
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .ed-form-block .ed-form-body .form-group {
+            margin: 0 0 2px;
+        }
+        .ed-textbox {
+            min-height: 30px;
+            font-size: 12px;
+            padding: 6px 6px;
+            height: 15px;
+        }
+    </style>
+
+    <style>
+        .red-text {
+            color: red;
+        }
+    </style>
+
+</body>
+</html>
+
+{% comment %} <script>
+    function fillMsg_1(){
+        let bidAmount = document.getElementById("bidAmount_1");
+        console.log(bidAmount)
+        let check = document.getElementById("checkBox_1");
+        console.log(check)
+        //let submits = document.getElementById("submits");
+         
+        if(bidAmount== "" || check.checked == false){
+            //submits.style.display = "none";
+            //document.getElementById("submits").disabled = true;
+            alert("Please Fill the Bid Amount")
+            
+        }else{
+            confirm("Are you sure for submission!!!");
+        
+
+        }
+        
+    }
+</script> {% endcomment %}
+{% endblock %}

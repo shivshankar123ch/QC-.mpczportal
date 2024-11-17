@@ -1,0 +1,111 @@
+{% extends 'rca/RCA_vendor_base.html' %}
+
+{% load static %}
+
+{% block active %}
+                <a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+                  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">RCA Vendor</span>
+                </a>
+                <div class="collapse active show" id="rcaCell">
+                  <ul class="nav ms-4">
+                    <li class="nav-item active">
+                      <a class="nav-link active" href="/rca/rca_acceptance">
+                        <span class="sidenav-mini-icon"> Accept </span>
+                        <span class="sidenav-normal"> Acceptance </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_release_ack">
+                        <span class="sidenav-mini-icon"> Ack </span>
+                        <span class="sidenav-normal"> Release Acknowledgement </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_repair_ue">
+                        <span class="sidenav-mini-icon"> Repair </span>
+                        <span class="sidenav-normal"> Repairable / UE </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_to_as">
+                        <span class="sidenav-mini-icon"> RCA </span>
+                        <span class="sidenav-normal"> RCA - AS </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+{% endblock active %}
+
+{% block body %}
+
+<h1>Acceptance</h1>
+
+<div class="table-responsive text-nowrap">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Position</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Kate</td>
+        <td>Moss</td>
+        <td>USA / The United Kingdom / China / Russia </td>
+        <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+        <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+        <td>23</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Anna</td>
+        <td>Wintour</td>
+        <td>USA / The United Kingdom / China / Russia </td>
+        <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+        <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+        <td>36</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Tom</td>
+        <td>Bond</td>
+        <td>USA / The United Kingdom / China / Russia </td>
+        <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+        <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Jerry</td>
+        <td>Horwitz</td>
+        <td>USA / The United Kingdom / China / Russia </td>
+        <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+        <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+        <td>41</td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Janis</td>
+        <td>Joplin</td>
+        <td>USA / The United Kingdom / China / Russia </td>
+        <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
+        <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+        <td>39</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock body %}

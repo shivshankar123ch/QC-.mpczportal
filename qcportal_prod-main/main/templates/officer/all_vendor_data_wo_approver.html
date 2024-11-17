@@ -1,0 +1,185 @@
+{% extends 'fqp/wo_approver/approver_base.html' %} 
+{% load static %}
+ {% block pagetitle %} Create Work Order {% endblock pagetitle %} 
+  {% block body %}
+<style>
+  [type="button"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  button:not(:disabled) {
+    cursor: pointer;
+    width: 130px;
+  }
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+
+<!-- <form class="form-inline my-2 my-lg-0" action="{% url 'all_vendor_wo_approver' %}" style="float: right;">
+    <div class="form-group">
+      <label for="search">Search Company Name</label>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    </div>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form> -->
+<!-- /.card-header -->
+<!-- <form action="/nabl_cgm_evaluate_save/{{data.User_Id}}" method="POST"> -->
+<!-- {% csrf_token %} -->
+
+<div class="ed-information">
+  <div class="card ed-card-block">
+    <div class="ed-card-inner">
+      <div class="card-header">
+        <h2>All Vendor</h2>
+      </div>
+      <div class="card-body">
+        <div class="ed-tableinfo-block">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered table-responsive"
+              id="all_vendor_data_wo_approver"
+              cellspacing="0"
+            >
+              <thead class="table table-dark">
+                <tr>
+                  <th style="width: 5%">S NO.</th>
+                  <th style="width: 5%">Discom</th>
+                  <th style="width: 5%">Registration Number</th>
+
+                  <th style="width: 5%">Firm/Company Name</th>
+
+                  <th style="width: 5%">Authorised Person Name</th>
+
+                  <th style="width: 5%">Contact Number</th>
+                  <th style="width: 5%">DGM(W&P) Status</th>
+
+                  <th style="width: 5%">DGM(Finance) Status</th>
+
+                  <th style="width: 5%">CGM/GM(works) Status</th>
+
+                  <th style="width: 5%">Document</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+
+                <tr class="bg-light">
+                  <td>{{forloop.counter}}</td>
+                  <td><b>{{data.User_zone}}</b></td>
+                  <td><b>{{data.Authentication_id}}</b></td>
+                  <td><b>{{data.CompanyName_E}}</b></td>
+                  <td><b>{{data.Authorised_person_E}}</b></td>
+                  <td><b>{{data.ContactNo}}</b></td>
+                  {% if data.work_approval == 1 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-success btn-sm">
+                        Approve
+                      </button></span
+                    >
+                  </td>
+                  {% elif data.work_approval == 2 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-danger btn-sm">
+                        Rejected
+                      </button></span
+                    >
+                  </td>
+                  {% else %}
+                  <td>
+                    <span
+                      ><button class="btn btn-info btn-sm">
+                        Pending
+                      </button></span
+                    >
+                  </td>
+                  {% endif %} {% if data.finance_approval == 1 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-success btn-sm">
+                        Approve
+                      </button></span
+                    >
+                  </td>
+                  {% elif data.finance_approval == 2 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-danger btn-sm">
+                        Rejected
+                      </button></span
+                    >
+                  </td>
+
+                  {% else %}
+                  <td>
+                    <span
+                      ><button class="btn btn-info btn-sm">
+                        Pending
+                      </button></span
+                    >
+                  </td>
+                  {% endif %} {% if data.cgm_approval == 1 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-success btn-sm">
+                        Approve
+                      </button></span
+                    >
+                  </td>
+                  {% elif data.cgm_approval == 2 %}
+                  <td>
+                    <span
+                      ><button class="btn btn-danger btn-sm">
+                        Rejected
+                      </button></span
+                    >
+                  </td>
+
+                  {% else %}
+                  <td>
+                    <span
+                      ><button class="btn btn-info btn-sm">
+                        Pending
+                      </button></span
+                    >
+                  </td>
+                  {% endif %}
+
+                  <td>
+                    <a href="/all_vendor_wo_approver_document/{{data.User_Id}}"
+                      ><button class="btn btn-info btn-sm">
+                        View Details
+                      </button></a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+    </div>
+  </div>
+  </div>
+  
+
+  <!-- /.content -->
+
+  <script>
+    $(document).ready(function () {
+      $("#all_vendor_data_wo_approver").DataTable();
+    });
+  </script>
+
+  {% endblock body %}
+</div>

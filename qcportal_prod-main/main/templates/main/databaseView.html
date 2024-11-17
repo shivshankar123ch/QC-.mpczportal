@@ -1,0 +1,26 @@
+{% extends 'main/databaseDB.html' %}
+{% load static %}
+
+{% block zone %}
+    <span class="ms-1 font-weight-bold">{{ usr_obj.User_zone }} Database Dashboard</span>
+{% endblock zone %}
+
+{% block body %}
+
+<table class="table table-bordered table-hover">
+    <h4 class="heading">Registration Form Details</h4>
+    
+    <tr>
+        <td class="font-weight-bold text-light bg-dark">Firm / Company Name (English):</td>
+        <td class="font-weight-bold text-light bg-dark">Action</td>
+    </tr>
+    {% for user in usr_obj %}
+    <tr>
+        <td>{{user.CompanyName_E}}</td>
+        <td><a href="/databaseView2/{{user.User_Id}}" >View</a></td>
+    </tr>
+    {% endfor %}
+    
+</thead>
+</table>
+{% endblock body %}

@@ -1,0 +1,145 @@
+{% extends 'officer/discom_base.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of
+body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink
+{ background-color:
+#007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px;
+width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page
+content) / .tabcontent
+{ color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;}
+#General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details
+{background-color: white;}
+#Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/agent.js' %}"></script>
+   
+</head>
+
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="roof_top_discom" name="myForm" onsubmit="return validateForm()"
+    method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="multisteps-form__content">
+        <div class="row mt-3"><b>
+                <h3 style="color: blue;" class="text-center">AGENCY REGISTRATION</h3>
+            </b></div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>Agency/Firm Name<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                onkeyup="validateForm()" onfocus="validateForm()" minlength="1" maxlength="50" onchange="validateForm()" name="one" id="input1" class="form-control" required="required">
+                <span id="name" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>Name of Authorised Person<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                onkeyup="validateForm()" onfocus="validateForm()" minlength="1" maxlength="50" onchange="validateForm()"  name="two" id="input2" class="form-control" required="required">
+                <span id="person" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>Mobile No of Authorised Person<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                onkeyup="validateForm()" onkeypress='validate(event)' minlength="10" maxlength="10" onfocus="validateForm()" onchange="validateForm()" name="three" id="input3" class="form-control" required="required">
+                <span id="mobile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>Email ID of Authorised Person<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" name="four" id="input4" class="form-control" required="required">
+                <span id="email" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>PAN Card<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                style="text-transform: uppercase"  onkeyup="validateForm()" onfocus="validateForm()" minlength="10" maxlength="10" onchange="validateForm()"  name="five" id="input5" class="form-control" required="required">
+                <span id="pan_no" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>GST No<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <input class="multisteps-form__select form-control" type="tel"
+                style="text-transform: uppercase" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" minlength="10" maxlength="15" name="six" id="input6" class="form-control" required="required">
+                <span id="gst_no" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label>
+                    <h6>Address<span style="color: red;">*</span></h6>
+                </label>
+            </div>
+            <div class="col-sm-6">
+                <textarea rows="4" cols="55" name="rohit" id="input7" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"  form="usrform"></textarea>
+                <span id="addresss" class="text-danger font-weight-bold" style="font-size: 80%;"></span>    
+            </div>
+        </div><br>
+        <hr/>
+
+        <div class="text-center">
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit"
+            onclick="validateForm()" type="Submit" title="Save & Next">Submit</button>
+        </div>
+    </div>
+</div>
+</form>
+<!---trial end here-->
+
+
+
+
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent
+= document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display="none" ; } tablinks=d ocument.getElementsByClassName( "tablink" ); for (i=0 ; i <
+    tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; }
+    document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element
+    with id="defaultOpen" and click on it document.getElementById( "defaultOpen" ).click(); {% endblock script %}

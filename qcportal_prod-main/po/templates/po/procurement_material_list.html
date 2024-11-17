@@ -1,0 +1,111 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+  <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Material List</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th style="width:5%">
+                          Material Serial No
+                      </th>
+                      <th style="width: 25%">
+                          Material Name
+                      </th>
+                      <th style="width: 20%">
+                          Material Category
+                      </th>
+                        <th style="width: 5%">
+                        Material Class
+                      </th>
+                      <th style="width:35%">
+                          Material Parameter
+                      </th>
+                      <th style="width: 15%">
+                          Material Price
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                      <td>
+                           <p class="btn-danger">Reject</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>2.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                      <td>
+                           <p class="btn-danger">Reject</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>3.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                      <td>
+                           <p class="btn-danger">Reject</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>4.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                      <td>
+                           <p class="btn-danger">Reject</p>
+                      </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+ {% endblock body %}

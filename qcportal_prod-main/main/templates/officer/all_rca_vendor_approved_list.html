@@ -1,0 +1,45 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>All Approved RCA Vendors</h2>
+    <div class="panel panel-default">
+    
+
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered table-hover">
+                    <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                        <tr>
+                            <th><b>S No.</b> </th>
+                            <th><b>Firm/Company Name</b> </th>
+                            <th><b>Authorised Person Name</b> </th>
+                            <th><b>Date Of Registration</b> </th>
+                            <th><b>Approved Zone</b> </th>
+                            <th><b>Address</b></th>
+                            <th><b>Authentication ID</b></th>
+                            
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in usr_obj %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>  {{data.CompanyName_E}}</td>
+                            <td>{{data.Authorised_person_E}}</td>
+                            <td>  {{data.Registration_Date}}</td>
+                            <td>{{data.User_zone}}</td>
+                            <td>{{data.Company_add_1}},{{data.Company_add_2}},{{data.Company_pin_code}},{{data.Company_dist}},{{data.Company_state}}</td>
+                            <td>  {{data.Authentication_id}}</td>
+                            
+                          
+                            </tr>
+                        {% endfor %} {% endwith %}
+                   <tr></tr>
+                    </tbody>
+
+                </table>
+            </div>
+          
+        </form>
+    </div>
+</div>
+{% endblock body %}

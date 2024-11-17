@@ -1,0 +1,97 @@
+
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} 
+
+
+
+
+
+    <title>API Display</title>
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> {% endcomment %}
+</head>
+<body>
+    {% comment %} {{response}} {% endcomment %}
+   
+   
+   
+    
+
+    <div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Details of Consumers
+                        </h2>
+                    </div>
+                    <div class="card-body"> 
+                        <div class="ed-tableinfo-block">
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-bordered">
+                                    <thead style="background-color: #dcdcdc;">
+                                        <tr> 
+                                            <th>Consumer Application No</th>
+                                            <th>Consumer Name</th>
+                                            <th>Subject</th>
+                                            <th>DC Name</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% comment %} {% if item.date < item.date.now() %}
+                                        <p> This will display if the item.date is before item.date.now(). </p>
+                                         {% endif %} {% endcomment %}
+                        
+                                        {% for i in response %}
+                                        <tr>
+                                        {% comment %} <th scope="row"><input type="hidden" name="consumerId" value="{{i.consumerId}}" /></th> {% endcomment %}
+                                        <td scope="row">{{i.consumerApplicationNo}}</td>
+                                        <td scope="row">{{i.consumerName}}</td>
+                                        <td>
+                                            {% comment %} {% if i.is_bid_submitted == False %} {% endcomment %}
+                                            <a href="/tkc/contractor-details/{{i.consumerApplicationNo}}" class="ed-links" style="text-decoration:underline;">{{i.shortDescriptionOfWork}}</a>
+
+                                            {% comment %} {% else %}
+                                            bid submitted {% endcomment %}
+                                            {% comment %} <a href="{% if i.bid_expiry >= currenTime %}/tkc/contractor-details/{{i.consumerApplicationNo}}{% else %}javascript:alert('Bid Already Expired!!!'){% endif %}" class="ed-links" style="text-decoration:underline;">{{i.shortDescriptionOfWork}}</a> {% endcomment %}
+                                            {% comment %} {% endif %} {% endcomment %}
+                                        </td>
+                                        <td>{{i.dcName}}</td>
+                                        {% comment %} <td scope="row">{% if currenTime <=  i.bid_expiry %}<span style="color:green; font-size:11px;">Active</span>{% else %}<span style="color:red; font-size:11px;">Expired</span>{% endif %}</td> {% endcomment %}
+                                
+                                        {% comment %} <td>{{i.bid_expiry|date:'d-m-Y'}}</td> {% endcomment %}
+
+                                        {% comment %} <td scope="row">{{bid_expiry}}</td> {% endcomment %}
+
+
+                                        </tr>
+                                        {% endfor %}   
+                                    </tbody>
+                                </table>
+                               
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% comment %} 
+    {% for i in response.list %}
+    <strong>{{i.consumerApplicationNo}} </strong>
+
+    <strong>{{i.consumerName}} </strong>
+    
+
+    {% endfor %} 
+
+    
+</body>
+</html> {% endcomment %}
+
+
+{% endblock body %}

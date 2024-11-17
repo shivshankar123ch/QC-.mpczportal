@@ -1,0 +1,86 @@
+{% extends 'vendor/RCA_vendor_base.html' %} {% load static %} {% block body %}
+
+
+<form class="multisteps-form__form mb-8" name="myForm" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+    <h5 class="font-weight-bolder mb-0">Basic Details</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+
+                <tr>
+                    <th scope="col" style="width: 05%;" class="text-center">S.No.</th>
+                    <th scope="col" style="width: 20%;" class="text-center">Report Name</th>
+                    <th scope="col" style="width: 20%;" class="text-center">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td>User Type</td>
+                    <td><b>{{userdata.User_code}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>Company Name</td>
+                    <td><b>{{userdata.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td>Name Of Authorised Person</td>
+                    <td><b>{{userdata.Authorised_person_E}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">4</td>
+                    <td>Contact Number</td>
+                    <td><b>{{userdata.ContactNo}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">5</td>
+                    <td>Email ID</td>
+                    <td><b>{{userdata.Email_Id}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">6</td>
+                    <td>Pan Number</td>
+                    <td><b>{{userdata.Company_Pan_No}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">7</td>
+                    <td>GST Number</td>
+                    <td><b>{{userdata.Company_Gst_No}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">8</td>
+                    <td>Address</td>
+                    <td><b>{{userdata.Company_add_1}},{{userdata.Company_add_2}},{{userdata.Company_pin_code}},{{userdata.Company_dist}},{{userdata.Company_state}}</b></td>
+                </tr>
+              
+                
+                <tr></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.container-fluid -->
+    {% if not userdata.profile_complete %}
+    <div class="row">
+        <div class="col-8">
+            <a class="nav-link" href="/rca/upload_docs"> <button style="background-color:#007bff" type="button" class="btn btn-info">Documents Upload </button></a>
+        </div>
+    </div>
+    {% elif userdata.profile_complete and not userdata.payment  %}
+    <div class="row">
+        <div class="col-8">
+            <a class="nav-link" href="/rca/view_document"> <button style="background-color:#007bff" type="button" class="btn btn-info">View Documents and Make Payment </button></a>
+        </div>
+    </div>
+    {% endif %}
+
+<!---end here-->
+
+
+
+
+<!-- /.content -->
+{% endblock body %}

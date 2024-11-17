@@ -1,0 +1,160 @@
+{% extends 'rca/RCA_base.html' %} {% load static %} {% block heading %}Create Release Order {% endblock heading %} {% block body %}
+<form action="/rca/rca_ro_order_add_schedule/{{ro.id}}" method="POST" name="myForm" onsubmit="return validateForm()">
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>Order add schedule</h2>
+        </div>
+        <div class="card-body">
+            <div class="forms-informations">
+                <div class="ed-form-block">
+                    <div class="ed-form-title">
+                        <h6>
+                            <span class="ed-text">
+                                Order schedule
+                            </span>
+                        </h6>
+                    </div>   
+
+                    <h6 class="mb-2">
+                        {% csrf_token %} Repairing work should be carried out strictly as per Technical Specification
+                        and Terms and Condition indicated in various annexure/Schedules of the subject Rate contract.
+                        Lump sum repair charges shall be payable as per the Price indicated
+                        in <label rows="1" cols="20"  onkeyup="fill()" id="data1"
+                        class="text-read" readonly></label>
+                        {%for data in schedule %}{{data.schedule_name}}
+                        {% endfor %}
+                        <label rows="1" cols="20" class="text-read"  
+                                id="data2" onkeyup="fill()"
+                                readonly>{%for data in schedule %}{{data.description_name}}{% endfor %}</label>
+                                (Terms  and conditions) of RCA. You are advised to take-up the repairing work as per the period specified under clause 8
+                                 
+                    </h6>
+
+                    <style>.text-read {
+                        background: transparent !important;
+                        resize: none !important;
+                        height: auto !important;
+                        border: 0 !important;
+                        font-size: 1rem;
+                        line-height: 1.625;
+                        color: #344767 !important;
+                        height: 30px !important;
+                        line-height: normal;
+                        margin: 4px 0 -12px;
+                    }</style>
+                    <div class="ed-form-body">
+                        <div class="form-group">
+                            
+                        </div>
+
+
+                        <div class="form-group">
+                                <h6 class="mb-2">
+                                </h6>
+                        </div>
+ 
+                        <!-- <table class="table table-striped m-3">
+                        <thead>
+                        <tr>
+                        <th scope="col-3"> Schedule I</th>
+                        <th scope="col-9"> Schedule II </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  for data in schedule %}
+                        <tr>
+                        <td>{{data.schedule_name}}</td>
+                        <td>{{data.description_name}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table> -->
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Enter Schedule Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="sched_name" id="sched_name1" required="required"
+                                onclick="validateForm()" placeholder="Schedule 1" class="form-control ed-textbox">
+                            <span id="schedule1" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Enter Schedule Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="sched_desc" id="sched_desc" onkeyup="fill()"
+                                onfocus="validateForm()" onkeyup="validateForm()" onclick="validateForm();"
+                                required="required" class="form-control ed-textbox" placeholder="Schedule II" required>
+                            <span id="schedule2" class="d-block ed-warningtext text-danger"></span>
+                        </div>  
+                        <div class="form-group">
+                            <div class="form-action text-right">
+                                {% if schedule.exists %}
+                                <input onClick="this.form.submit(); this.disabled=true; this.value='Sending…'; " type="submit" onclick="validateForm()" name="submit" value="Add schedule" class="btn ed-submit ed-formSubmit mr-2" autocomplete="off" disabled>
+                                {% else %}
+                                <input type="submit" value="Add schedule" onclick="validateForm()" class="btn ed-submit ed-formSubmit mr-2" autocomplete="off">
+                                {% endif %} 
+                                <a href="/rca/rca_ro_order_add_copy_to/{{ro.id}}">
+                                    <input type="button" onclick="validateForm()" name="submit" value="Save And Next" class="btn ed-submit ed-next" autocomplete="off">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+<script>
+    let dtElem = document.getElementById('order_date');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    function fill() {
+        let data_1 = document.getElementById("sched_name").value;
+        let data_2 = document.getElementById("data1").value = data_1;
+
+        let dTA_1 = document.getElementById("sched_desc").value;
+        let dTA_2 = document.getElementById("data2").value = dTA_1;
+
+    }
+</script>
+<script>
+    function validateForm() {
+
+        let schedule11 = document.forms["myForm"]["sched_name"].value;
+        let schedule12 = document.forms["myForm"]["sched_desc"].value;
+
+
+        if (schedule11 == "") {
+            document.getElementById('schedule1').innerHTML = " Please fill the required field ";
+            return false;
+        } else {
+            document.getElementById('schedule1').innerHTML = "";
+        }
+        if (schedule12 == "") {
+            document.getElementById('schedule2').innerHTML = " Please fill the required field ";
+            return false;
+        } else {
+            document.getElementById('schedule2').innerHTML = "";
+        }
+    }
+</script>
+{% endblock body %}

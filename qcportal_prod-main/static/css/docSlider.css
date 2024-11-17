@@ -1,0 +1,384 @@
+
+.docSlider-pager {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+body {
+    background: url(../img/large.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+	font-family:'Lato', sans-serif;
+}
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: #fff !important;
+}
+/* CHANGE THE BUTTON STYLE */
+.docSlider-button {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  margin: 5px 0;
+  background-color: #333;
+  opacity: .25;
+  appearance: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+.docSlider-button.selected {
+  opacity: 1;
+}
+
+.docSlider-button:active {
+  outline: none;
+}
+
+/**------------------------------
+  REWRITING IS NOT RECOMMENDED
+ -----------------------------**/
+html, body {
+  overflow: hidden;
+  touch-action: none;
+  height: 100%;
+}
+.form-group input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.3);
+  opacity: 1; /* Firefox */
+}
+
+.form-group input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.3);
+}
+html, body,
+.docSlider,
+.docSlider-inner,
+.docSlider-page {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  border: none;
+  outline: none;
+}
+
+html:active, body:active,
+.docSlider:active,
+.docSlider-inner:active,
+.docSlider-page:active {
+  outline: none;
+}
+
+.docSlider {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.docSlider-inner {
+  width: inherit;
+  height: inherit;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.docSlider-page {
+  height: inherit;
+  width: inherit;
+  overflow: auto;
+  position: absolute;
+  overflow-scrolling: touch;
+}
+.conatiner {
+    max-width: 720px;
+    margin: 0px auto;
+    width: 100%;
+}
+span.question-header {
+    font-size: 16px;
+    color: #fff;
+}
+span.question-header i.fa.fa-arrow-right {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.header-counter {
+    font-size: 23px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+}
+.block-structure form {
+    margin-top: 32px;
+}
+.form-check.form-group p {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: #fff;
+}
+.block-structure form {
+    padding-left: 50px;
+}
+.form-check.form-group {
+      display: inline-flex;
+    margin: 0px 0px -8px;
+    list-style: none;
+    padding: 0px;
+    flex-flow: column wrap;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    max-width: 100%;
+    min-width: 400px;
+}
+.form-check.form-group label {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: rgb(255 255 255 / 80%) 0px 0px 0px 2px inset;
+    padding: 8px;
+    margin-bottom: 8px;
+transition-duration: 0.1s;
+    transition-property: background-color, color, border-color, opacity, box-shadow;
+    transition-timing-function: ease-out; 
+	border-radius: 4px;
+	position: relative;
+}
+span.key-helper {
+    width: 22px;
+    height: 22px;
+    float: left;
+  text-align: center;
+	   
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    line-height: 22px;
+	box-shadow: rgb(255 255 255 / 80%) 0px 0px 0px 1px inset;
+	margin:4px 8px 0px 4px;
+}
+span.form-check-text {
+    float: left;
+    min-width: 75px;
+    text-align: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 28px;
+    font-weight: normal;
+}
+.form-check.form-group.form-1 {
+    min-width: 190px;
+}
+.form-check.form-group label input.check {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(
+45deg
+);
+    -ms-transform: rotate(45deg);
+    transform: rotate(
+45deg
+);
+}
+.form-check.form-group input:checked ~ .checkmark {
+    background-color: transparent;
+}
+.checkmark {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    height: 20px;
+    width: 20px;
+ 
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+.form-check.form-group label input:checked ~ .checkmark:after {
+  display: block;
+}
+.form-check.form-group label:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+a.deep-purple-ok-button {
+    float: left;
+    background: rgb(249, 173, 168);
+    text-decoration: none;
+    color: rgb(152, 19, 11);
+    border-radius: 4px;
+    width: auto;
+    display: block;
+    min-width: auto;
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 22px;
+    border: 1px solid transparent;
+    line-height: 40px;
+    padding: 0px 14px;
+    text-transform: uppercase;
+    
+}
+.form-group input {
+    width: 100%;
+       color: #fff;
+    font-size: 30px;
+    box-shadow: rgb(255 255 255 / 30%) 0px 1px;
+    background: transparent;
+    border: none;
+
+    padding: 0px 0px 8px;
+}
+:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+	border-bottom:1px solid #fff;
+}
+a.deep-purple-ok-button i.fa.fa-check {
+    float: right;
+    line-height: 38px;
+    padding-left: 6px;
+}
+.iti__flag-container {
+    border-bottom: 2px solid #fff;
+   
+}
+.iti__arrow {
+   
+    border-top: 4px solid #fff !important;
+}
+.Tliuu {
+    width: 100%;
+    height: 64px;
+    display: flex;
+}
+.opinion-scale-radio{
+    height: 100%;
+    flex: 1 1 0%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    margin-right: 6px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgb(255, 255, 255);
+    box-shadow: rgb(255 255 255 / 60%) 0px 0px 0px 1px inset;
+    position: relative;
+    transition: all 0.1s ease-out 0s;
+}
+.opinion-scale-radio label {
+    margin: 0px;
+    max-width: 100%;
+    font-weight: unset;
+    font-size: 20px;
+    line-height: 28px;
+}
+.form-group.radio-list .opinion-scale-radio input {
+    width: auto;
+    border: none;
+    box-shadow: rgb(255 255 255 / 30%) 0px 0px;
+    display: none;
+}
+.opinion-scale-radio:hover, .opinion-scale-radio:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.opinion-scale {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+}
+.opinion-scale-left {
+    flex: 1 1 0%;
+    text-align: left;
+	font-weight: unset;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.opinion-scale-center{
+    flex: 1 1 0%;
+    text-align: center;
+	font-weight: unset;
+    font-size: 16px;
+    line-height: 24px;
+}
+.responsive-spacer {
+    margin-top: 10px;
+}
+.form-check.form-group.form-2 {
+  
+    min-width: 70%;
+}
+.opinion-scale-right{
+    flex: 1 1 0%;
+    text-align: right;
+	font-weight: unset;
+    font-size: 16px;
+    line-height: 24px;
+}
+button.btn.btn-primary {
+    float: left;
+    background: rgb(249, 173, 168);
+    text-decoration: none;
+    color: rgb(152, 19, 11);
+    border-radius: 4px;
+    width: auto;
+    display: block;
+    min-width: auto;
+    margin-left: 0px;
+    margin-top: 20px;
+    font-size: 22px;
+    border: 1px solid transparent;
+    line-height: 40px;
+    padding: 0px 14px;
+    text-transform: uppercase;
+}
+p.alart-message {
+    float: left;
+    width: 100%;
+    padding-left: 50px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    line-height: 20px;
+    opacity: 0.7;
+    font-weight: unset;
+}
+p.alart-message  a {color: rgb(255, 255, 255); opacity: 0.7;} 
+.docSlider-button { background:#fff;}

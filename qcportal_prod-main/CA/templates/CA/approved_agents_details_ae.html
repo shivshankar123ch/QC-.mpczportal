@@ -1,0 +1,31 @@
+{% extends 'CA/ae_dashboard.html' %} {% load static %} {% block body %}
+
+<h3 class="card-title m-2"> <b> Details Of Invoices </b></h3>
+<table class="table table-bordered table-hover bg-white " cellspacing="0">
+    <thead class="bg-dark">
+        <tr>
+            <th>S.No.</th>
+            <th>Name</th>
+            <th>Mobile Number </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for data in data1 %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><b>{{data.Name}}</b></td>
+            <td><b>{{data.Mobile}}</b></td>
+
+
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock body %}

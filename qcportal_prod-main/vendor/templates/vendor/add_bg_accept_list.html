@@ -1,0 +1,48 @@
+{% extends 'vendor/RCA_vendor_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %} {% block rca_vendor_bg_accept_list %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rca_vendor_bg_accept_list %}
+    <div class="container table-responsive">
+        <h5>RCA BG Accept List</h5> 
+        <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-responsive table-bordered">
+            <thead class="table table-dark">
+                <tr>
+                    <th scope="col-1" style="text-align: center;" style="width: 10px;">S.No.</th>
+                    <th scope="col-2" style="text-align: center;">Vendor</th>
+                    <th scope="col-2" style="text-align: center;">RCA No.</th>
+                    <th scope="col-3" style="text-align: center;">Date</th>
+                    <th scope="col-3" style="text-align: center;">Additional Bg No.</th>
+                    <th scope="col-3" style="text-align: center;">Action</th>
+                    <th scope="col-3" style="text-align: center;">BG Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in data %}
+                <tr>
+                    <td style="text-align: center;">{{forloop.counter}}</td>
+                    <td style="text-align: center;"><b>{{ info.wo.vendor_id.CompanyName_E}}</b></td>
+                    <td style="text-align: center;"><b>MP{{info.wo.rca_cell.user_zone}}WO{{ info.wo.id}}</b></td>
+                    <td style="text-align: center;"><b>{{ info.wo.ordr_date }}</b></td>
+                    <td style="text-align: center;"><b>{{ info.id }}</b></td>
+                    <td style="text-align: center;"><a href="/vendor/add_bg_acceptance_details/{{info.id}}" class="fas fa-eye text-primary"> View</a></td>
+
+                    <td style="text-align: center;">
+                        {% if info.add_bg_accept == 1 %}
+                        Accepted
+                        {% elif info.add_bg_accept == -1 %}
+                        Rejected 
+                        {% else %}
+                        Pending 
+                        {% endif %}
+                   
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock body %}

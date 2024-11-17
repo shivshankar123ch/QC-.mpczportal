@@ -1,0 +1,51 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block body %}
+<head>
+   <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reject.js' %}"></script>
+</head>
+<table class="table-responsive border-box:20x">
+   <thead>
+      <th style="width:35%;"> Document Name
+      </th>
+      <th style="width:35%;">Document Number</th>
+
+           <th style="width:30%;">Upload File</th>
+   </thead>
+   <tbody>
+      {% with name=100 %}
+      {% for data in data %}
+      {% if data.Primary_verification_Status_approver == 2 %}
+      <form action="/roof_top/rejected_doc_save_approver/{{data.id}}" onsubmit="return validateForm()" name="myForm"  method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         {% else %}
+      <form action="/roof_top/rejected_doc_save/{{data.id}}" onsubmit="return validateForm()" name="myForm"  method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         {% endif %}
+         <tr>
+            <td  style="height:30px;">{{data.Types_of_Docs}}</b>
+            </td>
+            <td  style="height:30px;"> <input class="form-control" maxlength="15" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" type="text"
+                   name='doc_name' placeholder="{{data.Document_Number}}">
+                  <span id="number" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+               </td>
+             
+            <td  style="height:30px;"><input type="file" id="file_id"  name="file"accept="application/pdf"  onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" class="form-control">
+               <span id="file_1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="1"  style="height:30px;">
+               <a href="{{data.Ddocfile.url}}"  target="_blank" class="btn btn-success mr-3">View</a>
+            </td>
+            <td colspan="3"  style="height:30px;"><textarea class="form-control m-1" rows="1"
+                  placeholder='{{data.Primary_remark}}' disabled></textarea></td>
+            <td><button type="Submit" value="Submit" class="btn btn-success m-2">Resubmit</button></td>
+         </tr>
+              </form>
+         {% endfor %}
+         {% endwith %}
+      </form>
+   </tbody>
+</table>
+
+
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} 
+{% block a %} <span class="ms-1 font-weight-bold">{{user_data.Name}}</span> {% endblock a %}
+{% block body %} 
+<head><script type = "text/javascript" >  
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+</script> </head>
+<script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+<script>
+    function checkAll() {
+        let inputs = document.querySelectorAll('.pl');
+        let checkbox = document.getElementById("cbfill");
+        if (checkbox.checked === true) {
+            console.log("123");
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].checked = true;
+            }
+        } else {
+            console.log("567");
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].checked = false;
+            }
+        }
+
+
+
+    }
+</script>
+<h3 class="card-title m-2"> <b> Enter Month </b></h3>
+ 
+
+<form action="/ca/agents_details_ce_pending">
+    
+    <div class="table-responsive">
+       
+    <!-- <select name="Date_value" ><option value="3">01-2022</option></select> -->
+
+<div class="col-md-4">
+        <input type="month" id="date"  class="form-control" name="Date_value"><br><br>
+
+        <button type="submit " value=" Genrate Invoice " class="btn btn-info " role="button ">Submit</button></div>
+        </form>
+
+    </div><br>&nbsp;
+{% endblock body %}

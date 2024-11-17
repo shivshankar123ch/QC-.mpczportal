@@ -1,0 +1,145 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    [type=button]:not(:disabled),
+    [type=reset]:not(:disabled),
+    [type=submit]:not(:disabled),
+    button:not(:disabled) {
+        cursor: pointer;
+        width: 170px;
+    }
+
+    .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  } 
+
+</style>
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Vendor Data to be pushed in
+        </h2>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if "info" == message.tags %}
+        <li {% if message.tags %} id="messageid" class="{{ message.tags }} text-danger" {% endif %}>{{ message }}
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center ed-table-block ed-centertable "
+                        id="ErpPushViewId">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Sr.No.
+                                </th>
+                                <th class="text-center">
+                                    Name Of Company
+                                </th>
+                                <th class="text-center">
+                                    Name of Authorised Person
+                                </th>
+                                <th class="text-center">
+                                    User Type
+                                </th>
+                                <th class="text-center">
+                                    User Zone
+                                </th>
+                                <th class="text-center">
+                                    Action
+                                </th>
+                                <th class="text-center">
+                                    Vendor Registered ID
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in usr_obj %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.CompanyName_E}}</td>
+                                <td>{{data.Authorised_person_E}}</td>
+                                <td>{{data.User_type}}</td>
+                                <td>{{data.User_zone}}</td>
+                                {% if data.is_erp_pushed == True%}
+                                <td>
+                                    <span>
+                                        <button class="btn ed-submit btn-success">
+                                            Already Pushed
+                                        </button>
+                                    </span>
+                                </td>
+                                {% else %}
+                                <td><a href="/ErpPush/{{data.User_Id}}/{{data.User_zone}}">
+                                        <span>
+                                            <button class="btn ed-submit btn-primary">
+                                                Push To ERP
+                                            </button>
+                                        </span>
+                                    </a>
+                                </td>
+                                {% endif %}
+
+                                {% if data.is_erp_pushed == True and data.User_zone == 'CZ' %}
+                                <td>
+                                    <span>
+                                        <button class="btn ed-submit btn-secondary  ">
+                                            {{data.erp_cz_id}}
+                                        </button>
+                                    </span>
+                                </td>
+                                {% elif data.is_erp_pushed == True and data.User_zone == 'EZ' %}
+                                <td>
+                                    <span>
+                                        <button class="btn ed-submit btn-secondary">
+                                            {{data.erp_ez_id}}
+                                        </button>
+                                    </span>
+                                </td>
+                                {% elif data.is_erp_pushed == True and data.User_zone == 'WZ' %}
+                                <td>
+                                    <span>
+                                        <button class="btn ed-submit btn-secondary">
+                                            {{data.erp_wz_id}}
+                                        </button>
+                                    </span>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <span class="text-danger fw-bold">
+                                         
+                                            Not Available
+                                       
+                                    </span>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ul>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#ErpPushViewId').DataTable();
+    });
+</script>
+{% endblock body %}

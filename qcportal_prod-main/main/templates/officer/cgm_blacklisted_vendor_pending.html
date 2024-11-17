@@ -1,0 +1,50 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      All Pending Blacklisted Vendor
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table class="table  table-bordered table-hover display text-center">
+          <thead class="table-dark">
+            <tr>
+              <th class="w-5">S.No.</th>
+              <th class="w-45">
+                Name Of Company
+              </th>
+              <th class="w-50">
+                View
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.CompanyName_E}}</td>
+              <td> 
+                <a href="/blacklisted_cgm_vendor_evaluate/{{data.User_Id}}" class="ed-links">
+                  <label class="ed-textinfo">
+                    <span class="btn btn-info btn-sm">
+                      View Details
+                    </span>
+                  </label>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 
+
+{% endblock body %}

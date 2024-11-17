@@ -1,0 +1,356 @@
+{% extends 'officer/gm_work_base.html' %} {% load static %} {% block body %}
+
+<!-- <style> -->
+<!-- .btn:not(:disabled):not(.disabled) { -->
+<!-- /* cursor: pointer; */ -->
+<!-- width: 80px; -->
+<!-- } -->
+<!-- </style> -->
+<!-- <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body table-responsive table-bordered table-hover">
+
+                    <div class="card-body ">
+                        <h5 class="font-weight-bolder p-3">User All Information </h5>
+              <div class="table-responsive"> -->
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            User All Information
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped ed-table-block text-center">
+                    <thead>
+                        <tr>
+                            <th class="w-5" style="width:10px;">
+                                S.No
+                            </th>
+                            <th class="w-45">Document Name</th>
+                            <th class="w-50"> Document No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Type of Business</td>
+                            <td>{{data.Type_of_business}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td>Authorised Person Name</td>
+                            <td>{{data.Authorised_person_E}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>Company Name</td>
+                            <td>{{data.CompanyName_E}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">4</td>
+                            <td>Contact Number</td>
+                            <td>{{data.ContactNo}}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">5</td>
+                            <td>Email ID</td>
+                            <td>{{data.Email_Id}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">6</td>
+                            <td>Contractor Class</td>
+                            <td>{{type.Name}}</td>
+                        </tr>
+                        {% if data.upgrade_payment == 1 %}
+                    <tr>
+                        <td>7</td>
+                        <td>Upgrade class Type</td>
+                        <td><b>{{type_upgrate.Name}}</b></td>
+                    </tr>
+                    {% else %}
+                    
+                    {% endif %}
+                   
+                   <tr>
+                        <td>
+                            {% if data.upgrade_payment == 1 %}
+                            8
+                            {% else %}
+                            7
+                            {% endif %}
+                        </td>
+                        <td>Company GST No</td>
+                        <td>{{CompanyData.Company_Gst_No}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            9
+                            {% else %}
+                            8
+                            {% endif %}
+                        </td>
+                        <td>Pan Card No</td>
+                        <td>{{CompanyData.Company_Pan_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            10
+                            {% else %}
+                            9
+                            {% endif %}
+                        </td>
+                        <td>Company Gumastha No</td>
+                        <td>{{CompanyData.Company_Gumastha_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            11
+                            {% else %}
+                            10
+                            {% endif %}
+                        </td>
+                        <td>Company Registration_Date</td>
+                        <td>{{CompanyData.Registration_Date}}</td>
+                    </tr>
+                     <tr>
+                       <td colspan="3" class="thead"> Company Address</td>
+                    <tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            12
+                            {% else %}
+                            11
+                            {% endif %}
+                        </td>
+                        <td>Add 1</td>
+                        <td>{{CompanyData.Company_add_1}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            13
+                            {% else %}
+                            12
+                            {% endif %}
+                        </td>
+                        <td> Add 2</td>
+                        <td>{{CompanyData.Company_add_2}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            14
+                            {% else %}
+                            13
+                            {% endif %}
+                        </td>
+                        <td>Pin Code</td>
+                        <td>{{CompanyData.Company_pin_code}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            15
+                            {% else %}
+                            14
+                            {% endif %}
+                        </td>
+                        <td>District</td>
+                        <td>{{CompanyData.Company_dist}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            16
+                            {% else %}
+                            15
+                            {% endif %}
+                        </td>
+                        <td>State</td>
+                        <td>{{CompanyData.Company_state}}</td>
+                    </tr>
+                   <tr>
+                       <td colspan="3" class="thead"> Bank Details</td>
+                    <tr>
+                        <tr>
+                        <td>
+                            {% if data.upgrade_payment == 1 %}
+                            17
+                            {% else %}
+                            16
+                            {% endif %}
+                        </td>
+                        <td>Account No</td>
+                        <td>{{BankDetails.Account_Number}}</td>
+                    </tr>
+
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            18
+                            {% else %}
+                            17
+                            {% endif %}
+                        </td>
+                        <td>Bank Name</td>
+                        <td>{{BankDetails.Bank_name}}</td>
+                    </tr>
+
+                </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            19
+                            {% else %}
+                            18
+                            {% endif %}
+                        </td>
+                        <td>IFSC Code</td>
+                        <td>{{BankDetails.IFSC}}</td>
+                    </tr>
+                </tr>
+                        <tr>
+                        <td class="text-center">
+                            {% if data.upgrade_payment == 1 %}
+                            20
+                            {% else %}
+                            19
+                            {% endif %}
+                        </td>
+                        <td>Account Holder Name</td>
+                       <td>{{BankDetails.Account_Holder_Name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ed-tableinfo-block mt-4">
+            <h6>
+                Income Last Three Year Uploaded By Contractor
+            </h6>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped ed-table-block">
+                    <thead>
+                        <tr>
+                            <th> Type </th>
+                            <th> Financial Year </th>
+                            <th> Income In Rs </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in doc1 %}
+                        <tr>
+                            {% if data.Status == 1 %}
+                            <td>Turn Over</td>
+                            {% else %}
+                            <td>Income Tax Return</td>
+                            {% endif %}
+                            <td>{{data.Financial_year}}</td>
+                            <td>{{data.Amount}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <form action="/tkc_cgm_evaluate_save/{{data.User_Id}}" method="POST">
+            {% csrf_token %} {% csrf_token %}
+
+            <div class="ed-tableinfo-block mt-4">
+                <h6>
+                    Document Uploaded By Contractor
+                </h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped ed-table-block">
+                        <thead>
+                            <tr>
+                                <th> Document Name </th>
+                                <th> Document Number </th>
+                                <th> Issued Date </th>
+                                <th> Expired Date </th>
+                                <th> View Document</th>
+                                <th> Status(DGM'S)</th>
+                                <th> Status(GM)</th>
+                                <th> Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% with name=100 %} {% for data in doc %}
+                            <tr>
+                                <td>{{data.Types_of_Docs}}</td>
+                                <td>{{data.Document_Number}}</td>
+                                <td>{{data.Doc_issue_date|date:"d-M-Y"}}</td>
+                                <td>{{data.Doc_expiry_date|date:"d-M-Y"}}</td>
+                                {% if data.Ddocfile %}
+                                <td class="text-center">
+                                    <a href="{{data.Ddocfile.url}}" target="_self" class="btn ed-submit btn-info">
+                                        View
+                                    </a>
+                                </td>
+                                {% else %}
+                                <td class="text-center">
+                                    <a href="#" class="btn ed-submit btn-info">
+                                        View
+                                    </a>
+                                </td>
+                                {% endif %}
+
+                                <td>
+                                    {% if data.Primary_verification_Status == 1 %}
+                                    Accepted
+                                    {% elif data.Primary_verification_Status == 0 %}
+                                    Pending
+                                    {% else %}
+
+                                    Rejected
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if data.Primary_verification_Status_approver == 1 %}
+                                    Accepted
+                                    {% elif data.Primary_verification_Status_approver == 0 %}
+                                    Pending
+                                    {% else %}
+
+                                    Rejected
+                                    {% endif %}
+                                </td>
+
+                                <td>{{data.Primary_remark}}</td>
+                            </tr>
+                            {% endfor %} {% endwith %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- <div class="row card-body">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <input type="reset" value="Go Back" class="btn btn-secondary">
+            </div>
+        </div>
+</div> -->
+
+<!-- /.content -->
+
+{% endblock body %}

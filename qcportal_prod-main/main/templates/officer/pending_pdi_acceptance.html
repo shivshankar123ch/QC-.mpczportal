@@ -1,0 +1,249 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Pending For Approval PDI's
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="ed-tableinfo-block ed-orderinfo-block">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped text-center display" id="all_pdi_assigned_data">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="wc1">Sr.No.</th>
+                                    <th class="text-center">WO No.</th>
+                                    <th class="text-center" style="min-width:220px;">Wo Subject</th>
+                                    <th class="text-center">Offer No</th>
+                                    <th class="text-center" style="min-width:220px;">Offer Date</th>
+                                    <th>TKC Name</th>
+                                    <th>Vendor Name</th>
+                                    <th>Inspection Officer</th>
+                                    <th>Inspection Date</th>
+                                    <th>Inspection complete Date</th>
+
+                                    <th>Inspection Letter</th>
+                                    <th>Action</th>
+                                    <th>Status</th>
+
+                                    <th>Approval status</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for item1 in pdi_assign %}
+
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{item1.wo.Contract_Number}} </td>
+                                    <td>{{item1.wo.Header.Contract_Description}} </td>
+                                    <td>{{item1.offer_no}}</td>
+                                    <td>{{item1.offer_date|slice:"0:11"}}</td>
+                                    <td>{{item1.tkc_name}}</td>
+                                    <td>{{item1.vendor_name}}</td>
+                                    <td>{{item1.officer.officer_name}}</td>
+                                    <td>{{item1.inspection_date}} </td>
+                                    <td>{{item1.perform_date}} </td>
+
+
+                                    <td>
+                                        {% if item1.letter_report %}
+                                        <a target="_blank" href="{{item1.letter_report.url}}">
+                                
+                                                <span class="btn btn-info btn-sm">
+                                                    View
+                                                </span>
+                                            
+                                        </a>
+                                        {% else %}
+                                        
+                                            <span class="btn btn-danger btn-sm">
+                                                Not Uploaded
+                                            </span>
+                                        
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if item1.Material.PDI_Complete == 0 %}
+                                        <a class="btn btn-info btn-sm" target="" href="#" onclick="alert_msg()">
+                                            View</a>
+                                        {% comment %} {% elif item1.Material.PDI_Complete == 1 and not item1.pdi_report %}
+
+                                        <a class="btn btn-info btn-sm" target="" href="#" onclick="pdiReport()">
+                                            View</a> {% endcomment %}
+
+                                        {% else %}
+                                        <a class="btn btn-info btn-sm" target=""
+                                            href="/pdi_against_wo/{{item1.offer_no}}" id="pdi"> View</a>
+                                        {% endif%}
+
+
+                                        </a>
+
+                                    </td>
+
+
+
+
+                                    <td>
+                                        <div>
+                                            {% if item1.Material.PDI_Complete == 0 %}
+                                            <a href="{% url 'update_pdi_assign' item1.offer_no item1.id %}"
+                                                target="_blank" rel="noopener noreferrer"><span
+                                                    class="btn btn-info btn-sm">Reassign inspecting officer</span></a>
+                                            {% else %}
+                                            <span class="btn btn-success btn-sm">Inspection completed</span>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {% comment %} {% if item1.pdi_report %} {% endcomment %}
+                                            {% if item1.pdi_report and item1.propose_fakecall == False %}
+                                            <a href="{% url 'pdi_accept' item1.offer_no %}"
+                                                rel="noopener noreferrer"><span
+                                                    class="btn btn-primary btn-sm">Accept</span></a>
+                                            <a href="{% url 'pdi_reject' item1.offer_no %}"
+                                                rel="noopener noreferrer"><span class="btn btn-danger btn-sm">Reject</span></a>
+
+                                            {%elif item1.pdi_report and item1.propose_fakecall == True %}
+                                            <a  onclick="return(confirm('Are you sure to declare this Inspection is a Fake call'))" href="{% url 'fake_call' item1.offer_no %} " id="fakeCall"
+                                                    rel="noopener noreferrer"><span class="btn btn-danger btn-sm" >Initiate Fake
+                                                        Call</span></a>
+
+                                            {% elif item1.pdi_report_url and item1.propose_fakecall == False %}
+                                                    <a href="{% url 'pdi_accept' item1.offer_no %}"
+                                                        rel="noopener noreferrer"><span
+                                                            class="btn btn-primary btn-sm">Accept</span></a>
+                                                    <a href="{% url 'pdi_reject' item1.offer_no %}"
+                                                        rel="noopener noreferrer"><span class="btn btn-danger btn-sm">Reject</span></a>
+        
+                                            {%elif item1.pdi_report_url and item1.propose_fakecall == True %}
+                                            <a  onclick="return(confirm('Are you sure to declare this Inspection is a Fake call'))" href="{% url 'fake_call' item1.offer_no %} " id="fakeCall"
+                                            rel="noopener noreferrer"><span class="btn btn-danger btn-sm" >Initiate Fake
+                                                Call</span></a>
+                                            {% comment %} {% endif %} {% endcomment %}
+                                            {%else%}
+                                            pdi report not uploaded
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+  
+<style>
+    .avatar-upload {
+        position: relative;
+        max-width: 100%;
+        margin: 50px auto;
+    }
+
+    .avatar-upload .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    .avatar-upload .avatar-edit input {
+        display: none;
+    }
+
+    .avatar-upload .avatar-edit input+label {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 0;
+        border-radius: 100%;
+        background: #FFFFFF;
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-weight: normal;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .avatar-upload .avatar-edit input+label:hover {
+        background: #f1f1f1;
+        border-color: #d6d6d6;
+    }
+
+    .avatar-upload .avatar-edit input+label:after {
+        content: "\f040";
+        font-family: 'FontAwesome';
+        color: #757575;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 340px;
+        height: 340px;
+        position: relative;
+        border-radius: 4px;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar-upload .avatar-preview>div {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+
+
+
+
+</form>
+
+<script>
+    function alert_msg() {
+        alert("PDI Not Completed");
+    }
+    function pdiReport() {
+        alert("PDI Report Not Uploaded");
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#all_pdi_assigned_data').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+{% endblock body %}

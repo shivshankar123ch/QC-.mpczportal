@@ -1,0 +1,82 @@
+{% extends 'tkc/tkc_Base.html' %} {% load static %} {% block body %}
+<head>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+</head>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+                    <h5 class="font-weight-bolder">
+                        Basic Information Contractor
+                    </h5>
+                </div>
+
+                <div class="card-body table-responsive">
+                    <form action="/basic/" method="POST">
+                        {% csrf_token %}
+                           <table class="table table-bordered table-hover">
+                              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+
+                                <tr>
+                                    <th scope="col">S.No.</th>
+                                    <th scope="col">Report Name</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Type of Business</td>
+                                    <td>{{userdata.Type_of_business}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Authorised Person Name</td>
+                                    <td>{{userdata.Authorised_person_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Company Name</td>
+                                    <td>{{userdata.CompanyName_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Contact Number</td>
+                                    <td>{{userdata.ContactNo}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Email ID</td>
+                                    <td>{{userdata.Email_Id}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>User Type</td>
+                                    <td>{{userdata.User_type}}</td>
+                                </tr>
+                            <tr></tr>
+                            </tbody>
+                        </table>
+
+                    </form>
+
+                </div>
+                {% if not userdata.Complete_Details %}
+                <div class="button-row d-flex mt-4">
+
+                    <a href="/tkc/tkc_reg_seven"><button class="btn bg-gradient-primary mb-3" type="button"
+                            title="Send">Documents Upload</button></a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

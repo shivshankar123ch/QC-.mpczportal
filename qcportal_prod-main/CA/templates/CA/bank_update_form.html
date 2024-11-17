@@ -1,0 +1,60 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %}
+<span class="ms-1 font-weight-bold"></span> 
+<h3>Fill below details for update your bank</h3>
+  
+    <form method="post" action="{% url 'ca_bank_update' %}" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        <div class="col-lg-4">
+            <div class="form-group mb-4">
+                <label for="name">Bank Name <span class="text-danger">*</span></label>
+                <div class="input-group input_border">   
+                    {{form.bank_name}}
+                </div>    
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group mb-4">
+                <label for="name">Account Holder Name <span class="text-danger">*</span></label>
+                <div class="input-group input_border">   
+                    {{form.account_Holder_Name}}
+                </div>    
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group mb-4">
+                <label for="name">Account Nunber <span class="text-danger">*</span></label>
+                <div class="input-group input_border">   
+                    {{form.account_Number}}
+                </div>    
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group mb-4">
+                <label for="name">IFSC <span class="text-danger">*</span></label>
+                <div class="input-group input_border">   
+                    {{form.ifsc}}
+                </div>    
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group mb-4 form-file">
+                <label for="description">New Bank Cancelled Cheque <span class="text-danger">*</span></label>
+                {{form.passbook_image}}
+               
+            </div>
+        </div>
+        <p><b style="color: red;">NOTE :</b> कृपया नीचे दिए गए बिंदु को ध्यान से पढ़ें</p>
+    <ul>
+        <li>
+            आप अपना बैंक विवरण केवल एक बार ही बदल सकते है |
+        </li>
+        <li>
+            कृपया इस फॉर्म को सही से भरें |
+        </li>
+    </ul>
+            <button type="submit" class="btn btn-primary">Update</button>
+    </form>  
+    
+  
+
+{% endblock body %} 

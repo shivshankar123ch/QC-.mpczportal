@@ -1,0 +1,310 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+
+{% block body %}
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Upload Document</h3>
+          </div>
+          <div class="card-body ">
+            <h3 class=p-3>User All Data</h3>
+            <table id="example2 " class="table table-bordered table-hover  ">
+              <thead>
+                <tr>
+                  <th style="width:10% ">
+                    Serial Number</th>
+                  <th style="width: 40% ">
+                    Report Name </th>
+                  <th style="width:40% ">
+                    Value </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Type of Business</td>
+                  <td><b>{{data.Type_of_business}}</b></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Authorised Person Name</td>
+                  <td><b>{{data.Authorised_person_E}}</b></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Company Name</td>
+                  <td><b>{{data.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Contact Number</td>
+                  <td><b>{{data.ContactNo}}</b></td>
+
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Email ID</td>
+                  <td><b>{{data.Email_Id}}</b></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Vendor Type</td>
+                  <td><b>{{data.User_type}}</b></td>
+                </tr>
+                <td >7</td>
+                <td class="text-center">Company GST No</td>
+                <td class="text-center">{{CompanyData.Company_Gst_No}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">8</td>
+                  <td class="text-center">Pan Card No</td>
+                  <td class="text-center">{{CompanyData.Company_Pan_No}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">9</td>
+                  <td class="text-center">Company Gumastha No</td>
+                  <td class="text-center">{{CompanyData.Company_Gumastha_No}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">10</td>
+                  <td class="text-center">Company Registration_Date</td>
+                  <td class="text-center">{{CompanyData.Registration_Date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;">
+                    Company
+                    Address</td>
+                <tr>
+                <tr>
+                  <td class="text-center">11</td>
+                  <td class="text-center">Add 1</td>
+                  <td class="text-center">{{CompanyData.Company_add_1}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">12</td>
+                  <td class="text-center"> Add 2</td>
+                  <td class="text-center">{{CompanyData.Company_add_2}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">13</td>
+                  <td class="text-center">Pin Code</td>
+                  <td class="text-center">{{CompanyData.Company_pin_code}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">14</td>
+                  <td class="text-center">District</td>
+                  <td class="text-center">{{CompanyData.Company_dist}}</td>
+                </tr>
+                <tr>
+                  <td class="text-center">15</td>
+                  <td class="text-center">State</td>
+                  <td class="text-center">{{CompanyData.Company_state}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;"> Bank
+                    Details</td>
+                <tr>
+                <tr>
+                  <td class="text-center">16</td>
+                  <td class="text-center">Account No</td>
+                  <td class="text-center">{{BankDetails.Account_Number}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-center">17</td>
+                  <td class="text-center">Bank Name</td>
+                  <td class="text-center">{{BankDetails.Bank_name}}</td>
+                </tr>
+
+                </tr>
+                <tr>
+                  <td class="text-center">18</td>
+                  <td class="text-center">IFSC Code</td>
+                  <td class="text-center">{{BankDetails.IFSC}}</td>
+                </tr>
+                </tr>
+                <tr>
+                  <td class="text-center">19</td>
+                  <td class="text-center">Account Holder Name</td>
+                  <td class="text-center">{{BankDetails.Account_Holder_Name}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th align="center">
+                    Upload Basics Document
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in doc %}
+                <table class="table table-bordered table-hover">
+                  <label>Document Name :{{data.Types_of_Docs}}</label>
+                  <thead>
+                    <tr>
+                      <th style="width:40%;">{{data.Types_of_Docs}} Number : <br><b>{{data.Document_Number}}</b>
+                      </th>
+                      <th style="width:40%;"> Name On {{data.Types_of_Docs}}<br> <input type="text" readonly="readonly"
+                          placeholder="{{data.Name_on_Document}}">
+                      </th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"
+                            checked> Accepted
+                          <label class="form-check-label" for="radio1"></label>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check">
+                          <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+                          Rejected
+                          <label class="form-check-label" for="radio2"></label>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="form-check">
+                          <input type="text" class="form-check-input">
+                          <label class="form-check-label"></label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="width:80%">
+                    Uploaded Company Details
+                  </th>
+                  <th style="width:20%">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="container">
+                      <div class="container">
+                        <label>Area Of Land Occupied By Factory (sq. ft.)</label>
+                        <input type="text" id="v_area_occupied" name="eighteen" class="form-control"
+                          placeholder="{{Factory.Area_of_land}}" required="required" readonly>
+                      </div>
+
+                      <div class="container">
+                        <label>Number Of Working Shift in Factory *</label>
+                        <input type="text" id="v_working_shift" name="nineteen" class="form-control"
+                          placeholder="{{Factory.No_of_Shifts}}" required="required" readonly>
+                      </div>
+
+                      <div class="container">
+                        <label>Other Personnel Working In Factory *</label>
+                        <input type="text" id="v_personal_work_factroyr" name="twenty" class="form-control"
+                          placeholder="{{Factory.Outsourced_person}}" required="required" readonly>
+                      </div>
+
+                      <div class="container">
+                        <label>Buit Up Area Of Factory (sq. ft.)*</label>
+                        <input type="text" id="v_buit_up" name="twenty_one" class="form-control"
+                          placeholder="{{Factory.Area_built_up}}" required="required" readonly>
+                      </div>
+
+                      <div class="container">
+                        <label>Product Capacity Per annum(QUANTITY) *</label>
+                        <input type="text" id="v_product_capacity" name="twenty_two" class="form-control"
+                          placeholder="{{Factory.Yearly_Production}}" required="required" readonly>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="container">
+
+                    </div>
+                  </td>
+
+                  <!-- /.card-body -->
+                  <!-- /.card -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="width:80%">
+                    Uploaded Material Details
+                  </th>
+                  <th style="width:20%">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <table class="table" id="myTable">
+                      <label for="inputStatus">Material Tests reports from NABL accredited Laboratory(Valid)</label>
+                      <thead>
+                        <div>
+                          <th>
+                            <label>Material Name</label>
+                            <h6>{{Material.Material_Name}}</h6>
+                          </th>
+                        </div>
+
+                        <div>
+                          <th>
+                            <label>Material Specification</label>
+                            <h6>{{Material.Material_Name}}</h6>
+                          </th>
+                        </div>
+                        <div>
+                          <th>Type tests reports <a href="{{data.Ddocfile.Url}}" class="button btn btn-primary">View
+                            </a></th>
+                          <th>GTP and Drawing <a href="{{data.Ddocfile.Url}}" class="button btn btn-primary">View </a>
+                          </th>
+                          <th>Other Report<a href="{{data.Ddocfile.Url}}" class="button btn btn-primary">View </a></th>
+                        </div>
+
+                      </thead>
+                      </thead>
+                    </table>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+      </div>
+</section>
+<!-- /.content -->
+</div>
+{% endblock body %}

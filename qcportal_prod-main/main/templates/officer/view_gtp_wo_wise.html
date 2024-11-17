@@ -1,0 +1,95 @@
+{% extends 'officer/auditor_base.html' %} {% load static %} {% block body %}
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                GTP History W.O. Wise
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                        <thead>
+                            <tr>
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>
+                                        WO Number
+                                    </th>
+                                <th>
+                                    Name Of Company
+                                </th>
+                                <th>
+                                    Name of Authorized Person
+                                </th>
+                                   <th>
+                                       Material Name
+                                           </th>
+                                <th>
+                                 GTP Submit At
+                                    </th>
+                                    <th>
+                                        GTP Approved Remark
+                                    </th>
+                                    <th>GTP Approved Status</th>                                
+                                    <th>GTP Approved At</th>
+                                    <th>GTP Approved By</th>
+                                    <th>GTP File</th>
+                                    <th>Ohter Supporting Documents</th>
+                              
+                        </thead>
+                        <tbody>
+                            {% for data in gtp %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.TKCWoInfo.Contract_Number}}</td>
+                                <td>{{data.Vendor.CompanyName_E}}</td>
+                                <td>{{data.Vendor.Authorised_person_E}}</td>
+
+                                <td>{{data.Material_id.Material_Specification}}</td>
+
+
+                                <td>{{data.TKCVendor_Submit_At}}</td>
+
+                                <td>{{data.TKCVendor_Approved_Remark}}</td>
+                                {% if data.TKCVendor_Approved_Status == 1%}
+                                <td><h6>Approved</h6></td>
+                                {% else %}
+                                <td><h6>Not Approved</h6></td>
+                                {% endif %}
+                                <td>{{data.TKCVendor_Approved_At}}</td>
+                                <td>{{data.TKCVendor_Approved_By}}</td>
+                              
+
+                                {% if data.vendor_gtp_file %}
+
+                                <td> <a href="{{data.vendor_gtp_file.url}} " class="btn btn-success mr-3">View</a></td>
+                                {% else %}
+                                <td><h6>File Not Upload</h6></td>
+                                {% endif %}
+
+                                {% if data.vendor_other_docs %}
+
+                                <td> <a href="{{data.vendor_other_docs.url}} " class="btn btn-success mr-3">View</a></td>
+                                {% else %}
+                                <td><h6>File Not Upload</h6></td>
+                                {% endif %}
+
+                                
+
+                                
+                               
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    {% endblock body %}

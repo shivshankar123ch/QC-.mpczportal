@@ -1,0 +1,201 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<!-- <form action="/po/add_areastore_quantity/{{offer_material_data.id}}" onsubmit="return validateForm()" name="myForm" method="POST"> -->
+
+    
+    <div class="ed-information mb-2">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Create Dispatch instruction 
+                </h2>
+            </div>
+            <div class="card-body mb-2">  
+                <p class="text-info">
+                    {% if msg2 %}
+                    {{ msg2 }}
+                    {% endif %}
+                </p>
+                
+                <div class="forms-informations mb-4">
+                    <div class="ed-form-block">
+                        <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                    Dispatch  Details
+                                </span>
+                            </h6>
+                        </div>
+                        <div class="ed-form-body">  
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Item Name
+                                </label>
+                                <input type="text" class="form-control ed-textbox" value="{{offer.TKCVendor.Material_id.Material_Specification}}" autocomplete="off" readonly/>
+                            </div> 
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Ordered Quantity
+                                </label>
+                                <input type="text" class="form-control ed-textbox" value="{{offer.Quantity}}" autocomplete="off" readonly/>
+                            </div> 
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Offered Quantity
+                                </label>
+                                <input type="text" class="form-control ed-textbox" value="{{division_offer_data.quantity}}" autocomplete="off" readonly/>
+                            </div> 
+    
+                            <form action="/tkc/create_di_for_sitestore/{{offer.id}}/{{di_data.id}}/{{division_obj.id}}" method="POST"  name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+                                {% csrf_token %}
+                            
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Area Stores
+                                        <span class="text-danger">* </span>
+                                    </label> 
+                                    <select  class="form-control ed-textbox" id="areastore" onkeypress="validateForm()" onfocus="validateForm()" name="store">
+                                        {% for data1 in site_store_data %}
+                                        <option>{{ data1.Store_Address }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <span id="store1" class="d-block ed-warningtext text-danger"></span>
+                                </div>  
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Quantity to be Delivered
+                                        <span class="text-danger">* </span>
+                                    </label> 
+                                    <input type="Number" class="form-control ed-textbox"  onkeypress='validate(event)' autocomplete="off" id="qty" onchange="checkTable()" onkeypress="validateForm()" onfocus="validateForm()" name="qty"/>
+                                    <span id="data" class="d-block ed-warningtext text-danger"></span>
+                                </div>   
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Serial No. Excel
+                                    <span class="text-danger">* </span>
+                                </label> 
+                                <input type="file" class="form-control ed-textbox"  required name="Serial_Excel"/>
+                                <span id="data" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group"> 
+                                <div class="text-right mt-2">
+                                    <button class="btn ed-submits ed-formsubmit" onclick="validateForm()" type="submit">  
+                                        Submit 
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>  
+                </div>  
+                <div class="form-group">
+                    <p>Click Below to download sample Excel for uploading Serial number of item</p>
+                    <p>which need to be delivered on selected Division Site store.</p> 
+                    <a href="/vendor/download_demo_excel"> Download Excel </a>
+                </div> 
+                {% if division_offer_data.quantity == already_dispatch_qty %}
+                <p class="text-info font-bold text-center">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                {% endif %}
+            </div>
+            
+            <div class="card-body mb-2">  
+                <div class="ed-tableinfo-block mt-4">
+                    <div class="table-responsive">
+                        <table class="table table-striped ed-table-block" id="table1" onchange="checkTable()" onmouseover="checkTable()" >
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>DI NO.</th>
+                                    <th>Offer Item Name</th>
+                                    <th>Site Store</th>
+                                    <th>Quantity</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in dispatch_material_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.tkc_di.erp_di_number}} </td>
+                                    <td>{{data.wo_material.TKCVendor.Material_id.Material_Specification}}</td>
+                                    <td>{{data.Store_Address}}</td>
+                                    <td>{{data.quantity}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- <a href="/po/create_di_checked_material">
+                            <button class="btn  btn-info">Back</button>
+                        </a> --> 
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+<script>
+    function checkTable(){
+        var tab1 = document.getElementById("table1").rows.length;
+        console.log("lennnn",tab1)
+        
+        var cell_value =0;
+        var sumValue =0;
+        
+        for(cell_value=1;cell_value<tab1;cell_value++){
+            var num = document.getElementById("table1").rows[cell_value].cells.length;
+            var total = document.getElementById("one").value;
+            
+            sumValue = sumValue + Number(total);
+        }
+          console.log("valueeeeeeeeeeeee",sumValue)
+    }
+</script>
+
+<script>
+    function validateForm() {
+            let slect1 = document.forms["myForm"]["store"].value;
+            let select2 = document.forms["myForm"]["qty"].value;
+
+            if (slect1 == "") {
+                document.getElementById('store1').innerHTML = " Please fill the required details";
+            } else {
+                document.getElementById('store1').innerHTML = "";
+            }
+            if (select2 == "") {
+                document.getElementById('data').innerHTML = " Please fill the required details";
+            } else {
+                document.getElementById('data').innerHTML = "";
+            }
+    }
+</script>
+<script>
+    function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)
+
+            ) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+</script>
+{% endblock body %}>

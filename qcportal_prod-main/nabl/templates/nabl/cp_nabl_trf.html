@@ -1,0 +1,156 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static %}
+
+{% block active %}
+<ul class="navbar">
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/basic">
+            <span class="sidenav-mini-icon"> BI </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/rejected_doc">
+            <span class="sidenav-mini-icon"> RD </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/UpdateNablProfile">
+            <span class="sidenav-mini-icon"> AS </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update Profile </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+        </a>
+    </li>
+
+    <li class="nav-item ">
+        <a class="nav-link " href="#">
+            <span class="sidenav-mini-icon"> Noti </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+        </a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link active" href="/nabl/nabl_trf">
+            <span class="sidenav-mini-icon">T M R</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">Material Report </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical">
+            <span class="sidenav-mini-icon">Phy Test Out</span>
+            <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical_view">
+            <span class="sidenav-mini-icon">Phy Test View</span>
+            <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <span class="sidenav-mini-icon">LO</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+        </a>
+    </li>
+</ul>
+{% endblock active %}
+
+{% block body %}
+<form action="/basic/" method="POST">
+    {% csrf_token %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>Offered Materials Details </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-2">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center"
+                        id="example2 ">
+                        <thead>
+                            <tr>
+                                <th class="w-5">
+                                    S No.
+                                </th>
+                                <th class="w-15">
+                                    VENDOR
+                                </th>
+                                <th class="w-15">
+                                    Purchase Order Number
+                                </th>
+                                <th class="w-15">
+                                    Dispatch Instruction Number
+                                </th>
+                                <th class="w-15">
+                                    Dispatch Instruction Quantity
+                                </th>
+                                <th class="w-15">
+                                    Sampled Quantity for Testing
+                                </th>
+                                <th class="w-10">
+                                    Material Name
+                                </th>
+                                <th class="w-10">
+                                    Material Code
+                                </th>
+                                <th class="w-20">
+                                    View Gatepass Inward
+                                </th>
+                                <th class="w-20">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center;">
+                            {% for userdata in po_obj %}
+                            <tr>
+                                <td><b>{{forloop.counter}}</b></td>
+                                <td><b>{{userdata.area_store.po.vendor.CompanyName_E}}</b></td>
+                                <td><b>{{userdata.area_store.po.po_no}}</b></td>
+                                <td><b>{{userdata.area_store.di_master.erp_di_number}}</b></td>
+                                <td><b>{{userdata.area_store.offer_item.dispatch_qty}}</b></td>
+                                <td><b>{{userdata.outward_quantity}}</b></td>
+                                <td><b>{{userdata.area_store.offer_item.material.specification}}</b></td>
+                                <td><b>{{userdata.area_store.material_sample_code}}</b></td>
+                                {% comment %} {% if userdata.Calibration_Certificate %}
+                                    <td><b><a href="{{ userdata.Calibration_Certificate.url }}" target="_blank" class="ed-links">View</b></td>
+                                {% else %}
+                                    <td><b>Not uploaded</b></td>
+                                {% endif %} {% endcomment %}
+                                
+                                {% if userdata.gatepass %}
+                                    <td><b><a href="{{ userdata.gatepass.url }}" target="_blank" class="ed-links">View</b></td>
+                                {% else %}
+                                    <td><b>Not uploaded</b></td>
+                                {% endif %}
+                                {% if userdata.area_store.send_to_nabl == 1 and userdata.area_store.sampling_flag == 1 and userdata.area_store.nabl_gatepass == 1 %}
+                                <td><button><a href="/nabl/cp_nabl_trf_view/{{userdata.id}}">proceed</a></button></td>
+                                {% elif userdata.area_store.send_to_nabl == 2 and userdata.area_store.sampling_flag == 2 and userdata.area_store.nabl_gatepass == 2 %}
+                                
+                                <td><span>Resampling</span>
+                                    <button><a href="/nabl/cp_nabl_trf_view_resampling/{{userdata.id}}">proceed</a></button>
+                                </td>
+                                {% else %}
+                                <td></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock body %}

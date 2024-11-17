@@ -1,0 +1,500 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+
+{% load mathfilters %}
+<html lang="en">
+
+<head>
+    <title>Dispatch Instructions pdf</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        th,
+        td,
+        p {
+            font-size: 14px !important;
+            line-height: 26px !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            vertical-align: middle;
+        }
+
+        #options {
+            align-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        * {
+            white-space: normal !important;
+            word-break: break-all !important;
+        }
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+    <div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <!-- <div class="card-header">
+                       </div> -->
+                    <div class="card-body">
+                        <div id="printid"
+                            style="border: 1px solid #000;margin: 0px auto;max-width: 100%; padding: 20px;">
+                            <table class="table-header"
+                                style="border-bottom: 1px solid #000;margin-bottom: 10px; width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:100%">
+                                            <div class="cgm-logo-block">
+                                                {% if wo.Discom.Discom_Header %}
+                                                <img src="{{wo.Discom.Discom_Header.url}}" class="cgm-logo"
+                                                    style="width:100%" alt="User profile" />
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table-captions" style="width: 100%;margin: 0 0 10px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 00px;width: 50%;">
+                                            <p style="margin: 0;text-align: left;font-weight: 600;">
+                                                DI No.- {{wo_di.erp_di_number}}
+                                            </p>
+                                        </td>
+
+
+                                        <td style="padding: 00px;width: 50%;">
+                                            <p style="margin: 0;text-align: right;font-weight: 600;">
+                                                {{wo.Discom.Discom_location}}, Dated:
+                                                date|date: {{wo_di.created_date}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <table class="table-captions" style="width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="padding: 00px;width: 100%;">
+                                            <p style="margin: 0;">
+                                                <b> To, </b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 00px;width: 50%;">
+                                            <p style="margin: 0 0 10px; padding-left: 30px;">
+                                                {{wo.supplier.CompanyName_E}},<br>
+                                                {{address.Company_add_1}}<br>
+                                                {{address.Company_add_2}}<br>
+                                                {{address.Company_dist}},{{address.Company_state}} -
+                                                {{address.Company_pin_code}}
+                                            </p>
+                                        </td>
+                                        <td style="padding: 0px;width: 50%;">
+                                            <div style="text-align: right;">
+                                                <p style="margin: 0 0 0px;font-weight: 600;display: block;">
+                                                    <b>
+                                                        ERP W.O. No. {{wo.Contract_Number}} <br>
+                                                        ERP D.I. No. {{wo_di.erp_di_number}}
+                                                    </b>
+                                                </p>
+                                                <p style="margin: 0 0 5px;font-weight: 500;display: block;">
+                                                    <span style="padding-right:3px;">
+                                                        Email:-
+                                                    </span>
+                                                    <span>
+                                                        {{wo.supplier.Email_Id}}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td colspan="2" style="padding: 00px;width: 100%;">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 00px;width: 50%;">
+                                            
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table-captions" style="border:0px solid #ccc;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 00px;width: 100%;">
+                                            <p style="margin: 0 0 5px;">
+                                                <b style="padding-right: 9px;">Sub:</b> {{wo_di.di_subject}}
+                                            </p>
+
+                                            <p style="margin: 0 0 5px;">
+                                                <span style="padding-right: 0px;">
+                                                </span>
+                                                <span>
+
+                                                </span>
+                                            </p>
+
+
+                                            <p style="margin: 0;text-align: left;font-weight: 600;">
+                                                Offer No:-  {{wo_di.offer_no}} , Dated: {{wo_di.created_date}}
+                                            </p>
+
+                                            <p style="margin: 0 0 5px;">
+                                                Dear Sir,
+                                            </p>
+                                            <p style="margin: 0 0 5px;">
+                                                &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                                                {{wo_di.term_and_condition|safe}}
+                                            </p>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+
+
+                            <table class="table table-bordered table-captions" style="margin: 5px 0 20px;width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">
+                                            S. No.
+                                        </th>
+                                        <th style="width: 20%;min-width: 120px;">
+                                            Description of item
+                                        </th>
+                                        <th style="width: 5%;min-width: 120px;">
+                                            Unit
+                                        </th>
+                
+                                        <th style="width: 15%;min-width: 120px;">
+                                            Already DI Issued Qty
+                                        </th>
+                                        <th style="width: 15%;min-width: 120px;">
+                                            BAL. Qty for DI to be issued (After deduction of current DI Qty)
+                                        </th>
+                                        <th style="width: 15%;min-width: 120px;">
+                                            DI Qty
+                                        </th>
+                                        <th style="padding: 4px; width: 20%; border: 1px solid #ccc;min-width: 120px;">
+                                            Site Store
+                                        </th>
+                                        <th style="padding: 4px; width: 20%; border: 1px solid #ccc;min-width: 120px;">
+                                            Receiver Name
+                                        </th>
+                                        
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for j, k, l in zipped_data %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ j.0.wo_material.material_name }}</td>
+                                        <td>{{ k.uom }}</td>
+                                        <td>{{ l.0.already_di_issued_quantity }}</td>
+                                        <td>{{ l.0.remaining_quantity }}</td>
+                                        <td>{{ k.di_quantity }}</td>
+                                        <td>{{ wo_di.di_site_store_location}}</td>
+                                        <td>{{k.di_receiver_name}}</td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <table class="table-captions" style="margin: 15px 0 0; width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p style="margin: 0;">
+                                                Vendor Details
+                                            </p>
+                                            <p style="margin: 0 0 10px; padding-left: 30px;font-weight: 600;">
+                                                {{vendor_address.CompanyName_E}},<br>
+                                                {{vendor_address.Company_add_1}}<br>
+                                                {{vendor_address.Company_add_2}}<br>
+                                                {{vendor_address.Company_dist}},{{vendor_address.Company_state}} -
+                                                {{vendor_address.Company_pin_code}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table-captions" style="
+            margin: 15px 0 0; width: 100%;
+        ">
+                                <tbody>
+
+                                    <tr>
+                                        <td style="padding: 00px;width: 100%; text-align: right;">
+                                            <div style="margin: 5px 0 0; font-weight: 600; text-align: right;">
+                                                <p style="display:inline-block;text-align: center;font-weight: 600;">
+                                                    {{wo.Discom.TKC_Main_Sign}} <br>
+                                                    {{wo.Discom.Discom_Short_Name}}
+                                                </p>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="copytop-block" style="border:0px solid #ccc; width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 00px;width: 100%;">
+                                            <p style="margin: 0; font-weight: 600;">
+                                                Copy To:-
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 00px;width: 100%;">
+                                            <p style="margin: 0 0 5px;">
+                                                &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                                                {{wo_di.copy_to|safe}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <!--        <div class="ed-form-body">-->
+                                    <!--    <div class="ed-tableinfo-block">-->
+                                    <!--        <div class="table-responsive">-->
+                                    <!--            <table class="table table-striped ed-table-block" id="table">-->
+                                    <!--                <thead>-->
+                                    <!--                    <tr>-->
+                                    <!--                        <th>Sr. No</th>-->
+                                    <!--                        <th>Copy To</th>-->
+                                    <!--                    </tr>-->
+                                    <!--                </thead>-->
+                                    <!--                <tbody>-->
+                                    <!--                    <tr>-->
+
+
+                                    <!--                    </tr>-->
+
+                                    <!--                </tbody>-->
+                                    <!--            </table>-->
+                                    <!--        </div>-->
+                                    <!--    </div>-->
+                                    <!--</div>-->
+
+
+
+                                    <tr>
+                                        <td style="padding: 00px;width: 100%;">
+                                            <div style="margin: 35px 0 0;font-weight: 600;text-align: right;">
+                                                <p style="display:inline-block;text-align: center;font-weight: 600;">
+                                                    {{wo.Discom.TKC_Copy_To_Sign}} <br>
+                                                    O/o {{wo.Discom.Discom_Short_Name}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- <script>
+                                function printpage() {
+                                    var printButton = document.getElementById("printpagebutton");
+                                    printButton.style.visibility = 'hidden';
+                                    window.print()
+                                    printButton.style.visibility = 'visible';
+                                }
+                            </script> -->
+
+                        <!-- <div class="print-action-block" id="printactions">
+                            <div id="options">
+                                <input type="button" value="Print" class="btn btn-primary btn-print"
+                                    onclick="windoPrint()">
+                                <a href="/fqp/Send-pending-Wo-Di-For-Approval/{{wo_di.id}}">
+                                    <input id="printpagebutton1" type="Submit" style="width:200px"
+                                        class="btn btn-primary btn-print" type="button" value="Send DI For Approval" />
+
+                                </a>
+                            </div>
+                        </div> -->
+                        <div class="print-action-block" id="printactions">
+                            <div id="options">
+                                <button   id="print" class="btn btn-primary btn-print print_but " onclick="windoPrint()">Print and Download</button>
+                            </div>
+                        </div>
+
+
+                        <div id="diSend">
+                            <form action="/fqp/Upload-erp-Di-Copy/{{offer_no}}/{{wo_di.erp_di_number}}/{{wo_di.wo.id}}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="file" name="di_doc" class="form-control" required>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-info  print_but ">Upload and Send DI For Approval</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script> -->
+
+    <style>
+        /* .ed-wrapper-block .ed-sidebar-block {
+            display: none;
+        }
+
+        .ed-wrapper-block .ed-header-block {
+            display: none;
+        }
+
+        .ed-wrapper-block {
+            min-height: auto;
+        }
+
+        .ed-wrapper-block .ed-wrapper-contant {
+            padding: 10px;
+        }
+
+        .ed-pagetitle-block {
+            display: none;
+        }
+
+        .ed-footer-block {
+            display: none;
+        } */
+        .list {
+            list-style: disc;
+            padding-left: 10px;
+            margin: 0;
+        }
+
+        .list .items {
+            font-weight: 700;
+        }
+
+        .list .items p {
+            margin: 0 0 4px;
+            font-weight: 500;
+        }
+    </style>
+
+    <!-- <script>
+        // function printpage() {
+        //     //Get the print button and put it into a variable
+        //     var printButton1 = document.getElementById("printpagebutton1");
+        //     var printButton = document.getElementById("printpagebutton");
+        //     //Set the print button visibility to 'hidden'
+        //     printButton1.style.visibility = 'hidden';
+        //     printButton.style.visibility = 'hidden';
+        //     //Print the page content
+        //     window.print()
+        //     printButton.style.visibility = 'visible';
+        //     printButton1.style.visibility = 'visible';
+        // }
+    
+        // function add_fields() {
+        //     document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+        // }
+    
+        // function printpage() {
+        //     //Get the print button and put it into a variable
+        //     var printButton1 = document.getElementById("printpagebutton1");
+        //     var printButton = document.getElementById("printpagebutton");
+        //     //Set the print button visibility to 'hidden'
+        //     printButton1.style.visibility = 'hidden';
+        //     printButton.style.visibility = 'hidden';
+        //     //Print the page content
+        //     window.print()
+        //     printButton.style.visibility = 'visible';
+        //     printButton1.style.visibility = 'visible';
+        // }
+        // function add_fields1() {
+        //     document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+        // }
+    </script>-->
+
+
+    <script>
+
+        function prints() {
+            document.getElementById('options').style.display = 'none';
+            window.print();
+            document.getElementById('options').style.display = 'block';
+        }
+
+
+
+        function windoPrint() {
+            document.getElementById('printactions').style.display = 'none';
+            document.getElementById('diSend').style.display = 'none';
+            $('#edContainer').css('padding', '0');
+            $('.ed-card-block .card-body').css('padding', '0');
+            $('#edHeader').hide(); 
+            $('#edSidebar').hide();
+            $('.ed-footer-block').hide();
+            $('.ed-pagetitle-block').hide(); 
+            window.print(); 
+            document.getElementById('printactions').style.display = 'block';
+            document.getElementById('diSend').style.display = 'block';
+            $('#edContainer').css('padding-top', '95px');
+            $('.ed-card-block .card-body').css('padding', '15px');
+            $('#edContainer').css('padding-left', '265px');
+            $('#edContainer').css('padding-right', '0px');
+            $('#edContainer').css('padding-bottom', '16px');
+            $('#edHeader').show();
+            $('#edSidebar').show();
+            $('.ed-footer-block').show();
+            $('.ed-pagetitle-block').show(); 
+        }
+
+    </script>
+
+
+
+    {% endblock body %}

@@ -1,0 +1,63 @@
+{% extends 'officer/tmqm_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_recv">
+                  <span class="sidenav-mini-icon"> SR </span>
+                  <span class="sidenav-normal">Sample Received</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_return">
+                  <span class="sidenav-mini-icon"> SD/R </span>
+                  <span class="sidenav-normal">Sample Return</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="/tmqm_job_order">
+                  <span class="sidenav-mini-icon"> JO </span>
+                  <span class="sidenav-normal">Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Report_success">
+                  <span class="sidenav-mini-icon"> TR </span>
+                  <span class="sidenav-normal">Test Report</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+
+{% block body %}
+
+  <table class="table table-bordered table-hover bg-white  col-6 " cellspacing="0">
+
+    <thead class="bg-dark" >
+      <tr>
+      <th style="width:10%">Sample Code</th>
+      <th style="width:10%">Testing Date</th>
+      <th style="width:10%">Enter Employ Name</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for sc in sc_obj %}
+        {% if sc.is_rejected == 0 %}
+          <tr class="bg-light">
+          <td><b>{{sc.sample_code}}</b></td>
+          <td><b>{{sc.date}}</b></td>
+          <td><b>{{sc.officer_id}}</b></td>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+
+{% endblock body %}

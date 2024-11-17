@@ -1,0 +1,155 @@
+ {% extends 'rca/RCA_base.html' %} {% load static %} {% block heading %} DTR Issued {% endblock heading %} {% block body %}
+
+ <div class="ed-card-inner"> 
+    <div class="card-body">
+        <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+        </script>
+
+        <div class="printing-block" id="printid">
+            <table style="width:100%">
+                <tr>
+                    
+                </tr>
+                <tr>
+                    <td style="width: 100%;">
+                        <table style="width:100%; max-width: 80%; border: 1px solid #ddd;margin:0 auto; margin-top: 35px; margin-bottom: 15px;">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px;">RCA Order Information</th> 
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;"> 
+                                            RCA No
+                                        </p>
+                                    </td>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;"> 
+                                            MP{{ro.wo.rca_cell.user_zone}}00{{ ro.wo.id}}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            RCA Vendor Company name
+                                        </p>
+                                    </td>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;"> 
+                                            {{ ro.wo.vendor_id.CompanyName_E}}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            Material
+                                        </p>
+                                    </td>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;"> 
+                                            {{ ro.wo.wo_specification}}
+                                        </p>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%;">
+                        <table style="width:100%; max-width: 80%; border: 1px solid #ddd;margin:0 auto; margin-top: 15px; margin-bottom: 15px;">
+                            <thead>
+                                <tr>
+                                    <th style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px; width: 15%;"> Rating </th>
+                                    <th style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px; width: 40%;"> Description </th>
+                                    <th style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px; width: 10%; text-align: center;">  Quantity </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in material %}
+                                <tr>
+                                    
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;width: 15%;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            {{data.rating}}
+                                        </p>
+                                    </td>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;width: 40%;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            {{data.description}}
+                                        </p>
+                                    </td>
+                                    
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;width: 10%;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;text-align: center;">
+                                            {{data.quantity}}
+                                        </p>
+                                    </td>
+                                    
+                                   
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%;">
+                        <table style="width:100%; max-width: 80%; border: 1px solid #ddd;margin:0 auto; margin-top: 15px; margin-bottom: 15px;">
+                            <thead>
+                                <tr>
+                                    <th style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                        Rating
+                                    </th>
+                                    <th style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                        XMR Code
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in xmr %}
+                                <tr> 
+                                    
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            {{data.material.rating}}
+                                        </p>
+                                    </td>
+                                    <td style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                        <p style="font-size:12px; margin: 0; word-break: break-all; white-space: normal;">
+                                            {{data.xmr}}
+                                        </p>
+                                    </td> 
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="form-group mt-4"> 
+            <center>
+                <div id="options">
+                    <input id="printpagebutton" onclick="printDiv('printid')" class="btn ed-submit ed-formSubmit mr-2" type="button" value="Print" onclick="printpage()" />
+                    <a href="/rca/rca_base"> <button id="printpagebutton1" type="Submit" class="btn ed-submit ed-formSubmit"> Go To Home </button>
+                    </a>
+                </div>
+            </center>
+        </div>
+    </div>
+</div>
+{% endblock body %}

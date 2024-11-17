@@ -1,0 +1,317 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <!-- <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script> -->
+
+    <style>
+        hr {
+            border-top: 3px solid black;
+        }
+    </style>
+
+
+</head>
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-10">
+            <form action="/vendor/add_bg_save/{{data.id}}" name="myForm" method="POST"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+                <div class="card-body">
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <thead class="table table-dark ">
+                            <tr>
+                                <h5>Bank Guarantee Details
+                                    <h5>
+
+                            </tr>
+                        </thead>
+                        <!-- <tbody>
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">PO number</label> </td>
+                                <td> <label for="exampleInputEmail1">MP{{data.rca_cell.user_zone}}WO{{data.id}} </label>
+                                </td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_bg_bank}} </label> </td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_bg_no}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_issue_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Valid Upto </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_valid_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Claim Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_claim_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Amount </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_amount}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Account No. </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_ac_number}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_ifsc}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">BG Document </label> </td>
+                                <td style="text-align: left;"><a href="{{data.add_rca_bg_upload.url}}" target="_blank"
+                                        class="fas fa-eye text-primary"> View</a></td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.add_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Rejection Remarks </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.rca_bg_remark}} </label> </td>
+
+                            </tr>
+
+                            {% endif %}
+
+
+
+
+
+                        </tbody> -->
+                    </table>
+                </div>
+
+                <div class="card-body">
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <thead class="table table-dark ">
+                            <h5 class="font-weight-bolder">Bank Details For Payment </h5>
+
+
+                        </thead>
+                        <tbody>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">PO NUMBER </label> </td>
+                                <td><b>MP{{data.rca_cell.user_zone}}WO{{data.id}}</b>
+                                </td>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                                <td><input type="text" size="50" name="bgbank" id="bgbank" required>
+                                    <span id="bank_Name" class="text-danger font-weight-bold">
+                                </td>
+                                </span>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1"> Account Holder Name </label> </td>
+                                <td><input type="text" size="50" name="acc_holder_name" id="acc_name" placeholder=""
+                                        required>
+                                    <span id="bank_Name" class="text-danger font-weight-bold">
+                                </td>
+                                </span>
+                            </tr>
+                            <tr class="m-2">
+
+                                <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                                <td> <input type="text" size="50" min="1" name="ifsc" id="ifsc"
+                                        onkeypress='validate(event)' placeholder="" required>
+                                    <span id="amount1" class="text-danger font-weight-bold">
+                                </td>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">Account No. </label></td>
+                                <td> <input type="text" size="50" min="1" name="account_no" id="account_no"
+                                        onkeypress='validate(event)' placeholder="" required>
+
+                                    <span id="amount1" class="text-danger font-weight-bold">
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <h5 class="font-weight-bolder">BG Details </h5>
+
+
+                        <tr class="m-2">
+                            <td> <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                            <td> <input type="text" size="50" name="bg_no" id="bg_no" oonkeypress='validate(event)'
+                                    placeholder="" required>
+                                <span id="bank_no" class="text-danger font-weight-bold">
+                            </td>
+                        </tr>
+
+                        <tr class="m-2">
+                            <td> <label for="exampleInputEmail1">Amount </label> </td>
+                            <td> <input type="text" size="50" min="1" name="amount" id="amount"
+                                    onkeypress='validate(event)' placeholder="" required>
+                                <span id="amount1" class="text-danger font-weight-bold">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Issue Date </label> </td>
+                            <td><input type="date" name="bg_issu_date" id="bg_issu_date1" placeholder="" required>
+                                <span id="issueDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                            <td><input type="date" name="bg_valid_upto" id="bg_valid_upto1" placeholder="" required>
+                                <span id="validDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Claim Date </label> </td>
+                            <td><input type="date" name="claim_date" id="claim_date1" placeholder="" required>
+                                <span id="validDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td> <label for="digital_pdf">Upload BG document&nbsp;</label></td>
+                            <td> <input type="file" name="bg_upload" style="width: 200px" id="uploadFile"
+                                    onchange="pdfUpload()"></td>
+
+                        </tr>
+                        <tr>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary custom btn-primary m-3" id=""
+                    onclick="return submitForm()"></input>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#bg_valid_upto1').attr('min', today);
+</script>
+
+<script>
+
+    function pdfUpload() {
+        let uploadFile = document.getElementById("uploadFile");
+        let fileName = uploadFile.files[0].name;
+    }
+
+
+
+
+    let submitForm = () => {
+        let uploadFile = document.getElementById("uploadFile");
+        console.log(uploadFile.files[0])
+        if (uploadFile.files[0] != undefined) {
+            return true;
+        } else {
+            alert("Please Upload file first.")
+            return false;
+        }
+    }
+</script>
+
+{% endblock body %}

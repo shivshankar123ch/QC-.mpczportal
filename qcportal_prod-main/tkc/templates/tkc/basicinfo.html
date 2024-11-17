@@ -1,0 +1,129 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} {% block basic %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock basic %}
+
+    <head>
+        <script type="text/javascript">
+            window.history.forward();
+
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    </head>
+
+
+
+    <div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Basic Information Contractor
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="/basic/" method="POST">
+                            {% csrf_token %}
+                            <div class="ed-tableinfo-block">
+                                <div class="table-responsive">
+                                    <table
+                                        class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-5">S.No.</th>
+                                                <th>Document Name</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>1</th>
+                                                <td>Type of Business</td>
+                                                <td>{{userdata.Type_of_business}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>2</th>
+                                                <td>Authorised Person Name</td>
+                                                <td>{{userdata.Authorised_person_E}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>3</th>
+                                                <td>Company Name</td>
+                                                <td>{{userdata.CompanyName_E}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>4</th>
+                                                <td>Contact Number</td>
+                                                <td>{{userdata.ContactNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>5</th>
+                                                <td>Email ID</td>
+                                                <td>{{userdata.Email_Id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>6</th>
+                                                <td>Type</td>
+                                                <td>{{oyt}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">7</th>
+                                                <td>Registration Certificate</td>
+                                                {% if userdata.cert_image %}
+                                                <td>
+                                                    <a class="nav-link" href="{{userdata.cert_image.url}}"
+                                                        target=”_blank”>
+                                                        {{userdata.Authentication_id}}</a>
+                                                </td>
+                                                {% elif userdata.Authentication_id %}
+                                                <td>{{userdata.Authentication_id}}</td>
+                                                {% else %}
+                                                <td>Not Available</td>
+                                                {% endif %}
+                                            </tr>
+
+                                            <tr>
+                                                {% if userdata.officer_create %}
+                                                <td class="text-center">8</td>
+                                                <td>Turnkey Contractor Registration Certificate</td>
+                                                {% if userdata.cert_image_tkc %}
+                                                <td>
+                                                    <a class="nav-link" href="{{userdata.cert_image_tkc.url}}"
+                                                        target=”_blank”>
+                                                        {{userdata.Authentication_id_new}}</a>
+                                                </td>
+                                                {% elif userdata.Authentication_id_new %}
+                                                <td>{{userdata.Authentication_id_new}}</td>
+                                                {% else %}
+                                                <td>Not Available</td>
+
+                                                {% endif %}
+                                                {% else %}
+                                                <td></td>
+                                                {% endif %}
+                                            </tr>
+                                            <tr></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                        {% if not userdata.Complete_Details %}
+                        <div class="form-group mt-3">
+                            <div class="text-right">
+                                <a href="/tkc/tkc_reg_seven">
+                                    <button class="btn ed-submits ed-formsubmit " type="button" title="Send">
+                                        Upload Documents
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}

@@ -1,0 +1,364 @@
+<html>
+
+{% load static %}
+<style>
+@import url('https://fonts.googleapis.com/css?family=Saira+Condensed:700');
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+hr {
+  background-color: #662f66;
+  height: 3px;
+  margin: 5px;
+}
+
+div#cert-footer {
+  position: absolute;
+  width: 100%;
+  top: 550px;
+  text-align: center;
+}
+
+#cert-stamp, #cert-ceo-sign {
+  width: 60%;
+  display: inline-block;
+}
+
+div#cert-issued-by, div#cert-ceo-design {
+  margin-left: 7%;
+  width: 25%;
+  display: inline-block;
+  float: left;
+}
+
+div#cert-ceo-design {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+h1 {
+  font-family: 'Saira Condensed', sans-serif;
+}
+
+body {
+  text-align: center;
+  width: 80%;
+  height: 90%;
+  position: absolute;
+  left: 170px;
+  top: 30px;
+  border: 5px solid #662f66;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  margin: 5px 0px;
+}
+
+h1#cert-holder {
+  font-size: 30px;
+  color: #950c95;
+}
+
+p.smaller {
+  font-size: 17px !important;
+}
+
+div#cert-desc {
+  width: 70%;
+}
+
+p#cert-from {
+  color: black;
+  font-family: 'Saira Condensed', sans-serif;
+}
+
+div#cert-verify {
+  opacity: 1;
+  top: 700px;
+  left: 70%;
+  font-size: 12px;
+  color: black;
+}
+span {
+  content: "\2713";
+}
+
+
+</style>
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
+<body>
+
+<center>
+
+{% if User_Zone == 'CZ' %}
+      <p class=MsoNoSpacing align=center style='margin-right:-.3in;text-align:center;
+      text-indent:-.2in'><img width=123 height=105 id="Picture 1"
+      src="{% static 'assets\images\mpmk.png' %}"></p>
+      <p>
+
+      <h1>
+      M. P. MADHYA KSHETRA VIDYUT VITARAN CO. LTD.
+      </h1>
+      <h4>
+      (Government of M.P.Undertaking)
+      <br>
+      Regd. Office : Nishtha Parisar, Bijlinagar,Govindpura, Bhopal-462023
+      <br>
+      <h7>
+      ( 0755-2602033-34,2678325, 2678280-383-325, Fax No.2589821 Email – dgmproc2cz@gmail.com )
+      </h7>
+      <br>
+      Website:- https://portal.mpcz.in CIN Number:U40109MP2002SGC015119
+      </h4>
+    </p>
+    <h2 id="cert-course" style="color: #950c95;">
+      Certificate Of Registration
+    </h2>
+    <br>
+    <p class="smaller" id="cert-declaration" style='margin-left:0in;'>
+      THIS IS TO CERTIFY THAT
+    </p>
+
+    <h1 id="cert-holder">
+      M/s  {{company_name}}
+    </h1>
+
+    {% if data.User_type == 'TKC' %}
+    <p class="smaller" id='cert-completed-line'>
+      is registered {{data.User_type}} in MPMKVVCL
+    </p>
+    {% elif data.User_type == 'NABL' %}
+    <p class="smaller" id='cert-completed-line'>
+      is registered {{data.User_type}} in MPMKVVCL
+    </p>
+    {% else %}
+    <p class="smaller" id='cert-completed-line'>
+      is registered {{data.User_type}} in MPMKVVCL for Supply of
+      <br>
+      {% for data in vmaterial %}
+      <b>{{data.Material_Name}}</b>
+      <br>
+      {% endfor %}
+    </p>
+
+    {% endif %}
+    <p class="smaller" id='cert-issued'>
+    <b>Issued on : </b> {{d2}}
+    <b>Valid upto: </b> {{d1}}
+    <br>
+    </p>
+
+    <p class="smaller" id='cert-issued'>
+    <b>Registration No. : </b>
+    <br>
+    <b style="color: #950c95;"> {{no}}</b>
+    </p>
+
+    {% if data.User_type == 'TKC' %}
+    <div  id="cert-footer" style="margin-left: 60%;" >
+      <div id="cert-issued-by">
+        <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : GM(works)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPMKVVCL(Bhopal) </p>
+      </div>
+    {% else %}
+    <div  id="cert-footer" style="margin-left: 60%;" >
+      <div id="cert-issued-by">
+        <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : CGM(QC)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPMKVVCL(Bhopal) </p>
+      </div>
+    {% endif %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% elif User_Zone == 'WZ' %}
+      <img  class="image" width=120 height=120 src="{% static 'assets\images\mppk.png' %}" align=left style="width:120px;height:120px; padding-left: 0px; padding-left: 60px; padding-top: 10px; position: absolute;" alt="mpmk">
+
+      <p>
+        <h1>
+        M. P. PASCHIM  KSHETRA VIDYUT VITARAN CO. LTD.
+        </h1>
+        <h4>
+        (Government of M.P.Undertaking)
+        <br>
+        Regd. Office :  GPH Campus Polo Ground, Indore : 452015
+        <br>
+        <h7>
+        (1912, 0731-6700000, 0731-2426243, Fax No. 0731-2423300 Email – support@mpwz.org )
+        </h7>
+        <br>
+        Website:- http://www.mpwz.co.in CIN Number:U40109MP2002SGC015121
+        </h4>
+      </p>
+      <h2 id="cert-course" style="color: #950c95;">
+        Certificate Of Registration
+      </h2>
+      <br>
+      <p class="smaller" id="cert-declaration" style='margin-left:0in;'>
+        THIS IS TO CERTIFY THAT
+      </p>
+
+      <h1 id="cert-holder">
+        M/s  {{company_name}}
+      </h1>
+
+      {% if data.User_type == 'TKC' %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPKVVCL
+      </p>
+      {% elif data.User_type == 'NABL' %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPKVVCL
+      </p>
+      {% else %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPKVVCL for Supply of
+        <br>
+        {% for data in vmaterial %}
+        <b>{{data.Material_Name}}</b>
+        <br>
+        {% endfor %}
+      </p>
+
+      {% endif %}
+
+      <p class="smaller" id='cert-issued'>
+      <b>Issued on : </b> {{d2}}
+      <b>Valid upto: </b> {{d1}}
+      <br>
+      </p>
+
+      <p class="smaller" id='cert-issued'>
+      <b>Registration No. : </b>
+      <br>
+      <b style="color: #950c95;"> {{no}}</b>
+      </p>
+
+      {% if data.User_type == 'TKC' %}
+      <div  id="cert-footer" style="margin-left: 60%;" >
+        <div id="cert-issued-by">
+          <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : GM(works)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPPKVVCL(Indore) </p>
+        </div>
+      {% else %}
+      <div  id="cert-footer" style="margin-left: 60%;" >
+        <div id="cert-issued-by">
+          <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : CGM(QC)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPPKVVCL(Indore) </p>
+        </div>
+      {% endif %}
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+      <img  class="image" width=120 height=120 src="{% static 'assets\images\mppok.png' %}" align=left style="width:120px;height:120px; padding-left: 0px; padding-left: 60px; padding-top: 10px; position: absolute;" alt="mpmk">
+
+      <p>
+        <h1>
+        M. P. POORV KSHETRA VIDYUT VITARAN CO. LTD.
+        </h1>
+        <h4>
+        (Government of M.P. Undertaking)
+        <br>
+        Regd. Office : Block no. 7, Shakti Bhawan, PO: Vidyut Nagar, Rampur, Jabalpur (M.P.) - 482008
+        <br>
+        <h7>
+        ( 18002331266, Fax No. 2664749, 2666070 Email – mpeastdiscom@mpez.co.in )
+        </h7>
+        <br>
+        Website:- http://www.mpez.co.in CIN Number:U40109MP2002SGC015120
+        </h4>
+      </p>
+      <h2 id="cert-course" style="color: #950c95;">
+        Certificate Of Registration
+      </h2>
+      <br>
+      <p class="smaller" id="cert-declaration" style='margin-left:0in;'>
+        THIS IS TO CERTIFY THAT
+      </p>
+
+      <h1 id="cert-holder">
+        M/s  {{company_name}}
+      </h1>
+
+      {% if data.User_type == 'TKC' %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPoKVVCL
+      </p>
+      {% elif data.User_type == 'NABL' %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPoKVVCL
+      </p>
+      {% else %}
+      <p class="smaller" id='cert-completed-line'>
+        is registered {{data.User_type}} in MPPoKVVCL for Supply of
+        <br>
+        {% for data in vmaterial %}
+        <b>{{data.Material_Name}}</b>
+        <br>
+        {% endfor %}
+      </p>
+
+      {% endif %}
+
+      <p class="smaller" id='cert-issued'>
+      <b>Issued on : </b> {{d2}}
+      <b>Valid upto: </b> {{d1}}
+      <br>
+      </p>
+
+      <p class="smaller" id='cert-issued'>
+      <b>Registration No. : </b>
+      <br>
+      <b style="color: #950c95;"> {{no}}</b>
+      </p>
+
+      {% if data.User_type == 'TKC' %}
+      <div  id="cert-footer" style="margin-left: 60%;" >
+        <div id="cert-issued-by">
+          <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : GM(works)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPPoKVVCL(Jabalpur) </p>
+        </div>
+      {% else %}
+      <div  id="cert-footer" style="margin-left: 60%;" >
+        <div id="cert-issued-by">
+          <p style="background-image: url('/static/assets/images/WhatsApp Image 2022-03-27 at 5.56.57 PM.jpeg');background-repeat:no-repeat; margin-left: 33%; "> Signed By : CGM(QC)<br>Date : {{td}}<br>Authentication Method : OTP<br>MPPoKVVCL(Jabalpur) </p>
+        </div>
+      {% endif %}
+      </div>
+{% endif %}
+
+</center>
+</body>
+
+</html>
+

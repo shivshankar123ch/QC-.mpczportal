@@ -1,0 +1,124 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            User Payment Details
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center ed-table-block ed-centertable "
+                    id="payment">
+                    <thead>
+                        <tr>
+                            <th>
+                                Company/Firm Name
+                            </th>
+                            <th>
+                                Authorized Person
+                            </th>
+                            <th>
+                                Date of Payment
+                            </th>
+                            <th>
+                                Net Amount
+                            </th>
+                            <th>
+                                Purpose
+                            </th>
+                            <th>
+                                Transaction Id
+                            </th>
+                            <th>
+                                User Type
+                            </th>
+                            <th>
+                                Invoice
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in page_obj %}
+                        <tr>
+                            <td>{{data.User_Id.CompanyName_E}}</td>
+                            <td>{{data.Firstname}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.Netamount_Debited}}</td>
+                            <td>{{data.Productinfo}}</td>
+                            <td>{{data.Txdid}}</td>
+                            <td>{{data.User_Id.User_type}}</td>
+
+                            {% if not data.invoice %}
+                            <td>
+                                <a href="javascript:;" class="ed-links">
+                                    <label class="ed-textinfo" onClick="alert('No invoice uploaded')">
+                                        <span class="btn ed-submit btn-info">
+                                            View
+                                        </span>
+                                    </label>
+                                </a>
+                            </td>
+                            {% else %}
+                            <td>
+
+                                <a href="{{data.invoice.url}}" class="ed-links">
+                                    <label class="ed-textinfo text-info" onClick="alert('No invoice uploaded')">
+                                        <span class="btn ed-submit btn-info">
+                                            View
+                                        </span>
+                                    </label>
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="pagination">
+            <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}" >previous</a>
+                            {% endif %}
+        
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span> {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>&nbsp;
+            <a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a> {% endif %}
+            </span>
+        </div>
+    </div> -->
+
+
+<script>
+    $(document).ready(function () {
+        $('#payment').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+{% endblock body %}

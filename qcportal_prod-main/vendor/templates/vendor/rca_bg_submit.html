@@ -1,0 +1,440 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <!-- <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script> -->
+
+    <style>
+        hr {
+            border-top: 3px solid black;
+        }
+    </style>
+
+
+</head>
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-10">
+            <form action="/vendor/rca_ven_bg_save/{{data.id}}" name="myForm" id="my-form" method="POST"
+                enctype="multipart/form-data" onsubmit="return submitForm()">
+                {% csrf_token %}
+
+
+                <div class="card-body">
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <thead class="table table-dark ">
+                            <tr>
+                                <h5>Bank Guarantee Details
+                                    <h5>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">PO number</label> </td>
+                                <td> <label for="exampleInputEmail1">MP{{data.rca_cell.user_zone}}WO{{data.id}} </label>
+                                </td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.bg_bank}} </label> </td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.bg_no}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.issue_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Valid Upto </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.valid_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Claim Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.claim_date}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Amount </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.amount}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Account No. </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.ac_number}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.ifsc}} </label> </td>
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">BG Document </label> </td>
+                                <td style="text-align: left;"><a href="{{data.rca_bg_upload.url}}" target="_blank"
+                                        class="fas fa-eye text-primary"> View</a></td>
+
+                            </tr>
+
+                            {% endif %}
+
+                            {% if data.rca_bg_remark_flag == 1 %}
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Rejection Remarks </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.rca_bg_remark}} </label> </td>
+
+                            </tr>
+
+                            {% endif %}
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-body">
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <thead class="table table-dark ">
+                            <h5 class="font-weight-bolder">Bank Details For Payment </h5>
+
+
+                        </thead>
+                        <tbody>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">PO NUMBER </label> </td>
+                                <td><b>MP{{data.rca_cell.user_zone}}WO{{data.id}}</b>
+                                </td>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                                <td><input type="text" size="50" name="bgbank" id="bgbank" required>
+                                    <span id="bank_Name" class="text-danger font-weight-bold">
+                                </td>
+                                </span>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1"> Account Holder Name </label> </td>
+                                <td><input type="text" size="50" name="acc_holder_name" id="acc_name" placeholder=""
+                                        required>
+                                    <span id="bank_Name" class="text-danger font-weight-bold">
+                                </td>
+                                </span>
+                            </tr>
+                            <tr class="m-2">
+
+                                <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                                <td> <input type="text" size="50" min="1" name="ifsc" id="ifsc" placeholder="" required
+                                        size="11">
+                                    <span id="amount1" class="text-danger font-weight-bold">
+                                </td>
+                            </tr>
+                            <tr class="m-2">
+                                <td> <label for="exampleInputEmail1">Account No. </label></td>
+                                <td> <input type="text" size="50" min="1" name="account_no" id="account_no"
+                                        placeholder="" required>
+
+                                    <span id="amount1" class="text-danger font-weight-bold">
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellpadding="0 " id="dtBasicExample" cellspacing="0 " border="0 "
+                        class="datatable table table-responsive table-bordered ">
+                        <h5 class="font-weight-bolder">BG Details </h5>
+
+
+                        <tr class="m-2">
+                            <td> <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                            <td> <input type="text" size="50" name="bg_no" id="bg_no" placeholder="" required>
+                                <span id="bank_no" class="text-danger font-weight-bold">
+                            </td>
+                        </tr>
+
+                        <tr class="m-2">
+                            <td> <label for="exampleInputEmail1">Amount </label> </td>
+                            <td> <input type="text" size="50" min="1" name="amount" id="amount" placeholder="" required>
+                                <span id="amount1" class="text-danger font-weight-bold">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Issue Date </label> </td>
+                            <td><input type="date" name="bg_issu_date" id="bg_issu_date1" placeholder="" required>
+                                <span id="issueDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                            <td><input type="date" name="bg_valid_upto" id="bg_valid_upto1" placeholder="" required>
+                                <span id="validDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1"> Claim Date </label> </td>
+                            <td><input type="date" name="claim_date" id="claim_date1" placeholder="" required>
+                                <span id="validDate" class="text-danger font-weight-bold">
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td> <label for="digital_pdf">Upload BG document&nbsp;</label></td>
+                            <td> <input type="file" name="bg_upload" style="width: 200px" id="uploadFile"
+                                    onchange="pdfUpload()"></td>
+
+                        </tr>
+                        <tr>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary custom btn-primary m-3" id=""></input>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let dtElem1 = document.getElementById('bg_valid_upto1');
+    let dtElem2 = document.getElementById('claim_date1');
+    let maxDate = new Date();
+    let minDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    dtElem1.min = formatDate(minDate);
+    dtElem2.min = formatDate(minDate);
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+
+
+<script>
+
+    const form = document.getElementById('my-form');
+    const all_input = document.getElementsByTagName("input")
+
+    for (const element of all_input) {
+
+        element.addEventListener('change', (element) => {
+            let regexp1 = new RegExp(/^[A-Za-z ]+$/);
+            let regex2 = new RegExp(/^[A-Z]{4}0[A-Z0-9]{6}$/);
+            let regex3 = new RegExp(/^\d{9,18}$/);
+            let regex5 = new RegExp(/^\d{2,18}$/);
+            let regex4 = new RegExp(/^\d+(\.\d{1,2})?$/);
+            let inp_val = element.target
+
+            if (element.target.id == "bgbank") {
+                let result = regexp1.test(inp_val.value);
+                if (result == false) {
+                    alert("Bank name must be in letter only.")
+                    return false;
+                }
+            } else if (element.target.id == "acc_name") {
+                let result = regexp1.test(inp_val.value);
+                if (result == false) {
+                    alert("Account holder name should be in letter only.")
+                    return false;
+                }
+            } else if (element.target.id == "ifsc") {
+                let result = regex2.test(inp_val.value);
+                if (result == false) {
+                    alert("IFSC code  should be in Capital letter only.")
+                    return false;
+                }
+            } else if (element.target.id == "account_no") {
+
+                let result = regex3.test(inp_val.value);
+                if (result == false) {
+                    alert("Account number must be in Valid Format..")
+                    return false;
+                }
+
+            // } else if (element.target.id == "bg_no") {
+            //     let result = regex3.test(inp_val.value);
+            //     console.log(inp_val.value)
+            //     console.log(result)
+            //     if (result == false) {
+            //         alert("Bank Guarantee must be Number only.")
+            //         return false;
+            //     }
+            } else if (element.target.id == "amount") {
+                let result = regex5.test(inp_val.value);
+                console.log(inp_val.value)
+                console.log(result)
+                if (result == false) {
+                    alert("Amount must be Number only.")
+                    return false;
+                }
+            } else {
+                return true
+            }
+        })
+
+    }
+
+
+
+</script>
+
+<script>
+
+    function pdfUpload() {
+        let uploadFile = document.getElementById("uploadFile");
+        let fileName = uploadFile.files[0].name;
+    }
+
+
+
+
+    let submitForm = () => {
+
+        const form = document.getElementById('my-form');
+
+        console.log(form)
+        for (const element of form) {
+            console.log(element.id, element.value)
+            let regexp1 = new RegExp(/^[A-Za-z ]+$/);
+            let regex2 = new RegExp(/^[A-Z]{4}0[A-Z0-9]{6}$/);
+            let regex3 = new RegExp(/^\d{9,18}$/)
+            let regex5 = new RegExp(/^\d{2,18}$/);
+            let inp_val = element.value
+            console.log(element.id)
+            console.log(element.value)
+            if (element.id == "bgbank") {
+                let result = regexp1.test(inp_val);
+                console.log(result)
+                if (result == false) {
+                    alert("Bank name must be in letter only.")
+
+                    return false;
+                }
+            } else if (element.id == "acc_name") {
+                let result = regexp1.test(inp_val);
+
+                console.log(result)
+                if (result == false) {
+                    alert("Account holder name should be in letter only.");
+
+                    return false;
+                }
+            } else if (element.id == "ifsc") {
+                let result = regex2.test(inp_val);
+                if (result == false) {
+                    alert("IFSC code  should be in Capital letter only.")
+                    return false;
+                }
+            } else if (element.id == "account_no") {
+                let result = regex3.test(inp_val);
+                console.log(element.id)
+                console.log(result)
+                console.log(inp_val.value)
+                if (result == false) {
+                    alert("Account number must be Number only.")
+                    return false;
+                }
+
+            } else if (element.id == "bg_no") {
+                let result = regex3.test(inp_val);
+                if (result == false) {
+                    alert("Bank Guarantee must be Number only.")
+                    return false;
+                }
+            } else if (element.id == "amount") {
+                let result = regex5.test(inp_val);
+                if (result == false) {
+                    alert("Amount must be Number only.")
+                    return false;
+                }
+            } else if (uploadFile.files[0] == undefined) {
+                alert("Please Upload file first.")
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false
+    }
+
+
+</script>
+
+
+{% endblock body %}

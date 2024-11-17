@@ -1,0 +1,84 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>All Approved/Pending From Discom Vendor List </h2>
+    <div class="panel panel-default">
+    
+
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered table-hover" id="all_vendor_approved_list">
+                    <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                        <tr>
+                            <th><b>S No.</b> </th>
+                            <th><b>Firm/Company Name</b> </th>
+                            <th><b>Authorised Person Name</b> </th>
+                            <th><b>Approved Zone</b> </th>
+
+                            <th><b>Status at DGM(w&p)</b> </th>
+                            <th><b>Status at DGM(finance)</b> </th>
+
+                            <th><b>Status at CGM(QC)</b> </th>
+                            
+
+
+                            <th><b>Authentication ID</b></th>
+
+
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in doc %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>  {{data.CompanyName_E}}</td>
+                            <td>{{data.Authorised_person_E}}</td>
+                            <td>{{data.User_zone}}</td>
+                            {% if data.work_approval == 1  %}
+                            <td><span class="btn btn-success btn-sm">Approve</span></td>
+                                {% elif data.work_approval == 2  %}
+                                <td><span class="btn btn-danger btn-sm">Rejected</span></td>
+                                {% else %}
+                                <td><span class="btn btn-warning btn-sm">Pending</span></td>
+                                {% endif %}
+        
+                                {% if data.finance_approval == 1  %}
+                                <td><span class="btn btn-success btn-sm">Approve</span></td>
+                                {% elif data.finance_approval == 2  %}
+                                <td><span class="btn btn-danger btn-sm">Rejected</span></td>
+                                
+                                {% else %}
+                                <td><span class="btn btn-warning btn-sm">Pending</span></td>
+                                {% endif %}
+                            
+                                {% if data.cgm_approval == 1  %}
+                                <td><span class="btn btn-success btn-sm">Approve</span></td>
+                                {% elif data.cgm_approval == 2  %}
+                                <td><span class="btn btn-danger btn-sm">Rejected</span></td>
+                                
+                                {% elif data.cgm_approval == -1  %}
+                                <td><span class="btn btn-danger btn-sm">Rejected</span></td>
+                                
+                                {% else %}
+                                <td><span class="btn btn-warning btn-sm">Pending</span></td>
+                                {% endif %}
+                            <td>  {{data.Authentication_id}}</td>
+
+                        
+                           
+                            </tr>
+                        {% endfor %} {% endwith %}
+                  
+                    </tbody>
+
+                </table>
+            </div>
+          
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready( function () {
+    $('#all_vendor_approved_list').DataTable();
+} );
+</script>
+{% endblock body %}

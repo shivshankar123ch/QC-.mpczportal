@@ -1,0 +1,426 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Work Order Information
+        </h2>
+    </div>
+    <div class="card-body mb-4">
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Order Information
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Work Order No 
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="MP{{ro.rca_cell.user_zone}}00{{ ro.wo.id}}" readonly >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA Vendor Company name
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.vendor_id.CompanyName_E}}" readonly >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly >
+                    </div> 
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+
+    <div class="card-body mb-4">
+      <h4 class="mb-3">Release Number : RO00{{ro.id}}</h4>
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                Description 
+                            </th>
+                            <th class="text-center">
+                                Quantity 
+                            </th>
+                            <!--<th class="text-center">-->
+                            <!--    Rate -->
+                            <!--</th>-->
+                            <!--<th class="text-center">-->
+                            <!--    Total amount-->
+                            <!--</th> -->
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!--<td>{{data.rate}}</td>-->
+                            <!--<td>{{data.total_rate}}</td>-->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- <table class="table table-striped m-4 " border="2" style="width:90%">
+                <thead class="bg-primary">
+                <tr>
+                <th scope="col-3"> Rating </th>
+                <th scope="col-3"> XMR Code </th>
+                <th scope="col-3"> XMR Type </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in xmr %}
+                <tr>
+                <td>{{data.material.rating}}</td>
+                <td>{{data.xmr}}</td>
+                <td>
+                {% if data.new_design == 1 %}
+                New Design
+                {% elif data.old_l1 == 1 %}
+                Old L1
+                {% elif data.old_l2 == 1 %}
+                Old L2
+                {% endif %}
+                </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                </table> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                DRR No.
+                            </th>
+                            <th class="text-center">
+                                DRR Date
+                            </th>
+                            <th class="text-center">
+                                Challan No
+                            </th> 
+                            <th class="text-center">
+                                Challan Date
+                            </th>
+                            <th class="text-center">
+                                Vehicle No
+                            </th> 
+                            <th class="text-center">
+                                Qauntity
+                            </th> 
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {% for data in drr %}
+                        <tr>
+                            <td>{{data.id}}</td>
+                            <td>{{data.drr_date}}</td>
+                            <td>{{data.drr_challan_no}}</td>
+                            <td>{{data.drr_challan_date}}</td>
+                            <td>{{data.drr_vehicle}}</td>
+                            <td>{{data.drr_quantity}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                Release No. 
+                            </th>
+                            <th>
+                                XMR Report
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in rep %}
+                        <tr>
+                            <td>{{data.ro.id}}</td> 
+                            <td>  
+                                <a href="{{data.all_xmr_rprt.url}}" class="ed-links text-info">
+                                    <label class="ed-textinfo text-info">
+                                        <span class="btn btn-primary">
+                                        
+                                    View
+                                    </span>
+                                    </label>
+                                </a>
+                            </td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+
+    <form action="/po/rca_as_repaired_inward_accepted/{{ro.id}}" method="POST">
+        {% csrf_token %}  
+        <div class="card-body mb-4">  
+            <h6 class="mb-3">
+                <span class="ed-text">
+                    Areastore Physical Inspection
+                </span>
+            </h6> 
+
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered display text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>S.No.</th> 
+                                <th>
+                                    <span>XMR <br>
+                                        ( <input type="checkbox" id="xmrselBtn" onclick="selects()">
+                                        <small>select All</small>)
+                                    </span>
+                                </th>
+                                <th>XMR Rating</th>
+                                <th>DRR No.</th>
+                                <th>Uneconomical/ Repaired Status</th>
+                                <th>XMR Type </th>
+                                <th>
+                                    <span>
+                                        Accepted <br>
+                                        (<input type="radio" id="acceptedselBtn" onclick="acc_rej()" name="acc_rej_btn">
+                                        <small>select All</small>)
+                                    </span>
+                                </th>
+                                <th>
+                                    <span>
+                                        Rejected <br>
+                                        (<input type="radio" id="rejectedselBtn" onclick="acc_rej()" name="acc_rej_btn">
+                                        <small>select All</small>)
+                                    </span>
+                                </th>
+                                <th>Remark</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for a in xmr %}
+                            <tr> 
+                                <td>{{forloop.counter}}</td>
+                                <td>
+                                    {% if not a.as_accepted %}
+                                    {{a.xmr}} &nbsp; &nbsp; <input type="checkbox" name="xmr_det" value="{{a.id}}">
+                                    {% else %}
+                                    {{a.xmr}}
+                                    {% endif %}  
+                                </td> 
+
+                                <td>{{a.material.rating}}</td>
+                                
+
+
+                                <td>{{a.drr_details.id}}</td> 
+
+                                <td>
+                                    {% if a.uneco_status == 1 %}
+                                    Uneconomical<br>
+
+                                    {% else %}
+                                     Repaired <br>
+
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if a.new_design == 1 %}
+                                    New Design
+                                    {% elif a.old_l1 == 1 %}
+                                    Old L1
+                                    {% elif a.old_l2 == 1 %}
+                                    Old L2
+                                    {% elif a.design_non_star == 1 %}
+                                    Non Star(Old Design)
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if not a.physical_status %}
+                                    &nbsp; &nbsp; <input type="checkbox" name="accepted" value="{{a.id}}" id="accept{{a.id}}" onclick="checkman(value,id)">
+
+                                    {% elif a.physical_status == 1 %}
+                                    Accepted 
+                                    {% endif %} 
+                                </td>  
+                                <td>
+                                    {% if not a.physical_status %}
+                                    &nbsp; &nbsp; <input type="checkbox" name="rejected" value="{{a.id}}" id="reject{{a.id}}" onclick="checkman(value,id)">  
+                                    {% elif a.physical_status == -1 %}
+                                    Rejected 
+                                    {% endif %} 
+                                </td> 
+                                <td>
+                                    {% if not a.as_accepted %}
+                                    <textarea class="form-control ed-textbox" id="task" name={{a.xmr}} rows="1" placeholder="Write Remark"></textarea>
+                                    {% else %}
+                                    {{a.as_remark}}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-action text-right"> 
+                    <button type="Submit" class="btn btn-secondary ed-formSubmit" onclick="return submitform()">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>  
+<script>
+
+    function checkman(value,id){
+        
+        let key = document.getElementById(id);
+       
+        if(key.id == 'accept'+value){ 
+            document.getElementById('reject'+value).checked = false;  
+        }else{
+            document.getElementById('accept'+value).checked = false; 
+        }
+    }
+
+
+    function selects(){
+       let xmrselBtn = document.getElementById('xmrselBtn');
+       let xmr_det = document.getElementsByName("xmr_det");
+       for(i of xmr_det){
+        if(xmrselBtn.checked == true){
+            i.checked = true;
+        }else{
+            i.checked = false;
+        }
+       }
+    }
+
+    function acc_rej() {
+        let acc = document.getElementById('acceptedselBtn').checked;
+        let rej = document.getElementById('rejectedselBtn').checked;
+        let acc_col = document.getElementsByName('accepted');
+        let rej_col = document.getElementsByName('rejected');
+
+        for(i of acc_col){
+            for(j of rej_col){
+                if(acc == true){
+                     i.checked = true;
+                     j.checked = false;
+                }else{
+                    i.checked = false;
+                    j.checked = true;
+                }
+            }
+        }
+
+    }
+
+//     function submitform() {
+
+//         let xmr_col = document.getElementsByName('xmr_det');
+//         let acc_col = document.getElementsByName('accepted');
+//         let rej_col = document.getElementsByName('rejected');
+//         let count = 0;
+   
+//         if(xmr_col.length != 0){
+//             for (i of xmr_col) {
+//                count += 1;
+//             if (i.checked == true) {
+//                 for (j of acc_col) {
+//                     for (k of rej_col) {
+//                         if (j.checked && k.checked == true) {
+//                             alert("You can not check XMR with accept and reject at same time.");
+//                             return false;
+//                         }else if(j.checked == false && k.checked == false){
+//                             alert("You have to accept or reject selected XMR.");
+//                             return false;
+
+//                         }else {
+//                             return true;
+//                         }
+                        
+//                     }
+//                 }
+
+//             }else if(xmr_col.length == count){
+//                 alert("Please select xmr first");
+//                 return false;
+//             }
+//         }
+//     }else{
+//         alert("You have not any pandding XMR for Sumbit.");
+//         return false
+//     }
+//     }
+        
+        
+
+// </script>
+{% endblock body %}

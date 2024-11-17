@@ -1,0 +1,232 @@
+{% extends 'nabl/nabl_Base.html' %} 
+{% load static %}
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+      <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1 font-weight-bold" style="font-weight: bold; font-size: medium; ">Dashboard</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/basic">
+              <span class="sidenav-mini-icon"> BI </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/rejected_doc">
+              <span class="sidenav-mini-icon"> RD </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/UpdateNablProfile">
+              <span class="sidenav-mini-icon"> AS </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update  Profile </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+          </a>
+        </li>
+      <li class="nav-item ">
+          <a class="nav-link " href="#">
+              <span class="sidenav-mini-icon"> Noti </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/nabl/nabl_trf">
+              <span class="sidenav-mini-icon">T M R</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">RCA Material Report </span>
+          </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link active" href="/nabl/nabl_out_physical">
+          <span class="sidenav-mini-icon">Phy Test Out</span>
+          <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical_view">
+          <span class="sidenav-mini-icon">Phy Test View</span>
+          <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/">
+              <span class="sidenav-mini-icon">LO</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+          </a>
+      </li>
+  </ul>
+</div>
+{% endblock active %}
+{% block body %}
+<form method="POST" action="/nabl/nabl_out_physical">
+    {% csrf_token %}
+   <table class="table table-bordered table-hover bg-white col-3" cellspacing="1">
+    <thead class="bg-dark text-light" style="vertical-align: top;">
+        <tr>
+          <th style="width:10%; text-align: center;">TRF Id</th>
+          <th style="width:20%">Material ID</th>
+          <th style="width:20%">Sample Code</th>
+          <th style="width:10%; text-align: center;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for sc in sc_obj %}
+          <tr class="bg-light">
+          <td style="text-align: center;"><b>{{sc.TRF_Id}}</b></td>
+          <td><b><input  style="background-color: transparent;border: none;" size=10 value="{{sc.material_serial_number}}" name="material_serial_number_list" id="material_serial_number_list" type="text" ></b></td>
+          <td><b>{{sc.sample_code}}</b></td>
+          <td style="text-align: center;"><b><input value="{{sc.sample_code}}" name="sampleCode_list" id="sampleCode_list" type="checkbox" style="width: 20px; height: 20px;" class="button btn btn-primary"></b></td>
+          {% endfor %}
+      </tbody>
+  </table>
+  
+  <table class="table table-bordered bg-white col-3" cellspacing="1">
+    <tr class="bg-dark text-light">
+      <th style="width:30%; text-align: center;"><b>TRF ID</b></th>
+      <td><input style="text-align:center;" id="TRF_Id" name="TRF_Id" type="text" class="form-control textbox" value="{{TRF_Id}}" readonly="readonly"/></td>
+    </tr>
+    <!-- <tr class="bg-dark text-light">
+        <th style="width:30%; text-align: center;"><b>Driver Name</b></th>
+        <td><input style="text-align:center;" id="driver_name" name="driver_name" type="text" class="form-control textbox" required="required"/></td>
+    </tr>
+    <tr class="bg-dark text-light">
+      <th style="width:30%; text-align: center;"><b>Driver Mobile</b></th>
+      <td><input style="text-align:center;" id="outward_driver_mobile" name="outward_driver_mobile" type="number" class="form-control textbox" required="required"/></td>
+    </tr>
+    
+    <tr class="bg-dark text-light">
+        <td style="width:30%; text-align: center;"><b>Vehicle Number</b></td>
+        <td><input style="text-align:center;" id="Vehicle_number" name="Vehicle_number" type="text" class="form-control textbox" required="required"/></td>
+    </tr>
+    <tr class="bg-dark text-light">
+        <td style="width:30%; text-align: center;"><b>Date</b></td>
+        <td ><input style="text-align:center;" id="out_date" name="out_date" type="date" class="form-control textbox" required="required"/></td>
+    </tr>
+    <tr class="bg-dark text-light">
+    </tr> -->
+    <tr class="bg-dark text-light">
+      <th style="width:30%; text-align: center;"><b>Driver Name</b></th>
+      <td ><input style="text-align:center;" id="driver_name" name="driver_name" type="text" class="form-control textbox" value="{{driver_name}}"/></td>
+  </tr>
+  <tr class="bg-dark text-light">
+    <th style="width:30%; text-align: center;"><b>Driver Mobile</b></th>
+    <td><input style="text-align:center;" id="driver_mobile" name="driver_mobile" type="number" class="form-control textbox" /></td>
+  </tr>
+  <tr class="bg-dark text-light" style="width:100%;">
+    <td style="width:30%; text-align: center;"><b>Receiver Name</b></td>
+    <td ><input style="text-align:center;" id="receiver_name" name="receiver_name" type="text" class="form-control textbox" /></td>
+  </tr>    
+  <tr class="bg-dark text-light">
+      <td style="width:30%; text-align: center;"><b>Vehicle Number</b></td>
+      <td><input style="text-align:center;" id="vehicle_number" name="vehicle_number" type="text" class="form-control textbox" /></td>
+  </tr>
+  <tr class="bg-dark text-light">
+    <td style="width:30%; text-align: center;"><b>Material Name</b></td>
+    <td>
+      <select style="width:100%; text-align: center;" name="Material_name" id="Material_name">
+        <option value="DTR">Transformer</option>
+        <option value="CABLE">CABLE</option>
+        <option value="CONDUCTOR">CONDUCTOR</option>
+      </select>
+    </td>
+  </tr>
+  <tr class="bg-dark text-light">
+    <td style="width:30%; text-align: center;"><b>Tansformer Type</b></td>
+    <td>
+      <select style="width:100%; text-align: center;" name="trnsfrmr_type" id="trnsfrmr_type">
+        <option value="OLD">OLD</option>
+        <option value="NEW">NEW</option>
+      </select>
+    </td>
+  </tr>
+  <tr class="bg-dark text-light">
+    <td style="width:30%; text-align: center;"><b>Manufacturer Name</b></td>
+    <td ><input style="text-align:center;" id="manufacturer_name" name="manufacturer_name" type="text" class="form-control textbox" /></td>
+  </tr>
+  <tr class="bg-dark text-light">
+    <td style="width:30%; text-align: center;"><b>Rating (Tansformer)</b></td>
+    <td>
+      <select style="width:100%; text-align: center;" name="rating" id="rating">
+        <option value="25KVA">25KVA</option>
+        <option value="63KVA">63KVA</option>
+        <option value="100KVA">100KVA</option>
+        <option value="200KVA">200KVA</option>
+      </select>
+    </td>
+  </tr>
+<tr class="bg-dark text-light" style="width:100%;">
+    <td style="width:30%; text-align: center;"><b>Order Number</b></td>
+    <td ><input style="text-align:center;" id="order_number" name="order_number" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+    <td style="width:30%; text-align: center;"><b>Order Date</b></td>
+    <td ><input style="text-align:center;" id="order_date" name="order_date" type="date" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>DI Number</b></td>
+  <td ><input style="text-align:center;" id="di_number" name="di_number" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+    <td style="width:30%; text-align: center;"><b>DI Date</b></td>
+    <td ><input style="text-align:center;" id="di_date" name="di_date" type="date" class="form-control textbox" /></td>
+</tr>
+<!-- <tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>XMR S.No.</b></td>
+  <td class="bg-light text-light">
+  {% for i in xmr_sample_mat %}
+    <input style="text-align:center;" id="xmr_snos" name="xmr_snos" type="text" class="form-control textbox text-bold" value="{{i.xmr}}" readonly="readonly"/>
+  {% endfor %}
+  </td>
+</tr> -->
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Send To (Name of Lab.)</b></td>
+  <td ><input style="text-align:center;" id="send_to_lab" name="send_to_lab" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Letter No.</b></td>
+  <td ><input style="text-align:center;" id="letter_no" name="letter_no" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Date of letter within</b></td>
+  <td ><input style="text-align:center;" id="date_within" name="date_within" type="date" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light">
+  <td style="width:30%; text-align: center;"><b>Date</b></td>
+  <td ><input style="text-align:center;" id="out_date" name="out_date" type="date" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Issuing Authority</b></td>
+  <td ><input style="text-align:center;" id="issue_auth" name="issue_auth" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Inspectioner</b></td>
+  <td ><input style="text-align:center;" id="inspectioner_sign" name="inspectioner_sign" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Receiver</b></td>
+  <td ><input style="text-align:center;" id="receiver_sign" name="receiver_sign" type="text" class="form-control textbox" /></td>
+</tr>
+<tr class="bg-dark text-light" style="width:100%;">
+  <td style="width:30%; text-align: center;"><b>Gatekeeper</b></td>
+  <td ><input style="text-align:center;" id="gatekeeper_sign" name="gatekeeper_sign" type="text" class="form-control textbox" /></td>
+</tr>
+  <tr class="bg-dark text-light">
+  </tr>
+  </table>
+  
+  <center>
+    <button type="submit" class="button btn btn-primary">Generate Outward</button>
+  </center>  
+
+
+</form>
+{% endblock body %}

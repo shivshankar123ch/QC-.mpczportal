@@ -1,0 +1,547 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/assest/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assest/css/dataTables.bootstrap4.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'assest/scss/main.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+
+
+
+    <div class="ed-wrapper-block">
+        <div class="ed-wrapper-contant" id="edContainer">
+            <nav class="navbar ed-header-navbar ed-header-block" id="edHeader">
+                <div class="navbar-container">
+                    <ul class="navbar ed-nav-left">
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" id="navMenu">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="3" y1="12" x2="21" y2="12" />
+                                    <line x1="3" y1="6" x2="21" y2="6" />
+                                    <line x1="3" y1="18" x2="21" y2="18" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar ed-nav-right">
+                        <li class="nav-item ed-profilemenu-block">
+                            <a class="nav-link " href="#" data-toggle="dropdown">
+                                <span class="ed-imgbox">
+                                    <img src="{% static 'assest/images/userimg.jpg' %}" class="img-fluid ed-userimg"
+                                        alt="User profile" />
+                                </span>
+                                <span class="ed-text">
+                                    User Name
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item ed-logout-block">
+                        <a class="nav-link " href="javascript:;" onclick="CustomAlert.show()">
+                            <span class="ed-imgbox">
+                                <img src="assest/images/logout.png" class="img-fluid ed-logout" alt="Logout" />
+                            </span>
+                        </a>
+                    </li> -->
+
+                        <li class="nav-item ed-logout-block">
+                            <a class="nav-link " href="javascript:;" data-toggle="tooltip" title="Logout">
+                                <span class="ed-imgbox">
+                                    <img src="{% static 'assest/images/logout.png' %}" class="img-fluid ed-logout" alt="Logout" />
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+            <div class="ed-sidebar-block" id="edSidebar">
+                <div class="navbar-logo">
+                    <span class="ed-logo-item">
+                        <img src="{% static '/assest/images/rcalogo.png' %}" alt="Logo" class="img-fluid ">
+                    </span>
+                    <span class="ed-navbar-profile">
+                        <span class="ed-navbar-name">
+                            Name
+                        </span>
+                        <span class="ed-hdesignation-name">
+                            Vendore Name
+                        </span>
+                    </span>
+                </div>
+                <ul class="navbar-nav ed-menulist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link" href="#" data-toggle="dropdown">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Purchase Order
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu ed-menudropdown-block">
+                            <li class="menu-item">
+                                <a class="menu-link" href="openpo.html">All PO</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="bankdetails.html">Open PO</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="/vendor/dispatch_item">View Di</a>
+                            </li>  
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+
+            <!--  ---------------   Body part start ------------------------------------------- -->
+            <!--  ---------------   Body part start ------------------------------------------- -->
+
+
+
+            <div class="ed-infocontant">
+
+                <div class="ed-pagetitle-block">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
+                            <div class="media ed-pagetitle-info">
+                                <span class="ed-iconbox">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        <polyline points="9 22 9 12 15 12 15 22" />
+                                    </svg>
+                                </span>
+                                <div class="ed-ed-pagetitle-item">
+                                    <h4>
+                                        Dashboard
+                                    </h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                            <ul class="navbar ed-pagetitle-link">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                            <polyline points="9 22 9 12 15 12 15 22" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <span class="nav-link nav-icon">
+                                        /
+                                    </span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link nav-menuitem">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ed-infocontant">
+                    <div class="ed-information mb-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card ed-card-block">
+                                    <div class="card-header">
+                                        <h2>
+                                            Deals Analytics
+                                        </h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="ed-form-block">
+                                            <div class="ed-form-title">
+                                                <h6>
+                                                    <span class="ed-text">
+                                                        Add information
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="ed-form-body">
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        First name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Last name
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Email <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Passowrd <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Confirm Passowrd <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-action text-right">
+                                                        <button class="btn ed-submit ed-submitNext">
+                                                            <span class="ed-submit-text">
+                                                                Next
+                                                            </span>
+                                                        </button>
+
+                                                        <button class="btn ed-submit btn-success">
+                                                            <span class="ed-submit-text">
+                                                                Submit
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-7">
+                                <div class="card ed-card-block">
+                                    <div class="card-header">
+                                        <h2>
+                                            Deals Analytics
+                                        </h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="ed-form-block">
+                                            <div class="ed-form-title">
+                                                <h6>
+                                                    <span class="ed-text">
+                                                        Add information
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="ed-form-body">
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        First name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Last name
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Email <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Passowrd <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Confirm Passowrd <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn ed-submit ed-submitNext">
+                                                        <span class="ed-submit-text">
+                                                            Next
+                                                        </span>
+                                                    </button>
+
+                                                    <button class="btn ed-submit btn-danger ed-submitDelete">
+                                                        <span class="ed-submit-text">
+                                                            Delete
+                                                        </span>
+                                                    </button>
+
+                                                    <button class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                            Save
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="dialog-container" class="ed-dialog-container">
+                <div class="ed-modal-block" id="dialog-modal">
+                    <div class="ed-modal-content">
+                        <div class="ed-modal-header">
+                            <h4>Custom Alert Dialog</h4>
+                        </div>
+                        <div id="dialog-body" class="ed-modal-body">
+                            <p>
+                                This is the custom alert message. Click Ok to close this.
+                            </p>
+                        </div>
+                        <div class="ed-dialog-footer">
+                            <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+                                <span class="ed-submit-text">
+                                    Ok
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  ---------------   Body part end ------------------------------------------- -->
+            <!--  ---------------   Body part end ------------------------------------------- -->
+
+
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+
+            <div class="ed-footer-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            © 2022, All Rights Reserved By
+                            <a href="#" class="link">MPMKVVCL</a>
+                            .
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <a href="#" class="links">
+                                Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co.
+                                Ltd. Nishtha Parisar Govindpura, Bhopal.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="{% static '/assest/js/jquery.slim.min.js' %}"></script>
+    <script src="{% static '/assest/js/jquery.slim.min.js' %}"></script>
+    <script src="{% static '/assest/js/umd/popper.min.js' %}"></script>
+    <script src="{% static '/assest/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/assest/js/jquery.dataTables.min.js' %]"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            $('#navMenu').click(function () {
+                $('#edHeader').toggleClass('ed-header-collpase');
+                $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                $('#edContainer').toggleClass('ed-wrapper-collpase');
+            });
+        });
+
+        $('#ed-menulist .nav-item').on('click', function () {
+            // var target = $(this).attr('data-rel');
+            $('#ed-menulist .nav-item .nav-link').removeClass('active');
+            $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+            $('#ed-menulist .nav-item').removeClass('active');
+            $(this).addClass('active');
+            // $('#ed-menulist .nav-item').addClass('active');
+            $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+            // alert();
+            // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+            return false;
+        });
+    </script>
+
+    <script>
+        const dialogModal = document.getElementById('dialog-modal');
+        const CustomAlert = new function () {
+            this.show = function (msg) {
+                $('body').addClass('bodymodel');
+                dialogModal.style.visibility = 'visible';
+                dialogModal.style.opacity = 1;
+                dialogModal.style.top = '40%';
+            }
+
+            this.close = function () {
+                $('body').removeClass('bodymodel');
+                dialogModal.style.visibility = 'hidden';
+                dialogModal.style.opacity = 0;
+                dialogModal.style.top = '-40%';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#nextStep1").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").show();
+            $("#formStep3").hide();
+            $("#formStep4").hide();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep2").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").show();
+            $("#formStep4").hide();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep3").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").hide();
+            $("#formStep4").show();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep4").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").hide();
+            $("#formStep4").hide();
+            $("#formStep5").show();
+        });
+
+    });
+</script>
+
+
+<script>
+    $('.material-wrapper').on('click', '.remove', function () {
+        $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+    });
+    $('.material-wrapper').on('click', '.addMaterial', function () {
+        $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+    });
+</script>

@@ -1,0 +1,212 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+<div class="card card-default">
+   <div class="card-header">
+      <h3 class="card-title">Material Offer</h3>
+      <div class="card-tools">
+         <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
+         <i class="fas fa-minus"></i>
+         </button>
+         <button type="button" class="btn btn-tool" data-card-widget="remove">
+         <i class="fas fa-times"></i>
+         </button> -->
+      </div>
+   </div>
+      <div>
+            <p style="align-items:Center;color: rgb(255, 72, 0);font-size: medium; text-align: center; font-weight: 700;">
+              {% if msg2 %}
+              {{ msg2 }}
+              {% endif %}
+          </p>
+          </div>
+   <form   action="/vendor/vendor_offer_di_save/{{data.id}}" method="POST" onsubmit="return validateForm2();" name="myForm" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="card-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label for="exampleInputEmail1"> Material Specification </label>
+                  <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.offer_item.material.specification}}" disabled>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group">
+                  <label for="exampleInputEmail1"> Offer Item Quantity </label>
+                  <input type="number" name="quantity" class="form-control" accept=".xls,.xlsx" id="exampleInputEmail1" placeholder="{{data.deliverable_qty}}" disabled>
+               </div>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label class="ed-radio-block text-primary"> Material Serial no.s Excel
+                    <input type="radio" class="form-check-input" name="excel_type" value="serial_nos" required>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="col-md-6">
+         <div class="form-group">
+           
+            <div class="form-group"> 
+               <label class="ed-form-label">
+                   Click Here to download sample Excel for uploading Serial number of Material<br>
+                   <a href="/vendor/download_demo_excel">
+                       <b class="text-primary fw-bold">Download Excel</b>
+                   </a>
+               </label>
+           </div>
+         </div>
+
+
+        
+        <div class="form-group">
+            <label class="ed-radio-block text-primary" > Material Batch no.s/Lot no.s/Drum no.s Excel
+                <input type="radio" class="form-check-input" name="excel_type" value="batch_nos" required>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+            
+   
+   <div class="form-group"> 
+      <label class="ed-form-label">
+          Click Here to download sample Excel for uploading Batch no.s/Lot no.s/Drum no.s of Material<br>
+          <a href="/tkc/download_batch_demo_excel">
+              <b class="text-primary fw-bold">Download Excel</b>
+          </a>
+      </label>
+  </div>
+  <label for="exampleInput1" id="excelInput1">Upload Excel Here For Material Serial No./ Batch No.</label>
+  <input type="file" name="myfile" class="form-control" id="excelInput" 
+  placeholder="Upload Excel File"onchange="validateForm2()"onfocus="validateForm2()" required>
+<span id="file22" class="d-block ed-warningtext text-danger"></span>
+
+   <br>
+   <br>
+   <ul>
+  <li>Enter the item serial number within 20 characters</li>
+  <li>Do not Leave any blank spaces </li>
+</ul>
+         </div>
+ </div>
+      <div>
+         <center>
+            <br>
+            <button type="submit" id="submit" value="Submit" onclick="validateForm2()" class="btn-second btn-success p-1">Dispatch</button>
+            <br>
+         </center>
+   </form>
+   </div>
+</div>
+
+<script>
+  
+  var confirmationShown = false; 
+
+function validateForm2() {
+  if (confirmationShown) {
+    return true;
+  }
+
+  let fileInput = document.getElementById("excelInput").value;
+  var allowedExtensions = /(\.xlsx)$/i;
+  let fileInput_Result1 = allowedExtensions.test(fileInput);
+
+  if (fileInput == "") {
+    document.getElementById('file22').innerHTML = "Please fill the required detail";
+    return false;
+  } else if (fileInput_Result1 == false) {
+    document.getElementById('file22').innerHTML = "Please Upload valid file format (In .excel)";
+    return false;
+  } else {
+    return showConf(); 
+  }
+}
+
+function showConf() {
+  if (!confirmationShown) { 
+    var confirmed = confirm("Are you sure you want to submit the form?");
+    confirmationShown = true; 
+    return confirmed; 
+  }
+  return true; 
+}
+
+</script>
+
+
+
+
+<script>
+   function check(){
+     let arr = [];
+     let  a = document.getElementById("example2").rows.length;
+     var answer;
+     var i = 0;
+   
+     for (i = 0; i <= a; i++) {
+        
+     var n2 = document.getElementById("example2").rows[i].cells.length;
+     
+     answer = document.getElementById("exampleInputEmail1" + i).value;
+     
+     if(arr != null){
+    if(arr.includes(answer) ){
+        
+            
+           document.getElementById('text1').innerHTML = "same number not allowed."; 
+        
+     
+    }else{
+       
+         arr.push(answer)
+        console.log("arrrrrrrrrrr",arr)
+         document.getElementById('text1').innerHTML = ""; 
+    }
+     }else{
+          arr.push(answer)
+        console.log("arrrrrrrrrrr",arr)
+         document.getElementById('text1').innerHTML = ""; 
+     }
+     
+   }
+   }
+   
+</script>
+<script>
+   function validate(evt) {
+   var theEvent = evt || window.event;
+   
+   // Handle paste
+   if (theEvent.type === 'paste') {
+   key = event.clipboardData.getData('text/plain');
+   } else {
+   // Handle key press
+   var key = theEvent.keyCode || theEvent.which;
+   key = String.fromCharCode(key);
+   }
+   var regex = /[0-9]|\./;
+   if (!regex.test(key)) {
+   theEvent.returnValue = false;
+   if (theEvent.preventDefault) theEvent.preventDefault();
+   }
+   }
+</script>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+     const radioButtons = document.querySelectorAll(".form-check-input");
+     const fileInputLabel = document.getElementById("excelInput1");
+     
+     radioButtons.forEach(function(radioButton) {
+       radioButton.addEventListener("click", function() {
+         if (radioButton.checked) {
+           fileInputLabel.style.color = "red"; // Change this to your desired color
+         } else {
+           fileInputLabel.style.color = ""; // Reset to default color
+         }
+       });
+     });
+   });
+</script>
+{% endblock body %}

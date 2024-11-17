@@ -1,0 +1,177 @@
+{% load static%}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/jpg" href="{% static '/assets/img/energy_logo.jpg' %}" />
+    <title>
+        Quality Monitering Portal | Energy Department, Government of Madhya Pradesh
+    </title>
+    <link rel="icon" type="image/png" href="{% static '/assets/img/main_logo.jpg' %}" />
+    <!--  Social tags      -->
+    <meta name="description" content="Quality Monitering Portal | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state"
+    />
+    <meta name="keywords" content="Quality Monitering Portal | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="Quality Monitering Portal| Energy Department, Government of Madhya Pradesh" />
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static '/assets/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />
+    <!-- Anti-flicker snippet (recommended)  -->
+    <style>
+        .async-hide {
+            opacity: 0 !important;
+        }
+    </style>
+    <script>
+        (function(a, s, y, n, c, h, i, d, e) {
+            s.className += " " + y;
+            h.start = 1 * new Date();
+            h.end = i = function() {
+                s.className = s.className.replace(RegExp(" ?" + y), "");
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function() {
+                i();
+                h.end = null;
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, "async-hide", "dataLayer", 4000, {
+            "GTM-K9BGS8K": true,
+        });
+    </script>
+    <!-- Analytics-Optimize Snippet -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i["GoogleAnalyticsObject"] = r;
+            (i[r] =
+                i[r] ||
+                function() {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }),
+            (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(
+            window,
+            document,
+            "script",
+            "https://www.google-analytics.com/analytics.js",
+            "ga"
+        );
+        ga("create", "UA-46172202-22", "auto", {
+            allowLinker: true,
+        });
+        ga("set", "anonymizeIp", true);
+        ga("require", "GTM-K9BGS8K");
+        ga("require", "displayfeatures");
+        ga("require", "linker");
+        ga("linker:autoLink", ["2checkout.com", "avangate.com"]);
+        window.setTimeout("document.getElementById('successMessage').style.display='none';", 3000);
+    </script>
+</head>
+
+<body class="" onload="cap()">
+    <!-- Extra details for Live View on GitHub Pages -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+    
+    <div class="ed-otpvarify-block">
+        <div class="ed-container-block">
+            <div class="row h-100 m-auto align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 p-0">
+                    <div class="ed-otpvarify-information">
+                        <div class="ed-logintitle-block">
+                            <h1 class="ed-logintitle">Energy Department </h1>
+                            <h6 class="ed-loginsubtitle">Government Of Madhya Pradesh</h6>
+                        </div>
+                        <div class="ed-imgox-block">
+                            <img src="{% static '/assets/img/otp-verification.png' %}" class="img-fluid" />
+                            <!-- <div class="ed-imgox-background" style="background-image: url('{% static '/assets/img/otp-verification.png' %}');">
+              </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 p-0">
+                    <div class="ed-otpvarify-information">
+                        <div class="ed-otpvarify-items">
+                            <div class="ed-logintitle-block">
+                                <h1 class="ed-logintitle">OTP Verification </h1>
+                                <h6 class="ed-loginsubtitle">
+                                    Please enter the one time password to verify your account.
+                                </h6>
+                            </div>
+
+
+                            <form action="check_otp" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="ed-label-block">
+                                        Mobile OTP
+                                        <span class="text-danger">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input type="text" name="otp" class="form-control ed-textbox"
+                                        placeholder="Enter OTP" required="required">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    {% for message in messages %}
+                                    <label for="mobile" class="text-danger">{{message}}</span></label>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="text-center mt-4">
+                                        <button id="loginButton" onclick="validcap()" type="submit"
+                                            class="btn ed-submit ed-formSubmit">
+                                            Submit Code
+                                        </button>
+                                        <!-- <span class="text-muted text-sm">Haven't received it?<a href="login"> Resend a new code</a>.</span> -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="{% static '/assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static '/assets/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+    <!-- Kanban scripts -->
+    <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %}"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static '/assets/js/argon-dashboard.min28b5.js' %}"></script>
+</body>
+
+</html>

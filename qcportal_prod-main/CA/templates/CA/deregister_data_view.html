@@ -1,0 +1,115 @@
+{% extends 'CA/commercial_sales.html' %} {% load static %} 
+ {% block a %} <span class="ms-1 font-weight-bold">{{user_data.Name}}</span> {% endblock a %}
+{% block body %}
+
+<h4 class="card-title m-2"> <b> Deregistered request details</b></h4>
+<form class="form-group action="" method="POST">
+    {% csrf_token %}
+
+        <!-- <div class="col-md-3" style="float: right;"><input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search" name="search">
+ <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></div> -->
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Name:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Name}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Mobile:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Mobile}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Contractor Id:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Contractor_Id}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Invoice Number:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Invoice_Number}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Deposit amount:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Deposit_amount}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Email Id:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Email_Id}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Bank name:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Bank_name}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Account Holder Name:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Account_Holder_Name}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Account Number:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Account_Number}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+<br>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">IFSC:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.IFSC}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Aadhaar No.:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Aadhar}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname"> PAN No.:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Pan}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+<br>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Address:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.Add1}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">State:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.State}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname"> City.:</label><br>
+                    <input type="text" name="Mobile" value="{{data1.City}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+          
+
+<br>
+        <div class="col-12 col-sm-6">
+            <a href="{% url 'deregistration_requests' %}"><input type="button" class="btn btn-primary" value="Back" style="float: left;"></a>
+           
+        </div>
+       
+    </div>
+        <br>&nbsp; 
+    </form>
+
+    {% endblock body %}
+
+
+
+   

@@ -1,0 +1,170 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<script>
+   function checkAll() {
+      let inputs = document.querySelectorAll('.pl');
+      let checkbox = document.getElementById("cbfill");
+      if (checkbox.checked === true) {
+         console.log("123");
+         for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = true;
+         }
+      } else {
+         console.log("567");
+         for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = false;
+         }
+      }
+   }
+</script>
+<script>
+   
+   window.onload = function () {
+       var tbcheck = document.getElementById("table").rows.length;
+       console.log("tableee", tbcheck)
+       if (tbcheck < 2) {
+          
+           var d = document.getElementById("btn");
+           console.log("ddddddd", d)
+           d.style.setProperty("display", "none", "important");
+           var yes = document.getElementById("cbfill");
+
+           yes.onclick = function(){
+            alert("Please add the material before create DI ")
+           }
+         } else {
+           var dd = document.getElementById("btn");
+           dd.style.display == "";
+        }
+      }
+ </script>
+<!-- Main content -->
+<form action="{% url 'create_di_checked_material' %}" method="POST" onsubmit="return check_all()">
+   {% csrf_token %}
+
+   <div class="ed-information mb-4">
+      <div class="card ed-card-block">
+         <div class="card-header">
+            <h2>
+               View Di List
+            </h2>
+         </div>
+         <div class="card-body">
+            <div class="ed-tableinfo-block mb-2">
+               <div class="table-responsive">
+                  <table class="table display table-bordered table-hover " id="po_creater_DI">
+                     <thead class="table-dark">
+                        <tr>
+                           <th class="w-5">
+                              <input type="checkbox" onclick="checkAll();" id="cbfill">
+                           </th>
+                           <th class="w-5">Sr No.</th>
+                           <th>
+                              PO No
+                           </th>
+                           <th>
+                              Vendor Name
+                           </th>
+                           <th>
+                              PO Subject
+                           </th>
+                           <th>
+                              Item Name
+                           </th>
+                           <th>
+                              Total Quantity
+                           </th>
+                           <th>
+                              Offered Quantity
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for name in data %}
+                        <tr>
+                           <td><input type="checkbox" class="pl" name="checkbox"  value="{{name.id}}"></td>
+                           <td>
+                              {{ forloop.counter }}
+                           </td>
+                           <td>
+                              <b>{{name.po.po_no}}</b>
+                           </td>
+                           <td>
+                              {{name.po.vendor.CompanyName_E}}
+                           </td>
+                           <td>
+                              {{name.po.po_subject}}
+                           </td>
+                           <td>
+                              {{name.material.specification}}
+                           </td>
+                           <td>
+                              {{name.total_quantity}}
+                           </td>
+                           <td>
+                              {{name.Offer_Quantity}}
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+
+
+            <div class="form-group">
+               <div class="form-action text-right">
+                  <button type="submit" class="btn ed-submits ed-formsubmit" id="btn" >Create DI</button>
+               </div>
+            </div> 
+ 
+         </div>
+      </div>
+   </div>
+</form>
+
+<script>
+$(document).ready(function () {
+        $('#po_creater_DI').DataTable({
+            pagingType: 'full_numbers',
+        });
+       
+    });
+
+   function check_all(){
+      var checkboxs=document.getElementsByName("checkbox");
+    var okay=false;
+    for(var i=0,l=checkboxs.length;i<l;i++)
+    {
+        if(checkboxs[i].checked)
+        {
+            okay=true;
+            break;
+        }
+    }
+    if(okay)
+    {
+      // alert("Thank you for checking a checkbox");
+    }
+    else {
+    alert("Please check a checkbox");
+    return false
+   }
+}
+</script>
+<script>
+   let data_data = document.getElementById('mytbl');
+
+   var rowLength = data_data.rows.length;
+   if (rowLength == 1) {
+      document.querySelector('#btn').disabled = true;
+   }
+   else {
+      document.querySelector('#btn').disabled = false;
+   }
+   console.log(rowLength);
+
+</script>
+{% endblock body %}>

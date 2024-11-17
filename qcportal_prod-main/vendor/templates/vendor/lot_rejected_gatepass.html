@@ -1,0 +1,183 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+
+        <div class="pocertificate-block"> 
+            <div class="card ed-card-block">
+                <div id="printid" class="options-print">
+                    <div class="card-body">
+                        <div class="po-logo"> 
+                            {% if gatepass.area_store.po.discom.Discom_Header %}
+                            <img src="{{gatepass.area_store.po.discom.Discom_Header.url}}" class="img-fluid cgm-logo" alt="User profile" />
+                            {% endif %}
+                        </div>
+        <table class="table table-striped" border="2">
+            <thead class="bg-primary">
+                <tr>
+                    <th colspan="2"><b>PO Information</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PO No</td>
+                    <td><b>{{gatepass.area_store.po.po_no}}</b></td>
+                </tr>
+                <tr>
+                    <td>Vendor Company name</td>
+                    <td><b>{{ gatepass.area_store.po.vendor.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                    <td> Item Code </td>
+                    <td><b>{{ gatepass.area_store.offer_item.item_code}}</b></td>
+                </tr>
+                <tr>
+                    <td> Material </td>
+                    <td><b>{{ gatepass.area_store.offer_item.material.specification}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+    <!-- <h5 class="card-title m-2 table-responsive"> <b> Gatepass Material Details </b></h5>  -->
+    <div class="table-responsives">
+        <table class="table table-bordered table-responsive" cellspacing="0">
+             <tr>
+                    <th><b>Rejected Items:</b> </th>
+                    {% for data in Material %}
+                        <td><a href="/vendor/nabl_di_material_reject_view/{{data.id}}" ><button class="btn ed-submit btn-info">View</button></a></td>   
+                    {% endfor %}
+                </tr>
+      </tbody>
+      </table>
+    </div>   
+
+
+
+    
+    <form action="/po/nabl_reject_di" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div>
+            <table class="table table-striped mt-2" border="2">
+                <tr>
+                    <th><b>DI Number:</b></th>
+                    <td><b>{{ gatepass.area_store.di_master.erp_di_number}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th> Gatepass Date (mm/dd/yyyy):</th>
+                    <td>{{gatepass.gatepass_date}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Gatepass No:</th>
+                    <td>{{gatepass.gatepass_num}}</td> 
+                </tr>
+
+
+                <tr>
+                    <th>Gatekeeper Name:</th>
+                    <td>{{gatepass.gatekeeper_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>Vehicle No. :</th>
+                    <td>{{gatepass.vehicle_no}}</td>
+                </tr>
+
+                <tr>
+                    <th>Driver Name:</th>
+                    <td>{{gatepass.driver_name}}</td>
+                </tr>
+
+                <tr>
+                    <th>Driver Phone:</th>
+                    <td>{{gatepass.driver_phone}}</td>
+                </tr>
+
+                <tr>
+                    <th>Material Received By:</th>
+                    <td>{{gatepass.material_rec_by}}</td>
+                </tr>
+
+                
+                <tr>
+                    <th>Outward Quantity:</th>
+                    <td>{{gatepass.outward_quantity}}</td>
+                </tr>
+
+                <tr>
+                    <th>Driver Aadhar:</th>
+                {% if gatepass.driver_aadhar %}
+                    <td>
+                    <a class="btn ed-submit btn-info" target="blank" href="{{gatepass.driver_aadhar.url}}">View</a>
+                {% else %}
+                    <a class="btn ed-submit btn-warning" href=" ">Aadhar Not Uploaded</a>
+                {% endif %}
+                </td>
+                </tr>
+
+            </table>
+          
+        </div>
+    </form>
+</div>
+
+<center>
+    <div id="printoptions">
+        <input style="width:200px" class="btn btn-primary m-3" type="button" value="print gatepass" onclick="windowprint()" />
+
+    </div>
+</center>
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap Datatable js -->
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script>
+        function printpage() {
+            var printButton = document.getElementById("printpagebutton").innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printButton;
+            
+            window.print()
+            document.body.innerHTML = originalContents;
+            // printButton.style.visibility = 'visible';
+    
+        }
+
+
+        
+        function windowprint() {
+                    document.getElementById('sidenav-main').style.display = 'none';
+                    document.getElementById('headerMenu').style.display = 'none';
+                    // document.getElementById('contantBlock').style.display='none'; 
+                    document.getElementById('printoptions').style.display = 'none';
+                    $('#contantBlock').css('padding', '0');
+                    $('.ed-footer-block').hide();
+                    window.print();
+                    document.getElementById('sidenav-main').style.display = 'block';
+                    document.getElementById('headerMenu').style.display = 'block';
+                    // document.getElementById('contantBlock').style.display='block'; 
+                    document.getElementById('printoptions').style.display = 'block';
+                    $('#contantBlock').removeAttr('style');
+                    $('.ed-footer-block').show();
+                }
+    </script>
+    {% endblock body %}

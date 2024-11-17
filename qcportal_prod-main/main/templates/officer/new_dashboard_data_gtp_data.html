@@ -1,0 +1,59 @@
+{% extends 'officer/auditor_base.html' %} {% load static %} {% block body %}
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Vendor GTP History
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                        <thead>
+                            <tr>
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>
+                                    Name Of Company
+                                </th>
+                                <th>
+                                    Name of Authorized Person
+                                </th>
+                                <th>
+                                    WO Number
+                                </th>
+                                <th>
+                                    View Approved Vendors and GTP
+                                </th>
+                               
+                              
+                        </thead>
+                        <tbody>
+                            {% for data in gtp %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.TKCWoInfo.supplier.CompanyName_E}}</td>
+                                <td>{{data.TKCWoInfo.supplier.Authorised_person_E}}</td>
+                               
+                                <td>{{data.TKCWoInfo.Contract_Number}}</td>
+                                <td>
+                                    <a href="/view_gtp_wo_wise/{{data.TKCWoInfo.id}}" target="_self" class="ed-links">
+                                        <label class="ed-textinfo text-info">
+                                            View Details
+                                        </label>
+                                    </a>
+                                </td>
+                               
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    {% endblock body %}

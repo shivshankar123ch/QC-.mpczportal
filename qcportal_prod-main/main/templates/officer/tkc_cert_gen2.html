@@ -1,0 +1,63 @@
+{% extends 'officer/tkc_cert_gen.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item active">
+                <a class="nav-link active" href="/tkc_cert_gen2">
+                  <span class="sidenav-mini-icon"> UP </span>
+                  <span class="sidenav-normal">Upload Portal</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+
+{% block body %}
+<div class="card-header pb-0 pt-3 bg-transparent table-responsive">
+    <h6 class="text-capitalize">ALL Migrated TKC / Contractor </h6>
+    <div class="card-body pt-0 pb-10">
+    <div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Certificate</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in usr_obj %}
+            <form action="/tkc_cert_gen3/{{emp.User_Id}}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <tr>
+                    <td>{{ emp.Authorised_person_E }}</td>
+                    <td>{{ emp.CompanyName_E }}</td>
+                    <td scope="row">{{ emp.ContactNo }}</td>
+                    <td scope="row">{{ emp.Authentication_id }}</td>
+                    <td><input type="file" id="tkc_cert" name="tkc_cert" required="required"></td>
+
+                    {% if digital_cert_upload %}
+                        <td>
+                            Uploaded
+                        </td>
+                    {% else %}
+                        <td>
+                            <input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Upload">
+                        </td>
+                    {% endif %}
+                    
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+      </div>
+    </div>
+{% endblock body %}

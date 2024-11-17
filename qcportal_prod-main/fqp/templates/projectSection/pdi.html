@@ -1,0 +1,93 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+         <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover table-responsive">
+                  <tr>
+                      <th style="width:5%">
+                           V Id
+                      </th>
+                      <th style="width:10%">
+                           WO Id
+                      </th>
+                       <th style="width:15%">
+                           Material Name
+                      </th>
+                       <th style="width:15%">
+                           Material Specifaction
+                      </th>
+                      <th style="width:15%">
+                          Material Quantity
+                      </th>
+                       <th style="width:15%">
+                          MaterialSerial No
+                      </th>
+                       <th class="text-center" style="width:25%">
+                          Action
+                      </th>
+                    </tr>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>VENDOR DETAILS</span></u></b></p>
+                    {% for data in data %}
+                    <tr>
+                            <td><b>MPCZ00{{data.Vendor_id}}</b></td>
+                           <td><b>MPCZ00{{data.TKCWoInfo.id}}</b></td>
+                          <td><b>{{data.material_name}}</b></td>
+                         <td><b>{{data.material_specification}}</b></td>
+                        <td><b>{{data.offer_quantity}}{{data.material_unit}}</b></td>
+                         <td><b>{{data.serial_no}}</b></td>
+                        <td>
+                            {% if data.pdi_approved == 1 %}
+                         <a href="" class="btn btn-success btn-sm" style="width:130px;"> Approved</a>
+                          {% elif data.pdi_approved == -1 %}
+                          <a href="" class="btn btn-danger btn-sm" style="width:130px;"> Rejected</a>
+                            {% else %}
+                            <b>Initiate PDI</b>
+<!--                                 <form   action="/fqp/material_offer_approval_save/{{data.id}}" method="POST" enctype="multipart/form-data">-->
+<!--                           {% csrf_token %}-->
+<!--                                     <div class="row">-->
+<!--                            <div class="custom-control custom-radio m-1">-->
+<!--                                    <input type="radio" class="form-check-input" id="radio1" name='action' value="OK" checked required>-->
+<!--                                    <label class="form-check-label" for="radio1">Accepted</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="custom-control custom-radio m-1">-->
+<!--                                    <input type="radio" class="form-check-input" id="radio2" name='action' value="NOT">-->
+<!--                                    <label class="form-check-label" for="radio2">Rejected</label>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                                           <div class="custom-control m-1">&ndash;&gt;-->
+<!--                                    <input type="text" class="form-check-input" id="radio2" name='remark' >-->
+<!--                                    <label class="form-check-label" for="radio2">Remark</label>-->
+<!--                                </div>-->
+
+                                <button type="submit" id="submit" class="btn-second btn-success m-1">Submit</button>
+                                         </div>
+                          {% endif %}
+                        </td>
+                  </tr>
+                    {% endfor %}
+                </table>
+              </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+{% endblock body %}

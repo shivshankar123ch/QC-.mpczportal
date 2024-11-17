@@ -1,0 +1,77 @@
+{% extends 'CA/ca_dashboard.html' %}
+{% load static %} 
+{% block body %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<script type="text/javascript" src="{% static '/assets/js/Validation/reg_second.js' %}"></script>
+
+
+
+<form action="/ca/transaction_upload" method="POST"  enctype="multipart/form-data" class="multisteps-form__form mb-8" >
+  {% csrf_token %}
+  <!--single form panel-->
+  <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+  <h5 class="font-weight-bolder mb-0 text-info"></h5>
+  <!-- <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p> -->
+  <div class="multisteps-form__content">
+      <div class="row mt-3">
+          
+      </div>
+      <div class="row mt-3">
+        <!-- <div class="col-12 col-sm-6">
+          <label for="v_company_name">uplode<span style="color: red;">*</span></label>
+          <input type="File" id="File" name="File1" value="File1" onkeyup="englishTyping();validateForm()" onfocus="englishTyping();validateForm()" class="form-control" readonly="readonly">
+          <span id="nameOfAauthorizedEnglish" class="text-danger font-weight-bold"></span>
+        </div> -->
+        
+
+
+      </div>
+      <div class="row mt-3">
+        <!-- <div class="col-12 col-sm-6">
+            <a href="/ca/transaction_upload"><input type="submit" class="btn btn-info" value="Upload" onclick="return confirm('file successfully uploaded');"></a>
+        </div> -->
+
+        <div class="col-12 col-sm-6">
+            <a href="/ca/all_collection_agentdata"><input type="button" class="btn btn-info" value="View" style="float: left;"></a>
+        </div>
+        
+      </div>
+      <div class="button-row d-flex mt-4">
+        <!-- <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Accept"><a href="/ca/agents_details_ae" style="color: white;">Accept</a>
+        <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Reject"><a href="/ca/agents_details_ae" style="color: white;">Reject</a> -->
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Accept</a></button> -->
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Reject</a></button> -->
+    </div><br>
+    <!-- <div><a href="/ca/transaction_upload"><input type="submit" class="btn btn-info" value="Upload" onclick="return confirm('file successfully uploaded');"></a></div>
+    <div><a href="/ca/all_collection_agentdata"><input type="button" class="btn btn-info" value="View" style="float: right;"></a></div> -->
+
+
+      
+</form>
+
+<script>
+    let dtElem = document.getElementById('reg_date');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+</body>
+{% endblock body %}

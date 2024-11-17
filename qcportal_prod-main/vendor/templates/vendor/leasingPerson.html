@@ -1,0 +1,144 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block liaison %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock liaison %}
+
+
+    <style>
+        .button {
+            background-color: #007bff;
+            / Green / border: none;
+            color: 2px solid white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        
+        .button1 {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid darkblue;
+            width: 155px;
+        }
+        
+        .button1:hover {
+            background-color: darkblue;
+            color: white;
+            border: 1px solid white;
+        }
+    </style>
+
+    <!-- Validation Script -->
+    <script type="text/javascript" src="{% static '/assets/js/Validation/leasingPerson.js' %}"></script>
+    <!--form panels-->
+    <!-- <div class="row"> -->
+    <!-- <div class="col-12 col-lg-8 m-auto"> -->
+    <form class="multisteps-form__form mb-8" action="/vendor/liaison" name="myForm" onsubmit="return validateForm()" method="POST">
+        {% csrf_token %}
+        <!--single form panel-->
+        <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+        <h5 class="font-weight-bolder mb-0">Add Liaison officer Details</h5>
+        <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p>
+        <div class="multisteps-form__content">
+            <div class="row mt-3">
+                <div class="col-12 col-sm-6">
+                    <label class="labelName text-capitalize">Name<span style="color: red;">*</span></label>
+                    <input class="form-control" type="text" name="nameData" id="names" placeholder="Name" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" onkeyup="validateForm()"
+                        onfocus="validateForm()" onchange="validateForm()" required="required" />
+                    <span id="Names" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+                <div class="col-12 col-sm-6 mt-3 mt-sm-0 ">
+                    <label class="labelName text-capitalize">Designation<span style="color: red; ">*</span></label>
+                    <input class="form-control" type="text" name="designation" id="Designation" placeholder="Designation" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" onkeyup="validateForm() "
+                        onfocus="validateForm()" onchange="validateForm()" />
+                    <span id="Designations" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+            </div>
+            <div class="row mt-3 ">
+                <div class="col-12 col-sm-6 ">
+                    <label class="labelName text-capitalize">Date of birth<span style="color: red; ">*</span></label>
+                    <input class="form-control" type="date" name="dob" id="Dob" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" required="required" />
+                    <span id="Dobs" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+                <div class="col-12 col-sm-6 mt-3 mt-sm-0 ">
+                    <label class="labelName text-capitalize">Firm Name<span style="color: red; ">*</span></label>
+                    <input class="form-control " type="text" name="firm" id="Firms" placeholder="Firm Name" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                        required="required" />
+                    <span id="Firms_1" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+            </div>
+            <div class="row mt-3 ">
+                <div class="col-12 col-sm-6 ">
+                    <label class="labelName text-capitalize">Mobile Number<span style="color: red; ">*</span></label>
+                    <input type="tel" minlength="10" name="mobile" id="mobile1" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm() " class="form-control" maxlength="10" onkeypress='validate(event)' placeholder="999999999" title="Using Indian Number Formate"
+                        required="required" />
+                    <span id="mobileNumber" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+                <div class="col-12 col-sm-6 mt-3 mt-sm-0 ">
+                    <label class="labelName text-capitalize">Email ID<span style="color: red; ">*</span></label>
+                    <input type="email" name="email" id="email1" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control" title="Please fill the correct Email" style="text-transform: lowercase;" placeholder="name@example.com" required="required">
+                    <span id="emailAddress" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+
+                </div>
+
+            </div>
+            <div class="row mt-3 ">
+                <div class="col-12 col-sm-6 ">
+                    <label class="labelName text-capitalize">Upload  Photographs<span style="color: red; ">*</span></label>
+                    <input type="file" accept="image/jpg, image/png, image/jpeg" name="photo" id="v1_upload_file_material" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" required="required" />
+                    <span id="factoryMaterial" class="text-danger font-weight-bold " style="font-size: 80%; "></span>
+                </div>
+                <div class="col-12 col-sm-6 mt-3 mt-sm-0 "></div>
+            </div>
+
+            <div class="button-row d-flex mt-4 ">
+                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev " type="button " title="Prev " onclick="history.back(-1) "><a href="vendor_reg_seven ">Prev</a></button> -->
+                <button class="btn btn-primary text-capitalize fw-bold ms-auto mb-0 js-btn-next" style="width:160px;" onclick="validateForm(); " value="Submit " type="submit " title=" Submit ">Submit</button>
+                <!-- </div> -->
+    </form>
+    </div>
+    <!-- </div> -->
+
+    <!--single form panel-->
+    <script>
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+
+    <script>
+        let dtElem = document.getElementById('Dob');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+
+
+
+
+    {% endblock body %}

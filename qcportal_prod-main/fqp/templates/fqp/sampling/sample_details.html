@@ -1,0 +1,124 @@
+{% extends base_template_name %}
+
+
+
+{% block body %}
+{% block basic %}
+
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+                 <div class="ed-infocontant">
+                  <div class="ed-information mb-4">
+                      <div class="card ed-card-block">
+                          <div class="card-header">
+                              <h2>
+                                  View Order Information
+                              </h2>
+                          </div>
+
+
+
+
+
+
+
+                          <div class="card-body">
+                              <div class="ed-tableinfo-block ed-orderinfo-block">
+                                  <div class="table-responsive">
+                                      <table class="table table-hover table-bordered display" id="view_offer">
+                                          <thead class="table-dark">
+                                              <tr>
+                                                  <th class="wc1">Sr. No.</th>
+                                               
+                                                  <th style="min-width:300px;">Site store</th>
+                                                  
+                                                  <th style="min-width:200px;">Offer No.</th>                                                
+                                                  
+                                                  <th style="min-width:200px;">Material Name</th>
+                                                  <th style="min-width:80px;" >Item Code</th>
+                                                <th>Sampled no</th>
+                                                <th>Sampled By</th>
+                                                <th>Sampled Date</th>
+                                                <th>NABL Report</th>
+                                                <th>NABL Status</th>
+                
+                                                  
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                          {% for data in offer_data %}
+                                              <tr>
+                                                  <td>{{forloop.counter}}</td>
+                                                  <td>{{data.site_store}}</td>
+                                                  <td>{{data.offer_no}}</td>
+                                                  
+                                                  <td>{{data.wo_material.material_name}}</td>
+                                                  <td>{{data.wo_material.item_code}}</td>
+                                                
+                                                  <td>
+                                                  {% if data.serial_no%}
+                                                  {{data.serial_no}}
+                                                  
+                                                  {% else %}
+                                                  {{data.batch_no}}
+                                                  {% endif %}
+                                                </td>
+                                                <td>{{data.sampled_by.employ_name}}</td>
+                                                <td>{{data.sampled_date}}</td>
+
+
+                                                <td>
+                                                    {% if data.nabl_status is null %}
+                                                    <span class="btn btn-warning">Pending</span>
+                                                    {% elif data.nabl_report%}
+                                                    <a href="{{data.nabl_report.url}}" >view</a>
+                                                    {%else%}
+                                                    NABL Report not Uploaded
+                                                    {% endif %}
+                                                    
+                                                </td>
+                                                <td>
+                                                    
+                                                        {% if data.nabl_status == True %}
+                                                        Accepted
+                                                        {% elif data.nabl_status == False%}
+                                                        Rejected
+                                                        {% else %}
+                                                        Pending
+                                                        {% endif %}
+                                                     
+                                                </td>
+                                                  
+                                                 
+                                                  
+                                              </tr>
+                                         {% endfor %}
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+  <script>
+    $(document).ready(function () {
+      $('#view_offer').DataTable({
+          pagingType: 'full_numbers',
+      });
+  });
+  </script>
+
+    {% endblock basic %}
+    {% endblock body %}

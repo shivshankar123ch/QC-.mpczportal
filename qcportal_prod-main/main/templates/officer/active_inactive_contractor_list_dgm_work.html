@@ -1,0 +1,153 @@
+
+{% extends 'officer/dgm_work.html' %}
+{% load cart %}
+{% load static %}
+{% block body %} {% block active_tkc %}
+                                     <li class="nav-item active" style="list-style-type:none;">
+                                     {% endblock active_tkc %}
+
+                 <script>
+                   function printpage() {
+                       var download_var = document.getElementById("download");
+                    
+                       download_var.style.visibility = 'hidden';
+                 
+                       window.print()
+                       
+                       download_var.style.visibility = 'visible';
+                          
+                   }
+                   
+               </script>
+                <style>
+                   /* .table-bordered td {
+                   font-size: 15px;
+                   width: 15px !important;
+               }
+               
+               .table-bordered thead th {
+                   font-size: 15px;
+                  width: 30px !important;
+                   word-break: break-word;
+               } */
+               .btn:not([class*=btn-outline-]) {
+                    border: 0;
+                    width: 136px;
+                }
+
+                .table th{
+                  text-align: center;
+                }
+               </style>
+               
+                                     
+               <div class="text-right d-flex" style="justify-content: flex-end;">
+                 <a href="/export_users_csv" class="btn btn-primary mr-3">Export CSV</a> 
+                 <button class="btn btn-primary" id="download" onclick="printpage()">Print List </button>
+               </div>
+                                   
+                                     
+                                     </form>
+                                            <!-- <h5 class="font-weight-bolder">All Contractor as on {{today}}</h5>
+                                         <div class="panel panel-default">
+                                           <div class="panel-heading">Panel Heading</div>
+                                             <div class="panel-body">Panel Content</div> -->
+                                             <!-- <div class="table-responsive"> -->
+
+                                              <div class="ed-information">
+                                                <div class="card ed-card-block">
+                                                  <div class="ed-card-inner">
+                                                    <div class="card-header">
+                                                      <h2>
+                                                        All Contractor as on {{today}}
+                                                      </h2>
+                                                    </div>
+                                                    <div class="card-body">
+                                                      <div class="ed-tableinfo-block">
+                                                        <div class="table-responsive">
+                                                <table class="table table-bordered table-striped display text-center">
+                                                     <thead class="table-dark">
+                                                       <tr>
+                                                         <th>
+                                                             S.NO.</th>
+                                                             <th>Discom </th>
+                                                             <th>Registration Number </th>
+                                                             
+                                                             <th>Valid up to</th>
+                                                             <th>Status</th>
+                                                             <th>Firm/Company Name </th>
+                                                             <th>Authorised Person Name </th>
+                                                             <th>Contact Number</th>
+                                                             <th>Date of Approval</th>
+                                                             <th>View Certificate </th>
+                                                       </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                       {% for data in data %}
+                                                      
+                                                       <tr>
+                                                         <td >{{forloop.counter}}</td>
+                                                         <td >{{data.User_zone}}</td>
+                                                         <td >{{data.Authentication_id}}</td>
+                                                         <td>{{data|last_date:doc|date:"d-M-Y"}}</td>
+                                     
+                                     
+                                                           {% now "Y-m-d" as to_daaa %}
+                                                           {% if data.Authentication_id and data.blacklisted == 2 %}
+                                                        <td style="color: red;"> Debarred </td>
+
+                                                         {% elif data.Authentication_id and data.deregister == 0 %}
+                                                                      
+                                                               {% if to_daaa <= data|last_date:doc|date:"Y-m-d" %}
+                                                             <td> Active</td> 
+                                                               {% else %}
+                                                             <td> Inactive</td> 
+                                                               {% endif %}
+                                  
+                                                           {% elif data.Authentication_id and data.deregister == 1 %}
+                                                           <td> Deregistered </td> 
+
+                                                           {% else %}
+                                                           <td>Inactive</td>
+                                                           {% endif %}
+                                                         
+                                                         <td >{{data.CompanyName_E}}</td>
+                                                         <td >{{data.Authorised_person_E}}</td>
+                                                         <td>{{data.ContactNo}}</td>
+                                                         <td>{{data.date_of_approved}}</td>
+                                                           
+                                                 
+                                                         {% if data.cert_image%}
+                                                         <td> <a href="{{data.cert_image.url}} " target="_blank" ><span class="btn btn-info btn-sm">View</span></a></td>
+                                                         {% else %}
+                                                          <td><span class="btn btn-danger btn-sm">Certificate Not Uploaded</span></td>
+                                       
+                                                         {% endif %}
+                                     
+                                                         </tr>
+                                               
+                                                 {% endfor %}
+                                                 <tr></tr>
+                                                 </tbody>
+                                                 </table>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     {% endblock body %}
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     

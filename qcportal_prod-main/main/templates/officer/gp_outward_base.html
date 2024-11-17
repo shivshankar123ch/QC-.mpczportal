@@ -1,0 +1,57 @@
+{% extends 'officer/ta_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link" href="/ta_joborder">
+                  <span class="sidenav-mini-icon"> TA </span>
+                  <span class="sidenav-normal">TA Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="/gp_outward_base">
+                  <span class="sidenav-mini-icon"> GOP </span>
+                  <span class="sidenav-normal"> Generate Outward Pass </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+{% block body %}
+<h3 class="card-title">All Outward Pass</h3>
+<div class="card-body p-0">
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th>Cutomer Ref and Gate Pass number </th>
+                <th>Date</th>
+                <th>TRF Id</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for trf in trf_obj %}
+            <tr>
+                <td>{{trf.customer_ref_gatepass_no}}</td>
+                <td>{{trf.dated}}</td>
+                <td>{{trf.TRF_Id}}</td>
+                {% if trf.outpass_gen == 0 %}
+                <td>
+                  <a class="btn btn-primary btn-sm float-left" onclick="alert('Proceeding to Genarate Gate Pass')" href="/gp_outward/{{trf.TRF_Id}}">Generate Outward Pass</a>
+                </td>
+                {% else %}
+                <td>
+                    <a class="btn btn-primary btn-sm float-left" href="/gp_outward_view/{{trf.TRF_Id}}">View Outward GP</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}

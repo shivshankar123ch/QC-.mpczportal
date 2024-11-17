@@ -1,0 +1,47 @@
+% extends 'vendor/base1.html' %} {% load static %} {% block body %}
+                        <form id="login-form" class="form" action="changepwd" method="post">
+                            {% csrf_token %}
+
+                            <h3 class="text-center text-info">Change Mobile Number </h3>
+                            <div class="form-group">
+                                <label for="old mobile" class="text-info">current mobile number:</label><br>
+                                <input type="text" name="old_password" id="old mobile" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="new mobile" class="text-info">new mobile number:</label><br>
+                                <input type="text" name="new_password" id="new mobile" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm mobile" class="text-info">confirm new mobile number:</label><br>
+                                <input type="text" name="confirm_password" id="confirm mobile" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                           
+                            <div id="register-link" class="text-right">
+                                <!-- <a href="#" class="text-info">Register here</a> -->
+                            </div>
+                            <div class="worning">
+                               
+                                <p style="color: red; font-size:18px;margin-right: 132px;margin-top:90px"><b>{{msg}}</b></p>
+                                
+                              </div>
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</form>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock body %}

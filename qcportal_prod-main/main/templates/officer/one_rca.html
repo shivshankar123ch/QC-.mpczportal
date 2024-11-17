@@ -1,0 +1,100 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}Gatepass inward{% endblock pagetitle %}
+
+{% block fa %}
+<ul class="nav nav-treeview">
+  <li class="nav-item">
+    <a href="/po/area_process" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>Open Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/po/area_stock" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>In Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/gp_inward_rca" class="nav-link">
+      <i class="far fa fa-circle nav-icon"></i>
+      <p>Gatepass Inward</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="far fa fa-check-circle nav-icon"></i>
+      <p>Add RCA Gatepass Details</p>
+    </a>
+  </li>
+</ul>
+{% endblock fa %}
+
+{% block body %}
+<div style="width: 90%;">
+
+    <h1 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Add Gatepass Information</h1>
+
+    <form action="/create2_rca/{{trf_id}}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Materiallll</th>
+                <th scope="col">Specification</th>
+<!--                <th scope="col">Name</th>-->
+
+                <th scope="col">Vehicle_number</th>
+                <th scope="col">Driver_name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Submitted_by</th>
+                <th scope="col">Test_Request_Form_by</th>
+
+                <th scope="col">Material Number List</th>
+                <th scope="col">Allot no.</th>
+                <th scope="col">Material id.</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.select_material }}</td>
+
+                    <td>{{ emp.select_specification }}</td>
+
+<!--                    <th scope="row">{{ emp.emp_name }}</th>-->
+
+                    <th scope="row">{{ emp.Vehicle_number }}</th>
+                    <th scope="row">{{ emp.Driver_name }}</th>
+                    <th scope="row">{{ emp.Date }}</th>
+                    <th scope="row">{{ emp.Submitted_by }}</th>
+                    <th scope="row">{{ emp.Test_Request_Form_by }}</th>
+
+                    <td>{{ emp.material_number_list }}</td>
+
+                    <td>{{ emp.Allot_no }}</td>
+                    <td>{{ emp.Material_id }}</td>
+                    <td>{{ emp.Start_date }}</td>
+                    <td>{{ emp.End_Date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<center>
+    <a href="/gp_inward_rca" style="color:white;"><button type="button" class="button btn btn-success">Save and Next</button></a>
+    <button type="Submit" class="button btn btn-primary">Add Gatepass Details</button>
+</center>
+
+    </form>
+</div>
+
+
+
+{% endblock body %}

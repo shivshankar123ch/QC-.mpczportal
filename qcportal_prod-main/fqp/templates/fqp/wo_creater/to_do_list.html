@@ -1,0 +1,109 @@
+{% extends 'fqp/wo_creater/creater_base.html' %} {% load static %} {% block body %}
+
+
+
+<div class="ed-information">
+    <div class="card ed-card-block">
+      <div class="ed-card-inner">
+        <div class="card-header">
+          <h2>
+            To Do List
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+  <table class="table table-bordered table-striped display text-center ">
+    <thead class="table-dark">
+      <tr>
+          <th>Pending Work</th>
+          <th>Details</th>          
+          <th>Action</th>
+          
+      </tr>
+    </thead>
+    <tbody>
+
+<tr>
+  {% if len_gtp != 0 %}
+    <td>GTP Approval</td>
+    <td>Vendor GTP approval</td>    
+    <td><a href="/fqp/pending_gtp_approval" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td></td>
+    
+</tr>
+{% endif %}
+
+<tr>
+  {% if len_bg != 0 %}
+  <td>BG Approval</td>
+  <td>BG Approval againts Work Order</td>    
+  <td><a href="/fqp/bg_approval_list" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td></td>
+  
+</tr>
+{% endif %}
+
+<tr>
+  {% if len_material_offer != 0 %}
+    <td>Material offer approval</td>
+    <td>Material offer approval</td>    
+    <td>
+
+    <a href="/fqp/material_offer_approval_list" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td>
+    
+</tr>
+{% endif %}
+
+<tr>
+  {% if len_di_data != 0 %}
+    <td>DI Creation</td>
+    <td>Create DI and send for approval to wo_approver</td>    
+    <td>
+
+    <a href="/fqp/pending_di_list" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td>
+    
+</tr>
+{% endif %}
+
+<tr>
+  {% if len_fqp_data != 0 %}
+    <td>Only for Information</td>
+    <td>FQP Intimation</td>    
+    <td>
+
+    <a href="/fqp/officer_fqpintimation_data" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td>
+    
+</tr>
+{% endif %}
+
+<tr>
+  
+  <td>Only for Information</td>
+  <td>New FQP Intimation</td>    
+  <td>
+
+  <a href="/fqp/new_fqpintimation_data" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td>
+  
+</tr>
+
+<tr>
+  {% if len_mrc_data != 0 %}
+  <td>Only for Information</td>
+  <td>MRC</td>    
+  <td>
+
+  <a href="/tkc/mrc_offer_list" style="color:white"><button class="btn btn-info btn-sm">GO TO</a></td>
+  
+</tr>
+{% endif %}
+
+
+    
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+
+
+{% endblock body %}

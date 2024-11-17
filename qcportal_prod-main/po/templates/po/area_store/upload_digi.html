@@ -1,0 +1,42 @@
+{% extends 'officer/cgmr_base.html' %} {% load static %} {% block heading %} ALL RO Order {% endblock heading %} {% block body %}
+
+<form action="/po/upload_digi/{{digipdf.id}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>Upload digitally information</h2>
+        </div>
+        <div class="card-body">
+            <div id="options">
+                <div class="forms-informations">
+                    <div class="ed-form-block">
+                        <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                    Upload digitally
+                                </span>
+                            </h6>
+                        </div>
+                        <div class="ed-form-body">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Upload digitally signed pdf here
+                                    <span class="text-danger">*</span>
+                                </label> 
+                                <input type="file" name="digi_pdf" class="mt-2"></div>
+                            
+                                <div class="form-group">
+                                    <div class="form-action text-right">  
+                                        <button type="submit" class="btn ed-submit btn-success" value="Submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock body %}

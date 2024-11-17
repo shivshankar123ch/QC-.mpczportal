@@ -1,0 +1,121 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+{% endblock rejected_doc %}
+<div class="card card-default">
+          <div class="card-header">
+            <h5 class="card-title">Vendor Offer Letter</h5>
+            <div class="card-tools">
+              <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button> -->
+            </div>
+          </div>
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1"> Purchase Order No</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{offer.po.po_no}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+                  <!-- <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Item Category</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_category}}" disabled>
+                  </div> -->
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+
+                       <!-- <div class="form-group">
+                      <label for="exampleInputEmail1"> Class Of Item</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.item_class}}" disabled>
+                  </div> -->
+                <!-- /.form-group -->
+                 <div class="form-group">
+                      <label for="exampleInputEmail1"> Item Name</label>
+                     <input type="text"  name="name" class="form-control" id="exampleInputEmail1" placeholder="{{offer.item_name}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Total  Quantity In PO </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="{{material_data.Quantity}}" disabled>
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Offer Item Quantity </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="{{offer.Offer_Quantity}}" disabled>
+                   </div>
+                  </div>
+                  <!--    {% for data in dispatch_info %}-->
+                  <!--   <div class="col-md-6">-->
+                  <!-- <div class="form-group">-->
+                  <!--    <label for="exampleInputEmail1">Dispatch Item Serial No</label>-->
+                  <!--   <input type="number" name={{forloop.counter0}} class="form-control" id="exampleInputEmail1" placeholder={{data.serial_no}} disabled>-->
+                  <!-- </div>-->
+                  <!--  </div>-->
+                  <!--{% endfor %}-->
+
+
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">Offer Date</label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="{{offer.date}}" disabled>
+                   </div>
+                     </div>
+             
+                       <div class="col-md-6">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1">Offer ID</label>
+                        <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="MP{{offer.po.zone}}_{{offer.id}}" disabled>
+                      </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                             <label for=" ">Item Code</label>
+                            <input type="number" name="input_serial_no" class="form-control" id="exampleInputEmail1" placeholder="{{offer.item_code}}" disabled>
+                          </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                 <label for=" ">Serial No/Batch No</label>
+                                <input type="number" name="input_serial_no" class="form-control" id="exampleInputEmail1" placeholder="{{offer.input_serial_no}}" disabled>
+                              </div>
+                                </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                             <label for="exampleInputEmail1">Readiness Date</label>
+                            <input type="number" name="readiness_date" class="form-control" id="exampleInputEmail1" placeholder="{{offer.readiness_date}}" disabled>
+                          </div>
+                            </div>
+
+
+                                <div style="margin-top: 12px;">
+                                  {% if offer.routine_report_file %}
+                                  <a href="{{offer.routine_report_file.url}}" target="_blank"><span class="btn btn ed-submits btn-info">View Routine Report</span> </a>
+                                  {% else %}
+                                  <a> <span class="btn btn ed-submits btn-success">Routine Report Not Uploaded</span></a>
+                                  {% endif %}
+                                </div>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+
+        </div>
+</div>
+{% endblock body %}

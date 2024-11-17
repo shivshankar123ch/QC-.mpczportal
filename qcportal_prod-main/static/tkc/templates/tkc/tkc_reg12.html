@@ -1,0 +1,76 @@
+{% extends 'tkc/tkc_Base.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+
+
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <button class="btn btn-primary btn-block">Technical/Eligibility Details</button>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <button class="btn btn-primary btn-block">Annual Income Details</button>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <button class="btn btn-primary btn-block">Document Details</button>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <button class="btn btn-primary btn-block">Paid Amount Details</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="card-body table-responsive">
+                    <form action="tkc_reg_eight" name="myForm" onsubmit="return validateForm()" method="POST">
+                        {% csrf_token %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial No</th>
+                                    <th scope="col">Work Detail</th>
+                                    <th scope="col">Required Work Quantity</th>
+                                    <th scope="col">Details</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Part B 1)33 Kb line</td>
+                                    <td>20 KM</td>
+                                    <td>Part (A) 100% of AND 2)sumof percentage of any 4 works mentaioned in part(B) should be 100% or more
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Part B 1)33 Kb line</td>
+                                    <td> 20 KM</td>
+                                    <td>Part (A) 100% of AND 2)sumof percentage of any 4 works mentaioned in part(B) should be 100% or more </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                            <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send">Save And Next</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

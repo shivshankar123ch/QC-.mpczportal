@@ -1,0 +1,95 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+       <div class="table-responsive">
+          <table class="table table-striped projects table-responsive">
+              <thead>
+                  <tr>
+                      <th>
+                          #
+                      </th>
+                      <th>
+                          Work Order ID
+                      </th>
+                      <th>
+                          Supplier Name
+                      </th>
+                      <th>
+                          NIT NO
+                      </th>
+                       <th>
+                          Total Schedule
+                      </th>
+                      <th class="text-center">
+                       Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for name in data %}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>MPCZ00{{name.id}}</b>
+                      </td>
+                      <td>
+                          {{name.supplier.CompanyName_E}}
+                      </td>
+                      <td class="project_progress">
+                              {{name.nit_no}}
+                      </td>
+                      <td>
+                           {{name.milestone}}
+                      </td>
+                      <td class="project-actions text-center">
+                          <a class="btn btn-primary btn-sm" href="/fqp/view_wo/{{name.id}}" style="width:120px;">
+                               View Milestone
+                          </a>
+                          {% if name.Loa %}
+                          <a target="_blank" href="{{name.Loa.url}} " class="btn btn-primary btn-sm" style="width:120px;"> View LOA</a>
+                          {% else %}
+                          <a href="/fqp/upload_loa/{{name.id}}" class="btn btn-success btn-sm" style="width:130px;"> Upload LOA</a>
+                          {% endif %}
+                          {% if name.agreement %}
+                          <a  target="_blank" href="{{name.agreement.url}} " class="btn btn-primary  btn-sm" style="width:130px;"> View Agreement</a>
+                          {% else %}
+                          <a href="/fqp/upload_agreement/{{name.id}}" class="btn btn-success btn-sm" style="width:130px;"> Upload Agreement</a>
+                          {% endif %}
+                           {% if not name.create_status %}
+                         <a href="/fqp/wo_approval/{{name.id}}" class="btn btn-success btn-sm" style="width:130px;"> Send To Approval</a>
+                          <a href="/fqp/wo_delete/{{name.id}}" class="btn btn-danger btn-sm" style="width:130px;"> Delete </a>
+                          {% else %}
+                          <a  class="btn btn-primary btn-sm" style="width:130px;"> {{name.created_at}}</a>
+                          {% endif %}
+                      </td>
+                  </tr>
+              {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+{% endblock body %}

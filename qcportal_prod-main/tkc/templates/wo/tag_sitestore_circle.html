@@ -1,0 +1,110 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Select Circle For Sitestore Mapping
+                </h2>
+            </div>
+            <div class="card-body">
+                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="labelName text-capitalize">Discom<span
+                                        style="color: red;">*</span></label>
+                                <select class="form-control form-select form-select-lg"
+                                    aria-label=".form-select-lg example" name="dicom" id="discom" required
+                                    onchange="getCircle()">
+                                    <option selected disabled value="">Select Discom</option>
+                                    {% for data in discom_data %}
+                                    <option value="{{data.id}}">{{data.Discom_Name_E}}</option>
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+                            <form action="/tkc/save_sitestore_circle/{{store_data.id}}" method="POST" name="circle_name"
+                            id="circle_name">
+                            {% csrf_token %}
+                            <div class="col pt-4" >
+                                    <label class="labelName text-capitalize">Circle Name</label>
+                                   <div id="circle"></div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group  col-12 text-right">
+                               
+                                    <button type="submit" class="btn btn-primary" value="Submit">Save
+                                        Circle</button>
+                              
+                            </div>
+
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- </div> -->
+
+<!--single form panel-->
+<script>
+    function getCircle() {
+        let get_discom = document.getElementById('discom').value;
+
+
+        document.getElementById("circle").innerHTML = "";
+        $.ajax({
+            type: 'get',
+            url: `https://qcportal.mpcz.in/fqp/circle_master/${get_discom}`,
+            success: function (data) {
+                Object.entries(data).forEach(([_, value]) => {
+                    value.forEach(element => {
+                        var checkbox = document.createElement('input');
+                        var Circle_Name = 'Circle_Name';
+                        checkbox.type = 'checkbox';
+                        checkbox.id = element.id;
+                        checkbox.class = Circle_Name;
+                        checkbox.name = Circle_Name;
+                        checkbox.value = element.id;
+                        checkbox.checked = false;
+
+                        var label = document.createElement('label')
+
+                        label.appendChild(document.createTextNode(element.Circle_Name_E));
+
+                        var br = document.createElement('br');
+
+                        var circle_name = document.getElementById('circle');
+
+
+                        circle_name.appendChild(checkbox);
+                        circle_name.appendChild(label);
+                        circle_name.appendChild(br);
+                    });
+                });
+
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        })
+    }
+</script>
+{% endblock body %}

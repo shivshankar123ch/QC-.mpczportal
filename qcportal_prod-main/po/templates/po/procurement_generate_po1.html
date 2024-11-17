@@ -1,0 +1,1168 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}
+ {% block body %}
+<div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title"> Purchase order</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+     <form action="/po/procurement_previous_po" method="POST">
+		 <div class="m-3">
+           {% csrf_token %}
+
+   <div class="form-group">
+
+
+
+<!--------------------------------------------------------------------------------------------- ACCEPTANCE ----------------------------------------------------------------------------------------------->
+    <center>
+    <p class=MsoNormal align=center style='margin-top:0in;margin-right:-.5in;
+    margin-bottom:0in;margin-left:22.5pt;text-align:center;text-indent:-29.25pt;
+    line-height:normal'><img width=68 height=71
+    src="static/assets/images/mpmk.png" align=left style="width:100px;height:100px;" hspace=12 alt="͝"><span style='font-size:12.0pt;font-family:"Times New Roman",serif'><b>M.P.MADHYA
+    KSHETRA VIDYUT VITARAN CO. LTD.</b></span></p>
+
+    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+    margin-bottom:0in;margin-left:1.25in;text-align:center;line-height:normal'><b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>
+    (Government of M.P.Undertaking)</span></b></p>
+
+    <p class=MsoNormal align=center style='margin-top:0in;margin-right:-27.0pt;
+    margin-bottom:0in;margin-left:1.25in;text-align:center;line-height:normal'><b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>Regd. Office :
+    Nishtha Parisar, Bijlinagar,Govindpura, Bhopal-462023</span></b></p>
+
+    <p class=MsoNormal align=center style='margin-top:0in;margin-right:-.25in;
+    margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'><span
+    style='font-size:12.0pt;font-family:Wingdings;text-shadow:auto'>(</span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif;text-shadow:auto'> </span><span
+    style='font-size:10.0pt;font-family:"Times New Roman",serif;text-shadow:auto'>0755-2602033-34,
+    2678325, 2678280-383-325, Fax No.2589821 Email –</span><i><span
+    style='font-size:10.0pt;font-family:"Times New Roman",serif;text-shadow:auto'>dgm<a
+    href="mailto:proc2cz@gmail.com"><span style='color:windowtext;text-decoration:
+    none'>proc2cz@gmail.com</span></a></span></i><span style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'> </span></p>
+
+    <p class=MsoNormal align=center style='margin-top:0in;margin-right:-.75in;
+    margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'><b><span
+    style='font-size:10.0pt;font-family:"Times New Roman",serif'>Website:- <i>https://portal.mpcz.in</i><i>
+    CIN Number:U40109MP2002SGC015119</i></span></b></p>
+
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:-13.5pt;margin-bottom:
+    0in;margin-left:-4.5pt;line-height:normal'><span style='font-family:"Times New Roman",serif'>===========================================================================</span></p>
+    </center>
+    <p class=MsoNormal style='margin-top:0in;margin-right:22.5pt;margin-bottom:
+    0in;margin-left:0in'><span style='font-size:12.0pt;line-height:115%;font-family:
+    "Times New Roman",serif'>No. MD/MK/ <b>{{procurement.tendor_no}}</b>
+     <br>
+               Bhopal, dated:- <b>{{date}}</b></span></p>
+
+    <p class=MsoNormal style='margin-bottom:6.0pt;text-align:justify'><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>To,<b>
+    </b></span></p>
+
+    <p class=MsoNoSpacing style='text-indent:.5in'><b><span lang=EN-IN
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>{{ vendor.v_company_name }}</span></b></p>
+
+    <p class=MsoNoSpacing style='text-indent:.5in'><span lang=EN-IN
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'><b>{{vendor.v_company_reg_address_line1}}</b><b>                    Email:-</b> <b><a><span style='color:windowtext;
+    text-decoration:none'>{{vendor.v_email}}</span></a></b></span></p>
+
+    <p class=MsoNoSpacing style='margin-right:-13.5pt;text-indent:.5in'><span
+    lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><b>{{vendor.v_company_reg_address_line2}}</b>  <b>{{vendor.v_company_reg_address_city}}</b><b>                              <span class=MsoHyperlink><span
+    style='color:windowtext;text-decoration:none'><b>{{vendor.v_company_dir_email}}</b></span></span></b></span></p>
+
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:normal'><b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>Sub:  Order for supply of “<b>{{ procurement.item_name }}</b>” against Tender Specification No. <b>{{ procurement.tendor }}</b> (Opened on 27.08.2021). </span></b></p>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>Ref:</span></b><span lang=EN-IN style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'>     </span><span style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'> Your offer submitted against TS. No. MD/MK/<b> {{ procurement.tendor_no }}</b></span><span lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'> (Opened Date : <b> {{ date }}</b>)</b></span><span style='font-size:12.0pt;font-family:"Times New Roman",serif'></span></p>
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:normal'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>             </span></p>
+
+    <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>Dear
+    Sirs,</span></p>
+
+    <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+<!--------------------------------------------------------------------------------------------- ACCEPTANCE ----------------------------------------------------------------------------------------------->
+
+    <p class=MsoNormal style='margin-bottom:3.0pt;text-align:justify;line-height:normal'><b><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'>1.
+    <u>ACCEPTANCE</u></span></b><span style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>: Considering your above offer against the tender
+    under subject, we have pleasure in placing this detailed order for supply of <b>{{ procurement.item_name }} {{ procurement.tendor_no }}</b> on <b> Rs. {{ procurement.item_price }}</b> indicated
+    as detailed in Schedule–I; Price &amp; Quantity of this order.</span></p>
+    <p class=MsoNormal style='margin-bottom:3.0pt;text-align:justify;line-height:
+    normal'><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'>This
+    order is subject to the terms and conditions as stipulated in detail in <b>Annexure-I</b>
+    enclosed with this order except the terms and conditions as modified / laid
+    down hereunder. These shall be binding on you in respect of this contract and
+    no conditions or stipulations to the contrary or which are inconsistent will be
+    applicable/ acceptable.</span></p>
+    <p class=MsoNormal style='margin-bottom:6.0pt;text-align:justify;line-height:
+    normal'><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'>            This
+    order is also subject to the Technical Specifications as contained in <b>Annexure-II.</b></span><span
+    lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'> </span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'></span></p>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:4.0pt'>&nbsp;</span></p>
+
+
+<!--------------------------------------------------------------------------------------------- PRICES ----------------------------------------------------------------------------------------------->
+   <input type="checkbox" id="Price_checkBox" />
+    <p class=MsoPlainText style='text-align:justify'><b><span lang=EN-AU
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>2.         <u>PRICES</u>:
+    </span></b><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>The
+    accepted prices are in rupees on FOR Destination basis but exclusive of Goods
+    &amp; Services Tax (GST). The prices are <b><input type="text" name="price_variable" id="price_variable" placeholder="Variable" disabled></b> as per IEEMA price
+    variation formula of our tender stipulated in Annexure-III enclosed herewith.
+    The prices are based on the IEEMA price circular prevailing as on <b><input type="date" name="price_date" id="price_date" placeholder="01.07.2021" disabled></b>.
+    The price increase shall be limited to contractual delivery period only. Price
+    variation shall be allowed on ex-works price only, shown in Schedule-I. Please
+    note that no amount shall be paid extra towards any other Tax.</span></p>
+    <script>
+    document.getElementById('Price_checkBox').onchange = function() {
+    document.getElementById('price_variable').disabled = !this.checked;
+    document.getElementById('price_date').disabled = !this.checked;
+    };
+    </script>
+
+<!--------------------------------------------------------------------------------------------- GOODS AND SERVICE TAX ----------------------------------------------------------------------------------------------->
+    <p class=MsoPlainText style='text-align:justify'><span style='font-size:7.0pt;
+    font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+    <input type="checkbox" id="gst_checkBox" />
+
+    <p class=MsoPlainText style='text-align:justify'><b><u><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>GOODS &amp; SERVICES TAX (GST)</span></u></b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>:  </span></p>
+
+    <p class=MsoNormal style='margin-bottom:6.0pt;text-align:justify;line-height:
+    normal'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>The
+    GST shall be paid extra on ex-works price and freight, forwarding &amp;
+    Insurance as per actual on production of documentary evidence provided
+    dispatches are made within contractual delivery period in accordance with
+    Clause-2 of the Annexure-I, otherwise rate applicable upto Scheduled delivery
+    period shall be paid. Present prevailing rate of CGST + SGST is <input type="text" name="gst_percent" id="gst_percent" placeholder="18" size="1" disabled>%  <b>{{ procurement.item_name }}</b></span></p>
+    <script>
+    document.getElementById('gst_checkBox').onchange = function() {
+    document.getElementById('gst_percent').disabled = !this.checked;
+    };
+    </script>
+
+
+<!--------------------------------------------------------------------------------------------- PAYMENT ----------------------------------------------------------------------------------------------->
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:3.0pt'>&nbsp;</span></p>
+
+    <input type="checkbox" id="payment_checkBox" />
+
+    <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'><b>3.</b>         <b><u>PAYMENT</u></b>:
+    Subject to completion of all contractual formalities, 100% payment alongwith Goods
+    &amp; Services Tax corresponding to the consignment would be generally made
+    within 45 days from the date of DRR on acceptance of material in good condition
+    at Area Stores after successful testing at NABL lab. The Company shall not be
+    liable for payment of any interest on delayed payment.</p>
+
+    <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'>The invoice in triplicate with relevant documents such as Material Receipt Certificate
+    in good condition etc. should be submitted to the  <input type="text" name="payment_submitted" id="payment_submitted" placeholder="  Sr. A. O. (HOAU)/RAO, MPMKVVCL, Bhopal, Gwalior & Guna " size="50%" disabled>  upto Rs. <input type="number" name="payment_upto" id="payment_upto" placeholder="15.00 " disabled> Lakh and above Rs. <input type="number" name="payment_above" id="payment_above" placeholder="15.00 " disabled> Lakh to the Chief Finance Officer, Corporate Office, MPMKVVCL, Bhopal.
+    </p>
+    <script>
+    document.getElementById('payment_checkBox').onchange = function() {
+    document.getElementById('payment_submitted').disabled = !this.checked;
+    document.getElementById('payment_upto').disabled = !this.checked;
+    document.getElementById('payment_above').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoBodyTextIndent style='margin-top:0in;margin-right:0in;margin-bottom:
+    4.0pt;margin-left:0in;text-align:justify;text-indent:0in'><b><span lang=EN-AU>&nbsp;</span></b></p>
+
+
+<!--------------------------------------------------------------------------------------------- DELIVERY SCHEDULE ----------------------------------------------------------------------------------------------->
+   <input type="checkbox" id="delivery_checkBox" />
+
+    <p class=MsoBodyTextIndent style='margin-top:0in;margin-right:0in;margin-bottom:
+    4.0pt;margin-left:0in;text-align:justify;text-indent:0in'><b><span lang=EN-AU>4.</span></b><span
+    lang=EN-AU><b><u>DELIVERY SCHEDULE:</u></b> </span></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:0in;margin-bottom:
+    10.0pt;margin-left:.75in;text-align:justify;text-indent:-.25in'><span
+    lang=X-NONE>i.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE></span><span lang=X-NONE><input type="text" name="delivery_fromDATE" id="delivery_fromDATE" placeholder="Five days (05)’" disabled> from
+    the date of issue of order shall be allowed for submission of GTP &amp;
+    drawings and approval for the same shall be conveyed within <input type="text" name="delivery_withinDATE" id="delivery_withinDATE" placeholder=" Five (05)" disabled> days.</span></p>
+
+    <p class=MsoListParagraph style='margin-left:.75in;text-align:justify;
+    text-indent:-.25in'><span lang=X-NONE>ii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>The delivery of entire ordered quantity shall
+    be delivered as per following delivery schedule. However, early deliveries are
+    also preferable.</span></p>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+    <p>
+    <table>
+        <tr>
+        <th style="width:5%">S No.</th>
+        <th style="width:30%">Item Details</th>
+        <th style="width:5%">Quantity</th>
+        <th style="width:10%">Date</th>
+        </tr>
+        <tr>
+        <td><input type="number" name="delivery_Sno1" id="delivery_Sno1" placeholder=" 1 " disabled></td>
+        <td><input type="text" name="delivery_itemDetails1" id="delivery_itemDetails1" placeholder=" 33KV Dry Type CT ratio 300-150/5-5A " size="60" disabled></td>
+        <td><input type="number" name="delivery_quantity1" id="delivery_quantity1" placeholder=" 2 " disabled></td>
+        <td><input type="date" name="delivery_date1" id="delivery_date1"  size="80" disabled></td>
+        </tr>
+    </table>
+    </p>
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify'><b><span
+    lang=EN-IN style='font-size:8.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></b></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:5.4pt;margin-bottom:
+    12.0pt;margin-left:.75in;text-align:justify;text-indent:-.25in;line-height:
+    115%'><span lang=X-NONE>iii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>In case material under a lot is delivered
+    beyond terminal date specified for the respective lot(s) penalty as per penalty
+    clause of the purchase order shall be recoverable from the supplier. The
+    penalty shall be reckoned from the next day of the terminal date of restive
+    lot(s) to the date of actual delivery.</span></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:5.4pt;margin-bottom:
+    0in;margin-left:.75in;margin-bottom:.0001pt;text-align:justify;text-indent:
+    -22.5pt;line-height:115%'><span lang=X-NONE>iv.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>In case terminal date for a lot falls on a
+    holiday it will be shifted to the next working day.</span></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:5.4pt;margin-bottom:
+    0in;margin-left:.75in;margin-bottom:.0001pt;text-align:justify;text-indent:
+    -22.5pt;line-height:115%'><span lang=X-NONE>v.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>The purchaser reserve the right to defer the
+    supplies or re-schedule the delivery of the order if required. The intimation
+    shall be given in writing</span>,<span lang=X-NONE> the Price Variation shall
+    be given for quantities deferred alongwith any change in applicable Taxes. </span><span
+    lang=X-NONE> </span></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:5.4pt;margin-bottom:
+    0in;margin-left:.75in;margin-bottom:.0001pt;text-align:justify;text-indent:
+    -22.5pt;line-height:115%'><span lang=X-NONE>vi.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>In case of delay in the part of purchaser in
+    arranging the pre-dispatch inspection or in issuing dispatch Instructions
+    beyond the time line prescribed in </span>tender document<span lang=X-NONE>,
+    the same shall be specified by the purchaser in the dispatch Instructions and
+    this period shall not be counted for calculation of penalty on account of delay
+    in delivery.</span></p>
+
+    <p class=MsoListParagraph style='margin-top:0in;margin-right:5.4pt;margin-bottom:
+    0in;margin-left:.75in;margin-bottom:.0001pt;text-align:justify;text-indent:
+    -22.5pt;line-height:115%'><span lang=X-NONE>vii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span><span lang=X-NONE>Early delivery of the material shall be
+    preferred.</span></p>
+
+    <p class=MsoNoSpacing style='margin-left:31.5pt;text-align:justify'><b><span
+    lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Deferment
+    of deliveries</span></b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>:- </span><span style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>Purchaser reserves the right to defer the supplies or
+    reschedule the delivery of the orders, if required. The intimation shall be
+    given in writing. </span></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify'><span
+    style='font-size:9.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+    <script>
+    document.getElementById('delivery_checkBox').onchange = function() {
+    document.getElementById('delivery_fromDATE').disabled = !this.checked;
+    document.getElementById('delivery_withinDATE').disabled = !this.checked;
+    document.getElementById('delivery_Sno1').disabled = !this.checked;
+    document.getElementById('delivery_itemDetails1').disabled = !this.checked;
+    document.getElementById('delivery_quantity1').disabled = !this.checked;
+    document.getElementById('delivery_date1').disabled = !this.checked;
+    };
+    </script>
+<!--------------------------------------------------------------------------------------------- SECURITY DEPOSIT ----------------------------------------------------------------------------------------------->
+
+    <input type="checkbox" id="securityDeposite_checkBox" />
+
+    <p class=MsoNormal style='text-align:justify'><b><span style='font-size:12.0pt;
+    line-height:115%;font-family:"Times New Roman",serif'>5.</span></b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>
+       </span><b><u><span lang=EN-AU style='font-size:12.0pt;line-height:115%;
+    font-family:"Times New Roman",serif'>SECURITY DEPOSIT:</span></u></b><span
+    lang=EN-AU style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>
+    </span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>You
+    are required to furnish an amount of Rs.<b> <input type="text" name="securityDeposite_amount" id="securityDeposite_amount" placeholder="1,42,200/- (One Lakh Forty Two Thousand and Two Hundred)" size="50" disabled></b> only equivalent to <input type="text" name="securityDeposite_percent" id="securityDeposite_percent" placeholder=" 3 " size="1" disabled> % value of the order in the form of Bank Guarantee on the Non-Judicial Stamp paper valuing <input type="text" name="securityDeposite_SDpercent" id="securityDeposite_SDpercent" placeholder=" 0.25 " size="2" disabled>% of the SD value i.e <b>Rs. <input type="text" name="securityDeposite_SD" id="securityDeposite_SD" placeholder="356/-" size="2" disabled></b> against security deposit for faithful execution of
+    the order and also towards performance guarantee of the materials. The security
+    deposit should be furnished within one month from the date of the order.</span></p>
+
+    <p class=MsoNoSpacing style='text-align:justify;text-indent:.5in'><span
+    lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Bank
+    Guarantee in lieu of cash deposit must be of any nationalized/scheduled Bank is
+    to be submitted strictly as per Company proforma (to be supplied alongwith the
+    order) valid for minimum 42 months to cover the guarantee period in the office
+    of the MD, MPMKVV Co. Ltd, Bhopal.</span></p>
+
+    <p class=MsoNoSpacing style='text-align:justify;text-indent:.5in'><span
+    lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>The
+    Company shall forfeit the Security Deposit in the event of non-execution/part
+    execution of the order besides invoking the penalty clause.</span></p>
+
+    <p class=MsoPlainText style='margin-bottom:6.0pt;text-align:justify;text-indent:
+    .5in'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>The
+    security deposit shall be returned after faithful performance as per terms and
+    conditions of the order and on expiry of guarantee period and if there are no
+    claim to be recovered against you. No interest shall be paid by the Company on
+    security deposit furnished by you. The Bank Guarantee towards the security
+    deposit shall have to be kept valid till expiry of guarantee period and also
+    till full settlement of recoverable liabilities, if any.</span></p>
+
+    <script>
+    document.getElementById('securityDeposite_checkBox').onchange = function() {
+    document.getElementById('securityDeposite_amount').disabled = !this.checked;
+    document.getElementById('securityDeposite_percent').disabled = !this.checked;
+    document.getElementById('securityDeposite_SDpercent').disabled = !this.checked;
+    document.getElementById('securityDeposite_SD').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+<!------------------------------------------------------------------------------------------- PENALTY --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="penalty_checkBox" />
+
+    <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
+    normal'><b><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>6. <u>PENALTY</u></span></b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>:  </span></p>
+
+    <p class=MsoNoSpacing style='text-align:justify'><span lang=EN-IN
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>            In
+    case of delay in execution of the order or non-execution of the order, the
+    purchaser shall recover from the supplier, a sum equal to <input type="number" name="penalty_sumEqualPercent" id="penalty_sumEqualPercent" placeholder=" 0.5 " size="5" disabled>% of the Ex-works
+    price for the quantity not delivered to Stores for every week of delay. For the
+    purpose of this clause part of a week shall be considered as full week.
+    However, maximum penalty under this clause shall be restricted to <input type="number" name="penalty_restrictedPercent" id="penalty_restrictedPercent" placeholder=" 10 " size="5" disabled>% of the
+    Ex-works value. This will be without prejudice to other remedies available to
+    the Company as per the laws of India, or terms of this Tender. The GST shall
+    also be applicable on the amount of penalty.  </span></p>
+    <script>
+    document.getElementById('penalty_checkBox').onchange = function() {
+    document.getElementById('penalty_sumEqualPercent').disabled = !this.checked;
+    document.getElementById('penalty_restrictedPercent').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+<!------------------------------------------------------------------------------------------- SCHEME - WISE DISTRIBUTION --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="scheme_checkBox" />
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>7.</span></b><span lang=EN-IN style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'> <b><u>SCHEME-WISE DISTRIBUTION OF
+    ORDER QUANTIY:</u></b></span></p>
+
+    <p class=MsoPlainText style='text-align:justify;text-indent:35.45pt'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>The following <input type="number" name="scheme_KV" id="scheme_KV" placeholder="11" size="5" disabled>KV Dry Type Current Transformer against this order are being procured under following schemes as detailed hereunder:-</span></p>
+
+    <p class=MsoPlainText style='text-align:justify;text-indent:35.45pt'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+    <div align=center>
+
+    <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=553
+     style='border-collapse:collapse;border:none'>
+     <tr style='height:14.35pt'>
+      <td width=42 rowspan=2 style='width:31.5pt;border:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:14.35pt'>
+      <p class=MsoPlainText align=center style='margin-top:0in;margin-right:-5.4pt;
+      margin-bottom:0in;margin-left:-5.4pt;margin-bottom:.0001pt;text-align:center'><b><span
+      style='font-size:12.0pt;font-family:"Times New Roman",serif'>S. No.</span></b></p>
+      </td>
+      <td width=204 rowspan=2 style='width:152.95pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt;height:14.35pt'>
+      <p class=MsoPlainText align=center style='text-align:center'><b><span
+      style='font-size:12.0pt;font-family:"Times New Roman",serif'>Name of Item</span></b></p>
+      </td>
+      <td width=217 valign=top style='width:162.5pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt;height:14.35pt'>
+      <p class=MsoPlainText align=center style='margin-right:-5.4pt;text-align:
+      center;text-indent:-5.4pt'><b><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>Quantity procured under schemes (Nos.)</span></b></p>
+      </td>
+      <td width=91 rowspan=2 style='width:67.95pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt;height:14.35pt'>
+      <p class=MsoPlainText align=center style='margin-right:-5.4pt;text-align:
+      center;text-indent:-5.4pt'><b><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>Total
+      (No.)</span></b></p>
+      </td>
+     </tr>
+     <tr style='height:14.35pt'>
+      <td width=217 style='width:162.5pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:14.35pt'>
+      <p class=MsoPlainText align=center style='margin-right:-5.4pt;text-align:
+      center;text-indent:-5.4pt'><b><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>RRTD</span></b></p>
+      </td>
+     </tr>
+     <tr style='height:19.75pt'>
+      <td width=42 style='width:31.5pt;border:solid windowtext 1.0pt;border-top:
+      none;padding:0in 5.4pt 0in 5.4pt;height:19.75pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-4.0pt;
+      margin-bottom:0in;margin-left:-4.55pt;margin-bottom:.0001pt;text-align:center'><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="number" name="scheme_Sno" id="scheme_Sno" placeholder="1." size="5" disabled></span></p>
+      </td>
+      <td width=204 style='width:152.95pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:19.75pt'>
+      <p class=MsoNoSpacing style='margin-right:-2.7pt;text-indent:-2.9pt'><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="text" name="scheme_Item" id="scheme_Item" placeholder="11KV CT ratio 300-150/5-5A" size="25" disabled></span></p>
+      </td>
+      <td width=217 style='width:162.5pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:19.75pt'>
+      <p class=MsoNoSpacing align=center style='margin-right:-2.7pt;text-align:
+      center;text-indent:-2.9pt'><span lang=EN-IN style='font-size:12.0pt;
+      font-family:"Times New Roman",serif'><input type="number" name="scheme_RRTD" id="scheme_RRTD" placeholder="600" size="25" disabled></span></p>
+      </td>
+      <td width=91 style='width:67.95pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:19.75pt'>
+      <p class=MsoNoSpacing align=center style='margin-right:-2.7pt;text-align:
+      center;text-indent:-2.9pt'><b><span lang=EN-IN style='font-size:12.0pt;
+      font-family:"Times New Roman",serif'><input type="number" name="scheme_Total" id="scheme_Total" placeholder="600" size="5" disabled></span></b></p>
+      </td>
+     </tr>
+    </table>
+
+     <button value="" disabled>Add Field</button>
+    </div>
+
+    <script>
+    document.getElementById('scheme_checkBox').onchange = function() {
+    document.getElementById('scheme_Sno').disabled = !this.checked;
+    document.getElementById('scheme_KV').disabled = !this.checked;
+    document.getElementById('scheme_Item').disabled = !this.checked;
+    document.getElementById('scheme_RRTD').disabled = !this.checked;
+    document.getElementById('scheme_Total').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+<!------------------------------------------------------------------------------------------- PERFORMANCE GUARANTEE --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="performance_checkBox" />
+
+    <p class=MsoNormal style='margin-bottom:0in;text-align:justify'><b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>8.         <u>PERFORMANCE GUARANTEE</u></span></b><span style='font-size:12.0pt;line-height:115%;
+    font-family:"Times New Roman",serif'>: </span></p>
+
+    <p class=MsoListParagraph style='margin-bottom:12.0pt;margin-top:0in;
+    text-align:justify;text-indent:-.5in;line-height:12.0pt'><span lang=X-NONE>8.1.<span
+    style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>If during the course of <input type="number" name="performance_months" id="performance_months" placeholder="36" size="5" disabled> months subsequent to the date of receipt of consignment, any of the goods is found defective in material or workmanship or develops defect during service, the same shall be
+    replaced/repaired immediately, but in any case within <input type="number" name="performance_days" id="performance_days" placeholder="90" size="5" disabled> days of receipt of
+    report of defect/ failure, by you free of all charges. All necessary
+    arrangement on this account will be made by you. In case replacement is delayed
+    beyond three months of intimation cost of the material may be recovered from your
+    pending bills/security deposit.</p>
+
+    <p class=MsoListParagraph style='margin-left:49.5pt;text-align:justify'><span
+    lang=X-NONE style='font-size:8.0pt'> </span></p>
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>The said material if required to be replaced, shall be collected
+    by you from Area Stores/ work site at their own cost and at your own
+    responsibility. These materials will like-wise be returned duly repaired/
+    replaced and tested subsequently by you to the destination indicated on <input type="text" name="performance_freight" id="performance_freight" placeholder="“FREIGHT PAID BASIS”" size="20" disabled>
+     at their cost in a reasonable time of <input type="number" name="performance_days2" id="performance_days2" placeholder="90" size="5" disabled>days from the
+    date of intimation. The guarantee period as stipulated in clause 8.1 above
+    shall also be applicable for repaired/replaced material, which shall however be
+    counted afresh from the date of its delivery in our stores/site.</p>
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>Further, it is clarified that all the charges towards carrying
+    out repairs including packing, forwarding, loading, unloading shall be borne by
+    you. The amount deposited under security deposit clause shall also cover the
+    performance guarantee of the material.</p>
+
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>All equipment/ line materials reported failed within the
+    specified guarantee period may be replaced free of cost by you.</p>
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>In case Equipment/material is installed at field and failed during
+    the Guarantee period due to manufacturing defect, as per Clause 8.1, the actual
+    cost of dismantling and replacement of these equipments/ materials with the new
+    ones may be charged to you.</p>
+
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>To and fro transportation cost of such failed equipment may also
+    be borne by you.</p>
+
+    <p class=MsoListParagraph style='text-align:justify;text-indent:-.5in;
+    line-height:12.0pt'><span lang=X-NONE>8.7.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span></span>In the event of your inability to adhere to the aforesaid
+    provisions, suitable penal action will be taken against you, which may
+    interalia include blacklisting of your firm for future business with the
+    Purchaser for a certain period.</p>
+
+    <script>
+    document.getElementById('performance_checkBox').onchange = function() {
+    document.getElementById('performance_months').disabled = !this.checked;
+    document.getElementById('performance_days').disabled = !this.checked;
+    document.getElementById('performance_freight').disabled = !this.checked;
+    document.getElementById('performance_days2').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+
+<!------------------------------------------------------------------------------------------- SUBMISSION OF DRAWING AND LITERATURE --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="drawing_checkBox" />
+
+    <p class=MsoNormal style='margin-bottom:0in;line-height:normal;text-autospace:
+    none'><b><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'>9. <u>SUBMISSION OF DRAWING AND LITERATURE:-</u></span></b></p>
+
+    <p class=MsoNormal style='margin-left:.5in;text-align:justify;line-height:normal'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>All the relevant
+    drawings alongwith GTP shall be submitted within <input type="number" name="drawing_submitted" id="drawing_submitted" placeholder="5" size="3" disabled> days from the date of issue
+    of order for approval and the same shall be conveyed within <input type="number" name="drawing_conveyed" id="drawing_conveyed" placeholder="5" size="3" disabled> days. One set of
+    drawing, Descriptive Literature and instructions Manual for Erection,
+    Commissioning and maintenance of the equipments ordered, shall be supplied to
+    each consignee.</span></p>
+
+    <script>
+    document.getElementById('drawing_checkBox').onchange = function() {
+    document.getElementById('drawing_submitted').disabled = !this.checked;
+    document.getElementById('drawing_conveyed').disabled = !this.checked;
+    };
+    </script>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+
+<!------------------------------------------------------------------------------------------- INSPECTION --------------------------------------------------------------------------------------------->
+
+    <p class=MsoNormal style='margin-top:0in;margin-right:1.2pt;margin-bottom:10.0pt;
+    margin-left:4.5pt;text-align:justify;text-indent:-4.5pt'><b><span lang=EN-AU
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>10.</span></b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>
+    <b>    </b></span><b><u><span lang=EN-AU style='font-size:12.0pt;line-height:
+    115%;font-family:"Times New Roman",serif'>INSPECTION</span></u></b><b><span
+    lang=EN-AU style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>:-
+    </span></b></p>
+
+    <p class=MsoNormal style='margin-left:.75in;text-align:justify;text-indent:
+    -.25in;line-height:normal'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>i</span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>     </span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>The Purchaser
+    shall arrange pre dispatch inspection of material/equipment at the Firm’s work
+    before dispatch by deputing an officer from the Purchaser. You shall extend all
+    necessary cooperation and facilities to the inspecting authority for performing
+    inspection/ testing of materials as per relevant IS/Technical Specification of
+    the tender.</span></p>
+
+    <p class=MsoPlainText style='margin-top:0in;margin-right:0in;margin-bottom:
+    5.0pt;margin-left:.75in;text-align:justify;text-indent:-.25in'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>ii    Intimation about
+    the date, by which material shall be ready for inspection, indicating quantity,
+    be given to the Order Placing Authority, by you, so as to reach him
+    sufficiently in advance, failing which, you shall be responsible for delay in
+    delivery on account of inspection.</span></p>
+
+    <p class=MsoPlainText style='margin-top:0in;margin-right:0in;margin-bottom:
+    5.0pt;margin-left:.75in;text-align:justify;text-indent:-.25in'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>iii</span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>   </span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>The firm shall not
+    dispatch the material unless specific dispatch instructions are issued by the
+    Purchaser or any other authorized officer of the Purchaser.</span></p>
+
+    <p class=MsoPlainText style='margin-top:0in;margin-right:0in;margin-bottom:
+    5.0pt;margin-left:.75in;text-align:justify;text-indent:-.25in'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>iv  </span><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'><span> </span>In case the Officer
+    deputed for inspection does not find the offered lot ready at your works, the
+    Purchaser shall reserve the right to recover from you such charges as might
+    have been incurred in arranging such inspection. These charges have been
+    specified in clause 11 “Fake inspection call”.</span></p>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:7.0pt'>&nbsp;</span></p>
+
+
+<!------------------------------------------------------------------------------------------- FAKE INSPECTION CALL --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="fake_checkBox" />
+
+    <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'><b>11. <u>FAKE INSPECTION CALL</u></b></p>
+
+    <p class=MsoBodyText style='margin-top:0in;margin-right:-1.8pt;margin-bottom:
+    6.0pt;margin-left:35.4pt;text-align:justify'>All such cases where after giving
+    inspection call you will not offer full quantity as per your offer letter to
+    the Inspecting Officer deputed by the Purchaser for any reason, shall be
+    treated as ‘Fake Inspection Call’. The Purchaser will not be under any
+    obligation to arrange inspection of such partial lot and you will be required
+    to remit a sum of Rs. <input type="number" name="fake_amountGST" id="fake_amountGST" placeholder="50,000/-" size="7" disabled> +GST  as applicable for each fake inspection call.</p>
+
+    <p class=MsoBodyText style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:.5in'>In case of more than two
+    Fake Inspection call under the same purchase order, the purchaser at its
+    discretion may cancel the order for balance ordered quantity exercising
+    provision of “Cancellation/ Termination of order” of the tender and also debar your
+    firm from future business.</p>
+
+    <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'>&nbsp;</p>
+
+    <script>
+    document.getElementById('fake_checkBox').onchange = function() {
+    document.getElementById('fake_amountGST').disabled = !this.checked;
+    };
+    </script>
+
+<!------------------------------------------------------------------------------------------- ACCEPTANCE OF MATERIAL --------------------------------------------------------------------------------------------->
+ <input type="checkbox" id="acceptanceMaterial_checkBox" />
+
+ <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'><b>12.       </b><b><u><span
+ lang=EN-AU>ACCEPTANCE OF MATERIAL</span></u></b><b>:-</b> </p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>i.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>The
+ MPMKVVCL has option to conduct Routine and acceptance test on the samples from
+ the consignment of material received at our consignee Area Stores before its
+ acceptance from the lot supplied against the order. The said test shall be
+ conducted on any one unit of the received lot. The sample Unit shall be selected
+ for conducting Routine and acceptance test from the lot of CTs received in Area
+ stores. The selected samples shall be sent with complete details for testing as
+ per specification at any independent NABL accredited Laboratory like ERDA, CPRI
+ etc.</span><span lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:
+ "Times New Roman",serif'>  </span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+ margin-left:.5in;text-align:justify;line-height:95%'><span lang=EN-AU
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>ii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>In
+ case the sample unit fails in any of the Routine/Acceptance Test the entire lot
+ shall be rejected. The GM/In-charge (stores) shall verify and ensure that the
+ serial number and make is engraved on the sides of the CTs. The testing charges
+ shall be borne by MPMKVVCL. However, in case the material fails in any of the
+ test the entire lot shall be rejected and the entire testing charges shall be
+ recovered from you.</span></p>
+
+ <p class=MsoNormal style='margin-bottom:0in;margin-bottom:0in;margin-top:0in;
+ text-align:justify;line-height:95%'><span lang=EN-AU style='font-size:8.0pt;
+ line-height:95%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>iii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>In
+ case of any dispute relating to test results against the rejected lot and on
+ contesting by the supplier, the re-testing of another randomly selected sample
+ from the rejected lot in presence of your representative may be considered at
+ the discretion of MPMKVVCL, provided request is received from you within <input type="number" name="acceptanceMaterial_days" id="acceptanceMaterial_days" placeholder="15" size="5" disabled>
+ days from the date of rejection of material. The testing of sample in presence
+ of your representative may also be considered only when your representative
+ makes its presence on the date of testing of sample at the concern lab. Else
+ the laboratory shall perform testing at its own. The re-testing charges
+ including other expenses viz. transportation, loading unloading etc. shall be
+ borne by you. In case of failure of the lot in second testing, the lot shall be
+ finally rejected and shall have to be lifted and replaced by you. No further
+ representation/ request shall be entertained and the decision/ discretion of
+ MPMKVVCL in this regard shall be final and binding on you.</span></p>
+
+ <p class=MsoNormal style='margin-bottom:0in;margin-bottom:0in;margin-top:0in;
+ text-align:justify;line-height:95%'><span lang=EN-AU style='font-size:4.0pt;
+ line-height:95%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>iv.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>In
+ case of emergency, the Purchaser may use/issue material/equipment prior to
+ satisfactory testing at NABL lab.  In the event of failure of
+ material/equipment in testing at NABL lab later on following action shall be
+ taken for that particular lot / order only:-</span></p>
+
+ <p class=MsoListParagraph style='margin-top:0in;margin-right:0in;margin-bottom:
+ 12.0pt;margin-left:58.5pt;text-align:justify;text-indent:-.25in;line-height:
+ 95%'><span lang=X-NONE>a)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span></span><span lang=X-NONE><input type="number" name="acceptanceMaterial_percent" id="acceptanceMaterial_percent" placeholder="5" size="5" disabled>% payment of the bill for the supplies already
+ made will be recovered by Purchaser.</span></p>
+
+ <p class=MsoListParagraph style='margin-left:58.5pt;text-align:justify;
+ text-indent:-.25in;line-height:95%'><span lang=X-NONE>b)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span></span><span lang=X-NONE>For</span> the material/equipment <span
+ lang=X-NONE>already </span>used/issued<span lang=X-NONE>, the guarantee period
+ shall stand twice the normal guarantee period and the period of performance
+ security deposit shall be suitably extended to cover the extended guarantee
+ period.</span></p>
+
+ <p class=MsoListParagraph style='margin-left:58.5pt;text-align:justify;
+ text-indent:-.25in;line-height:95%'><span lang=X-NONE>c)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span></span><span lang=X-NONE>The </span>purchaser<span lang=X-NONE> shall be
+ intimated </span>you <span lang=X-NONE>about the results of such test to make
+ suitable improvement in </span>your <span lang=X-NONE>manufacturing process and
+ to ensure quality control.</span></p>
+
+ <p class=MsoListParagraph style='margin-left:58.5pt;text-align:justify;
+ text-indent:-.25in;line-height:95%'><span lang=X-NONE>d)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span></span><span lang=X-NONE>If any </span>quantity is <span lang=X-NONE>available
+ in the area stores,</span> the same <span lang=X-NONE>shall not be issued and
+ have to be taken back by </span>you<span lang=X-NONE> at </span>your<span
+ lang=X-NONE> own cost.</span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>v.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>The
+ Purchaser has all the rights to conduct the test including type tests, at his
+ own cost by an independent agency during execution of order. In the event of
+ failure in such tests, the expenses incurred in testing shall be your’s account
+ as already mentioned above in case of random testing.</span></p>
+
+ <p class=MsoNormal style='margin-bottom:0in;margin-bottom:0in;margin-top:0in;
+ text-align:justify;line-height:95%'><span lang=EN-AU style='font-size:8.0pt;
+ line-height:95%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+ <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+ margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:95%'><span
+ lang=EN-AU style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'><span
+ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>vi.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><b><u><span
+ style='font-size:12.0pt;line-height:95%;font-family:"Times New Roman",serif'>Ground
+ Rent</span></u></b></p>
+
+ <p class=MsoBodyTextIndent style='margin-left:.25in;text-align:justify;
+ text-indent:.25in;line-height:115%'><span lang=EN-AU>In case of rejection of
+ supplied quantity, you have to lift the entire rejected quantity within period
+ specified in rejection intimation letter, failing which ground rent @ <input type="number" name="acceptanceMaterial_percentPerWeek" id="acceptanceMaterial_percentPerWeek" placeholder="0.5" size="5" disabled>% per
+ week of ordered FOR rates (Ex-works + Freight) subject to maximum <input type="number" name="acceptanceMaterial_percentMax" id="acceptanceMaterial_percentMax" placeholder="10" size="5" disabled>% of
+ ordered FOR rate to be levied on you.</span></p>
+
+ <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+ text-indent:0in;line-height:115%'><b><span lang=EN-AU style='font-size:6.0pt;
+ line-height:115%'>&nbsp;</span></b></p>
+
+    <script>
+    document.getElementById('acceptanceMaterial_checkBox').onchange = function() {
+    document.getElementById('acceptanceMaterial_days').disabled = !this.checked;
+    document.getElementById('acceptanceMaterial_percent').disabled = !this.checked;
+    document.getElementById('acceptanceMaterial_percentPerWeek').disabled = !this.checked;
+    document.getElementById('acceptanceMaterial_percentMax').disabled = !this.checked;
+    };
+    </script>
+
+
+<!------------------------------------------------------------------------------------------- CONSIGNEE --------------------------------------------------------------------------------------------->
+    <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in;line-height:115%'><b><span lang=EN-AU>12.        <u>CONSIGNEE</u></span></b><span
+    lang=EN-AU>: Supplies shall be made at the destinations as mentioned in
+    Dispatch Instruction to be issued by this office after completion of
+    Pre-dispatch inspection by the Company’s Officers at your works. Material
+    Receipt Certificate (MRC) shall be issued by the respective consignees after
+    receipt of material in good condition.</span></p>
+
+    <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
+    normal'><span lang=EN-AU style='font-size:6.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+
+<!------------------------------------------------------------------------------------------- RANDOM SAMPLE TESTING --------------------------------------------------------------------------------------------->
+    <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in;line-height:115%'><b><span lang=EN-AU>13.        <u>RANDOM SAMPLE TESTING</u></span></b><span
+    lang=EN-AU>: The Company shall have option to test the samples selected at random from the supplies effected
+    and subject it to Routine/Type tests/ acceptance test to be conducted at
+    CPRI/ERDA etc.</span></p>
+
+    <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
+    normal'><span lang=EN-AU style='font-size:6.0pt;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+
+<!------------------------------------------------------------------------------------------- EXTENSION ORDER --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="extension_checkBox" />
+
+    <p class=MsoNormal style='margin-bottom:8.0pt;text-align:justify'><b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>14.</span></b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>
+       <b><u>EXTENSION ORDER:</u></b> The Company reserves right to place an
+    extension order only once for any additional quantity to the extent of <input type="number" name="extension_quantity" id="extension_quantity" placeholder="50" size="5" disabled>%
+    quantity of this order on the same rates, terms and conditions within <input type="number" name="extension_months" id="extension_months" placeholder="9" size="2" disabled>
+    months from the date of order.</span></p>
+
+
+    <p class=MsoBodyText style='margin-bottom:0in;text-align:justify'>&nbsp;</p>
+
+    <script>
+    document.getElementById('extension_checkBox').onchange = function() {
+    document.getElementById('extension_quantity').disabled = !this.checked;
+    document.getElementById('extension_months').disabled = !this.checked;
+    };
+    </script>
+
+
+<!------------------------------------------------------------------------------------------- SETTLELMENT OF DISPUTES --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="settlement_checkBox" />
+
+    <p class=MsoPlainText style='text-align:justify;line-height:115%'><b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>15.</span></b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>
+        <b><u>SETTLELMENT OF DISPUTES:</u></b><b> </b>All disputes arising out of
+    this contract agreement purchase orders etc. shall be determined by a competent
+    court at <input type="text" name="settlement_court" id="settlement_court" placeholder="Bhopal" size="7" disabled> only.</span></p>
+
+    <p class=MsoPlainText style='text-align:justify;line-height:115%'><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>            A
+    duplicate copy of the order is enclosed which may please be signed and returned
+    to this office as a token of your receipt and acceptance of the terms &amp;
+    conditions of the order. Copy of the order is also send through email address <input type="email" name="settlement_email" id="settlement_email" placeholder="agarwal.industries@ymail.com" size="25" disabled> <b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'> </span></b><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>as
+    per your offer. </span></p>
+
+    <p class=MsoPlainText style='text-align:justify;text-indent:.5in'><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>The terms &amp;
+    conditions of the order shall be adhered to and complied with.      </span></p>
+
+    <p class=MsoNormal style='text-align:justify;text-indent:.5in'><span
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>Please
+    complete the contractual formalities as per terms of the order and deliver the
+    material as per the delivery schedule.</span></p>
+
+    <p class=MsoNormal style='margin-right:1.2pt'><span style='font-size:12.0pt;
+    line-height:115%;font-family:"Times New Roman",serif'>                        Thanking
+    you,</span></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><b><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>Encl:-</span></b></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>1.  Schedule-I (Price &amp;
+    Quantity)</span></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>2.  Annexure-I (General Terms &amp;
+    Conditions)</span></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>3.  Annexure-II (Detailed Technical
+    Specifications)</span></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>4.  Annexure-III (Price Variation
+    Formula)</span></p>
+
+    <p class=MsoPlainText style='margin-right:-52.55pt'><span style='font-size:
+    12.0pt;font-family:"Times New Roman",serif'>5.  Proforma of Bank Guarantee
+                   </span></p>
+
+   <center>
+    <p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+    font-family:"Times New Roman",serif'>
+          Yours sincerely,</span></p>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>
+    Chief General Manager (Proc),</span></b></p>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>
+    Corporate Office, MPMKVVCL, Bhopal </span></b></p>
+    </center>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif;color:black'>Copy to:-</span></b></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify;text-indent:
+    -.5in'><span lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif;
+    color:black'>1.         </span><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>The
+    CFO, Corporate Office, MP MKVV Co. Ltd. Bhopal.</span></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify;text-indent:
+    -.5in'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>2.         The
+    Director (Finance), Corporate Office, MP MKVV Co. Ltd. Bhopal.</span></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify;text-indent:
+    -.5in'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>3.         The
+    CGM (M&amp;BM)/(QCMM)/(W&amp;P), Corporate Office, MP MKVV Co. Ltd. Bhopal.</span></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify;text-indent:
+    -.5in'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>4.         The
+    CE (Purchase), Corporate Office, MP Poorv Kshetra VV Co. Ltd., Shakti Bhavan,
+    Rampur, Jabalpur.</span></p>
+
+    <p class=MsoNoSpacing style='margin-left:.5in;text-align:justify;text-indent:
+    -.5in'><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>5.         The
+    CE (Purchase), Corporate Office, MP Paschim Kshetra VV Co. Ltd., Pologround
+    Indore.</span></p>
+
+    <p class=MsoNoSpacing><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>6.         The
+    CGM (BR)/(GR), MP MKVV Co. Ltd., Bhopal/Gwalior.</span></p>
+
+    <p class=MsoNoSpacing><span style='font-size:12.0pt;font-family:"Times New Roman",serif'>7.
+           The GM (Stores), MP MKVV Co. Ltd., Bhopal/Gwalior/Guna.</span></p>
+
+    <p class=MsoBodyTextIndent style='margin-left:.5in;text-align:justify;
+    text-indent:-.5in'>8.      The DGM (CBPU), Corporate Office, MP MKVV Co.
+    Ltd., Bhopal.</p>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>9.         The A.O. (Bills), Corporate Office, MP MKVV
+    Co. Ltd., Bhopal.</span></p>
+
+    <center>
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>
+    Dy.General Manager (P-II),</span></b></p>
+
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>
+    Corporate Office, MPMKVVCL, Bhopal </span></b></p>
+    </center>
+
+    <p class=MsoNoSpacing><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>&nbsp;</span></p>
+
+
+    <script>
+    document.getElementById('settlement_checkBox').onchange = function() {
+    document.getElementById('settlement_court').disabled = !this.checked;
+    document.getElementById('settlement_email').disabled = !this.checked;
+    };
+    </script>
+
+
+<!------------------------------------------------------------------------------------------- SCHEDULE-I --------------------------------------------------------------------------------------------->
+    <input type="checkbox" id="schedule_checkBox" />
+
+    <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+    text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+    font-family:"Times New Roman",serif'>SCHEDULE-I</span></u></b></p>
+
+    <p class=MsoPlainText align=center style='text-align:center'><b><span
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>(PRICE &amp;
+    QUANTITY)</span></b></p>
+
+    <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+     width="100%" style='border-collapse:collapse;border:none;margin-left:6.75pt;
+     margin-right:6.75pt'>
+     <tr>
+      <td width=37 valign=top style='width:27.9pt;border:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Sr.</span></b></p>
+      <p class=MsoNoSpacing align=center style='text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>No</span></b></p>
+      </td>
+      <td width=114 valign=top style='width:85.5pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Item</span></b></p>
+      </td>
+      <td width=84 valign=top style='width:63.0pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-5.4pt;
+      margin-bottom:0in;margin-left:-5.4pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Item
+      Code</span></b></p>
+      </td>
+      <td width=66 valign=top style='width:49.5pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-3.15pt;
+      margin-bottom:0in;margin-left:-3.25pt;margin-bottom:.0001pt;text-align:center;
+      text-indent:1.75pt'><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+      "Times New Roman",serif'>Qty. Ordered</span></b></p>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-3.0pt;
+      margin-bottom:0in;margin-left:-3.4pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>(No.)</span></b></p>
+      </td>
+      <td width=84 valign=top style='width:63.0pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-3.0pt;
+      margin-bottom:0in;margin-left:-3.4pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Unit
+      'Ex-works' Price (inclu. Packing &amp; Forwarding Charges) with base date
+      01.07.2021</span></b></p>
+      <p class=MsoNoSpacing align=center style='text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>(Rs./No.)</span></b></p>
+      </td>
+      <td width=73 valign=top style='width:54.65pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-5.4pt;
+      margin-bottom:0in;margin-left:-5.4pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Freight,
+      Forward-ing &amp; Insurance Charge  (Rs./No)</span></b></p>
+      </td>
+      <td width=89 valign=top style='width:66.85pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-5.75pt;
+      margin-bottom:0in;margin-left:-5.55pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Total
+      Unit ‘FOR’ Destination price including Freight charges forwarding &amp;
+      Insurance Charges but excluding GST (Rs./No.)</span></b></p>
+      </td>
+      <td width=95 valign=top style='width:71.35pt;border:solid windowtext 1.0pt;
+      border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+      <p class=MsoNoSpacing align=center style='text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Total
+      Amount</span></b></p>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-4.75pt;
+      margin-bottom:0in;margin-left:-6.05pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>(Rs.)</span></b></p>
+      </td>
+     </tr>
+     <tr style='height:31.9pt'>
+      <td width=37 style='width:27.9pt;border:solid windowtext 1.0pt;border-top:
+      none;padding:0in 5.4pt 0in 5.4pt;height:31.9pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-4.0pt;
+      margin-bottom:0in;margin-left:-4.55pt;margin-bottom:.0001pt;text-align:center'><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="number" name="schedule_Sno" id="schedule_Sno" placeholder="1." size="1" disabled></span></p>
+      </td>
+      <td width=114 style='width:85.5pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:31.9pt'>
+      <p class=MsoNoSpacing style='margin-right:-2.7pt'><span lang=EN-IN
+      style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="text" name="schedule_item" id="schedule_item" placeholder="11KV Dry Type CT ratio 300-150/5-5A" size="25" disabled></span></p>
+      </td>
+      <td width=84 style='width:63.0pt;border-top:none;border-left:none;border-bottom:
+      solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;
+      height:31.9pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-5.4pt;
+      margin-bottom:0in;margin-left:-5.4pt;margin-bottom:.0001pt;text-align:center'><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="text" name="schedule_itemCode" id="schedule_itemCode" placeholder="M-0116033" size="5" disabled></span></p>
+      </td>
+      <td width=66 style='width:49.5pt;border-top:none;border-left:none;border-bottom:
+      solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;
+      height:31.9pt'>
+      <p class=MsoNoSpacing align=center style='margin-right:-2.7pt;text-align:
+      center;text-indent:-2.9pt'><span lang=EN-IN style='font-size:12.0pt;
+      font-family:"Times New Roman",serif'><input type="number" name="schedule_Qty" id="schedule_Qty" placeholder="600" size="3" disabled></span></p>
+      </td>
+      <td width=84 style='width:63.0pt;border-top:none;border-left:none;border-bottom:
+      solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;
+      height:31.9pt'>
+      <p class=MsoNoSpacing><span lang=EN-IN style='font-size:12.0pt;font-family:
+      "Times New Roman",serif'>&nbsp;</span></p>
+      <p class=MsoNormal align=center style='text-align:center'><span lang=EN-IN
+      style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'><input type="number" name="schedule_price" id="schedule_price" placeholder="7700.00" size="5" disabled></span></p>
+      </td>
+      <td width=73 style='width:54.65pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:31.9pt'>
+      <p class=MsoNoSpacing><span lang=EN-IN style='font-size:12.0pt;font-family:
+      "Times New Roman",serif'>&nbsp;</span></p>
+      <p class=MsoNormal align=center style='text-align:center'><span lang=EN-IN
+      style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'><input type="number" name="schedule_freight" id="schedule_freight" placeholder="200.00" size="5" disabled></span></p>
+      </td>
+      <td width=89 style='width:66.85pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:31.9pt'>
+      <p class=MsoNoSpacing><span lang=EN-IN style='font-size:12.0pt;font-family:
+      "Times New Roman",serif'>&nbsp;</span></p>
+      <p class=MsoNormal align=center style='text-align:center'><span lang=EN-IN
+      style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'><input type="number" name="schedule_freightGST" id="schedule_freightGST" placeholder="7900.00" size="5" disabled></span></p>
+      </td>
+      <td width=95 style='width:71.35pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:31.9pt'>
+      <p class=MsoNoSpacing align=center style='text-align:center'><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="number" name="schedule_total1" id="schedule_total1" placeholder="4740000.00" size="6" disabled></span></p>
+      </td>
+     </tr>
+     <tr style='height:7.15pt'>
+      <td width=547 colspan=7 style='width:5.7in;border:solid windowtext 1.0pt;
+      border-top:none;padding:0in 5.4pt 0in 5.4pt;height:7.15pt'>
+      <p class=MsoNoSpacing align=right style='text-align:right'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'>Total</span></b></p>
+      </td>
+      <td width=95 style='width:71.35pt;border-top:none;border-left:none;
+      border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0in 5.4pt 0in 5.4pt;height:7.15pt'>
+      <p class=MsoNoSpacing align=center style='margin-top:0in;margin-right:-4.75pt;
+      margin-bottom:0in;margin-left:-6.05pt;margin-bottom:.0001pt;text-align:center'><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="number" name="schedule_total2" id="schedule_total2" placeholder="4740000.00" size="6" disabled></span></b><b><span
+      lang=EN-IN style='font-size:12.0pt;font-family:"Times New Roman",serif'></span></b></p>
+      </td>
+     </tr>
+    </table>
+
+    <p class=MsoNoSpacing align=right style='margin-top:0in;margin-right:-27.0pt;margin-bottom:
+    0in;margin-left:-.25in;margin-bottom:.0001pt'><b><span lang=EN-AU
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'><input type="text" name="schedule_total3" id="schedule_total3" placeholder=" (Rupees Forty Seven Lakh Forty Thousand Only)" size="50%" disabled></span></b></p>
+    <p class=MsoNoSpacing><b><span lang=EN-IN style='font-size:12.0pt;font-family:
+    "Times New Roman",serif'>Chief General Manager (Proc),</span></b></p>
+
+    <p class=MsoNoSpacing style='margin-right:-49.5pt'><b><span lang=EN-IN
+    style='font-size:12.0pt;font-family:"Times New Roman",serif'>Corporate Office, MPMKVVCL, Bhopal </span></b></p>
+
+    <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-IN
+    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'> </span></b></p>
+
+    <script>
+    document.getElementById('schedule_checkBox').onchange = function() {
+    document.getElementById('schedule_Sno').disabled = !this.checked;
+    document.getElementById('schedule_item').disabled = !this.checked;
+    document.getElementById('schedule_itemCode').disabled = !this.checked;
+    document.getElementById('schedule_Qty').disabled = !this.checked;
+    document.getElementById('schedule_price').disabled = !this.checked;
+    document.getElementById('schedule_freight').disabled = !this.checked;
+    document.getElementById('schedule_freightGST').disabled = !this.checked;
+    document.getElementById('schedule_total1').disabled = !this.checked;
+    document.getElementById('schedule_total2').disabled = !this.checked;
+    document.getElementById('schedule_total3').disabled = !this.checked;
+    };
+    </script>
+
+    <div>
+          <a href="/test_preview"><button type="button" id="button" class="btn btn-primary">Preview Page</button></a>
+          <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1">Generate PO</button>
+    </div>
+
+    </div>
+
+    </form>
+</div>
+
+</body>
+
+{% endblock body %}

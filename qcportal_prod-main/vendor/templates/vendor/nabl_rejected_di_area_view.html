@@ -1,0 +1,123 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Areastore Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">  
+                    <table class="table table-striped ed-table-block">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Material Specification</th> 
+                                <th>Quantity</th>
+                                <th>Area Store Name</th>
+                                <th>Gatepass Details</th>
+                                <th>view Items</th>     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in Material %}
+                                <tr>
+                                <td>
+                                {{forloop.counter}}
+                                </td>
+                                <td>
+                                {{data.offer_item.material.specification}}
+                                </td>
+                                <td>
+                                {{data.deliverable_qty}}
+                                </td>
+                                <td>
+                                {{data.areastore}}
+                                </td>
+                                <td><a href="/vendor/lot_rejected_gatepass_info/{{data.id}}"><button class="btn ed-submit btn-info">View</button></a></td>
+                                <td><a href="/vendor/nabl_di_material_reject_view/{{data.id}}" ><button class="btn ed-submit btn-info">Rejected Item</button></a></td>   
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+  
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            $('#navMenu').click(function () {
+                $('#edHeader').toggleClass('ed-header-collpase');
+                $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                $('#edContainer').toggleClass('ed-wrapper-collpase');
+            });
+        });
+
+        $('#ed-menulist .nav-item').on('click', function () {
+            // var target = $(this).attr('data-rel');
+            $('#ed-menulist .nav-item .nav-link').removeClass('active');
+            $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+            $('#ed-menulist .nav-item').removeClass('active');
+            $(this).addClass('active');
+            // $('#ed-menulist .nav-item').addClass('active');
+            $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+            // alert();
+            // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+            return false;
+        });
+    </script>
+
+    <script>
+        const dialogModal = document.getElementById('dialog-modal');
+        const CustomAlert = new function () {
+            this.show = function (msg) {
+                $('body').addClass('bodymodel');
+                dialogModal.style.visibility = 'visible';
+                dialogModal.style.opacity = 1;
+                dialogModal.style.top = '40%';
+            }
+
+            this.close = function () {
+                $('body').removeClass('bodymodel');
+                dialogModal.style.visibility = 'hidden';
+                dialogModal.style.opacity = 0;
+                dialogModal.style.top = '-40%';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+<script>
+    $('.material-wrapper').on('click', '.remove', function () {
+        $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+    });
+    $('.material-wrapper').on('click', '.addMaterial', function () {
+        $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+    });
+</script>
+{% endblock body %}

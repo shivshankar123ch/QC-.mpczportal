@@ -1,0 +1,118 @@
+{% extends 'officer/cgmr_base.html' %} {% load static %} {% block heading %} ALL RO Order {% endblock heading %} {% block body %} {% block rca_cgm_all_work_order %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rca_cgm_all_work_order %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                All RCA
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                        <thead>
+                            <tr>
+                                
+                                <th class="w-5 text-center">
+                                    S.No.
+                                </th> 
+                                <th class="w-15 text-center">
+                                    Vendor
+                                </th> 
+                                <th class="w-15 text-center">
+                                    RCA No.
+                                </th>
+                                <th class="w-15 text-center">
+                                    Date
+                                </th>
+                                <th class="w-20 text-center">
+                                    Action
+                                </th>
+                                <th class="w-15 text-center">
+                                    Upload & Approve
+                                </th>
+                                <th class="w-20 text-center">
+                                    Download digitally signed pdf
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in data %}
+                            <tr> 
+                                <td class="w-5 text-center">
+                                    {{ forloop.counter }}
+                                </td>
+                                <td class="text-center">
+                                    {{ info.vendor_id.CompanyName_E}}
+                                </td>
+                                <td class="text-center">
+                                    MP{{info.rca_cell.user_zone}}WO{{ info.id}}
+                                </td>
+                                <td class="text-center">
+                                    {{ info.ordr_date }}
+                                </td>
+                                <td class="text-center"> 
+                                    <a href="/po/rca_cgm_order_view/{{info.id}}" class="ed-links">
+                                        <label class="ed-textinfo">
+                                            <i class="fas fa-eye"></i>
+                                            View
+                                        </label>
+                                    </a>  
+                                </td>
+                                <td class="text-center">  
+                                    <a href="/po/upload_digi/{{info.id}}" class="ed-links">
+                                        <label class="ed-textinfo"> 
+                                            Upload link
+                                        </label>
+                                    </a>  
+                                </td>
+                                {% if info.digi_sign_doc %}                                
+                                <td class="text-center"> 
+                                    <a href="{{info.digi_sign_doc.url}}" target="_blank"  class="ed-links">
+                                        <label class="ed-textinfo">
+                                            <i class="fas fa-eye"></i>
+                                            Sign Uploaded
+                                        </label>
+                                    </a>  
+                                </td>
+                                {% else %}                                
+                                <td class="text-center"> 
+                                    <a href="#" onclick="alert('File not uploaded yet!')" class="ed-links">
+                                        <label class="ed-textinfo">
+                                            <i class="fas fa-eye"></i>
+                                            Sign Not Uploaded
+                                        </label>
+                                    </a>  
+                                </td>
+                                {% endif %}
+                    <!-- <form action="/po/rca_cgm_all_work_order/{{info.id}}" method="POST">
+                    {% csrf_token %}
+
+                <div id="options">
+
+                    <label for="digital_pdf">Upload digitally signed pdf here &nbsp;</label>
+                    <input type="file" name="digi_pdf" style="width: 200px">
+                    <button id="printpagebutton1" type="Submit" style=" width:200px" class="btn btn-primary m-3"><a
+                            class="btn btn-danger" onclick="myFunction()" href="/po/upload_digi/{{info.id}}">Submit & Approve </a>
+                        
+                    </button>
+                </div>
+                </form> --> 
+                </tr>
+                {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
+                
+
+
+
+
+
+
+    {% endblock body %}

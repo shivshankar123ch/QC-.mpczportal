@@ -1,0 +1,107 @@
+{% extends 'nabl/nabl_base.html' %}
+{% load static %}
+
+{% block body %}
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
+
+
+<style>
+  body {
+     background: url("../static/assets/images/mpeb_wrapper.jpg") no-repeat right center;
+     position: relative;
+     background-size: cover;
+}
+.col-12{
+  max-width:93%;
+  margin-left:3rem;
+  margin-bottom:4rem;
+}
+</style>
+
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-body" >
+                  <div class="btn-group w-100 mb-2 float-left">
+                    <a class="btn btn-info active float-left" data-filter="all" style="background-color: #007bff;">All Purchase Order</a>
+                  </div>
+                <div>
+                </div>
+
+              </div>
+
+
+      <div class="card">
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          PO No
+                      </th>
+                      <th style="width: 20%">
+                          Item Category
+                      </th>
+                      <th>
+                          item Name
+                      </th>
+                      <th>
+                          item Quantity
+                      </th>
+                      <th style="width: 30%">
+
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for name in data%}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>MPCZ00{{name.id}}</b>
+                      </td>
+                      <td>
+                          {{name.item_category}}
+                      </td>
+                      <td class="project_progress">
+                          {{name.item_name}}
+                      </td>
+                      <td>
+                          {{name.item_quantity}}
+                      </td>
+                      <td class="project-actions text-right">
+                        {% if  name.vendor_offer%}
+<!--                        <a class="btn btn-primary btn-sm float-left" href="/vendor_offer_preview/{{name.id}}">-->
+                        <a class="btn btn-primary btn-sm float-left" href="#">
+                            Test Item Details
+                        </a>
+                        {% endif %}
+                          {% if not name.po_test %}
+<!--                          <a class="btn btn-primary btn-sm" href="/nabl_upload/{{name.id}}">-->
+                          <a class="btn btn-primary btn-sm" href="#">
+                              Upload Report
+                          </a>
+                          {% endif %}
+                      </td>
+                  </tr>
+                {% endfor %}
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock body %}

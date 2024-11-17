@@ -1,0 +1,83 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Offer Materials List
+        </h2>
+        <h6>
+            <p> <b>Work Order No. - {{wo_data.Contract_Number}}</b> </p>
+            <p> <b>TKC/Supplier - {{wo_data.supplier.CompanyName_E}}</b> </p>
+            <p><b>Offer No. - {{offer_no}}</b></p>
+
+        </h6>
+    </div>
+
+    <div class="card-body">
+        <div class="ed-tableinfo-block ">
+            <div class="table-responsive">
+                <table class="table  table-bordered  text-center display " id="vendor_purchase_B">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5 text-center">S.No.</th>
+                            <th class=" text-center">Material Name</th>
+                            <th class=" text-center">Material Code</th>
+                            <th class=" text-center">Vendor Name</th>
+                            <th class=" text-center">Offered Quantity</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for i in offer_materials_data %}
+                            <td>
+                                <b>{{forloop.counter}}</b>
+                            </td>
+
+                            <td>
+                                <b>{{i.wo_material.material_name}}</b>
+                            </td>
+                            <td>
+                               <b> {{i.wo_material.item_code}}</b>
+                            </td>
+
+                            <td>
+                               <b> {{i.TKCVendor.Vendor.CompanyName_E}}</b>
+  
+                            </td>
+
+                            <td>
+                               <b> {{i.quantity}}</b>
+
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script>
+    $(document).ready( function () {
+    $('#vendor_purchase_B').DataTable();
+} );
+</script>
+
+
+{% endblock body %}

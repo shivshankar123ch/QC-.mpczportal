@@ -1,0 +1,140 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                       Multiple DI LIST Info
+                                    </h2>
+                                </div>
+
+   <div class="table-responsive">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if "error" == message.tags %}
+        <li {% if message.tags %} id= "messageid" class="{{ message.tags }} text-danger"{% endif %}>{{ message }}</li>
+        {%elif "info" == message.tags%}
+        <li {% if message.tags %} id= "messageid"  class="{{ message.tags }} text-info"{% endif %}>{{ message }}</li>
+        {%elif "success" == message.tags %}
+        <li {% if message.tags %} id= "messageid" class="{{ message.tags }} text-primary"{% endif %}>{{ message }}</li>
+        {% endif %} 
+        {% endfor %}
+     {% endif %}   
+    </ul>
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Offer No.</th>
+                <th>Work Order No.</th>
+                <th>DI No.</th>
+                <th>Inspection No.</th> 
+                <th>Receiver Name</th>
+                <th>Action</th>
+                <th>View Receiving Details</th>
+            </tr>
+        </thead>
+        <tbody>
+                
+            {% for di_no, value in erp_di_data_to_view_and_create.items %}
+            {% for inner_key, inner_value in value.items %}
+            {% if inner_key == 'di_data1' %}
+            <tr>
+                <td>
+                  {{forloop.counter}}
+              </td>
+                 <td>
+                  {{offer_no}}
+              </td>
+              <td>{{value.di_data1.CONTRACT_NUMBER }}</td>
+
+               <td>
+                 {{ di_no }}
+              </td>
+               <td>
+                  {{ value.di_data1.INSPECTION_REF2 }}
+              </td>
+              <td>
+                  {{ value.di_data1.RECEIVER_NAME }}
+              </td>
+              
+              {% if value.Already_Created == True%}
+              <td>
+              <button class="btn ed-submits btn-success">
+                  <span class="ed-submit-text">
+                  DI Already Created
+                  </span>
+              </button>
+              </td>
+
+              <td>
+                <a  href="/fqp/view_receiving_details/{{wo_id}}/{{di_no}}/{{offer_no}}">
+                <button class="btn ed-submits btn-success">
+                    <span class="ed-submit-text">
+                    View Receiving Details
+                    </span>
+                </button>
+                </a>
+                </td>
+              
+              {% else %}
+              <td>
+                <a  href="/fqp/create_erp_di_entry/{{wo_id}}/{{di_no}}/{{offer_no}}">
+                <button class="btn ed-submits btn-primary">
+                    <span class="ed-submit-text">
+                    Create DI
+                    </span>
+                </button>
+                    </a>
+                </td>
+                {% if value.Already_Created == False %}
+                <td>
+                
+                    <button class="btn ed-submits btn-primary">
+                        <span class="ed-submit-text">
+                        Not Applicable
+                        </span>
+                    </button>
+                        </a>
+                    </td>
+
+                {% endif %}
+
+            {% endif %}
+          </tr>
+           
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

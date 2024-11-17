@@ -1,0 +1,86 @@
+
+{% load static%}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/jpg" href="{% static '/assets/img/energy_logo.jpg' %}" />
+   <title>Collection Agent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet"> -->
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("return");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+        }
+    </script>
+</head>
+<style>
+    body {
+        text-align: center;
+        padding: 40px 0;
+        background: #EBF0F5;
+    }
+    
+    h1 {
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    
+    p {
+        color: #404F5E;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size: 20px;
+        margin: 0;
+    }
+    
+    i {
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+        margin-left: -15px;
+    }
+    
+    .card {
+        background: white;
+        padding: 60px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <div class="card">
+        <h5 class="card-header">सफलतापूर्वक  पंजीकरण</h5>
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+            <i class="checkmark">✓</i>
+        </div>
+
+         <div class="card-body">
+    <h5 class="card-title" style="color: green;">सफलतापूर्वक  पंजीकरण</h5>
+    <br>
+    <p class="card-text">आपका भुगतान एवं पंजीकरण सफलतापूर्वक हो चुका है | </p><br>
+    <p>यूजरनेम एवं पासवर्ड की जानकारी आपके ईमेल और मोबाइल पर सॉझा की जा चुकी हैं |</p><br>
+    <a href="/ca/payment_invoice" class="btn btn-primary">✓  Dowanload Invoice </a>
+  </div>
+        
+       
+</body>
+
+</html>
+

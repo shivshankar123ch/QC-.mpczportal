@@ -1,0 +1,74 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+<form class="multisteps-form__form mb-8" action="vendor_reg_fifteen" method="POST">
+    {% csrf_token %}
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Digital Signature
+            </h2>
+        </div>
+
+        <div class="card-body">
+            <div class="form-group">
+                <p>
+                    I hereby declare that the details furnished above are true and correct to the best of my knowledge
+                    and belief and in case if any document found Incorrect or false or any information provided in
+                    application form found incorrect or false
+                    then registration may be cancelled at any time.
+                </p>
+
+                <div class="form-group"> 
+                    <h4> 
+                            Annexure-A 
+                    </h4> 
+                </div>
+            <div class="form-group">
+                <label class="ed-checkbox-block pl-3">
+                  1.  I {{data.Authorised_person_E}} Director/Owner/Proprietor   of M/s {{data.CompanyName_E}}. Representing the Company hereby sincerely and solemnly affirm and states as follow:
+                    a) That my firm M/s {{data.CompanyName_E}}.. has not been blacklisted Debarred from any Govt. Utility/DISCOMs in India. 
+                    b) That we have never failed earlier to execute any purchase Order (S) of MP DISCOMS and its subsidiary companies / or Debarred / Blacklisted by MP DISCOMS and. subsidiary companies/any of the distribution Utility. 
+                    c) That we accept all the terms and conditions of MP DISCOMS without any deviation. 
+                    d) That myself or any representatives of my Company/Firm do not have any relatives or blood relations with the employees of MP DISCOMS and its subsidiaries. 
+                    e) That all the documents including type test reports and other documents are genuine. 
+                    f) That my firm M/s {{data.CompanyName_E}}.is solely manufacturer of the items applied for vendor registration under MP Discoms on QC Portal, but not as a trader/dealer/distributor.   
+                    It is certified that the information furnished above are true to the best of my knowledge and belief. 
+                    It is hereby undertaken that in the event of any information found to be false or incorrect at a later date, MP DISCOMS is entitled to terminate the approval entered into. 
+                    <input type="checkbox" name="" id="" class="form-check-input" checked />
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+
+
+            </div>
+
+            <div class="form-group">
+                <label class="ed-radio-block">Online Verification through OTP
+                    <input type="radio" name="opinions" id="radio-1" class="form-check-input" checked />
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div class="form-group mt-2">
+                <div class="btn-actionblock text-right">
+                    <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_twelve">Prev</a></button> -->
+                    <button class="btn ed-submits ed-formsubmit" value="Submit" type="submit" title="Save & Next"><a
+                            class="text-white">Save & Next</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> 
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

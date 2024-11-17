@@ -1,0 +1,596 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static '/assets/img/icons8-light-bulb-64.png' %}">
+    <link rel="icon" type="image/png" href="/static/assets/img/mp-logo_0.png" />
+    <title>
+        PMA OFFICER | Dashboard
+    </title>
+
+    <!-- <meta name="description"
+    content="DGM QUALITY OFFICER | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state" />
+    <meta name="keywords"
+    content="DGM QUALITY OFFICER | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="DGM QUALITY OFFICER | Energy Department, Government of Madhya Pradesh" />
+    <meta property="og:site_name" content="Creative Tim" /> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" /> 
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" /> 
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> 
+    <link id="pagestyle" href="{% static '/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />  -->
+
+
+    <script>
+        (function (a, s, y, n, c, h, i, d, e) {
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function () {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function () {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
+            'GTM-K9BGS8K': true
+        });
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-46172202-22', 'auto', {
+            allowLinker: true
+        });
+        ga('set', 'anonymizeIp', true);
+        ga('require', 'GTM-K9BGS8K');
+        ga('require', 'displayfeatures');
+        ga('require', 'linker');
+        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
+    </script>
+
+
+    <link rel="stylesheet" href="{% static 'qcassest/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'qcassest/css/dataTables.bootstrap4.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'qcassest/css/OverlayScrollbars.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'qcassest/css/daterangepicker.css' %}" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'qcassest/css/qcstyle.css' %}" />
+    <link rel="stylesheet" href="{% static 'qcassest/css/select2.min.css' %}" />
+</head>
+
+<body>
+    <!--  ---------------------- sidebar ----------------------- -->
+
+
+
+    <div class="qc-sidenav-block" id="qcsidenavMain">
+        <div class="qc-overlay-block" id="qcOverlay"></div>
+        <div class="qc-sidenav-header">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'qcassest/images/qclogoImg.png' %}" alt="Logo" class="img-fluid" />
+                <span class="qc-text">PMA OFFICER </span>
+                <!-- <span class="ed-hdesignation-name">
+                {{ officer.designation}}
+            </span> -->
+            </a>
+            <a href="#" class="qc-toggleclose" id="qcClosemenu">
+                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 5L5 19M5.00001 5L19 19" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+        <div class="qc-menucontant-block">
+            <ul class="navbar-nav qc-navbar-nav">
+                <!-- <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <span class="iconbox">
+                    <svg
+                      version="1.1"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 26.39 26.39"
+                      style="enable-background: new 0 0 26.39 26.39"
+                      xml:space="preserve"
+                    >
+                      <g>
+                        <g id="c14_house">
+                          <path
+                            d="M3.588,24.297c0,0-0.024,0.59,0.553,0.59c0.718,0,6.652-0.008,6.652-0.008l0.01-5.451c0,0-0.094-0.898,0.777-0.898h2.761
+            c1.031,0,0.968,0.898,0.968,0.898l-0.012,5.434c0,0,5.628,0,6.512,0c0.732,0,0.699-0.734,0.699-0.734V14.076L13.33,5.913
+            l-9.742,8.164C3.588,14.077,3.588,24.297,3.588,24.297z"
+                          />
+                          <path
+                            d="M0,13.317c0,0,0.826,1.524,2.631,0l10.781-9.121l10.107,9.064c2.088,1.506,2.871,0,2.871,0L13.412,1.504L0,13.317z"
+                          />
+                          <polygon
+                            points="23.273,4.175 20.674,4.175 20.685,7.328 23.273,9.525 		"
+                          />
+                        </g>
+                        <g id="Capa_1_216_"></g>
+                      </g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                      <g></g>
+                    </svg>
+                  </span>
+                  <span class="textitem_main">
+                    <span class="textitem"> Dashboard </span>
+                  </span>
+                </a>
+              </li> -->
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link" href="javascript:;" data-toggle="dropdown">
+                        <span class="iconbox">
+                            <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.13 4.13 9.37.37A1.26 1.26 0 0 0 8.48 0H3.75A1.25 1.25 0 0 0 2.5 1.25v13.5A1.25 1.25 0 0 0 3.75 16h8.5a1.25 1.25 0 0 0 1.25-1.25V5a1.26 1.26 0 0 0-.37-.87zm-.88 10.62h-8.5V1.25h3.48V5a1.25 1.25 0 0 0 1.25 1.27h3.77zm0-9.73H8.48V1.25L12.25 5z" />
+                                <path d="M5 7.5h6v1.25H5zM5 10h6v1.25H5z" />
+                            </svg>
+                        </span>
+                        <span class="textitem_main">
+                            <span class="textitem">
+                                PMA
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu ed-menudropdown-block">
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/work_order">
+                                All WO
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/pma_verify_boq_list">
+                                Verify BOQ
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/tkc/tkc_mrc_offer_list_pma_di/">
+                                View TKC MRC
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/mpeb_login">
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link" href="javascript:;" data-toggle="dropdown">
+                        <span class="iconbox">
+                            <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.13 4.13 9.37.37A1.26 1.26 0 0 0 8.48 0H3.75A1.25 1.25 0 0 0 2.5 1.25v13.5A1.25 1.25 0 0 0 3.75 16h8.5a1.25 1.25 0 0 0 1.25-1.25V5a1.26 1.26 0 0 0-.37-.87zm-.88 10.62h-8.5V1.25h3.48V5a1.25 1.25 0 0 0 1.25 1.27h3.77zm0-9.73H8.48V1.25L12.25 5z" />
+                                <path d="M5 7.5h6v1.25H5zM5 10h6v1.25H5z" />
+                            </svg>
+                        </span>
+                        <span class="textitem_main">
+                            <span class="textitem">
+                                FQP Intimation
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu ed-menudropdown-block">
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/fqp/officer_new_fqpintimation_wo">
+                                New FQP Intimation
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link" href="/mpeb_login">
+                        <span class="iconbox">
+                            <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.13 4.13 9.37.37A1.26 1.26 0 0 0 8.48 0H3.75A1.25 1.25 0 0 0 2.5 1.25v13.5A1.25 1.25 0 0 0 3.75 16h8.5a1.25 1.25 0 0 0 1.25-1.25V5a1.26 1.26 0 0 0-.37-.87zm-.88 10.62h-8.5V1.25h3.48V5a1.25 1.25 0 0 0 1.25 1.27h3.77zm0-9.73H8.48V1.25L12.25 5z" />
+                                <path d="M5 7.5h6v1.25H5zM5 10h6v1.25H5z" />
+                            </svg>
+                        </span>
+                        <span class="textitem_main">
+                            <span class="textitem">
+                                Logout
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <!--  ---------------------- sidebar ----------------------- -->
+    <!--  ---------------------- sidebar ----------------------- -->
+
+    <main class="">
+        <!--  ---------------------- Header ----------------------- -->
+        <div class="qc-header-block" id="qcheaderMenu">
+            <div class="qc-container-block">
+                <div class="qc-leftblock">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mnav-item">
+                            <a class="navbar-brand" href="#">
+                                <img src="{% static 'qcassest/images/qclogoImg.png' %}" class="img-fluid" alt="logo" />
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link qc-toggelmenu" id="qcToggelMenu">
+                                <!-- <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                alt="navbar Icon"> -->
+                                <svg fill="#000000" version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                                    xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px"
+                                    viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M19,7H5C4.4,7,4,6.6,4,6s0.4-1,1-1h14c0.6,0,1,0.4,1,1S19.6,7,19,7z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M12,11H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h7c0.6,0,1,0.4,1,1S12.6,11,12,11z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M18,15H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h13c0.6,0,1,0.4,1,1S18.6,15,18,15z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M15,19H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h10c0.6,0,1,0.4,1,1S15.6,19,15,19z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item mnav-item">
+                            <a href="javascript:;" class="nav-link qc-toggelmenu" id="toggelMMenu">
+                                <!-- <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                alt="navbar Icon"> -->
+                                <svg fill="#000000" version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;"
+                                    xmlns:graph="&ns_graphs;" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px"
+                                    viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M19,7H5C4.4,7,4,6.6,4,6s0.4-1,1-1h14c0.6,0,1,0.4,1,1S19.6,7,19,7z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M12,11H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h7c0.6,0,1,0.4,1,1S12.6,11,12,11z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M18,15H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h13c0.6,0,1,0.4,1,1S18.6,15,18,15z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M15,19H5c-0.6,0-1-0.4-1-1s0.4-1,1-1h10c0.6,0,1,0.4,1,1S15.6,19,15,19z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="qc-rightblock">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/vendor/vendor_view_profile" class="qc-profilemenu">
+                                <span class="nav-text"> PMA Officer </span>
+                                <span class="qc-imgbox">
+                                    <!-- <img src="{% static 'assets/images/avatar.jpg' %}" class="img-fluid"  alt="Profile Icon"> -->
+                                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9ZM15.8243 13.6235C17.1533 12.523 18 10.8604 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 10.8604 6.84668 12.523 8.17572 13.6235C4.98421 14.7459 3 17.2474 3 20C3 20.5523 3.44772 21 4 21C4.55228 21 5 20.5523 5 20C5 17.7306 7.3553 15 12 15C16.6447 15 19 17.7306 19 20C19 20.5523 19.4477 21 20 21C20.5523 21 21 20.5523 21 20C21 17.2474 19.0158 14.7459 15.8243 13.6235Z"
+                                            fill="#000000" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                        <a href="javascript:;" class="nav-link qc-zones">
+                            EZ
+                        </a>
+                    </li> -->
+                        <li class="nav-item">
+                            <a href="/mpeb_login " class="nav-link qc-logoutmenu" data-toggle="tooltip" title="Logout!">
+                                <!-- <img src="{% static 'assets/images/logout.png' %}" class="img-fluid" alt="navbar Icon"> -->
+                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.4399 14.62L19.9999 12.06L17.4399 9.5" stroke="#292D32"
+                                        stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M9.76001 12.0601H19.93" stroke="#292D32" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M11.76 20C7.34001 20 3.76001 17 3.76001 12C3.76001 7 7.34001 4 11.76 4"
+                                        stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--  ---------------------- Header ----------------------- -->
+        <div class="qc-contant-block" id="qccontantBlock">
+            <!-- <div class="ed-pagetitle-block">
+            <div class="row align-items-center">
+                <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
+                    <div class="media ed-pagetitle-info">
+                        <span class="ed-iconbox">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                        </span>
+                        <div class="ed-ed-pagetitle-item">
+                            <h4>
+                                {% block pagetitle %} Dashboard {% endblock pagetitle %}
+
+                            </h4>
+                            <p>
+                                {% for message in messages %}
+                                <label>
+                                    <span> 
+                                        {{message}}
+                                    </span>
+                                </label>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                    <ul class="navbar ed-pagetitle-link">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link nav-icon">
+                                /
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link nav-menuitem">
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>   -->
+
+            <div class="card ed-card-block">
+                {% block body %}
+                {% endblock body %}
+            </div>
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+
+            <footer class="ed-footer-block">
+                <div class="ed-copyright-text">
+                    ©
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    , All Rights Reserved By
+                    <a href="#" class="links">MPMKVVCL.</a>
+                </div>
+                <div class="ed-copyright-text">
+                    Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co. Ltd. Nishtha
+                    Parisar Govindpura, Bhopal.
+                </div>
+            </footer>
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+    <!-- <script src="{% static '/assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static '/assets/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %}"></script> -->
+    <!-- Kanban scripts -->
+    <!-- <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %}"></script>
+    <script src="{% static '/assets/js/plugins/chartjs.min.js' %}"></script> -->
+
+
+    <script src="{% static 'qcassest/js/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'qcassest/js/popper.min.js' %}"></script>
+    <script src="{% static 'qcassest/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'qcassest/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'qcassest/js/qcjavascript.js' %}"></script>
+    <script src="{% static 'qcassest/js/select2.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#example").DataTable();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
+    <!-- <script>
+        var ctx1 = document.getElementById("chart-line").getContext("2d");
+
+        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+        new Chart(ctx1, {
+            type: "line",
+            data: {
+                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [{
+                    label: "Mobile apps",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#5e72e4",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    maxBarThickness: 6
+
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#fbfbfb',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#ccc',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script> -->
+
+</body>
+
+</html>

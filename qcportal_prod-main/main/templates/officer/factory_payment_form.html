@@ -1,0 +1,159 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% load cart %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      All Factory Payment Request
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover display " id="factory_payment_details">
+          <thead class="table-dark">
+            <tr>
+              <th>
+                Sr. No.
+              </th>
+              <th>
+                Firm/Company Name
+              </th>
+              <th>
+                Factory Inspection Date
+              </th>
+              <th>
+                View Factory Inspection Report
+              </th>
+              <th>
+                Material Details
+              </th>
+              <th>
+                Action
+              </th>
+              <th>
+                Remark
+              </th>
+              <th>Submit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.vendor.CompanyName_E}}</td>
+
+              <td>{{data.date|date:"d-M-Y"}}</td>
+
+              <td>
+                <a href="{{data.report.url}}" target="_blank" class="ed-links">
+
+                  <span class="btn btn-info">
+                    <i class="fas fa-eye"></i>
+                    View
+                  </span>
+
+                </a>
+              </td>
+              <td class="text-center">
+                <a href="/all_factory_payment_material/{{data.id}}" target="_blank" class="ed-links">
+
+                  <span class="btn btn-info">
+                    <i class="fas fa-eye"></i>
+                    View
+                  </span>
+
+                </a>
+              </td>
+
+
+              <form action="/all_factory_payment_details_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <td>
+                  {% if data.Primary_verification_Status_approver == 1 %}
+                  <span class="text-success">Accepted</span>
+                  {% else %}
+                  <div class="form-group">
+                    <label class="ed-radio-block">Accepted
+                      <input class="form-check-input" type="radio" name="a" value="OK" id="flexRadioDefault1"
+                        onchange="checkData();" onclick="checkData();">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="ed-radio-block">Rejected
+                      <input class="form-check-input" type="radio" id="flexRadioDefault2" name="a" value="NOT"
+                        onchange="validateData();" onclick="validateData();">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  {% endif %}
+                </td>
+                <td>
+                  <input type="text" id="remark" name="remark" class="form-control ed-textbox">
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+              </form>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</section>
+<script>
+  $(document).ready(function () {
+    $('#factory_payment_details').DataTable({
+      pagingType: 'full_numbers',
+    });
+  });
+</script>
+<script>
+  function validateData() {
+    console.log("jlkk");
+    var fileInput1 = document.getElementById('flexRadioDefault1').value;
+    var fileInput2 = document.getElementById('flexRadioDefault2').value;
+    console.log(fileInput1);
+    console.log(fileInput2);
+    if (fileInput2 == "NOT") {
+      document.getElementById("v_upload_file_2").style.display = "none";
+    } else {
+      console.log("456");
+    }
+    // if(fileInput1 == "OK"){
+    //    document.getElementById("v_upload_file_2").style.display = "block";
+    // }
+  }
+  function checkData() {
+    var fileInput1 = document.getElementById('flexRadioDefault1').value;
+    if (fileInput1 == "OK") {
+      document.getElementById("v_upload_file_2").style.display = "block";
+    }
+  }
+</script>
+<!-- /.content -->
+
+{% endblock body %}

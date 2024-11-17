@@ -1,0 +1,71 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+
+<  <!-- Main content -->
+    <section class="content">
+         <form   action="/tkc_purchase2" method="POST">
+           {% csrf_token %}
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Create Price Schedule</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <tr>
+                      <th style="width:5%">
+                           Serial No
+                      </th>
+                      <th style="width: 20%">
+                           Milestone
+                      </th>
+                      <th style="width: 50%">
+                          Task List
+                      </th>
+                      <th style="width:10%">
+                          Percentage
+                      </th>
+                    </tr>
+
+                    <tr>
+                       <td>1</td>
+                        <td><input type="text"></td>
+                      <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea></td>
+                    <td><input type="Number"></td>
+                  </tr>
+                        <tr>
+                       <td>2</td>
+                        <td><input type="text"></td>
+                      <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea></td>
+                    <td><input type="Number"></td>
+                  </tr>
+                </table>
+
+                   <a href="dashboard14"></a>
+
+                 <button type="Submit" class="btn-success btn btn-primary float-left m-3">Add Row</button>
+            </a>
+                  <a href="dashboard14"></a>
+
+                 <button type="Submit" class="btn-success btn btn-primary float-right m-3">Upload Schedule</button>
+            </a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+         </form>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock body %}

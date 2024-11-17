@@ -1,0 +1,151 @@
+{% extends 'nabl/nabl_Base.html' %}
+{% load static %}
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button"
+  aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1 font-weight-bold" style="font-weight: bold; font-size: medium; ">Dashboard</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/basic">
+        <span class="sidenav-mini-icon"> BI </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/rejected_doc">
+        <span class="sidenav-mini-icon"> RD </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/nabl/UpdateNablProfile">
+        <span class="sidenav-mini-icon"> AS </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update Profile </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/profile_status">
+        <span class="sidenav-mini-icon">PS</span>
+        <span class="sidenav-normal">Profile Status</span>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link " href="#">
+        <span class="sidenav-mini-icon"> Noti </span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/nabl_trf">
+        <span class="sidenav-mini-icon">T M R</span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">RCA Material Report </span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link active" href="/nabl/nabl_out_physical">
+        <span class="sidenav-mini-icon">Phy Test Out</span>
+        <span class="sidenav-normal">Physical Tested Outward</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/nabl/nabl_out_physical_view">
+        <span class="sidenav-mini-icon">Phy Test View</span>
+        <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">
+        <span class="sidenav-mini-icon">LO</span>
+        <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock active %}
+{% block body %}
+
+<div class="ed-information mb-2">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        Central Purchase Tested Outward
+      </h2>
+    </div>
+    <div class="card-body mb-2">
+      <div class="ed-tableinfo-block mt-4">
+        <form method="POST" action="/nabl/cp_nabl_out_physical">
+          {% csrf_token %}
+
+          <div class="table-responsive">
+            <table class="table table-striped ed-table-block">
+              <thead>
+                <th>S No.</th>
+                <th>Manufacturer</th>
+                <th>Material Serial No.</th>
+                <th>Material Capacity / Type </th>
+                <th>Inward<br> Gatepas ID</th>
+                <th>Inward<br> Gatepas Date</th>
+                <th>Remark</th>
+                <th>Test Report</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for sc in sc_obj %}
+                <tr class="bg-light">
+                  <td style="text-align: center;">{{forloop.revcounter}}</td>
+                  <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.company_name}}" name="ManufacturerName" id="ManufacturerName"
+                        type="text" readonly="readonly"></td>
+                  <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.material_serial_number}}" name="XMRList" id="XMRList" type="text" readonly="readonly"></td>
+                  <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.material_name}}" name="CapacityList" id="CapacityList" type="text"
+                        readonly="readonly"></td>
+                  <!-- <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.material_name}}" name="TypeList" id="TypeList" type="text" readonly="readonly"></td> -->
+                  {% if sc.Gatepass.gatepass %}
+                  <td style="text-align: center;"><a href="{{sc.Gatepass.gatepass.url}}"
+                      target="_blank">{{sc.Gatepass.id}}</a></td>
+                  {% else %}
+                  <td style="text-align: center;"><a onclick="alert('No Outward Found')">{{sc.Gatepass.id}}</a></td>
+                  {% endif %}
+
+                  <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.Gatepass.gatepass_date}}" name="GatepassInwardDate" id="GatepassInwardDate" type="text"
+                        readonly="readonly"></td>
+                  <td style="text-align: center;"><input style="background-color: transparent;border: none;" size=10
+                        value="{{sc.FinalRemark}}" name="RemarkList" id="RemarkList" type="text" readonly="readonly">
+                  </td>
+
+                  {% if sc.sampleCode_report %}
+                  <td style="text-align: center;"><a href="{{sc.sampleCode_report.url}}" target="_blank">View</a></td>
+                  {% else %}
+                  <td style="text-align: center;">Physically Rejected/Report Not Uploaded</a></td>
+                  {% endif %}
+
+                  <td style="text-align: center;"><input value="{{sc.material_serial_number}}/{{sc.TRF_Id}}/{{sc.Gatepass.id}}" name="material_list"
+                        id="material_list" type="checkbox"  ></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <div class="form-action text-right">
+              <button type="submit" class="btn ed-submit ed-formsubmit">
+                Generate Gatepass
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

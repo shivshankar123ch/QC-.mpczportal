@@ -1,0 +1,137 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+<div class="mx-auto" style="width: 85%;">
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th colspan="2">Work Order Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Work Order No</td>
+                <td><b>MPCZ00{{ ro.wo.id}}</b></td>
+            </tr>
+            <tr>
+                <td>RCA Vendor Company name</td>
+                <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+            </tr>
+            <tr>
+                <td> Material </td>
+                <td><b>{{ ro.wo.wo_specification}}</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+  
+   
+
+    <form action="/po/drr_details/{{ro.id}}" method="POST" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div>
+            <table class="table table-striped m-4" style="width:90%" border="2">
+                <tr>
+                    <th>Release No:<span style="color: red;">*</span></th>
+                    <td><b>MPCZ00{{ ro.id}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th>DRR Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                    <td><input type="date" id="drr_date" name="drr_date" required="required" onkeyup="validateForm()"
+                            onfocus="validateForm()" onchange="validateForm()" placeholder="" style="width:250px;">
+                        <span id="date" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Challan No: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="challan_no" id="dispatch_num" placeholder=""
+                            style="width:250px;" required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Challan Date:(mm/dd/yyyy)<span style="color: red;">*</span></th>
+                    <td><input type="date" id="order_date1" name="challan_date" placeholder="" required="required"
+                            onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                            style="width:250px;"> <span id="order" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span></td>
+                </tr>
+
+                <tr>
+                    <th>Vehicle No: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="vehicle" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Quantity: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="quantity" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+            </table>
+            <div class="col-md-11">
+                <input type="submit" name="submit" onclick="validateForm()" value="Add DRR Info"
+                    class="btn m-2 float-right" autocomplete="off">
+
+            </div>
+        </div>
+    </form>
+
+    <a class="btn btn-primary aglin-left m-2 btn-lg" href="/po/rca_as_repaired_inward/{{ro.id}}"
+    button  style="padding: 10px 10px;width: 12%;background-color: #04AA6D;color: #f1f5f1;">Next</a>
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    {% endblock body %}

@@ -1,0 +1,354 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block body %}
+
+
+<style>
+    .ed-footer-block {
+        display: none;
+    }
+
+    .edrca-sidenav-block {
+        display: none;
+    }
+
+    .edrca-header-block {
+        display: none;
+    }
+
+    .edrca-contant-block {
+        padding: 10px;
+    }
+    .ed-card-block {
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+</style>
+
+
+<div class="ed-card-inner">
+    <div class="card-body p-0">
+        <div class="ed-nablgatepass-block" id="printid">
+            <div class="title-info">
+                <h2 class="text-center">
+                    {{material_obj.DispatcherNameOfEntity}}, {{usr_obj2.User_zone}}
+                </h2>
+                <h4 class="text-center mt-2">
+                    GatePass cum Challan
+                </h4>
+            </div>
+
+            <div class="ed-nablgatepass-inner">
+                <div class="table-responsives">
+                    <table class="ed-nablgatepass-top">
+                        <tr>
+                            <td class="w-50 text-left">
+                                <h6 class="text-left">
+                                    No: {{material_obj.id}}
+                                </h6>
+                            </td>
+                            <td class="w-50 text-right">
+                                <h6 class="text-right">
+                                    Date: {{material_obj.IssueDate}}
+                                </h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="ed-nablgatepass-item">
+                    <h5 class="text-center">
+                        Dispatcher Details
+                    </h5>
+                    <div class="table-responsives">
+                        <table class="table table-bordered ed-nablgatepass-info">
+                            <th class="w-25">
+                                Name Of Entity
+                            </th>
+                            <td class="w-25">
+                                <input type="text" class="form-control ed-textnone" readonly
+                                    value="{{material_obj.DispatcherNameOfEntity}}" />
+                            </td>
+                            <th class="w-25">
+                                LOA/Order No.
+                            </th>
+                            <td class="w-25">
+                                <input type="text" class="form-control ed-textnone" readonly
+                                    value="{{material_obj.LoaOrderNo}}" />
+                            </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Name Of Item
+                                </th>
+                                <td class="w-25">
+                                    <input type="text" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.NameOfItem}}" />
+                                </td>
+                                <th class="w-25">
+                                    LOA/Order date.
+                                </th>
+                                <td class="w-25">
+                                    <input type="date" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.LoaOrderDate}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Description Of item
+                                </th>
+                                <td class="w-25">
+                                    <input type="text" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.DescriptionOfItem}}" />
+                                </td>
+                                <th class="w-25">
+                                    Manufacturar /Firm Name
+                                </th>
+                                <td class="w-25">
+                                    <input type="text" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.ManufacturerName}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Vehicle name & No.
+                                </th>
+                                <td class="w-25">
+                                    <input type="text" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.VehicleNumber}}" />
+                                </td>
+                                <th class="w-25">
+                                    DI no & date
+                                </th>
+                                <td class="w-25">
+                                    <input type="date" class="form-control ed-textnone" readonly
+                                        value="{{material_obj.DINoDate}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Driver Name
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.DriverName}}
+                                </td>
+                                <th class="w-25">
+                                    Driver Contact no.
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.DriverContactNo}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Issue Date
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.IssueDate}}
+                                </td>
+                                <th class="w-25">
+                                    Issued to
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.IssuedTo}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="ed-nablgatepass-item">
+                    <h5 class="text-center">
+                        Material Details
+                    </h5>
+                    <div class="table-responsives">
+                        <table class="table table-bordered ed-nablgatepass-info">
+                            <tr>
+                                <th class="w-5">
+                                    S No.
+                                </th>
+                                <th class="w-20">
+                                    Material S No.
+                                </th>
+                                <th class="w-20">
+                                    Material Capacity
+                                </th>
+                                <th class="w-20">
+                                    Material type
+                                </th>
+                                <th class="w-20">
+                                    Remark
+                                </th>
+                            </tr>
+                            {% for i, j , k, l in sct_obj %}
+                            <tr>
+                                <td class="w-5">
+                                    {{forloop.counter}}
+                                </td>
+                                <td class="w-25">
+                                    {{i}}
+                                </td>
+                                <td class="w-25">
+                                    {{j}}
+                                </td>
+                                <td class="w-25">
+                                    {{k}}
+                                </td>
+                                <td class="w-25">
+                                    {{l}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="ed-nablgatepass-item">
+                    <div class="table-responsives">
+                        <table class="table table-bordered ed-nablgatepass-info">
+                            <tr>
+                                <th class="w-30">
+                                    Verified by
+                                </th>
+                                <th class="w-30">
+                                    Gatekeeper
+                                </th>
+                                <th class="w-40">
+                                    Issuing Authority
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="w-30">
+                                    <div style="display: inline-block">
+                                        {{material_obj.VerifiedBy}}
+                                    </div>
+                                </td>
+                                <td class="w-30">
+                                    <div style="display: inline-block">
+                                        {{material_obj.Gatekeeper}}
+                                    </div>
+                                </td>
+                                <td class="w-40">
+                                    <div style="display: inline-block">
+                                        {{material_obj.IssuingAuthority}}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-30">
+                                    <div style="display: inline-block">
+                                        {{material_obj.VerifiedByDesignation}}
+                                    </div>
+                                </td>
+                                <td class="w-30">
+                                    <div style="display: inline-block">
+                                        {{material_obj.GatekeeperDesignation}}
+                                    </div>
+                                </td>
+                                <td class="w-40">
+                                    <div style="display: inline-block">
+                                        {{material_obj.IssuingAuthorityDesignation}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="ed-nablgatepass-item">
+                    <h5 class="text-center">
+                        Receiver Details
+                    </h5>
+                    <div class="table-responsives">
+                        <table class="table table-bordered ed-nablgatepass-info">
+                            <tr>
+                                <th class="w-25">
+                                    Name Of Entity
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.ReceiverNameOfEntity}}
+                                </td>
+                                <th class="w-25">
+                                    Contact Person
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.ReceiverContactPerson}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">
+                                    Receiver details
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.ReceiverDetails}}
+                                </td>
+                                <th class="w-25">
+                                    Contact no.
+                                </th>
+                                <td class="w-25">
+                                    {{material_obj.ReceiverContact}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+
+        <div id="options" class="form-group mt-2">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <input id="printpagebutton" class="btn ed-submit ed-formSubmit mb-1" type="button"
+                            value="Print Gatepass" onclick="printinfo();" />
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <form action="/po/uplaod_gatepass/{{material_obj.id}}" method="POST"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" id="digitalCert" name="digitalCert" required="required" class="mb-1">
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="text-center">
+                        <input type="submit" id="sub" class="btn ed-submit ed-formSubmit mb-1" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    function printinfo()
+    {
+        console
+        document.getElementById("options").style.display = 'none';
+        window.print();
+        document.getElementById("options").style.display = 'block';
+    }
+    $(document).keydown(function(event) {
+        alert();
+        if (event.ctrlKey==true && (event.which == '80')) { //cntrl + p
+            event.preventDefault();
+            printinfo();
+        }
+    });
+</script>
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,99 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block body %}
+
+
+<form class="multisteps-form__form mb-8" name="myForm" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+    <h5 class="font-weight-bolder mb-0">Basic Details</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+
+                <tr>
+                    <th scope="col" style="width: 05%;" class="text-center">S.No.</th>
+                    <th scope="col" style="width: 20%;" class="text-center">Report Name</th>
+                    <th scope="col" style="width: 20%;" class="text-center">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr>
+                    <td class="text-center">1</td>
+                    <td>User Zone</td>
+                    <td><b>{{userdata.user_zone}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td>User Type</td>
+                    <td><b>{{userdata.user_type}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td>Agency Name</td>
+                    <td><b>{{userdata.agency_name}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">4</td>
+                    <td>Name Of Authorised Person</td>
+                    <td><b>{{userdata.name_of_auth}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">5</td>
+                    <td>Contact Number</td>
+                    <td><b>{{userdata.contact}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">6</td>
+                    <td>Email ID</td>
+                    <td><b>{{userdata.email}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">7</td>
+                    <td>Pan Number</td>
+                    <td><b>{{userdata.pan_card}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">8</td>
+                    <td>GST Number</td>
+                    <td><b>{{userdata.gst}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">9</td>
+                    <td>Address</td>
+                    <td><b>{{userdata.address}}</b></td>
+                </tr>
+                <tr>
+                    <td class="text-center">10</td>
+                    <td>Certificate</td>
+                    {% if userdata.imageCert == '' %}
+                        <td class="text-left"> <a onclick="alert('No document')">View</a></td>
+                    {% else %}
+                        <td class="text-left"> <a href="{{userdata.imageCert.url}} " target="_blank">View</a></td>
+                    {% endif %}                    
+                </tr>
+
+                <tr></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.container-fluid -->
+    {% if not userdata.profile_complete %}
+    <div class="row">
+        <div class="col-8">
+            <a class="nav-link" href="/roof_top/roof_top_upload"> <button style="background-color:#007bff" type="button" class="btn btn-info">Documentss Upload </button></a>
+        </div>
+    </div>
+    {% elif userdata.profile_complete and not userdata.payment  %}
+    <div class="row">
+        <div class="col-8">
+            <a class="nav-link" href="/roof_top/view_document"> <button style="background-color:#007bff" type="button" class="btn btn-info">View Document and Make Payment </button></a>
+        </div>
+    </div>
+    {% endif %}
+
+<!---end here-->
+
+
+
+
+<!-- /.content -->
+{% endblock body %}

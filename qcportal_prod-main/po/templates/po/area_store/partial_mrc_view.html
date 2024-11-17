@@ -1,0 +1,496 @@
+{% extends 'officer/gm_store_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        text-indent: 0;
+    }
+
+    .p,
+    p {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+        margin: 0pt;
+    }
+
+    h1 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 11pt;
+    }
+
+    .s1 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+    }
+
+    .s2 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 9pt;
+        vertical-align: 2pt;
+    }
+
+    .s3 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+    }
+
+    .s4 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 9pt;
+    }
+
+    .s5 {
+        color: black;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 9pt;
+    }
+
+    table,
+    tbody {
+        vertical-align: top;
+        overflow: visible;
+    }
+</style>
+<!-- <form method="POST" action="/po/rca_mrc/{{data.id}}" style="background: white;"> -->
+{% csrf_token %}
+
+<style>
+    th,
+    td {
+        padding: 4px;
+        font-size: 13px;
+        line-height: 24px;
+    }
+</style>
+
+
+
+
+<div id="printid">
+<table style="border: 1px solid #ccc; margin:0 auto; margin-left:10%; width:85%; margin-right:5%;">
+    <tr>
+        <td style="padding: 20px;">
+
+            <table style="border: 0; width:100%; margin-bottom:20px;">
+                <tr>
+                    <td style="padding: 4px;">
+                        <div class="cgm-logo-block">
+
+
+                            {% if pr.ro.rca_cell.Region.Region_Name_E == 'Gwalior' %}
+                            <img src="{% static 'assets/images/header1.png' %}" alt="͝" class="cgm-logo"
+                                style="width:100%">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'Bhopal' %}
+                            <img src="{% static 'assets/images/header1.png' %}" alt="͝" class="cgm-logo"
+                                style="width:100%">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'JABALPUR' %}
+                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                alt="͝">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'SHAHDOL' %}
+                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                alt="͝">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'REWA' %}
+                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                alt="͝">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'SAGAR' %}
+                            <img src="{% static 'assets/images/header_mppk1.png' %}"
+                                style="width:100%; border-bottom: 0px solid #000; padding-bottom: 0px;"
+                                alt="͝">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                    style="width:100%">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'Ujjain' %}
+                                <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                        style="width:100%">
+                            {% elif pr.ro.rca_cell.Region.Region_Name_E == 'Indore' %}
+                                <img src="{% static 'assets/images/header_mppk.png' %}" alt="͝" class="cgm-logo"
+                                        style="width:100%">
+
+                            {% endif %}
+
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 4px;">
+                        <h5 style="display: block;text-align:center;">
+                        <u><b>MATERIAL RECEIPT CERTIFICATE (MRC) FOR GOODS RECEIVED</b></u>
+                        </h5>
+                    </td>
+            </table>
+
+            <table style="border: 0; width:100%; margin-bottom:0px;">
+                <tr>
+                    <td style="text-align: left; width: 60%;">
+                        <b>Order :</b> MD/MK/04/P-II/TS-{{ pr.ro.wo.dispatch_no }}/985 dtd {{pr.ro.wo.ordr_date }}
+                    </td>
+                    <td style="text-align: right; width: 40%;">
+                        Report Date: {{ pr.partial_date }}
+                    </td>
+                </tr>
+            </table>
+
+            <table style="border: 0; width:100%; margin-bottom:10px;">
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        To, <br>
+                        The Director (F&amp;A) <br>
+                        O/O MD ({{ pr.ro.wo.rca_cell.user_zone }}) M.P.M.K.V.V.Co Ltd
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        <b>Subject</b> :
+                        Material Receipt certificate (MRC) for Goods received.
+                        <br /><br />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        The Consignments as per details given below have been
+                        Received
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        <b>PO Subject : </b>
+                        Rate Contract Award of Fail BGP transformer against RCA No {{ pr.ro.wo.dispatch_no }}
+                        dtd {{ pr.ro.wo.ordr_date}}
+                    </td>
+                </tr>
+            </table>
+
+            <table style="border: 1px solid #ccc; width:100%; margin-bottom:0px;text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; width: 15%;border: 1px solid #ccc;text-align:center;">
+                            Supplier Name
+                        </th>
+                        <th style="text-align: left; width: 15%;border: 1px solid #ccc;text-align:center;">
+                            Supplier Works
+                        </th>
+                        <th style="text-align: left; width: 15%;border: 1px solid #ccc;text-align:center;">
+                            Against Order No.
+                        </th>
+                        <th style="text-align: left; width: 10%;border: 1px solid #ccc;text-align:center;">
+                            Order Date
+                        </th>
+                        <th style="text-align: left; width: 15%;border: 1px solid #ccc;text-align:center;">
+                            MRC Number
+                        </th>
+                        <th style="text-align: left; width: 30%;border: 1px solid #ccc;text-align:center;">
+                            Order Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            {{ pr.ro.wo.vendor_id.CompanyName_E }}
+                        </td>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            {{ pr.ro.wo.vendor_id.Company_dist }}
+                        </td>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            MP{{ pr.ro.wo.rca_cell.user_zone }}WO{{pr.ro.wo.id }}
+                        </td>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            {{ pr.ro.wo.ordr_date }}
+                        </td>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            <span> ERP/ {{ pr.id }} DTD</span>
+                            <span>{{ pr.order_date }}
+                            </span>
+                        </td>
+                        <td style="border: 1px solid #ccc;text-align:center;">
+                            Rate Contract
+                            Award of Fail BGP transformer against RCA No {{ pr.ro.wo.dispatch_no }}
+                             dtd {{ pr.ro.wo.ordr_date }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style="border: 0; width:100%; margin-bottom:10px;">
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        Goods Receipts Details For PO
+                        Number:MP{{ pr.ro.wo.rca_cell.user_zone }}WO{{ pr.ro.wo.id }}
+                    </td>
+                </tr>
+            </table>
+
+            <table style="border: 1px solid #ddd; width:100%; margin-bottom:20px;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; width: 15%; text-align: center;border: 1px solid #ddd;">
+                            Receiving No.
+                        </th>
+                        <th style="text-align: left; width: 15%;text-align: center;border: 1px solid #ddd;">
+                            Receiving Date
+                        </th>
+                        <th style="text-align: left; width: 15%;text-align: center;border: 1px solid #ddd;">
+                            DRR No.
+                        </th>
+                        <th style="text-align: left; width: 10%;text-align: center;border: 1px solid #ddd;">
+                            MTR No. <br> Date
+                        </th>
+                        <th style="text-align: left; width: 15%;text-align: center;border: 1px solid #ddd;">
+                            Vehicle No.
+                        </th>
+                        <th style="text-align: left; width: 15%;text-align: center;border: 1px solid #ddd;">
+                            Transport Agency
+                        </th>
+                        <th style="text-align: left; width: 30%;text-align: center;border: 1px solid #ddd;">
+                            Invoice/ Challan No. and Date
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+
+                            <!-- {% for k in rec_gate %}
+                            <span>{{k.id}},</span>{% endfor %} -->
+                            <span></span>
+                         
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            <!-- {% for k in rec_gate %}
+                            <span>{{k.lotp_in_date}},</span>{% endfor %} -->
+                            <span></span>
+                            
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            {% for i in drr %}
+                            <span>MPCZDRR{{i.id}},</span>{% endfor %}
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            {% for i in drr %} <span>
+                                {{i.drr_vehicle}}</span>
+                            {% endfor %}
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+
+                        </td>
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            {% for i in drr %}<span>    {{i.drr_challan_no }} DT {{ i.drr_challan_date }}, </span>{% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table style="border: 1px solid #ddd; width:100%; margin-bottom:20px;">
+                <thead>
+                    <tr>
+                      
+                        <th style="text-align: left; width: 15%; text-align: center;text-align: center;border: 1px solid #ddd;">
+                            Item Code
+                        </th>
+                        <th style="text-align: left; width: 25%; text-align: center;text-align: center;border: 1px solid #ddd;">
+                            Item Description
+                        </th>
+                        <th style="text-align: left; width: 10%; text-align: center;text-align: center;border: 1px solid #ddd;">
+                            Quantity Delivered
+                        </th>
+                        <th style="text-align: left; width: 20%; text-align: center;text-align: center;border: 1px solid #ddd;">
+                            Manufacturing Serial Number From-To
+                        </th>
+                        <th style="text-align: left; width: 20%; text-align: center;text-align: center;border: 1px solid #ddd;">
+                            Remarks
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                   {% for a,b,c,d in matzip %}
+                    
+                    <tr>
+                        
+
+                        
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            
+                            <span> {{a}}</span>
+                           
+                        </td>
+                        
+
+                        
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            
+                            <span> 
+                                Failed Transformer (for repairing) and Transporation</span>
+                            <span>{{b}}</span>
+                           
+                        </td>
+                       
+                   
+
+                        
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                           
+                            <span>{{c}}</span>
+                            
+                           
+                        </td>
+                        
+
+                       
+                        
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            
+                            <span>{{d}}</span>
+                           
+                        </td>
+                        
+                        
+                        <td style="text-align: center;border: 1px solid #ddd;">
+                            ok
+                        </td>
+                    </tr>
+                   {% endfor %}
+                </tbody>
+            </table>
+
+
+            
+          
+            <table style="border: 0; width:100%; margin-bottom:10px;">
+                <tr>
+                    <td style="text-align: left; width: 100%;">
+                        <b>Note : </b>
+                        Subject to detailed checking as per technical specifications of the order. The entry of
+                        the consignment has been taken in Daily Receipt Register (of material) as mentioned
+                        above.
+                    </td>
+                </tr>
+            </table>
+            
+            <table style="border: 0; width:100%; margin-bottom:10px;">
+                <tr>
+                    <th style="text-align: left; width: 100%;" colspan="2">
+                        Comment :-
+                    </th>
+                </tr>  
+                {% for data in comment %}
+                <tr>
+                    <td style="width: 20px;">
+                        <b>{{forloop.counter}}</b>
+                    </td>
+                    <td style="width: 98%;">
+                        <div style="width :100% ; white-space: normal; word-wrap: break-word; word-break: break-word;">
+                            {{data.add_comment}}
+                        </div> 
+                    </td>
+                </tr>
+                {% endfor %} 
+            </table>
+
+            
+            <table style="border: 0; width:100%; margin-bottom:15px;">
+                <tr>
+                    <td style="text-align: left; width: 70%;">
+                        <b>DRR Details :</b>
+                        {% for i in drr %}
+                        <span>MPCZDRR{{i.id}},</span>{% endfor %}
+                        <br> 
+                       <b> Invoice/Challan No. and Dates :</b>
+                        {% for i in drr %}<span>NT/IND/{{i.drr_challan_no }} DT {{ i.drr_challan_date }}, </span>{% endfor %}
+                          
+                    </td> 
+                    <td style="text-align: right; width: 30%;">
+                        <div style="display:inline-block;text-align:center;">
+                            GM/AGM/ DGM (Area Store)<br>
+                            MPMKVVCL <br>
+                            Area Stores {{ pr.ro.store.Name }}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+         
+
+            
+            <table style="border: 0; width:100%; margin-bottom:15px;">
+                <tr>
+                    <th colspan="2" style="text-align: left; width: 100%;"> 
+                        Copy to:-
+                    </th>
+                </tr>   
+                {% for data1 in copy %}
+                <tr>
+                    <td style="width:20px;">
+                         {{forloop.counter}} 
+                    </td>
+                    <td style="width: 98%;">
+                        <div>
+                            {{data1.copy_name}}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+</div>
+
+<div id="options" class="form-group mt-4 text-center">
+
+    <input onclick="printDiv('printid')" type="button" value="print" class="btn ed-submit btn-primary">
+
+  
+
+</div>
+
+
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+
+            </center {% endblock body %}

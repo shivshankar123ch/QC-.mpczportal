@@ -1,0 +1,66 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+  <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Material List</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th style="width:5%">
+                           Serial No
+                      </th>
+                      <th style="width: 25%">
+                          Name Of Material
+                      </th>
+                      <th style="width: 20%">
+                          IS As per Tender
+                      </th>
+                        <th style="width:40%">
+                        Name Of Acceptance
+                      </th>
+                      <th style="width:10%">
+                        Accuracy for acceptance
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1.</td>
+                    <td>Transformer</td>
+                    <td>IS:2026 and IS 1180</td>
+                    <td>
+                         <ul class="list-group">
+                            <li class="list-group-item">1. Breaking Load Test</li>
+                             <li class="list-group-item">2. Resistance Test</li>
+                             <li class="list-group-item">3. Breaking Load Test</li>
+                             <li class="list-group-item">4. Resistance Test</li>
+                        </ul>
+                      </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+ {% endblock body %}

@@ -1,0 +1,30 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>Select NABL</h2>
+  </div>
+  <div class="card-body">
+    <div class="discomoption-block">
+      <div class="form-group">
+        <h4>Select Discom wise NABL for material Testing</h4>
+        <ul class="listoptions">
+          <li class="nav-item">
+            <a class="nav-link" href="/po/select_nabl2/{{ro_id}}/{{final_mat_lst}}/CZ"> CZ </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/po/select_nabl2/{{ro_id}}/{{final_mat_lst}}/EZ"> EZ </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/po/select_nabl2/{{ro_id}}/{{final_mat_lst}}/WZ"> WZ </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+{% endblock body %}

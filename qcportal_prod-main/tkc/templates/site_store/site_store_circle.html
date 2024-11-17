@@ -1,0 +1,174 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                        Received Material
+                                    </h2>
+                                </div>
+               <div class="card-body pb-5">
+                   <div class="ed-tableinfo-block ed-orderinfo-block">
+                       <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                      <tr>
+                          <th style="width:10%">
+                               Work Order No
+                          </th>
+                          <th style="width:10%">
+                            DI No
+                       </th>
+                          <th style="width:30%">
+                               DI Description
+                          </th>
+                          <th style="width:30%">
+                            View DI
+                       </th>
+                          <th style="width:20%">
+                               Contractor
+                          </th>
+                           <th style="width:20%">
+                               Item Name
+                          </th>
+
+                          <th style="width:20%">
+                        Quantity
+                       </th>
+
+                       <th>
+                        Circle Name
+                       </th>
+                         
+                         
+                        <th>Check Receiving</th>
+
+                        <th>Check Receiving By Officer</th>
+
+
+
+                        <th>Officer Details</th>
+                        
+                        
+                        </tr>
+                    </thead>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>Received Material Details</span></u></b></p>
+                    {% for Supply in offer %}
+                    <tr>
+                         <td><b>{{Supply.wo.Contract_Number}}</b></td>
+                            <td><b>{{Supply.tkc_di.erp_di_number}}</b></td>
+                            <td><b>{{Supply.tkc_di.di_subject}}</b></td>
+                            <td> <a href="{{Supply.tkc_di.tkc_di_doc.url}}"  target="_blank">View</a></td>
+                         <td><b>{{Supply.wo.supplier.CompanyName_E}}</b></td>
+                        <td><b>{{Supply.wo_material.material_name}}</b></td>
+                        <td><b>{{Supply.quantity}}</b></td>
+                        <td><b>{{Supply.circle.Circle_Name_E}}</b></td>
+                        {% if Supply.Dispatch_Status == 1%}
+                        
+                         <td><a class="btn btn-primary"  ed-formSubmit" href="/tkc/site_store_item_received/{{Supply.id}}">View</a></td>
+                         
+                         {% else %}
+                         <td><h6>DI not Approved</h6></td>
+                        {% endif %}
+
+
+
+                        <td>
+                            {% if Supply.Physical_Status == 1 and Supply.officer_assined == 1 and Supply.Physical_Status_officer == 0 %}
+    
+                                <span><a class="btn btn-primary ed-formSubmit" href="/tkc/site_store_item_received_officer/{{Supply.id}}">Material Receving </a></span>
+    
+                               
+                                {% elif Supply.Physical_Status == 1 and Supply.officer_assined == 1 and Supply.Physical_Status_officer == 1 %}
+                                
+                                <span class="btn btn-danger">Physicaly Ok</span>    
+                               
+                                {% elif Supply.Physical_Status == -1 and Supply.officer_checked == 0 %}
+                                
+                                <span class="btn btn-danger">Physicaly Not Ok</span>
+                                
+                                {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 1  and Supply.officer_assined == 1 %}
+                                
+                            <span class="btn btn-info">Officer Details Added</span>
+
+
+                            {% elif Supply.Physical_Status == 1 and Supply.officer_assined == 0 %}
+                                
+                            <span class="btn btn-info">Officer Not Assined</span>
+                                
+                                {% else %}
+                                
+                            <span class="btn btn-dark">Physicaly Not Checked</span>
+                            
+                            {% endif %}
+                            </td>
+
+
+
+
+
+
+
+                        <td>
+                        {% if Supply.Physical_Status == 1 and Supply.officer_checked == 0 and Supply.officer_assined == 1 and Supply.Physical_Status_officer == 1 %}
+
+                            <span><a class="btn btn-primary ed-formSubmit" href="/tkc/add_officer_details/{{Supply.id}}">Upload Officer Details</a></span>
+
+                        {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 1  and Supply.officer_checked == 1 %}
+                            
+                            <span class="btn btn-danger">Officer Details Uploaded</span>
+
+
+
+                            {% elif Supply.Physical_Status == -1 and Supply.officer_checked == 0 %}
+                            
+                            <span class="btn btn-danger">Physicaly Not Ok</span>
+                            
+                            {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 1 %}
+                            
+                        <span class="btn btn-info">Officer Details Added</span>
+                        {% elif Supply.Physical_Status == 1 and Supply.officer_assined == 0 %}
+                                
+                        <span class="btn btn-info">Officer Not Assined</span>
+                            {% else %}
+                            
+                        <span class="btn btn-dark">Physicaly Not Checked</span>
+                        
+                        {% endif %}
+                        </td>
+
+
+                     
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+                    </div>
+   </div>
+
+{% endblock body %}

@@ -1,0 +1,145 @@
+{% extends 'po/procurement_base.html' %}
+{% load static %}
+{% block pagetitle %} Procurement generated  {% endblock pagetitle %}
+{% block body %}
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<p>{{ text|linebreaks }}</p>
+
+
+<pre>{{ text }}</pre>
+<!--<div class="mx-auto" style="width: 95%;">-->
+<!--<p name="acceptance" id="acceptance" contenteditable="false" class="text-uppercase"><b>Accetance</b></p>-->
+<!--<button onclick="myFunction1(this);">Enable Edit!</button>-->
+<!--<script>-->
+<!--function myFunction1(button) {-->
+<!--  var accept = document.getElementById("acceptance");-->
+<!--  if (accept.contentEditable == "true") {-->
+<!--    accept.contentEditable = "false";-->
+<!--    button.innerHTML = "Enable Edit!";-->
+<!--  } else {-->
+<!--    accept.contentEditable = "true";-->
+<!--    button.innerHTML = "Disable Edit!";-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+<!--<p id="acceptance_text" contenteditable="false" class="text-justify">Considering your offer against the tender under subject and subsequent correspondence, we have pleasure in placing this detailed-->
+<!--    order for supply of<b> 11KV CT:PT Unit ratio 300-150/5A & 33KV CT:PT unit ratio 10/5A </b> on <b>own quoted rates</b> as detailed in Schedule-I; Price & Quantity of this order-->
+<!--    <br>This order is subject to the terms and conditions as stipulated in detail in Annexure-I enclosed with this order except the terms and condition as modified / laid down hereunder. These shall be binding-->
+<!--    on you in respect of this contract and no conditions or stipulations to be contrary or which are inconsistent will be applicable / acceptable-->
+<!--    <br>This order is also subject to the technical specifications as contained in Annexure-II-->
+<!--</p>-->
+<!--<button onclick="myFunction_acceptance_text(this);">Enable Edit!</button>-->
+<!--<script>-->
+<!--function myFunction_acceptance_text(button) {-->
+<!--  var accept_text = document.getElementById("acceptance_text");-->
+<!--  if (accept_text.contentEditable == "true") {-->
+<!--    accept_text.contentEditable = "false";-->
+<!--    button.innerHTML = "Enable Edit!";-->
+<!--  } else {-->
+<!--    accept_text.contentEditable = "true";-->
+<!--    button.innerHTML = "Disable Edit!";-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+
+<!--<p id="delivery" contenteditable="false" class="text-uppercase"><b>Delivery Schedule</b></p>-->
+<!--<button onclick="myFunction2(this);">Enable Edit!</button>-->
+<!--<script>-->
+<!--function myFunction2(button) {-->
+<!--  var ds = document.getElementById("delivery");-->
+<!--  if (ds.contentEditable == "true") {-->
+<!--    ds.contentEditable = "false";-->
+<!--    button.innerHTML = "Enable Edit!";-->
+<!--  } else {-->
+<!--    ds.contentEditable = "true";-->
+<!--    button.innerHTML = "Disable Edit!";-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+<!--<table class="table table-hover">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col" contenteditable="false"># </p></th>-->
+<!--      <th scope="col" contenteditable="false">First</p></th>-->
+<!--      <th scope="col" contenteditable="false">Last</th>-->
+<!--      <th scope="col" contenteditable="false">Handle</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <tr>-->
+<!--      <th scope="row" contenteditable="true">1</th>-->
+<!--      <td contenteditable="true">Mark</td>-->
+<!--      <td contenteditable="true">Otto</td>-->
+<!--      <td contenteditable="true">@mdo</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th scope="row" contenteditable="true">2</th>-->
+<!--      <td contenteditable="true">Jacob</td>-->
+<!--      <td contenteditable="true">Thornton</td>-->
+<!--      <td contenteditable="true">@fat</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th scope="row" contenteditable="true">3</th>-->
+<!--      <td contenteditable="true">cob</td>-->
+<!--      <td contenteditable="true">ton</td>-->
+<!--      <td contenteditable="true">@Ball</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th scope="row" contenteditable="true">4</th>-->
+<!--      <td colspan="2" contenteditable="true">Larry the Bird</td>-->
+<!--      <td contenteditable="true">@twitter</td>-->
+<!--    </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+<!--<p id="copy_to" contenteditable="false" class="text-uppercase"><b>copy to</b></p>-->
+<!--<button onclick="copy_t(this);">Enable Edit!</button>-->
+<!--<script>-->
+<!--function copy_t(button) {-->
+<!--  var copy_to = document.getElementById("copy_to");-->
+<!--  if (copy_to.contentEditable == "true") {-->
+<!--    copy_to.contentEditable = "false";-->
+<!--    button.innerHTML = "Enable Edit!";-->
+<!--  } else {-->
+<!--    copy_to.contentEditable = "true";-->
+<!--    button.innerHTML = "Disable Edit!";-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+<!--<p id="copy_to_text" contenteditable="false" class="text-justify">-->
+<!--    1. The Director-->
+<!--    <br>2. The CGM-->
+<!--    <br>3. The CFO-->
+<!--    <br>4. The CE, Jabalpur-->
+<!--    <br>5. The CE, Indore-->
+<!--    <br>6. The CGM-->
+<!--    <br>7. The GM (W&P)-->
+<!--    <br>8. The GM (Stores)-->
+<!--    <br>9. The AGM-->
+<!--    <br>10. The AO-->
+<!--</p>-->
+<!--<button onclick="copy_to_txt(this);">Enable Edit!</button>-->
+<!--<script>-->
+<!--function copy_to_txt(button) {-->
+<!--  var c_t_text = document.getElementById("copy_to_text");-->
+<!--  if (c_t_text.contentEditable == "true") {-->
+<!--    c_t_text.contentEditable = "false";-->
+<!--    button.innerHTML = "Enable Edit!";-->
+<!--  } else {-->
+<!--    c_t_text.contentEditable = "true";-->
+<!--    button.innerHTML = "Disable Edit!";-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+
+
+<!--</div>-->
+    <input type="submit" value="Submit">
+</form>
+{% endblock body %}

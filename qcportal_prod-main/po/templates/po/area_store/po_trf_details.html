@@ -1,0 +1,180 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+<div class="ed-card-inner">
+  <div class="card-header">
+      <h2>
+          View DTR Issued
+      </h2>
+  </div>
+  <div class="card-body mb-4">
+      <div class="ed-tableinfo-block">
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                  <thead>
+                      <tr>
+                        <th style="width: 1%">
+                            s No.
+                        </th>
+                        <th style="width: 10%">
+                            PO No
+                        </th>
+                        <th>
+                            item Name 
+                        </th>
+                        <th>
+                            item Quantity
+                        </th>
+                        <th>
+                            View DI
+                        </th>
+                        <th>
+                            View Items Number
+                        </th>
+                        <th>
+                            Create GatePass For NABL 
+                        </th>
+                        <th>
+                          Create TRF For NABL
+                      </th>
+                        <th>
+                            Action
+                        </th> 
+                        <th>
+                          Status
+                      </th>
+                    </tr>
+                </thead>
+             <tbody>
+               {% for name in data1 %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        {{name.po.po_no}}
+                     </td>
+                     <td class="project_progress">
+                             {{name.offer_item.material.specification}}
+                     </td>
+                     <td>
+                          {{name.deliverable_qty}}
+                     </td>
+                     <td>
+                        <a class="btn ed-submit btn-success"  href="{{name.di_master.di_doc.url}}" target="_blank">View</a>
+                    </td>
+                       <td>
+
+                         <a class="btn ed-submit btn-success" href="/po/po_di_sampled_item/{{name.id}}">View
+                         </a>
+                       </td>
+                       {% if name.sampling_flag == 1 %}
+                          <td>
+                            {% if name.nabl_gatepass == 0 %} 
+                              <a class="btn ed-submit btn-success" href="/po/po_nabl_gatepass/{{name.id}}">
+                                Create Gatepass
+                              </a> 
+                              {% elif name.nabl_gatepass == 1 %}
+                              <span>Gatepass Created</span>
+                              {% else %}
+                              <span></span>
+                              {% endif %}
+                              {% if name.nabl_gatepass == 1 %}
+                              {% for reverse in name.ar_store.all %}
+                                {% if reverse.gatepass %}
+                                  <a class="btn ed-submit btn-success" href="/po/po_nabl_gatepass_print/{{name.id}}">print Gatepass</a>
+                                {% else %}
+                                <a class="btn ed-submit btn-danger" href="/po/po_nabl_gatepass_print/{{name.id}}">upload Gatepass</a>
+                                {% endif %}
+                                {% endfor %}
+                              {% else %}
+                              
+                              <span></span>
+                              {% endif %} 
+                              {% comment %} <p style="color:red" >If gatepass not uploded plese upload it</p> {% endcomment %}
+                          </td>
+                          <td>
+                            {% if name.nabl_gatepass == 1 and name.nabl_trf == 0 %}
+                            <a class="btn  ed-submit btn-primary" href="/po/po_test_request_form_submit/{{name.id}}">Create TRF
+                            </a> 
+                            {% elif name.nabl_trf == 1 %}
+                            <span>TRF Created</span>
+                            {% else %}
+                            <span>Gatepass Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if name.send_to_nabl == 0 and name.nabl_gatepass == 1 and name.nabl_trf == 1 %}
+                            <a class="btn ed-submit btn-primary" href="/po/po_nabl_update/{{name.id}}" >Send To NABL 
+                            </a> 
+
+                              {% elif name.send_to_nabl == 0 %}
+                                <span>Gatepass and trf pending</span>
+
+                              {% elif name.send_to_nabl == 1 %}
+                              <span>Sent to NABL</span>
+                              {% else %}
+
+                              <span>Reject By NABL</span>
+                            {% endif %}
+                            <td>
+                              <a class="btn ed-submit btn-primary" href="/nabl/cp_nabl_result_sampling/{{name.id}}" >click to check status
+                              </a>  
+                           </td>
+                         {% elif name.sampling_flag == 2 %}
+                         <td>
+                          {% if name.nabl_gatepass == 1 %}
+                            <a class="btn ed-submit btn-success" href="/po/po_nabl_gatepass_resampling/{{name.id}}">
+                              Reasampling Gatepass Create
+                            </a>
+                            {% elif name.nabl_gatepass == 2 %}
+                            <span>Reasampling Gatepass Created</span>
+                            <a class="btn ed-submit btn-success" href="/po/po_nabl_gatepass_print_resampling/{{name.id}}">print Resampling Gatepass</a>
+                            {% else %}
+                            <span></span> 
+                          {% endif %}
+                            <a class="btn ed-submit btn-success" href="/po/po_nabl_gatepass_print/{{name.id}}">print sampling Gatepass</a>
+
+                          </td>
+
+                        <td>
+                          {% if name.nabl_gatepass == 2 and name.nabl_trf == 1 %}
+                          <a class="btn  ed-submit btn-primary" href="/po/po_resampling_test_request_form_submit/{{name.id}}">Create Reasampling TRF
+                          </a>
+                          {% elif name.nabl_trf == 2 %}
+                          <span>Reasampling TRF Created</span>
+                          {% else %}
+                          <span>Reasampling Gatepass Pending</span>
+                          {% endif %}
+                      </td>
+                        <td>
+                            {% if name.send_to_nabl == 1 and name.nabl_gatepass == 2 and name.nabl_trf == 2 %}
+                            <a class="btn ed-submit btn-primary" href="/po/po_resampling_nabl_update/{{name.id}}" >Send To NABL for Resampling
+                            </a> 
+
+                            {% elif name.send_to_nabl == 1 %}
+                              <span>Reasampling Gatepass and trf pending</span>
+
+                            {% elif name.send_to_nabl == 2 %}
+                            <span>Sent to NABL</span>
+                            {% else %}
+                            <span>Reject By NABL</span>
+                          {% endif %}
+                          <td>
+                            <a class="btn ed-submit btn-primary" href="/nabl/cp_nabl_result_resampling/{{name.id}}" >click to check resampling status
+                            </a>
+                        </td>
+                          {% endif %}
+                          </td>
+
+                        </tr>
+             {% endfor %}
+          </tbody>
+         </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

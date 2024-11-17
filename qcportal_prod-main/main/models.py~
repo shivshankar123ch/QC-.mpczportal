@@ -1,0 +1,407 @@
+from django.db import models
+from datetime import datetime
+
+
+# Create your models here.
+
+class OwnerShip_Type_Table_Master(models.Model):
+    OwnerShip_type_Id = models.AutoField(primary_key=True)
+    OwnerShip_type_Name_E = models.CharField(max_length=100, null=True, blank=True)
+    OwnerShip_type_Name_H = models.CharField(max_length=100, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.IntegerField(blank=True, null=True, default=0)
+    From_Date = models.IntegerField(blank=True, null=True, default=0)
+    Till_Date = models.IntegerField(blank=True, null=True, default=0)
+
+
+class PO_Type_Table_Master(models.Model):
+    PO_type_Id = models.AutoField(primary_key=True)
+    PO_type_Name = models.CharField(max_length=100, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.IntegerField(blank=True, null=True, default=0)
+    From_Date = models.IntegerField(blank=True, null=True, default=0)
+    Till_Date = models.IntegerField(blank=True, null=True, default=0)
+
+    def __str__(self):
+        return self.PO_type_Name
+
+
+class PO_Clause_Master(models.Model):
+    PO_Clause_Id = models.AutoField(primary_key=True)
+    PO_Clause_Name = models.CharField(max_length=200, null=True, blank=True)
+    PO_Clause_Description = models.TextField(default="", null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.IntegerField(blank=True, null=True, default=0)
+    From_Date = models.IntegerField(blank=True, null=True, default=0)
+    Till_Date = models.IntegerField(blank=True, null=True, default=0)
+
+    def __str__(self):
+        return self.PO_Clause_Name
+
+
+class PO_Type_Clause(models.Model):
+    PO_type_Id = models.ForeignKey(PO_Type_Table_Master, on_delete=models.CASCADE, null=True, blank=True)
+    PO_Clause_Id = models.ForeignKey(PO_Clause_Master, on_delete=models.CASCADE, null=True, blank=True)
+
+
+class User_login_table(models.Model):
+    User_Id = models.AutoField(primary_key=True)
+    User_Password = models.CharField(max_length=20, null=True, blank=True)
+    User_type_Id = models.CharField(max_length=20, null=True, blank=True)
+    OTP_No = models.CharField(max_length=10, null=True, blank=True)
+    Verify_Status = models.IntegerField(blank=True, null=True, default=0)
+    Last_Login = models.DateTimeField(null=True, blank=True)
+    Is_Deleted = models.BooleanField()
+    In_Between_Date = models.DateField(null=True, blank=True)
+    Out_Between_Date = models.DateField(null=True, blank=True)
+    Contact_No = models.CharField(max_length=15, null=True, blank=True)
+
+
+class Bank_Master_Table(models.Model):
+    Bank_id = models.AutoField(primary_key=True)
+    Bank_Name = models.CharField(max_length=40, null=True, blank=True)
+    Bank_Code = models.CharField(max_length=20, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Created_Date = models.DateField(null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+
+
+class State_Master_Table(models.Model):
+    State_Id = models.AutoField(primary_key=True)
+    State_Code = models.CharField(max_length=20, null=True, blank=True)
+    State_Name_E = models.CharField(max_length=20, null=True, blank=True)
+    State_Name_H = models.CharField(max_length=20, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Created_Date = models.DateField(null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.BooleanField()
+
+
+class District_Master_Table(models.Model):
+    District_Id = models.AutoField(primary_key=True)
+    District_Name_E = models.CharField(max_length=20, null=True, blank=True)
+    District_Name_H = models.CharField(max_length=20, null=True, blank=True)
+    Distict_Code = models.CharField(max_length=10, null=True, blank=True)
+    State_Id = models.CharField(max_length=10, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Created_Date = models.DateField(null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.BooleanField()
+
+
+class City_Table_Master(models.Model):
+    City_Id = models.AutoField(primary_key=True)
+    City_name_E = models.CharField(max_length=20, null=True, blank=True)
+    City_name_H = models.CharField(max_length=20, null=True, blank=True)
+    State_id = models.CharField(max_length=20, null=True, blank=True)
+    District_id = models.CharField(max_length=20, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Created_Date = models.DateField(null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.BooleanField()
+
+
+class Pin_Code_Table_Master(models.Model):
+    pincode_Id = models.AutoField(primary_key=True)
+    Pincode_number = models.IntegerField(blank=True, null=True, default=0)
+    State_id = models.CharField(max_length=20, null=True, blank=True)
+    District_id = models.CharField(max_length=20, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Created_Date = models.DateField(null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+
+
+class User_Registration(models.Model):
+    User_Id = models.AutoField(primary_key=True)
+    Type_of_business = models.CharField(max_length=20, null=True, blank=True)
+    Authorised_person_E = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_person_H = models.CharField(max_length=100, null=True, blank=True)
+    CompanyName_E = models.CharField(max_length=100, null=True, blank=True)
+    CompanyName_H = models.CharField(max_length=100, null=True, blank=True)
+    ContactNo = models.CharField(max_length=20, null=True, blank=True)
+    Email_Id = models.EmailField(max_length=50, null=True, blank=True)
+    User_code = models.CharField(max_length=16, null=True, blank=True)
+    # use value for Central Zone  = CZ  West Zone = WZ East Zone = EZ
+    User_zone = models.CharField(max_length=10, null=True, blank=True)
+    # use value for vendor = 1 nabl = 2 tkc = 3
+    User_type = models.CharField(max_length=12, null=True, blank=True)
+    Basic_Details = models.IntegerField(blank=True, null=True, default=0)
+    Complete_Details = models.IntegerField(blank=True, null=True, default=0)
+    Experience = models.IntegerField(blank=True, null=True, default=0)
+    Turnover = models.IntegerField(blank=True, null=True, default=0)
+    Vendor_type = models.CharField(max_length=3, null=True, blank=True)
+    Oyt = models.CharField(max_length=3, null=True, blank=True)
+    Pancard = models.CharField(max_length=12, null=True, blank=True)
+    Aadhar = models.CharField(max_length=15, null=True, blank=True)
+    Otp = models.CharField(max_length=6, null=True, blank=True)
+    payment = models.IntegerField(blank=True, default=0)
+    complete_data = models.IntegerField(blank=True, default=0)
+    work_approval = models.IntegerField(blank=True, null=True, default=0)
+    work_rejection = models.IntegerField(blank=True, null=True, default=0)
+    finance_approval = models.IntegerField(blank=True, null=True, default=0)
+    finance_rejection = models.IntegerField(blank=True, null=True, default=0)
+    factory_approval_status = models.IntegerField(blank=True, null=True, default=0)
+    factory_approval_payment = models.IntegerField(blank=True, null=True, default=0)
+    factory_approval = models.IntegerField(blank=True, null=True, default=0)
+    factory_rejection = models.IntegerField(blank=True, null=True, default=0)
+    cgm_approval = models.IntegerField(blank=True, null=True, default=0)
+    final_rejection = models.IntegerField(blank=True, null=True, default=0)
+    Authentication_id = models.CharField(max_length=20, null=True, blank=True)
+    Uploaded_Date = models.DateTimeField(auto_now_add=True, null=True)
+    Updated_Date = models.DateTimeField(auto_now=True, null=True)
+    add_material = models.IntegerField(blank=True, null=True, default=0)
+    qc_approval= models.IntegerField(blank=True, null=True, default=0)
+    qc_rejection= models.IntegerField(blank=True,null=True, default=0)
+
+class UserCompanyData(models.Model):
+    Company_Id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=15, null=True, blank=True)
+    CompanyName_E = models.CharField(max_length=100, null=True, blank=True)
+    CompanyName_H = models.CharField(max_length=100, null=True, blank=True)
+    Company_Contact_No = models.CharField(max_length=15, null=True, blank=True)
+    Company_Fax = models.CharField(max_length=20, null=True, blank=True)
+    Company_Pan_No = models.CharField(max_length=15, null=True, blank=True)
+    Company_Gumastha_No = models.CharField(max_length=25, null=True, blank=True)
+    Company_Gst_No = models.CharField(max_length=25, null=True, blank=True)
+    Registration_Date = models.DateField(null=True, blank=True)
+    Company_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Company_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Company_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Company_dist = models.CharField(max_length=30, null=True, blank=True)
+    Company_state = models.CharField(max_length=30, null=True, blank=True)
+    Company_t_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Company_t_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Company_t_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Company_t_dist = models.CharField(max_length=30, null=True, blank=True)
+    Company_t_state = models.CharField(max_length=30, null=True, blank=True)
+
+
+class UserCompanyDataMain(models.Model):
+    Company_Id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=15, null=True, blank=True)
+    CompanyName_E = models.CharField(max_length=100, null=True, blank=True)
+    CompanyName_H = models.CharField(max_length=100, null=True, blank=True)
+    Company_Contact_No = models.CharField(max_length=15, null=True, blank=True)
+    Company_Fax = models.CharField(max_length=20, null=True, blank=True)
+    Company_Pan_No = models.CharField(max_length=15, null=True, blank=True)
+    Company_Gumastha_No = models.CharField(max_length=25, null=True, blank=True)
+    Company_Gst_No = models.CharField(max_length=25, null=True, blank=True)
+    Registration_Date = models.DateField(null=True, blank=True)
+    Company_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Company_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Company_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Company_dist = models.CharField(max_length=30, null=True, blank=True)
+    Company_state = models.CharField(max_length=30, null=True, blank=True)
+    Company_city = models.CharField(max_length=50, null=True, blank=True)
+    Company_t_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Company_t_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Company_t_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Company_t_dist = models.CharField(max_length=30, null=True, blank=True)
+    Company_t_state = models.CharField(max_length=30, null=True, blank=True)
+    Company_t_city = models.CharField(max_length=50, null=True, blank=True)
+
+
+class AuthorisedPerson(models.Model):
+    AuthorisedPerson_id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_P_Name_E = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_P_Name_H = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_P_DOB = models.DateField(null=True, blank=True)
+    Authorised_P_Number = models.CharField(max_length=15, null=True, blank=True)
+    Authorised_P_Email = models.CharField(max_length=15, null=True, blank=True)
+    Authorised_P_Aadhar_No = models.CharField(max_length=15, null=True, blank=True)
+    Authorised_P_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_P_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Authorised_P_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Authorised_P_state = models.CharField(max_length=50, null=True, blank=True)
+    Authorised_P_District = models.CharField(max_length=50, null=True, blank=True)
+    Authorised_P_City = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_Name_E = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_Name_H = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_DOB = models.DateField(null=True, blank=True)
+    Director_P_Number = models.CharField(max_length=15, null=True, blank=True)
+    Director_P_Email = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_Aadhar_No = models.CharField(max_length=15, null=True, blank=True)
+    Director_P_add_1 = models.CharField(max_length=100, null=True, blank=True)
+    Director_P_add_2 = models.CharField(max_length=100, null=True, blank=True)
+    Director_P_pin_code = models.IntegerField(blank=True, null=True, default=0)
+    Director_P_state = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_District = models.CharField(max_length=50, null=True, blank=True)
+    Director_P_City = models.CharField(max_length=50, null=True, blank=True)
+    Status = models.IntegerField(blank=True, default=0)
+
+
+class BankDetails(models.Model):
+    Bank_Id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=15, null=True, blank=True)
+    Bank_name = models.CharField(max_length=100, null=True, blank=True)
+    Account_Holder_Name = models.CharField(max_length=100, null=True, blank=True)
+    Account_Number = models.CharField(max_length=25, null=True, blank=True)
+    IFSC = models.CharField(max_length=15, null=True, blank=True)
+    Status = models.IntegerField(blank=True, default=0)
+
+
+class PaymentDetails(models.Model):
+    payment_Id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=15, null=True, blank=True)
+    amount = models.IntegerField(null=True, blank=True)
+    Payment_mode = models.CharField(max_length=15, null=True, blank=True)
+    Transaction_id = models.CharField(max_length=15, null=True, blank=True)
+    Status = models.IntegerField(blank=True, default=0)
+
+
+class Role_Master(models.Model):
+    Role_Id = models.AutoField(primary_key=True)
+    Role_Name = models.CharField(max_length=100, null=True, blank=True)
+    Role_Description = models.CharField(max_length=200, null=True, blank=True)
+    Role_Priority = models.CharField(max_length=15, null=True, blank=True)
+    Is_Admin = models.IntegerField(null=True, blank=True)
+    Is_Active = models.IntegerField(null=True, blank=True)
+    Created_At = models.DateTimeField(auto_now_add=True, null=True)
+    Updated_At = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.Role_Name
+
+
+class Officer(models.Model):
+    employ_id = models.AutoField(primary_key=True)
+    employ_login_id = models.CharField(max_length=100, null=True, blank=True)
+    employ_name = models.CharField(max_length=100, null=True, blank=True)
+    designation = models.CharField(max_length=100, null=True, blank=True)
+    role = models.ForeignKey(Role_Master, on_delete=models.CASCADE, null=True, blank=True)
+    image = models.FileField(upload_to='officer/image', null=True, blank=True)
+    otp = models.IntegerField(null=True, blank=True)
+    mobile = models.CharField(max_length=15, null=True, blank=True)
+
+
+class VendorDispatchInfo(models.Model):
+    po_id = models.IntegerField(blank=True)
+    item_quantity = models.IntegerField(blank=True)
+    inspecting_officer_id = models.CharField(max_length=10, null=True, blank=True)
+    lab_name = models.CharField(max_length=10, null=True, blank=True)
+    test_status = models.IntegerField(blank=True, default=0)
+
+    def _str_(self):
+        return self.VendorDispatchInfo_id
+
+
+class InspectingOfficerInfo(models.Model):
+    officer_name = models.CharField(max_length=100, null=True, blank=True)
+    contact_no = models.CharField(max_length=100, null=True, blank=True)
+    officer_email = models.CharField(max_length=100, null=True, blank=True)
+    officer_employ_id = models.CharField(max_length=100, null=True, blank=True)
+
+
+
+# class VendorDispatchInfo(models.Model):
+#     po_id = models.IntegerField(blank=True)
+#     item_quantity = models.IntegerField(blank=True)
+#     inspecting_officer_id = models.CharField(max_length=10, null=True, blank=True)
+#     lab_name = models.CharField(max_length=10, null=True, blank=True)
+#     test_status = models.IntegerField(blank=True, default=0)
+
+#     def _str_(self):
+#         return self.VendorDispatchInfo_id
+
+
+class VendorDispatchItemInfo(models.Model):
+    dispatch_d = models.IntegerField(blank=True)
+    serial_number = models.CharField(max_length=30, null=True, blank=True)
+
+    def _str_(self):
+        return self.serial_number
+
+
+class TestReport(models.Model):
+    VendorDispatchInfo = models.IntegerField(blank=True)
+    item_serial_no = models.IntegerField(blank=True)
+    item_name = models.CharField(max_length=30, null=True, blank=True)
+    test_applied = models.CharField(max_length=30, null=True, blank=True)
+    test_result = models.IntegerField(blank=True)
+    status = models.IntegerField(blank=True, default=0)
+
+
+class LocalStore(models.Model):
+    store_name = models.CharField(max_length=30, null=True, blank=True)
+    add_store_address = models.CharField(max_length=30, null=True, blank=True)
+    store_latitude = models.CharField(max_length=30, null=True, blank=True)
+    store_longitude = models.CharField(max_length=30, null=True, blank=True)
+    store_officer_id = models.CharField(max_length=30, null=True, blank=True)
+    store_officer_contact_no = models.CharField(max_length=30, null=True, blank=True)
+
+    def _str_(self):
+        return self.add_store_name
+
+
+class LocalStoreInventory(models.Model):
+    store_name = models.CharField(max_length=30, null=True, blank=True)
+    po_id = models.IntegerField(blank=True)
+    Di_Id = models.IntegerField(blank=True)
+    quantity = models.IntegerField(blank=True)
+
+    def _str_(self):
+        return self.store_name
+
+class LabInfo(models.Model):
+    select_product = models.CharField(max_length=30, null=True, blank=True)
+    name_of_material_for_testing = models.CharField(max_length=30, null=True, blank=True)
+    is_as_per_tender = models.CharField(max_length=30, null=True, blank=True)
+    select_testing = models.CharField(max_length=30, null=True, blank=True)
+
+
+
+class PO_Type_Table_Master(models.Model):
+    PO_type_Id = models.AutoField(primary_key=True)
+    PO_type_Name = models.CharField(max_length=100, null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.IntegerField(blank=True, null=True, default=0)
+    From_Date = models.IntegerField(blank=True, null=True, default=0)
+    Till_Date = models.IntegerField(blank=True, null=True, default=0)
+
+    def __str__(self):
+        return self.PO_type_Name
+
+from tinymce import models as tinymce_models
+
+class PO_Clause_Master(models.Model):
+    PO_Clause_Id = models.AutoField(primary_key=True)
+    PO_Clause_Name = models.CharField(max_length=200, null=True, blank=True)
+    PO_Clause_Description = tinymce_models.HTMLField(null=True, blank=True)
+    # PO_Clause_Description = models.TextField(default="", null=True, blank=True)
+    Created_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_By = models.CharField(max_length=20, null=True, blank=True)
+    Updated_Date = models.DateField(null=True, blank=True)
+    Status = models.IntegerField(blank=True, null=True, default=0)
+    Is_Deleted = models.IntegerField(blank=True, null=True, default=0)
+    From_Date = models.IntegerField(blank=True, null=True, default=0)
+    Till_Date = models.IntegerField(blank=True, null=True, default=0)
+
+    def __str__(self):
+        return self.PO_Clause_Name
+
+
+class PO_Type_Clause(models.Model):
+    PO_type_Id = models.ForeignKey(PO_Type_Table_Master, on_delete=models.CASCADE, null=True, blank=True)
+    PO_Clause_Id = models.ForeignKey(PO_Clause_Master, on_delete=models.CASCADE, null=True, blank=True)

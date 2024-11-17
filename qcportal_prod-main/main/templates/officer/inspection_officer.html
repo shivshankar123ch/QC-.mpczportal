@@ -1,0 +1,202 @@
+{% extends 'main/inspecting_officer_base.html' %} {% load static %} {% block body %}
+<div class="ed-infocontant">
+   <div class="ed-information mb-4">
+      <div class="card ed-card-block">
+         <div class="card-header">
+            <h2>
+               Inspection Officer Details
+            </h2>
+         </div>
+         <div class="card-body">
+            <div class="ed-tableinfo-block ed-orderinfo-block">  
+               <div class="table-responsive">
+                  <table class="table table-striped ed-table-block">
+                     <thead>
+                        <tr>
+                           <th class="wc1">Sr. No.</th>
+                           <th class="">WO No.</th>
+                           <th>Subject</th>
+                           <th>Company</th>
+                           <th>Offer No</th>
+                           <th>Offer Date</th>
+                           <th>Upload Inspection Report</th>
+                           <th>View Inspection</th>
+                           <th>Status</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for item1 in pdi_data %}
+                        <tr>
+                           <td>{{forloop.counter}}</td>
+                           <td>{{item1.wo.Contract_Number}} </td>
+                           <td>{{item1.wo.Header.Contract_Description}}</td>
+                           <td>{{item1.wo.supplier.CompanyName_E}}</td>
+                           <td>{{item1.offer_no}}</td>
+                           <td>{{item1.offer_date}}</td>
+
+
+
+
+
+                           <td>
+                              <div class="poaction-info">
+
+                                 {% if item1.pdi_report %}
+                                 <a href="{{item1.pdi_report.url}}">
+                                    <button class="btn ed-submit btn-info">
+                                       <span class="ed-submit-text">
+                                          view report
+                                       </span>
+                                    </button>
+                                 </a>
+                                 {% elif item1.pdi_report_url %}
+                                 <a class="nav-link " href="{{item1.pdi_report_url}}" target=”_blank”>
+                                    <span class="btn ed-submit btn-info "> View</span></a>
+
+                                 {% elif item1.Material.PDI_Complete == 1 %}
+                                 <form action="/pdi/{{item1.offer_no}}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="file" accept="application/pdf" name="pdi_report" required>
+                                    <button class="btn ed-submit btn-danger" type="submit">
+                                       <span class="ed-submit-text">
+                                          Submit
+                                       </span>
+                                    </button>
+                                 </form>
+                                 {%else%}
+                                 <span> pdi not Completed</span>
+                                 {% endif %}
+                              </div>
+                           </td>
+
+
+
+
+
+                           <td>
+                              {% if item1.Material.PDI_Complete == 1 %}
+                              <a class="btn ed-submit btn-info" target=""
+                                 href="/officer_view_inspection/{{item1.offer_no}}" id="pdi"> View</a>
+                              </a>
+                              {% else %}
+                              PDI not Completed
+                              {% endif %}
+                           </td>
+
+                           <td>
+                              {% if item1.pdi_report %}
+                              <div class="poaction-info">
+                                 <a target="_blank">
+                                    <button class="btn ed-submit btn-success btn-success">
+                                       <span class="ed-submit-text">
+                                          Approved
+                                       </span>
+                                    </button>
+                              </div>
+                              {% elif item1.pdi_report_url %}
+                              <div class="poaction-info">
+                                 <a target="_blank">
+                                    <button class="btn ed-submit btn-success btn-success">
+                                       <span class="ed-submit-text">
+                                          Approved
+                                       </span>
+                                    </button>
+                              </div>
+                              {% else %}
+                              <div class="poaction-info">
+                                 <a target="_blank">
+                                    <button class="btn ed-submit btn-warning">
+                                       <span class="ed-submit-text">
+                                          Pending
+                                       </span>
+                                    </button>
+                              </div>
+                              {% endif %}
+                           </td>
+
+
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<style>
+   .avatar-upload {
+      position: relative;
+      max-width: 100%;
+      margin: 50px auto;
+   }
+
+   .avatar-upload .avatar-edit {
+      position: absolute;
+      right: 12px;
+      z-index: 1;
+      top: 10px;
+   }
+
+   .avatar-upload .avatar-edit input {
+      display: none;
+   }
+
+   .avatar-upload .avatar-edit input+label {
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 0;
+      border-radius: 100%;
+      background: #FFFFFF;
+      border: 1px solid transparent;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      font-weight: normal;
+      transition: all 0.2s ease-in-out;
+   }
+
+   .avatar-upload .avatar-edit input+label:hover {
+      background: #f1f1f1;
+      border-color: #d6d6d6;
+   }
+
+   .avatar-upload .avatar-edit input+label:after {
+      content: "\f040";
+      font-family: 'FontAwesome';
+      color: #757575;
+      position: absolute;
+      top: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      margin: auto;
+   }
+
+   .avatar-upload .avatar-preview {
+      width: 340px;
+      height: 340px;
+      position: relative;
+      border-radius: 4px;
+      border: 6px solid #F8F8F8;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+   }
+
+   .avatar-upload .avatar-preview>div {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+   }
+</style>
+</form>
+<script>
+   function alert_msg() {
+      alert("PDI Not Completed");
+   }
+</script>
+{% endblock body %}

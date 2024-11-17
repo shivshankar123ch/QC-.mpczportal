@@ -1,0 +1,167 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+<script>
+  console.log("scripttt")
+  window.onload = function () {
+      var tbcheck = document.getElementById("table").rows.length;
+      console.log("tableee", tbcheck)
+      if (tbcheck < 2) {
+          console.log("comee if")
+          var d = document.getElementById("nextStep3");
+          console.log("ddddddd", d)
+          d.style.setProperty("display", "none", "important");
+      } else {
+          var dd = document.getElementById("nextStep3");
+          dd.style.display == "";
+      }
+}
+</script>
+<div class="ed-information mb-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Work Order Copy To Details
+          </h2>
+        </div>
+        <!-- --------------------- Step 3 -------------------------------- -->
+        
+        <div class="card-body" id="formStep3">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped ed-table-block" id="table">
+                <thead>
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Copy To </th>
+                    <th>Mail Id </th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in Copy_To %}
+                  <tr>
+                    <td>
+                      {{forloop.counter}}
+                    </td>
+
+                    <td>
+                      {{data.Copy_To}}
+                    </td>
+                    <td>
+                      {{data.Copy_To_URL}}
+                    </td>
+                    <td>
+                      <div class="poaction-info">
+                        <a href="/fqp/delete_copy_to/{{wo.id}}/{{data.id}}" class="btn ed-submit btn-danger">
+                          <span class="ed-submit-text">
+                            Delete
+                          </span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--</div>-->
+          <form action="/fqp/procurement_generate_wo11/{{wo.id}}/{message_rendered}" onsubmit="return validateForm()" name="myForm"
+            method="POST">
+            {% csrf_token %}
+            <div class="ed-form-block">
+              <div class="ed-form-title">
+                <h6>
+                  <span class="ed-text">
+                    Work Order Copy TO:
+                  </span>
+                </h6>
+              </div>
+              <div class="ed-form-body material-wrapper">
+                <div class="material-elements">
+                  <div class="form-group">
+                    <label class="ed-form-label">
+                      Copy To
+                    </label>
+                    <input name="Copy_To" type="text" class="form-control ed-textbox"onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()"required autocomplete="off" />
+                    <span id="copyyy" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="ed-form-label">
+                      Email Id
+                    </label>
+                    <input name="Copy_To_URL" type="text" id="email1" class="form-control ed-textbox" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" autocomplete="off" />
+                    <span id="urll" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-action text-right">
+                      <button type="submit" id="btnsave" class="btn ed-submit btn-info">
+                        <span class="ed-submit-text">
+                          Add More
+                        </span>
+                      </button>
+                      {% if message_rendered %}
+                      <a href="/fqp/wo_view/{{wo.id}}" class="btn ed-submit ed-submitNext" onclick="msg()" id="nextStep3">
+                        <span class="ed-submit-text">
+                          PreView
+                        </span>
+                      </a>
+                      {% else %}
+                      <a href="/fqp/wo_view_gbpa/{{wo.id}}" class="btn ed-submit ed-submitNext" onclick="msg()" id="nextStep3">
+                        <span class="ed-submit-text">
+                          PreView
+                        </span>
+                      </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- --------------------- Step 4 -------------------------------- -->
+      <!-- --------------------- Step 4 -------------------------------- -->
+    </div>
+  </div>
+</div>
+<script>
+  function validateForm(){Copy_To_URL
+      let copy1 = document.forms["myForm"]["Copy_To"].value;
+      // let emailData = document.forms["myForm"]["Copy_To_URL"].value;
+      let emailData = document.getElementById('email1').value;
+      let emailLowerCase = emailData.toLowerCase();
+      let emailRgex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      let emailResult = emailRgex.test(emailLowerCase);
+      
+      if (copy1 == "") {
+           document.getElementById('copyyy').innerHTML = "Please fill the required detail"
+            return false;
+      } else {
+            document.getElementById('copyyy').innerHTML = "";
+      }
+      if (emailData != "") {
+        if (emailResult == false) {
+            document.getElementById('emailAddress').innerHTML = " Please fill the valid email Id";
+            return false;
+        } else {
+            document.getElementById('emailAddress').innerHTML = "";
+        }
+    }
+  }
+</script>
+<script>
+  function msg(){
+    confirm("Preview your Work Order")
+  }
+</script>
+{% endblock body %}

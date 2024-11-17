@@ -1,0 +1,272 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+{% block basic %}
+{% endblock basic %}
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Create FQP Intimation
+        </h2>
+    </div>
+    <div class="card-body">
+
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+            <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <th>Work Order No.</th>
+                        <th>Work Order Subject.</th>
+                        <th>TKC Name</th>
+                        <th>View Work-Order</th>
+                        <th>View FQP Intimations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for wd in wo_data %}
+
+                        <tr>
+                            <td>{{wd.Contract_Number}}</td>
+                            <td>{{wd.Header.Contract_Description}}</td>
+                            <td>{{wd.supplier.CompanyName_E}}</td>
+                            <td>
+                                {% if wd.Wo_Digital %}
+                                <a class="btn ed-submits btn-success" href="{{wd.Wo_Digital.url}}">View Work Order</a>
+
+                                {% else %}
+                                <a class="btn ed-submits btn-primary" href="#">Work Order Not Uploaded</a>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <a class="btn ed-submits btn-success"
+                                    href="/tkc/tkc_fqpintimation_list/?woid={{wd.id}}">View FQP Intimation</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="">
+            <h5 class="">
+                FQP Intimation
+            </h5>
+            <div class="forms-informations">
+                <div class="ed-form-block p-0 border-0">
+
+                    <div class="ed-form-body">
+                        <form action="/tkc/tkc_fqpintimation_create/" method="POST" enctype="multipart/form-data"
+                            onsubmit="return validateFunction()">
+                            {% csrf_token %}
+                            {% for wd in wo_data %}
+                            <input type="text" name="woid" value="{{wd.id}}" hidden class="form-control ed-textbox"
+                                required>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Brief Description Of Work
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="brief_description_of_work" id=""
+                                    class="form-control ed-textbox" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Region
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="region_id" id="region_id" class="form-control ed-textbox"
+                                    onchange="getcircle()" required>
+                                    <option value="" selected disabled style="width:250px;">Please Select Region
+                                    </option>
+                                    {% for rd in rm_data %}
+                                    <option value="{{rd.id}}" style="width:250px;">{{rd.Region_Name_E}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Circle
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="circle_id" id="circle_id" class="form-control ed-textbox" required>
+                                    <option selected disabled style="width:250px;">Please Select Circle</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Divisions
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="division_id" id="" class="form-control ed-textbox" required>
+                                    <option value="" style="width:250px;">Please Select Division</option>
+                                    {% for dd in dm_data %}
+                                    <option value="{{dd.id}}" style="width:250px;">{{dd.Division_Name_E}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Execution Detail
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="work_execution_detail" id="" class="form-control ed-textbox"
+                                    value="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Execution/Milestone PDF
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="file" name="work_execution_milestone_pdf" placeholder="" value=""
+                                    accept="application/pdf" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Layout/Sld Of Work Execution/Completion
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="file" name="layout_sld_of_work_execution" placeholder="" value=""
+                                    accept="application/pdf" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Tentative Date Of Execution/Completion
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="date" id="" name="tentative_date_of_execution" placeholder="dd/mm/yy"
+                                    class="form-control ed-textbox" required>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Remark
+                                    <!-- <span class="text-danger">* </span> -->
+                                </label>
+                                <input type="textarea" name="intimation_remark" placeholder=""
+                                    class="form-control ed-textbox" value="">
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button type="submit" class="btn ed-submits ed-formsubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getcircle() {
+        var region_id = document.getElementById("region_id").value;
+        //alert(region_id);
+       document.getElementById('circle_id').innerHTML = '';
+        mydata = { "region_id": region_id }
+
+        $.ajax({
+            type: 'get',
+            url: "{% url 'tkc_circle_list' %}",
+            data: mydata,
+            success: function (data) {
+               
+                Object.entries(data).forEach(([_, value]) => {
+                    value.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.id;
+                        option.text = element.Circle_Name_E;
+                        var region = document.getElementById('circle_id');
+                        region.add(option);
+
+                    })
+                    })
+                }
+    })
+}
+</script>
+
+<script>
+    function support_data_file() {
+
+        let supporting_name_id = document.getElementById('supporting_name_id');
+        //  console.log("supporting_name_id---------",supporting_name_id.value)
+        let supporting_document_id = document.getElementById('supporting_document_id');
+        //  console.log(supporting_name_id.value)
+        if (supporting_name_id.value == "") {
+            supporting_document_id.setAttribute("hidden", true);
+            supporting_document_id.removeAttribute("required");
+
+        } else {
+            //  console.log("else")
+            supporting_document_id.removeAttribute("hidden");
+            supporting_document_id.setAttribute("required", true);
+
+        }
+    }
+
+    function total_amt() {
+        let amt_wit_tax = document.getElementById('amt_wit_tax');
+        let inv_amt_cgst = document.getElementById('inv_amt_cgst');
+        let inv_amt_sgst = document.getElementById('inv_amt_sgst');
+        let total_inv_amt = document.getElementById('total_inv_amt');
+        let pass_amt = document.getElementById('pass_amt').value;
+        let inv_amt = document.getElementById('inv_amt').value;
+        if (inv_amt == "None" || NaN) {
+            inv_amt = 0;
+        }
+        let x = Number(amt_wit_tax.value) + Number(inv_amt_cgst.value) + Number(inv_amt_sgst.value);
+        total_inv_amt.value = x;
+        let y = Number(pass_amt) - Number(inv_amt);
+        // console.log(y,total_inv_amt.value)
+        if (y < total_inv_amt.value) {
+            alert("Total Invoice Amount should not be grater then the diffrence of PO value and invoice pass amount value.");
+            return false
+        }
+        // console.log(x,amt_wit_tax.value,inv_amt_cgst.value,inv_amt_sgst.value)
+
+
+    }
+
+    function validateFunction() {
+        let pass_amt = document.getElementById('pass_amt').value;
+        let inv_amt = document.getElementById('inv_amt').value;
+
+        if (inv_amt == "None" || NaN) {
+            inv_amt = 0;
+        }
+
+        let total_inv_amt = document.getElementById('total_inv_amt').value;
+        let y = Number(pass_amt) - Number(inv_amt)
+        if (y < total_inv_amt) {
+            alert("Total Invoice Amount should not be grater then the diffrence of PO value and invoice pass amount value.");
+            return false
+        } else {
+            return true;
+        }
+    }
+</script>
+
+{% endblock body %}

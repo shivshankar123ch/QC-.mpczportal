@@ -1,0 +1,864 @@
+{% extends 'officer/tmqm_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_recv">
+                  <span class="sidenav-mini-icon"> SR </span>
+                  <span class="sidenav-normal">Sample Received</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_return">
+                  <span class="sidenav-mini-icon"> SD/R </span>
+                  <span class="sidenav-normal">Sample Return</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_job_order">
+                  <span class="sidenav-mini-icon"> JO </span>
+                  <span class="sidenav-normal">Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="/Report_success">
+                  <span class="sidenav-mini-icon"> TR </span>
+                  <span class="sidenav-normal">Test Report</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+{% block body %}
+  <h6 class="text-capitalize">Success Report List</h6>
+  {% if output == "Fail" %}
+  <h6 class="text-capitalize" style="background-color: rgb(236, 122, 122);">The output of this report is : {{ output }}</h6>
+  {% else %}
+  <h6 class="text-capitalize" style="background-color: rgb(131, 247, 131);">The output of this report is : {{ output }}</h6>
+  {% endif %}
+
+  <!-- <table class="table table-striped"> -->
+    <div class="table-responsive">
+    <table class="table table-striped ">
+    {% for nrl in nabl_report_lst %}
+    <tr>
+        <td><b>PARAMETERS</b></td>
+        <td><b>OUTPUT</b></td>
+    </tr>
+    <tr>
+        <td>reportno</td>
+        <td>{{ nrl.reportno }}</td>
+    </tr>
+    <tr>
+        <td>ulrno</td>
+        <td>{{ nrl.ulrno }}</td>
+    </tr>
+    <tr>
+        <td>manufacturer_wopo</td>
+        <td>{{ nrl.manufacturer_wopo }}</td>
+    </tr>
+    <tr>
+        <td>manufacturer</td>
+        <td>{{ nrl.manufacturer }}</td>
+    </tr>
+    <tr>
+        <td>wo_po</td>
+        <td>{{ nrl.wo_po }}</td>
+    </tr>
+    <tr>
+        <td>srno</td>
+        <td>{{ nrl.srno }}</td>
+    </tr>
+    <tr>
+        <td>lot</td>
+        <td>{{ nrl.lot }}</td>
+    </tr>
+    <tr>
+        <td>mainid</td>
+        <td>{{ nrl.mainid }}</td>
+    </tr>
+    <tr>
+        <td>maindetid</td>
+        <td>{{ nrl.maindetid }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_tfcondition</td>
+        <td>{{ nrl.bulkmain_tfcondition }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_phase</td>
+        <td>{{ nrl.bulkmain_phase }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_windingtype</td>
+        <td>{{ nrl.bulkmain_windingtype }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_vector</td>
+        <td>{{ nrl.bulkmain_vector }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_win_descg1</td>
+        <td>{{ nrl.bulkmain_win_descg1 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_win_descg2</td>
+        <td>{{ nrl.bulkmain_win_descg2 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_cooling</td>
+        <td>{{ nrl.bulkmain_cooling }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_mva</td>
+        <td>{{ nrl.bulkmain_prim_mva }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_mva</td>
+        <td>{{ nrl.bulkmain_sec_mva }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_ratedvol</td>
+        <td>{{ nrl.bulkmain_prim_ratedvol }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_ratedvol</td>
+        <td>{{ nrl.bulkmain_sec_ratedvol }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_ratedcur</td>
+        <td>{{ nrl.bulkmain_prim_ratedcur }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_ratedcur</td>
+        <td>{{ nrl.bulkmain_sec_ratedcur }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_conn</td>
+        <td>{{ nrl.bulkmain_prim_conn }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_conn</td>
+        <td>{{ nrl.bulkmain_sec_conn }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_not1</td>
+        <td>{{ nrl.bulkmain_prim_not1 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_not2</td>
+        <td>{{ nrl.bulkmain_prim_not2 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_not3</td>
+        <td>{{ nrl.bulkmain_prim_not3 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_prim_not4</td>
+        <td>{{ nrl.bulkmain_prim_not4 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_not1</td>
+        <td>{{ nrl.bulkmain_sec_not1 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_not2</td>
+        <td>{{ nrl.bulkmain_sec_not2 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_not3</td>
+        <td>{{ nrl.bulkmain_sec_not3 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_sec_not4</td>
+        <td>{{ nrl.bulkmain_sec_not4 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_temp_oil</td>
+        <td>{{ nrl.bulkmain_temp_oil }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_temp_wind</td>
+        <td>{{ nrl.bulkmain_temp_wind }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_windingmaterial</td>
+        <td>{{ nrl.bulkmain_windingmaterial }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_metalval</td>
+        <td>{{ nrl.bulkmain_metalval }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_refstd</td>
+        <td>{{ nrl.bulkmain_refstd }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_jobrating</td>
+        <td>{{ nrl.bulkmain_jobrating }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_reftemp</td>
+        <td>{{ nrl.bulkmain_reftemp }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_freq</td>
+        <td>{{ nrl.bulkmain_freq }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_oilleakage</td>
+        <td>{{ nrl.bulkmain_oilleakage }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_oilquantity</td>
+        <td>{{ nrl.bulkmain_oilquantity }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_total_loss</td>
+        <td>{{ nrl.bulkmain_total_loss }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_tap_changer</td>
+        <td>{{ nrl.bulkmain_tap_changer }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_tapon</td>
+        <td>{{ nrl.bulkmain_tapon }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_variation</td>
+        <td>{{ nrl.bulkmain_variation }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_volts1</td>
+        <td>{{ nrl.bulkmain_volts1 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_volts2</td>
+        <td>{{ nrl.bulkmain_volts2 }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_persteps</td>
+        <td>{{ nrl.bulkmain_persteps }}</td>
+    </tr>
+    <tr>
+        <td>bulkmain_steps</td>
+        <td>{{ nrl.bulkmain_steps }}</td>
+    </tr>
+    <tr>
+        <td>torder_scheduleoftest</td>
+        <td>{{ nrl.torder_scheduleoftest }}</td>
+    </tr>
+    <tr>
+        <td>torder_dateofreceipt</td>
+        <td>{{ nrl.torder_dateofreceipt }}</td>
+    </tr>
+    <tr>
+        <td>torder_dateoftestingfrom</td>
+        <td>{{ nrl.torder_dateoftestingfrom }}</td>
+    </tr>
+    <tr>
+        <td>torder_dateoftestingto</td>
+        <td>{{ nrl.torder_dateoftestingto }}</td>
+    </tr>
+    <tr>
+        <td>torder_dateofissue</td>
+        <td>{{ nrl.torder_dateofissue }}</td>
+    </tr>
+    <tr>
+        <td>torder_samplecode</td>
+        <td>{{ nrl.torder_samplecode }}</td>
+    </tr>
+    <tr>
+        <td>torder_customernameaddress</td>
+        <td>{{ nrl.torder_customernameaddress }}</td>
+    </tr>
+    <tr>
+        <td >torder_note1</td>
+        <td>{{ nrl.torder_note1 }}</td>
+    </tr>
+    <tr>
+        <td>torder_note2</td>
+        <td>{{ nrl.torder_note2 }}</td>
+    </tr>
+    <tr>
+        <td>torder_note3</td>
+        <td>{{ nrl.torder_note3 }}</td>
+    </tr>
+    <tr>
+        <td>torder_note4</td>
+        <td>{{ nrl.torder_note4 }}</td>
+    </tr>
+    <tr>
+        <td>tfooter_1testedbylabel</td>
+        <td>{{ nrl.tfooter_1testedbylabel }}</td>
+    </tr>
+    <tr>
+        <td>torder_1testedbyname</td>
+        <td>{{ nrl.torder_1testedbyname }}</td>
+    </tr>
+    <tr>
+        <td>torder_1testedbydesign</td>
+        <td>{{ nrl.torder_1testedbydesign }}</td>
+    </tr>
+    <tr>
+        <td>tfooter_2checkedbylabel</td>
+        <td>{{ nrl.tfooter_2checkedbylabel }}</td>
+    </tr>
+    <tr>
+        <td>torder_2checkedbyname</td>
+        <td>{{ nrl.torder_2checkedbyname }}</td>
+    </tr>
+    <tr>
+        <td>torder_2checkedbydesign</td>
+        <td>{{ nrl.torder_2checkedbydesign }}</td>
+    </tr>
+    <tr>
+        <td>tfooter_3approvedbylabel</td>
+        <td>{{ nrl.tfooter_3approvedbylabel }}</td>
+    </tr>
+    <tr>
+        <td>torder_3approvedbyname</td>
+        <td>{{ nrl.torder_3approvedbyname }}</td>
+    </tr>
+    <tr>
+        <td>torder_3approvedbydesign</td>
+        <td>{{ nrl.torder_3approvedbydesign }}</td>
+    </tr>
+    <tr>
+        <td>tfooter_4hodlabel</td>
+        <td>{{ nrl.tfooter_4hodlabel }}</td>
+    </tr>
+    <tr>
+        <td>torder_4hodname</td>
+        <td>{{ nrl.torder_4hodname }}</td>
+    </tr>
+    <tr>
+        <td>torder_4hoddesign</td>
+        <td>{{ nrl.torder_4hoddesign }}</td>
+    </tr>
+    <tr>
+        <td>tfooter_witnessbylabel</td>
+        <td>{{ nrl.tfooter_witnessbylabel }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbyname1</td>
+        <td>{{ nrl.torder_witnessbyname1 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbydesign1</td>
+        <td>{{ nrl.torder_witnessbydesign1 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbyname2</td>
+        <td>{{ nrl.torder_witnessbyname2 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbydesign2</td>
+        <td>{{ nrl.torder_witnessbydesign2 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbyname3</td>
+        <td>{{ nrl.torder_witnessbyname3 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbydesign3</td>
+        <td>{{ nrl.torder_witnessbydesign3 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbyname4</td>
+        <td>{{ nrl.torder_witnessbyname4 }}</td>
+    </tr>
+    <tr>
+        <td>torder_witnessbydesign4</td>
+        <td>{{ nrl.torder_witnessbydesign4 }}</td>
+    </tr>
+    <tr>
+        <td>normaltapno</td>
+        <td>{{ nrl.normaltapno }}</td>
+    </tr>
+    <tr>
+        <td>totaltapqty</td>
+        <td>{{ nrl.totaltapqty }}</td>
+    </tr>
+    <tr>
+        <td>wr_lot</td>
+        <td>{{ nrl.wr_lot }}</td>
+    </tr>
+    <tr>
+        <td>wr_testdate</td>
+        <td>{{ nrl.wr_testdate }}</td>
+    </tr>
+    <tr>
+        <td>wr_bulkmain_mwrwindphconn</td>
+        <td>{{ nrl.wr_bulkmain_mwrwindphconn }}</td>
+    </tr>
+    <tr>
+        <td>wr_bulkmain_mwrwindtol</td>
+        <td>{{ nrl.wr_bulkmain_mwrwindtol }}</td>
+    </tr>
+    <tr>
+        <td>wr_bulkmain_hvunit</td>
+        <td>{{ nrl.wr_bulkmain_hvunit }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputhvu</td>
+        <td>{{ nrl.wr_mwrinputhvu }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputhvv</td>
+        <td>{{ nrl.wr_mwrinputhvv }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputhvw</td>
+        <td>{{ nrl.wr_mwrinputhvw }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshvtemp</td>
+        <td>{{ nrl.wr_normaltap_reshvtemp }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshvu</td>
+        <td>{{ nrl.wr_normaltap_reshvu }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshvv</td>
+        <td>{{ nrl.wr_normaltap_reshvv }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshvw</td>
+        <td>{{ nrl.wr_normaltap_reshvw }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshvavg</td>
+        <td>{{ nrl.wr_normaltap_reshvavg }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reshv75</td>
+        <td>{{ nrl.wr_normaltap_reshv75 }}</td>
+    </tr>
+    <tr>
+        <td>wr_bulkmain_lvunit</td>
+        <td>{{ nrl.wr_bulkmain_lvunit }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputlvu</td>
+        <td>{{ nrl.wr_mwrinputlvu }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputlvv</td>
+        <td>{{ nrl.wr_mwrinputlvv }}</td>
+    </tr>
+    <tr>
+        <td>wr_mwrinputlvw</td>
+        <td>{{ nrl.wr_mwrinputlvw }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslvtemp</td>
+        <td>{{ nrl.wr_normaltap_reslvtemp }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslvu</td>
+        <td>{{ nrl.wr_normaltap_reslvu }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslvv</td>
+        <td>{{ nrl.wr_normaltap_reslvv }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslvw</td>
+        <td>{{ nrl.wr_normaltap_reslvw }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslvavg</td>
+        <td>{{ nrl.wr_normaltap_reslvavg }}</td>
+    </tr>
+    <tr>
+        <td>wr_normaltap_reslv75</td>
+        <td>{{ nrl.wr_normaltap_reslv75 }}</td>
+    </tr>
+    <tr>
+        <td>wr_result</td>
+        <td>{{ nrl.wr_result }}</td>
+    </tr>
+    <tr>
+        <td>vr_lot</td>
+        <td>{{ nrl.vr_lot }}</td>
+    </tr>
+    <tr>
+        <td>vr_testdate</td>
+        <td>{{ nrl.vr_testdate }}</td>
+    </tr>
+    <tr>
+        <td>vr_mratioinputu</td>
+        <td>{{ nrl.vr_mratioinputu }}</td>
+    </tr>
+    <tr>
+        <td>vr_mratioinputv</td>
+        <td>{{ nrl.vr_mratioinputv }}</td>
+    </tr>
+    <tr>
+        <td>vr_mratioinputw</td>
+        <td>{{ nrl.vr_mratioinputw }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_hvrated</td>
+        <td>{{ nrl.vr_normaltap_hvrated }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_lvrated</td>
+        <td>{{ nrl.vr_normaltap_lvrated }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_calratio</td>
+        <td>{{ nrl.vr_normaltap_calratio }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_ratiou</td>
+        <td>{{ nrl.vr_normaltap_ratiou }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_ratiov</td>
+        <td>{{ nrl.vr_normaltap_ratiov }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_ratiow</td>
+        <td>{{ nrl.vr_normaltap_ratiow }}</td>
+    </tr>
+    <tr>
+        <td>vr_normaltap_acccritdata</td>
+        <td>{{ nrl.vr_normaltap_acccritdata }}</td>
+    </tr>
+    <tr>
+        <td>vr_vectordetected</td>
+        <td>{{ nrl.vr_vectordetected }}</td>
+    </tr>
+    <tr>
+        <td>vr_result</td>
+        <td>{{ nrl.vr_result }}</td>
+    </tr>
+    <tr>
+        <td>ir_lot</td>
+        <td>{{ nrl.ir_lot }}</td>
+    </tr>
+    <tr>
+        <td>ir_testdate</td>
+        <td>{{ nrl.ir_testdate }}</td>
+    </tr>
+    <tr>
+        <td>ir_time</td>
+        <td>{{ nrl.ir_time }}</td>
+    </tr>
+    <tr>
+        <td>ir_temp</td>
+        <td>{{ nrl.ir_temp }}</td>
+    </tr>
+    <tr>
+        <td>ir_reshve</td>
+        <td>{{ nrl.ir_reshve }}</td>
+    </tr>
+    <tr>
+        <td>ir_reslve</td>
+        <td>{{ nrl.ir_reslve }}</td>
+    </tr>
+    <tr>
+        <td>ir_reshvlv</td>
+        <td>{{ nrl.ir_reshvlv }}</td>
+    </tr>
+    <tr>
+        <td>ir_hve_volt</td>
+        <td>{{ nrl.ir_hve_volt }}</td>
+    </tr>
+    <tr>
+        <td>ir_lve_volt</td>
+        <td>{{ nrl.ir_lve_volt }}</td>
+    </tr>
+    <tr>
+        <td>ir_hvlv_volt</td>
+        <td>{{ nrl.ir_hvlv_volt }}</td>
+    </tr>
+    <tr>
+        <td>ir_result</td>
+        <td>{{ nrl.ir_result }}</td>
+    </tr>
+    <tr>
+        <td>nll_lot</td>
+        <td>{{ nrl.nll_lot }}</td>
+    </tr>
+    <tr>
+        <td>nll_testdate</td>
+        <td>{{ nrl.nll_testdate }}</td>
+    </tr>
+    <tr>
+        <td>nll_bulkmain_nllguar</td>
+        <td>{{ nrl.nll_bulkmain_nllguar }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_ptr</td>
+        <td>{{ nrl.nll_normaltap_ptr }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_ctr</td>
+        <td>{{ nrl.nll_normaltap_ctr }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_frq</td>
+        <td>{{ nrl.nll_normaltap_frq }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_vrms</td>
+        <td>{{ nrl.nll_normaltap_vrms }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_vmean</td>
+        <td>{{ nrl.nll_normaltap_vmean }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_i1</td>
+        <td>{{ nrl.nll_normaltap_i1 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_i2</td>
+        <td>{{ nrl.nll_normaltap_i2 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_i3</td>
+        <td>{{ nrl.nll_normaltap_i3 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_iavg</td>
+        <td>{{ nrl.nll_normaltap_iavg }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_w1</td>
+        <td>{{ nrl.nll_normaltap_w1 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_w2</td>
+        <td>{{ nrl.nll_normaltap_w2 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_w3</td>
+        <td>{{ nrl.nll_normaltap_w3 }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_pmeasured</td>
+        <td>{{ nrl.nll_normaltap_pmeasured }}</td>
+    </tr>
+    <tr>
+        <td>nll_normaltap_pcorrected</td>
+        <td>{{ nrl.nll_normaltap_pcorrected }}</td>
+    </tr>
+    <tr>
+        <td>nll_result</td>
+        <td>{{ nrl.nll_result }}</td>
+    </tr>
+    <tr>
+        <td>ll_lot</td>
+        <td>{{ nrl.ll_lot }}</td>
+    </tr>
+    <tr>
+        <td>ll_testdate</td>
+        <td>{{ nrl.ll_testdate }}</td>
+    </tr>
+    <tr>
+        <td>ll_bulkmain_llguar50</td>
+        <td>{{ nrl.ll_bulkmain_llguar50 }}</td>
+    </tr>
+    <tr>
+        <td>ll_bulkmain_llguar100</td>
+        <td>{{ nrl.ll_bulkmain_llguar100 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_ptr</td>
+        <td>{{ nrl.ll_normaltap_ptr }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_ctr</td>
+        <td>{{ nrl.ll_normaltap_ctr }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_temp</td>
+        <td>{{ nrl.ll_normaltap_50per_temp }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_frq</td>
+        <td>{{ nrl.ll_normaltap_50per_frq }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_vmeas</td>
+        <td>{{ nrl.ll_normaltap_50per_vmeas }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_i1</td>
+        <td>{{ nrl.ll_normaltap_50per_i1 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_i2</td>
+        <td>{{ nrl.ll_normaltap_50per_i2 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_i3</td>
+        <td>{{ nrl.ll_normaltap_50per_i3 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_imeas</td>
+        <td>{{ nrl.ll_normaltap_50per_imeas }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_w1</td>
+        <td>{{ nrl.ll_normaltap_50per_w1 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_w2</td>
+        <td>{{ nrl.ll_normaltap_50per_w2 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_w3</td>
+        <td>{{ nrl.ll_normaltap_50per_w3 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_pmeasured</td>
+        <td>{{ nrl.ll_normaltap_50per_pmeasured }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_llat75</td>
+        <td>{{ nrl.ll_normaltap_50per_llat75 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_50per_zat75</td>
+        <td>{{ nrl.ll_normaltap_50per_zat75 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_temp</td>
+        <td>{{ nrl.ll_normaltap_100per_temp }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_frq</td>
+        <td>{{ nrl.ll_normaltap_100per_frq }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_vmeas</td>
+        <td>{{ nrl.ll_normaltap_100per_vmeas }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_i1</td>
+        <td>{{ nrl.ll_normaltap_100per_i1 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_i2</td>
+        <td>{{ nrl.ll_normaltap_100per_i2 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_i3</td>
+        <td>{{ nrl.ll_normaltap_100per_i3 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_imeas</td>
+        <td>{{ nrl.ll_normaltap_100per_imeas }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_w1</td>
+        <td>{{ nrl.ll_normaltap_100per_w1 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_w2</td>
+        <td>{{ nrl.ll_normaltap_100per_w2 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_w3</td>
+        <td>{{ nrl.ll_normaltap_100per_w3 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_pmeasured</td>
+        <td>{{ nrl.ll_normaltap_100per_pmeasured }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_llat75</td>
+        <td>{{ nrl.ll_normaltap_100per_llat75 }}</td>
+    </tr>
+    <tr>
+        <td>ll_normaltap_100per_zat75</td>
+        <td>{{ nrl.ll_normaltap_100per_zat75 }}</td>
+    </tr>
+    <tr>
+        <td>ll_percimpedancevoltreq</td>
+        <td>{{ nrl.ll_percimpedancevoltreq }}</td>
+    </tr>
+    <tr>
+        <td>ll_percimpedancevoltobtained</td>
+        <td>{{ nrl.ll_percimpedancevoltobtained }}</td>
+    </tr>
+    <tr>
+        <td>ll_percimpedancevoltremark</td>
+        <td>{{ nrl.ll_percimpedancevoltremark }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss50perreq</td>
+        <td>{{ nrl.ll_totalloss50perreq }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss50perobtained</td>
+        <td>{{ nrl.ll_totalloss50perobtained }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss50perremark</td>
+        <td>{{ nrl.ll_totalloss50perremark }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss100perreq</td>
+        <td>{{ nrl.ll_totalloss100perreq }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss100perobtained</td>
+        <td>{{ nrl.ll_totalloss100perobtained }}</td>
+    </tr>
+    <tr>
+        <td>ll_totalloss100perremark</td>
+        <td>{{ nrl.ll_totalloss100perremark }}</td>
+    </tr>
+    <tr>
+        <td>hvt_iovt_lot</td>
+        <td>{{ nrl.hvt_iovt_lot }}</td>
+    </tr>
+    <tr>
+        <td>hvt_iovt_testdate</td>
+        <td>{{ nrl.hvt_iovt_testdate }}</td>
+    </tr>
+    <tr>
+        <td>hvt_iovt_ptr</td>
+        <td>{{ nrl.hvt_iovt_ptr }}</td>
+    </tr>
+    <tr>
+        <td>hvt_iovtctr</td>
+        <td>{{ nrl.hvt_iovtctr }}</td>
+    </tr>
+    <tr>
+        <td>hvt_hvdetail</td>
+        <td>{{ nrl.hvt_hvdetail }}</td>
+    </tr>
+    <tr>
+        <td>hvt_lvdetail</td>
+        <td>{{ nrl.hvt_lvdetail }}</td>
+    </tr>
+    <tr>
+        <td>hvt_result</td>
+        <td>{{ nrl.hvt_result }}</td>
+    </tr>
+    <tr>
+        <td>iovt_hvdetail</td>
+        <td>{{ nrl.iovt_hvdetail }}</td>
+    </tr>
+    <tr>
+        <td>iovt_result</td>
+        <td>{{ nrl.iovt_result }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock body %}

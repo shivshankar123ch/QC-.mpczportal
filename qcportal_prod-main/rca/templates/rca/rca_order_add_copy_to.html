@@ -1,0 +1,79 @@
+{% extends 'rca/RCA_base.html' %} {% load static %} {% block heading %} Create Work Order {% endblock heading %} {% block body %}
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>Order Copy to information</h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable ">
+                    <thead>
+                        <th> Copy To List </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in copy %}
+                        <tr>
+                            <td>{{data.copy_name}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <form action="/rca/rca_order_add_copy_to/{{wo.id}}" method="POST" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Copyto Details
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+                    
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Enter Name(Copy To:)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="copy" id="sched_name" class="form-control ed-textbox" placeholder="Add Name" required="required" onclick="validateForm()" onfocus="validateForm()" onchange="validateForm()" required>
+                        <span id="address" class="d-block ed-warningtext text-danger"></span>
+                    </div>
+
+ 
+                    <div class="form-group">
+                        <div class="form-action text-right">
+                            <input type="submit" onclick="validateForm()" name="submit" value="Add Name"
+                                class="btn ed-submit ed-formSubmit mr-2">
+                            <a href="/rca/rca_order_view/{{wo.id}}">
+                                <input type="button" name="submit" value="Save And Next" onclick="validateForm()"
+                                    class="btn ed-submit ed-next">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+                        
+</div>
+<script>
+    function validateForm() {
+
+        let schedule11 = document.forms["myForm"]["copy"].value;
+
+
+        if (schedule11 == "") {
+            document.getElementById('address').innerHTML = " Please fill the required field ";
+            return false;
+        } else {
+            document.getElementById('address').innerHTML = "";
+        }
+    }
+</script>
+{% endblock body %}

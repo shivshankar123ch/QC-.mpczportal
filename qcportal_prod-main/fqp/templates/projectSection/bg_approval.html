@@ -1,0 +1,76 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+{% block body %}
+<div class="card card-default width-90 m-4" style="width:85%">
+          <div class="card-header">
+            <h3 class="card-title">Bank Guarantee Details </h3>
+          </div>
+     <form   action="/fqp/bg_approval_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%"><b>MPCZ000{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1">Bank Guarantee Bank Name </label> </td>
+                    <td><b>{{data.bg_bank_name}}</b>
+                </tr>
+                     <tr>
+                  <td>   <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                         <td>   <b>{{data.bg_guarantee_no}}</b></td>
+
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                   <td><b>{{data.bg_issue_date}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                  <td><b>{{data.bg_valid_date}}</b></td>
+                </tr>
+                      <tr>
+                  <td>   <label for="exampleInputEmail1">Amount </label> </td>
+                         <td><b>{{data.bg_amount}}</b></td>
+                     </tr>
+                    <tr>
+                  <td>   <label for="exampleInputEmail1">Upload Bank Guarantee</label> </td>
+                        <td><a target="_blank" href="{{data.bg.url}} " class="btn btn-primary btn-sm" style="width:120px;"> View BG</a></td>
+                     </tr>
+                  <tr>
+                <td>
+                    <label for="exampleInputEmail1">Remark </label>
+                    <input type="text" name= "bg_no" id="bg_no" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' placeholder="">
+                          <span id="bank_no" class="text-danger font-weight-bold">
+
+
+
+                      </td><td>
+                   <div class="custom-control custom-radio">
+                                    <input type="radio" class="form-check-input" id="radio1" name='action' value="OK" checked required>
+                                    <label class="form-check-label" for="radio1">Accepted</label>
+                                </div>
+
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="form-check-input" id="radio2" name='action' value="NOT">
+                                    <label class="form-check-label" for="radio2">Rejected</label>
+                                </div>
+                </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1">Submit</button>
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+    </div>
+{% endblock body %}

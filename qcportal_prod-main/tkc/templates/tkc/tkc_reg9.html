@@ -1,0 +1,199 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %} {% block css %}
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active,
+.show>.btn-info.dropdown-toggle { color:
+#fff; background-color: #007bff; border-color: #10707f; } label:not(.form-check-label):not(.custom-file-label) {
+font-weight: inherit; } {% endblock css %} {% block body %}
+
+<head>
+    <script type="text/javascript" src="/static/assets/js/Validation/tkc_reg9.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <form action="tkc_reg_nine" onsubmit="return validateForm()" name="myForm" method="POST">
+            {% csrf_token %}
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="btn-group w-100 mb-2 ">
+                                        <a class="btn btn-info " href="javascript:void(0)" data-filter="1"
+                                            style="background-color: #007bff;"> Annual Income and Tax Return Details</a>
+
+                                    </div>
+
+
+                                    <div class="filter-container p-3 col-md-12 float-centered">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col"><label for="year">FINANCIAL
+                                                                    YEARS<span style="color: red;">*</span></label></th>
+                                                            <th scope="col"><label for="Income">TURN OVER<span
+                                                                        style="color: red;">*</span></label></th>
+                                                            <th scope="col"> <label for="Income"> INCOME TAX <span
+                                                                        style="color: red;">*</span></label></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td>
+                                                                <select id="year" name="year12"
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"
+                                                                    required="required">
+                                                                    <option selected value="">Select One</option>
+                                                                    <option value="2021-2022">2021-2022</option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                                <span id="year_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="input_income" name="input_income"
+                                                                    class="form-control" minlength="1" maxlength="20"
+                                                                    required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur=" incomeValidation(id)">
+                                                                <span id="input_income_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="input_tax" name="input_tex"
+                                                                    class="form-control" minlength="1" maxlength="20"
+                                                                    required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur="taxValidation(id)">
+                                                                <span id="input_tax_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+
+                                                            <td>
+                                                                <select id="year1" name="year13"
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"
+                                                                    required="required">
+                                                                    <option selected value="">Select One</option>
+                                                                    <option value="2021-2022">2021-2022</option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                                <span id="year1_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="input_income1"
+                                                                    name="input_income1" class="form-control"
+                                                                    minlength="1" maxlength="20" required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur=" incomeValidation(id)">
+                                                                <span id="input_income1_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="input_tax1" name="input_tex1"
+                                                                    class="form-control" minlength="1" maxlength="20"
+                                                                    required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur="taxValidation(id)">
+                                                                <span id="input_tax1_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+
+                                                            <td>
+                                                                <select id="year2" name="year14"
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"
+                                                                    required="required">
+                                                                    <option selected value="">Select One</option>
+                                                                    <option value="2021-2022">2021-2022</option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                                <span id="year2_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="" id="input_income2" name="input_income2"
+                                                                    class="form-control" minlength="1" maxlength="20"
+                                                                    required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur=" incomeValidation(id)">
+                                                                <span id="input_income2_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="input_tax2" name="input_tex2"
+                                                                    class="form-control" required="required"
+                                                                    onkeypress="return isNumberKey(event)"
+                                                                    onblur="taxValidation(id)">
+                                                                <span id="input_tax2_span"
+                                                                    class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="button-row  col-12">
+                                                    <button class="btn bg-gradient-primary ms-auto mb-0 float-right "
+                                                        type="submit" title="Send">Save And Next</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- /.content-wrapper -->
+                                        <!-- /.content -->
+                                    </div>
+                                    <!-- /.content-wrapper -->
+
+                                    <!-- ./wrapper -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %}

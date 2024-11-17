@@ -1,0 +1,110 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %}
+{% block body %}
+
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            window.history.forward();
+
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    <h4 class="text-info font-weight-bolder">Enter One Time Password</h4>
+                                    {% if message %}
+                                    <div class="alert alert-{{class}}">
+                                        {{message}}
+                                    </div>
+                                    {% endif %}
+                                    <form class="row g-3 needs-validation" name="myForm" onsubmit="return validateForm()" action="nabl_reg13" method="post">
+                                        {% csrf_token %}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>OTP Number</label> {% for message in messages %}
+                                                <!-- <label>Your OTP<span style="color: red;">*</span></label> -->
+                                                <input type="number" placeholder="Enter OTP" class="form-control" value="{{message}}" id="myInput" disabled> {% endfor %}
+                                                <span id="o_t_p_7" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Enter Your OTP number<span style="color: red;">*</span></label>
+                                                <input type="tel" placeholder="Enter otp" class="form-control" maxlength="8" onkeypress='validate(event)' onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" onkeypress='validate(event)' name="otp" id="otp">
+                                                <span id="o_t_p" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="button-row d-flex mt-4">
+
+                                            <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" onclick="validateForm();" title="Send">Submit</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function validateForm() {
+            let oTP = document.forms["myForm"]["otp"].value;
+            let phoneNumber = document.getElementById('myInput').value;
+            let phoneNumber1 = document.getElementById('otp').value;
+
+            if (oTP == "") {
+                document.getElementById('o_t_p').innerHTML = " Please enter the required detail ";
+                return false;
+            } else {
+                if (phoneNumber != phoneNumber1) {
+                    document.getElementById('o_t_p').innerHTML = "Otp not match "
+                } else {
+                    document.getElementById('o_t_p').innerHTML = " "
+                }
+
+            }
+        }
+
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                validateForm
+                key = String.fromCharCode(key)
+;
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+</body>
+{% endblock body %}
+
+{% endblock title %}

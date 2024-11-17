@@ -1,0 +1,82 @@
+{% extends 'rca/RCA_base.html' %}
+
+{% load static %}
+
+{% block active %}
+                <a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="false">
+                  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">RCA Cell</span>
+                </a>
+                <div class="collapse active show" id="rcaCell">
+                  <ul class="nav ms-4">
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_release_order">
+                        <span class="sidenav-mini-icon"> RO </span>
+                        <span class="sidenav-normal"> Release Order</span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_allotment">
+                        <span class="sidenav-mini-icon"> Allot </span>
+                        <span class="sidenav-normal"> Allotment </span>
+                      </a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link active" href="/rca/rca_as">
+                        <span class="sidenav-mini-icon"> AS </span>
+                        <span class="sidenav-normal"> As for Oil </span>
+                      </a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link " href="/rca/rca_di">
+                        <span class="sidenav-mini-icon"> DI </span>
+                        <span class="sidenav-normal"> Dispatch Instruction </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+{% endblock active %}
+
+
+{% block body %}
+
+<h5>Area Store for Oil</h5>
+<div class="table-responsive text-nowrap">
+<table class="table table-striped" style="width:100%" border="1">
+  <tr>
+    <th>Work Order No.:</th>
+    <td>MPCZ004</td>
+  </tr>
+  <tr>
+    <th>Area Store Name:</th>
+    <td><label>Bhopal</label></td>
+  </tr>
+  <tr>
+    <th>Vendor:</th>
+    <td><label>Ramesh Rai</label></td>
+  </tr>
+  <tr>
+    <th>Material:</th>
+    <td><label>DTR</label></td>
+  </tr>
+  <tr>
+    <th>Specification:</th>
+    <td><label>11 KV CT Ratio</label></td>
+  </tr>
+  <tr>
+    <th>#Recoverable Material :</th>
+    <td><label>9</label></td>
+  </tr>
+  <tr>
+    <th>Oil Alloted (In Liters):</th>
+    <td><label>100</label></td>
+  </tr>
+</table>
+</div>
+
+<input type="submit" onclick="check()" name="submit" value="Issue" class="btn btn-success btn-primary button button1" autocomplete="off" style="width: 170px; height: 50px;border: 1px solid darkblue;border-radius: 8px;margin-top: 2px">
+
+
+{% endblock body %}

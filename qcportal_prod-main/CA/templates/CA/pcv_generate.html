@@ -1,0 +1,171 @@
+{% extends 'CA/fi_dashborad.html' %} {% load static %} {% block body %}
+
+
+
+<!DOCTYPE html>
+<html>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+
+    <h5>
+        <b>INVOICES SUMMARY:</h5></b>
+
+        <table style="width:80%">
+            <tr>
+                <th>Total Invoices</th>
+                <th>Total Commision</th>
+                <th>Total TDS</th>
+                <th>Total GST</th>
+                <th>Total Payable Amount</th>
+
+            </tr>
+            <tr>
+                <td>{{data1.invoce}}</td>
+                <td>{{data1.commission_amount}}11</td>
+                <td>12</td>
+                <td>{{data1.Gst_ammount}}</td>
+                <td>{{data1.Customer_bill_amount}}</td>
+
+            </tr>
+
+        </table>
+
+
+        </br>
+
+
+        <h5>
+            <b>DETAILS:</h5></b>
+
+            <table style="width:80%">
+                <tr>
+                    <th style="width:1%">S.No.</th>
+                    <th style="width:2%">Agent Name</th>
+                    <th style="width:2%">Mobile</th>
+                    <th style="width:2%">Bank Ac</th>
+                    <th style="width:2%">Bank Name</th>
+                    <th style="width:2%">IFSC</th>
+                    <th style="width:2%">Month</th>
+                    <th style="width:2%">Year</th>
+                    <th style="width:2%">Invoice Number</th>
+                    <th style="width:2%">Total Commission</th>
+                    <th style="width:2%">Total TDS</th>
+                    <th style="width:2%">CGST</th>
+                    <th style="width:2%">SGST</th>
+                    <th style="width:2%">Payable Ammount</th>
+
+
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>{{data.Name}}</td>
+                    <td>{{data.Mobile}}</td>
+                    <td>{{data.Bank_name}}</td>
+                    <td>{{data.Account_Number}}</td>
+                    <td>{{data.IFSC}}</td>
+                    <td>{{data1.Customer_payment_month}}</td>
+                    <td>{{data1.Customer_payment_year}}</td>
+                    <td>{{data1.invoce}}</td>
+                    <td>{{data1.Is_commission}}</td>
+                    <td>0.0</td>
+                    <td>0.0</td>
+                    <td>{{data1.Customer_bill_amount}}</td>
+
+
+
+                </tr>
+
+            </table>
+            </table>
+            </br>
+            </div>
+            </div>
+
+            </div>
+            </div>
+
+
+            </br>
+            <script>
+                < /br>
+
+                function printpage() {
+                    //Get the print button and put it into a variable
+                    var printButton1 = document.getElementById("printpagebutton1");
+                    var printButton = document.getElementById("printpagebutton");
+                    //Set the print button visibility to 'hidden'
+                    printButton1.style.visibility = 'hidden';
+                    printButton.style.visibility = 'hidden';
+                    //Print the page content
+                    window.print()
+                    printButton.style.visibility = 'visible';
+                    printButton1.style.visibility = 'visible';
+
+                }
+            </script>
+
+
+            <center>
+                {% if user1 %}
+                <div>
+                    <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+                    <a href="/ca/basic"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+                </div>
+                {% endif %} {% if user2 %}
+                <div>
+                    <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+                    <a href="/"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+                </div>
+                {% endif %} {% if user3 %}
+                <div>
+                    <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+                    <a href="/ca/basic"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+                </div>
+                {% endif %}
+
+            </center>
+
+            </script>
+            <center>
+                <div>
+                    <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+                    <a href="/"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to login page</button> </a>
+                    <a href="/ca/commercial"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Go To commericail section</button> </a>
+                </div>
+            </center>
+
+
+
+            <p>Please check and verified by commerical section</p>
+
+            <label for="myCheck">Checkbox:</label>
+            <input type="checkbox" id="myCheck" name="checkbox" onclick="myFunction()">
+
+            <p id="text" style="display:none">verified Go to Finance!</p>
+            <!-- <a href="/ca/finance" style="color:white;"><button type="button" class="button btn btn-success">Save and Next</button></a> -->
+
+            <script>
+                function myFunction() {
+                    var checkBox = document.getElementById("myCheck");
+                    var text = document.getElementById("text");
+                    if (checkBox.checked == true) {
+                        text.style.display = "block";
+                    } else {
+                        text.style.display = "none";
+                    }
+                }
+            </script>
+
+
+
+
+
+            {% endblock body %}

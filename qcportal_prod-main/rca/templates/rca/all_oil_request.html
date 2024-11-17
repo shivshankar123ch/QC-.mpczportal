@@ -1,0 +1,38 @@
+  {% extends 'rca/RCA_base.html' %}
+  {% load static %}
+  {% block heading %} Create RO Order {% endblock heading %}
+{% block body %}
+<table class="table table-striped m-4 " border="2" style="width:80%">
+            <thead class="bg-primary">
+              <tr>
+                <th scope="col-1">#</th>
+                <th scope="col-2">Vendor</th>
+                <th scope="col-2">Release Order No.</th>
+                <th scope="col-3">Oil (Liter)</th>
+                <th scope="col-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for info in data %}
+              <tr>
+                 <td>{{forloop.counter}}</td>
+                  <td><b>{{ info.ro.wo.vendor_id.CompanyName_E}}</b></td>
+                <td><b>RO00{{ info.ro.id}}</b></td>
+                <td></b>{{ info.v_request_quantity }}</b></td>
+                <td>
+                    {% if not info.rca_forward_to_as %}
+                    <a href="/rca/oil_request_forward/{{info.id}}" class="text-secondary">Forward To Area Store</a></td>
+                  {% else %}
+                  <b>Request Forwarded</b>
+                  {% endif %}
+                  <!-- {% if  info.as_forward_to_rca and not info.rca_forward_to_vendor %}
+                    <a href="/rca/oil_request_forward_vendor/{{info.id}}" class="text-secondary">Forward To Vendor </a></td>
+                  {% elif  info.as_forward_to_rca and info.rca_forward_to_vendor %}
+                  <b>Request Forwarded</b>
+                  {% endif %} -->
+                 </tr>
+                  {% endfor %}
+
+            </tbody>
+    </table>
+{% endblock body %}

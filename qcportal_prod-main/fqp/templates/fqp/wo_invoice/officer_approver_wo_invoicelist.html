@@ -1,0 +1,132 @@
+
+{% extends 'fqp/wo_approver/approver_base.html' %}
+{% load static %} 
+{% block body %} 
+
+{% block basic %}
+<li class="nav-item active" style="list-style-type: none;">
+{% endblock basic %}
+
+<style>
+    .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 182px;
+    margin-top: 10px;
+}
+</style>
+
+
+ 
+<div class="ed-information mb-4">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Work-Order Invoice List 
+                    </h2>
+                </div>
+                <div class="card-body"> 
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered  display text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="w-5 text-center">Sr.No.</th>
+                                        <th>Work Order No.</th>
+                                        <th>Work Order Description</th>
+                                        <th>Work Order Date</th>
+                                        <th>TKC Name</th>
+                                        <th>View Work Order Detail</th>
+                                        <th>Work Order Amount (In Rupees)</th>
+                                        <th>Work Order Approved Amount(In Rupees)</th>
+                                        <th>Pending Invoice amount(In Rupees)</th>
+                                        <th>View Invoice</th>
+                                        <th>View Current Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wo in wo_data %}
+                                    <tr>
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>
+                                            {{wo.Contract_Number}} 
+                                        </td>
+                                        <td>
+                                            {{wo.Header.Contract_Description}}
+                                        </td>
+                                        <td>
+                                            {{wo.Contract_Date}}
+                                        </td>
+                                        <td>
+                                            {{wo.supplier.CompanyName_E}}
+                                        </td> 
+        
+                                        <td>
+                                            {% if wo.Wo_Digital %}
+                                            <a class="btn ed-submits btn-success" href="{{wo.Wo_Digital.url}}" target="_blank">View Work-Order</a>
+                                            {% else %}
+                                            <a class="btn ed-submits btn-primary" href="#">Work-Order Not Uploaded</a>
+                                            {% endif %}
+                                        </br>
+                                        
+                                        {% if wo.Wo_Agreement %}
+
+                                        <a class="btn ed-submits btn-success" href="{{wo.Wo_Agreement.url}}" target="_blank">View Work-Order Agreement</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-primary" href="#">Work-Order Agreement Not Uploaded</a>
+                                        {% endif %}
+                                        </td>
+        
+                                        
+                                        <td>
+                                               {% for wm in wo_amt %}
+                                                    {% if wo.id == wm.TKCWoInfo %}
+                                                   
+
+                                                    {{wm.total_amount|default:"0"}} 
+
+                                                    {% endif %}
+                                                    {% endfor %}
+                                        </td> 
+                                          <td>
+
+                                            {{wo.total_invoice_ammount|default:"0"}} 
+
+                                        </td>
+                                        {% if officer.role.Role_Name == "WO_APPROVER" %} 
+                                        <td></td>
+                                        <td>
+                                            <a class="btn ed-submits btn-primary" onclick="msg()"
+                                                href="/fqp/wo_approver_invoice_list/?woid={{wo.id}}&ordertype=WorkOrder">View Invoices</a>
+                                        </td>
+                                        {% if officer.role.Role_Name == "WO_APPROVER" %}
+                                        <td>
+                                            <a class="btn  btn-info btn-sm" onclick="msg()"
+                                                href="/fqp/tkc_show_current_invoice_list/?woid={{wo.id}}">View Invoice</a>
+                                        </td>
+                                        {% endif %}
+                                        
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %} 
+                                    <td>
+                                        
+                                    </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock body %}
+

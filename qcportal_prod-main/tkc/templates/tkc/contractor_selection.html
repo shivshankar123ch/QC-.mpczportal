@@ -1,0 +1,70 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} 
+    <title>API Display</title>
+</head>
+<body>
+    <div class="ed-information mb-2">
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Participated Contractors Dashboard 
+                        </h2>
+                    </div>
+                    {% if response %}  
+                    <div class="card-body"> 
+                        <div class="ed-tableinfo-block">
+                            <div class="table-responsive">
+                                {% for i in response %}
+                                <h5 class="text-center alert alert-info">You are selected as a contractor for application number {{i.consumers.consumerApplicationNo}} now you can start your work</h5>
+                                {% endfor %} 
+                                <table
+                                    class="table table-bordered">
+                                    <thead style="background-color: #dcdcdc;">
+                                        <tr> 
+                                            <th>Application No</th>
+                                            <th>Applicant Name</th>
+                                            <th>Contractor Name</th>
+                                            <th>Contractor Company</th> 
+                                            {% comment %} <th>Address</th>  {% endcomment %}
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                        {% for i in response %}
+                                        <tr>
+                                        <td>{{i.consumers.consumerApplicationNo}}</td>
+                                        <td>{{i.consumers.consumerName}}</td>
+                                        <td>{{i.User_Id.Authorised_person_E}}</td>
+                                        <td>{{i.User_Id.CompanyName_E}}</td>
+                                        <td>                       
+                                            <a href="{% if response %}/tkc/contractor_work_started/{{i.consumers.consumerApplicationNo}}
+                                            {% endif %}" class="ed-links" style="text-decoration:underline;"><button class="btn btn-success">Start Work</button></a>  
+             
+                                        </td> 
+                                    </tr>
+                                        {% endfor %}   
+                                    </tbody>
+                                </table>
+                                
+                    {% else %}
+                    <h4 class="text-center alert alert-info">You are not selected as a contractor by applicant</h4>
+                    {% endif %}
+
+                                {% comment %} <a class="btn btn-dark" href="{% url 'consumer-estimation-offline' %}">Put Bid after expiry</a> {% endcomment %}
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+{% endblock body %}

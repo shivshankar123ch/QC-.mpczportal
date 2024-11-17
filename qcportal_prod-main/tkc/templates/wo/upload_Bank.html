@@ -1,0 +1,175 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+<div class="card card-default width-75 m-4" style="width:85%">
+          <div class="card-header">
+            <h6 class="card-title"><b>Upload Bank Details </b></h6>
+          </div>
+     <form   action="/tkc/upload_bank/{{data.id}}" method="POST" name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%">{{data.Contract_Number}}</th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1">Bank  Name<span style="color: red;">*</span> </label> </td>
+                  <td><input type="text"  name= "Bank_name" id="Bank_name"  onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="Bank_name1" class="text-danger font-weight-bold" style="font-size: 80%;">
+                  </span>
+                   </td>
+                </tr>
+                       <tr>
+                  <td> <label for="exampleInputEmail1">IFSC Code<span style="color: red;">*</span> </label> </td>
+                  <td><input type="text"  name= "IFSC" id="IFSC" maxlength="11"  onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="IFSC1" class="text-danger font-weight-bold" style="font-size: 80%;">
+                  </span>
+                   </td>
+                </tr>
+                 <tr>
+                  <td> <label for="exampleInputEmail1">Account Holder  Name<span style="color: red;">*</span> </label> </td>
+                  <td><input type="text"  name= "Account_Holder_Name"  style="text-transform: uppercase;" id="bgbank" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) 
+                   || (event.charCode > 96 && event.charCode < 123)" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="bank_Name1" class="text-danger font-weight-bold" style="font-size: 80%;">
+                  </span>
+                   </tdC:\nginx\html\qcdev.mpcz.in\tkc\templates\tkc>
+                </tr>
+
+
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Account No<span style="color: red;">*</span>  </label> </td>
+                  <td><input type="password"  name= "Account_Number" onkeypress='validate(event)'  minlength="8" maxlength="16" id="bg_issu_date1" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="accNumber" class="text-danger font-weight-bold" style="font-size: 80%;"></td></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Confirm Account No<span style="color: red;">*</span> </label> </td>
+                  <td><input type="text" name= "bg_valid_upto" id="bg_valid_upto1" onkeypress='validate(event)'  minlength="8" maxlength="16" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="acc2Number" class="text-danger font-weight-bold" style="font-size: 80%;"></td></td>
+                </tr>
+                      <tr>
+                  <td>     <label for="exampleInputEmail1"> Upload Cancel Check  <span style="color: red;">*</span> </label></td>
+                         <td>    <div class="form-group">
+                     <input type="file" name="cancel_check" class="form-control" accept="application/pdf" id="file33" placeholder=""onkeyup="validateForm()"
+                     onfocus="validateForm()" onchange="validateForm()" required>
+                     <span id="file22" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                   </div>
+                     </tr>
+                </tbody>
+              </table>
+               <div class="form-group">
+                                                <div class="form-action text-right">
+                                                    <button  type="submit" id="btnsave" onclick="validateForm()" class="btn ed-submit btn-info" >
+                                                        <span class="ed-submit-text">
+                                                            Submit
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+               </div>
+     </form>
+          </div>
+          <script>
+            function validateForm(){
+              let name = document.forms["myForm"]["Bank_name"].value;
+              let code = document.forms["myForm"]["IFSC"].value;
+              let holderName = document.forms["myForm"]["Account_Holder_Name"].value;
+              let Number = document.forms["myForm"]["Account_Number"].value;
+              let Number2 = document.forms["myForm"]["bg_valid_upto"].value;
+              let fileup = document.forms["myForm"]["cancel_check"].value;
+              let fileee = document.getElementById("file33").value;
+              var allowedExtensions = /(\.pdf)$/i;
+              let fileInput_Result1 = allowedExtensions.test(fileee);
+
+
+              if (name == "") {
+               document.getElementById('Bank_name1').innerHTML = "Please fill the required details";
+               return false;
+              } else {
+                document.getElementById('Bank_name1').innerHTML = "";
+              }
+              if (code == "") {
+               document.getElementById('IFSC1').innerHTML = "Please fill the required details";
+               return false;
+              } else {
+                document.getElementById('IFSC1').innerHTML = "";
+              }
+              if (holderName == "") {
+               document.getElementById('bank_Name1').innerHTML = "Please fill the required details";
+               return false;
+              } else {
+                document.getElementById('bank_Name1').innerHTML = "";
+              }
+              if (Number == "") {
+               document.getElementById('accNumber').innerHTML = "Please fill the required details";
+               return false;
+              } else {
+                document.getElementById('accNumber').innerHTML = "";
+              }
+              if (Number2 == "") {
+               document.getElementById('acc2Number').innerHTML = "Please fill the required details";
+               return false;
+              } else {
+                document.getElementById('acc2Number').innerHTML = "";
+              }
+              // if (fileup == "") {
+              //  document.getElementById('file22').innerHTML = "Please fill the required details";
+              //  return false;
+              // } else {
+              //   document.getElementById('file22').innerHTML = "";
+              // }
+
+              if (fileup == "") {
+              document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+              return false;
+               } else {
+              //document.getElementById('Twenty_two').innerHTML = "";
+             if (fileInput_Result1 == false) {
+              document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+               return false;
+              } else {
+               // document.getElementById('file1').innerHTML = "";
+              const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+              if (oFile > 2) {
+                alert("File size must be less than or equal to 2 MB");
+                document.getElementById("file33").value = "";
+                return false;
+
+              } else {
+                document.getElementById('file22').innerHTML = "";
+             }
+         }
+      }
+    }
+          </script>
+          <script>
+            function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+        // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+}
+          </script>
+
+{% endblock body %}

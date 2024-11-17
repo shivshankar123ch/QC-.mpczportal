@@ -1,0 +1,47 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} MRC {% endblock heading %}
+{% block body %}
+ 
+<form action="/po/upload_digital_po_mrc/{{mr.id}}" method="POST" enctype="multipart/form-data">
+    <!-- <form action="/po/po_mrc_release_list" method="POST" enctype="multipart/form-data"> -->
+    {% csrf_token %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Upload Digitally Signed
+            </h2>
+        </div>
+        <div class="card-body">
+            <div id="options">
+                <div class="ed-form-block border-0 p-0" >
+                    <div class="ed-form-body">
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Upload digitally signed pdf here
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" name="digi_pdf_pr">
+                            <span id="addre2" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group"> 
+                            <div class="form-action text-right">
+                                <button type="submit" class="btn ed-submit ed-formSubmit" value="Submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> 
+  
+
+
+                        <!-- <button id="printpagebutton1" type="Submit" style=" width:200px" class="btn btn-primary m-3"><a
+                class="btn btn-danger" onclick="myFunction()" href="/po/upload_digi/{{digipdf.id}}">Submit & Approve
+            </a> -->
+
+                         
+{% endblock body %}

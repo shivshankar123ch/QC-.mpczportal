@@ -1,0 +1,180 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<div class="ed-information mb-4">
+    <!-- <div class="card ed-card-block"> -->
+        <div class="card-header">
+            <h2>
+                Vendor Profile Status
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-4">
+                <div class="table-responsive">
+                    <table id="profile_status" class="table table-bordered table-hover table-striped">
+                        <thead class="table-dark">
+                            <tr>
+
+                                <th>
+                                    Profile Status
+                                </th>
+                                <th>
+                                    Status on DGM(works)
+                                </th>
+                                <th>
+                                    Status on DGM(finance)
+                                </th>
+
+                                <th>
+                                    Status on CGM
+                                </th>
+
+                                <th>
+                                    Final Reg Number
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in data11 %}
+                            <tr>
+                                {% if data.Complete_Details == 1 %}
+                                <td><span class="btn btn-success badge-sm ">Complete</span></td>
+
+
+                                {% else %}
+                                <td><span class="btn btn-warning badge-sm ">Pending(upload document)</span></td>
+                                {% endif %}
+                                {% if data.work_approval == 1 %}
+                                <td><span class=" btn-primary btn badge-sm">Approve</span></td>
+                                {% elif data.work_approval == 2 %}
+                                <td><span class="btn btn-danger badge-sm">Rejected</span></td>
+                                {% else %}
+                                <td><span class="btn btn-warning badge-sm">Pending</span></td>
+                                {% endif %}
+
+                                {% if data.finance_approval == 1 %}
+                                <td><span class="btn btn-primary badge-sm">Approve</span></td>
+                                {% elif data.finance_approval == 2 %}
+                                <td><span class="btn btn-danger badge-sm">Rejected</span></td>
+
+                                {% else %}
+                                <td><span class="btn btn-warning badge-sm">Pending</span></td>
+                                {% endif %}
+
+
+                                {% if data.cgm_approval == 1 %}
+                                <td><span class="btn btn-primary badge-sm">Approve</span></td>
+                                {% elif data.cgm_approval == 2 %}
+                                <td><span class="btn btn-danger badge-sm">Rejected</span></td>
+
+                                {% else %}
+                                <td><span class="btn btn-warning badge-sm">Pending</span></td>
+                                {% endif %}
+
+                                {% if data.Authentication_id%}
+                                <td><span class="btn btn-secondary badge-sm">{{data.Authentication_id}}</span></td>
+
+
+                                {% else %}
+                                <td><span class="btn btn-warning badge-sm">Pending</span></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- <div class="container-fluid py-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row"> -->
+                    <!-- <div class="col-lg-3 col-md-6 col-12">
+                  <div class="card  mb-4">
+                      <div class="card-body p-3">
+                          <div class="row">
+                              <div class="col-8">
+                                  <div class="numbers">
+                                      <p class="text-sm mb-0 text-uppercase font-weight-bold">Download Certificate.
+                                      </p>
+                                      <h5 class="font-weight-bolder">
+                                      
+                                      </h5>
+                                      <p class="mb-0">
+                                          {% if userdata.digital_cert_upload == 1 %}
+                                              <a class="text-success text-sm font-weight-bolder" style="text-decoration: underline; text-decoration-color: blue;" href="{{userdata.cert_image.url}}" target="_blank">{{userdata.Authentication_id}}</a>
+                                               <a class="text-success text-sm font-weight-bolder" href="/show_cert_tkc/{{userdata.Authentication_id}}"{{userdata.Authentication_id}}</a> -->
+                    <!-- {% elif userdata.Authentication_id %}
+                                    <a class="text-success text-sm font-weight-bolder"
+                                        onclick="alert('Certificate generated but not digitally signed')">{{userdata.Authentication_id}}</a>
+                                    {% else %}
+                                    <a class="text-success text-sm font-weight-bolder"
+                                        onclick="alert('Certificate not uploaded')">Not Available</a>
+                                    {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div
+                                    class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+                    <!-- <div class="col-lg-3 col-md-6 col-12">
+
+            </div>
+
+        </div>
+    </div> -->
+                    <!-- <div class="col-lg-3 col-md-6 col-12">
+                  <div class="card  mb-4">
+                      <div class="card-body p-3">
+                          <div class="row">
+                              <div class="col-8">
+                                  <div class="numbers">
+                                    <a href="/tkc/transaction_history">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Transaction Details</p>
+                                    <h5 class="font-weight-bolder">
+                                     
+                                    </h5>
+                                  </a>
+                                    <p class="mb-0">
+                                      <span class="text-success text-sm font-weight-bolder">{{payu_count}}</span> 
+                                    </p>
+                                  </div>
+                                </div>
+                              <div class="col-4 text-end">
+                                  <div
+                                      class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                      <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+      $('#profile_status').DataTable({
+        pagingType: 'full_numbers',
+      });
+    });
+  </script>
+{% endblock body %}

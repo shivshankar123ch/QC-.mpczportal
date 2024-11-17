@@ -1,0 +1,106 @@
+{% extends 'po/po_approver/approver_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                    <th>
+                      S NO.
+                      </th>
+                      <th>
+                          PO No
+                      </th>
+                      <th>
+                        Vendor Name
+                    </th>
+                    <th>
+                        PO Subject
+                    </th>
+                      <th>
+                          PO Date
+                      </th>
+                      <th>
+                        Item Name
+                    </th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                {% for name in data%}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>{{name.po.po_no}}</b>
+                      </td>
+                      <td>
+                          {{name.po.vendor.CompanyName_E}}
+                      </td>
+                      <td>
+                              {{name.po.po_subject}}
+                      </td>
+                      <td>
+                           {{name.po.erp_created_date}}
+                      </td>
+                      <td>
+                        {{name.material.specification}}
+                   </td>
+
+                      <td class="project-actions text-center">
+                          <!-- <a class="btn btn-primary btn-sm" href="/po/vendor_ins_approved/{{name.po.id}}/{{name.id}}" onclick="return confirm('Are you sure you want to accept ?');">
+                              Accept
+                          </a>
+                           <a class="btn btn-primary btn-sm" href="/po/vendor_ins_reject/{{name.po.id}}">
+                              Reject
+                          </a> -->
+                          {% if name.Po_doc %}
+                            <a class="btn btn-success btn-sm" href="{{name.Po_doc.url}} " class="btn btn-success mr-3">PO </a>
+                          {% else %}
+                           <a class="btn btn-success btn-sm" href="#" class="btn btn-success mr-3"> PO</a>
+                          {% endif %}
+                            <a class="btn btn-success btn-sm" href="/po/approver_offer_view/{{name.po.id}}/{{name.id}}" class="btn btn-success mr-3"> View Offer</a>
+                            <a class="btn btn-success btn-sm" href="/po/procurement_status/{{name.po.id}}">Status</a>
+                      </td>
+                  </tr>
+             
+
+           </tbody>
+          </table>
+          {% endfor %}
+          {% if msg %}
+          <span style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{ msg }}</span>
+          {% endif %}
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+
+{% endblock body %}>
+
+{% if msg %}
+<span style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{ msg }}</span>
+{% endif %}

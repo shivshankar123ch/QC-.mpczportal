@@ -1,0 +1,115 @@
+{% extends 'officer/gm_work_base.html' %}
+{% load static %}
+{% load cart %}
+{% block body %}
+
+
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>All Contractor</h2>
+  </div>
+
+  <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+  <div class="card-body">
+
+    <form>
+      <div class="row align-items-center justify-content-end">
+        <div class="col-sm-4">
+          <div class="form-group d-flex align-items-center justify-content-end p-2 mb-3">
+            <label for="staticEmail2" class="sr-only">Search By Authentication ID</label>
+            <input type="search" placeholder="Search" aria-label="Search" name="search" class="form-control">
+
+            <button type="submit" class="btn ed-submit btn-primary" style="    height: 38px;">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+          <thead>
+            <tr>
+              <th>
+                S.NO.
+              </th>
+              <th>Discom </th>
+              <th>Firm/Company<br> Name </th>
+              <th>Authorised<br> Person<br> Name </th>
+              <th>Contact<br> Number</th>
+              <th>Registration <br>Number </th>
+              <th>Active/Inactive</th>
+              <th>Valid Up To</th>
+              <th>View <br>Certificate </th>
+              <th>Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.User_zone}}</td>
+              <td>{{data.CompanyName_E}}</td>
+              <td>{{data.Authorised_person_E}}</td>
+              <td>{{data.ContactNo}}</td>
+              <td>{{data.Authentication_id}}</td>
+              {% now "Y-m-d" as to_daaa %}
+
+              {% if data.Authentication_id %}
+
+              {% if to_daaa <= data|last_date:doc|date:"Y-m-d" %} <td>
+                <span>Active</span>
+                </td>
+                {% else %}
+                <td>
+                  <span>Inactive</span>
+                </td>
+                {% endif %}
+
+                {% else %}
+                <td>
+                  <span>Inactive</span>
+                </td>
+                {% endif %}
+                <td>{{data|last_date:doc|date:"d-M-Y"}}</td>
+                {% if data.cert_image%}
+                <td>
+                  <a href="{{data.cert_image.url}} " target="_self" class="fas fa-eye text-secondary">
+                  </a>
+                </td>
+                {% else %}
+                <td>
+                  <a href="#" target="_self" class="fas fa-eye text-secondary">
+                  </a>
+                </td>
+
+                {% endif %}
+
+                <td>
+                  <a href="/vendor_cgm_evaluate_view/{{data.User_Id}}">
+                    View Details
+                  </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

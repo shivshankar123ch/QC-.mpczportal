@@ -1,0 +1,120 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} {% block activation_payment_check %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock activation_payment_check %}
+
+    <head>
+        <script type="text/javascript">
+            window.history.forward();
+
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    </head>
+
+
+    <div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Basic Information
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="/basic/" method="POST">
+                            {% csrf_token %}
+                            <div class="ed-tableinfo-block">
+                                <div class="table-responsive">
+                                    <table
+                                        class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-5">S.No.</th>
+                                                <th>Report Name</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>1</th>
+                                                <td>Type of Business</td>
+                                                <td>{{userdata.Type_of_business}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>2</th>
+                                                <td>Authorised Person Name</td>
+                                                <td>{{userdata.Authorised_person_E}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>3</th>
+                                                <td>Company Name</td>
+                                                <td>{{userdata.CompanyName_E}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>4</th>
+                                                <td>Contact Number</td>
+                                                <td>{{userdata.ContactNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>5</th>
+                                                <td>Email ID</td>
+                                                <td>{{userdata.Email_Id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>6</th>
+                                                <td>User Type</td>
+                                                <td>{{userdata.User_type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>7</th>
+                                                <td>User Registration Date</td>
+                                                <td>{{userdata.Updated_Date|date:"d-M-Y"}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>8</th>
+                                                <td>User Registration End Date</td>
+                                                <td>{{doc.Doc_expiry_date|date:"d-M-Y"}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group mt-3">
+                            <h6>
+                                <b>Note:-</b> Activation charges before license expiry is Rs 590.00/- , After expiration
+                                of
+                                license it will be Rs 2360.00/-
+                            </h6>
+                            {% if expiry_date > registration_date %}
+                            <p class="mb-2"> Your Registration will expire on
+                                <b>{{doc.Doc_expiry_date|date:"d-M-Y"}}</b> </p>
+                            <p class="mb-2"> Activation charges is Rs 590.00/- </p>
+                            <div class="text-left mt-4">
+                                <a href="/tkc/activation_before_expired" class="mb-2">
+                                    <button class="btn btn-primary btn-sm mb-2" type="button" title="Send">
+                                        Go For Activation
+                                    </button>
+                                </a>
+                            </div>
+                            {% else %}
+                            <p class="mb-2 text-danger">
+                                Your Registration expired on <b>{{doc.Doc_expiry_date|date:"d-M-Y"}}</b>
+                            </p>
+                            <p class="mb-2"> Activation charges is Rs 2360.00/- </p>
+                            <div class="mb-2">
+                                <a href="/tkc/activation_after_expired" class="">
+                                    <button class="btn ed-submit ed-formsubmit" type="button" title="Send">Go For
+                                        Activation </button></a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+    {% endblock body %}

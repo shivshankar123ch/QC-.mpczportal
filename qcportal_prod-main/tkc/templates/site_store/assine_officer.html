@@ -1,0 +1,132 @@
+{% extends 'officer/circle_base.html' %} {% load static %} {% block body %} 
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="card ed-card-block">
+    <div class="card-header">
+        <h2>
+            Assign Officer
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-2">
+            <div class="table-responsive"> 
+                <table class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <tr>
+                            <!-- <th colspan="2">WO Information</th> -->
+                            <th>WO No</th>
+                            <th>Contractor name</th>
+                            <th>Material</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                            <td>{{data.wo.Contract_Number}}</td> 
+                            <td>{{ data.wo.supplier.CompanyName_E}}</td> 
+                            <td>{{ data.wo_material.material_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+    
+        <form action="/tkc/gm_circle_assine_officer/{{data.id}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+         
+        
+
+        <div class="ed-form-block">
+            <div class="ed-form-body border-0 p-0">
+                <div class="form-group">
+                    <label class="">
+                        Officer Name 
+                        <span class="text-danger">*</span> 
+                    </label>
+                    <input type="text" name="name" id="gatepass_num" class="form-control ed-textbox" required="required" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span> 
+                </div>
+
+
+                <div class="form-group">
+                    <label class="">
+                        Officer Descgnation
+                        <span class="text-danger">*</span> 
+                    </label> 
+                    <input type="text" name="designation" placeholder=""  class="form-control ed-textbox"  required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                </div> 
+
+
+                <div class="form-group">
+                    <label class="">
+                        Officer Mobiel Numbner
+                        <span class="text-danger">*</span> 
+                    </label> 
+                    <input type="text" name="mobile" placeholder="" class="form-control ed-textbox"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span> 
+                </div> 
+
+
+                <div class="form-group">
+                    <label class="">
+                        Verification Date
+                        <span class="text-danger">*</span> 
+                    </label> 
+                    <input type="date" name="date" placeholder="" class="form-control ed-textbox"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span> 
+                </div> 
+
+
+
+                <div class="form-group">
+                    <div class="text-right">
+                        <input type="submit" name="submit" onclick="validateForm()" value="Assine Officer" class="btn ed-submit ed-formSubmit " autocomplete="off"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+   
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    {% endblock body %}

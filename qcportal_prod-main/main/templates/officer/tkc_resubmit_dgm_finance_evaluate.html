@@ -1,0 +1,145 @@
+ {% extends 'officer/dgm_finance.html' %} {% load static %} {% block body %}
+<div class="container">
+     <h3 class="font-weight-bolder">Uploaded All Document</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="font-weight-bolder">User All Basics Data</h5>
+        </div>
+        <!-- <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+         <table class="table table-bordered table-responsive">
+                <thead class="table table-dark">
+                  <tr>
+
+                    <th class="text-center" style="width:10px;">
+                        S.No
+                    </th>
+                        <th>
+                            Report Name </th>
+                        <th>
+                            Value </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center" >1</td>
+                        <td>Type of Business</td>
+                        <td><b>{{data.Type_of_business}}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" >2</td>
+                        <td>Authorised Person Name</td>
+                        <td><b>{{data.Authorised_person_E}}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" >3</td>
+                        <td>Company Name</td>
+                        <td><b>{{data.CompanyName_E}}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" >4</td>
+                        <td>Contact Number</td>
+                        <td><b>{{data.ContactNo}}</b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center" >5</td>
+                        <td>Email ID</td>
+                        <td><b>{{data.Email_Id}}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" >6</td>
+                        <td>Vendor Type</td>
+                        <td><b>{{data.User_type}}</b></td>
+                    </tr>
+                <tr></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <h6>Income Last Three Year Uploaded By Contractor</h6>
+        </div>
+        <!-- <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+           <table class="table table-bordered table-responsive">
+                <thead class="table table-dark">
+                    <tr>
+                        <th> Type </th>
+                        <th> Financial Year </th>
+                        <th> Income In Rs </th>
+                    </tr>
+                </thead>
+              <tr></tr>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <h5 class="font-weight-bolder">Document Uploaded By Contractor</h5>
+        </div>
+        <form action="/dgm_finance_evaluate_save/{{data.User_Id}}" method="POST">
+            {% csrf_token %}
+            <div class="table-responsive">
+           <table class="table table-bordered table-hover">
+                <thead class="table table-dark">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> Issued Date </th>
+                            <th> Expired Date </th>
+                            <th> View Document</th>
+                            <th> Status</th>
+                            <th> Action</th>
+                            <th> Remark </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in doc1 %}
+                        <tr>
+                            <td><b>{{data.Types_of_Docs}}</b></td>
+                            <td><b>{{data.Document_Number}}</b></td>
+                            <td><b>{{data.Doc_issue_date|date:"d-M-Y"}}</b></td>
+                            <td><b>{{data.Doc_expiry_date|date:"d-M-Y"}}</b></td>
+                          <td> <a href="{{data.Ddocfile.url}} " target="_self" class="fas fa-eye text-secondary"></a></td>
+                                <td>
+                                  {% if data.Primary_verification_Status == 1 %}
+                                <b>Ok</b>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                <b> Resubmit </b>
+                                {% else %}
+                                <b>Pending</b>
+                                {% endif %}
+                                 </td>
+                            <td>
+                                {% if data.Primary_verification_Status == 1 %}
+                                <b>Accepted</b>
+                                {% else %}
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="form-check-input" id="radio1" name={{name|add:forloop.counter0}} value="OK" checked required>
+                                    <label class="form-check-label" for="radio1">Accepted</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="form-check-input" id="radio2" name={{name|add:forloop.counter0}} value="NOT">
+                                    <label class="form-check-label" for="radio2">Rejected</label>
+                                </div>
+                                {% endif %}
+                            </td>
+                            {% if data.Primary_remark %}
+                            <td colspan="5"><textarea style="min-width:300px;" class="form-control" id="task" name={{forloop.counter0}} rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="{{data.Primary_remark}}"></textarea></td>
+                            {% else %}
+                            <td colspan="5"><textarea style="min-width:300px;" class="form-control" id="task" name={{forloop.counter0}} rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="Write Remark"></textarea></td>
+                            {% endif %}
+                            </tr>
+                             {% endfor %} {% endwith %}
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="button-row d-flex mt-4">
+                <button class="btn bg-gradient-light mb-0 js-btn-prev" type="reset" title="Go Back">Reset</button>
+                <button class="btn bg-gradient-primary ms-auto mb-0" onclick="return confirm('Are you sure you want to submit ?');" type="submit" title="Submit">Submit</button>
+            </div> -->
+        </form>
+    </div>
+</div>
+{% endblock body %}

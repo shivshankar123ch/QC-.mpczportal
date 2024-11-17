@@ -1,0 +1,87 @@
+{% extends 'po/po_approver/approver_base.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 160px;
+
+    margin-top: 8px;
+}
+</style>
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">MRC Status</h3>
+
+         <!-- <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div> -->
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center">
+             <thead class="table-dark">
+                 <tr>
+                     <th >Sr No.</th>
+                     <th >PO No.</th>
+                     <th >DI No.</th>
+                     <th>Vendor Name</th>
+                     <th>Item Name </th>
+                     <th>Item Quantity</th>
+                     <!-- <th>View</th> -->
+                    <th>Action</th>
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in pr %}
+                 <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td><b>{{name.ro.po.po_no}}</b></td>
+                     <td><b>{{name.ro.di_master.erp_di_number}}</b></td>
+                     <td><b>{{name.ro.po.vendor.CompanyName_E}}</b></td>
+                     <td class="project_progress">{{name.ro.offer_item.material.specification}}
+                     </td>
+                     <td>{{name.ro.deliverable_qty}}</td>
+                     <td>
+                        <!-- <a class="btn btn-info btn-sm" target="_blank" href="{{name.ro.di_master.di_doc.url}}" >View DI</a> -->
+                      <!-- </td>
+                      <td> -->
+                      <!-- <a class="btn btn-info btn-sm" target="_blank" href="{{name.ro.po.Po_doc.url}}" >View PO</a> -->
+                      {% if name.ro.mrc_create_flag == True %}
+                      <a class="btn btn-success btn-sm" >MRC Created</a>
+                      {% else %}
+                      <a class="btn btn-danger btn-sm">MRC Not Created</a>
+                      {% endif %}
+                      {% if name.digi_sign_pr %}
+                      <a class="btn btn-info btn-sm" target="_blank" href="{{name.digi_sign_pr.url}}" >View MRC</a>
+                      {% else %}
+                      <a class="btn btn-danger btn-sm">MRC_doc Not Uploaded</a>
+                      </td>
+                    {% endif %}
+                   </tr>
+             {% endfor %}
+
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

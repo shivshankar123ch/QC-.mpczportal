@@ -1,0 +1,297 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+<script>
+  console.log("scripttt")
+  window.onload = function () {
+      var tbcheck = document.getElementById("table").rows.length;
+      console.log("tableee", tbcheck)
+      if (tbcheck < 2) {
+          console.log("comee if")
+          var d = document.getElementById("nextStep3");
+          console.log("ddddddd", d)
+          d.style.setProperty("display", "none", "important");
+      } else {
+          var dd = document.getElementById("nextStep3");
+          dd.style.display == "";
+      }
+}
+</script>
+<div class="ed-information mb-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Advance Details
+          </h2>
+        </div>
+        <!-- --------------------- Step 3 -------------------------------- -->
+        <div class="card-body" id="formStep3">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center " id="table">
+                <thead>
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Advance</th>
+                    <th>Amount(In Percentage)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for Advance in Advance %}
+                  <tr>
+                    <td>
+                      {{forloop.counter}}
+                    </td>
+                    <td>
+                      {{Advance.Name}}
+                    </td>
+                    <td>
+                      {{Advance.Amount_Percentage}}<b> % </b>
+                    </td>
+                    <td>
+                      <div class="poaction-info">
+                        <a href="/fqp/delete_advance/{{wo.id}}/{{Advance.id}}" class="btn ed-submit btn-danger">
+                          <span class="ed-submit-text">
+                            Delete
+                          </span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--</div>-->
+          <form action="/fqp/procurement_generate_wo2/{{wo.id}}" onsubmit="return validateForm()" name="myForm"
+            method="POST">
+            {% csrf_token %}
+            <div class="ed-form-block">
+              <div class="ed-form-title">
+                <h6>
+                  <span class="ed-text">
+                    Contract Advance
+                  </span>
+                </h6>
+              </div>
+              <div class="ed-form-body material-wrapper">
+                <div class="material-elements">
+                  <div class="form-group">
+                    <label class="ed-form-label">
+                      Select Type Of Advance
+                      <span class="text-danger">*</span>
+                    </label>
+                    <select name="item" class="form-control ed-textbox" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()"required>
+                      <option value="">Please Select</option>
+                      {% for data in type %}
+                      <option value="{{data.Name}}">{{ data.Name }}</option>
+                      {% endfor %}
+                    </select>
+                    <span id="selectionn" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="ed-form-label">
+                      Amount(In Percentage) <span class="text-danger">*</span>
+                    </label>
+                    <input name="amount" step="0.01" max="100" min="0" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' type="Number" class="form-control ed-textbox"
+                      autocomplete="off" required />
+                      <span id="amo" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-action text-right">
+                      <button onclick="history.back()" id="btnsave" class="btn ed-submit btn-info">
+                        <span class="ed-submit-text">
+                          Back
+                        </span>
+                      </button>
+
+                      <button type="submit" id="btnsave" class="btn ed-submit btn-info">
+                        <span class="ed-submit-text">
+                          Add More
+                        </span>
+                      </button>
+                      <a href="/fqp/procurement_generate_wo3/{{wo.id}}" class="btn ed-submit ed-submitNext"
+                        id="nextStep3">
+                        <span class="ed-submit-text">
+                          Next
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- --------------------- Step 4 -------------------------------- -->
+      <!-- --------------------- Step 4 -------------------------------- -->
+    </div>
+  </div>
+</div>
+<script>
+  function validateForm(){
+      let select1 = document.forms["myForm"]["item"].value;
+      let select2 = document.forms["myForm"]["amount"].value;
+
+      if (select1 == "") {
+           document.getElementById('selectionn').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('selectionn').innerHTML = "";
+      }
+      if (select2 == "") {
+           document.getElementById('amo').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('amo').innerHTML = "";
+      }
+
+  }
+</script>
+<script>
+  function validate(evt) {
+var theEvent = evt || window.event;
+
+// Handle paste
+if (theEvent.type === 'paste') {
+key = event.clipboardData.getData('text/plain');
+} else {
+// Handle key press
+var key = theEvent.keyCode || theEvent.which;
+key = String.fromCharCode(key);
+}
+var regex = /[0-9]|\./;
+if (!regex.test(key)) {
+theEvent.returnValue = false;
+if (theEvent.preventDefault) theEvent.preventDefault();
+}
+}
+</script>
+<script>
+  // Insert Data
+  $("#btnsave").click(function () {
+    console.log("Save Button Clicked");
+    output = "";
+    let sid = $("#stuid").val();
+    let nm = $("#item").val();
+    let em = $("#amount").val();
+    let pw = $("#passwordid").val();
+    let csr = $("input[name=csrfmiddlewaretoken").val();
+    if (nm == "") {
+      console.log("Please Enter Name");
+    } else if (em == "") {
+      console.log("Please Enter Email");
+    } else {
+      console.log(nm);
+      console.log(em);
+      //console.log(pw);
+      mydata = {
+        stuid: sid,
+        name: nm,
+        email: em,
+        password: pw,
+        csrfmiddlewaretoken: csr,
+      };
+      $.ajax({
+        url: "{% url 'procurement_generate_po' %}",
+        method: "POST",
+        data: mydata,
+        dataType: "json",
+        success: function (data) {
+          //console.log(data);
+          x = data.student_data;
+          if (data.status == "Save") {
+            $("#msg").text("Form Submitted Successfully");
+            $("#msg").show();
+            //console.log(x);
+            for (i = 0; i < x.length; i++) {
+              output +=
+                "<tr><td>" +
+                x[i].id +
+                "</td><td>" +
+                x[i].name +
+                "</td><td>" +
+                x[i].email +
+                "</td><td>" +
+                x[i].password +
+                "</td><td> <input type='button' class='btn btn-warning btn-sm btn-edit' value='Edit'  data-sid=" +
+                x[i].id +
+                "> <input type='button' class='btn btn-danger btn-sm btn-del' value='Delete' data-sid=" +
+                x[i].id +
+                ">";
+            }
+            $("#tbody").html(output);
+            $("#stuid").val("");
+            $("form")[0].reset();
+          }
+          if (data.status == 0) {
+            $("#msg").text("Unable to Save Data");
+            $("#msg").show();
+            $("#stuid").val("");
+            $("form")[0].reset();
+          }
+        },
+      });
+    }
+  });
+
+  // Delete Data
+  $("tbody").on("click", ".btn-del", function () {
+    //console.log("Delete Button Clicked");
+    let id = $(this).attr("data-sid");
+    let csr = $("input[name=csrfmiddlewaretoken").val();
+    //console.log(id);
+    mydata = { sid: id, csrfmiddlewaretoken: csr };
+    mythis = this;
+    $.ajax({
+      url: "{% url 'procurement_generate_po' %}",
+      method: "POST",
+      data: mydata,
+      success: function (data) {
+        //console.log(data);
+        if (data.status == 1) {
+          $("#msg").text("Data Deleted Successfully");
+          $("#msg").show();
+          $(mythis).closest("tr").fadeOut();
+        }
+        if (data.status == 0) {
+          $("#msg").text("Unable to Delete Data");
+          $("#msg").show();
+        }
+      },
+    });
+  });
+
+  // Edit Data
+  $("tbody").on("click", ".btn-edit", function () {
+    //console.log("Edit Button Clicked");
+    let id = $(this).attr("data-sid");
+    let csr = $("input[name=csrfmiddlewaretoken").val();
+    //console.log(id);
+    mydata = { sid: id, csrfmiddlewaretoken: csr };
+    $.ajax({
+      url: "{% url 'procurement_generate_po' %}",
+      method: "POST",
+      data: mydata,
+      dataType: "json",
+      success: function (data) {
+        //console.log(data);
+        $("#stuid").val(data.id);
+        $("#nameid").val(data.name);
+        $("#emailid").val(data.email);
+        $("#passwordid").val(data.password);
+      },
+    });
+  });
+</script>
+</div>
+{% endblock body %}

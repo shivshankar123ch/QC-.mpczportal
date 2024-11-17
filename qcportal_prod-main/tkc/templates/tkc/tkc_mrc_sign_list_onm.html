@@ -1,0 +1,138 @@
+{% extends 'officer/dgm_onm_login.html' %}
+{% load static %}
+{% block heading %} MRC Format {% endblock heading %}
+{% block body %}
+
+
+<div class="p-4" style="background:#fff;">
+
+<div class="table-responsive">
+  <table class="table table-bordered ed-table m-4 " border="2" style="width:100%">
+    
+    {% for data1 in data|slice:":1" %}
+    <tr>
+      <th>Work Order Number
+      </th>
+      <td>{{data1.wo.Contract_Number}}
+      </td>
+    </tr>
+    <tr>
+      <th>WO Subject
+      </th>
+      
+        <td>{{data1.wo.Header.Contract_Description}}
+      </td>
+    </tr>
+    <tr>
+      <th>TKC Firm Name
+      </th>
+      <td>{{data1.supplier.CompanyName_E}}
+      </td>
+    </tr>
+    <tr>
+      <th>WO Date
+      </th>
+      <td>{{data1.wo.Wo_Approved_At}}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-responsive m-4 " border="2" style="width:100%">
+    <thead class="table-dark table">
+      <tr>
+          <th>Sr. No.</th>
+
+          <th>DI Number with Date</th>
+          <th>Offer Number with Date</th>
+          <th>Vendor Name</th>
+          <th>Material Code</th>
+          <th>Material Name</th>
+          
+          <th>Circle</th>
+
+          {% comment %} <th>Action</th> {% endcomment %}
+          <th>Upload Signed MRC</th>
+          <th>MRC Number and Date</th>
+          <th>Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in data %}
+      <tr>
+        <td style="text-align: center;">{{forloop.counter}}</td>
+
+        <td style="text-align: center;">{{data.tkc_di.erp_di_number}},{{data.tkc_di.created_date}}</td>
+        <td style="text-align: center;">{{data.offer_no}}, {{data.created_at}}</td>
+
+        <td style="text-align: center;">{{data.TKCVendor.Vendor}}</td>
+        <td style="text-align: center;">{{data.wo_material.item_code}}</td>
+        <td style="text-align: center;">{{data.wo_material.material_name}}</td>
+
+        <td style="text-align: center;">{{data.circle.Circle_Name_E}}</td>
+
+        {% comment %} {% if data.tkc_mrc_initiate == 1 %}
+        <td style="text-align: center;"><a href="/tkc/format_tk_create_onm/{{data.id}}" class="fas fa-eye text-secondary"> MRC Created </a></td>
+        {% else %}
+        <td style="text-align: center;"><a href="/tkc/format_tk_create_onm/{{data.id}}" class="fas fa-eye text-secondary"> Create MRC </a></td>
+        {% endif %} {% endcomment %}
+
+        {% comment %} <td style="text-align: center;"> <a href="/tkc/upload_digi_tkc_mrc_onm/{{data.id}}">Upload link</a></td> {% endcomment %}
+
+        
+        {% if data.tkc_mrc_initiate == 1 %}
+        {% for cm in cr_mr %}
+          {% if cm.offer_id == data.id %}
+            {% if cm.digi_signflag == 1 %}
+            <td style="text-align: center;"> <a href="{{cm.digi_sign.url}}" target="_blank" class="fas fa-eye text-secondary">Uploaded</a></td>
+            {% else %}
+            <td style="text-align: center;"> <a href="/tkc/upload_digi_tkc_mrc_onm/{{data.id}}">Upload link</a></td>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+          
+        {% else %}
+        <td style="text-align: center;"></td>
+        {% endif %}
+
+
+        {% if data.tkc_mrc_initiate == 1 %}
+        {% for cm in cr_mr %}
+        {% if cm.offer_id == data.id %}  
+          <td style="text-align: center;">{{cm.id}}, {{cm.date}}</td>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+          <td style="text-align: center;"></td>
+        {% endif %}
+
+
+        {% if data.tkc_mrc_initiate == 1 %}
+        {% for cm in cr_mr %}
+        {% if cm.offer_id == data.id %}
+          {% if cm.digi_signflag == 1 %}
+          <td style="text-align: center;">MRC Uploaded</td>
+          {% else %}  
+          <td style="text-align: center;">MRC Created</td>
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+        
+        {% else %}
+        <td style="text-align: center;">Pending</td>
+        {% endif %}
+
+
+
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+</div>
+</div>
+
+{% endblock body %}

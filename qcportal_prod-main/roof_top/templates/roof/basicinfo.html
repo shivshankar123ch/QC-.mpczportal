@@ -1,0 +1,55 @@
+{% extends 'roof/agentbase.html' %} {% load static %} {% block body %}
+
+<form class="multisteps-form__form mb-8" name="myForm" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+    <h5 class="font-weight-bolder mb-0">Basic Details</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Report Name</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp1</td>
+                    <td>&nbsp&nbsp&nbspAgency Name</td>
+                    <td><b>&nbsp&nbsp&nbsp{{userdata.agency_name}}</b></td>
+                </tr>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp2</td>
+                    <td>&nbsp&nbsp&nbspPan Card</td>
+                    <td>&nbsp&nbsp&nbsp{{userdata.pan_card}}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp3</td>
+                    <td>&nbsp&nbsp&nbspContact Number</td>
+                    <td>&nbsp&nbsp&nbsp{{userdata.contact}}</td>
+                </tr>
+                
+
+                <tr></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.container-fluid -->
+    {% if not userdata.profile_complete %}
+    <div class="row">
+        <div class="col-8">
+            <a class="nav-link" href="/roof/roof_secound"> <button style="background-color:#007bff" type="button" class="btn btn-info">Document Upload </button></a>
+        </div>
+    </div>
+    {% endif %}
+
+{% endif %}
+<!---end here-->
+
+
+
+
+<!-- /.content -->
+{% endblock body %}

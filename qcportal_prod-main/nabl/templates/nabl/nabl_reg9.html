@@ -1,0 +1,72 @@
+
+
+
+{% extends 'nabl/nabl_Base.html' %} {% load static%} 
+{% block body %}
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/nabl_reg9.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
+
+</head>
+
+
+<!----start here-->
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h3 class="font-weight-bolder mb-0; text-center">Material Information</h3>
+    <!-- <p class="mb-0 text-sm">Mandatory informations</p> -->
+    <div class="multisteps-form__content ">
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 20px;">
+                    <tr>
+                        <th>Material</th>
+						<th>Specification</th>
+                     
+                        <!-- <th scope="col">Material GTP Doc</th>
+                        <th scope="col">Material Other Doc</th> -->
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in data %}
+                    <tr>
+                        <td>{{ emp.Material_Name }}</td>
+						<td>{{ emp.Material_Specification_Name }}</td>
+                 
+                   
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-row d-flex mt-4">
+            <!-- <button class="btn btn-primary mb-0 js-btn-prev" type="Submit" title="Prev">Add Material</button>
+          <a href="vendor_reg_eleven"><button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" value="Submit" type="button" title="Save & Next">Save & Next</button></a> -->
+            <!-- </div> -->
+            <button class="btn bg-gradient-light mb-0 js-btn-prev" type="Submit"   title="Add Material"><a href="/nabl/add_material"> Add Material</a></button>
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" name="work1" type="submit" onclick="validateForm()" title="Save & Next"><a href="/nabl/nabl_reg10"> Save & Next</a><span id="workk" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span></button>
+</div>
+<!-----end here-->
+
+
+{% endblock body %}

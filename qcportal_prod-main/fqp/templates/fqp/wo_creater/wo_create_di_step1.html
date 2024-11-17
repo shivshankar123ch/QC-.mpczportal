@@ -1,0 +1,229 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Dispatch Instruction {% endblock pagetitle %}
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+
+
+<div class="ed-information mb-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Create Dispatch Instruction
+                    </h2>
+                </div>
+                {% if zone == "EZ" %}
+                <form action="/fqp/create_erp_di_entry/{{wo.id}}/D/{{erp_di_no}}/{{offer_no}}"  method="POST">
+                    {% csrf_token %}
+                    <!-- --------------------- Step 1 -------------------------------- -->
+                    <div class="card-body" id="formStep1">
+                        <div class="ed-form-block">
+                            <div class="ed-form-title">
+                                <h6>
+                                    <span class="ed-text">
+                                        Dispatch Instruction Details
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="ed-form-body">
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        TKC Supplier Name
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox" value="{{wo.supplier.CompanyName_E}}" readonly />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        ERP DI Number 
+                                    </label>
+                                    <input type="text" name="DI_no" class="form-control ed-textbox" 
+                                        onchange="validateForm()" value="{{ di_no}}" autocomplete="off" required="required" />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        DI Subject <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_subject" onchange="validateForm()" value="{{di_subject}}"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="subject" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Letter Prefix <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_prefix" onchange="validateForm()" value="{{ di_no}}"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="prefix" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+            
+                                <div class="form-group">
+                                    <div class="form-action text-right">
+                                        <button type="submit" class="btn ed-submit ed-submitNext"
+                                            onchange="validateForm()" id="nextStep1">
+                                            <span class="ed-submit-text">
+                                                Next
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                <form action="/fqp/create_tkc_di_step1/{{wo.id}}/{{offer_no}}"  method="POST">
+                    {% csrf_token %}
+                    <!-- --------------------- Step 1 -------------------------------- -->
+                    <div class="card-body" id="formStep1">
+                        <div class="ed-form-block">
+                            <div class="ed-form-title">
+                                <h6>
+                                    <span class="ed-text">
+                                        Dispatch Instruction Details
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="ed-form-body">
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        TKC Supplier Name
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox" value="{{wo.supplier.CompanyName_E}}" readonly />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        ERP DI Number
+                                    </label>
+                                    <input type="Number" name="DI_no" class="form-control ed-textbox"
+                                        onchange="validateForm()" autocomplete="off" required="required" />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        DI Subject <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_subject" onchange="validateForm()"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="subject" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Letter Prefix <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_prefix" onchange="validateForm()"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="prefix" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+            
+                                <div class="form-group">
+                                    <div class="form-action text-right">
+                                        <button type="submit" class="btn ed-submit ed-submitNext"
+                                            onchange="validateForm()" id="nextStep1">
+                                            <span class="ed-submit-text">
+                                                Next
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validateForm() {
+        console.log("fireeeeeeeeeee")
+        var two_2 = document.forms["myForm"]["vendor"].value;
+        var two_3 = document.forms["myForm"]["po_no"].value;
+        var two_4 = document.forms["myForm"]["po_subject"].value;
+        var two_5 = document.forms["myForm"]["po_prefix"].value;
+        var two_6 = document.forms["myForm"]["date"].value;
+
+
+
+        if (two_2 == "") {
+            document.getElementById('over').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('over').innerHTML = "";
+        }
+
+        if (two_3 == "") {
+            document.getElementById('number').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('number').innerHTML = "";
+        }
+        if (two_4 == "") {
+            document.getElementById('subject').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('subject').innerHTML = "";
+        } if (two_5 == "") {
+            document.getElementById('prefix').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('prefix').innerHTML = "";
+        }
+        if (two_6 == "") {
+            document.getElementById('po_date').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('po_date').innerHTML = "";
+        }
+
+    }
+</script>
+<script>
+    let dtElem_9 = document.getElementById('futureDate');
+    let maxDate_9 = new Date();
+    dtElem_9.max = formatDate(maxDate_9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+
+{% endblock body %}

@@ -1,0 +1,393 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+    .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 116px;
+}
+</style>
+
+<!-- <style>
+    .select2-container--open .select2-dropdown--below {
+  position: relative;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  position: absolute;
+  top: -27px;
+  border: 0px !important;
+  width: 94%;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+</style> -->
+
+
+<div class="ed-information">
+    <div class="card ed-card-block">
+        <div class="ed-card-inner">
+            <div class="card-header">
+                <h2>
+                    Vendor Details
+                </h2>
+            </div>
+            <div class="card-body">
+                    <div class="container">
+                        <div id="myPopup" class="popup hide">
+                      {% if msg %}
+                      <div class="popup-header text-info">
+                          <img src="https://img.icons8.com/ios/50/000000/new-letter--v2.png" class="mr-3"/>
+                          {{ msg }}
+                          <span class="close toggle" data-target="myPopup">close</span>
+                      </div>
+                      
+                      {% endif %}
+                    </div>
+                </div>
+                <div class="ed-tableinfo-block">
+                    <div class="table-responsive">
+                        <table class="table table-bordered display table-striped text-center" id="add_vendor">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width:3%">
+                                        S.No
+                                    </th>
+                                    <th style="width:30%">
+                                        Work Order Description
+                                    </th>
+                                    <th style="width:20%">
+                                        Vendor Name
+                                    </th>
+                                    <th style="width:20%">
+                                        Material Name
+                                    </th>
+                                    <th style="width:10%">
+                                        Item Code
+                                    </th>
+                                    <th style="width:10%">
+                                        Submit Date
+                                    </th>
+                                    <th style="width:5%">Action</th>
+                                    <th style="width:5%">Approval Status</th>
+                                    <th style="width:10%">View Acceptance/Rejection Docs</th>
+                                    <th style="width:10%">Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for Supply in all_vendor %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{Supply.TKCWoInfo.Header.Contract_Description}}</td>
+                                <td>{{Supply.Vendor.CompanyName_E}}</td>
+                                <td>{{Supply.Material_id.Material_Name}}</td>
+                                <td>
+                                    {% if wo_discom == "CZ" %}
+                                    {{Supply.Material_id.item_code}}
+                                    {% elif wo_discom == "EZ" %}
+                                    {{Supply.Material_id.item_code_ez}}
+                                    {% elif wo_discom == "WZ" %}
+                                    {{Supply.Material_id.item_code_wz}}
+                                    {% endif %}
+                                </td>
+
+                                <td>{{Supply.TKCVendor_Submit_At}}</td>
+
+
+                                <td>{% if not Supply.TKCVendor_Submit %}
+                                    <a href="/tkc/tkc_vendor_delete/{{supplier.id}}/{{Supply.id}}"
+                                        class="btn btn-sm btn-danger">
+                                        Delete
+                                    </a>
+                                    <a href="/tkc/tkc_vendor_approval/{{data.id}}/{{Supply.id}}"
+                                        class="btn btn-sm btn-primary">
+                                        Submit
+                                    </a>
+
+                                    {% else %}
+                                    <span class="btn btn-sm btn-success">Submitted</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if Supply.TKCVendor_Approved_Status == 0 and Supply.TKCVendor_Submit == 1 %}
+                                    <span class="btn btn-sm btn-warning">
+                                        Pending
+                                    </span>
+
+                                    {% elif Supply.TKCVendor_Approved_Status == -1 %}
+
+                                    <span class="btn btn-sm btn-danger">
+                                        Rejected
+                                    </span>
+
+                                    {% elif Supply.TKCVendor_Approved_Status == 1 %}
+
+                                    <span class="btn btn-sm btn-success">
+                                        Approved
+                                    </span>
+                                    </a>
+
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if Supply.other_acceptance_rejection_doc %}
+                                    <a href={{Supply.other_acceptance_rejection_doc.url}}>
+                                        <span class="btn btn-sm btn-info">View</span>
+                                    </a>
+                                    {% else %}
+
+                                    <span class="btn btn-danger btn-sm">
+                                        Not Uploaded
+                                    </span>
+
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if Supply.TKCVendor_Approved_Remark %}
+                                    <span class="btn btn-secondary btn-sm">
+
+                                        {{ Supply.TKCVendor_Approved_Remark}}
+                                    </span>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+
+
+                        <form action="/tkc/add_vendor/{{data.id}}" method="POST" name="myForm"
+                            onsubmit="return validateForm()" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- /.card-header -->
+                            <div class="card-body bg-light">
+                                <table id="example2" class="table table-bordered display table-hover ">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th colspan="2">
+                                                <label for="exampleInputEmail1"> Upload Vendor Details </label>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label for="exampleInputEmail1"> Select Work Order Material<span
+                                                        style="color: red;">*</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <select class="form-control" name="v_id" id="Schedule"
+                                                    onchange="check(event)">
+                                                    <option value=""  onkeyup="validateForm()" onfocus="validateForm()"
+                                                        Selected>
+                                                        <b>Choose
+                                                            Material</b>
+                                                    </option>
+
+                                                    {% for v in list_schedule_supply_item %}
+
+                                                    <option id="one" name="name1" value="{{v.item_code}}">
+                                                        <b>{{v.item_code}} |
+                                                            {{v.material_name}}</b></option>
+                                                    {% endfor %}
+                                                </select>
+                                                <span id="select1" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="exampleInputEmail1">Select Vendor </label><span
+                                                    style="color: red;">*</span>
+                                            </td>
+                                            <td>
+                                                <select class="form-control" name="vendor" onkeyup="validateForm()"
+                                                    onfocus="validateForm()" onchange="validateForm()" id="material1">
+                                                    <option Selected> <b>Choose Vendor</b></option>
+                                                </select>
+                                                <span id="select2" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label for="exampleInputEmail1">Vendor GTP Drawing</label><span
+                                                    style="color: red;">*</span>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="gtp_file" id="upload_file"
+                                                    onkeyup="validateForm()" onfocus="validateForm()"
+                                                    onchange="validateForm()" required class="form-control">
+                                                <span id="file_up" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label for="exampleInputEmail1">Other Document</label>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="other_file" id="other_file"
+                                                    onkeyup="validateForm()" onfocus="validateForm()"
+                                                    onchange="validateForm()" class="form-control">
+                                                <span id="file_up" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" id="submit" onclick="validateForm()"
+                                    class="btn btn-info mr-5 mt-4"> ADD</button>
+                                <!--    <input type="button" class="btn ed-submit ed-submits btn-primary mr-2 mb-2"  value="Add Vendor" onclick="showDiv()"/>-->
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.card-body -->
+<script>
+    $(document).ready( function () {
+    $('#add_vendor').DataTable();
+} );
+</script>
+<script>
+    // let popupId = document.getElementById("").innerHTML;
+    setTimeout(function(){ $('#myPopup').hide() }, 3000);
+
+
+ </script>
+
+<script>
+
+    $("#Schedule").select2({
+        placeholder: " Select Work Order Material",
+        allowClear: true
+    });
+</script>
+
+<script>
+
+
+    function check(event) {
+
+        let id_1 = event.target.value;
+        console.log(id_1)
+
+        $.ajax({
+            type: 'get',
+            url: `https://qcportal.mpcz.in/api/vendor_materials/${id_1}`,
+
+
+            success: function (data) {
+                var html = '';
+
+                data.data.forEach(element => {
+
+
+                    if (element.user_id.cgm_approval == '1') {
+
+
+                        html = html + (`<option value="${element.id}">${element.user_id.CompanyName}</option>`);
+                    }
+
+                });
+                $('#material1').html(html);
+
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        })
+
+    }    
+</script>
+
+<script>
+    function validateForm() {
+
+        let name = document.forms["myForm"]["v_id"].value;
+        let name_v = document.forms["myForm"]["vendor"].value;
+        let file_upload = document.forms["myForm"]["gtp_file"].value;
+        let fileee = document.getElementById("upload_file").value;
+        var allowedExtensions = /(\.pdf)$/i;
+        let fileInput_Result1 = allowedExtensions.test(fileee);
+
+
+        if (name == "") {
+            document.getElementById('select1').innerHTML = "Please fill the required details";
+            return false;
+        } else {
+            document.getElementById('select1').innerHTML = "";
+        }
+
+        if (name_v == "") {
+            document.getElementById('select2').innerHTML = "Please fill the required details";
+            return false;
+        } else {
+            document.getElementById('select2').innerHTML = "";
+        }
+
+        if (file_upload == "") {
+
+            document.getElementById('file_up').innerHTML = "Please the Upload file(In .pdf format)";
+            return false;
+        } else {
+            //document.getElementById('Twenty_two').innerHTML = "";
+            if (fileInput_Result1 == false) {
+                document.getElementById('file_up').innerHTML = "  Please Upload valid file format(In .pdf) ";
+                return false;
+            } else {
+                // document.getElementById('file1').innerHTML = "";
+                const oFile = document.getElementById("upload_file").files[0].size / 1024 / 1024;
+                if (oFile > 2) {
+                    alert("File size must be less than or equal to 2 MB");
+                    document.getElementById("upload_file").value = "";
+                    return false;
+
+                } else {
+                    document.getElementById('file_up').innerHTML = "";
+                }
+            }
+        }
+
+    }
+</script>
+
+
+<script>
+    $("#Schedule").select2({
+        placeholder: "Select work order",
+        allowClear: true
+    });
+
+
+</script>
+
+
+{% endblock body %}

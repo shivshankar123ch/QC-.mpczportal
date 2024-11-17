@@ -1,0 +1,266 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+
+
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            RCA Rejected Dispatch
+        </h2>
+    </div>
+    <div class="card-body mb-4">
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Work Order Information
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Work Order No
+                        </label>
+                        <input type="text" class="form-control ed-textbox"
+                            value="MP{{info.rca_cell.user_zone}}00{{ ro.wo.id}}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA Vendor Company name
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.vendor_id.CompanyName_E}}"
+                            readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                Description
+                            </th>
+                            <th class="text-center">
+                                Quantity
+                            </th>
+                            <!--<th class="text-center">-->
+                            <!--    Rate -->
+                            <!--</th>-->
+                            <!--<th class="text-center">-->
+                            <!--    Total amount-->
+                            <!--</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!-- <td>{{data.rate}}</td>
+                            <td>{{data.total_rate}}</td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- <table class="table table-striped m-4 " border="2" style="width:90%">
+                <thead class="bg-primary">
+                <tr>
+                <th> Rating </th>
+                <th> XMR Code </th>
+                <th> XMR Type </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in xmr %}
+                <tr>
+                <td>{{data.material.rating}}</td>
+                <td>{{data.xmr}}</td>
+                <td>
+                {% if data.new_design == 1 %}
+                New Design
+                {% elif data.old_l1 == 1 %}
+                Old L1
+                {% elif data.old_l2 == 1 %}
+                Old L2
+                {% endif %}
+                </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                </table> -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th> Gatepass ID. </th>
+                            <th> Gatepass No. </th>
+                            <th> Gatekeeper Name </th>
+                            <th> Vehicle No. </th>
+                            <th> Driver Name </th>
+                            <th> Driver Phone </th>
+                            <th> Gatepass Date: </th>
+                            <th> Material Received By </th>
+                            <th> Outward Quantity </th>
+                            <th> Driver ID </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in gp %}
+                        <tr>
+                            <td>{{data.id}}</td>
+                            <td>{{data.gatepass_num}}</td>
+                            <td>{{data.gatekeeper_name}}</td>
+                            <td>{{data.vehicle_no}}</td>
+                            <td>{{data.driver_name}}</td>
+                            <td>{{data.driver_phone}}</td>
+                            <td>{{data.gatepass_date}}</td>
+                            <td>{{data.material_rec_by}}</td>
+                            <td>{{data.outward_quantity}}</td>
+                            <td>
+                                <a href="{{data.driver_aadhar.url}}" class="ed-links text-info">
+                                    <span class="btn btn-info">
+                                      
+                                        View
+                                        file
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <!-- <th><input type="checkbox"></th> -->
+                            <th>XMR</th>
+                            <th>Rating</th>
+                            <th>Gatepass No.</th>
+                            <!-- <th>Uneconomical/Repaired Status</th> -->
+                            <th>XMR Type </th>
+                            <th>XMR Submit</th>
+                            <th>Remark</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in xmr %}
+                        <tr>
+                            <form action="/po/rca_as_rejected_dispatch_accept/{{ro.id}}" method="POST">
+                                {% csrf_token %}
+                                <!-- <td><input type="checkbox"></td> -->
+                                <td>{{a.xmr}}</td>
+                                <td>{{a.material.rating}}</td>
+                                <td>{{a.gatepass_details.id}}</td>
+                                <!-- <td>
+                                    {% if a.uneco_status == 1 %}
+                                    Uneconomical
+                                    {% else %}
+                                    Repaired
+                                    {% endif %}
+                                </td> -->
+                                <td>
+                                    {% if a.new_design == 1 %}
+                                    New Design
+                                    {% elif a.old_l1 == 1 %}
+                                    Old L1
+                                    {% elif a.old_l2 == 1 %}
+                                    Old L2
+                                    {% elif a.design_non_star == 1 %}
+                                    Non Star(Old Design)
+                                    
+
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if a.xmr_rej_gp_flag %}
+                                    submitted
+                                    {% else %}
+                                    <label>
+                                        <input type="checkbox" id="xmr_det" name="xmr_det" value="{{a.id}}">
+                                    </label>
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+                                    {% if not a.xmr_rej_gp_flag %}
+                                    <textarea class="form-control" id="task" name={{a.xmr}} rows="1"
+                                        placeholder="Write Remark"></textarea>
+                                    {% else %}
+                                    {{a.xmr_rej_gp_remark}}
+                                    {% endif %}
+                                </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-action text-right">
+                <button type="Submit" class="btn btn-secondary   mr-2">Submit</button>
+                <a class="btn btn-info " href="/po/rca_as_gen_gatepass/{{ro.id}}">
+                    Gatepass
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock body %}

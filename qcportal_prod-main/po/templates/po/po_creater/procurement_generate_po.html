@@ -1,0 +1,168 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Purchase Order {% endblock pagetitle %}
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+
+
+<div class="ed-information mb-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Create Purchase Order
+                    </h2>
+                </div>
+                <form action="/po/procurement_generate_po" onsubmit="return validateForm()" name="myForm" method="POST">
+                    {% csrf_token %}
+                    <!-- --------------------- Step 1 -------------------------------- -->
+                    <div class="card-body" id="formStep1">
+                        <div class="ed-form-block">
+                            <div class="ed-form-title">
+                                <h6>
+                                    <span class="ed-text">
+                                        Vendor Details
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="ed-form-body">
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Select Vendor Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="vendor" class="form-control ed-textbox" id="name"
+                                        onchange="validateForm()" required="required">
+                                        <option value="">Please Select</option>
+                                        {% for data in vendor %}
+                                        <option value="{{data.User_Id}}">{{ data.CompanyName_E }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <span id="over" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        ERP PO Number
+                                    </label>
+                                    <input type="Number" name="po_no" class="form-control ed-textbox"
+                                        onchange="validateForm()" autocomplete="off" required="required" />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        PO Subject <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="po_subject" onchange="validateForm()"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="subject" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Letter Dispatch No <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="po_prefix" onchange="validateForm()"
+                                        class="form-control ed-textbox" autocomplete="off" required="required" />
+                                    <span id="prefix" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        PO Approval Date <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="date" name="date" id="futureDate" class="form-control ed-textbox"
+                                        onchange="validateForm()" autocomplete="off" onkeypress="return false" required="required" onkey />
+                                    <span id="po_date" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-action text-right">
+                                        <button type="submit" class="btn ed-submit ed-submitNext"
+                                            onchange="validateForm()" id="nextStep1">
+                                            <span class="ed-submit-text">
+                                                Next
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validateForm() {
+        //console.log("fireeeeeeeeeee")
+        var two_2 = document.forms["myForm"]["vendor"].value;
+        var two_3 = document.forms["myForm"]["po_no"].value;
+        var two_4 = document.forms["myForm"]["po_subject"].value;
+        var two_5 = document.forms["myForm"]["po_prefix"].value;
+        var two_6 = document.forms["myForm"]["date"].value;
+
+
+
+        if (two_2 == "") {
+            document.getElementById('over').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('over').innerHTML = "";
+        }
+
+        if (two_3 == "") {
+            document.getElementById('number').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('number').innerHTML = "";
+        }
+        if (two_4 == "") {
+            document.getElementById('subject').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('subject').innerHTML = "";
+        } if (two_5 == "") {
+            document.getElementById('prefix').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('prefix').innerHTML = "";
+        }
+        if (two_6 == "") {
+            document.getElementById('po_date').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('po_date').innerHTML = "";
+        }
+
+    }
+</script>
+<script>
+    let dtElem_9 = document.getElementById('futureDate');
+    let maxDate_9 = new Date();
+    dtElem_9.max = formatDate(maxDate_9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+
+{% endblock body %}

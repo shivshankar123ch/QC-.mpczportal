@@ -1,0 +1,408 @@
+
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+
+{% load mathfilters %}
+<html lang="en">
+
+<!-- <head>
+    <title>Dispatch Instructions pdf</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+   
+    <style>
+        th,
+        td,
+        p {
+            font-size: 12px;
+            line-height: 24px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            vertical-align: middle;
+        }
+        #options {
+            align-content:center;
+            align-items:center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+
+<div class="certificate-info">
+    <div class="card ed-card-block">
+        <div class="card-body">
+            <div id="printid" class="options-print">
+                <div class="po-logo"> 
+                    {% if po_data.discom.Discom_Header %}
+                    <img src="{{po_data.discom.Discom_Header.url}}" class="img-fluid cgm-logo w-100" alt="" /> 
+                    {% endif %}
+                </div>
+                <table cellpadding=0 cellspacing=0 class="table w-100 mb-3">
+                    <tr>
+                        <td class="text-left w-55 pl-0 border-0">
+                            <p class="m-0 text-left">
+                                {{di_update_data.prefix}}/{{di_update_data.erp_di_number}}
+                            </p>
+                        </td>
+    
+                        <td class="text-right w-45 text-right border-0  pr-0">
+                            <p class="m-0 text-right ">
+                                {{po_data.discom.Discom_location}}, Dated: {{date|date:"d-M-Y"}}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <p class="m-0">
+                    To,
+                </p>
+
+                <table cellpadding=0 cellspacing=0 class="table cgm-region-regions mb-3">
+                    <tr>
+                        <td class="text-left w-55 pl-0 border-0">
+                            <p class="m-0 text-left">
+                                    {{po_data.vendor.CompanyName_E}},<br>
+                                    {{address.Company_add_1}}<br>
+                                    {{address.Company_add_2}}<br>
+                                    {{address.Company_dist}},{{address.Company_state}} - {{address.Company_pin_code}}<br>
+                                    Reg.no.-{{po_data.vendor.Authentication_id}}
+                                </p>
+                            </td>
+
+                            <td class="text-right w-45 text-right  pr-0 border-0">
+                                <p class="m-0" style="display: inline-block;">
+                                    <b>
+                                        ERP P.O. No. {{di_update_data.po_no}} <br>
+                                        ERP D.I. No. {{di_update_data.erp_di_number}}<br>
+                                        Offer ID: MP{{di_update_data.zone}}{{di_update_data.id}}<br>
+                                        Offer Date: {{date}} <br>
+                                        Scheme Name & Code: {{di_update_data.scheme_name}}/{{di_update_data.scheme_code}}
+                                    </b>
+                                </p>
+                                <p class="m-0">
+                                    <b> Email :- </b>
+                                    <span class="pl-2">
+                                        {{user.Email_Id}}
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <p class="mb-2">
+                        <b> Sub :- </b>
+                        <span class="pl-2">
+                            {{di_update_data.di_subject}}
+                        </span>
+                    </p>
+                    <p class="mb-2">
+                        <b>Terms and conditions :-</b>
+                        <span>
+                            {{di_update_data.term_and_condition|safe}}
+                        </span>
+                    </p> 
+                    <p class="mb-2">
+                        <b>Material Details </b>
+                    </p>    
+                    <table class="table border-0 mb-2 w-100">
+                         {% for data1 in update_po_material_offer %}
+                         <tr>
+                            <td class="p-0 border-0">
+                                <div class="border w-100 p-2 bordered-black mb-2"> 
+                                    <table class="table border-0 w-100 m-0">
+                                        <tr>
+                                            <th class="w-30 border-0">
+                                                Name of Item :- 
+                                            </th>
+                                            <td class="w-70 border-0">
+                                                <p class="m-0">  
+                                                    {{data1.material.specification}} 
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="w-30 border-0"> 
+                                                Total Quantity :- 
+                                            </th>
+                                            <td class="w-70 border-0">
+                                                <p class="m-0">
+                                                    {{data1.material.Quantity}}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="w-30 border-0"> 
+                                                Remaining Quantity :- 
+                                            </th>
+                                            <td class="w-70 border-0">
+                                                <p class="m-0">
+                                                    {{data1.remaining_qty}}
+                                                </p>
+                                            </td>
+                                        </tr> 
+                                    </table>
+                                    <table class="table table-bordered text-left w-100 m-0">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th style="w-5">
+                                                    Sr No.
+                                                </th> -->
+                                                <!-- <th style="w-45">
+                                                    Particular
+                                                </th> -->
+                                                <th class="w-70">
+                                                    Name of consignee GM/EE (Stores)
+                                                </th>
+                                                <th class="w-30">
+                                                    Qty. to be dispatched in <br>
+                                                    (Nos.)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            {% for data in AreaStroeData %}
+                                            {% if data1 == data.offer_item %}
+                                            <tr>
+                                                <!-- <td>{{forloop.counter}}</td> -->
+                                                <!-- <td style="text-align: center;">{{data.offer_item.material.specification}} </td> -->
+                                                <td>{{data.areastore}} </td>
+                                                <td>{{data.deliverable_qty}}</td>
+                                                <!-- <td>{{data.offer_item.material.Quantity}}</td> -->
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>  
+                        </tr> 
+                        {% endfor %}
+                    </table> 
+                    <br><br>
+                    <div class="ed-authorise-info mt-5 mb-2">
+                        <div class="ed-authorise-inner text-right">
+                            <h6 class="d-inline-block text-center">
+                                <b>
+                                    <!-- Chief Engineer (Purchase) <br> -->
+                                    <!-- {{po_data.discom.Po_Main_Sign}} -->
+                                    {{sign}}
+                                    <br>
+                                    <!-- {{po_data.discom.Discom_Short_Name}} -->
+                                    {{p_name}}
+                                </b>
+                            </h6>
+                        </div> 
+                    </div> 
+                    <p class="mt-2 mb-1">
+                        <b> Copy to :-</b>
+                    </p>
+                    <table class="table table-bordered ed-Schedule-info">
+                        <thead>
+                            <tr>
+                                <th class="w-5">
+                                    Sr. No
+                                </th>
+                                <th class="w-95">
+                                    Copy To
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in copy %}
+                            <tr>
+                                <td>
+                                    <p class="m-0 text-center">
+                                        {{forloop.counter}}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class="m-0">
+                                        {{data.copy}}
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <br><br>
+                    <div class="ed-authorise-info mt-3 mb-2">
+                        <div class="ed-authorise-inner text-right">
+                            <h6 class="d-inline-block text-center">
+                                <b>
+                                    <!-- Addl. Chief Engineer (purchase) <br> -->
+                                    <!-- {{po_data.discom.Po_Copy_To_Sign}} -->
+                                    {{copy_sign}}
+                                    <br>
+                                    <!-- O/o  -->
+                                    <!-- {{po_data.discom.Discom_Short_Name}} -->
+                                    {{p_name}}
+                                </h6>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="form-action mb-5" id="printactions">
+                        <div id="options" class="text-center "> 
+                            <!--<input id="printpagebutton" class="btn btn-primary" style="text-align: center; font-size: 20px;" type="button" value="Print" onclick="printDiv(printid)"/>-->
+                            <!-- <input onclick="printDiv('printid')" type="button" value="Print" class="btn ed-submits btn-primary ml-2" onclick="printpage()"> -->
+                            <input onclick="windoPrint()" type="button" value="Print" class="btn ed-submits btn-primary ml-2" onclick="printpage()">
+                            
+
+
+                            <!--
+                                <input id="printpagebutton" class="btn btn-primary btn-print" type="button" value="Print Order" onclick="printpage()" />
+                            -->
+                            <a href="/po/send_to_approval_di/{{di_update_data.id}}/{{di_update_data.erp_di_number}}">
+                                <input id="printpagebutton1" type="Submit" class="btn ed-submits ed-formSubmit"
+                                    type="button" value="Send DI For Approval" onclick="return(confirm('Are you sure you want to Send DI for Approval ?'))"/>
+                    
+                            </a>
+                        </a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function printpage() {
+        var printButton = document.getElementById("printpagebutton");
+        printButton.style.visibility = 'hidden';
+        window.print()
+        printButton.style.visibility = 'visible';
+    }
+</script>
+
+
+ <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+
+
+
+        <!-- <script>
+        // function printpage() {
+        //     //Get the print button and put it into a variable
+        //     var printButton1 = document.getElementById("printpagebutton1");
+        //     var printButton = document.getElementById("printpagebutton");
+        //     //Set the print button visibility to 'hidden'
+        //     printButton1.style.visibility = 'hidden';
+        //     printButton.style.visibility = 'hidden';
+        //     //Print the page content
+        //     window.print()
+        //     printButton.style.visibility = 'visible';
+        //     printButton1.style.visibility = 'visible';
+        // }
+    
+        // function add_fields() {
+        //     document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+        // }
+    
+        // function printpage() {
+        //     //Get the print button and put it into a variable
+        //     var printButton1 = document.getElementById("printpagebutton1");
+        //     var printButton = document.getElementById("printpagebutton");
+        //     //Set the print button visibility to 'hidden'
+        //     printButton1.style.visibility = 'hidden';
+        //     printButton.style.visibility = 'hidden';
+        //     //Print the page content
+        //     window.print()
+        //     printButton.style.visibility = 'visible';
+        //     printButton1.style.visibility = 'visible';
+        // }
+        // function add_fields1() {
+        //     document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+        // }
+    </script>-->
+    
+<script>
+
+    function windoPrint() {
+        document.getElementById('printactions').style.display = 'none';
+        document.getElementById('edSidebar').style.display = 'none';
+        document.getElementById('edHeader').style.display = 'none';
+        document.getElementById('edContainer').style.paddingLeft = '0';
+        document.getElementById('edContainer').style.paddingTop = '0';
+        document.getElementById('edContainer').style.paddingRight = '0';
+        $('.ed-pagetitle-block').hide();
+        $('.ed-footer-block').hide();
+        $(".ed-card-block").css({ "border": "0", "box-shadow": "none" });
+
+        window.print();
+        document.getElementById('printactions').style.display = 'block';
+        document.getElementById('edSidebar').style.display = 'block';
+        document.getElementById('edHeader').style.display = 'block';
+        document.getElementById('edContainer').style.paddingLeft = '265px';
+        document.getElementById('edContainer').style.paddingTop = '95px';
+        document.getElementById('edContainer').style.paddingRight = '16px';
+        $('.ed-pagetitle-block').show();
+        $('.ed-footer-block').show();
+        $(".ed-card-block").css({ "border": "0", "box-shadow": "0px 0px 6px 1px rgb(30 30 30 / 10%)" });
+    }
+
+</script>
+
+
+<!-- <style>
+        .ed-wrapper-block .ed-sidebar-block {
+            display: none;
+        }
+
+        .ed-wrapper-block .ed-wrapper-contant {
+            padding: 10px;
+        }
+
+        .ed-wrapper-block .ed-header-block {
+            display: none;
+        }
+
+        .ed-pagetitle-block {
+            display: none;
+        }
+
+        .ed-footer-block {
+            display: none;
+        }
+    </style> -->
+
+<style>
+    .certificate-info * {
+        font-size: 14px !important;
+        word-break: normal !important;
+        word-break: break-all !important;
+        white-space: normal !important;
+    line-height: 22px;
+    }
+    .certificate-info td, .certificate-info th {
+    padding: 4px;
+    /* border:0; */
+}
+.bordered-black {
+    border: 1px solid #263544 !important;
+} 
+/* 
+.table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered td {
+    border: 1px solid #dee2e6;
+} */
+</style>
+
+{% endblock body %}

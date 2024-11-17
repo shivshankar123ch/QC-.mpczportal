@@ -1,0 +1,136 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                       Receiving Details Data for DI {{di_no}}.
+                                    </h2>
+                                </div>
+
+   <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Offer No.</th>
+                <th>Work Order No.</th>
+                <th>DI No.</th>
+                <th>Itemcode</th>
+                <th>Item_Description</th>
+                <th>Receiving No.</th>
+                <th>Receiving Delievery Date.</th>
+                <th>Receiving Location.</th>
+                <th>Received Quantity</th>
+                <th>Delievery Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if receiving_details_data|length > 1 %}
+            {% for Data in receiving_details_data %}
+
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{offer_no}}
+                </td>
+                <td>
+                    {{Data.wo.Contract_Number}}
+                </td>
+                <td>
+                    {{Data.erp_di_number}}
+                </td>
+                <td>
+                    {{Data.receiving_item_code}}
+                </td>
+                <td>
+                    {{Data.receiving_item_code_desc}}
+                </td>
+                 <td>
+                    {{Data.receiving_ref_number}}
+                </td>
+                <td>
+                    {{Data.rec_delievery_date}}
+                </td>
+                <td>
+                    {{Data.receiving_location}}
+                </td> 
+                <td>
+                    {{Data.receiving_quantity}}
+                </td> 
+                <td>
+                    {{Data.rec_delievery_date}}
+                </td> 
+             
+            </tr>
+{% endfor %}
+{% else %}
+<tr>
+    <td>
+        {{forloop.counter}}
+    </td>
+       <td>
+        {{offer_no}}
+    </td>
+    <td>
+        {{receiving_details_data.first.wo.Contract_Number}}
+    </td>
+    <td>
+        {{receiving_details_data.first.erp_di_number}}
+    </td>
+    <td>
+        {{receiving_details_data.first.receiving_item_code}}
+    </td>
+    <td>
+        {{receiving_details_data.first.receiving_item_code_desc}}
+    </td>
+     <td>
+        {{receiving_details_data.first.receiving_ref_number}}
+    </td>
+    <td>
+        {{receiving_details_data.first.rec_delievery_date}}
+    </td>
+    <td>
+        {{receiving_details_data.first.receiving_location}}
+    </td> 
+    <td>
+        {{receiving_details_data.first.receiving_quantity}}
+    </td> 
+    <td>
+        {{receiving_details_data.first.rec_delievery_date}}
+    </td> 
+ 
+</tr>
+{% endif %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

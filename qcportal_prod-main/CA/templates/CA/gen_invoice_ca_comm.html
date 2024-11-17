@@ -1,0 +1,482 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %} {% block a %} <span class="ms-1 font-weight-bold">{{a.Name}}</span> {% endblock %}
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    .column {
+        float: left;
+        width: 20%;
+        padding: 5px;
+    }
+    
+    .column1 {
+        float: left;
+        width: 80%;
+        padding: 5px;
+    }
+    /* Clearfix (clear floats) */
+    
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+
+
+<script>
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+
+    }
+</script>
+
+<form method="POST" action="gen_invoice_ca_comm" style="background: white;">
+    {% csrf_token %}
+    <div class="row">
+        <!-- <div class="column">
+            <img src="https://pbs.twimg.com/profile_images/905356038416678912/f_Wq42vL_400x400.jpg" alt="Snow" style="width:95%">
+        </div> -->
+
+        <div class="column1"><br><b>
+        
+                        &nbsp;<centre><h2>Invoice Tax.</h2></centre>
+                </div>
+            </b>
+            <b>
+                <p align="justify">
+                    <font size="+2">
+                </p>
+                </font>
+            </b>
+            <div style="position:relative; left:220px; top:2px"> <b>
+                    <p align="justify">
+                        <font size="+2">
+                    </p>
+                    </font>
+                </b></div>
+            <div style="position:relative; left:300px; top:2px"> <b>
+                    <p align="justify">
+                        <font size="+2">
+                    </p>
+                    </font>
+                </b></div>
+            <div style="position:relative; left:140px; top:2px"> <b>
+                    <p align="justify">
+                        <font size="+2">
+                    </p>
+                    </font>
+                </b></div>
+
+        </div>
+
+    </div>
+    <hr size="2" width="100%" color="black">
+
+    <div class="mx-auto" style="width: 85%;">
+        {% for data in data %}
+        <TABLE cellpadding=0 cellspacing=0 class="t0">
+            <TR>
+                <TD style="width: 650px;" class="tr0 td0">
+                    <P class="p6 ft10">
+                        <NOBR><b><b>{{data.Name}}</b><b></b>
+                        </NOBR>
+                    </P>
+                    <!-- <P class="p6 ft10"><NOBR> Work Order No-- <b>MPCZOO{{vd.id}}</b></NOBR>
+                    </P> -->
+                </TD>
+                <TD class="tr0 td1">
+                    <P class="p7 ft10"><b>{{data.Customer_payment_date}}</b> Report Date:<b>May 25, 2022
+
+                        </b></P>
+                </TD>
+            </TR>
+        </TABLE>
+
+        <TABLE cellpadding=0 cellspacing=0 class="t0">
+            <TR>
+                <TD class="tr1 td0">
+                    <b><P class="p6 ft11">Address:-</P></b>
+                    <P class="p6 ft11">{{data.Add1}}</P>
+
+                </TD>
+                <TD class="tr1 td1">
+                    <P class="p6 ft12">&nbsp;</P>
+                </TD>
+            </TR>
+            <TR>
+
+            </TR>
+            <TR>
+                <TD class="tr3 td0">
+                    <P class="p8 ft11">
+                        {{data.Pincode}}
+                        <br>
+                        <br>
+                        <!-- <b>Email:{{oil.ro.wo.vendor_id.Email_Id }}</b> -->
+                    </P>
+                </TD>
+            </TR>
+            <!-- <TR>
+                <TD class="tr3 td1">
+                    <P class="p6 ft0">Email--<A
+                            href="mailto:agarwal.industries@ymail.com">{{vd.vendor_id.Email_Id}}</A></P>
+                </TD>
+            </TR> -->
+            <TR>
+                <!-- <TD class="tr3 td0">
+                    <P class="p8 ft11">{{address.Company_add_2}} {{address.Company_dist }} {{address.Company_state }}
+                        {{address.Company_pin_code }}</P>
+                </TD> -->
+                <TD class="tr3 td1">
+                    <P class="p9 ft0"></P>
+                </TD>
+            </TR>
+        </TABLE>
+        {% endfor %}
+        <!-- {% for data in data1 %} -->
+
+        <table style="width:100%" border="1">
+            <tr>
+                <th>Billed To:</th>
+                <th>MPEB(commerical section)</th>
+                <th>GSTIN:-</th>
+                <th>{{data.Customomer_Id}}</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>State </td>
+                <td>{{data.state}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Invoice No.</td>
+                <td>{{data.Is_process}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>invoice Trems</td>
+                <td>{{data.date}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Invoice No.</td>
+                <td>{{data.Is_process}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Payment</td>
+                <td>{{data.a}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>GSTIN:</b></td>
+                <td>
+                    <b>{{data.Customomer_Id}}<b></td>
+                <td>service NO.</td>
+                <td>{{data.amount}}</td>
+            </tr>
+        </table></br>
+
+        <!-- {% endfor %} -->
+        <table class="table-bordered" style="width:100%" border="1">
+            <tr>
+              <th>S.NO.</th>
+              <th>Discription</th> 
+              <th>N/A</th>
+              <th>Ammount</th>
+
+
+
+            </tr>
+            <tr>
+                <td>1.</td>
+
+                <td>Commision For Bill Collection</td>
+                <td>N/A</td>
+
+                <td onclick="sum()" id="a1">{{commission_amount}}</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>Add:CGST</td>
+                <td></td>
+                <td id="a2">{{commission_amount}}</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>Add:SGST</td>
+                <td></td>
+                <td>{{k}}</td>
+
+            </tr>
+
+
+            <tr>
+                <td></td>
+                <td>Add:TDS</td>
+                <td></td>
+                <td>{{a.tds}}</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td><b>Grand Total</b></td>
+                <td></td>
+                <td><b>{{add}}</b>
+                </td>
+
+            </tr>
+        </table>
+        </br>
+
+
+
+        {% for data in data %}
+        <table style="width:100%" border="1">
+            <tr>
+                <b>
+                    <th>Bank Details:</th><br>
+                    <th></th></b>
+
+            </tr>
+            <tr>
+                <td>
+                    <b>Bank Name</td></b>
+                    <td>{{data.Bank_name}}</td>
+            </tr>
+            <tr>
+
+                <td>
+                    <b>Account No.:</td></b>
+                    <td>{{data.Account_Number}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Account Holder Name:</td></b>
+                    <td>{{data.Account_Holder_Name}}</td>
+            </tr>
+            <tr>
+
+                <td>
+                    <b>RTGS/NEFT IFSC Code:</td></b>
+                    <td>{{data.IFSC}}</td>
+            </tr>
+            <tr>
+
+
+            </tr>
+
+
+        </table>
+        {% endfor %}
+
+        </br>
+
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+                    text-indent:0in'></p>
+        <table class="table  table-borderless m-1" style="width:50%">
+            <thead>
+                <tr>
+
+                    <th style="width:2%">
+
+                    </th>
+                    <th style="width: 80%">
+
+                </tr>
+            </thead>
+            <tbody>
+                <b></b> {% for data in schedule %}
+                <tr>
+                    <td>
+                        <b>{{forloop.counter}}</b>
+                    </td>
+                    <td style="
+                                 overflow: hidden;
+                                  display: inline-block;
+                                 white-space: word-wrap;">
+                        <div style="width :100% ; white-space: normal; word-wrap: break-word; word-break: break-word;">
+                            {{data.reference_name}}</div>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <br>
+        <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>
+                <br><br>
+                <b>Note : </b>A*Tax as applicable, not payble under reverse charges.
+            
+
+
+        <div style="position:relative; left:700px; top:2px">
+            {% for data  in data %}
+            <b>Authorised Signatory &nbsp;({{data.Name}})</b>{% endfor %}
+        </div>
+
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+        <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>
+            <br><br>
+            <b>Commision Details: </b>
+
+        </span></p>
+        </span>
+        </p>
+        <!-- <p>Thanking you !</p> -->
+        </span>
+        </p>
+        </span>
+        </p>
+        <table class="table table-striped m-3">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th scope="col-3" style="text-align: center;"> S.No. </th>
+                    <th scope="col-3" style="text-align: center;"> Connection No. </th>
+                    <th scope="col-3" style="text-align: center;">Bill Paid AMT </th>
+
+                    <th scope="col-9" style="text-align: center;"> comm AMT</th>
+                    <th scope="col-9" style="text-align: center;">CGST AMT</th>
+                    <th scope="col-9" style="text-align: center;">SGST AMT</th>
+
+                </tr>
+
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td style="text-align: center;">1.</td>
+                    <td style="text-align: center;">{{Contractor_id}}</td>
+                    <td style="text-align: center;">{{commission_amountByTwo}}</td>
+                    <td style="text-align: center;">{{commission_amount}}</td>
+                    <td style="text-align: center;">{{k}}</td>
+                    <td style="text-align: center;">{{k}}</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center;">2.</td>
+                    <td style="text-align: center;">{{Contractor_id}}</td>
+                    <td style="text-align: center;">{{commission_amountByTwo}}</td>
+                    <td style="text-align: center;">{{commission_amount}}</td>
+                    <td style="text-align: center;">{{k}}</td>
+                    <td style="text-align: center;">{{k}}</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <p align="justify">
+        </p>
+
+        </span>
+        </p>
+        </span>
+        </p>
+
+        <br>
+
+</form>
+
+
+
+
+
+<td style="text-align:center"><span><b></b></span></td>
+
+</tr>
+
+</table>
+{% for data in data %}
+<table style="margin-top:40px;float:right">
+    <tr>
+
+        <td><span>Signed by: <b>{{data.Name}}</b>,<br> <b>{{Officer_obj.designation}}</b></td>
+</tr>
+<tr>
+<td><span>Date: <b>{{data.Updated_Date}}</b></span></td>
+    </tr>
+
+    <tr>
+        <td><span>Address: <b>{{data.Add1}}</b></span></td>
+    </tr>
+    <tr>
+        <td><span>Ref No.: <b>{{Mobile}}</b></span></td>
+    </tr>
+    <tr>
+        <td><span>verified By OTP: <b>{{otp}}</b></span></td>
+    </tr>
+
+    <tr>
+        <td style="width:200px;float:right;border:0;border-bottom:1px solid rgb(83, 210, 45);"></td>
+    </tr>
+
+
+
+    <tr>
+        <td style="position:relative; left:40px; top:-100px; opacity: 0.2;"><span><b><img style="width:120px; height:120px" src="{% static 'assets\images\ok.jpeg' %}"/></b></td>
+</tr>
+
+
+</table>
+{% endfor %}
+
+</div>
+
+</div>
+
+
+
+<center>
+    <div id="options">
+        <input id="printpagebutton" style="width:200px" class="btn btn-primary m-3" type="button" value="print order" onclick="printpage()" />
+        <a href="/po/area_base"> <input id="printpagebutton1" type="button" value="Go To Home" style=" width:200px" class="btn btn-primary m-3" />
+        </a>
+    </div>
+</center>
+
+<script>
+    function sum(){
+        var aa1 = document.getElementById('a1').value;
+        console.log("jfsjfslljf",aa1)
+    }
+</script>
+{% endblock body %}

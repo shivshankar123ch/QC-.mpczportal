@@ -1,0 +1,496 @@
+<html lang="en">
+{% load static %}
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static '/assets/img/icons8-light-bulb-64.png' %}">
+    <link rel="icon" type="image/png" href="/static/assets/img/mp-logo_0.png" />
+    <title>
+        CGM(QC)
+    </title>
+    <meta name="description" content="GGM OFFICER | Dashboard | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state"
+    />
+    <meta name="keywords" content="CGM OFFICER | Dashboard | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="CGM OFFICER | Dashboard | Energy Department, Government of Madhya Pradesh" />
+    <meta property="og:site_name" content="Creative Tim" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet'" />
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css" rel="stylesheet' %}" />
+    <script src="{% static '/kit.fontawesome.com/42d5adcbca.js' %}" crossorigin="anonymous"></script>
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />
+
+
+
+    <style>
+        .async-hide {
+            opacity: 0 !important
+        }
+    </style>
+    <script>
+        (function(a, s, y, n, c, h, i, d, e) {
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function() {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function() {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
+            'GTM-K9BGS8K': true
+        });
+    </script>
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '{% static ' / www.google - analytics.com / analytics.js ' %}', 'ga');
+        ga('create', 'UA-46172202-22', 'auto', {
+            allowLinker: true
+        });
+        ga('set', 'anonymizeIp', true);
+        ga('require', 'GTM-K9BGS8K');
+        ga('require', 'displayfeatures');
+        ga('require', 'linker');
+        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
+    </script>
+
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '{static ' / www.googletagmanager.com / gtm5445.html ' %}' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
+    </script>
+</head>
+
+<body class="g-sidenav-show   bg-gray-100">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="#">
+                <img src="{% static 'dashboard/dist/img/logo.png' %}" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">CGM(QC)</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link active" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                    {% block active %}
+                    <div class="collapse  show " id="dashboardsExamples">
+                        <ul class="nav ms-4">
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/payment">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"> Payments </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/mpeb_login">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"style="color:red;"> Logout </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endblock active %}
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <main class="main-content position-relative border-radius-lg ">
+        <nav class="navbar navbar-main navbar-expand-lg  px-0 mx-4 shadow-none border-radius-xl z-index-sticky " id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+                    <a href="javascript:;" class="nav-link p-0">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="d-sm-inline d-none nav-link text-white font-weight-bold px-0">CGM(QC)</span>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav justify-content-end ">
+
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center ">
+                            <a href="javascript:; " class="nav-link text-white p-0 " id="iconNavbarSidenav ">
+                                <div class="sidenav-toggler-inner ">
+                                    <i class="sidenav-toggler-line bg-white "></i>
+                                    <i class="sidenav-toggler-line bg-white "></i>
+                                    <i class="sidenav-toggler-line bg-white "></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center ">
+                            <a href="/mpeb_login " class="nav-link text-white font-weight-bold px-0 ">
+                                <i class="fa fa-user me-sm-1 "></i>
+                                <span class="d-sm-inline d-none " style="color:red;">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid py-4 ">
+            <strong style="color:white; ">Vendor</strong>
+            <div class="row ">
+                <div class="col-lg-12 ">
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL REGISTERED VENDOR</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{total}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_total_vendor " <a <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle ">
+                                                <i class="ni ni-money-coins text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL APPROVED VENDOR</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{approve}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_complete_vendor " <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle ">
+                                                <i class="ni ni-world text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL PENDING VENDOR</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{pending}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_pending_vendor " <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle ">
+                                                <i class="ni ni-paper-diploma text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <strong style="color:white; ">NABL</strong>
+            <div class="row ">
+                <div class="col-lg-12 ">
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL REGISTERED NABL</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{total_nabl}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_total_nabl " <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle ">
+                                                <i class="ni ni-money-coins text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL APPROVED NABL</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{approve_nabl}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_approved_nabl " <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+                                                    <!-- since last week -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle ">
+                                                <i class="ni ni-world text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 ">
+                            <div class="card mb-4 ">
+                                <div class="card-body p-4 ">
+                                    <div class="row ">
+                                        <div class="col-8 ">
+                                            <div class="numbers ">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold ">TOTAL PENDING NABL</p>
+                                                <h5 class="font-weight-bolder ">
+                                                    {{pending_nabl}}
+                                                </h5>
+                                                <p class="mb-0 ">
+                                                    <a href="cgm_pending_nabl " <span class="text-success text-sm font-weight-bolder ">
+                                                        </span></a>
+                                                    <!-- since last quarter -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end ">
+                                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle ">
+                                                <i class="ni ni-paper-diploma text-lg opacity-10 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-lg-12 mb-4 mb-lg-0 ">
+                    <div class="card z-index-2 h-100 ">
+                        <div class="card-header pb-0 pt-3 bg-transparent ">
+                            <div class="card-body pt-0 pb-10 ">
+                                <div class="row ">
+                                    {% block body %}
+                                    <!-- <h5> Please Check details on the left side nav pannel bar</h5> -->
+                                    {% endblock body %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="footer pt-3 ">
+                <div class="container-fluid ">
+                    <div class="row align-items-center justify-content-lg-between ">
+                        <div class="col-lg-6 mb-lg-0 mb-4 ">
+                            <div class="copyright text-center text-sm text-muted text-lg-start ">
+                                ©
+
+                                </script>
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, All Rights Reserved <i class='fa fa-lightbulb-o yellow-color' style="color: solid black; "></i>&nbsp; by
+                                <a href="# " class="font-weight-bold " target="_blank ">MPMKVVCL
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center justify-content-lg-between ">
+                        <div class="col-lg-12 mb-lg-0 mb-4 ">
+                            <div class="copyright text-center text-sm text-muted text-lg-start ">
+
+                                Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co. Ltd. Nishtha Parisar Govindpura, Bhopal.
+                                <a href="# " class="font-weight-bold " target="_blank ">
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+            </div>
+    </main>
+    <script src="{% static '/assets/js/core/popper.min.js' %} "></script>
+    <script src="{% static '/assets/js/core/bootstrap.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/chartjs.min.js' %} "></script>
+    <script>
+        var ctx1 = document.getElementById("chart-line ").getContext("2d ");
+
+        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+        new Chart(ctx1, {
+            type: "line ",
+            data: {
+                labels: ["Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "],
+                datasets: [{
+                    label: "Mobile apps ",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#5e72e4 ",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    maxBarThickness: 6
+
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#fbfbfb',
+                            font: {
+                                size: 11,
+                                family: "Open Sans ",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#ccc',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans ",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script async defer src="{% static '/js/buttons.js' %} "></script>
+    <script src="{% static '/assets/js/argon-dashboard.min28b5.js' %} "></script>
+</body>
+
+</html>

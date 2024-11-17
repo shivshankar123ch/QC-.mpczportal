@@ -1,0 +1,306 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+
+ 
+
+
+<div class="card">
+    <div class="card-header">
+        <h2>
+            WO Information
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-2"> 
+            <div class="table-responsives">
+                <table class="table table-bordered  table-striped ed-table-block">  
+                    <tbody>
+                    <form action="/tkc/tkc_wo_nabl_gatepass_new_new/{{offer_data.nabl_user_id}}/{{offer_data.tkc_di_id}}/{{offer_data.offer_no}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">
+                                Work Order No. and Date
+                            </th>
+                            <td>{{offer_data.wo.Contract_Number}} - {{offer_data.wo.Contract_Date|date:"d/m/Y"}}</td>
+                        </tr>
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">
+                                Work Order Description
+                            </th>
+                            <td>{{offer_data.wo.Header.Contract_Description}}</td>
+                        </div>
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">
+                                TKC Name
+                            </th>
+                            <td>{{offer_data.wo.supplier.CompanyName_E}}</td>
+                        </div> 
+                        <tr> 
+                            <th style="background: #263544;" class="thead text-white w-30">
+                                View Work-Order
+                            </th>
+                            <td>
+                                {% if offer_data.wo.Wo_Digital %}
+                                <a class="btn ed-submits btn-info" href="{{offer_data.wo.Wo_Digital.url}}"
+                                    target="_blank">View Work Order</a>
+
+                                {% else %}
+                                <a class="btn ed-submits btn-info" href="#">Work Order Not Uploaded</a>
+                                {% endif %}
+                            </td>
+                        </div>  
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">Offer No </th>
+                            <td>{{offer_data.offer_no}}</td>
+                        </div>
+                        
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">Offer Date</th>
+                            <td>{{offer_data.created_at|date}}</td>
+                        </div>
+                        
+                        <tr>
+                            <th style="background: #263544;" class="thead text-white w-30">Di ERP No.</th>
+                            <td>{{offer_data.tkc_di.erp_di_number}}</td>
+                        </div>  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+        <h4 class="mb-2"> <b> Gatepass Material Details </b></h4> 
+        <div class="ed-tableinfo-block mb-2"> 
+            <div class="table-responsives">
+                <table class="table table-bordered  table-striped ed-table-block"> 
+                    <thead>
+                        <tr>
+                            <th class="w-5">
+                                S NO.
+                            </th>
+                            <th class="w-25">
+                                Item Code
+                            </th>
+                            <th class="w-30">
+                                Material Name
+                            </th>
+                            <th class="w-20">
+                                Material Serial Number/Batch Number
+                            </th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in serial_no_item %}
+           
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{data.offer.wo_material.item_code}}</td>
+                            <td>{{data.offer.wo_material.material_name}}</td>   
+                            {% if data.offer.excel_type == True %}
+                            <td class="project_progress">
+                                    {{data.serial_no}}
+                            </td>
+                            {% elif data.offer.excel_type == False %}
+
+                                <td class="project_progress">{{data.batch_no}}</td>
+                                {% endif %}  
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>  
+        </div>
+
+
+
+    
+        {% csrf_token %}
+
+        
+            
+
+
+
+
+
+        <div class="ed-form-block"> 
+            <div class="ed-form-body">      
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        NABL Name
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="number" name="tkc_di_id" value="{{offer_data.tkc_di_id}}" required="required"  class="form-control ed-textbox" readonly >
+                    <input type="number" name="nabl_user_id" value="{{offer_data.nabl_user_id}}" required="required"  class="form-control ed-textbox" readonly   hidden>
+                    <input type="text" name="nabl_company" value="{{offer_data.nabl_user.CompanyName_E}}"  class="form-control ed-textbox" readonly >
+                    <!-- <b>{{ offer_data.nabl_user.CompanyName_E}}</b> -->
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        NABL Number
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" value="{{ offer_data.nabl_user.ContactNo}}" class="form-control ed-textbox" readonly > 
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Gatepass Date (mm/dd/yyyy)
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="date" id="gatepass_date" name="gatepass_date" required="required" class="form-control ed-textbox">
+                    <span id="date" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Gatepass No 
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="gatepass_no" id="gatepass_num" class="form-control ed-textbox" required="required">
+                    <span id="tendor" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+ 
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Gatekeeper Name
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="gk_name"  class="form-control ed-textbox"    required="required" >
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Vehicle No
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="vehicle_no" class="form-control ed-textbox" required="required" >
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+ 
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Driver Name
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="driver_name" class="form-control ed-textbox" required="required" >
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Driver Phone
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="driver_phone" class="form-control ed-textbox"
+                            required="required" >
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Material Received By
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="text" name="mat_rece_by" class="form-control" required="required"  >
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Driver Aadhar Upload
+                        <span class="text-danger">* </span>
+                    </label>
+                    <input type="file" name="driver_aadhar" class="" required>
+                    <span id="materilall" class="d-blcok text-danger ed-error-block" ></span>
+                </div>    
+      
+                <!-- <tr>
+                <td> <label for="driver_aadhar">Upload Upload Gatepass&nbsp;</label></td>
+                <td> <input type="file" name="gatepass" style="width: 200px" class="form-control" required ></td>
+                </div> -->
+
+
+{% for data in serial_no_item %}
+<!-- <h3>shubham tripahti</h3> -->
+
+
+<!-- <tr>
+                    <th>{{data.offer.wo_material.material_name}} Outward Quantity: <span style="color: red;">*</span> </th>
+                    <td scope="row">
+                        <input type="number" name="outward_quantity[]"  placeholder="" class="form-control" style="width:250px;" required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </div> -->
+                <div style="display:none;">
+                    <td>
+                        <input type="text" name="offer_no" value="{{data.offer.offer_no}}" placeholder="" style="width:250px;" required="required">
+                    </td>
+                </div>
+
+                <div style="display:none;">
+                    <td>
+                        <input type="number" name="serial_no_id[]" value="{{data.id}}" placeholder="" style="width:250px;" required="required">
+                    </td>
+                </div>
+                <div style="display:none;">
+                     
+                        <input type="text" name="site_store_address" value="{{data.offer.site_store}}" placeholder="" style="width:250px;" required="required">
+                     
+                </div>
+
+                <!-- <tr hidden>
+                    <td scope="row">
+                        <input type="text" name="nabl_name" value="{{data.offer.nabl_name}}" style="width:250px;" required="required">
+                    </td>
+                </div> -->
+ 
+
+
+                <div style="display:none;">
+                         <input type="number" name="offer_id[]" value="{{data.offer.id}}" placeholder="" style="width:250px;" required="required">
+                 </div>
+                <!-- <tr hidden>
+                    <td scope="row">
+                        <input type="number" name="item_code_id[]" placeholder="" style="width:250px;"
+                        value="{{data.offer.wo_material.id}}" required="required">
+                    </td>
+                </div> -->
+
+           
+
+                {% endfor %}
+
+
+            <!-- </table> -->
+            <div class="form-group">
+                <div class="text-right"> 
+                <input type="submit" name="submit" onclick="validateForm()" value="Generate Gatepass"
+                class="btn ed-submit ed-formSubmit" autocomplete="off">
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div>
+        </div> 
+
+   
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    {% endblock body %}

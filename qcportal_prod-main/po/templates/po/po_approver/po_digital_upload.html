@@ -1,0 +1,222 @@
+{% extends 'po/po_approver/approver_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+
+
+<form action="/po/po_upload_digital_copy/{{po.id}}" name="myForm" method="POST" enctype="multipart/form-data" id="myForm">
+    {% csrf_token %}
+    <div id="uploadImage">
+        <div class="ed-infocontant">
+            <div class="ed-information mb-4">
+                <div class="card ed-card-block">
+                    <div class="card-body">
+                        <div class="avatar-upload">
+                            <div class="avatar-preview">
+
+                                <!-- <div id="imagePreview"
+                                    style="background-image:url(https://freeiconshop.com/wp-content/uploads/edd/pdf-flat.png);">
+                                </div> -->
+                                <img src="{% static 'assest/images/pdfIcon.png' %}" id="imagePreview" />
+                                <input type='file' name="digital" id="pdfUpload" accept=".pdf" class="avatar-edit"
+                                    onchange="uploadPdf()" />
+                            </div> 
+                        </div>
+                        <p id="uploadfilename"></p>
+                        <div class="form-group text-right">                                                         
+                            <button type="submit" onclick="return submitForm()" class="btn ed-submit btn-info">
+                                <span class="ed-submit-text">
+                                    Submit
+                                </span>
+                            </button>
+                            <div id="Progress_Status" style="display:none;">
+                                <p id="pdfName"></p>
+                                <div id="myprogressBar">
+                                    <p id="uploadpercent"></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+
+<style>
+    #Progress_Status {
+        width: 30%;
+        background-color: #ddd;
+        display: block;
+        margin: 0 auto;
+        margin-top: -37px;
+    }
+
+    #pdfName{
+        margin: 0 auto;
+        text-align: center;
+        font-weight: 200;
+    }
+
+    #myprogressBar {
+        border: 1px solid #17a2b8;
+        border-radius: 10px;
+        width: 1%;
+        height: 20px;
+        background-color: #17a2b8;
+        text-align: center;
+        line-height: 32px;
+        color: black;
+
+
+    }
+
+    .avatar-upload {
+        position: relative;
+        max-width: 340px;
+        margin: 50px auto;
+    }
+
+    .avatar-upload .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    .avatar-upload .avatar-edit input {
+        display: none;
+    }
+
+    .avatar-upload .avatar-edit input+label {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 0;
+        border-radius: 100%;
+        background: #FFFFFF;
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-weight: normal;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .avatar-upload .avatar-edit input+label:hover {
+        background: #f1f1f1;
+        border-color: #d6d6d6;
+    }
+
+    .avatar-upload .avatar-edit input+label:after {
+        content: "\f040";
+        font-family: 'FontAwesome';
+        color: #757575;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 340px;
+        height: 340px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar-upload .avatar-preview>div {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .avatar-upload .avatar-preview .avatar-edit {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 100%;
+        opacity: 0;
+    }
+</style>
+
+
+
+<div id="dialog-container" class="ed-dialog-container">
+    <div class="ed-modal-block" id="dialog-modal">
+        <div class="ed-modal-content">
+            <div class="ed-modal-header">
+                <h4>Custom Alert Dialog</h4>
+            </div>
+            <div id="dialog-body" class="ed-modal-body">
+                <p>
+                    This is the custom alert message. Click Ok to close this.
+                </p>
+            </div>
+            <div class="ed-dialog-footer">
+                <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+                    <span class="ed-submit-text">
+                        Ok
+                    </span>
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    let pdfUpload = document.getElementById("pdfUpload");
+    let pdfName = document.getElementById("pdfName");
+
+    function uploadPdf() {
+        let Progress_Status = document.getElementById("Progress_Status")
+        Progress_Status.style.display = "block";
+        let progressBar = document.getElementById("myprogressBar");
+        let uploadpercent = document.getElementById("uploadpercent");
+        var width = 1;
+        var identity = setInterval(scene, 10);
+
+        function scene() {
+
+            if (width >= 100) {
+                clearInterval(identity);
+            } else {
+                width++;
+                progressBar.style.width = width + '%';
+                uploadpercent.textContent = width + '%'
+                let fileName = pdfUpload.files[0].name;
+                pdfName.textContent = fileName;
+            }
+        }
+
+    }
+
+    let submitForm = () => {
+
+        if (pdfUpload.files[0] == undefined) {
+            alert("Please Upload pdf file first..")
+            return false;
+        } else {
+            return true;
+        }
+
+
+    }
+
+
+
+</script>
+
+
+{% endblock body %}

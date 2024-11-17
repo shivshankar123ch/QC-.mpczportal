@@ -1,0 +1,102 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink { background-color:
+    #007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px; width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page content) / .tabcontent
+    { color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;} #General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details {background-color: white;}
+    #Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+    
+    <body>
+
+        <head>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+            <script type="text/javascript" src="/static/assets/js/Validation/"></script>
+            <script type="text/javascript">
+                window.history.forward();
+                function noBack() {
+                    window.history.forward();
+                }
+            </script>
+        
+        
+        </head>
+    
+    
+        <main class="main-content  mt-0">
+            <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                                <div class="card card-plain">
+                                    <div class="card-header pb-0 text-left" data-offset="0">
+                                        <h4 class="text-info font-weight-bolder">Registration Form for Solar Vendor</h4>
+                                       
+                                            <table class="table table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">Serial No</th>
+                                                  <th scope="col">Document Name</th>
+                                                  <th scope="col">Document Number</th>
+                                                  <th scope="col">View</th>
+                                                  
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {% for doc in data %}
+                                                <tr>
+                                                 
+                                                  <td>{{forloop.counter}}</td>
+                                                  <td>{{doc.Types_of_Docs}} </td>
+                                                  <td>{{doc.Document_Number}} </td>
+                                                  <td> <a href="{{doc.Ddocfile.url}} "  target="_blank" class="btn btn-success mr-3">View</a></td>
+                                                </tr>
+                                               
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+                                            
+                                        
+                                            <div class="button-row d-flex mt-4">
+                                                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                                <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Save & Next" style="color: white;"><a href="/roof_top/roof_top_payment"> Save & Next</a></button>                                                
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            let dtElem = document.getElementById('dob');
+            let maxDate = new Date();
+            dtElem.max = formatDate(maxDate);
+    
+            function formatDate(date) {
+                let dd = String(date.getDate()).padStart(2, '0');
+                let mm = String(date.getMonth() + 1).padStart(2, '0');
+                let yyyy = date.getFullYear();
+                return `${yyyy}-${mm}-${dd}`;
+            }
+            //trial here
+            let dtElem2 = document.getElementById('dir_dob');
+            let maxDate2 = new Date();
+            dtElem2.max = formatDate(maxDate2);
+    
+            function formatDate(date) {
+                let dd = String(date.getDate()).padStart(2, '0');
+                let mm = String(date.getMonth() + 1).padStart(2, '0');
+                let yyyy = date.getFullYear();
+                return `${yyyy}-${mm}-${dd}`;
+            }
+        </script>
+    </body>
+    
+    
+    {% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent = document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display="none" ; }
+        tablinks=d ocument.getElementsByClassName( "tablink"); for (i=0 ; i < tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; } document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element with
+        id="defaultOpen" and click on it document.getElementById( "defaultOpen").click(); {% endblock script %}

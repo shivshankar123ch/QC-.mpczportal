@@ -1,0 +1,38 @@
+{% extends 'tkc/site_store_base.html' %}
+{% load static %}
+{% block heading %} MRC Format {% endblock heading %}
+{% block body %}
+<table class="table table-bordered table-responsive m-4 " border="2" style="width:100%">
+  <thead class="table-dark table">
+    <tr>
+        <th>S.No.</th>
+        <th>Work Order No.</th>
+        <th>Vendor</th>
+        <th>Offer Number</th>
+        <th>TKC</th>
+        <th>Circle</th>
+        <th>MRC No.</th>
+        <th>MRC Date</th>
+
+        <th>Action</th>
+        
+    </tr>
+  </thead>
+  <tbody>
+    {% for info in data %}
+    <tr>
+      <td style="text-align: center;">{{forloop.counter}}</td>
+      <td style="text-align: center;">{{info.offer.wo.Contract_Number}}</td>
+      <td style="text-align: center;">{{info.offer.TKCVendor.Vendor}}</td>
+      <td style="text-align: center;">{{info.offer.offer_no}}</td>
+      <td style="text-align: center;">{{info.offer.supplier.CompanyName_E}}</td>
+      <td style="text-align: center;">{{info.offer.circle.Circle_Name_E}}</td>
+      <td style="text-align: center;">{{info.id}}</td>
+      <td style="text-align: center;">{{info.date}}</td>
+      <td style="text-align: center;"><a href="{{info.digi_sign.url}}" class="fas fa-eye text-secondary"> View MRC </a></td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock body %}

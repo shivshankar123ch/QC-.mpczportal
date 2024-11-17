@@ -1,0 +1,106 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+
+<head>
+   <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reject.js' %}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+</head>
+
+<div class="ed-information mb-2">
+   <div class="card ed-card-block">
+      <div class="card-header">
+         <h2>
+            Rejected Document
+         </h2>
+      </div>
+      <div class="card-body mb-2">
+         <div class="ed-tableinfo-block mt-4">
+            <div class="table-responsive">
+               <table class="table table-striped ed-table-block">
+                  <thead>
+                     <th class="w-20">
+                        Document Name
+                     </th>
+                     <th class="w-20">Document Number</th>
+                     <th class="w-20">Issued Date</th>
+                     <th class="w-20">Expired Date</th>
+                     <th class="w-20">Upload File</th>
+                  </thead>
+                  <tbody>
+                     {% with name=100 %}
+                     {% for data in data %}
+                     {% if data.Primary_verification_Status_approver == 2 %}
+                     <form action="/tkc/rejected_doc_GM_save/{{data.id}}" onsubmit="return validateForm()" name="myForm"
+                        method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% elif data.Approval_doc == 2 %}
+                        <form action="/tkc/rejected_doc_finance_save/{{data.id}}" onsubmit="return validateForm()"
+                           name="myForm" method="POST" enctype="multipart/form-data">
+                           {% csrf_token %}
+                           {% else %}
+                           <form action="/tkc/rejected_doc_save/{{data.id}}" onsubmit="return validateForm()"
+                              name="myForm" method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              {% endif %}
+                              <tr>
+                                 <td>{{data.Types_of_Docs}}</b>
+                                 </td>
+                                 <td>
+                                    <input class="form-control ed-textbox" maxlength="25" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" type="text" name='doc_name' placeholder="{{data.Document_Number}}">
+                                    <span id="number" class="d-block ed-warningtext text-danger"></span>
+                                 </td>
+                                 <td>
+                                    <input type="date" name='issue_date' id="issue_1" value="{{data.Doc_issue_date}}" class="form-control ed-textbox">
+                                 </td>
+                                 <td>
+                                    <input type="date" name='expire_date' id="expire_1" value="{{data.Doc_expiry_date}}" class="form-control ed-textbox">
+                                 </td>
+                                 <td>
+                                    <input type="file" id="file_id" name="file" accept="application/pdf" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" class="">
+                                    <span id="file_1" class="d-block ed-warningtext text-danger"></span>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td colspan="1">
+                                    <a href="{{data.Ddocfile.url}}" target="_blank"
+                                       class="btn ed-submits btn-success">
+                                       View
+                                    </a>
+                                 </td>
+                                 <td colspan="3">
+                                    <textarea class="form-control ed-textbox" rows="1" required="required" placeholder='{{data.Primary_remark}}' disabled></textarea>
+                                 </td>
+                                 <td><button type="Submit" value="Submit" class="btn btn-success m-2">Resubmit</button>
+                                 </td>
+                              </tr>
+                           </form>
+                           {% endfor %}
+                           {% endwith %}
+                        </form>
+                  </tbody>
+               </table>
+
+               <script>
+                  let dtElem1 = document.getElementById('issue_1');
+                  let maxDate1 = new Date();
+                  dtElem1.max = formatDate(maxDate1);
+
+                  function formatDate(date) {
+                     let dd = String(date.getDate()).padStart(2, '0');
+                     let mm = String(date.getMonth() + 1).padStart(2, '0');
+                     let yyyy = date.getFullYear();
+                     return `${yyyy}-${mm}-${dd}`;
+                  }
+               </script>
+               <script language="javascript">
+                  var today = new Date();
+                  var dd = String(today.getDate()).padStart(2, '0');
+                  var mm = String(today.getMonth() + 1).padStart(2, '0');
+                  var yyyy = today.getFullYear();
+
+                  today = yyyy + '-' + mm + '-' + dd;
+                  $('#expire_1').attr('min', today);
+               </script>
+
+               {% endblock body %}

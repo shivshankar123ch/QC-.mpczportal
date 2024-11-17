@@ -1,0 +1,58 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block heading %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock heading %}
+
+{% block body %}
+
+<!-- <body onkeydown="return (event.keyCode != 116)">  
+    <h1>  
+        Click this page to set focus.  
+    </h1>  
+</body>  -->
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+<img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+<div class="mx-auto" style="width: 85%;">
+        <table class="table table-striped m-4 " border="2" style="width:90%">
+            <thead class="table table-dark">
+                <tr>
+                    <th scope="col-3"> Serial Number </th>
+                    <th scope="col-3"> Sample Code </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sample_number in final_zip %}
+                <tr>
+                    <td style="text-align: center;">{{forloop.counter}}</td>
+                    <td  style="text-align: center;">{{sample_number}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <script>
+        {
+            function ValidateRating(event, inputText) {
+                event.preventDefault();
+                //remaining function logic goes here
+            }
+        }
+
+    </script>
+
+</div>
+
+{% endblock body %}

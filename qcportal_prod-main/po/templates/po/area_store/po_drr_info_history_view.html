@@ -1,0 +1,83 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      DRR Info View
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="forms-informations mb-3">
+      <div class="ed-form-block">
+        <div class="ed-form-title">
+          <h6>
+            <span class="ed-text">
+              DRR Information
+            </span>
+          </h6>
+        </div>
+
+        {% for name in info %}
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label">
+              DRR Date (mm/dd/yyyy)
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{name.drr_date}}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Challan No
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{name.drr_challan_no}}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Challan Date:(mm/dd/yyyy)
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{name.drr_challan_date}}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Vehicle No
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{name.drr_vehicle}}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Total Received (DI) Quantity
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{name.drr_quantity}}" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    $('#gatepass_history').DataTable();
+  })
+</script>
+{% endblock body %}

@@ -1,0 +1,115 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %}
+{% block body %}
+
+
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/assets/js/Validation/nabl_reg7.js"></script>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    
+    
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+          
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    <h4 class="text-info font-weight-bolder">Turnover & Experience</h4>
+
+                                    <form class="row g-3 needs-validation" action="/nabl/nabl_reg7" name="myForm" onsubmit="return validateForm()" method="POST">
+                                        {% csrf_token %}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Work Experience (In Years)<span style="color: red;">*</span></label>
+                                               <input type="number" aria-label=".form-select-lg example"name="work_experience" onKeyPress="if(this.value.length==3) return false;"  id="work_experience1" onchange="validateForm()" onfocus="validateForm()"
+                                              onkeyup="validateForm()"class="form-control"min="0" onkeypress='validate(event)' max="200" maxlength="3" required >
+                                              <span id="work" class="text-danger font-weight-bold text-sm-left"
+                                              style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Turn Over(In Lakhs)<span style="color: red;">*</span></label>
+                                                <input type="tel" min="1" name="turn_over" id="turn_over1"onchange="validateForm()" onfocus="validateForm()"
+                                                onkeyup="validateForm()" minlength="1" maxlength="100" class="form-control" onkeypress='validate(event)'  required placeholder="Turn Over(In Lakhs)">
+                                                <span id="over_45" class="text-danger font-weight-bold text-sm-left"
+                                                style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Latitude<span style="color: red;">*</span></label>
+                                                <input type="tel" min="1" name="latitude" id="turn_over2"onchange="validateForm()" onfocus="validateForm()"
+                                                onkeyup="validateForm()" minlength="1" maxlength="20" class="form-control" onkeypress='validate(event)'  required placeholder="">
+                                                <span id="over_4" class="text-danger font-weight-bold text-sm-left"
+                                                style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Longitude<span style="color: red;">*</span></label>
+                                                <input type="tel" min="1" name="longitude" id="turn_over3"onchange="validateForm()" onfocus="validateForm()"
+                                                onkeyup="validateForm()"  minlength="1" maxlength="20"class="form-control" onkeypress='validate(event)'  required placeholder="">
+                                                <span id="over_5" class="text-danger font-weight-bold text-sm-left"
+                                                style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                        <div class="button-row d-flex mt-4">
+                                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                            <button class="btn bg-gradient-primary ms-auto mb-0" onclick="validateForm()" type="submit" title="Save & Next">Save & Next</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+</body>
+
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key)
+;
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+
+    {% endblock body %}
+{% endblock title %}

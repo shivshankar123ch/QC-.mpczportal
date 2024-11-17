@@ -1,0 +1,90 @@
+{% extends 'tkc/tkc_Base.html' %} {% load static %} {% block body %}
+<head>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reg8.js' %}"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+                    <h5 class="font-weight-bolder">
+                        Contractor Upgrade
+                    </h5>
+                    <p class="mb-0">
+                        All <span style="color: red">(*)</span> marked fields are mandatory
+                    </p>
+                </div>
+                <div class="card-body">
+                    <form action="upgrade_tkc_two" name="myForm" onsubmit="return validateForm()" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                               <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Current Contractor Class</label>
+                                    <select id="Vendor_type" name="VendorType" class="form-control op1 form-select form-select-lg"
+                                    aria-label=".form-select-lg example" required  onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" required readonly>
+                                        <option value="{{contractor.id}}" selected>
+                                            {{contractor.Name}}</option>
+                                    </select>
+                                    <span id="select2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Select Contractor Type<span style="color: red">*</span> (Please Select The Next Applicable Contractor Type  Upgrade)</label>
+                                    <select id="Vendor_type" name="VendorType" class="form-control op1 form-select form-select-lg"
+                                    aria-label=".form-select-lg example" required  onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" required>
+                                        <option value="select-option-user" selected>
+                                            Select Contractor Type</option>
+                                            {% for data in all_contractor %}
+                                        <option value="{{data.id}}">{{data.Name}}</option>
+                                         {% endfor %}
+                                    </select>
+                                    <span id="select2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+
+                            </div>
+
+                        </div>
+                        <div class="button-row d-flex mt-3 mr-3">
+                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev"><a href="#" style="color: white;">Prev</a></button> -->
+                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                            <button class="btn bg-gradient-primary ms-auto m-2 mb-0 m-2" type="submit" onclick="validateForm()" title="Send">Save And
+                                Next</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+        // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+}
+</script>
+{% endblock body %}

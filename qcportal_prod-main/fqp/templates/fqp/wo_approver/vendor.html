@@ -1,0 +1,123 @@
+{% extends 'fqp/wo_approver/approver_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %} Vendor Details Information {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table
+                                class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Company Name</th>
+                                        <th>Person Name</th>
+                                        <th>Material Name</th>
+                                        <th>Material Specification Name</th>
+                                        <th>Certificate</th>
+                                        <th>Action</th>
+                                        <th>Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for Data in Vendor %}
+                                    <tr>
+                                        <td>
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td>
+                                            {{Data.Vendor.CompanyName_E}}
+                                        </td>
+                                        <td>
+                                            {{Data.Vendor.Authorised_person_E}}
+                                        </td>
+                                        <td>
+                                            {{Data.Material_id.Material_Name}}
+                                        </td>
+                                        <td>
+                                            {{Data.Material_id.Material_Specification}}
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{Data.BG_Copy.url}}">
+                                                <button class="btn ed-submit btn-success">
+                                                    <span class="ed-submit-text">
+                                                        View
+                                                    </span>
+                                                </button>
+                                            </a>
+
+                                        </td>
+                                        <td>{% if Data.TKCVendor_Approved_Status == 0 %}
+                                            <form action="/fqp/vendor_approval/{{Data.id}}"
+                                                onsubmit="return validateForm()" name="myForm" method="POST">
+                                                {% csrf_token %}
+                                                <div class="orderaction-items">
+                                                    <div class="radio-groups-items">
+                                                        <label class="radio-groups">
+                                                            <input type="radio" name="action" value="1" />
+                                                            Accept
+                                                        </label>
+                                                        <label class="radio-groups">
+                                                            <input type="radio" name="action" value="0" checked />
+                                                            Reject
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="remark"
+                                                            class="form-control ed-textbox">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn ed-submit btn-info">
+                                                    <span class="ed-submit-text">
+                                                        Submit
+                                                    </span>
+                                                </button>
+                                            </form>
+                                            {% elif Data.TKCVendor_Approved_Status == -1 %}
+                                            <a href="" class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    Rejected
+                                                </span>
+                                            </a>
+                                            {% elif Data.TKCVendor_Approved_Status == 1 %}
+                                            <a href="" class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    Approved
+                                                </span>
+                                            </a>
+
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if Data.TKCVendor_Approved_Remark %}
+                                            <span class="ed-submit-text">
+                                                {{ Data.TKCVendor_Approved_Remark}}
+                                            </span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        {% endblock body %}

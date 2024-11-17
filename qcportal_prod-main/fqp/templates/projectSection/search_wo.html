@@ -1,0 +1,53 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Create TKC New Work order</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+     <form   action="/fqp/generate_wo" method="POST"    enctype="multipart/form-data" >
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+              {% if messages %} {% for message in messages %}
+                            <div class="alert alert-warning {{message.tags}}" id="successMessage" role="alert">
+                                {{message}}
+                            </div>
+                            {% endfor %}{% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                 <div class="form-group">
+                  <label>Select Contractor</label>
+                   <select id="vendor"  name="vendor" class="form-control custom-select" required>
+                  <option selected disabled value="" >Choose Contractor </option>
+                   {% for name in data %}
+                    <option value='{{name.Authentication_id}}'>{{name.CompanyName_E}}</option>
+                     {% endfor %}
+                   </select>
+                    </div>
+              </div>
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Enter ERP Work/Purchase Order  Number</label>
+                  <input type="text" class="form-control" id="po_no" name="po_no"  placeholder="Work Order No" />
+                    </div>
+              </div>
+              <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Search </button>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,86 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+<div class="ed-information">
+  <div class="card ed-card-block">
+    <div class="ed-card-inner">
+      <div class="card-header">
+        <h2>
+          Approved Vendor List
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="ed-tableinfo-block">
+          <div class="table-responsive">
+            <table id="wo_approve_vendor_list" class="table table-bordered table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th style="width:30%">
+                    Work Order No.
+                  </th>
+                  <th style="width:20%">
+                    Supplier
+                  </th>
+                  <th style="width:20%">
+                    Contract Date
+                  </th>
+                  <th style="width:20%">
+                    Vendor
+                  </th>
+                  <!-- <th style="width:10%">
+                              Item Code
+                          </th> -->
+                  <th style="width:5%">Approved Material</th>
+                </tr>
+              </thead>
+
+              {% for data in all_approved_vendor %}
+              <tr>
+                <td>{{data.TKCWoInfo.Contract_Number}}</td>
+                <td>{{data.TKCWoInfo.supplier.CompanyName_E}}</td>
+                <td>{{data.TKCWoInfo.Contract_Date}}</td>
+                <td>{{data.Vendor.CompanyName_E}}</td>
+                <!-- <td>{{data.Material_id.Material_Name}} -->
+                <td>
+                  <a href="/tkc/wo_approve_vendor_material_list/{{data.TKCWoInfo.id}}/{{data.Vendor.User_Id}}"
+                    class="btn btn-info btn-sm">
+                    View
+                  </a>
+                </td>
+
+
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+      $('#wo_approve_vendor_list').DataTable();
+  });
+</script>
+
+
+<!-- /.card-body -->
+<script>
+  function showDiv() {
+    document.getElementById('welcomeDiv').style.display = "block";
+  }
+
+</script>
+{% endblock body %}

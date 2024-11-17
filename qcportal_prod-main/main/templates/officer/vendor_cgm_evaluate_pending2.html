@@ -1,0 +1,318 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+  </script>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body table-responsive table-bordered table-hover">
+                    <div class="card-header">
+                        <h3 class="card-title">Upload Document</h3>
+                    </div>
+                    <div class="card-body table-responsive table-bordered">
+                        <h3 class=p-3>User All Data</h3>
+                        <table id="example2 " class="table table-bordered table-striped display ">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width:10% ">
+                                        Serial Number </th>
+                                    <th style="width: 40% ">
+                                        Report Name </th>
+                                    <th style="width:40% ">
+                                        Value </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Type of Business</td>
+                                    <td><b>{{data.Type_of_business}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Authorised Person Name</td>
+                                    <td><b>{{data.Authorised_person_E}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Company Name</td>
+                                    <td><b>{{data.CompanyName_E}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Contact Number</td>
+                                    <td><b>{{data.ContactNo}}</b></td>
+
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Email ID</td>
+                                    <td><b>{{data.Email_Id}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Vendor Type</td>
+                                    <td><b>{{data.User_type}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <form action="/vendor_cgm_evaluate_save/{{data.User_Id}}" method="POST">
+                        {% csrf_token %}
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th align="center">
+                                            Upload Basics Document
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in doc %}
+                                    <table class="table table-bordered table-hover">
+                                        <label>Document Name :{{data.Types_of_Docs}}</label>
+                                        <thead>
+                                            <tr>
+                                                <th style="width:30%;">{{data.Types_of_Docs}} Number <input type="text" readonly="readonly" placeholder="{{data.Document_Number}}">
+                                                </th>
+                                                <th style="width:30%;"> Name On {{data.Types_of_Docs}}<br> <input type="text" readonly="readonly" placeholder="{{data.Name_on_Document}}">
+                                                </th>
+                                                <th style="width:40%;"> <br> Remark Given By W&P <input type="text" readonly="readonly" placeholder="{{data.Primary_remark}}">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {% for fac in factory %}
+                        <div class="card-body col-8">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:100%">
+                                            Uploaded Company Details
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="container">
+                                                <label>Area Of Land Occupied By Factory (sq. ft.)</label>
+                                                <input type="text" id="v_area_occupied" name="eighteen" class="form-control" placeholder="{{fac.Area_of_land}}" required="required" readonly>
+                                            </div>
+
+                                            <div class="container">
+                                                <label>Number Of Working Shift in Factory *</label>
+                                                <input type="text" id="v_working_shift" name="nineteen" class="form-control" placeholder="{{fac.No_of_Shifts}}" required="required" readonly>
+                                            </div>
+
+                                            <div class="container">
+                                                <label>Other Personnel Working In Factory *</label>
+                                                <input type="text" id="v_personal_work_factroyr" name="twenty" class="form-control" placeholder="{{fac.Outsourced_person}}" required="required" readonly>
+                                            </div>
+
+                                            <div class="container">
+                                                <label>Buit Up Area Of Factory (sq. ft.)*</label>
+                                                <input type="text" id="v_buit_up" name="twenty_one" class="form-control" placeholder="{{fac.Area_built_up}}" required="required" readonly>
+                                            </div>
+
+                                            <div class="container">
+                                                <label>Product Capacity Per annum(QUANTITY) *</label>
+                                                <input type="text" id="v_product_capacity" name="twenty_two" class="form-control" placeholder="{{fac.Yearly_Production}}" required="required" readonly>
+                                            </div>
+                        </div>
+                        {% endfor %}
+                        </td>
+                        <td>
+
+                </div>
+                </td>
+
+                <!-- /.card-body -->
+                <!-- /.card -->
+                </tr>
+                </tbody>
+                </table>
+            </div>
+
+
+            <div class="card-body">
+                <h3 class="card-title m-2"> <b> Document Uploaded By Vendor </b></h3>
+                <table class="table table-bordered table-hover bg-white " cellspacing="0">
+                    <thead class="bg-dark">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> View Document </th>
+                            <th> Primary Remark </th>
+                            <th> Status </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in tech_data %}
+                        <tr class="bg-light">
+                            <td><b>{{data.Types_of_Docs}}</b></td>
+
+                            <td> <a href="{{data.Document_Doc.url}} " class="btn btn-success mr-3">View</a></td>
+                            <td><b>{{data.Primary_remark}}</b></td>
+                            <td>
+                                {% if data.Primary_verification_Status == 1 %}
+                                <p>Ok</p>
+                                {% elif data.Primary_verification_Status == 2 %}
+                                <p>Not Ok</p>
+                                {% else %}
+                                <p>Inspection not done</p>
+                                {% endif %}
+                            </td>
+                            
+                            {% endfor %} {% endwith %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:100%">
+                                Uploaded Material Details
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table class="table" id="myTable">
+                                    <label for="inputStatus">Material Tests reports from NABL accredited Laboratory(Valid)</label>
+                                     {% for fac in Material %}
+                                    <thead>
+
+                                        <div>
+                                            <th>
+                                                <label>Material Name</label>
+                                                <h6>{{fac.Material_Name}}</h6>
+                                            </th>
+                                        </div>
+
+                                        <div>
+                                            <th>
+                                                <label>Material Specification</label>
+                                                <h6>{{fac.Material_Specification}}</h6>
+                                            </th>
+                                        </div>
+                                        <div>
+                                            <th>Type tests reports <a href="{{fac.Material_Test_Doc.url}}" class="button btn btn-primary">View
+                        </a></th>
+                                            <th>GTP and Drawing <a href="{{fac.Material_GTP_Doc.url}}" class="button btn btn-primary">View </a>
+                                            </th>
+                                            <th>Other Report<a href="{{fac.Material_Other_Doc.url}}" class="button btn btn-primary">View </a></th>
+                                          
+                                        </div>
+                                        <div>
+                                            <th>
+                                                <label>FI Primary Remark</label>
+                                                <h6>{{fac.Primary_remark}}</h6>
+                                            </th>
+                                        </div>
+                                        <div>
+                                            <th>
+                                                <label>FI Primary Verification Status</label>
+                                                {% if fac.Primary_verification_Status == 1 %}
+                                                <p>Ok</p>
+                                                {% elif fac.Primary_verification_Status == 2 %}
+                                                <p>Not Ok</p>
+                                                {% else %}
+                                                <p>Inspection not done</p>
+                                                {% endif %}
+                                            </th>
+                                        </div>
+                                        <tr>
+
+
+
+
+                                    </thead>
+                                    {% endfor %}
+                                    </thead>
+                                </table>
+
+
+                            </td>
+
+                            </tr>
+                    </tbody>
+                </table>
+
+                <form>
+
+                    <tr>
+                        <tbody>
+                            <!-- <table>
+
+                                <td>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio1" name="action" value="OK" checked required> Accepted
+                                        <label class="form-check-label" for="radio1"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio2" name="action" value="NOT"> Rejected
+                                        <label class="form-check-label" for="radio2"></label>
+                                    </div>
+                                </td>
+
+                                <td colspan="5"><textarea class="form-control" id="task" name="remark" rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="{{data.CGM_remark}}"></textarea>
+                                </td>
+                                <td>  <button type="Submit" style="float:left" class="btn-success" onclick="alert('OTP is generated and sent to the registered mobile number')">Submit</button></td>
+
+
+
+                            </table> -->
+                        </tbody>
+                    </tr>
+
+
+
+
+                    <!-- <div class="row card-body">
+                        <div class="col-lg-5 float-right">
+                            <div class="form-group">
+                                <button type="Submit" style="float:left" class="btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+ -->
+
+
+
+
+                    <!-- <a href="/cert_vendor/{{data.User_Id}}" ><button type="Submit" class="btn-success"> Approve </button></a> -->
+            </div>
+            <!-- /.container-fluid -->
+
+
+
+
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+{% endblock body %}

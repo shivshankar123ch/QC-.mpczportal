@@ -1,0 +1,265 @@
+<html>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<head>
+<center>
+<style>
+
+    .signature, .title { 
+        float:left;
+        border-top: 2px solid #000;
+        width: 200px; 
+        text-align: center;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #example2 {
+        width: 213px;
+        padding: 10px;
+        height: 66px;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+
+{% if usr_obj.User_type == "NABL"  %} <!-- NABL IF -->
+<div class="auto-mx" style="width:100%; padding:5px; text-align:center; border: 10px solid black">
+    <div class="auto-mx" style="padding:2px; text-align:center; border: 4px solid black">
+        <table style="padding:20px; width:100%; border:2px solid black;">
+            <tr>
+                <td><img src="{% static 'assets\images\mppok.png' %}" alt="" border=3 height=120 width=150></img></td>
+                <td align ="center"><span style="font-size:24px; font-weight:bold;text-align: center;">MADHYA PRADESH POORV KSHETRA VIDYUT VITRAN CO. LTD.</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:66px">Regd. Office: Shakti Bhawan, PO: Vidyut Nagar, Rampur, Jabalpur 482008</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:170px"> 0761 - 2661795, 2702800 Website http://www.mpez.co.in/ </span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015120</span>
+                </td>
+            </tr>
+        </table>
+        <hr style="height:2px;border-width:0;color:black;background-color:black;" />
+        <h3 class="text-center text-primary font-weight-bolder" style="color: blue;">NABL ACCREDIATED LAB REGISTRATION CERTIFICATE</h3>
+        <table class="table table-bordered table-sm" style="font-size:18px; border: 2px solid black; border-collapse: collapse; width: 100%;">
+            <tbody style="border: 2px solid black; border-collapse: collapse;">
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Lab Name & <br>Address</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;"><span><b>M/s {{company_name}} </b></span><br> Registered Office Address:{{UCDM_obj.Company_add_1}} {{UCDM_obj.Company_add_2}}, {{UCDM_obj.Company_dist}}, {{UCDM_obj.Company_state}}, <br>{{UCDM_obj.Company_pin_code}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">TC No.</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">{{nabl_cert_number}} <b> ( </b>{{nabl_accredited_issue}} to {{ nabl_accredited_expiry }} <b> )</b></td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Registration No.</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;"><b>{{no}}</b></td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Date of Issue</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">{{day}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Valid up To</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">{{valid_upto}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Application for</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">MP Discom(CZ/EZ/WZ)</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td rowspan="3" style="margin-top: 10px; border: 2px solid black; border-collapse: collapse;"><b>*Name of items</b></td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">
+                        <table style="padding:20px; width:100%; border:2px solid black;">
+                            {% for mat in vmaterial  %}  
+                            <tr style="border: 2px solid black; border-collapse: collapse;">
+                                <th style="width:5%; border: 2px solid black; border-collapse: collapse;">{{ forloop.counter }} </th>
+                                <td style="width:95%; border: 2px solid black; border-collapse: collapse;">{{ mat.Material_Specification_Name }}.</td>
+                            </tr>
+                            {% endfor %}
+                        </table>     
+                    </td>          
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td>
+                        <span style="font-size:15px;float:left"><i>*Remark:- Subject to NABL scope of testing</i></span>
+                        <table style="margin-top:10px;float:right; border: 2px solid black; border-collapse: collapse;" >
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td id="example2"></td>
+                            </tr>
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td>Signed by:<b>{{Officer_obj.designation}}</b></td>
+                            </tr>
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td>upload your digital signature</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function printpage() {
+        var download_var = document.getElementById("download");
+        var certFile_var = document.getElementById("digitalCert");
+        var sub_var = document.getElementById("sub");
+		var return2dash = document.getElementById("return2dash");
+     
+        download_var.style.visibility = 'hidden';
+        certFile_var.style.visibility = 'hidden';
+        sub_var.style.visibility = 'hidden';
+		return2dash.style.visibility = 'hidden';
+
+        window.print()
+        
+        download_var.style.visibility = 'visible';
+        certFile_var.style.visibility = 'visible';
+        sub_var.style.visibility = 'visible';  
+		return2dash.style.visibility = 'visible';
+    }
+</script>
+
+<table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+	  <tr>
+	    <th><button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button></th>
+		    <form action="/uplaod_cert/{{no}}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th> 
+			    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+			</form>
+	  </tr>
+</table>
+{% elif usr_obj.User_type == "VENDOR"  %} <!-- NABL ELSE VENDOR IF -->
+<div class="auto-mx" style="width:100%; padding:5px; text-align:center; border: 10px solid black">
+    <div class="auto-mx" style="padding:2px; text-align:center; border: 4px solid black">
+        <table style="padding:20px; width:100%; border:2px solid black;">
+            <tr>
+                <td><img src="{% static 'assets\images\mppok.png' %}" alt="" border=3 height=120 width=150></img></td>
+                <td align ="center"><span style="font-size:24px; font-weight:bold;text-align: center;">MADHYA PRADESH POORV KSHETRA VIDYUT VITRAN CO. LTD.</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:66px">Regd. Office: Shakti Bhawan, PO: Vidyut Nagar, Rampur, Jabalpur 482008</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:170px"> 0761 - 2661795, 2702800 Website http://www.mpez.co.in/ </span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015120</span>
+                </td>
+            </tr>
+        </table>
+        <hr style="height:2px;border-width:0;color:black;background-color:black;" />
+        <h3 class="text-center text-primary font-weight-bolder" style="color: blue;">VENDOR REGISTRATION CERTIFICATE</h3>
+        <table class="table table-bordered table-sm" style="font-size:18px; border: 2px solid black; border-collapse: collapse;">
+            <tbody>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Company Name & <br>Address</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;"><span><b>M/s {{company_name}} </b></span><br> Registered Office Address:{{UCDM_obj.Company_add_1}} {{UCDM_obj.Company_add_2}}, {{UCDM_obj.Company_dist}}, {{UCDM_obj.Company_state}}, <br>{{UCDM_obj.Company_pin_code}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Registration No.</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;"><b>{{no}}</b></td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Date of Issue</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">{{day}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Valid up To</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">{{valid_upto}}</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td style="border: 2px solid black; border-collapse: collapse;">Area of supply</td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">MP Discom(CZ/EZ/WZ)</td>
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td rowspan="3" style="margin-top: 10px;border: 2px solid black; border-collapse: collapse;"><b>Equipments/Items</b></td>
+                    <td style="border: 2px solid black; border-collapse: collapse;">
+                        <table style="padding:20px; width:100%; border:2px solid black;">
+                            {% for mat in vmaterial  %}  
+                            <tr style="border: 2px solid black; border-collapse: collapse;">
+                                <th style="width:5%; border: 2px solid black; border-collapse: collapse;">{{ forloop.counter }} </th>
+                                <td style="width:95%; border: 2px solid black; border-collapse: collapse;">{{ mat.Material_Specification }} .</td>
+                            </tr>
+                            {% endfor %}
+                        </table>     
+                    </td>          
+                </tr>
+                <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                    <td>
+                        <table style="margin-top:10px;float:right; border: 2px solid black; border-collapse: collapse;" >
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td id="example2"></td>
+                            </tr>
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td>Signed by:<b>{{ Officer_obj.designation }}</b></td>
+                            </tr>
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td>upload your digital signature</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function printpage() {
+        var download_var = document.getElementById("download");
+        var certFile_var = document.getElementById("digitalCert");
+        var sub_var = document.getElementById("sub");
+		var return2dash = document.getElementById("return2dash");
+     
+        download_var.style.visibility = 'hidden';
+        certFile_var.style.visibility = 'hidden';
+        sub_var.style.visibility = 'hidden';
+		return2dash.style.visibility = 'hidden';
+
+        window.print()
+        
+        download_var.style.visibility = 'visible';
+        certFile_var.style.visibility = 'visible';
+        sub_var.style.visibility = 'visible';  
+		return2dash.style.visibility = 'visible';
+    }
+</script>
+
+<table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+	  <tr>
+	    <th><button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button></th>
+		    <form action="/uplaod_cert/{{no}}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th> 
+			    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+			</form>
+	  </tr>
+</table>
+{% endif %} 
+
+</center>
+</body>
+<center>
+    {% if usr_obj.User_type == "TKC"  %}
+        <a href='/digital_sign_cert/TKC'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+    {% elif usr_obj.User_type == "NABL" %}
+        <a href='/digital_sign_cert/NABL'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+    {% elif usr_obj.User_type == "VENDOR" %}
+        <a href='/digital_sign_cert/VENDOR'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+    {% endif %}
+</center>
+</html>

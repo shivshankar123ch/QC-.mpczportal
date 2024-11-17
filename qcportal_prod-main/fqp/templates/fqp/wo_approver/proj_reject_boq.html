@@ -1,0 +1,51 @@
+{% extends 'fqp/wo_approver/approver_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+
+<style>
+    .btn_save {
+        float: right;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Update Order information 
+                </h2>
+            </div>
+
+            <div class="card-body">
+                
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+                        </div>                       
+                    </div>
+                 </div> 
+                 <p
+                    style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700; font-size:30px">
+                    {% if mgs %}
+                    {{ mgs }}
+                    {% endif %}
+                </p>                     
+                </div>
+            </div>
+           </div>
+        </div>
+</div>
+
+
+{% endblock body %}

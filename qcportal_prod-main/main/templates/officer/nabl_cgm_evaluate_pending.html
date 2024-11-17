@@ -1,0 +1,244 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+<div class="ed-infocontant">
+  <div class="ed-information mb-4">
+    <div class="card ed-card-block">
+      <div class="card-header">
+        <h2>
+          Uploaded All Document
+        </h2>
+      </div>
+      <div class="card-body">
+        <!-- <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                  {% if msg1 %}
+                  {{ msg1 }}
+                  {% endif %}
+              </p> -->
+        <h3 class=p-3>User All Basics Data</h3>
+        <div class="ed-tableinfo-block ed-orderinfo-block ">
+          <div class="table-responsive">
+            <table id="example2" class="table table-bordered table-hover  ">
+              <thead class="table-dark">
+                <tr>
+                  <th style="width:10% ">
+                    Serial Number</th>
+                  <th style="width: 40% ">
+                    Report Name </th>
+                  <th style="width:40% ">
+                    Value </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Type of Business</td>
+                  <td><b>{{data.Type_of_business}}</b></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Authorised Person Name</td>
+                  <td><b>{{data.Authorised_person_E}}</b></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Company Name</td>
+                  <td><b>{{data.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Contact Number</td>
+                  <td><b>{{data.ContactNo}}</b></td>
+
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Email ID</td>
+                  <td><b>{{data.Email_Id}}</b></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Vendor Type</td>
+                  <td><b>{{data.User_type}}</b></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Company GST No</td>
+                  <td>{{CompanyData.Company_Gst_No}}</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Pan Card No</td>
+                  <td>{{CompanyData.Company_Pan_No}}</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Company Gumastha No</td>
+                  <td>{{CompanyData.Company_Gumastha_No}}</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Company Registration_Date</td>
+                  <td>{{CompanyData.Registration_Date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;">
+                    Company Address</td>
+                <tr>
+                <tr>
+                  <td>11</td>
+                  <td>Add 1</td>
+                  <td>{{CompanyData.Company_add_1}}</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td> Add 2</td>
+                  <td>{{CompanyData.Company_add_2}}</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Pin Code</td>
+                  <td>{{CompanyData.Company_pin_code}}</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>District</td>
+                  <td>{{CompanyData.Company_dist}}</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>State</td>
+                  <td>{{CompanyData.Company_state}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="Material_Name_for_testing">
+              <thead class="table-dark">
+                <tr>
+                  <th> S No.</th>
+                  <th> Product Name </th>
+                  <th> Material Name for Testing </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in mat1 %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{data.Material_Name}}</td>
+                  <td>{{data.Material_Specification_Name}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+
+          <!-- /.card-header -->
+            <div class="table-responsive">
+              <h3 class="card-title">Document Uploaded By Nabl</h3>
+              <table class="table table-bordered table-hover" id="document_uploaded_by_Nabl">
+                <thead class="table-dark">
+                  <tr>
+                    <th> S No. </th>
+                    <th> Document Name </th>
+                    <th> Issued Office Name </th>
+                    <th> Document Number </th>
+                    <th> Issued Date </th>
+                    <th> Expired Date </th>
+                    <th> View Document</th>
+                    <th> Remark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% with name=100 %}
+                  {% for data in doc %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.Types_of_Docs}}</td>
+                    <td>{{data.Issued_office_Name}}</td>
+                    <td>{{data.Document_Name}}</td>
+                    <td>{{data.Doc_issue_date}}</td>
+                    <td>{{data.Doc_expiry_date}}</td>
+                    <td> <a href="{{data.Ddocfile.url}}" target="_blank" class="btn btn-success mr-3">View</a></td>
+                    {% if data.Primary_remark %}
+                    <td>{{data.Primary_remark}}</td>
+                    {% else %}
+                    <td>Not any remark</td>
+                    {% endif %}
+                  </tr>
+
+                  {% endfor %}
+                  {% endwith %}
+                </tbody>
+              </table>
+              <form action="/nabl_cgm_evaluate_save/{{data.User_Id}}" method="POST">
+                {% csrf_token %}
+              <table>
+                <tbody>
+                  <td>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" id="radio1" name="action" value="OK" checked
+                        required> Accepted
+                      <label class="form-check-label" for="radio1"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" id="radio2" name="action" value="NOT"> Rejected
+                      <label class="form-check-label" for="radio2"></label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-group">
+                      <textarea class="form-control" id="task" name="remark" rows="1" style="width: 757px;"
+                        placeholder="{{data.CGM_remark}}"></textarea>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <button type="Submit" style="float:left" class=" btn btn-info">Submit</button>
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+           
+
+<script>
+  $(document).ready(function () {
+    $('#Material_Name_for_testing').DataTable({
+      pagingType: 'full_numbers',
+    });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $('#document_uploaded_by_Nabl').DataTable({
+      pagingType: 'full_numbers',
+    });
+  });
+</script>
+
+{% endblock body %}

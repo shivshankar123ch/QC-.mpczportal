@@ -1,0 +1,134 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+    <title>API Display</title>
+    <div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>Details of New Application</h2>
+                    </div>
+                    <div class="card-body">
+                
+                        {% if user_data %}
+                            <div class="ed-tableinfo-block">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead style="background-color: #dcdcdc;">
+                                            <tr>
+                                                <th>Application No</th>
+                                                <th>Applicant Name</th>
+                                                <th>Task Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in user_data %}
+                                            <tr>
+                                                <td scope="row">
+                                                    {% if i.consumer_application_no %}
+                                                        {{ i.consumer_application_no }}
+                                                    {% else %}
+                                                        {{ i.consumers.consumerApplicationNo }}
+                                                    {% endif %}
+                                                </td>
+                                                <td scope="row">
+                                                    {% if i.consumerName %}
+                                                        {{ i.consumerName }}
+                                                    {% else %}
+                                                        {{ i.consumers.consumerName }}
+                                                    {% endif %}
+                                                </td>
+                                                <td scope="row">
+                                                    {% if i.shortDescriptionOfWork %}
+                                                        {{ i.shortDescriptionOfWork }}
+                                                    {% else %}
+                                                        {{ i.consumers.shortDescriptionOfWork }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if i.is_rejected == None %}
+                                                        <a href="#" onclick="setInterestedId({{ i.id }})"
+                                                            data-toggle="modal" data-target="#interestedModal">
+                                                            <button class="btn btn-info">Interested</button>
+                                                        </a>
+                                                        <a href="/tkc/not_interested/{{ i.id }}">
+                                                            <button class="btn btn-danger">Not Interested</button>
+                                                        </a>
+                                                    {% elif i.is_rejected == False %}
+                                                        <a class="btn btn-success"
+                                                            href="/tkc/contractor_work_started/{{ i.consumer_application_no }}">
+                                                            Start Work
+                                                        </a>
+                                                    {% elif i.is_rejected == True %}
+                                                        <button class="btn btn-danger">Not Interested</button>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        {% else %}
+                            <h4 class="text-center alert alert-info">You have no new application</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interested Modal -->
+    <div class="modal fade" id="interestedModal" tabindex="-1" role="dialog" aria-labelledby="interestedModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="interestedModalLabel">Interested Agreement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        मैं समबंधित कार्य को करने के समबन्ध में अपनी सहमति प्रदान करता हूँ |
+                        मैं इस तथ्य से भली-भांति परिचित हूं कि किसी भी झूठी सूचना/जाली दस्तावेजों
+                        को प्रस्तुत करने से किसी भी स्तर पर आवेदन अस्वीकार कर दिया जाएगा |
+                        चयन करने के पश्चात करने अगर मैं कार्य करने के लिए मना करता हूँ तो मध्य प्रदेश
+                        मध्य क्षेत्र विद्युत वितरण कंपनी लिमिटेड, भोपाल को मुझें ब्लैकलिस्टेड करने का अधिकार होगा |
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="hidden" id="interestedId">
+                    <button type="button" class="btn btn-primary" onclick="agreeAndProceed()">Agree & Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .table-bordered thead td,
+        .table-bordered thead th {
+            border-bottom-width: 2px;
+            white-space: nowrap;
+        }
+    </style>
+
+    <script>
+        function agreeAndProceed() {
+            const interestedId = document.getElementById('interestedId').value;
+            if (interestedId) {
+                // Replace 'next-page-url' with the URL you want to redirect to after agreeing
+                window.location.href = '/tkc/interested/' + interestedId;
+            }
+        }
+
+        // Function to set the interestedId when the "Interested" button is clicked
+        function setInterestedId(id) {
+            document.getElementById('interestedId').value = id;
+        }
+    </script>
+{% endblock body %}

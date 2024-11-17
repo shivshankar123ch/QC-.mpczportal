@@ -1,0 +1,105 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>{% comment %} All Pending Verification Contractor {% endcomment %}</h2>
+    </div>
+    {% if name %}
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-3">
+            <div class="table-responsive">
+                <table
+                class="table table-striped table-bordered ed-table-block ed-centertable text-center"
+                >
+                <thead>
+                    <tr>
+                   <th>S No.</th>
+                    <th>Item Name</th>
+                    <th>Item Code</th>
+                    <th>Serial Number</th>
+                    <th>Accept/Reject Result</th>
+                    <th>Pass/Fail Result</th>
+                    <th>Nabl Report</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                  {% for name in name %}
+                    <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                      {{name.material_name}}
+                  </td>                    
+                    <td>
+                        <p>{{name.sample_code}}</p>
+                    </td>
+                    <td>
+                        <p>{{name.material_serial_number}}</p>
+                    </td>
+                    <td>
+                      {% if name.outward_generated == 1 %}
+                        {% if name.Gatepass.area_store.sampling_flag == 1 and name.Gatepass.area_store.send_to_nabl == 1 %}
+
+                            {% if name.phy_accepted == 1 %}
+                                <span>Sample Accept</span>
+                            {% elif name.phy_rejected == 1 %}
+                            <span>Sample Reject</span>
+                            {% else %}
+                            <span>sample pending</span>
+                            {% endif %}
+                        {% else %}
+                        <span>Pending</span> 
+                        {% endif %}
+                     {% endif %} 
+                    </td>
+                    <td>
+                        {% if name.outward_generated == 1 %}
+                          {% if name.Gatepass.area_store.sampling_flag == 1 and name.Gatepass.area_store.send_to_nabl == 1 %}
+  
+                              {% if name.result_pass == 1 %}
+                                  <span>Sample Pass</span>
+                              {% elif name.result_pass == 0 %}
+                              <span>Sample Fail</span>
+                              {% else %}
+                              <span>sample pending</span> 
+                              {% endif %}
+                          {% else %}
+                          <span>Pending</span> 
+                          {% endif %}
+                       {% endif %} 
+                      </td>
+                      <td>
+                        {% if name.sampleCode_report %}
+                          <b><a href="{{name.sampleCode_report.url}}" target="_blank">View NABL Report</a></b>
+                          {% else %}
+                          <span>Nabl report not uploaded</span>
+                          {% endif %}
+                        
+                      </td>
+
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <h1>NABL Testing is pending</h1>
+    <span style="color:red">NABL Testing is pending</span><td>
+    {% endif %}
+</div>
+        <script>
+          {
+            function ValidateRating(event, inputText) {
+              event.preventDefault();
+              //remaining function logic goes here
+            }
+          }
+        </script>
+      </div>
+
+
+{% endblock body %}

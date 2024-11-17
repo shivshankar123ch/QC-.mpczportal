@@ -1,0 +1,214 @@
+{% extends 'po/procurement_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+<head>
+  <!-- <script type="text/javascript" src="{% static 'assets/js/Validation/vendor2.js' %}"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</head>
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title">Create New Purchase order</h3>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <form action="procurement_generate_po" method="POST">
+    {% csrf_token %}
+    <!-- /.card-headers -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Select Vendor</label>
+            <select id="vendor" name="vendor" required="required" class="form-control custom-select" required>
+              <option selected disabled value="">Choose Vendor </option>
+              {% for name in vendor %}
+              <option value='{{name.CompanyName_E}}'>{{name.CompanyName_E}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <!-- /.form-group -->
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Enter Material Type</label>
+            <select name="category" class="form-control select" style="width: 100%;" required>
+              <option selected disabled value="">Choose Material Type </option>
+              {% for name in m_data %}
+              <option value='{{name.Material_Name}}'>{{name.Material_Name}}</option>
+              {% endfor %}
+            </select> -->
+
+
+            <label>Enter Material Type<span style="color: red;">*</span></label>
+            <select class="form-control form-select form-select-lg" required="required" aria-label=".form-select-lg example" required="required"
+              id="country" name="category" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+              <option value="">Material Name</option>
+            </select>
+          </div>
+          <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+
+          <div class="form-group">
+            <label>Select Item Category</label>
+            <select name="class" class="form-control select"   required="required" style="width: 100%;" required>
+              <option  value="">Choose Item Category </option>
+              {% for name in m_data %}
+              <option value='{{name.Material_Type}}'>{{name.Material_Type}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <!-- /.form-group -->
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Enter Material Specification</label>
+            <select name="name" class="form-control select" style="width: 100%;" required>
+              <option selected disabled value="">Choose Material Specification </option>
+              {% for name in m_data %}
+              <option value='{{name.Material_Type}}'>{{name.Material_Type}}</option>
+              {% endfor %}
+            </select> -->
+
+
+
+
+            <label>Specification<span style="color: red;">*</span></label>
+        <select class="form-control form-select form-select-lg"   name="name" aria-label=".form-select-lg example" name="Specification" id="state"
+          required="required" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+          <option value="">Material Specification</option>
+
+        </select>
+          </div>
+          <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1"> Tendor &amp; Enquiry No </label>
+            <input type="text" required="required" name="tendor" class="form-control" id="exampleInputEmail1" placeholder="">
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1"> NIT Number </label>
+            <input type="text" name="nit"   required="required" class="form-control" id="exampleInputEmail1" placeholder="">
+          </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1"> Enter Quantity </label>
+            <input type="number" required="required" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="">
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1"> Enter Price In Rs </label>
+            <input type="number" name="price" required="required" class="form-control" id="exampleInputEmail1" placeholder="">
+          </div>
+        </div>
+        <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1">Generate
+          PO</button>
+        <!-- /.row -->
+        <!-- /.row -->
+      </div>
+      <!-- /.card-body -->
+
+    </div>
+
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      type: 'get',
+      // mode:'cros',
+      url: 'https://qcportal.mpcz.in/api/material_master',
+      success: function (data) {
+        //console.log(data);
+        getCountry(auth_token);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    })
+    $('#country').change(function () {
+      console.log('countrychange');
+      getState();
+    })
+  })
+
+
+  let auth_token;
+  function getCountry(auth_token) {
+    $.ajax({
+      type: 'get',
+      // mode:'cros',
+      url: 'https://qcportal.mpcz.in/api/material_master',
+      success: function (data1) {
+        // console.log(data1.Material_Name);
+        console.log("kkkk");
+        //console.log(data1);
+        //var html = '';
+        data1.data.forEach(element => {
+          
+          $('#country').append(`<option value="${element.Material_Id}">${element.Material_Name}</option>`)
+        })
+      },
+      error: function (error) {
+        console.log(error);
+      },
+
+    })
+  }
+
+  function getState() {
+
+    let country_id = $('#country').val();
+    console.log(country_id);
+    console.log("hii nsss");
+    //country id
+
+    //console.log(country_id);
+
+    $.ajax({
+      type: 'get',
+      url: 'https://qcportal.mpcz.in/api/material_fetch/' + country_id,
+      //url : 'https://qcportal.mpcz.in/api/material_featch/' + country_id,
+      // console.log('url');
+      success: function (data) {
+        // console.log(url);
+        console.log(data);
+
+        var html = '';
+
+        data.forEach(element => {
+          html = html + (`<option value="${element.Material_Specification_Id}">${element.Material_Specification}</option>`);
+
+        });
+        $('#state').html(html);
+
+
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
+  }
+
+
+
+
+</script>
+{% endblock body %}

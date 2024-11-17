@@ -1,0 +1,161 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>Uploaded All Document</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>User All Basic Details</h5>
+        </div>
+        <!-- <div class="panel-body">Panel Content</div> -->
+        <div class="panel-body">
+             <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center" width="5%"><b> S. No.</b></th>
+                        <th><b>Document  Name</b></th>
+                        <th><b> Document No</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Type of Business</td>
+                        <td>{{data.Type_of_business}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>Authorised Person Name</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Company Name</td>
+                        <td>{{data.CompanyName_E}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td>Contact Number</td>
+                        <td>{{data.ContactNo}}</td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td>Email ID</td>
+                        <td>{{data.Email_Id}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</td>
+                        <td>Vendor Type</td>
+                        <td>{{data.User_type}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">7</td>
+                        <td>Company GST No</td>
+                        <td>{{CompanyData.Company_Gst_No}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">8</td>
+                        <td>Pan Card No</td>
+                        <td>{{CompanyData.Company_Pan_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">9</td>
+                        <td>Company Gumastha No</td>
+                        <td>{{CompanyData.Company_Gumastha_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">10</td>
+                        <td>Company Registration_Date</td>
+                        <td>{{CompanyData.Registration_Date}}</td>
+                    </tr>
+                     <tr>
+                       <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;"> Company Address</td>
+                    <tr>
+                        <tr>
+                        <td class="text-center">11</td>
+                        <td>Add 1</td>
+                        <td>{{CompanyData.Company_add_1}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">12</td>
+                        <td> Add 2</td>
+                        <td>{{CompanyData.Company_add_2}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">13</td>
+                        <td>Pin Code</td>
+                        <td>{{CompanyData.Company_pin_code}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">14</td>
+                        <td>District</td>
+                        <td>{{CompanyData.Company_dist}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">15</td>
+                        <td>State</td>
+                        <td>{{CompanyData.Company_state}}</td>
+                    </tr>
+                 
+             </section>
+                <tr></tr>
+            </table>
+        </div>
+        
+        <div class="panel-heading">
+            <h5> Vendor Material Details</h5>
+        </div>
+        <form action="/new_material_vendor_cgm_evaluate/{{data.User_Id}}" method="POST">
+            {% csrf_token %}
+         <div class="table-responsive mt-3">
+                <table class="table table-bordered table-hover">
+                    <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                        <tr>
+                            <th><b>Material Name</b> </th>
+                            <th><b>Material Specification</b> </th>
+                            <th><b>Material Test Doc</b> </th>
+                            <th><b>Material GTP Doc</b> </th>
+                            <th><b>Material Other Doc</b></th>
+                            <th><b>Remark</b></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for data in material %}
+                        <tr>
+                            <td>
+                                {{data.Material_Name}}</h5>
+                            </td>
+                            <td>{{data.Material_Specification}}</td>
+                            {% if data.Material_Test_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_Test_Doc.url}}"  target="_self">View</a></td>
+                            {% else %}
+                            <td>Not Required </td>
+                            {% endif %}
+                            {% if data.Material_GTP_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_GTP_Doc.url}}"  target="_self">View</a></td>
+                            {% else %}
+                            <td>Not Required </td>
+                            {% endif %}
+                             {% if data.Material_Other_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_Other_Doc.url}}"  target="_self">View</a></td>
+                            {% else %}
+                            <td>Not Available </td>
+                            {% endif %}
+
+                            <td class="text-center"> <input type="text" name="name_data"></td>
+                            </tr>
+                        {% endfor %}
+                   <tr></tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="button-row d-flex mt-4">
+                <button class="btn bg-gradient-primary ms-auto mb-0" onclick="return confirm('Are you sure you want to submit ?');" type="submit" title="Submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

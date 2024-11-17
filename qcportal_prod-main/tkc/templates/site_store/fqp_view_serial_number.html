@@ -1,0 +1,192 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+ 
+
+  <!-- Main content -->
+   <section class="content">
+     
+    <form action="/tkc/tkc_site_store_material_drr/{{tkc_di_id}}/{{dataid}}" method="post">
+      {% csrf_token %}
+      <div>
+          <table class="table table-striped m-4" style="width:90%" border="2">
+             
+              <tr>
+                  <th>DRR Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                  <td><input type="date" id="drr_date" class="form-control" name="drr_date" required="required" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" placeholder=""onkeypress="return false" style="width:250px;">
+                      <span id="date" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+
+              <tr>
+                  <th>Challan No: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" class="form-control" name="challan_no" id="dispatch_num" placeholder=""
+                          style="width:250px;" required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()">
+                      <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+
+              <tr>
+                  <th>Challan Date:(mm/dd/yyyy)<span style="color: red;">*</span></th>
+                  <td><input type="date" id="order_date1" class="form-control" name="challan_date" placeholder="" required="required"
+                          onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"
+                          style="width:250px;"> <span id="order" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span></td>
+              </tr>
+
+              <tr>
+                  <th>Vehicle No: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" name="vehicle" class="form-control" placeholder="" style="width:250px;"
+                          required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()">
+                      <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+              <tr>
+                  <th>Quantity: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" name="quantity"class="form-control" placeholder="" style="width:250px;"
+                          value="{{count}}" placeholder="{{count}}" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()" readonly>
+                      <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+          </table>
+       
+      </div>
+ 
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Receive Material</h3>
+
+         
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped table-bordered display projects">
+             <thead class="table-dark">
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                    
+                     <th>
+                         item Name 
+                     </th>
+                     <th>
+                         Serial Number/Batch Number
+                     </th>
+                     <th>
+                        Physically Status
+                    </th>
+                    <th>Remark</th>
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        <b>{{name.wo_material.material_name}}</b>
+                     </td>
+                    
+                     {% if name.offer.excel_type == True %}
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                     {% elif name.offer.excel_type == False %}
+
+                        <td class="project_progress">
+                          {{name.batch_no}}
+                          </td>
+
+                          {% endif %}
+                   
+                     <td>{% if name.Physical_Status == 1%} Accpected  <input type="radio" name="{{name.id}}" value="1" checked hidden> {% elif name.Physical_Status == -1 %}Rejected  <input type="radio" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                         <input type="radio" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="radio" name="{{name.id}}" value="-1"> Reject
+                    {% endif %}</td>
+
+                     <td>
+                      {% if name.Physical_Status == 1%}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+                      
+                      {% elif name.Physical_Status == -1 %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+
+                      {% else %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="ok" required>
+                      {% endif %}
+                       
+                     </td>
+                   
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+        <center><button class="btn-lg btn btn-primary ">Submit</button></center>
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+ <script>
+    let dtElem = document.getElementById('drr_date');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+    let dtElem2 = document.getElementById('order_date1');
+    let maxDate2 = new Date();
+    dtElem2.max = formatDate(maxDate2);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    //end date selection
+    // let today = new Date();
+    // let dd = String(today.getDate()).padStart(2, '0');
+    // let mm = String(today.getMonth() + 1).padStart(2, '0');
+    // let yyyy = today.getFullYear();
+
+    // today = yyyy + '-' + mm + '-' + dd;
+    // $('#drr_date').attr('min', today);
+   // $('#v_p_end_date').attr('min', today);
+</script>
+
+{% endblock body %}

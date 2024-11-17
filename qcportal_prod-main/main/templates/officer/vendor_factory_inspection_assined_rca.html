@@ -1,0 +1,89 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 160px;
+}
+</style>
+                <div class="ed-infocontant">
+                    <div class="ed-information mb-4">
+                        <div class="card ed-card-block">
+                            <div class="card-header">
+                                <h2>                  
+                                    All Assigned Factory Inspection 
+                                </h2>
+                            </div>        
+                            <div class="card-body">           
+                                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                                    {% if msg1 %}
+                                    {{ msg1 }}
+                                    {% endif %}
+                                </p>
+                                <!-- <form action="/tkc/gm_verify_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform" onsubmit="return validateForm()"> -->
+                                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                                    <div class="table-responsive">
+                <table class="table table-bordered display table-hover " id="factory_assigned_rca">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5">S.No.</th>
+                            <th class="w-20">
+                                Name Of Company
+                            </th>
+                            <th class="w-20">
+                                Inspection Offcier Name
+                            </th>
+                            <th class="w-20 text-center">
+                                Status
+                            </th>
+                            <th class="w-20">
+                                Field Inspection Assied Date
+                            </th>
+                            <th class="w-20">
+                                Field Inspection Completed Date
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in data1 %}
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td>{{data.vendor.CompanyName_E}} </td>
+                            <td>{{data.officer.officer_name}} </td>
+                            <td class="text-center">
+                                {% if data.Status == 0 %}
+                                <span ><button class=" btn btn-warning btn-sm">Pending</button></span> {% else %}
+                                <span ><button class="btn btn-success btn-sm">Approve</button></span>
+
+                                {% endif %}
+                            </td>
+                            <td>{{data.assign_date}} </td>
+                            <td>{{data.perform_date}} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+    $('#factory_assigned_rca').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+</script>
+{% endblock body %}

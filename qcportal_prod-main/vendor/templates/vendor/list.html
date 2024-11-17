@@ -1,0 +1,80 @@
+{% extends 'vendor/base1.html' %} {% load static %} 
+
+
+{% block body %}
+
+<div class="mx-auto" style="width: 95%;">
+
+
+
+    <h1 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Material Information</h1>
+
+    <!-- Search section  -->
+    <div class="center-form" style="display: flex; justify-content: center;">
+        <form action="employees-list" method="POST" style="width: 500px;">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search by Material name or sepcification" aria-label="" aria-describedby="basic-addon1" style="margin-right: 10px;"
+              name="search_query" value="{{ search_query }}"/>
+    
+              <input class="btn btn-success" type="submit" value="Search"/>
+            </div>
+        </form>
+    </div>
+    <br>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Material</th>
+                <th scope="col">Specification</th>
+                <th scope="col">Type Test Report</th>
+                <th scope="col">GTP and Drawing</th>
+                <th scope="col">Other Documents</th>
+                <th scope="col">Name</th>
+                <!-- <th scope="col">Email</th>
+                <th scope="col">Salary</th> -->
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.select_material }}</td>
+                    <td>{{ emp.select_specification }}</td>
+
+                    <th scope="row">
+                        <img style="height: 100px; width: auto;" src="{{ emp.type_test_reportURL }}" class="card-img-top" alt="...">
+                    </th>
+
+                    <th scope="row">
+                        <img style="height: 100px; width: auto;" src="{{ emp.gtp_and_drawingURL }}" class="card-img-top" alt="...">
+                    </th>
+
+                    <th scope="row">
+                        <img style="height: 100px; width: auto;" src="{{ emp.othersURL }}" class="card-img-top" alt="...">
+                    </th>
+
+                    <th scope="row">{{ emp.emp_name }}</th>
+                    <!-- <td>{{ emp.emp_email }}</td>
+                    <td>{{ emp.emp_salary }}</td> -->
+
+                    <td>
+                        <a style="margin-right: 30px;" href="{% url 'edit-employee' emp.id %}">Edit</a>
+                        <a href="{% url 'delete-employee' emp.id %}">Remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a href="{% url 'create-employee' %}"><button type="button" class="btn btn-primary">Add New Material</button></a>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'vendor_reg_eleven' %}"><button type="button" class="btn btn-primary">Submit</button></a>
+    </div>
+</div>
+    {% endblock body %}

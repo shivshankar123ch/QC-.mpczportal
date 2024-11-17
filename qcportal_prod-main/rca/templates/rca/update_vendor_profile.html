@@ -1,0 +1,135 @@
+{% extends 'vendor/RCA_vendor_base.html' %} {% load static %} {% block body %}  {% block update_profile %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock update_profile %}
+
+<form action="/rca/update_profile" method="POST">
+    {% csrf_token %}
+    <div class="container">
+       <h5>Basic Details</h5>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">Panel Heading</div>
+                                                                  <div class="panel-body">Panel Content</div> -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                        <tr>
+                            <th style="width:5% ">
+                                S.No.</th>
+                            <th style="width: 45% ">
+                                Title </th>
+                            <th style="width: 20% ">
+                                Value </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+
+                       
+
+                        <tr>
+                            <td class="text-center align-middle">1</td>
+                            <td class="align-middle">Authorised Person Name</td>
+                            <td class="text-center align-middle"><input type="text" name="one" value="{{basic.Authorised_person_E}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">2</td>
+                            <td class="align-middle">Company Name</td>
+                            <td class="align-middle text-center"><input type="text" name="two" value="{{basic.CompanyName_E}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">3</td>
+                            <td class="align-middle">Contact Number</td>
+                            <td class="text-center align-middle"><input type="text" name="three" value="{{basic.ContactNo}}" class="form-control" readonly></td>
+
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td class="text-center align-middle">4</td>
+                            <td class="align-middle">Email</td>
+                            <td class="text-center align-middle"><input type="text" name="four" value="{{basic.Email_Id}}" class="form-control" readonly></td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center align-middle">5</td>
+                            <td class="align-middle">GST Number</td>
+                            <td class="text-center align-middle"><input type="text" name="five" value="{{basic.Company_Gst_No}}" class="form-control" readonly></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td class="text-center align-middle">6</td>
+                            <td class="align-middle">PAN Card Number</td>
+                            <td class="align-middle text-center"><input type="text" name="six" value="{{basic.Company_Pan_No}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">7</td>
+                            <td class="align-middle">Aadhar Card Number</td>
+                            <td class="align-middle text-center"><input type="text" name="seven" value="{{basic.Aadhar}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">8</td>
+                            <td class="align-middle">Company Gumastha/Registration No</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_Gumastha_No}}" class="form-control" readonly></td>
+
+                        </tr>
+						
+						<tr>
+                            <td class="text-center align-middle">9</td>
+                            <td class="align-middle">Address1</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_add_1}}" class="form-control" readonly></td>
+
+                        </tr>
+						<tr>
+                            <td class="text-center align-middle">10</td>
+                            <td class="align-middle">Address2</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_add_2}}" class="form-control" readonly></td>
+
+                        </tr>
+						<tr>
+                            <td class="text-center align-middle">11</td>
+                            <td class="align-middle">Pincode</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_pin_code}}" class="form-control" readonly></td>
+
+                        </tr>
+						<tr>
+                            <td class="text-center align-middle">12</td>
+                            <td class="align-middle">District</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_dist}}" class="form-control" readonly></td>
+
+                        </tr>
+						<tr>
+                            <td class="text-center align-middle">13</td>
+                            <td class="align-middle">State</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.Company_state}}" class="form-control" readonly></td>
+
+                        </tr>
+                        
+                      
+                      
+
+
+
+                         </tr>
+                        <tr></tr>
+
+                    </tbody>
+                </table>
+                <div class="col-lg-6">
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock body %}

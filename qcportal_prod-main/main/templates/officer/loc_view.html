@@ -1,0 +1,75 @@
+{% extends 'po/area_store/pma_officer.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %} LOC Details Information {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                         
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>LOC No</th>
+                                        <th>LOC Amount</th>
+                                        <th>LOC Issue Date</th>
+                                        <th>LOC Valid Date</th>
+                                        <th>View</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for Supply in data %}
+                                    <tr>
+                                        <td>
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td>
+                                            {{Supply.LOC_No}}
+                                        </td>
+                                        <td>
+                                            {{Supply.LOC_Amount}}
+                                        </td>
+                                        <td>
+                                            {{Supply.LOC_Issue_Date}}
+                                        </td>
+                                        <td>
+                                            {{Supply.LOC_Issue_Date}}
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{Supply.LOC.url}}">
+                                                <button class="btn ed-submit btn-success">
+                                                    <span class="ed-submit-text">
+                                                        View LOC
+                                                    </span>
+                                                </button>
+                                            </a>
+
+                                        </td> -->
+                                        
+
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+{% endblock body %}

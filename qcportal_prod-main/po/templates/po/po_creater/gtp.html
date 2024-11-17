@@ -1,0 +1,325 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+    <div class="ed-wrapper-block">
+        <div class="ed-wrapper-contant" id="edContainer">
+            <nav class="navbar ed-header-navbar ed-header-block" id="edHeader">
+                <div class="navbar-container">
+                    <ul class="navbar ed-nav-left">
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" id="navMenu">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="3" y1="12" x2="21" y2="12" />
+                                    <line x1="3" y1="6" x2="21" y2="6" />
+                                    <line x1="3" y1="18" x2="21" y2="18" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar ed-nav-right">
+                        <li class="nav-item ed-profilemenu-block">
+                            <a class="nav-link " href="#" data-toggle="dropdown">
+                                <span class="ed-imgbox">
+                                    <img src="assest/images/userimg.jpg" class="img-fluid ed-userimg"
+                                        alt="User profile" />
+                                </span>
+                                <span class="ed-text">
+                                    User Name
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item ed-logout-block">
+                        <a class="nav-link " href="javascript:;" onclick="CustomAlert.show()">
+                            <span class="ed-imgbox">
+                                <img src="assest/images/logout.png" class="img-fluid ed-logout" alt="Logout" />
+                            </span>
+                        </a>
+                    </li> -->
+
+                        <li class="nav-item ed-logout-block">
+                            <a class="nav-link " href="javascript:;" data-toggle="tooltip" title="Logout">
+                                <span class="ed-imgbox">
+                                    <img src="assest/images/logout.png" class="img-fluid ed-logout" alt="Logout" />
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+            <div class="ed-sidebar-block" id="edSidebar">
+                <div class="navbar-logo">
+                    <span class="ed-logo-item">
+                        <img src="./assest/images/rcalogo.png" alt="Logo" class="img-fluid ">
+                    </span>
+                    <span class="ed-navbar-profile">
+                        <span class="ed-navbar-name">
+                            Name
+                        </span>
+                        <span class="ed-hdesignation-name">
+                            Designation
+                        </span>
+                    </span>
+                </div>
+                <ul class="navbar-nav ed-menulist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link" href="#" data-toggle="dropdown">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Purchase Order
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu ed-menudropdown-block">
+                            <li class="menu-item">
+                                <a class="menu-link" href="createorder.html">Create Purchase Order</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="vieworder.html">View Purchase Order</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="bankguarantee.html">Bank guarantee</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="gtp.html">GTP</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="offerdmaterial.html">Offered Material</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+
+            <!--  ---------------   Body part start ------------------------------------------- -->
+            <!--  ---------------   Body part start ------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+            <div id="dialog-container" class="ed-dialog-container">
+                <div class="ed-modal-block" id="dialog-modal">
+                    <div class="ed-modal-content">
+                        <div class="ed-modal-header">
+                            <h4>Custom Alert Dialog</h4>
+                        </div>
+                        <div id="dialog-body" class="ed-modal-body">
+                            <p>
+                                This is the custom alert message. Click Ok to close this.
+                            </p>
+                        </div>
+                        <div class="ed-dialog-footer">
+                            <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+                                <span class="ed-submit-text">
+                                    Ok
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  ---------------   Body part end ------------------------------------------- -->
+            <!--  ---------------   Body part end ------------------------------------------- -->
+
+
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+
+            <div class="ed-footer-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            © 2022, All Rights Reserved By
+                            <a href="#" class="link">MPMKVVCL</a>
+                            .
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <a href="#" class="links">
+                                Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co.
+                                Ltd. Nishtha Parisar Govindpura, Bhopal.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            $('#navMenu').click(function () {
+                $('#edHeader').toggleClass('ed-header-collpase');
+                $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                $('#edContainer').toggleClass('ed-wrapper-collpase');
+            });
+        });
+
+        $('#ed-menulist .nav-item').on('click', function () {
+            // var target = $(this).attr('data-rel');
+            $('#ed-menulist .nav-item .nav-link').removeClass('active');
+            $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+            $('#ed-menulist .nav-item').removeClass('active');
+            $(this).addClass('active');
+            // $('#ed-menulist .nav-item').addClass('active');
+            $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+            // alert();
+            // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+            return false;
+        });
+    </script>
+
+    <script>
+        const dialogModal = document.getElementById('dialog-modal');
+        const CustomAlert = new function () {
+            this.show = function (msg) {
+                $('body').addClass('bodymodel');
+                dialogModal.style.visibility = 'visible';
+                dialogModal.style.opacity = 1;
+                dialogModal.style.top = '40%';
+            }
+
+            this.close = function () {
+                $('body').removeClass('bodymodel');
+                dialogModal.style.visibility = 'hidden';
+                dialogModal.style.opacity = 0;
+                dialogModal.style.top = '-40%';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#nextStep1").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").show();
+            $("#formStep3").hide();
+            $("#formStep4").hide();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep2").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").show();
+            $("#formStep4").hide();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep3").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").hide();
+            $("#formStep4").show();
+            $("#formStep5").hide();
+        });
+
+        $("#nextStep4").click(function () {
+            $("#formStep1").hide();
+            $("#formStep2").hide();
+            $("#formStep3").hide();
+            $("#formStep4").hide();
+            $("#formStep5").show();
+        });
+
+    });
+</script>
+
+
+<script>
+    $('.material-wrapper').on('click', '.remove', function () {
+        $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+    });
+    $('.material-wrapper').on('click', '.addMaterial', function () {
+        $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+    });
+</script>
+
+
+{% endblock body %}
+
+
+
+
+
+
+
+

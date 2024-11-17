@@ -1,0 +1,365 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %} {% block body %}
+
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+<!--         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+
+
+        <script type="text/javascript">
+            window.history.forward();
+
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+
+
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left" data-offset="0">
+                              <div class="card-header pb-0 text-left" data-offset="0">
+                                    {% if messages %} {% for message in messages %}
+                                    <div class="alert alert-warning {{message.tags}}" role="alert" {% if message.tags %} {% endif%}>
+                                        {{message}}
+										{% endfor %}{% endif %}
+                                    </div>
+
+                                <h4 class="text-info font-weight-bolder">Upload Material Details</h4>
+
+                                <form class="row g-3 needs-validation" action="add_material" name="myForm" enctype="multipart/form-data" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row mt-3">
+                                        <div class="col-12 col-sm-4">
+                                            <label for="inputStatus" class="labelName"><h5>Select Product:<span
+                                                style="color: red;">*</span></h5></label>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <select class="form-select form-select-lg" aria-label=".form-select-lg example" name="product1" required="required" id="country" name="Material" onselect="listIsData1()" onchange="listIsData1();getDatanull()">
+                                              <option value="">Select Product</option>
+                                             </select>
+                                            <span id="User" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                        </div>
+                                        <div class="col-12 col-sm-2"></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12 col-sm-4">
+                                            <label for="inputStatus" class="labelName"><h5>Specification:<span
+                                                style="color: red;">*</span></h5></label>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <!-- <ul id="state" style="list-style: none;border: 1px;" name="specification" required="required" onchange="listIsData1();">
+                                            </ul> -->
+                                            <select class="form-select form-select-lg" aria-label=".form-select-lg example" id="state" name="specification" required="required" onselect="listIsData1()" onchange="listIsData1();getDatanull()">
+                                                <option value="">Select Specification</option>
+                                               </select>
+                                            <span id="specification_1" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                        </div>
+                                        <div class="col-12 col-sm-2"></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12 col-sm-4"><label for="inputStatus" class="labelName"><h5>List of IS:<span
+                                            style="color: red;">*</span></h5></label></div>
+                                        <div class="col-12 col-sm-6">
+                                            <!-- <ul id="isDatas" style="list-style: none;" name="IsDatas" onselect="getISdata()" onkeyup="getISdata()" onchange="getISdata() ">
+
+                                            </ul> -->
+                                            <select class="form-select form-select-lg" aria-label=".form-select-lg example" id="isDatas" name="IsDatas" required="required">
+                                                <option value="">Select IS</option>
+                                               </select>
+                                            <span id="isData_1" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                        </div>
+                                        <div class="col-12 col-sm-2"></div>
+                                    </div>
+
+                                    <div class="row mt-3">
+
+                                        <div class="col-12 col-sm-4">
+
+                                            <label><h5>Select Test :<span style="color: red;">*</span></h5></label>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <ul id="orders" style="list-style: none;" name="ips" onselect="getCity();" onkeyup="getCity();" onchange="getCity(); ">
+                                            </ul>
+                                            <span id="Test_1" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                        </div>
+                                        <div class="col-12 col-sm-2"></div>
+                                    </div>
+
+                                    <div class="button-row d-flex mt-4">
+                                        <button type="button" onclick='selects()' class="box btn btn-primary myDiv">Select All Test</button>
+                                        <button type="button" onclick='deSelect()' class="box btn btn-secondary myDiv">Deselect All Test</button>
+                                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button"
+                                                title="Prev" onclick="history.back()">Prev</button> -->
+                                        <!-- <button id="select">Select Two Wheelers</button> -->
+
+                                        <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" onclick="Validatform()" id="select" title="Send"> Save &
+                                                Next</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .button1 {
+            width: 250px;
+        }
+        
+        .button2 {
+            width: 250px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function selects() {
+            var ele = document.getElementsByName('ips');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = true;
+            }
+        }
+
+        function deSelect() {
+            var ele = document.getElementsByName('ips');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = false;
+
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            console.log("ajax calllllllll")
+            $.ajax({
+                type: 'get',
+                // mode:'cros',
+                url: 'https://qcportal.mpcz.in/api/material_master',
+                success: function(data) {
+                    // console.log(data);
+                    getCountry(auth_token);
+                },
+                error: function(error) {
+                    console.log(error);
+                },
+            })
+            $('#country').change(function() {
+                //console.log('countrychange');
+                getState();
+            })
+
+
+
+
+
+
+            $('#isDatas').change(function() {
+                console.log('its test here');
+
+                let country_id = $('#isDatas').val();
+                //console.log('satya');
+                console.log(country_id);
+                let auth_token;
+
+                function getCountrys(auth_token) {
+                    $.ajax({
+                        type: 'get',
+                        // mode:'cros',
+                        url: 'https://qcportal.mpcz.in/api/material_test_master/' + country_id,
+                        //url: 'https://qcportal.mpcz.in/api/material_test_fetch/3',
+                        success: function(data1) {
+                            console.log(data1);
+                            // console.log(data1.List_Of_Test[0].Test_Name);
+
+                            var html = '';
+                            data1.material_specification.forEach(element => {
+
+                                // $('#Test').append(`<option value="${element.id}">${element.Test_Name}</option>`);
+                                html = html + (`<li ><input type="checkbox" value="${element.Acceptance_Test_Id}"   id="mn" name="ips" onkeyup="validateForm();" onchange="validateForm();">${element.Name_Of_Acceptance_Test}</li>`);
+
+
+                            });
+                            $('#orders').html(html);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+
+                    })
+                }
+                getCountrys();
+                //getState();
+            })
+        })
+
+
+
+
+
+        let auth_token;
+
+        function getCountry(auth_token) {
+            $.ajax({
+                type: 'get',
+                // mode:'cros',
+                url: 'https://qcportal.mpcz.in/api/material_master',
+                success: function(data1) {
+                    // console.log(data1.Material_Name);
+                    // console.log("kkkk");
+                    //console.log(data1);
+                    //var html = '';
+                    data1.data.forEach(element => {
+
+                        $('#country').append(`<option value="${element.Material_Id}"   onselect="listIsData1()"  onchange="listIsData1()">${element.Material_Name}</option>`)
+                    })
+                },
+                error: function(error) {
+                    console.log(error);
+                },
+
+            })
+        }
+
+        // var myAllId =[]
+
+
+        function listIsData1() {
+            //console.log("is data here");
+
+            let country_id = $('#state').val(); ///document.getElementById("turn_over3").value;
+
+
+            $.ajax({
+                type: 'get',
+                url: 'https://qcportal.mpcz.in/api/material_is_master/' + country_id,
+
+                success: function(data1) {
+
+                    var html = '';
+
+                    data1.material_specification.forEach(element => {
+                        html = html + (`<option value=""></option><option value="${element.Is_Id}">${element.IS_Name}</option>`);
+
+                    });
+                    $('#isDatas').html(html);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+        }
+
+        function getState() {
+
+            let country_id = $('#country').val();
+            // console.log(country_id);
+            //console.log("hii nsss");
+            //country id
+
+            //console.log(country_id);
+
+            $.ajax({
+                type: 'get',
+                url: 'https://qcportal.mpcz.in/api/material_specification_master/' + country_id,
+                //url : 'https://qcportal.mpcz.in/api/material_featch/' + country_id,
+                // console.log('url');
+                success: function(data) {
+                    //console.log(data);
+                    var html = '';
+
+                    data.material_specification.forEach(element => {
+                        html = html + (`<option value=""></option><option value="${element.Material_Specification_Id}">${element.Material_Specification_Name}</option>`);
+
+                    });
+                    $('#state').html(html);
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+        }
+
+
+
+
+
+        // function getDatanull() {
+        //     console.log("nisha1234567");
+        //     // let listIs = document.getElementById('mnss').value == ns2;
+        //     let x = document.getElementById("isDatas");
+        //     x.style.display = "none";
+        //     let specification = document.getElementById('state').value;
+        //     console.log(specification)
+
+        //     console.log(listIs);
+
+        // }
+    </script>
+    <script>
+        function validateForm() {
+            console.log("hiiinsss234");
+            let product_1 = document.forms["myForm"]["product1"].value;
+            let specificationn = document.forms["myForm"]["specification"].value;
+            //let test = document.forms["myForm"]["ips"].value;
+            if (product_1 == "") {
+                console.log("if me ayaaaa")
+                document.getElementById('User').innerHTML = "Please fill the required field  ";
+                return false;
+            } else {
+                document.getElementById('User').innerHTML = " ";
+            }
+            if (specificationn == "") {
+                document.getElementById('specification_1').innerHTML = "Please fill the required field  ";
+                return false;
+            } else {
+                document.getElementById('specification_1').innerHTML = " ";
+            }
+
+            if (!this.form.ips.checked) {
+                alert('You must agree to the terms first.');
+                return false;
+            }
+            var ns2 = document.getElementById("mn").checked = false;
+            // if (ns2 === true) {
+            //     alert("11");
+            //     document.getElementById('Test_1').innerHTML = "Please fill the required field  ";
+            //     return false;
+            // } else {
+            //     document.getElementById('Test_1').innerHTML = "";
+            // }
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            }
+    </script>
+
+
+
+
+</body>
+{% endblock body %} {% endblock title %}
+

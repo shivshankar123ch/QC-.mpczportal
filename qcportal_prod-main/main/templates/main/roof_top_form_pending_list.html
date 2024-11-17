@@ -1,0 +1,50 @@
+
+{% extends 'officer/discom_base.html' %} {% load static %} {% block body %}{% load static %}
+<div class="container">
+  <h2>All Pending Contractor</h2>
+  <div class="panel panel-default">
+      <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+      <div class="table-responsive">
+         <table class="table table-bordered table-hover">
+              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                    <th>
+                         Serial Number
+                    </th>
+                    <th>
+                        Name Of Agency
+                    </th>
+                  
+                    <th>
+                      Email
+                  </th>
+                  <th>
+                    Contact Number
+                </th>
+              
+             
+                    <th>
+                      Action
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                  <td>{{data.agency_name}}</td>
+             
+                  <td>{{data.email}}</td>
+                  <td>{{data.contact}}</td>
+                 
+                    <td> <a href="/roof_top_filling_pending_form/{{data.id}}">View Details</a></td>
+                 
+                  {%  endfor %}
+              <tr></tr>
+                </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,560 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+{% block basic %}
+{% endblock basic %}
+
+
+<div class="ed-information">
+    <div class="card ed-card-block">
+        <div class="ed-card-inner">
+            <div class="card-header">
+                <h2>
+                    FQP Intimation Detail
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="ed-tableinfo-block">
+                    <div class="table-responsive">
+
+                        <table class="table table-striped table-bordered  text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="w-45">Name</th>
+                                    <th class="w-50">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for td in task_data %}
+                                <tr>
+                                    <th>Work Order No. and Date</th>
+                                    <td>{{td.wo.Contract_Number}} - {{td.wo.Contract_Date|date:"d/m/Y"}}</td>
+                                </tr>
+                                <tr>
+
+                                    <th>Work Order Description</th>
+                                    <td>{{td.wo.Header.Contract_Description}}</td>
+                                </tr>
+                                <tr>
+                                    <th>TKC Name</th>
+                                    <td>{{td.wo.supplier.CompanyName_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Work-order Amount (In rupees)</th>
+                                    <td>{{td.loa_amount|default:"---"}}</td>
+                                </tr>
+                                <tr>
+                                    <th>View Work-Order</th>
+                                    <td>
+                                        {% if td.wo.Wo_Digital %}
+                                        <a class="btn ed-submits btn-info" href="{{td.wo.Wo_Digital.url}}"
+                                            target="_blank">View</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-danger" href="#">Work Order Not Uploaded</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+
+
+                                <!-- <tr>
+                                    <th>Create FQP Intimation</th>
+                                    <td>
+                                        <a class="btn ed-submits btn-primary"
+                                            href="/tkc/tkc_new_fqpintimation_create/?woid={{td.wo_id}}&wotaskid={{td.id}}">Create
+                                            FQP Intimation</a>
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <th colspan="2" class="" style="background: #212529; padding:0;">
+                                        <!-- <h3>Task detail</h3> -->
+                                        <h4>
+                                            --------------------------------------------------------
+                                            --------------------------------------------------------
+                                            --------------------------------------------------------
+                                        </h4>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>GIS Feeder Id/Task Id</th>
+                                    <td>{{td.gis_feeder_id}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Region</th>
+                                    <td>{{td.region.Region_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Circle</th>
+                                    <td>{{td.circle.Circle_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Division</th>
+                                    <td>{{td.division.Division_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Distribution center / zone</th>
+                                    <td>{{td.distribution_center.DC_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>ERP Estimate Number</th>
+                                    <td>{{td.erp_estimate_no}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>ERP GBPA Number</th>
+                                    <td>{{td.erp_gbpa_no}}</td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>Package name and number</th>
+                                    <td>{{td.package_name_and_no}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Description Of Work/Task</th>
+                                    <td>{{td.description_of_work}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Feeder Name on which work proposed </th>
+                                    <td>{{td.feeder_name_on_which_work_proposed}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Substation Name on which work proposed </th>
+                                    <td>{{td.substation_name_on_which_work_proposed}}</td>
+                                </tr>
+
+                                {% endfor %}
+
+                                <tr>
+                                    <th colspan="2" class="" style="background: #212529; padding:0;">
+                                        <!-- <h3>Task detail</h3> -->
+                                        <h4>
+                                            --------------------------------------------------------
+                                            --------------------------------------------------------
+                                            --------------------------------------------------------
+                                        </h4>
+                                    </th>
+                                </tr>
+
+
+                                {% for data in int_data %}
+                                <tr>
+                                    <th>FQP Intimation Number and Date</th>
+                                    <td>{{data.intimation_unique_no}}</td>
+                                </tr>
+
+                                <!-- <tr>
+                                    <th>Milestone</th>
+                                    <td>{{data.wotask_milestone.milestone.milestone_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th style="width:25%;">Milestone Category</th>
+                                    {% for mcat in fqpinti_mile_cat_data %}
+                                    {% if mcat.fqpintimation_id == data.id %}
+
+                                    <td>{{mcat.wotask_milestone_main_category.milestone_category_name}}
+                                    </td>
+
+                                    {% endif %}
+                                    {% endfor %}
+                                </tr> -->
+
+                                <tr>
+                                    <th>Work Execution Detail</th>
+                                    <td>{{data.work_execution_detail}}</td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>Brief Description Of Work</th>
+                                    <td>{{data.brief_description_of_work}}</td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>Work Execution Image 1</th>
+                                    <td>
+                                        {% if data.work_execution_milestone_image1 %}
+                                        <a class="btn ed-submits btn-info"
+                                            href="{{data.work_execution_milestone_image1.url}}" target="_blank">View</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-primary" href="#">Not Uploaded</a>
+
+                                        {% endif %}
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>Work Execution Image 2</th>
+
+                                    <td>
+                                        {% if data.work_execution_milestone_image2 %}
+                                        <a class="btn ed-submits btn-info"
+                                            href="{{data.work_execution_milestone_image2.url}}" target="_blank">View</a>
+
+                                        {% else %}
+                                        <a class="btn ed-submits btn-primary" href="#">Not Uploaded</a>
+
+                                        {% endif %}
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>Date Of Execution</th>
+                                    <td>{{data.date_of_execution}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Date Of Readines</th>
+                                    <td>{{data.date_of_readines}}</td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>Date Of Completion</th>
+                                    <td>{{data.date_of_completion}}</td>
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h2>
+                        FQP Intimation Observation List
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-bordered  text-center">
+                                <thead class="table-dark">
+                                    <tr>
+
+                                        <!-- <th style="min-width: 120px;">Milestone Category</th> -->
+                                        <th style="min-width: 120px;">TKC Rrview Remark</th>
+                                        <th style="min-width: 120px;">TKC Review Status</th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category</th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category Activity
+                                            And Operation </th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category Charactics
+                                        </th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category Quantum Of
+                                            check Contractor</th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category Quantum Of
+                                            Check TPQMA </th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category
+                                            acceptance_norms </th>
+                                        <th style="min-width: 120px;">Milestone Sub-Category
+                                            format_of_record </th>
+                                        <th style="min-width: 120px;">Inspecting Officer Name</th>
+                                        <th style="min-width: 120px;">Inspecting Officer Role</th>
+                                        <th style="min-width: 120px;">Observation Remark </th>
+                                        <th style="min-width: 120px;">Observation Image </th>
+                                        <th style="min-width: 120px;">Observation Location </th>
+                                        <th style="min-width: 120px;">Observation Date </th>
+                                        <th style="min-width: 120px;">Observation Status </th>
+                                        <th style="min-width: 120px;">Observation Latitude </th>
+                                        <th style="min-width: 120px;">Observation Longitude </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for od in observation_data %}
+
+                                    <tr>
+<td>{{od.id}}</td>
+                                        <td>{{od.tkc_review_remark|default:"---"}}</td>
+                                        <td>
+                                            {% if od.observation_status == 0 %}
+                                            <button type="buttton" class="btn ed-submits btn-info">Submitted</button>
+                                            {% elif od.observation_status == 1 or od.observation_status == 2 %}
+                                            <button type="buttton" class="btn ed-submits btn-primary">
+                                                Submitted
+                                            </button>
+                                            {% else %}
+                                            <button type="button" class="btn ed-submits btn-success">
+                                                Submit
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{od.milestone_subcategory_data.milestone_main_subcategory.milestone_subcategory_name|default:"---"}}
+                                        </td>
+                                        <td>{{od.milestone_subcategory_data.activity_and_operation|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.characteristics|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.quantum_of_check_contractor|default:"---"}}
+                                        </td>
+                                        <td>{{od.milestone_subcategory_data.quantum_of_check_tpqma|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.acceptance_norms|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.format_of_record|default:"---"}}</td>
+                                        <td>{{od.officer.employ_name|default:"---"}}</td>
+                                        <td>{{od.officer.role.Role_Name|default:"---"}}</td>
+                                        <td>{{od.observation_remark|default:"---"}}</td>
+                                        <td>
+                                            {% if od.observation_image %}
+                                            <img src="{{od.observation_image.url}}" alt="Observation Image"
+                                                style="height:90%;width:90%;"></br>
+                                            <a class="btn ed-submits btn-success" href="{{od.observation_image.url}}"
+                                                target="_blank">Observation Image</a>
+                                            {% else %}
+                                            <a class="btn ed-submits btn-primary" href="#">Observation Image Not
+                                                Uploaded</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{od.observation_location|default:"---"}}</td>
+                                        <td>{{od.observation_date|default:"---"}}</td>
+                                        <td>
+                                            {% if od.observation_status == 1 %}
+                                            <a class="btn ed-submits btn-success" href="#">OK</a>
+                                            {% elif od.observation_status == 2 %}
+                                            <a class="btn ed-submits btn-danger" href="#">NOT OK</a>
+                                            {% elif od.observation_status == 0 %}
+                                            <a class="btn ed-submits btn-warning" href="#">Pending</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{od.observation_lat|default:"---"}}</td>
+                                        <td>{{od.observation_long|default:"---"}}</td>
+                                    </tr>
+
+
+                                    {% if od.observation_status == 2 and tkc_review_status == 1 %}
+                                    <tr>
+                                        <form action="/tkc/tkc_new_fqpintimation_observation_review/" method="POST"
+                                            enctype="multipart/form-data">
+                                            <td><input type="text" name="tkc_review_remark"></td>
+                                            <td>
+                                                <input type="text" name="fqpintimation_id"
+                                                    value="{{od.fqpintimation_id}}" hidden>
+                                                <input type="text" name="observation_id" value="{{od.id}}" hidden>
+                                                {% if od.observation_status == 0 %}
+                                                <button type="buttton"
+                                                    class="btn ed-submits btn-info">Submitted</button>
+                                                {% elif od.observation_status == 1 or od.observation_status == 2 %}
+                                                <button type="buttton" class="btn ed-submits btn-primary">
+                                                    Completed
+                                                </button>
+                                                {% else %}
+                                                <button type="submit" class="btn ed-submits btn-primary">
+                                                    Submit
+                                                </button>
+                                                {% endif %}
+                                            </td>
+                                        </form>
+                                        <td>{{od.milestone_subcategory_data.milestone_main_subcategory.milestone_subcategory_name|default:"---"}}
+                                        </td>
+                                        <td>{{od.milestone_subcategory_data.activity_and_operation|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.characteristics|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.quantum_of_check_contractor|default:"---"}}
+                                        </td>
+                                        <td>{{od.milestone_subcategory_data.quantum_of_check_tpqma|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.acceptance_norms|default:"---"}}</td>
+                                        <td>{{od.milestone_subcategory_data.format_of_record|default:"---"}}</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+
+                                    </tr>
+                                    {% endif %}
+
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card-header">
+            <h2>
+                FQP Inspection Officer List
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped ed-table-block table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th class="W-5 text-center">S.No.</th>
+
+                                <th>Officer Fullname</th>
+                                <th>Officer Mobile</th>
+                                <th>Officer Designation</th>
+                                <th>Representative From</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for i in officer_data %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.officer_fullname}}</td>
+                                <td>{{i.officer_mobile}}</td>
+                                <td>{{i.officer_designation}}</td>
+                                <td>{{i.representative_from}}</td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-header">
+            <h2>
+                FQP Inspection Image
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped ed-table-block table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th class="W-5 text-center">S.No.</th>
+
+                                <th>Image 1</th>
+                                <th>Image 2</th>
+                                <th>Image 3</th>
+                                <th>Inspection Remark</th>
+                                <th>Inspection Latitude</th>
+                                <th>Inspection Longitude</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for i in close_inti %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+
+                                <td>
+                                    {% if i.image_1 %}
+                                    <img src="{{i.image_1.url}}" alt="Close Inspection Image"
+                                        style="height:50%;width:55%;"></br>
+                                    <a class="btn ed-submits btn-success" href="{{i.image_1.url}}" target="_blank">Close
+                                        Inspection Image</a>
+
+                                    {% else %}
+                                    <a class="btn ed-submits btn-primary" href="#">Close Inspection Image Not
+                                        Uploaded</a>
+
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if i.image_2 %}
+                                    <img src="{{i.image_2.url}}" alt="Close Inspection Image"
+                                        style="height:50%;width:55%;"></br>
+                                    <a class="btn ed-submits btn-success" href="{{i.image_2.url}}" target="_blank">Close
+                                        Inspection Image</a>
+
+                                    {% else %}
+                                    <a class="btn ed-submits btn-primary" href="#">Close Inspection Image Not
+                                        Uploaded</a>
+
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.image_3 %}
+                                    <img src="{{i.image_3.url}}" alt="Close Inspection Image"
+                                        style="height:50%;width:55%;"></br>
+                                    <a class="btn ed-submits btn-success" href="{{i.image_3.url}}" target="_blank">Close
+                                        Inspection Image</a>
+
+                                    {% else %}
+                                    <a class="btn ed-submits btn-primary" href="#">Close Inspection Image Not
+                                        Uploaded</a>
+
+                                    {% endif %}
+                                </td>
+                                <td>{{i.close_remark}}</td>
+                                <td>{{i.close_lat}}</td>
+                                <td>{{i.close_long}}</td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<!-- <script type="text/javascript">
+
+    function myFunc(cone) {
+        let x = document.getElementsByClassName(cone);
+        let acc = document.getElementById("accept" + cone);
+        // let rej = document.getElementById("reject"+cone);
+        // console.log(x)
+        if (x.length == 1) {
+            if (acc.checked == true) {
+                let model = document.getElementById('InspectionModal');
+                let modal_yes = document.getElementById('modal_yes');
+                let modal_no = document.getElementById('modal_no');
+                let btn = document.getElementById(cone);
+                let inspection_info_input_id = document.getElementById('inspection_info_input_id');
+                let modal_inspction_submit = document.getElementById('modal_inspction_submit').innerText;
+                let modal_yes = document.getElementById('modal_yes');
+                let modal_no = document.getElementById('model_no');
+                // btn.setAttribute("type", "button");
+                btn.setAttribute("data-toggle", "modal");
+                btn.setAttribute("data-target", "#InspectionModal");
+                inspection_info_input_id.innerText = modal_inspction_submit;
+
+                // document.getElementById("modal_yes").addEventListener("click", model_submit);
+                // document.getElementById("model_no").addEventListener("click", model_submit);
+                //      function modal_submit(){
+
+
+                //        btn.setAttribute("type", "submit");
+
+
+                // }     
+            }
+        }
+    }
+
+
+
+
+
+</script> -->
+
+{% endblock body %}

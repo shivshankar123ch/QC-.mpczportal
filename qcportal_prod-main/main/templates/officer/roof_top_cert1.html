@@ -1,0 +1,159 @@
+<html>
+{% load static %}
+<head>
+<center>
+
+<style>
+
+.signature, .title { 
+
+float:left;
+
+  border-top: 1px solid #000;
+
+  width: 220px; 
+
+  text-align: right;
+
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js" integrity="sha512-vNrhFyg0jANLJzCuvgtlfTuPR21gf5Uq1uuSs/EcBfVOz6oAHmjqfyPoB5rc9iWGSnVE41iuQU4jmpXMyhBrsw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    window.onload = function() {
+        document.getElementById("download").addEventListener("click", () => {
+            const invoice = this.document.getElementById("invoice");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+                margin: [0.2,0.5,0,0.2] , //top, left, buttom, right,
+                filename: "{{cert_u_obj.company_name}}" + '.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'A4',
+                    orientation: 'landscape'
+                }
+            };
+
+
+            html2pdf().from(invoice).set(opt).save();
+
+        })
+    }
+</script>
+</head>
+
+<body>
+
+<div class="auto-mx" style="width:85%; padding:5px; text-align:center; border: 10px solid #787878" id="invoice">
+<div class="auto-mx" style="padding:2px; text-align:center; border: 2px solid #787878" id="invoice">
+	
+       <img src="{% static 'assets\images\mpmk.png' %}" style="width:15%; height:15%" alt="mpmk" class="center"> 
+       <span style="font-size:16px; font-weight:bold">M.P. MADHYA KSHETRA VIDYUT VITRAN COMPANY LIMITED</span>
+	   <br>
+	   <span style="font-size:14px; font-weight:bold"><i>(Government of M. P. Undertaking)</i></span>
+	   <br>
+	   <span style="font-size:14px; font-weight:bold">Regd. Office: Nishtha Parisar, Govindpura Bhopal 462023</span>
+	   <br>
+	   <span style="font-size:14px; font-weight:bold"> 0755-2601300, Ext-501, Website portal.mpcz.in</span>
+	   <br>
+	   <span style="font-size:14px; font-weight:bold">CIN NUMBER: U40109MP2002SGC015119</span>
+  
+
+	   <br>      
+	   <span style="font-size:20px"><i>***************************</i></span>
+	   <br>
+	   <br>
+       <span style="font-size:20px"><i>This is to certify that</i></span>
+       <br>
+       <span style="font-size:26px"><b>M/s {{agency_name}}</b></span>
+	   <br>
+       <span style="font-size:16px">Registered Office Address: <b>{{cert_u_obj.Company_add_1}} {{cert_u_obj.Company_add_2}}, {{cert_u_obj.Company_dist}}, {{cert_u_obj.Company_state}}, {{cert_u_obj.Company_pin_code}} </b></span>
+	   <br> 
+       <br>	
+       <span style="font-size:20px">Registration number: </span><span style="font-size:26px"><b>{{cert_u_obj.no}}</b></span>
+	   <br>
+       
+       <span style="font-size:16px">is registered as <b>{{cert_u_obj.User_type}} </b> for supply of material in <b>CZ/EZ/WZ</b> : <br></span>
+       
+       <br>
+       <span style="font-size:16px">Date of Issue: {{cert_u_obj.day}}</span>
+	   <br>
+
+       {% if cert_u_obj.User_type == "TKC"  %}
+       <span style="font-size:16px">Valid up to: {{cert_u_obj.electic_liecense_date}}</span><br>
+       {% elif cert_u_obj.User_type == "NABL"  %}
+       <span style="font-size:16px">Valid up to: {{cert_u_obj.nabl_cert_exp}}</span><br>
+       {% elif cert_u_obj.User_type == "VENDOR" %}
+       <span style="font-size:16px">Valid up to: {{cert_u_obj.valid_upto}}</span><br>
+       {% endif %}
+    <div style="display:table;" style="padding:5px; text-align:center; border: 20px solid #787878">    
+        <table border="0" cellspacing="0" cellpadding="0" style="padding-left:50px; padding-bottom:20px;">
+            <tbody>
+                <tr>
+                    <td style="text-align: left;">Signed by: <b> {{cert_u_obj.designation}}</b></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <svg width="180" height="70">
+                            <rect x="0" y="0" width="180" height="70" style="stroke:black;stroke-width:1;fill-opacity:0;stroke-opacity:0.5" />
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-size: 10px;">upload your digital signature here</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+{% if var_show %}
+
+<script>
+    function printpage() {
+     
+        var download = document.getElementById("download1");
+        var certFile = document.getElementById("certFile");
+        var sub = document.getElementById("sub");
+     
+        download1.style.visibility = 'hidden';
+        certFile.style.visibility = 'hidden';
+        sub.style.visibility = 'hidden';
+        window.print()
+        download1.style.visibility = 'visible';
+        certFile.style.visibility = 'visible';
+        sub.style.visibility = 'visible';              
+    }
+</script>
+
+<table class="center">
+	  <tr>
+	    <th><button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download1" onclick="printpage()">Download Pdf </button></th>
+		    <form action="/uplaod_cert/{{cert_u_obj.no}}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<th><input style="text-align: center; font-size: 20px;" type="file" id="certFile" name="certFile" required="required"></th> 
+			    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+			</form>
+	  </tr>
+</table>
+{% endif %}
+</center>
+</body>
+
+</html>
+

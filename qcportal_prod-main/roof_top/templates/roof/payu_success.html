@@ -1,0 +1,145 @@
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/jpg" href="{% static '/assets/img/energy_logo.jpg' %}" />
+    <title>
+        Quality Monitering Portal | Energy Department, Government of Madhya Pradesh
+    </title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+  <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("return");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+        }
+    </script>
+</head>
+<style>
+  body {
+    text-align: center;
+    padding: 40px 0;
+    background: #EBF0F5;
+  }
+  h1 {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  i {
+    color: #9ABC66;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+  }
+
+  .card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+  }
+</style>
+
+<body>
+  <div class="card">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+      <i class="checkmark">✓</i>
+    </div>
+    <h1>Success</h1>
+    <p>Payment done successfully</p>
+     
+  <!-- <div>
+    <h6>Payment Status:{{data.Payu_Status}}</h6>
+    <h6>Name:{{data.Firstname}}</h6>
+    <h6>CardNumber:{{data.Cardnum}}</h6>
+    <h6>Amount Debited:{{data.Netamount_Debited}}</h6>
+    <h6>Email Id:{{data.Email_Id}}</h6>
+    <h6>PayU MoneyId:{{data.Payu_Moneyid}}</h6>
+    <h6>Transaction Id:{{data.Txdid}}</h6>
+    <h6>Bank Ref Num:{{data.Bank_Ref_Num}}</h6>
+    <h6>Contact No:{{data.Contact_No}}</h6>
+  </div> -->
+<center>
+  <table class="table" style="margin:10px;text-algin:left;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th style="text-align:left;">Description</th>
+        <th style="text-align:left;margin-left:10px;">Payment Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1.</th>
+        <td>Payment Status</td>
+        <td style="margin-left:20px;">{{data.Payu_Status}}</td>
+      </tr>
+      <tr>
+        <th scope="row">2.</th>
+        <td>Name</td>
+        <td style="margin-left:20px;">{{data.Firstname}}</td>
+      </tr>
+      <tr>
+        <th scope="row">3.</th>
+        <td>Card Number</td>
+        <td style="margin-left:20px;">{{data.Cardnum}}</td>
+        
+      </tr>
+      <tr>
+        <th scope="row">4.</th>
+        <td>Amount Debited </td>
+        <td style="margin-left:20px;">{{data.Netamount_Debited}}</td>
+      </tr>
+      <tr>
+        <th scope="row">5.</th>
+        <td>Email Id</td>
+        <td style="margin-left:20px;">{{data.Email_Id}}</td>
+      </tr>
+      <tr>
+        <th scope="row">6.</th>
+        <td>Transaction Id</td>
+        <td style="margin-left:20px;">{{data.Txdid}}</td>
+      </tr>
+
+
+      <tr>
+        <th scope="row">7.</th>
+        <td>Bank Reference Number</td>
+        <td>{{data.Bank_Ref_Num}}</td>
+      </tr>
+      <tr>
+        <th scope="row">8.</th>
+        <td>Contact Number</td>
+        <td>{{data.Contact_No}}</td>
+      </tr>
+    <tr>
+        <th scope="row">9.</th>
+        <td>Payment Purpose</td>
+        <td>{{data.Productinfo}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </center>
+</body>
+</html>

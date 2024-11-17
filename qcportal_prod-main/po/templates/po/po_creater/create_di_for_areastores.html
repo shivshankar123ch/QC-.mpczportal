@@ -1,0 +1,272 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<!-- <form action="/po/add_areastore_quantity/{{offer_material_data.id}}" onsubmit="return validateForm()" name="myForm" method="POST"> -->
+    <div class="ed-information">
+        <div class="card ed-card-block">
+          <div class="ed-card-inner">
+            <div class="card-header">
+              <h2>
+                CREATE DISPATCH INSTRUCTION
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="ed-tableinfo-block">
+               
+    
+
+<div class="ed-form-body">
+                        
+    <div class="form-group">
+        <label class="ed-form-label">
+            Item Name
+        </label>
+        <input type="text" class="form-control ed-textbox" value="{{offer_material_data.item_name}}" autocomplete="off" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label class="ed-form-label">
+            Ordered Quantity
+        </label>
+        <input type="text" id="ordered_quantity" class="form-control ed-textbox" value="{{offer_material_data.total_quantity}}" autocomplete="off" readonly/>
+    </div> 
+
+    <div class="form-group">
+        <label class="ed-form-label">
+            Offered Quantity
+        </label>
+        <input type="text" class="form-control ed-textbox" id="offered_quantity" value="{{offer_material_data.Offer_Quantity}}" autocomplete="off" readonly/>
+    </div>
+
+    <form action="/po/create_di_areastores/{{offer_material_id}}/{{po_id}}/{{po_material_id}}" method="POST"  name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+    <div class="row"> 
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Area Stores
+                    <span style="color: red;">* </label> 
+                <select  class="form-control ed-textbox" id="areastore"  onchange="validateForm()" name="store">
+                    <option selected disabled value="">Select Area Store</option>
+                    {% for data1 in area_store_list %}
+                    <option>{{ data1.Name }}</option>
+                    {% endfor %}
+                </select>
+                <span id="areastore_span" class="text-danger font-weight-bold text-sm-left"style="font-size: 80%;"></span>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Quantity to be Delivered
+                    <span style="color: red;">* </label>
+                <input type="Number" class="form-control ed-textbox" step="0.01"  onkeypress='validate(event)' autocomplete="off" id="qty" onchange=" checkTable()"  onblur="validateForm()"  name="qty"/>
+                <span id="qty_span" class="text-danger font-weight-bold text-sm-left"style="font-size: 80%;"></span>
+            </div> 
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="poaction-info p-2">
+                <label class="ed-form-label">
+                   
+                     </label>
+                <button class="btn btn-success btn-sm" style="margin-top: 30px;" onclick="return checkFun()"  onsubmit="return validateForm()" onclick="showError()" type="submit"> 
+                    <span class="ed-submit-text" >
+                        Add
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+
+    </div> 
+</div>
+</form>
+
+    <div class="ed-tableinfo-block mt-4">
+        <div class="table-responsive">
+            <table class="table table-striped ed-table-block" id="table1" >
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>PO NO.</th>
+                        <th>Offer Item Name</th>
+                        <th>Area Store</th>
+                        <th>Quantity</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in AreaStroeData%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.po.po_no}} </td>
+                        <td>{{data.offer_item.material.specification}}</td>
+                        <td class="areastore">{{data.areastore}}</td>
+                        <td class="one">{{data.deliverable_qty}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- /po/create_di_checked_material -->
+           
+                <button id="backNone" type="button" class="btn btn-info btn-sm" onclick="backReturn()">Submit</button>
+           
+			<p hidden style="align-items:Center;color: rgb(4, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                {% if msg1 %}
+                {{ msg1 }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+      
+
+<script>
+    // let ordered_quantity = document.getElementById("ordered_quantity");
+        let offered_quantity = document.getElementById("offered_quantity");
+
+        if(sumValue !== offered_quantity.value){
+            document.getElementById("backNone").disabled = true;
+        }
+</script>
+
+<script>
+    function showError(){
+        let qty = document.forms["myForm"]["qty"].value;
+        if (qty.trim() == "") {
+                alert("Please fill the offered quantity.")
+            }
+
+    }
+</script>
+
+
+<script>
+    function checkTable(){
+        var offered_quantity = document.getElementById('offered_quantity').value;
+        var sumValue=0;
+        const collection = document.getElementsByClassName("one");
+        var qty = document.getElementById("qty").value;
+        
+        for (let i = 0; i < collection.length; i++) {
+        sumValue= sumValue + Number(collection[i].innerHTML);
+        } 
+        var remanig_qty = offered_quantity - sumValue;
+        //alert(remanig_qty);
+        if(remanig_qty<qty){
+            alert("Not Fill more then Offered Quantity.");
+            //document.getElementById("backNone").disabled = false;
+
+        }
+        else if(sumValue<offered_quantity)  {
+            //alert("Please fill the Remaining Offered Quantity");
+          }
+          else{
+            //location.href = "/po/create_di_checked_material";
+            alert("No Remaining Offered Quantity.");
+            
+          }
+         }
+</script>
+
+<script>
+    function validateForm() {
+            let areastore = document.forms["myForm"]["store"].value;
+            let qty = document.forms["myForm"]["qty"].value;
+
+            const collection = document.getElementsByClassName("areastore");
+            for (let i = 0; i < collection.length; i++) {
+                if(areastore == collection[i].innerHTML){
+                // if(selectedareastore == selectedareastore){
+                alert("Area Store Already Selected.");
+                return false 
+                }
+
+            }
+           
+
+            if (areastore == "") {
+                document.getElementById('areastore_span').innerHTML = "Please fill the required details.";
+                return false
+            } else {
+                document.getElementById('areastore_span').innerHTML = "";
+            }
+            if (qty.trim() == "") {
+        
+                document.getElementById('qty_span').innerHTML = " Please fill the required details.";
+                return false
+            } else {
+                document.getElementById('qty_span').innerHTML = "";
+            }
+    }
+</script>
+
+<script>
+    function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)
+
+            ) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+</script>
+
+<script>
+    function backReturn(){
+      
+        
+        let offered_quantity = document.getElementById('offered_quantity');
+     
+        const collection = document.getElementsByClassName("one");
+        var sumValue =0;
+
+        for (let i = 0; i < collection.length; i++) {
+        sumValue= sumValue + Number(collection[i].innerHTML);
+        //console.log(sumValue)
+        }
+
+        if(sumValue == offered_quantity.value){
+            //backNone.display = none;
+            document.getElementById("backNone").disabled = false;
+            location.href = "/po/create_di_checked_material";
+           
+        }else{
+            alert("Please Fill the Remaining Quantity.")
+        }
+        
+    }
+</script>
+
+<script>
+    function checkFun(){
+        let areastore = document.forms["myForm"]["store"].value;
+        let qty = document.forms["myForm"]["qty"].value;
+                if(areastore == "" || qty.trim() == "" ){
+                    alert("Please fill the Offered Quantity.")
+                }else{
+                    confirm('Are you sure you want to add this Area Store ?')
+                }
+
+    }
+</script>
+{% endblock body %}>

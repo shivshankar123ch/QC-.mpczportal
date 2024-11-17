@@ -1,0 +1,1005 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% block headerBox %} {% endblock headerBox %}
+{% block footer %} {% endblock footer %}
+{% block aboveheader %} {% endblock aboveheader %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% load cart %}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        .ntl-form-block {
+            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            padding: 0px 0;
+        }
+
+        #options {
+            align-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+        <div class="ntl-form-block mx-auto" style="width: 100%;">
+            <div class="container-fluid ntl-form-container" style="width: 100%;">
+                <div class="ntl-imgbox">
+                    {% if lab_name == "Nishtha Testing Laboratory" %}
+                        <img src="{% static 'assets/images/ntllogo.png' %}" class="img-fluid" />
+                    {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                        <img src="{% static 'assets/images/gtllogo.png' %}" class="img-fluid" />
+                    {% endif %}
+                </div>
+                <div class="fomr-info-block">
+                    <h2 class="ntl-titles text-right">
+                        {% if lab_name == "Nishtha Testing Laboratory" %}
+                            NTL/MPCZ/BPL/FM/19
+                        {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                            GTL/MPCZ/GWL/FM/19
+                        {% endif %}
+                    </h2>
+
+                    <h2 class="ntl-titles text-center">
+                        TEST REQUEST FORM (For DTR)
+                    </h2>
+
+                    <ul class="forms-counters">
+                        <li class="nav-item">
+                            <div class="form-group flex-box">
+                                <label class="lable-text">Name of Customer Organization: <b>{{data.customer_Organization_name }}</b> </label>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="form-group flex-box">
+                                <label class="lable-text">Address of Customer Organization: <b>{{data.customer_Organization_address }}</b></label>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="form-group flex-boxmain">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Contact Person’s Name: <b>{{data.contact_person_name }}</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Designation: <b>{{ data.contact_person_designation}}</b></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group flex-boxmain">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Contact Person’s Mobile No.: <b>{{ data.mobile_no}}</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Email Id: <b>{{ data.email_id }}</b></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="form-group flex-boxmain">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Name of Sample/Product: 
+                                                <b>{{ data.name_of_sample_product }}</b></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="form-group flex-boxmain">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">Customer’s Reference No. & Date: Gate pass no
+                                                <b>{{ data.customer_ref_gatepass_no }}</b></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group flex-box">
+                                            <label class="lable-text">dated: <b>{{ data.dated }}</b></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul class="forms-countersinner">
+                                <li class="nav-item">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Sample Description and condition: <b>{{data.sample_description_condition }}</b></label>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Test Specification: <b>{{ data.test_spec }}</b></label>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Drawings/ Catalogs/ Operating Manual (Pl specify):
+                                            <b>{{ data.drawings_catalogs_operating_manual }}</b></label>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="form-group flex-box">
+                                        <label class="lable-text">Test to be conducted.: <b>Please tick below as per IS
+                                                1180.</b></label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="information-table">
+                                <table class="table test-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Measurement of Turn Ratio Polarity </td>
+                                            {% if data.Test_name1 == 1 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+
+                                            <th>6</th>
+                                            <td>Measurement of Impedance Voltage and Load Loss (At 50% and 100%)
+                                            </td>
+                                            {% if data.Test_name6 == 6 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>2</th>
+                                            <td>Checking of Vector relationship</td>
+                                            {% if data.Test_name2 == 2 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                            <th>7</th>
+                                            <td>Induced Over Voltage withstand test.</td>
+                                            {% if data.Test_name7 == 7 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                        </tr>
+    
+                                        <tr>
+                                            <th>3</th>
+                                            <td>Measurement of No load loss and no load current</td>
+                                            {% if data.Test_name3 == 3 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                            <th>8</th>
+                                            <td>Separate source voltage withstand test</td>
+                                            {% if data.Test_name8 == 8 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                        </tr>
+    
+                                        <tr>
+                                            <th>4</th>
+                                            <td>Measurement of Insulation Resistance</td>
+                                            {% if data.Test_name4 == 4 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                            <th>9</th>
+                                            <td>Breakdown Voltage of Transformer Oil</td>
+                                            {% if data.Test_name9 == 9 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                        </tr>
+    
+                                        <tr>
+                                            <th>5</th>
+                                            <td>Measurement of Winding Resistance</td>
+                                            {% if data.Test_name5 == 5 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                            <th>10</th>
+                                            <td>Temperature rise test</td>
+                                            {% if data.Test_name10 == 10 %}
+                                                <th class="infos">
+                                                    <span style="font-size: 30px;">✔</span>
+                                                </th>
+                                            {% else %}
+                                                <th class="infos"></th>
+                                            {% endif %}
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="flex-box">
+                                <label class="lable-text">Sample Identification (Model No. Sr. No.): As per enclosed
+                                    Gate pass.</label>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="flex-box">
+                                <label class="lable-text">Decision Rule required:
+                                    <span class="pl-3">
+                                        {% if data.decision_yes_no == "Yes" %}
+                                        <span class="option-inofs">
+                                            <input checked type="radio" id="Yes" name="decision_yes_no" value="Yes" onclick="ruleoptions1();" disabled/>
+                                            Yes</span>
+                                        </span>
+                                        {% else %}
+                                        <span class="option-inofs">
+                                            <input type="radio" id="Yes" name="decision_yes_no" value="Yes" onclick="ruleoptions1();" disabled/>
+                                            Yes</span>
+                                        </span>
+                                        {% endif %}
+
+                                        {% if data.decision_yes_no == "No" %}
+                                        <span class="option-inofs">
+                                            <input checked type="radio" id="No" name="decision_yes_no" value="No" onclick="ruleoptions2();" disabled />
+                                                 No</span>
+                                        </span>
+                                        {% else %}
+                                        <span class="option-inofs">
+                                            <input type="radio" id="No" name="decision_yes_no" value="No" onclick="ruleoptions2();" disabled />
+                                                 No</span>
+                                        </span>
+                                        {% endif %}
+
+                                        
+                                    </span>
+                                    <br>
+                                    If yes at Sr. No. 7 then please ✔ any one:
+                                </label>
+                                <ul class="rule-info" id="ruleINfo">
+                                    <li class="list-item">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <p>
+                                                    Decision on Compliance to specification will be based on the tolerance
+                                                    mention in the standard specification.
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {% if data.decision_option == "a). Decision on Compliance to specification will be based on the tolerance mention in the standard specification.                    ✔" %}
+                                                <label class="custome-checkbox">
+                                                    <th class="infos">
+                                                        <span class="checkmark" style="font-size: 30px; text-align: center;">✔</span>
+                                                    </th>
+                                                </label>
+                                                {% else %}
+                                                    <label class="custome-checkbox">
+                                                        <input disabled id="decision_option2" name="decision_option" type="radio" name="decision" value="For the tolerance specify by the customer, the same will be considered for the decision criteria.                     ✔">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </li>
+    
+                                    <li class="list-item">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <p>
+                                                    For the tolerance specify by the customer, the same will be
+                                                    considered for
+                                                    the decision criteria.
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {% if data.decision_option == "For the tolerance specify by the customer, the same will be considered for the decision criteria.                     ✔" %}
+                                                <label class="custome-checkbox">
+                                                    <th class="infos">
+                                                        <span class="checkmark" style="font-size: 30px; text-align: center;">✔</span>
+                                                    </th>
+                                                </label>
+                                                {% else %}
+                                                    <label class="custome-checkbox">
+                                                        <input disabled id="decision_option2" name="decision_option" type="radio" name="decision" value="For the tolerance specify by the customer, the same will be considered for the decision criteria.                     ✔">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </li>
+    
+                                    <li class="list-item">
+                                        <p>
+                                            If MU to be considered on decision of compliance, {% if lab_name == "Nishtha Testing Laboratory" %}
+                                            NTL
+                                            {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                            GTL
+                                            {% endif %} will calculate MU
+                                            at
+                                            confidence level of 95% will be acceptable. If MU to be taken, please 
+                                            any one:
+                                        </p>
+                                        {% if data.decision_option == "Positive" %}
+                                            i) Positive
+                                            <label class="custome-checkbox1">
+                                                <span class="checkmark" style="font-size: 30px; text-align: center;">✔</span>
+                                            </label>
+                                        {% else %}
+                                            i) Positive 
+                                            <label class="custome-checkbox1">
+                                                <span class="checkmark" style="font-size: 30px; text-align: center;"></span>
+                                            </label>
+                                        {% endif %}
+                                        
+                                        {% if data.decision_option == "Negative" %}
+                                            ii) Negative
+                                            <label class="custome-checkbox1">
+                                                <span class="checkmark" style="font-size: 30px; text-align: center;" >✔</span>
+                                            </label>
+                                        {% else %}
+                                            ii) Negative 
+                                            <label class="custome-checkbox1">
+                                                <span class="checkmark" style="font-size: 30px; text-align: center;" ></span>
+                                            </label>
+                                        
+                                        {% endif %}
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="aggrement-info">
+                        <div class="aggrement-item">
+                            I <b>{{ data.sign }}</b> on behalf of M/s <b>{{ data.onbehalf }}</b> agree to the test conditions as given above and also agree
+                            to the terms & conditions of {% if lab_name == "Nishtha Testing Laboratory" %}
+                            NT Lab, MPMKVVCL Bhopal
+                            {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                            GT Lab, MPMKVVCL Gwalior
+                            {% endif %}, as given on overleaf Sr. No. 1 to
+                            8.
+                        </div>
+                    </div>
+                    
+                    <div class="sign-info">
+                        <div class="sign-items">
+                            <label>Signature {{data.sign2}}</label>
+                            <label>Organization: {{data.Organization}}</label>
+                            <label><input id="email_address" name="email_address" type="text" class="form-control tetxbox" style="display: none"/></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="break-after:page"></div>
+
+            
+
+            <div class="ntl-form-block">
+                <div class="container-fluid ntl-form-container">
+                    <div class="terms-info">
+                        <h4>Terms & Conditions</h4>
+                        <ol class="terms-list">
+                            <li class="nav-item">
+                                <p>
+                                    All possible precautions shall be taken for safe handling of the test item, however for
+                                    damage, if any, during the testing due to unforeseen reasons the <b>{% if lab_name == "Nishtha Testing Laboratory" %}
+                                    NT Lab, MPMKVVCL Bhopal
+                                    {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                    GT Lab, MPMKVVCL Gwalior
+                                    {% endif %}</b>
+                                    shall not be held responsible.
+                                </p>
+                            </li>
+                            <li class="nav-item">
+                                <p>
+                                    Sample Copy accepted for the testing may be returned un-tested, if the circumstances
+                                    are
+                                    beyond our control.
+                                </p>
+                            </li>
+                            <li class="nav-item">
+                                <p>
+                                    The Test Report shall not be used for any legal purpose and shall not be produced in
+                                    the
+                                    Court of law.
+                                </p>
+                            </li>
+
+                            <li class="nav-item">
+                                <p>
+                                    Discrepancy found in Test Report (if any) will be Corrected and Modified Test report
+                                    shall be issued with Revised Issue No.
+                                </p>
+                            </li>
+
+                            <li class="nav-item">
+                                <p>
+                                    Dispute (if any) shall be sorted out amicably; however, the decision of the
+                                    laboratory
+                                    in charge will be the final decision.
+                                </p>
+                            </li>
+
+                            <li class="nav-item">
+                                <p>
+                                    The above conditions are subject to change/modification any time without prior
+                                    notice/information.
+                                </p>
+                            </li>
+
+                            <li class="nav-item">
+                                <p>
+                                    Except otherwise specified , {% if lab_name == "Nishtha Testing Laboratory" %}
+                                    NT Lab, MPMKVVCL Bhopal
+                                    {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                    GT Lab, MPMKVVCL Gwalior
+                                    {% endif %} reserves the right of disposal of
+                                    uncollected Test Item , if not collected by customer within 6 months from the issue of
+                                    the Test report.
+                                </p>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <p>
+                                    {% if lab_name == "Nishtha Testing Laboratory" %}
+                                    NT Lab, MPMKVVCL Bhopal
+                                    {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                    GT Lab, MPMKVVCL Gwalior
+                                    {% endif %}, shall also not be held responsible for Physical Damage,
+                                    Deterioration of accuracy, Security etc. of the tested item.
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="fomr-info-block">
+                        <h2 class="ntl-titles">
+                            Contract/Tender Review Form <span>{% if lab_name == "Nishtha Testing Laboratory" %}
+                                (For NTL use only)
+                                {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                (For GTL use only)
+                                {% endif %}</span>
+                        </h2>
+        
+                        <div class="information-table">
+                            <table class="table test-table1">
+                                <tbody>
+                                    <tr>
+                                        <th>1</th>
+                                        <td>Physical Condition of sample</td> 
+                                        <th class="infos"></th>
+                                    </tr>
+        
+                                    <tr>
+                                        <th>2</th>
+                                        <td>Whether sample received, is as per TRF (Yes/No)</td>
+                                        <th class="infos"></th> 
+        
+                                    </tr>
+        
+                                    <tr>
+                                        <th>3</th>
+                                        <td>Whether decision rule applicable (Yes/No)</td>
+                                        <th class="infos"></th>
+                                    </tr>
+        
+                                    <tr>
+                                        <th>4</th>
+                                        <td>Scope within range (Yes/No)</td>
+                                        <th class="infos"></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table test-table1">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50%;"><b>Status of Sample (Accepted/Rejected)</b></td> 
+                                        <th style="width: 50%;" class="infos"></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table test-table1 border-0 mt-5">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50%;" class="border-0"><b>Verified by Receiving In charge</b></td> 
+                                        <td style="width: 50%;" class="border-0 text-right">
+                                            <div style="display: inline-block;text-align: center;">
+                                                <b>Technical Manager <br>
+                                                    {% if lab_name == "Nishtha Testing Laboratory" %}
+                                                    (NTL)
+                                                    {% elif lab_name == "GWALIOR TESTING LABORATORY MPMKVVCL GWALIOR" %}
+                                                    (GTL)
+                                                    {% endif %}</b>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function printpage() {
+                    //Get the print button and put it into a variable
+                    var sub = document.getElementById("sub");
+                    var digitalCert = document.getElementById("digitalCert");
+                    var printButton = document.getElementById("printpagebutton");
+                    //Set the print button visibility to 'hidden'
+                    sub.style.visibility = 'hidden';
+                    digitalCert.style.visibility = 'hidden';
+                    printButton.style.visibility = 'hidden';
+                    //Print the page content
+                    window.print()
+        
+                    printButton.style.visibility = 'visible';
+                    digitalCert.style.visibility = 'visible';
+                    sub.style.visibility = 'visible';
+                }
+            </script>
+        <center>
+                {% if var_show == 1 %}
+                <div id="options">
+                    <table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+                          <tr>
+                            <th><input id="printpagebutton" class="btn btn-primary" style="text-align: center; font-size: 20px;" type="button" value="Print TRF" onclick="printpage()"/> </th>
+                                <form action="/po/test_request_view/{{amn_obj.id}}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th> 
+                                    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+                                </form>
+                          </tr>
+                    </table>
+                </div>
+                {% elif var_show == 0 %}
+                    <a class="btn ed-submit ed-formSubmit mb-2"  href="/po/TRF_generate">Return</a>
+                {% endif %}
+        </center>
+        </div>
+
+    <script>
+        function ruleoptions1() {
+            document.getElementById('ruleINfo').style.display = 'block';
+        }
+        function ruleoptions2() {
+            document.getElementById('ruleINfo').style.display = 'none';
+        }
+
+    </script>
+    <style>
+        .ntl-form-block .ntl-form-container {
+            border: 1px solid #000;
+            padding: 40px;
+        }
+
+        .ntl-form-block .ntl-imgbox {
+            margin: 0 0 35px;
+        }
+
+        .ntl-form-block .ntl-imgbox img {
+            width: 100%;
+        }
+
+        .ntl-form-block .fomr-info-block {
+            position: relative;
+        }
+
+        .ntl-form-block .fomr-info-block .ntl-titles {
+            font-size: 22px;
+            text-transform: capitalize;
+            font-weight: 600;
+            text-align: center;
+            margin: 0 0 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters {
+            margin: 16px 0 10px;
+            padding: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .nav-item {
+            list-style: number;
+            padding-left: 8px;
+            font-weight: 400;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group {
+            margin: 0 0 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box {
+            display: inline-block;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box.lable-text {}
+
+        .ntl-form-block .fomr-info-block .forms-counters .form-group.flex-box .lable-text {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+            white-space: nowrap;
+            margin-right: 5px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .textbox {
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px dotted #000;
+            border-radius: 0;
+            display: block !important;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .forms-countersinner {
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li.nav-item {}
+
+        .ntl-form-block .fomr-info-block .forms-counters .forms-countersinner .nav-item {
+            list-style: lower-alpha;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table {
+            width: 100%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table {
+            border: 1px solid #212529;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th,
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table td {
+            border: 1px solid #212529;
+            padding: 10px 10px;
+            vertical-align: middle;
+            white-space: normal !important;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th {
+            font-weight: 400;
+            width: 2%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table th.infos {
+            width: 6%;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .information-table .table td {
+            width: 35%;
+        }
+
+
+        .ntl-form-block .fomr-info-block .forms-counters .rule-info {
+            display: block;
+            padding: 0;
+            margin: 0 0 6px;
+            padding-left: 25px;
+        }
+
+        .ntl-form-block .fomr-info-block .forms-counters .rule-info .list-item {
+            padding-left: 8px;
+            list-style: lower-alpha;
+        }
+
+        .custome-checkbox {
+            display: block;
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            height: 40px;
+            width: 80px;
+            float: right;
+        }
+
+        .custome-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 40px;
+            width: 80px;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+
+
+        .custome-checkbox input:checked~.checkmark {
+            background-color: transparent;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custome-checkbox input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .custome-checkbox .checkmark:after {
+            left: 30px;
+            top: 8px;
+            width: 8px;
+            height: 18px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .custome-checkbox1 {
+            display: block;
+            position: relative;
+            padding-left: 0;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            padding-right: 90px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .custome-checkbox1 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 40px;
+            width: 50px;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+
+
+        .custome-checkbox1 input:checked~.checkmark1 {
+            background-color: transparent;
+        }
+
+        .checkmark1:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custome-checkbox1 input:checked~.checkmark1:after {
+            display: block;
+        }
+
+        .custome-checkbox1 .checkmark1:after {
+            left: 22px;
+            top: 8px;
+            width: 8px;
+            height: 18px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+
+        .ntl-form-block .fomr-info-block .aggrement-info {
+            margin: 40px 0 0;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 0px;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info .aggrement-item {
+            display: inline-block;
+            overflow: hidden;
+            margin: 10px 0 30px;
+        }
+
+        .ntl-form-block .fomr-info-block .aggrement-info .aggrement-item .form-control {
+            display: inline-block;
+            width: auto;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px dotted #000;
+            border-radius: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info {
+            margin: 0 0;
+            position: relative;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items .tetxbox {
+            display: inline-block;
+            width: auto;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: 0;
+            border-bottom: 2px solid #000;
+            border-radius: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .sign-info .sign-items label {
+            display: block;
+            font-weight: 500;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info {
+            margin: 0 auto;
+            margin-top: 80px;
+            max-width: 600px;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info h4 {
+            font-size: 24px;
+            text-align: center;
+            margin: 0 0 15px;
+            text-decoration: underline;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list {
+            padding: 0;
+            margin: 0;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list .nav-item {
+            list-style: number;
+            padding-left: 10px;
+            font-weight: 500;
+        }
+
+        .ntl-form-block .fomr-info-block .terms-info .terms-list .nav-item p {
+            line-height: 24px;
+            font-weight: 400;
+            font-size: 14px;
+            margin: 0 0 3px;
+        }
+
+        .ntl-form-block .test-table1 {
+            border: 1px solid #212529;
+        }
+
+        .ntl-form-block .test-table1 td,
+        .ntl-form-block .test-table1 th {
+            border: 1px solid #212529;
+            padding: 10px 10px;
+            vertical-align: middle;
+        }
+
+        .ntl-form-block .test-table1 th {
+            font-weight: 400;
+            width: 5%;
+        }
+
+        .ntl-form-block .test-table1 th.infos {
+            width: 10%;
+        }
+
+        .ntl-form-block .test-table1 td {
+            width: 35%;
+        }
+        .print-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+    </style>
+</body>
+</html>
+{% endblock body %}

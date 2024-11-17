@@ -1,0 +1,174 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static %}
+
+{% block active %}
+<ul class="navbar">
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/basic">
+            <span class="sidenav-mini-icon"> BI </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/rejected_doc">
+            <span class="sidenav-mini-icon"> RD </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " href="/nabl/UpdateNablProfile">
+            <span class="sidenav-mini-icon"> AS </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update Profile </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+        </a>
+    </li>
+
+    <li class="nav-item ">
+        <a class="nav-link " href="#">
+            <span class="sidenav-mini-icon"> Noti </span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+        </a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link active" href="/nabl/nabl_trf">
+            <span class="sidenav-mini-icon">T M R</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">Material Report </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical">
+            <span class="sidenav-mini-icon">Phy Test Out</span>
+            <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical_view">
+            <span class="sidenav-mini-icon">Phy Test View</span>
+            <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <span class="sidenav-mini-icon">LO</span>
+            <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+        </a>
+    </li>
+</ul>
+{% endblock active %}
+
+{% block body %}
+<form action="/basic/" method="POST">
+    {% csrf_token %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>Gatepass Details </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-2">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered display text-center"
+                        id="example2">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="w-5">
+                                    S No.
+                                </th>
+                                <th class="w-15">
+                                    Dispatcher Name Of Entity
+                                </th>
+                                <th class="w-15">
+                                    Manufacturer Name
+                                </th>
+                                <th class="w-15">
+                                    Description Of Item
+                                </th>
+                                <th class="w-15">
+                                    RO ID
+                                </th>
+                                <!-- <th class="w-15">
+                                    Vehicle Number
+                                </th> -->
+                                <th class="w-10">
+                                    IssueDate
+                                </th>
+                                <th class="w-20">
+                                    View Gatepass
+                                    Inward
+                                </th>
+                                <th class="w-20">
+                                    Upload Report and Result
+                                </th>
+                                <th class="w-20">
+                                    Failure Percentage (%)
+                                </th>
+                                <th class="w-20">
+                                    Material Testing Status
+                                </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody style="text-align: center;">
+                            {% for userdata, lst_failure_per, lst_status in final_data %}
+                            <tr>
+                                <td><b>{{forloop.revcounter}}</b></td>
+                                <td><b>{{userdata.DispatcherNameOfEntity}}</b></td>
+                                <td><b>{{userdata.ManufacturerName}}</b></td>
+                                <td><b>{{userdata.DescriptionOfItem}}</b></td>
+                                <td><b>{{userdata.roid}}</b></td>
+                                <!-- <td><b>{{userdata.VehicleNumber}}</b></td> -->
+                                <td><b>{{userdata.IssueDate}}</b></td>
+                                {% if userdata.gatepassAreaStore_file %}
+                                <td>
+                                    <a href="{{ userdata.gatepassAreaStore_file.url }}" target="_blank"
+                                        class="ed-links">
+                                        <label class="ed-textinfo text-primary">
+                                            View Gatepass
+                                        </label>
+                                    </a>
+                                </td>
+                                {% else %}
+                                <td>Gatepass not uploaded</td>
+                                {% endif %}
+                                {% if userdata.SomeSamplePhyRejected == 1 %}
+                                <td>
+                                    <a href="/nabl/nabl_sample_recv/{{userdata.id}}" class="btn ed-submit btn-danger">
+                                        Upload Result/ Report
+                                    </a>
+                                </td>
+                                {% elif userdata.AllSampleReportSubmited == 1 %}
+                                <td>
+                                    <a href="/nabl/nabl_sample_recv/{{userdata.id}}" class="btn ed-submit btn-success">
+                                        Upload Result/ Report
+                                    </a>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <a href="/nabl/nabl_sample_recv/{{userdata.id}}" class="btn ed-submit btn-info">
+                                        Upload Result/ Report
+                                    </a>
+                                </td>
+                                {% endif %}
+                               
+                                <td><b>{{lst_failure_per | floatformat:2}} %</b></td>
+
+                                <td><b>{{lst_status}}</b></td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock body %}

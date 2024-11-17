@@ -1,0 +1,177 @@
+{% extends 'CA/ae_dashboard.html' %}
+{% load static %} 
+{% block body %}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<script type="text/javascript" src="{% static '/assets/js/Validation/reg_second.js' %}"></script>
+
+
+
+
+
+
+
+{% for data in data1 %}
+<form action="/ca/agents_all_details_ae/{{data.User_Id}}" method="POST" class="multisteps-form__form mb-8" >
+  {% csrf_token %}
+  <!--single form panel-->
+  <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+  <h5 class="font-weight-bolder mb-0 text-info">Registration Form</h5>
+  <!-- <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p> -->
+  <div class="multisteps-form__content">
+      <div class="row mt-3">
+          <div class="col-12 col-sm-6">
+              <label>Name<span style="color: red;">*</span></label>
+              <input type="text" id="company_name_e" value="{{data.Name}}" name="name" onkeyup="englishTyping();validateForm()" onfocus="englishTyping();validateForm()" onchange="validateForm()" class="form-control" readonly="readonly">
+                                            <span id="companyNameEnglish" class="text-danger font-weight-bold"></span>
+          </div>
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+              <label>Father Name<span style="color: red;">*</span></label>
+              <input type="text" id="company_name_e" name="fname" value="{{data.Father_name}}" onkeyup="englishTyping();validateForm()" onfocus="englishTyping();validateForm()" onchange="validateForm()" class="form-control" readonly="readonly">
+                                            <span id="companyNameEnglish" class="text-danger font-weight-bold"></span>
+          </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="v_company_name">Aadhar Card Number<span style="color: red;">*</span></label>
+          <input type="text" id="name_of_authorized_e" name="aadhar" value="{{data.Aadhar}}" onkeyup="englishTyping();validateForm()" onfocus="englishTyping();validateForm()" class="form-control" readonly="readonly">
+          <span id="nameOfAauthorizedEnglish" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="v_mobile">Energy Bill Number<span style="color: red;">*</span></label>
+          <input type="text" id="name_of_authorized_e" name="bill" value="{{data.Enery_bill}}" onkeyup="englishTyping();validateForm()" onfocus="englishTyping();validateForm()" class="form-control" readonly="readonly">
+          <span id="nameOfAauthorizedEnglish" class="text-danger font-weight-bold"></span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="fax">Mobile number (Number will used for login)</label>
+                                            <input type="tel" minlength="10" id="mobile1" name="mobile" value="{{data.Mobile}}" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control" maxlength="10" onkeypress='validate(event)' placeholder="9878786756" title="Using Indian Number Formate"
+                                                readonly="readonly">
+                                            <span id="mobileNumber" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="pan">Email ID<span style="color: red;">*</span></label>
+          <input type="email" id="email1" name="email" onkeyup="validateForm()" value="{{data.Email_Id}}" onfocus="validateForm()" onchange="validateForm()" class="form-control" title="Please fill the correct Email" style="text-transform: lowercase;" placeholder="abcd@gmail.com" readonly="readonly">
+          <span id="emailAddress" class="text-danger font-weight-bold"></span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="reg_no">Pan Card Number<span style="color: red;">*</span></label>
+          <input type="text" name="pan" onkeyup="validateForm()" onfocus="validateForm()" value="{{data.Pan}}" onchange="validateForm()" class="form-control" title="Please fill the correct Email" style="text-transform: lowercase;" readonly="readonly">
+          <span id="emailAddress" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="reg_date">GST Number<span style="color: red;">*</span></label>
+                                            <input type="text" name="gst" value="{{data.Gst}}" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control" title="Please fill the correct Email" style="text-transform: lowercase;" readonly="readonly">
+                                            <span id="emailAddress" class="text-danger font-weight-bold"></span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <h5><b>Address Details</b></h5>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="add1">Address Line 1<span style="color: red;">*</span></label>
+          <input type="text" name="add1" value="{{data.Add1}}"  id="txtadd1" onfocus="validateForm()" required="required" onkeyup="fill();validateForm()" onchange="fill();" class="form-control" readonly="readonly">
+          <span id="address" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="add2">Address Line 2</label>
+          <input type="text" name="add2" id="txtadd2" value="{{data.Add2}}" onkeyup="fill();" onchange="fill();" required="required" value="{{add1}}" class="form-control" readonly="readonly">
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="zip">Pincode <span style="color: red;">*</span></label>
+          <input type="tel" name="zip" id="txtzip" value="{{data.Pincode}}" pattern="^\d{6}$" required="required" maxlength="6" minlength="6" onkeypress='validate(event)' class="form-control" onblur="setZipInfo()" onkeyup="setZipInfo();fill();validateForm()" onchange="fill();" readonly="readonly">
+          <span id="code" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="add2">District<span style="color: red;">*</span></label>
+          <input type="text" name="add3" id="txtdistrict" value="{{data.District}}" class="form-control" required="required" onfocus="validateForm()" onkeyup="setZipInfo();fill(); validateForm();" onchange="fill();" readonly="readonly">
+          <span id="Add3" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="add2">State<span style="color: red;">*</span></label>
+                                            <input type="text" name="add4" id="txtstate" value="{{data.State}}" class="form-control" required="required" onfocus="validateForm()" onkeyup="setZipInfo();fill(); validateForm();" onchange="fill();" readonly="readonly">
+                                            <span id="state1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label for="city">City <span style="color: red;">*</span></label>
+          <input type="text" name="city" id="txtcity" value="{{data.City}}" class="form-control" required="required" onfocus="validateForm()" onkeyup="setZipInfo();fill(); validateForm();" onchange="fill();" readonly="readonly">
+          <span id="city1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+      </div>
+      <div class="row mt-3"><b>Bank Details</b></div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label for="bank_name">Banks' Name <span style="color: red;">*</span></label>
+          <input type="text" class="form-control form-select form-select-lg" name="bank_name" value="{{data.Bank_name}}" id="bank_name"  onkeyup="validateForm();" onfocus="validateForm()" onchange="validateForm()" readonly="readonly">
+
+          <span id="bank_Name" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label>IFSC code <span style="color: red;">*</span></label>
+          <input type="text" id="ifsc" name="ifsc" minlength="1" maxlength="15" value="{{data.IFSC}}" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" style="text-transform: uppercase" readonly="readonly">
+          <span id="ifscCode" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label>Account holder name <span style="color: red;">*</span></label>
+          <input type="text" id="ac_holder_name" name="ac_holder_name" value="{{data.Account_Holder_Name}}"  onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" style="text-transform: uppercase" onfocus="validateForm()"
+                                                onchange="validateForm()" class="form-control" readonly="readonly">
+                                            <span id="ac_holderName" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label>Account number <span style="color: red;">*</span></label>
+          <input type="text" id="protocol" name="ac_number" value="{{data.Account_Number}}" class="form-control" onselectstart="return false" oncopy="return false" onkeypress='validate(event)' onfocus="validateForm()" onchange="validateForm()" readonly="readonly" pattern="^\d{9,18}$"
+              maxlength="18" minlength="9" title="Please fill the Account number">
+          <span id="ac_tNumber" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+        </div>
+      </div>
+      <div class="button-row d-flex mt-4">
+        <!-- <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Accept"><a href="/ca/agents_details_ae" style="color: white;">Accept</a>
+        <input type="submit" class="btn bg-gradient-primary ms-auto mb-0" name="user" value="Reject"><a href="/ca/agents_details_ae" style="color: white;">Reject</a> -->
+
+
+
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Accept</a></button> -->
+        <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="button" ><a href="#" style="color: white;">Reject</a></button> -->
+    </div>
+    <div><a href="/ca/agents_upload_detail"><input type="button" class="btn btn-info" value="Upload"></a></div>
+
+
+      
+</form>
+{% endfor %}
+<script>
+    let dtElem = document.getElementById('reg_date');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+</body>
+{% endblock body %}

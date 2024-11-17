@@ -1,0 +1,269 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+
+{% block body %}
+<style>
+  .ed-tableinfo-block .ed-table-block td .btn {
+    margin: 0px;
+    width: 100px;
+  }
+  .btn:not(:disabled):not(.disabled) {
+    
+    width: 142px;
+}
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+<!-- <div class="card card-default width-75 m-4" style="width:100%">
+       <div class="table-responsive"> -->
+<div class="ed-information">
+  <div class="card ed-card-block">
+    <div class="ed-card-inner">
+      <div class="card-header">
+        <h2>
+          <!-- All Vendor -->
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="ed-tableinfo-block">
+          <div class="table-responsive">
+            <table class="table table-striped ed-table-block display table-bordered text-center" id="upload_bg">
+              <thead class="table-dark">
+                <tr>
+                  <th>Sr No.</th>
+                  <th>Wo No.</th>
+                  <th>Subject</th>
+                  <th>Bank Name</th>
+                  <th>BG Type</th>
+                  <th>BG Guarantee_no</th>
+                  <th>BG Issue Date</th>
+                  <th>BG Valid Date</th>
+                  <th>BG Amount</th>
+                  <th>BG Copy</th>
+                  <th>Action</th>
+                  <th>Approval Status</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for Supply in BG %}
+                <tr>
+                  <td>
+                    {{forloop.counter}}
+                  </td>
+                  <td>
+                    {{Supply.TKCWoInfo.Contract_Number}}
+                  </td>
+                  <td>
+                    {{Supply.TKCWoInfo.Header.Contract_Description}}
+                  </td>
+                  
+                  <td>
+                    {{Supply.BG_Bank_name}}
+                  </td>
+                  <td>
+                    {{Supply.BG_Type}}
+                  </td>
+                  <td>
+                    {{Supply.BG_Guarantee_no}}
+                  </td>
+                  <td>
+                    {{Supply.BG_Issue_Date}}
+                  </td>
+                  <td>
+                    {{Supply.BG_Valid_Date}}
+                  </td>
+                  <td>
+                    {{Supply.BG_Amount}}
+                  </td>
+                  <td>
+                    <a target="_blank" href="{{Supply.BG_Copy.url}}" class="btn ed-submit btn-sm btn-info">
+                      View
+                    </a>
+
+                  </td>
+                  <td>{% if not Supply.BG_Submit %}
+
+                    <a href="/tkc/bg_delete/{{data.id}}/{{Supply.id}}" class="btn ed-submit btn-sm btn-danger">
+                      Delete
+                    </a>
+                    <a href="/tkc/bg_sumit_for_approval/{{data.id}}/{{Supply.id}}"
+                      class="btn ed-submit btn-sm btn-primary">
+                      Submit
+                    </a>
+          </div>
+          {% else %}
+          <a href="" class="btn ed-submit btn-sm btn-success">
+            Submitted
+          </a>
+          {% endif %}
+          </td>
+          <td>{% if Supply.BG_Approved_Status == 0 and Supply.BG_Submit == 1 %}
+            <a href="" class="btn ed-submit btn-sm btn-warning">
+              Pending
+            </a>
+            {% elif Supply.BG_Approved_Status == -1 %}
+            <a href="" class="btn ed-submit btn-sm btn-danger">
+              Rejected
+              </span>
+            </a>
+            {% elif Supply.BG_Approved_Status == 1 %}
+            <a href="" class="btn ed-submit btn-sm btn-success">
+              Approved
+            </a>
+            {% endif %}
+          </td>
+
+          <td>
+            {% if Supply.BG_Approved_Remark %}
+            <span class="btn btn-sm btn-secondary">
+              {{ Supply.BG_Approved_Remark}}
+            </span>
+            {% endif %}
+          </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- /.card-body -->
+<script>
+  $(document).ready(function () {
+    $('#upload_bg').DataTable();
+  });
+</script>
+
+<script>
+
+  function validateForm() {
+    let select1 = document.forms["myForm"]["Type"].value;
+    let name = document.forms["myForm"]["BG_Bank_name"].value;
+    let g_number = document.forms["myForm"]["BG_Guarantee_no"].value;
+    let is_date = document.forms["myForm"]["BG_Issue_Date"].value;
+    let ex_date = document.forms["myForm"]["BG_Valid_Date"].value;
+    let amounnt = document.forms["myForm"]["BG_Amount"].value;
+    let fileup = document.forms["myForm"]["BG_Copy"].value;
+    let fileee = document.getElementById("file33").value;
+    var allowedExtensions = /(\.pdf)$/i;
+    let fileInput_Result1 = allowedExtensions.test(fileee);
+
+
+    if (select1 == "") {
+      document.getElementById('selectionn').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('selectionn').innerHTML = "";
+    }
+    if (name == "") {
+      document.getElementById('bank_Name').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('bank_Name').innerHTML = "";
+    }
+    if (g_number == "") {
+      document.getElementById('bank_no').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('bank_no').innerHTML = "";
+    }
+    if (is_date == "") {
+      document.getElementById('issueDate').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('issueDate').innerHTML = "";
+    }
+    if (ex_date == "") {
+      document.getElementById('validDate').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('validDate').innerHTML = "";
+    }
+    if (amounnt == "") {
+      document.getElementById('amount1').innerHTML = "Please fill the required details";
+      return false;
+    } else {
+      document.getElementById('amount1').innerHTML = "";
+    }
+    if (fileup == "") {
+      document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+      return false;
+    } else {
+      //document.getElementById('Twenty_two').innerHTML = "";
+      if (fileInput_Result1 == false) {
+        document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+        return false;
+      } else {
+        // document.getElementById('file1').innerHTML = "";
+        const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+        if (oFile > 2) {
+          alert("File size must be less than or equal to 2 MB");
+          document.getElementById("file33").value = "";
+          return false;
+
+        } else {
+          document.getElementById('file22').innerHTML = "";
+        }
+      }
+    }
+  }  
+</script>
+<script>
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>
+<script>
+  let dtElem3 = document.getElementById('bg_issu_date1');
+  let maxDate3 = new Date();
+  dtElem3.max = formatDate(maxDate3);
+
+  function formatDate(date) {
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = date.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
+  }
+</script>
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#bg_valid_upto1').attr('min', today);
+</script>
+{% endblock body %}

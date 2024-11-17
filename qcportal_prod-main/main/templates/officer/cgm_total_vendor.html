@@ -1,0 +1,61 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>All Vendor</h2>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="background-color:#FFFFE0;color:black;">
+                <thead class="font-weight-bold" style="font-size: 15px;">
+                    <tr>
+                        <th>
+                            Serial Number
+                        </th>
+                        <th>
+                            Name Of Company
+                        </th>
+                        <th>
+                            Name of Authorized Person
+                        </th>
+                        <th>
+                            Registration Date
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Contact Number
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.CompanyName_E}}</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                        <td>{{data.Uploaded_Date|date:"d-M-Y"}}</td>
+                        <td>{{data.Email_Id}}</td>
+                        <td>{{data.ContactNo}}</td>
+                        <td> <a href="/vendor_cgm_evaluate/{{data.User_Id}}"><span class="btn btn-info btn-sm">Detail View</span></a></td>
+                        <td>
+                            {% if data.cgm_approval == 0 %}
+                            <h5 style="color: blue;"> pending</h5>
+                            {% else %}
+                            <h5 style="color: blue;"> Approve</h5>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

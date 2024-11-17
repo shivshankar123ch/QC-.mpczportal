@@ -1,0 +1,811 @@
+<html lang="en">
+{% load static %}
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static '/assets/img/icons8-light-bulb-64.png' %}">
+    <link rel="icon" type="image/png" href="/static/assets/img/mp-logo_0.png" />
+    <title> P S Office | Dashboard</title>
+    <meta name="description"
+        content="Vendor Registration | Dashboard | Energy Department, Government of Madhya Pradesh is concerned with power policy framework and administrative control, safeguarding consumers’ interest, promotion of conventional energy sources and efficient power system in the state" />
+    <meta name="keywords"
+        content="Vendor Registration | Dashboard | Energy Department, Energy Department Government of Madhya Pradesh India" />
+    <meta name="title" content="Vendor Registration | Dashboard | Energy Department, Government of Madhya Pradesh" />
+    <meta property="og:site_name" content="Creative Tim" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet'" />
+    <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static '/assets/css/nucleo-svg.css" rel="stylesheet' %}" />
+    <script src="{% static '/kit.fontawesome.com/42d5adcbca.js' %}" crossorigin="anonymous"></script>
+    <link href="{% static '/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/argon-dashboard.min28b5.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static '/css/rcastyle.css' %}" rel="stylesheet" />
+
+    
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/popper.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- yogesh changes -->
+<link rel="stylesheet" href="{% static 'assets1/scss/main.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/datatables.css' %}">
+<script src="{% static '/assets/js/Validation/jquery.js' %}"></script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/rcastyle.css">
+ 
+
+
+
+
+    <style>
+        .async-hide {
+            opacity: 0 !important
+        }
+
+        label.labelName.text-capitalize {
+            font-size: 12.50px;
+        }
+
+        .custom {
+            width: 160px !important;
+        }
+    </style>
+    <script>
+        (function (a, s, y, n, c, h, i, d, e) {
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function () {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function () {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
+            'GTM-K9BGS8K': true
+        });
+    </script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '{% static ' / www.google - analytics.com / analytics.js ' %}', 'ga');
+        ga('create', 'UA-46172202-22', 'auto', {
+            allowLinker: true
+        });
+        ga('set', 'anonymizeIp', true);
+        ga('require', 'GTM-K9BGS8K');
+        ga('require', 'displayfeatures');
+        ga('require', 'linker');
+        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
+    </script>
+</head>
+
+
+
+<!-- <body class="g-sidenav-show   bg-gray-100"> -->
+<!-- <div class="min-height-300 bg-primary position-absolute w-100"></div> -->
+
+<body>
+
+    <aside class="edrca-sidenav-block" id="sidenav-main">
+        <div class="edrca-overlay-block" id="edrca-overlay"></div>
+        <div class="edrca-sidenav-header">
+            <!-- <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i> -->
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'dashboard/dist/img/logo1.png' %}" class="img-fluid" alt="logo">
+                <span class="edrca-text">
+                    P S Office
+                </span>
+            </a>
+        </div>
+        <!-- <div class="edrca-menucontant-block" id="sidenav-collapse-main"> -->
+        <div class="edrca-menucontant-block">
+            <ul class="navbar-nav edrca-navbar-nav" id="rca-menulist">
+                <li class="nav-item">
+                    <a href="/fqp/Ps-Dashboard" class="nav-link active">
+                        <span class="iconbox">
+                            <svg version="1.1" x="0px" y="0px" viewBox="0 0 26.39 26.39"
+                                style="enable-background:new 0 0 26.39 26.39;" xml:space="preserve">
+                                <g>
+                                    <g id="c14_house">
+                                        <path d="M3.588,24.297c0,0-0.024,0.59,0.553,0.59c0.718,0,6.652-0.008,6.652-0.008l0.01-5.451c0,0-0.094-0.898,0.777-0.898h2.761
+			c1.031,0,0.968,0.898,0.968,0.898l-0.012,5.434c0,0,5.628,0,6.512,0c0.732,0,0.699-0.734,0.699-0.734V14.076L13.33,5.913
+			l-9.742,8.164C3.588,14.077,3.588,24.297,3.588,24.297z" />
+                                        <path
+                                            d="M0,13.317c0,0,0.826,1.524,2.631,0l10.781-9.121l10.107,9.064c2.088,1.506,2.871,0,2.871,0L13.412,1.504L0,13.317z" />
+                                        <polygon points="23.273,4.175 20.674,4.175 20.685,7.328 23.273,9.525 		" />
+                                    </g>
+                                    <g id="Capa_1_216_">
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="textitem">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <span class="iconbox">
+                            <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 485.091 485.091"
+                                style="enable-background:new 0 0 485.091 485.091;" xml:space="preserve">
+                                <g>
+                                    <rect x="125.257" y="75" width="40" height="40"></rect>
+                                    <rect x="125.257" y="155" width="40" height="40"></rect>
+                                    <rect x="205.257" y="75" width="40" height="40"></rect>
+                                    <rect x="205.257" y="155" width="40" height="40"></rect>
+                                    <path d="M416.676,266.396c-5.831,0.964-11.767,1.453-17.643,1.453c-28.931,0.001-56.689-11.458-78.776-32.39V0h-270v445h190.334
+                                    c29.839,29.437,59.132,38.438,60.371,38.808l4.295,1.283l4.295-1.283c1.247-0.373,30.891-9.471,60.918-39.34
+                                    c27.18-27.037,60.283-77.208,63.641-162.684l0.723-18.39L416.676,266.396z M80.257,30h210v205.459
+                                    c-22.084,20.93-49.843,32.389-78.777,32.39c-5.873,0-11.809-0.489-17.642-1.453l-18.157-3.001l0.723,18.39
+                                    c2.389,60.827,19.844,103.761,39.506,133.216H80.257V30z M350.461,422.044c-18.579,18.867-37.034,27.976-45.204,31.384
+                                    c-8.17-3.408-26.625-12.517-45.204-31.384c-30.02-30.485-47.655-72.223-52.538-124.252c1.323,0.039,2.646,0.058,3.966,0.058
+                                    c34.253-0.001,67.053-12.514,93.776-35.518c27.756,23.892,62.062,36.495,97.742,35.46
+                                    C398.117,349.821,380.481,391.559,350.461,422.044z"></path>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="textitem">
+                            TKC
+                            <span class="ed-right-angel">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu ed-menudropdown-block">
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/fqp/All-Discom-Work-Orders">
+                                Work Order
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/All-Discom-Material-Offers">
+                               Material Offers
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/all_discom_pdi">
+                                PDI's
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/All-Discom-DIs">
+                                DI's
+                            </a>
+                        </li>
+                       
+                     </ul>
+                </li>
+                 
+
+
+
+
+
+
+
+
+                
+
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <span class="iconbox">
+                            <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 485.091 485.091"
+                                style="enable-background:new 0 0 485.091 485.091;" xml:space="preserve">
+                                <g>
+                                    <rect x="125.257" y="75" width="40" height="40"></rect>
+                                    <rect x="125.257" y="155" width="40" height="40"></rect>
+                                    <rect x="205.257" y="75" width="40" height="40"></rect>
+                                    <rect x="205.257" y="155" width="40" height="40"></rect>
+                                    <path d="M416.676,266.396c-5.831,0.964-11.767,1.453-17.643,1.453c-28.931,0.001-56.689-11.458-78.776-32.39V0h-270v445h190.334
+                                    c29.839,29.437,59.132,38.438,60.371,38.808l4.295,1.283l4.295-1.283c1.247-0.373,30.891-9.471,60.918-39.34
+                                    c27.18-27.037,60.283-77.208,63.641-162.684l0.723-18.39L416.676,266.396z M80.257,30h210v205.459
+                                    c-22.084,20.93-49.843,32.389-78.777,32.39c-5.873,0-11.809-0.489-17.642-1.453l-18.157-3.001l0.723,18.39
+                                    c2.389,60.827,19.844,103.761,39.506,133.216H80.257V30z M350.461,422.044c-18.579,18.867-37.034,27.976-45.204,31.384
+                                    c-8.17-3.408-26.625-12.517-45.204-31.384c-30.02-30.485-47.655-72.223-52.538-124.252c1.323,0.039,2.646,0.058,3.966,0.058
+                                    c34.253-0.001,67.053-12.514,93.776-35.518c27.756,23.892,62.062,36.495,97.742,35.46
+                                    C398.117,349.821,380.481,391.559,350.461,422.044z"></path>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="textitem">
+                            All Contractor & Vendor Data
+                            <span class="ed-right-angel">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu ed-menudropdown-block">
+                        <li class="menu-item ">
+                            <a class="menu-link" href="/fqp/contractor_details_ps">
+                                Contractor
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/active_inactive_contractor_list_ps">
+                               Active/Inactive Contractors
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/day_wise_count_vendor_ps">
+                            Vendor Data
+                            </a>
+                        </li>
+                        <li class="menu-item ">
+                            <a class="menu-link " href="/fqp/gtp_drawing_dashboard_ps">
+                            Vendor GTP Data
+                            </a>
+                        </li>
+                       
+                     </ul>
+                </li>
+
+
+
+
+
+
+
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">
+                        <span class="iconbox">
+                            <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 310 310"
+                                style="enable-background:new 0 0 310 310;" xml:space="preserve">
+                                <g id="XMLID_15_">
+                                    <path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341
+        C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531
+        c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170
+        c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z"></path>
+                                    <path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100
+        C140,123.284,146.716,130,155,130z"></path>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+                        </span>
+                        
+                        <span class="textitem">
+                            Logout
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+
+    
+    <main class="">
+        <div class="edrca-header-block" id="headerMenu">
+            <div class="edrca-container-block">
+                <div class="edrca-leftblock">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mnav-item">
+                            <a class="navbar-brand" href="#">
+                                <img src="{% static 'dashboard/dist/img/logo1.png' %}" class="img-fluid" alt="logo">
+                                <span class="edrca-text">
+                                    Vendor
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMenu">
+                                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                    alt="navbar Icon">
+                            </a>
+                        </li>
+                        <li class="nav-item mnav-item">
+                            <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMMenu">
+                                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid"
+                                    alt="navbar Icon">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="edrca-rightblock">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link edrca-profilemenu">
+                                <span class="edrca-imgbox">
+                                    <img src="{% static 'assets/images/avatar.jpg' %}" class="img-fluid"
+                                        alt="Profile Icon">
+                                </span>
+                                <span class="nav-text">{{userdata.Authorised_person_E}}</span>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="javascript:;" class="nav-link edrca-zones">
+                                EZ
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a href="/fqp/PS-Logout " class="nav-link edrca-logoutmenu" data-toggle="tooltip"
+                                title="Logout!">
+                                <img src="{% static 'assets/images/logout.png' %}" class="img-fluid" alt="navbar Icon">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="edrca-contant-block" id="contantBlock">  
+            {% comment %} <div class="edrca-dashboard-contant d-block">
+                <div class="edrca-dashboard-list">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>All Discom's Summary</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card ed-card-block bg-success">
+                                <div class="ed-card-inner">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-8 col-8">
+                                                <div class="numbers ">
+                                                    <h4>
+                                                        Total Registered TKC
+                                                    </h4>
+                                                    <h6>
+                                                        {{tkcs}}
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-4">
+                                                <div class="iconbox">
+                                                    <i class="ni ni-money-coins text-lg opacity-10 "
+                                                        aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card ed-card-block bg-info">
+                                <div class="ed-card-inner">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-8 col-8">
+                                                <div class="numbers ">
+                                                    <h4>
+                                                        Total Work Orders
+                                                    </h4>
+                                                    <h6>{{all_wo}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-4">
+                                                <div class="iconbox">
+                                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card ed-card-block bg-warning">
+                                <div class="ed-card-inner">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-8 col-8">
+                                                <div class="numbers ">
+                                                    <h4>
+                                                        Total DI's
+                                                    </h4>
+                                                    <h6>{{all_di}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-4">
+                                                <div class="iconbox">
+                                                    <i class="ni ni-paper-diploma text-lg opacity-10"
+                                                        aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="card ed-card-block bg-danger">
+                                <div class="ed-card-inner">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-8 col-8">
+                                                <div class="numbers ">
+                                                    <h4>
+                                                        <a href="/vendor/transaction_history" style="color:#fff;">Total PDI's</a>
+                                                    </h4>
+                                                    <h6>{{all_pdi}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-4">
+                                                <div class="iconbox">
+                                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   {% endcomment %}
+            <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+            <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+
+            <div class="card ed-card-block">
+                
+
+                
+                {% block body %} {% endblock body %}
+
+
+
+
+
+
+                
+            </div>
+            <!--  ------------------------------------------ Block Body End -----------------------------   -->
+            <!--  ------------------------------------------ Block Body End -----------------------------   -->
+
+            <footer class="ed-footer-block mt-4 ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="ed-copyright-text text-left">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, All Rights Reserved By
+                                <a href="#" class="links">MPMKVVCL.</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="ed-copyright-text text-right">
+                                Developed and Maintained by IT Cell, Madhya
+                                Pradesh Madhya Kshetra Vidyut Vitran Co. Ltd. Nishtha Parisar Govindpura,
+                                Bhopal.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+
+    
+<style>
+    .table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #344767 !important;
+}
+
+    .table-bordered td, .table-bordered th {
+    border: 1px solid #344767 !important;
+}
+.table-bordered {
+    border: 2px solid #344767 !important;
+}
+.table thead th {
+    padding: 0.75rem 1.5rem;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle !important;
+}
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: unset !important;
+    background: #fff !important;
+    color: #000 !important;
+}
+</style>
+
+
+
+    <script src="{% static '/assets/js/core/popper.min.js' %} "></script>
+    <script src="{% static '/assets/js/core/bootstrap.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/dragula/dragula.min.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/jkanban/jkanban.js' %} "></script>
+    <script src="{% static '/assets/js/plugins/chartjs.min.js' %} "></script>
+    <script>
+        var ctx1 = document.getElementById("chart-line ").getContext("2d ");
+
+        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+        new Chart(ctx1, {
+            type: "line ",
+            data: {
+                labels: ["Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "],
+                datasets: [{
+                    label: "Mobile apps ",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#5e72e4 ",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    maxBarThickness: 6
+
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#fbfbfb',
+                            font: {
+                                size: 11,
+                                family: "Open Sans ",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#ccc',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans ",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script>
+
+    
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script async defer src="{% static '/js/buttons.js' %} "></script>
+    <script src="{% static '/assets/js/argon-dashboard.min28b5.js' %} "></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="{% static '/assets/js/Validation/datatables.js' %}"></script>
+    <!-- <script src="{% static '/assets/js/bootstrap.bundle.min.js' %}"></script> -->
+    
+    
+    <script> 
+        $(document).ready(function () {
+            $('#toggelMenu').click(function () {
+                $('#sidenav-main').toggleClass('ed-header-collpase');
+                $('#headerMenu').toggleClass('ed-sidebar-collpase');
+                $('#contantBlock').toggleClass('ed-wrapper-collpase');
+            });
+            $('#toggelMMenu').click(function () {
+                $('#sidenav-main').addClass('ed-sidenav-open');
+            });
+            $('#edrca-overlay').click(function () {
+                $('#sidenav-main').removeClass('ed-sidenav-open');
+            });
+        });
+
+    </script>
+
+
+<script>
+    $(document).ready(function () { 
+       $('#toggelMenu').click(function () { 
+           $('#sidenav-main').toggleClass('ed-header-collpase');
+           $('#headerMenu').toggleClass('ed-sidebar-collpase');
+           $('#contantBlock').toggleClass('ed-wrapper-collpase');
+       });
+       $('#toggelMMenu').click(function () { 
+           $('#sidenav-main').addClass('ed-sidenav-open'); 
+       });
+       $('#edrca-overlay').click(function () { 
+           $('#sidenav-main').removeClass('ed-sidenav-open');  
+       });
+   }); 
+
+   </script>
+
+</body>
+
+</html>

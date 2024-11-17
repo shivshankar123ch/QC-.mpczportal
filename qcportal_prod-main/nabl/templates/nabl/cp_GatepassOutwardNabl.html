@@ -1,0 +1,367 @@
+<html>
+<head>
+    <title> </title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+</head>
+<style>
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+td {
+    padding: 4px 10px;
+    font-size: 16px;
+    text-transform: capitalize;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.ed-textnone {
+    height: 38px;
+    padding: 6px 10px;
+    font-size: 16px;
+    outline: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    width: 100%;
+}
+
+th{
+    height: 40px;
+    font-size: 18px;
+    font-weight: 700;
+}
+</style>
+<body>
+    <h1 style="font-size: 18px; text-transform: capitalize; color:red">
+        Original Gatepass has to be send with the driver
+    </h1>
+    <div id="printid"> 
+    <form method="POST" action="/nabl/cp_Gatepass_save_nabl/{{trf_id}}/{{gp_id}}">  
+        {% csrf_token %}
+        <table style="border: 1px solid #ddd; width: 80%; margin: 0 auto;">
+            <tr>
+                <td style="padding: 20px;">
+                    <center>
+                        <b><font face = "Verdana" size = "24"><div class='printchatbox' id='printchatbox' style="font-size: 40px;" ></div></b></font>
+                    </center>
+                    <h2 style="text-transform: capitalize;font-size: 30px; text-align: center; margin: 0 0 30px;">
+                        Gate Pass cum Challan
+                    </h2>  
+                    <table style="border: 0px solid #ddd;width: 100%; margin: 0 auto;">
+                        <tr>    
+                            <td style="width: 50%; text-align: left;">
+                                <h4 style="font-size: 16px; text-transform: capitalize;    margin: 0 0 14px;">
+                                </h4> 
+                            </td>
+                            <td style="">
+                                <h4 style="font-size: 16px; text-transform: capitalize;    margin: 0 0 14px;text-align: right;">
+                                </h4>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border: 0px solid #ddd;width: 100%; margin: 0 auto;">
+                        <tr>    
+                            <td style="">
+                                <h4 style="font-size: 24px; text-transform: capitalize;    margin: 0 0 14px;">
+                                    Dispatcher Details
+                                </h4> 
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td style="">
+                                <table style="border: 1px solid #ddd; width: 100%;">
+                                    <tr>    
+                                        <td style="width:15%; border:1px solid #ddd;">
+                                            Name Of Entity 
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone"  name='DispatcherNameOfEntity' class='chatinput' id='chatinput' placeholder="" /> 
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            LOA/Order No.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" name='LoaOrderNo' />
+                                        </td>
+                                    </tr> 
+                                    <tr>   
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Name Of Item
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" name="NameOfItem" id="Material_name" />
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            LOA/Order date.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="date" class="ed-textnone" placeholder="" name='LoaOrderDate' required="required" onkeypress="return false"/>
+                                        </td>
+                                    </tr> 
+                                </table>
+                                <table  style="border: 0px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:15%;border: 1px solid #ddd; border-top: 0;border-bottom: 0;">
+                                            Description Of item
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;border-top: 0;border-bottom: 0;">
+                                            <input type="text" class="ed-textnone" placeholder="" name="DescriptionOfItem" id="DescriptionOfItem"/>
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;border-top: 0;border-bottom: 0;">
+                                            Manufacturar /Firm Name
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;border-top: 0;border-bottom: 0;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="ManufacturerName" name="ManufacturerName" />
+                                        </td>
+                                    </tr> 
+                                </table>
+                                <table  style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Vehicle name & No.
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="VehicleNumber" name="VehicleNumber" />
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            DI no & date
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="DINoDate" name="DINoDate"/>
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Driver Name
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="DriverName" name="DriverName" />
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Driver Contact no.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="DriverContactNo" name="DriverContactNo" maxlength="10" onblur="mobileValidation(id)"/>
+                                            
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Issue Date
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="date" class="ed-textnone" placeholder="" id="IssueDate" name="IssueDate" required="required" onkeypress="return false"/>
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Issued to
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="IssuedTo" name="IssuedTo" />
+                                        </td>
+                                    </tr> 
+                                </table>
+
+                                <h4 style="font-size: 18px; text-transform: capitalize; padding-top: 25px;padding-bottom: 10;">
+                                    Material Details
+                                </h4> 
+                                
+                                <table style="border: 1px solid #ddd; margin-bottom: 20px;text-align: center;">
+                                    <tr>    
+                                        <th style="width:10%;border: 1px solid #ddd;">
+                                            S No.
+                                        </th>
+                                        <th style="width:20%;border: 1px solid #ddd;">
+                                            Material S No.
+                                        </th> 
+                                        <th style="width:50%;border: 1px solid #ddd;">
+                                            Material Capacity / Type
+                                        </th>
+                                        <th style="width:20%;border: 1px solid #ddd;">
+                                            Remark
+                                        </th>
+                                    </tr> 
+                                    
+                                    {% for mat, ct, remark in final_zip %}
+                                    <tr>   
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="MatList" name="MatList" value="{{mat}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="CapacityTypeList" name="CapacityTypeList" value="{{ct}}" readonly="readonly"/>
+                                        </td>
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                          <input type="text" class="ed-textnone" placeholder="" id="RemarkList" name="RemarkList" value="{{remark}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    {% endfor %}
+                                </table>
+    
+                                <table style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <th style="width:30%;border: 1px solid #ddd;">
+                                            Verified by
+                                        </th>
+                                        <th style="width:30%;border: 1px solid #ddd;">
+                                            Gatekeeper
+                                        </th> 
+                                        <th style="width:40%;border: 1px solid #ddd;">
+                                            Issuing Authority
+                                        </th> 
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Name: <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="VerifiedBy" id="VerifiedBy"/>
+                                            </div>
+                                        </td>
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Name:
+                                                <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="Gatekeeper" id="Gatekeeper"/>
+                                            </div>
+                                        </td>
+                                        <td style="width:40%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Name:
+                                                <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="IssuingAuthority" id="IssuingAuthority" />
+                                            </div>
+                                        </td> 
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Designation:
+                                                <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="VerifiedByDesignation" id="VerifiedByDesignation" />
+                                            </div>
+                                        </td>
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Designation:
+                                                <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="GatekeeperDesignation" id="GatekeeperDesignation" />
+                                            </div>
+                                        </td>
+                                        <td style="width:40%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                Designation:
+                                                <input type="text" class="ed-textnone" placeholder="" style="display:inline-block;width: auto;" name="IssuingAuthorityDesignation" id="IssuingAuthorityDesignation" />
+                                            </div>
+                                        </td> 
+                                    </tr>  
+                                </table>   
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td style="">
+                                <h4 style="font-size: 24px; text-transform: capitalize; margin: 20px 0 0px;">
+                                    Receiver Details 
+                                </h4> 
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td style="">  
+                                <table style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Name Of Entity
+                                        </td>
+                                        <td style="width:25%; border: 1px solid #ddd;">
+                                             <input type="text" class="ed-textnone" placeholder="" value="{{usr_obj2.CompanyName_E}}" id="ReceiverNameOfEntity" name="ReceiverNameOfEntity" /> 
+                                        </td> 
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Contact Person
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" value="{{usr_obj2.Authorised_person_E}}" id="ReceiverContactPerson" name="ReceiverContactPerson" />
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Receiver details
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" id="ReceiverDetails" name="ReceiverDetails" />
+                                        </td> 
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Contact no.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" placeholder="" value="{{usr_obj2.ContactNo}}" id="ReceiverContact" name="ReceiverContact" onblur="mobileValidation(id)" maxlength="10"/>
+                                        </td>
+                                    </tr>  
+                                </table>
+                            </td>
+                        </tr>   
+                    </table>   
+                </td>
+            </tr> 
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <center>
+        <div class="form-group">
+            <div class="form-action text-center">
+                <button type="submit" class="btn btn-info">Generate Outward</button>
+               
+            </div>
+        </div>
+    </center>
+    <h1 style="font-size: 18px; text-transform: capitalize; color:red">
+        Original Gatepass has to be send with the driver
+    </h1>
+  </form>
+        <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+        </script>
+        <script>
+            var inputBox = document.getElementById('chatinput');
+            inputBox.onkeyup = function(){
+            document.getElementById('printchatbox').innerHTML = inputBox.value +" " +'{{discom_name_radio}}';
+            }
+        </script>
+
+<script>
+    function mobileValidation(get_id){
+        
+        let mobile_Num = document.getElementById(get_id);
+
+        let RegExp_mobile = /^[6789]\d{9}$/;
+
+    
+        if(mobile_Num.value == ""){
+              alert("Please fill the Mobile Number*");
+            return false;
+
+        }else{
+            let result = RegExp_mobile.test(mobile_Num.value);
+            if (result == false) {
+            
+                alert( "Please enter in valid mobile number*");
+                return false;
+            }
+            else{
+                document.getElementById('mobile_Num').innerHTML = "";
+
+            }
+        }
+    }
+</script> 
+</body>
+</html>

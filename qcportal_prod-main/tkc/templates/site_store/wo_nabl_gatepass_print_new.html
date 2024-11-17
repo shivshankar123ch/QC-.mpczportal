@@ -1,0 +1,340 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+ 
+
+ 
+<div class="card ed-card-block">
+    <div class="ed-card-inner">
+        <!-- <div class="card-header">
+        </div> -->
+        <div class="card-body">
+            <div class="p-2 printoption" id="printoption">
+                <!-- <div class="pd-header">
+                    <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+                </div> -->
+                    <!-- <div class="table-responsives">
+                        <table class="table table-striped" border="2">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th colspan="2">Wo Material Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>WO No</td>
+                                    <td><b>{{data.wo.Contract_Number}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Contractor name</td>
+                                    <td><b>{{ data.wo.supplier.CompanyName_E}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td> Material </td>
+                                    <td><b>{{ data.wo_material.material_name}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                -->
+                <h2 class="text-center mb-3">
+                    <b><u>Gatepass Letter</u></b>
+                </h2>
+
+                <h6 class="text-right">
+                    <b>
+                        Date :- <span class="font-100"> {{current_date|date:"d-m-Y"}}</span>
+                    </b>
+                </h6>
+                
+                <div class="table-ifno mb-2 mt-2"> 
+                    <table class="table w-70">
+                      
+                      
+                        <tr>
+                            <th class="border-0 w-30">
+                                <h6 class="m-0">
+                                    <b>Name of Nabl. :</b>  
+                                </h6>
+                            </th>
+                            
+                            <th class="border-0 w-30">
+                                <h6 class="m-0">
+                                    {{gatepass_data.nabl_user.CompanyName_E}}
+                                </h6>
+                            </th> 
+                        </tr>
+                        
+                        <tr>
+                            <th class="border-0 w-30">
+                                <h6 class="m-0">
+                                    <b>Nabl Contact No. :</b> 
+                                </h6>
+                            </th>
+                            
+                            <th class="border-0 w-30">
+                                <h6 class="m-0">
+                                    {{gatepass_data.nabl_user.ContactNo}}
+                                </h6>
+                            </th> 
+                        </tr>
+
+                        
+
+                    </table>
+                </div>
+                <h4 class="mt-2"> Gatepass Material Details </h4> 
+                <div class="ed-tableinfo-block">
+                    <div class="table-responsives">
+                        <table class="table table-bordered ed-table-block1">
+                            <thead>
+                                <tr>
+                                    <th class="w-">
+                                        <h5><b>S NO.</b></h5>
+                                    </th>
+                                    <th class="w-45">
+                                        <h5><b>Material Name</b></h5>
+                                    </th>
+                                    <th class="w-50">
+                                        <h5><b>Material Serial Number/Batch Number</b> </h5>
+                                    </th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in offer_data %}
+                            
+                                <tr class="bg-light">
+                                    <td>{{forloop.counter}}</td>
+                                    <td><b>{{data.offer.wo_material.material_name}}</b></td>
+                                        {% if data.offer.excel_type == True %}
+                                    <td class="project_progress">
+                                            {{data.serial_no}}
+                                    </td>
+                                    {% elif data.offer.excel_type == False %}
+
+                                        <td class="project_progress">
+                                        {{data.batch_no}}
+                                        </td>
+
+                                        {% endif %}  
+                                </tr> 
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>      
+
+                
+               
+    
+                <form action="/tkc/tkc_site_store_gatepass_letter_print" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    <div> 
+                        <table class="table table-striped mt-2" border="2">
+                        
+                            <tr hidden>
+                                <th>NABL Name:<span style="color: red;">*</span></th>
+                                <td><b>{{ gatepass_data.nabl_user.CompanyName_E}}</b>
+                                
+                                </td>
+                            </tr>
+                            <tr hidden>
+                                <th>NABL Number:<span style="color: red;">*</span></th>
+                                <td><b>{{ gatepass_data.nabl_user.ContactNo}}</b>
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> Gatepass Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                                <td>{{gatepass_data.gatepass_date}}
+                                    <!-- <input type="date" id="gatepass_date" name="gatepass_date" value="{{gatepass_data.gatepass_date}}" readonly> -->
+                                    <span id="date" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th>Gatepass No: <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.gatepass_num}}
+                                    <!-- <input type="text" name="gatepass_no" id="gatepass_num" placeholder="" value="{{gatepass_data.gatepass_num}}"  style="width:250px;" > -->
+                                      
+                                    <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th>Gatekeeper Name <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.gatekeeper_name}}
+                                    <!-- <input type="text" name="gk_name" placeholder="" style="width:250px;" value="{{gatepass_data.gatekeeper_name}}" readonly > -->
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Vehicle No. <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.gatekeeper_name}}
+                                    <!-- <input type="text" name="vehicle_no" placeholder="" style="width:250px;" value="{{gatepass_data.gatekeeper_name}}"  readonly> -->
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Driver Name: <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.vehicle_no}}
+                                    <!-- <input type="text" name="driver_name" placeholder="" style="width:250px;" value="{{gatepass_data.vehicle_no}}" readonly> -->
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Driver Phone: <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.driver_phone}}
+                                    <!-- <input type="text" name="driver_phone" placeholder="" style="width:250px;" value="{{gatepass_data.driver_phone}}" readonly> -->
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Material Received By: <span style="color: red;">*</span> </th>
+                                <td scope="row">{{gatepass_data.material_rec_by}}
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>
+
+                            
+                            <tr hidden>
+                                <th>Gatepass Id: <span style="color: red;">*</span> </th>
+                                <td scope="row"><input type="text" name="gate_pass_id" placeholder="" style="width:250px;" value="{{gatepass_data.id}}" readonly>
+                                    <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                                        style="font-size: 100%;"></span>
+                                </td>
+                            </tr>  
+
+                        </table> 
+                    </div>
+
+
+                    <div class="table-ifno mb-2 mt-2 ">
+                        <div class="d-block" style="overflow:hidden;"> 
+                            <table class="table w-50 float-right">
+                                <tr>
+                                    <th class="border-0 w-30">
+                                        <h6 class="m-0">
+                                            <b>Name of Site Store Incharge :</b>  
+                                            {{gatepass_data.site_store.autherised_person}}
+                                        </h6>
+                                    </th> 
+                                </tr>
+                                
+                                <tr>
+                                    <th class="border-0 w-30">
+                                        <h6 class="m-0">
+                                            <b>Site Store Mob No :</b> 
+                                            {{gatepass_data.site_store.contact_no}}
+                                        </h6>
+                                    </th> 
+                                </tr>
+    
+                                
+                                
+                                <tr>
+                                    <th class="border-0 w-30">
+                                        <h6 class="m-0">
+                                            <b>Site Store Address :</b> 
+                                            {{gatepass_data.site_store.Store_Address}}
+                                        </h6>
+                                    </th> 
+                                </tr> 
+                            </table>
+                        </div>   
+                    </div>  
+                    
+                    <div class="col-sm-3" id="printoptions1">
+                        <div class="text-left">
+                            <label class="m-0">Upload Sign Documents </label> 
+                            <div class="d-flex">
+                            <input type="file" class="" value="Upload" required name= "gatepass_file" id = "gatepass" required>
+                            <button type="submit" class="btn ed-submit ed-formsubmit">Submit</button>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </form>
+
+
+
+ 
+
+            </div>
+            
+            <div id="printoptions" class="form-group">
+                <div class="text-center"> 
+                    <input id="printpagebutton" class="btn ed-submit btn-primary" type="button" value="print gatepass" onclick="windowprint()" /> 
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+  
+    <script>
+        // let dtElem = document.getElementById('bid_open_date');
+        // let maxDate = new Date();
+        // dtElem.max = formatDate(maxDate);
+
+        // function formatDate(date) {
+        //     let dd = String(date.getDate()).padStart(2, '0');
+        //     let mm = String(date.getMonth() + 1).padStart(2, '0');
+        //     let yyyy = date.getFullYear();
+        //     return `${yyyy}-${mm}-${dd}`;
+        // }
+    </script>
+    <!-- <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> -->
+    
+    <script>
+        // function printpage() {
+        //     var printButton = document.getElementById("printpagebutton");
+        //     window.print()
+        //     printButton.style.visibility = 'visible';
+    
+        // }
+
+
+
+
+
+        
+        function windowprint() {
+            document.getElementById('edSidebar').style.display = 'none';
+            document.getElementById('edHeader').style.display = 'none';
+            document.getElementById('printoptions').style.display = 'none';
+            document.getElementById('printoptions1').style.display = 'none';
+            // document.getElementById('notes').style.display = 'none';
+            $('#edContainer').css('padding', '0');
+            // $('.ed-textbox').css('border', '0');
+            $('.ed-pagetitle-block').hide();
+            $('.ed-footer-block').hide();
+            window.print();
+            document.getElementById('edHeader').style.display = 'block';
+            document.getElementById('edSidebar').style.display = 'block';
+            document.getElementById('printoptions').style.display = 'block';
+            document.getElementById('printoptions1').style.display = 'block';
+            // document.getElementById('notes').style.display = 'block';
+            $('#edContainer').removeAttr('style');
+            // $('.ed-textbox').css('border-width', '1px');
+            $('.ed-pagetitle-block').show();
+            $('.ed-footer-block').show();
+        }
+
+
+
+
+
+    </script>
+    {% endblock body %}

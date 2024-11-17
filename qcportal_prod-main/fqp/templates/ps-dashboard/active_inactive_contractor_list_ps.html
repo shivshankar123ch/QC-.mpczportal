@@ -1,0 +1,129 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+{% load cart %}
+{% block active_tkc %}
+<li class="nav-item active" style="list-style-type:none;">
+   {% endblock active_tkc %}
+   <script>
+      function printpage() {
+        var divToPrint = document.getElementById("printTable");
+  var newWin = window.open("");
+  newWin.document.write(`
+    <html>
+      <head>
+        <style>
+          table {
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+          }
+        </style>
+      </head>
+      <body>
+        ${divToPrint.outerHTML}
+      </body>
+    </html>
+  `);
+  newWin.document.close();
+  newWin.print();
+  newWin.close();
+      }
+      
+   </script>
+   <style>
+      /* .table-bordered td {
+      font-size: 15px;
+      }
+      .table-bordered thead th {
+      font-size: 15px;
+      word-break: break-word;
+      } */
+      .table-responsive {
+          min-height: .01%;
+          overflow-x: auto;
+      }
+
+      table.table-condensed.table-bordered {
+        border-collapse: collapse;
+        width: 1350px;
+        overflow-x: scroll;
+        display: block;
+    }
+   </style>
+   <div class="container-fluid" >
+      
+          <h5 class="font-weight-bolder mt-3">All Contractor as on {{today}}</h5>
+          
+          <div class="panel panel-default">
+            <div class="text-right d-flex" >
+              <a href="/export_users_csv" class="btn btn-primary mr-3">Export CSV</a> 
+              <button class="btn btn-primary" id="download" onclick="printpage()">Print List </button>
+          </div>
+              <!-- <div class="panel-heading">Panel Heading</div>
+                <div class="panel-body">Panel Content</div> -->
+              <div class="table-responsive" style="overflow-x: auto; width: 100%;">
+                <table class="table table-condensed table-bordered" id="printTable">
+                    <thead class="table table-dark">
+                      <tr>
+                          <th width="10%" >S.No.</th>
+                          <th width="10%" class="text-center align-middle">Discom</th>
+                          <th width="10%">Registration<br>Number </th>
+                          <th width="12%" >Valid <br>Up To</th>
+                          <th width="6%" class="text-center:  align-middle">Status</th>
+                          <th width="13%">Firm/Company<br> Name </th>
+                          <th width="12%">Authorised<br> Person Name </th>
+                          <th width="8%">Contact<br> Number</th>
+                          <th width="11%">Date of<br> Approval</th>
+                          <th width="12%">View <br>Certificate </th>
+                          <th width="12%">View Details </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for data in data %}
+                      <tr>
+                          <td class="text-center">{{forloop.counter}}</td>
+                          <td class="text-center">{{data.User_zone}}</td>
+                          <td class="text-center">{{data.Authentication_id}}</td>
+                          <td class="text-center">{{data|last_date:doc|date:"d-M-Y"}}</td>
+                          {% now "Y-m-d" as to_daaa %}
+                          {% if data.Authentication_id and data.blacklisted == 2 %}
+                          <td style="color: red;"> Debarred </td>
+                          {% elif data.Authentication_id and data.deregister == 0 %}
+                          {% if to_daaa <= data|last_date:doc|date:"Y-m-d" %}
+                          <td> Active</td>
+                          {% else %}
+                          <td> Inactive</td>
+                          {% endif %}
+                          {% elif data.Authentication_id and data.deregister == 1 %}
+                          <td> Deregistered </td>
+                          {% else %}
+                          <td>Inactive</td>
+                          {% endif %}
+                          <td style="width:auto;">{{data.CompanyName_E}}</td>
+                          <td style="width:auto;">{{data.Authorised_person_E}}</td>
+                          <td>{{data.ContactNo}}</td>
+                          <td>{{data.date_of_approved}}</td>
+                          {% if data.cert_image%}
+                          <td class="text-center"> <a href="{{data.cert_image.url}} " class="btn btn-secondary" target="_blank" >View <i class="fa fa-file-pdf-o"></i></a></td>
+                          {% else %}
+                          <td>
+                            <h6> Certificate Not Uploaded</h6>
+                          </td>
+                          {% endif %}
+                          <td> <a href="/fqp/contractor_details_view_ps/{{data.User_Id}}">View Details</a></td>
+                      </tr>
+                      {% endfor %}
+                      <tr></tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+          
+    </div>
+
+   
+   {% endblock body %}

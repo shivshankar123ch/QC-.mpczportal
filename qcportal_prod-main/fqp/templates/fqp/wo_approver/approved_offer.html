@@ -1,0 +1,284 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Material Offer Details
+                    </h2>
+                </div>
+                <div class="card-body">
+                    
+                    <h4 class="text-center">Confirmation of inspection offer </h4>
+
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table id="example2"
+                                class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%">
+                                            Work Order No
+                                        </th>
+                                        <!-- <th style="width:30%">
+                                            Work Order Description
+                                        </th> -->
+                                        <th style="width:20%">
+                                            Vendor
+                                        </th>
+                                        <th style="width:20%">
+                                            Item
+                                        </th>
+                                        <th style="width:10%">
+                                            Item Code
+                                        </th>
+                                        <th style="width:10%">
+                                            WO Qty
+                                        </th>
+                                        
+                                        <th style="width:10%">
+                                            Balance Qty.
+                                        </th>
+                                        <th style="width:10%">
+                                            Offer Quantity
+                                        </th>
+                                        <th style="width:10%">
+                                            Readiness Date
+                                        </th>
+                                        <th style="width:15%">PDI Status</th>
+                                        <th style="width:15%">Inspecting Officer</th>
+                                        <th style="width:15%">PDI Report</th>
+                                        <th style="width:15%">Letter Report</th>
+                                        <th style="width:15%">DI Status</th>
+                                        
+                                        <th style="width:10%">
+                                            Offer Acceptance Letter
+                                        </th>
+                                        {% comment %} <th style="width:20%">Action</th> {% endcomment %}
+                                        <th style="width:30%">Remarks</th>
+                                        
+
+                                    </tr>
+                                </thead>
+                                {% for Supply in offer %}
+                                <tr>
+                                    <td>{{Supply.TKCVendor.TKCWoInfo.Contract_Number}}</td>
+                                    <!-- <td>{{Supply.TKCVendor.TKCWoInfo.Header.Contract_Description}}</td> -->
+                                    <td>{{Supply.TKCVendor.Vendor.CompanyName_E}}</td>
+                                    <td>{{Supply.TKCVendor.Material_id.Material_Name}}</td>
+                                    
+                                        <td>
+                                            {% if wo_discom == 'CZ' %}
+                                                {{Supply.TKCVendor.Material_id.item_code}} 
+                                            {% elif wo_discom == 'WZ' %}
+                                                {{Supply.TKCVendor.Material_id.item_code_wz}}
+                                            {% elif wo_discom == 'EZ' %}
+                                                {{Supply.TKCVendor.Material_id.item_code_ez}}
+                                            {% endif %}
+                                            
+                                        </td>
+                                    <td>{{Supply.wo_material.total_order_qty}}</td>
+                                    <td>{{Supply.wo_material.balance_qty}}</td>
+                                    <td>{{Supply.quantity}} </td>
+                                    <td>{{Supply.readiness_date}} </td>
+                                    <td>
+                                        {% if Supply.PDI_Complete == 1 and Supply.PDI_Approved_Status == 1 %}
+                                            <button class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    Completed
+                                                </span>
+                                            </button>
+
+                                        {% elif Supply.PDI_Complete == 0 and Supply.PDI_Assign == 1 and Supply.PDI_Approved_Status == 0 %}
+                                        <button class="btn ed-submit btn-success">
+                                            <span class="ed-submit-text">
+                                                PDI Assigned
+                                            </span>
+                                        </button>
+                                            
+                                        {% elif Supply.PDI_Complete == 1 and Supply.PDI_Approved_Status == 0 %}
+                                            <button class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    Pending for Approval 
+                                                </span>
+                                            </button>
+                                        {% elif Supply.PDI_Complete == o and Supply.PDI_Approved_Status == 0 %}
+                                        <button class="btn ed-submit btn-danger">
+                                            <span class="ed-submit-text">
+                                                Not Completed
+                                            </span>
+                                        </button>
+                                        {% endif %}
+                                    </td>
+
+                                    <td> 
+
+                                        {% if Supply.PDI %}
+
+                                        {{Supply.PDI.officer.officer_name}}
+
+                                        {% else %}
+                                            <button class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    Pdi Not Assign 
+                                                </span>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                    
+                                    <td> 
+
+                                        {% if Supply.PDI.pdi_report %}
+
+                                        <a class="nav-link btn ed-submit btn-info" href="{{Supply.PDI.pdi_report.url}}"
+                                         target=”_blank”>
+                                         view</a>
+                                         {% elif Supply.PDI.pdi_report_url %}
+                        
+                                        <a class="nav-link " href="{{Supply.PDI.pdi_report_url}}"
+                                        target=”_blank”>
+                                        <span class="btn btn-info btn-sm"> View</span></a>
+
+                                        {% else %}
+                                            <button class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    Not Uploaded 
+                                                </span>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                    <td> 
+
+                                        {% if Supply.PDI.letter_report %}
+
+                                        <a class="nav-link btn ed-submit btn-info" href="{{Supply.PDI.letter_report.url}}"
+                                         target=”_blank”>
+                                         view</a>
+
+                                        {% else %}
+                                            <button class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    Not Uploaded 
+                                                </span>
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if Supply.DI_Created_Status == 1 %}
+                                            <button class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    DI created
+                                                </span>
+                                            </button>
+
+                                        {% elif Supply.DI_Created_Status == 0 %}
+                                        <button class="btn ed-submit btn-danger">
+                                            <span class="ed-submit-text">
+                                                DI Pending
+                                            </span>
+                                        </button>
+
+                                        {% endif %}
+                                    </td>
+
+
+
+                                    <td>
+                                        {% if Supply.offer_material_docs %}
+                                        <a href="{{Supply.offer_material_docs.url}}">
+                                            <button class="btn ed-submit btn-info">
+                                                <span class="ed-submit-text">
+                                                    View
+                                                </span>
+                                            </button>
+                                        </a>
+                                        {% else %}
+                                            <button class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    Not Uploded
+                                                </span>
+                                            </button>
+                                        {% endif %}
+
+                                    </td>
+                                    {% comment %} <td style="width:20%">{% if Supply.Material_Offer_Submit_Approved_Status == 0 %}
+                                        <form
+                                            action="/fqp/material_offer_approval/{{Supply.TKCVendor.TKCWoInfo.id}}/{{Supply.id}}"
+                                            onsubmit="return validateForm()" name="myForm" method="POST">
+                                            {% csrf_token %}
+                                            <div class="orderaction-items">
+                                                <div class="radio-groups-items">
+                                                    <label class="radio-groups">
+                                                        <input type="radio" name="action" value="1" />
+                                                        Accept
+                                                    </label>
+                                                    <label class="radio-groups">
+                                                        <input type="radio" name="action" value="0" checked />
+                                                        Reject
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="remark" class="form-control ed-textbox">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn ed-submit btn-info">
+                                                <span class="ed-submit-text">
+                                                    Submit
+                                                </span>
+                                            </button>
+                                        </form>
+                                        {% elif Supply.Material_Offer_Submit_Approved_Status == -1 %}
+                                        <a href="" class="btn ed-submit btn-danger">
+                                            <span class="ed-submit-text">
+                                                Rejected
+                                            </span>
+                                        </a>
+                                        {% elif Supply.Material_Offer_Submit_Approved_Status == 1 %}
+                                        <a href="" class="btn ed-submit btn-success">
+                                            <span class="ed-submit-text">
+                                                Approved
+                                            </span>
+                                        </a>
+
+                                        {% endif %}
+                                    </td> {% endcomment %}
+
+                                    <td>
+                                        {% if Supply.Material_Offer_Submit_Approved_Remark %}
+                                        <span class="ed-submit-text">
+                                            {{ Supply.Material_Offer_Submit_Approved_Remark}}
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div> 
+
+                    </div>
+                </div>
+                </form>
+                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}

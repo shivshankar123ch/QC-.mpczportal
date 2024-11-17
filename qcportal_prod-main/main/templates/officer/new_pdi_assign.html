@@ -1,0 +1,380 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<script src="{% static '/js/jquery.min.js' %}"></script>
+<script src="{% static '/js/popper.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+
+<div class="card ed-card-block">
+    <div class="card-header">
+        <h2>
+            PDI Assign
+        </h2>
+    </div>
+    <div class="card-body">
+
+
+
+        <div class="ed-tableinfo-block ed-orderinfo-block">
+            <div class="table-responsive">
+                <form action="/pdi_add_data/{{offer_no}}" method="post" onsubmit="return validation()" target="_blank">
+                    {% csrf_token %}
+                    <table class="table table-bordered table-hover display">
+                        {% for Data in offer %}
+                        <tr>
+                            <th class="w-30">Sr No.</th>
+                            <td class="w-70">{{forloop.counter}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>WO No</th>
+                            <td> {{Data.wo.Contract_Number}} </td>                                     
+                        </tr>
+                        <tr>
+                            <th>Subject</th>
+                            <td>
+                                {% for Data1 in wo_data %}
+                                {{Data1.Header.Contract_Description}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        <th>Offer Id</th>
+                        <td>{{Data.offer_no}}</td>                                                   
+                        </tr>
+
+                        <tr>
+                            <th>Offer Date</th>
+                            <td>{{Data.created_at}} </td>                                                        
+                        </tr>
+                        {% endfor %}
+                        {% for Data1 in wo_data %}
+                        <tr>
+                            <th>TKC Firm Name</th>
+                            <td> {{Data1.supplier.CompanyName_E}}</td>                                                  
+                        </tr>
+
+                        <tr>
+                            <th>Vendor Company Name</th>
+                            <td>
+                                {% for Data in offer %}
+                                {{Data.TKCVendor.Vendor}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Vendor Address</th>
+                            <td>
+                                {% for each in address_data %}
+                                {{each.Company_add_1}}</br>
+                                {{each.Company_add_2}},{{each.Company_pin_code}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Vendor Authorize Person Name</th>
+                            <td>
+                                {% for Data3 in offer %}
+                                {{Data3.TKCVendor.Vendor.Authorised_person_E}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Vendor Authorize Person Mobile</th>
+                            <td>
+                                {% for Data3 in offer %}
+                                {{Data3.TKCVendor.Vendor.ContactNo}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Date of Rediness</th>
+                            <td>
+                                {% for Data4 in offer %}
+                                {{Data4.readiness_date}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Inspection Date</th>
+                            <td>
+                                <input class="form-control" name="date" id="get_date" type="date" required="required"
+                                    onkeypress="return false" data-date-format="DD MMMM YYYY">
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <th>Select Inspecting Officer</th>
+                            <td>
+                                <select name="Officer" id="officer_list" class="form-control another_officer " required="required">
+
+                                    <option selected disabled >Select Officer</option>
+                                    {% for item1 in inspecting_officer %}
+                                    <option value="{{item1.id}}">{{item1.user_zone}} | {{item1.officer_name}} | {{item1.officer_designation}}
+                                        | {{item1.contact_no}} | {{item1.officer_address}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <span class="officer_span"></span>
+                        </tr>
+                        <tr>
+                            <th>Choose Another Inspecting Officer(Optional)</th>
+                            <td>
+                                <select name="another_officer" id="officer_list1" class="form-control officer officer_list">
+                                    <option selected disabled >Choose Another Officer</option>
+                                    {% for item1 in inspecting_officer %}
+                                    <option value="{{item1.id}}">{{item1.user_zone}} | {{item1.officer_name}} | {{item1.officer_designation}}
+                                        | {{item1.contact_no}} | {{item1.officer_address}}</option>
+                                    {% endfor %}
+                                </select>
+                               
+                            </td>
+                            <span class="another_officer_span"></span>
+                        </tr>
+
+                        <tr>
+                            <th>Any other officer for inspection(PMA, PFC)</th>
+                            <td>
+                                <button class="btn ed-submit ed-formsubmit" data-toggle="modal"
+                                data-target="#addDetails" type="button"> Add Details</button>
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12  text-right">
+                
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    function get_date(){
+        var x = document.getElementById("get_date").value;
+        var y = document.getElementById("get_date1").value;
+        document.getElementById("get_date1").href=y+'/'+x;
+       
+    }
+</script> -->
+
+
+
+<div class="modal" id="addDetails">
+    <div class="modal-dialog ed-customemodel-block">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Officer Information</h4>
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            <div class="modal-body">
+                <div class="ed-form-block border-0 p-0">
+                    <div class="ed-form-body">
+                        <form action="/pdi_officers_add/{{offer_no}}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Officer from
+                                </label>
+                                <input type="text" class="form-control ed-textbox" name="officer_from" id='officer_from'
+                                    required>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Officer Name
+                                </label>
+                                <input type="text" class="form-control ed-textbox" name="officer_name" id='officer_name'
+                                    required>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Officer Mobile No.
+                                </label>
+                                <input type="text" class="form-control ed-textbox" name="officer_mobile_no"
+                                    id='officer_mobile_no' required>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Designation
+                                </label>
+                                <input type="text" class="form-control ed-textbox" name="designation" id='designation'
+                                    required>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <div class="btn-actionblock text-right">
+                                    <button class="btn ed-submit ed-formsubmit" value="" type="submit">
+                                        Submit
+                                    </button>
+                        </form>
+                        <button class="btn ed-submit btn-danger" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<style>
+    .avatar-upload {
+        position: relative;
+        max-width: 100%;
+        margin: 50px auto;
+    }
+
+    .avatar-upload .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    .avatar-upload .avatar-edit input {
+        display: none;
+    }
+
+    .avatar-upload .avatar-edit input+label {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 0;
+        border-radius: 100%;
+        background: #FFFFFF;
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-weight: normal;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .avatar-upload .avatar-edit input+label:hover {
+        background: #f1f1f1;
+        border-color: #d6d6d6;
+    }
+
+    .avatar-upload .avatar-edit input+label:after {
+        content: "\f040";
+        font-family: 'FontAwesome';
+        color: #757575;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 340px;
+        height: 340px;
+        position: relative;
+        border-radius: 4px;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar-upload .avatar-preview>div {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+<script>
+    {% comment %} let dtElem = document.getElementById('get_date');
+    alert(dtElem);
+    let maxDate = new Date();
+
+    dtElem.max = formatDate(maxDate);
+
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    } {% endcomment %}
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#get_date').attr('min', today);
+
+
+    function validation() {
+        let get_date = document.getElementById("get_date").value;
+        let officer_list = document.getElementById("officer_list").value;
+        // let another_officer = document.getElementById("officer_list1").value;
+        if (get_date.trim() == "") {
+            document.getElementById("get_date_span").innerHTML = "pls fill the details ";
+            return false
+        }
+        else {
+            document.getElementById("get_date_span").innerHTML = "";
+
+        }
+        if (officer_list.trim() == "") {
+            document.getElementById("officer_span").innerHTML = "pls fill the details ";
+            return false
+        }
+        else {
+            document.getElementById("officer_span").innerHTML = "";
+
+        }
+        // if (another_officer.trim() == "") {
+        //     document.getElementById("another_officer_span").innerHTML = "pls fill the details ";
+        //     return false
+        // }
+        // else {
+        //     document.getElementById("another_officer_span").innerHTML = "";
+
+        // }
+        return true;
+
+    }
+</script>
+    <script>
+    $(document).ready(function () {
+        $("#officer_list").select2({
+            placeholder: "Select an option...",
+            selectOnClose: true,
+            allowClear: true
+         });
+        $("#officer_list1").select2({
+            allowClear: true,
+            placeholder: 'Choose Another Inspecting Officer(Optional)'
+        });
+//when unselected..
+        $('#officer_list1').on('select2:unselect', function(e) {
+        $('#officer_list1').val(null).trigger('change'); //clear other
+        });
+    });
+</script> 
+  
+    
+
+
+
+{% endblock body %}

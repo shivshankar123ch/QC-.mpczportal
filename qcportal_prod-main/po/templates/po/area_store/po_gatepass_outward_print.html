@@ -1,0 +1,218 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Gatepass Outward {% endblock heading %}
+{% block body %}
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="card p-5"  id="printpagebutton">
+    <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+    <div class="table-responsives">
+        <table class="table table-striped" border="2">
+            <thead class="bg-primary">
+                <tr>
+                    <th colspan="2">PO Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PO No</td>
+                    <td><b>{{data.po.po_no}}</b></td>
+                </tr>
+                <tr>
+                    <td>Vendor Company name</td>
+                    <td><b>{{ data.po.vendor.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                    <td> Material </td>
+                    <td><b>{{ data.offer_item.material.specification}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+    <h3 class="card-title m-2 table-responsive"> <b> Gatepass Material Details </b></h3> 
+    <div class="table-responsives">
+        <table class="table table-bordered table-responsive" cellspacing="0">
+            <thead class="bg-primary">
+            <tr>
+              <th style="width:5% ">
+                  S NO.</th>
+                  <th style="width:5% ">
+                  Material Name </th>
+                  <th style="width:5% ">
+                  Material Serial Number </th>
+  
+               
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+           
+            <tr class="bg-light">
+              <td>{{forloop.counter}}</td>
+              <td><b>{{data.material}}</b></td>
+              <td><b>{{data.serial_no}}</b></td>
+        
+         {% endfor %}
+      </tbody>
+      </table>
+    </div>   
+
+
+
+    
+    <form action="/po/create_po_gatepass/{{data.id}}/{{data.di_master.erp_di_number}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div>
+            <table class="table table-striped mt-2" border="2">
+                <tr>
+                    <th>DI Number:<span style="color: red;">*</span></th>
+                    <td><b>{{ data.id}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th> Gatepass Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                    <td><input type="date" id="gatepass_date" name="gatepass_date" onkeyup="validateForm()" value="{{data1.gatepass_date}}"
+                            onfocus="validateForm()" onchange="validateForm()" readonly onkeypress="return false">
+                        <span id="date" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatepass No: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="gatepass_no" id="gatepass_num" placeholder="" value="{{data1.gatepass_num}}"
+                            style="width:250px;" onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatekeeper Name <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="gk_name" placeholder="" style="width:250px;" value="{{data1.gatekeeper_name}}"
+                             onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Vehicle No. <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="vehicle_no" placeholder="" style="width:250px;" value="{{data1.vehicle_no}}"
+                            onkeyup="validateForm()" onfocus="validateForm()"  readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Name: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_name" placeholder="" style="width:250px;" value="{{data1.vehicle_no}}"
+                             onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Phone: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_phone" placeholder="" style="width:250px;" value="{{data1.driver_phone}}"
+                             onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Material Received By: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="mat_rece_by" placeholder="" style="width:250px;" value="{{data1.material_rec_by}}"
+                            onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                
+                <tr>
+                    <th>Outward Quantity: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="outward_qty" placeholder="" style="width:250px;" value="{{data1.outward_quantity}}"
+                             onkeyup="validateForm()" onfocus="validateForm()" readonly
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+            
+
+            </table>
+          
+        </div>
+    </form>
+</div>
+
+<center>
+    <div id="options">
+        <input style="width:200px" class="btn btn-primary m-3" type="button" value="print gatepass" onclick="printpage()" />
+
+    </div>
+</center>
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap Datatable js -->
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script>
+        function printpage() {
+            var printButton = document.getElementById("printpagebutton").innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printButton;
+            
+            window.print()
+            document.body.innerHTML = originalContents;
+            // printButton.style.visibility = 'visible';
+    
+        }
+    </script>
+    {% endblock body %}

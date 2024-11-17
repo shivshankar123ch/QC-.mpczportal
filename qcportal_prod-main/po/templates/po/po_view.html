@@ -1,0 +1,366 @@
+{% extends 'po/po_approver/approver_base.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+    {% csrf_token %}
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <div id="printid">
+
+        <table cellpadding=0 cellspacing=0 class="cgm-region-block" style="width:93%; margin-left:5%; margin-right:2%;">
+            <tr>
+                <td class="cgm-region-td" style="width:100%">
+                    <table cellpadding=0 cellspacing=0 class="cgm-region-container" style="width:100%">
+                        <tr>
+                            <td colspan="2" style="width:100%">
+                                <div class="cgm-logo-block">
+                                    {% if po.discom.Discom_Header %}
+                                    <img src="{{po.discom.Discom_Header.url}}" class="cgm-logo" style="width:100%"
+                                        alt="User profile" />
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table cellpadding=0 cellspacing=0 class="cgm-region-regions" style="width:100%;">
+                                    <tr>
+                                        <td class="text-left " style="width: 55% !important;">
+                                            <!-- <P class="p6 ft10">No.<NOBR>CGM/BR/RCA-Cell/TS-{{vd.dispatch_no}}/<b><b>Order No-MPCZWO{{vd.id}}</b></NOBR>
+                                                        </P> -->
+                                            <p class="text-left" style="font-size:11px;text-align: left;">
+                                                No.<NOBR>
+                                                    {{po.po_prefix}}<b>
+                                                            /{{po.po_no}}</b></NOBR>
+                                            </p>
+                                            <!-- <P class="p6 ft10"><NOBR> Work Order No-- <b>MPCZOO{{vd.id}}</b></NOBR>
+                                                        </P> -->
+                                        </td>
+                                        <td class="text-right" style="width: 45% !important;;">
+                                            <p class="text-right" style="font-size:11px; text-align: right;">
+                                                Bhopal, dated:-<b>{{po.erp_created_date}}</b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+
+                                <table cellpadding=0 cellspacing=0 class="cgm-region-information" style="width:100%;">
+                                    <tr>
+                                        <td style="width:100%">
+                                            <p class="mb-1" style="font-size:12px;">To,</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:100%">
+                                            <p style="font-size:12px;">
+                                                <b>{{ po.vendor.CompanyName_E }}</b>
+                                                <br>
+                                                <b>Address:{{company.Company_add_1}}
+                                                {{company.Company_add_2}}
+                                                {{company.Company_dist }}
+                                                {{company.Company_state }}
+                                                {{company.Company_pin_code }}</b>
+                                            <br>
+                                             
+                                                <b>Email--<a href="">{{po.vendor.Email_Id}}</a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:100%">
+                                 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p class="subject mb-3" style="font-size:12px; margin-botttom:15px;">
+                                                <b>
+                                                    Sub:
+                                                </b>
+                                                {{po.po_subject}}
+                                            </p>
+
+                                            <p class='application-info' style="font-size:12px;text-align:justify">
+                                                {{po.term_and_condition|safe}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="schedule-info" style="width:100%; margin-bottom: 20px;">
+                                                <h6
+                                                    style="margin-bottom:5px;margin-top:0; font-size:14px; font-weight: 600;text-align: center;">
+                                                    Material Information
+                                                </h6>
+                                                <table class="schedule-table"
+                                                    style="width:100%; border: 1px solid #ddd;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width: 10%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Sr No.
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width: 35%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Material Specification
+                                                            </th>
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:10%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Unit
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:10%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Quantity
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:10%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Total Amount(In Rs)
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:15%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Total Tax(In Rs)
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:10%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Total Amount (Incl Tax)(Rs)
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       {% for data in Material %}
+              <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                 <td>
+                  {{data.specification}}
+                </td>
+                <td>
+                  {{data.unit}}
+                </td>
+                <td>
+                  {{data.Quantity}}
+                </td>
+                <td>
+                    {{data.Amount}}
+                </td>
+                   <td>
+                    {{data.tax}}
+                </td>
+                  <td>
+                   {{data.total_amount}}
+                </td>
+
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="schedule-info" style="width:100%; margin-bottom: 10px;">
+                                                <h6
+                                                    style="margin-bottom:5px;margin-top:0; font-size:12px; font-weight: 600;">
+                                                    Encl. As above
+                                                </h6>
+                                                <table class="schedule-table"
+                                                    style="width:100%; border: 1px solid #ddd;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width: 15%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Schedule No.
+                                                            </th>
+                                                            </th>
+                                                            <th class="schedule-wd3"
+                                                                style="font-size:12px; width:85%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                Schedule Description
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for name in schedule %}
+                                                        <tr>
+                                                            <td class="schedule-wd3"
+                                                                style="font-size:12px; width: 15%;border-bottom: 1px solid #ddd; padding: 8px 10px;">
+                                                                <p style="font-size:12px; margin: 0;">
+                                                                    {{name.schedule_name}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="schedule-wd7"
+                                                                style="font-size:12px; width: 85%;border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                                <p style="font-size:12px; margin: 0;">
+                                                                    {{name.schedule_description}}
+
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <p class="thanks-text" style="font-size:12px;margin-top:10px;">
+                                                Thanking you
+                                                !</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table style="width:100%; border: 0px solid #ddd;">
+                                                <tr>
+                                                    <td style="width:100%; border: 0px solid #ddd; text-align: right;">
+                                                        <div style=" display: inline-block; ">
+                                                            <h4
+                                                                style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                                <!-- CHIEF GENERAL MANAGER -->
+                                                                {{po.discom.Po_Main_Sign}}
+                                                                <!--  ( {{vd.rca_cell.Region.Region_Name_E}})-->
+                                                            </h4>
+                                                            <h4
+                                                                style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                               <!-- {{po.discom.Discom_Short_Name}} -->
+                                                               {{po.discom.Discom_Short_Name}}
+                                                            </h4>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table class="table copy-table-block mt-2"
+                                                style="width:100%; border: 1px solid #ddd;">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2"
+                                                            style="font-size:12px; width: 100%;  border-bottom: 1px solid #ddd;padding: 8px 10px;">
+                                                            Copy to :-
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for data in copy %}
+                                                    <tr>
+                                                        <td class="copy-wd2"
+                                                            style="font-size:12px; width: 8%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                            <p style="font-size:12px;margin: 0;">
+                                                                <b>{{forloop.counter}}</b>
+                                                            </p>
+                                                        </td>
+                                                        <td class="copy-wd8"
+                                                            style="font-size:12px; width: 92%;  border-bottom: 1px solid #ddd;padding: 6px 10px;">
+                                                            <p style="font-size:12px;margin: 0;">
+                                                                {{data.copy}}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <table style="width:100%; border: 0px solid #ddd; margin-top:40px;">
+                                    <tr>
+                                        <td style="width:100%; border: 0px solid #ddd; text-align: right; padding: 10px 0;">
+                                            <div style=" display: inline-block; ">
+                                                <h4
+                                                    style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                    <!-- CHIEF GENERAL MANAGER -->
+                                                    {{po.discom.Po_Copy_To_Sign}}
+                                                    <!--                                                            ({{vd.rca_cell.Region.Region_Name_E}}-->
+                                                    <!--                                                            Region)-->
+                                                </h4>
+                                                <h4
+                                                    style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                                                    <!-- {{po.discom.Discom_Short_Name}} -->
+                                                    {{po.discom.Discom_Short_Name}}
+                                                </h4>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+<br>
+<br>
+
+<script>
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+    }
+
+    function add_fields() {
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+    }
+
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+    }
+    function add_fields1() {
+        document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+    }
+</script>
+<style>
+    .print-action-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .print-action-block .btn-print {
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin: 0 10px;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        font-weight: 300;
+    }
+</style>
+{% endblock body %}

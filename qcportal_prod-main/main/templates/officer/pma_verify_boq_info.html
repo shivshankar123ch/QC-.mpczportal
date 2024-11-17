@@ -1,0 +1,270 @@
+{% extends 'officer/pma_login.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+<style>
+.btn{
+    margin-top:20px;
+    }
+.ed-tableinfo-block .dataTables_length{
+        display: block;
+    }
+.ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+}
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>                  
+                    Update Order information 
+                </h2>
+            </div>        
+            <div class="card-body">           
+                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                <!-- <form action="/tkc/gm_verify_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform" onsubmit="return validateForm()"> -->
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+                        </div>                      
+                        <table class="table table-striped ed-table-block display table-bordered" id="pma_data">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th style="min-width:60px;">Total Order Qty</th>                                                     
+                                    <th style="min-width:140px;" class="circle"> {{officer_circle}}</th>
+                                    <input  hidden type="text" class="form-control " name="circle_name" style="text-align: center;"  value="{{getcircle.circle_name}}"/>                                 
+                                    <th style="min-width:140px;" class="circle">{{getcircle.circle_name}} Verified Quantity</th>
+                                    <th  class="text-center" style="min-width:60px;">GM Status</th>
+                                </tr> 
+                            </thead>                                                             
+                            <tbody>
+                                
+                                {% for data in stored_data %}                               
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>                                 
+                                    <td>{{data.total_order_qty}}</td> 
+                                    <td>{{data.circle_quantity}}</td> 
+                                    <td>{{data.verified_circle_qty}}</td> 
+                                    {% comment %} {{data.verified_circle_qty}}
+                                        <td>
+                                            <input type="text" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data" value="{{data.verified_circle_qty}}"  > {% endcomment %}
+                                        </td> 
+                                    {% comment %} <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>                                 
+                                    <td>{{data.total_order_qty}}</td> 
+                                     
+                                    {% for key,value in item_dict.items %}                                   
+                                    {% if data.item_code == key %}                               
+                                    {% for a in value %}                                   
+                                    <td>{{a}}</td>
+                                   
+                                    {% endfor %}                                    
+                                    {% endif %}
+                                    {% endfor %}                           
+
+                                    {% for key,value in verified_item_qty.items %}                                   
+                                    {% if data.item_code == key %}                               
+                                    {% for b in value %}                                   
+                                    <td>{{b}}</td>
+                                   
+                                    {% endfor %}                                    
+                                    {% endif %}
+                                    {% endfor %} {% endcomment %}
+
+                                    {% if gm_status == 0 %}                                
+                                    <td class="text-center"><button class="btn ed-submits btn-primary">Pending</button></td>
+                                    {% elif gm_status == 1 %}
+                                    <td class="text-center"><button class="btn ed-submits btn-success">Approved</button></td>
+                                    {% elif gm_status == 2 %}
+                                    <td class="text-center"><button class="btn ed-submits btn-danger">Rejected</button> </td>
+                                    {% endif %}
+                                </tr> 
+                                {% endfor %}                                                                                                                                                                             
+                            </tbody>
+                        </table>
+                    </div>
+                     <!-- <div class="row btn_save">
+                        <span id="error_span" class="text-danger"></span>
+                        <a href="/fqp/save_boq/{{wo_instance.id}}">
+                            <div><button type="button" class="btn ed-submit btn-info">
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Save
+                                </span>
+                            </button>
+                            </a> -->
+                            <!-- <button type="submit" class="btn ed-submit btn-info" >
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Submit
+                                </span>
+                            </button> -->
+                        <!-- </div>  -->                
+                        <!-- </form> -->
+
+                        
+                        <table class="table table-striped ed-table-block display table-bordered" id="pma_requested_data">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>                                  
+                                    <th style="min-width:140px;">Circle Name</th>
+                                    <th style="min-width:140px;">Circle Qty.</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for new_material in requested_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{new_material.material_name}}</td>   
+                                    <td>{{new_material.item_code}} </td>                                                             
+                                    <td>{{new_material.circles_name}}</td> 
+                                    <td>{{new_material.circle_qty}}</td>
+                                </tr> 
+                                {% endfor %}
+                            </tbody>
+                        </table>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% if recommendation_data == '' %}
+<div class="row">
+    <form action="/pma_save_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform">
+
+    <div class="col">
+        <label ><h4>Remarks/Recommendations</h4></label>
+       <input type="text" name="recommendations" class="form-control" id="recommendations" value="" required>
+    </div>
+    <div class="col btn_save">
+
+            <button type="submit" class="btn ed-submit btn-info " >
+            <span class="ed-submit-text ml-1 mr-2"> Submit </span>
+            </button> 
+        </div> 
+    </form>
+</div>
+{% else %}
+<div class="row">
+    <div class="col">
+        <label ><h4>Remarks/Recommendations</h4></label>
+       <input type="text" name="recommendations" class="form-control" id="recommendations" value="{{recommendation_data}}" readonly >
+    </div>
+</div>
+{% endif %}
+{% comment %} <script>
+    $(document).ready(function () {
+        $('#pma_data').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+    $(document).ready(function () {
+        $('#pma_requested_data').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+   
+</script> {% endcomment %}
+<script>
+    function validateForm(){
+       const collection = document.getElementsByClassName("Circle_data");
+       let val = document.getElementById("error_span");
+       for (let i = 0; i < collection.length; i++) {
+           if(collection[i].value==""){
+            val.innerHTML=" Please fill the required details ";
+            return false;    
+           }
+           else{
+               val.innerHTML="";
+           }
+       }
+       return true;
+   
+       }
+</script>
+<script>
+    function validate_Form(){
+        let material_name = document.getElementById("material_name").value;
+        let item_code = document.getElementById("item_code").value;
+        let circle_name = document.getElementById("circle_name").value;
+        let circle_qty = document.getElementById("circle_qty").value;
+
+        if( material_name.trim()==""){
+            document.getElementById("material_name_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("material_name_span").innerHTML = "";
+
+        }
+        if(item_code.trim()==""){
+            document.getElementById("item_code_span").innerHTML = "Please fill the required details";
+
+        }
+        else{
+            document.getElementById("item_code_span").innerHTML = "";
+
+        }
+
+        if(circle_name.trim()==""){
+            document.getElementById("circle_name_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("circle_name_span").innerHTML = "";
+
+        }
+
+        if(circle_qty.trim()==""){
+            document.getElementById("circle_qty_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("circle_qty_span").innerHTML = "";
+
+        } 
+        return true;
+
+
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

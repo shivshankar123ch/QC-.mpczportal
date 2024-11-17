@@ -1,0 +1,320 @@
+{% extends base_template_name %}
+
+{% block body %}
+<style>
+    .Milestone{padding-left: 20px;}
+</style>
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Create FQP Intimation Task
+        </h2>
+    </div>
+    <div class="card-body">
+
+        <div class="ed-tableinfo-block ed-orderinfo-block mb-3">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered text-center">
+                    <thead class="table-dark">
+                        <th>Work-order No. and Date</th>
+                        <th style="width:40%">Work-order Description.</th>
+                        <th>TKC Name</th>
+                        <th>Work-order Amount(In rupees)</th>
+                        <!-- <th>View Work-Order</th> -->
+                        <th>View FQP Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+
+                        <tr>
+                            <td>{{wo_data.Contract_Number}} - {{wo_data.Contract_Date|date:"d/m/Y"}}</td>
+                            <td>{{wo_data.Header.Contract_Description}}</td>
+                            <td>{{wo_data.supplier.CompanyName_E}}</td>
+                                <td>{{wo_data.loa_amount|default:"---"}}</td>
+                            <!-- <td>
+                                {% if wo_data.Wo_Digital %}
+                                <a class="btn ed-submits btn-success" href="{{wo_data.Wo_Digital.url}}">View Work Order</a>
+
+                                {% else %}
+                                <a class="btn ed-submits btn-primary" href="#">Work Order Not Uploaded</a>
+                                {% endif %}
+                            </td> -->
+
+                            <td>
+                                <a class="btn ed-submits btn-info"
+                                    href="/fqp/officer_new_fqpintimation_tasklist/?woid={{wo_data.id}}">View Task</a>
+                            </td>
+
+                        </tr>
+                       
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="">
+            <h5 class="">
+                FQP Intimation
+            </h5>
+            <div class="forms-informations">
+                <div class="ed-form-block p-0 border-0">
+
+                    <div class="ed-form-body">
+                        <form action="/fqp/officer_new_fqpintimation_task_create/" method="POST" enctype="multipart/form-data"
+                            onsubmit="return validateFunction()">
+                            {% csrf_token %}
+                       
+                            <input type="text" name="wo_id" value="{{wo_data.id}}" hidden class="form-control ed-textbox"
+                                required>
+                         
+
+                            <div class="form-group" hidden>
+                                <label class="ed-form-label">
+                                  Work-Order Number
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="work_order_number" id=""
+                                    class="form-control ed-textbox" value="{{wo_data.Contract_Number}}" readonly required>
+                            </div>
+                   
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                   <h5>Milestone<span class="text-danger">* </span></h5> 
+                                  
+                                </label>
+                                {% for md in mile_data %}
+                                <div class="Milestone">
+                                    <label class="ed-checkbox-block"> 
+                                        <input type="checkbox" class="" id="check1" name="milestone_id[]" value="{{md.id}}">
+                                        {{md.milestone_name}} 
+                                        <span class="checkmark">
+                                        </span>
+                                    </label>
+                                 </div>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    GIS Feeder Id/Task Id
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="number" name="gis_feeder_id" id=""
+                                    class="form-control ed-textbox" value="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Region
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="region_id" id="region_id" class="form-control ed-textbox"
+                                    onchange="getcircle()" required>
+                                    <option value="" selected disabled style="width:250px;">Please Select Region
+                                    </option>
+                                    {% for rd in rm_data %}
+                                    <option value="{{rd.id}}" style="width:250px;">{{rd.Region_Name_E}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Circle
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="circle_id" id="circle_id" class="form-control ed-textbox" onchange="getdivision()" required>
+                                    <option  style="width:250px;">Please Select Circle</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                  Divisions
+                                    <span class="text-danger">* </span>
+                                </label>
+                        <select name="division_id" id="division_id" class="form-control ed-textbox" onchange="getdivision_circle()" required>
+                                    <option selected disabled style="width:250px;">Please Select Division</option>
+
+                                </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label class="ed-form-label">
+                                   Sub Divisions
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="sub_division_id" id="sub_division_id" class="form-control ed-textbox" onchange="getdivision_circle()" required>
+                                    <option selected disabled style="width:250px;">Please Select Sub Division</option>
+
+                                </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Distribution Center/Zone
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="distribution_center_id" id="distribution_center_id" class="form-control ed-textbox" required>
+                                    <option selected disabled style="width:250px;">Please Select Distribution Center</option>
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    ERP Estimate Number
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="number" name="erp_estimate_no" id="" class="form-control ed-textbox"
+                                    value="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    ERP GBPA No.
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="number" name="erp_gbpa_no" placeholder="" class="form-control ed-textbox" value=""
+                                    accept="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Package name and number
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="package_name_and_no" placeholder="" class="form-control ed-textbox" value=""
+                                    accept="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Description of Work/Task
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="description_of_work" class="form-control ed-textbox" placeholder="" value=""
+                                    accept="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Feeder Name on which work proposed 
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="feeder_name_on_which_work_proposed" id=""
+                                    class="form-control ed-textbox" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Substation Name on which work proposed 
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="substation_name_on_which_work_proposed" id=""
+                                    class="form-control ed-textbox" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button type="submit" class="btn ed-submits ed-formsubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script >
+    function getcircle() {
+        var region_id = document.getElementById("region_id").value;
+       document.getElementById('circle_id').innerHTML = '';
+        mydata = { "region_id": region_id }
+        $.ajax({
+            type: 'get',
+            url: "{% url 'tkc_circle_list' %}",
+            data: mydata,
+            success: function (data) {
+                Object.entries(data).forEach(([_, value]) => {
+                    value.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.id;
+                        option.text = element.Circle_Name_E;
+                        var region = document.getElementById('circle_id');
+                        region.add(option);
+                    })
+                    })
+                }
+    })
+}
+
+
+
+
+function getdivision() {
+        var circle_id = document.getElementById("circle_id").value;
+       document.getElementById('division_id').innerHTML = '';
+        mydata = { "circle_id": circle_id }
+        $.ajax({
+            type: 'get',
+            url: "{% url 'tkc_division_list' %}",
+            data: mydata,
+            success: function (data) {
+                Object.entries(data).forEach(([_, value]) => {
+                    value.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.id;
+                        option.text = element.Division_Name_E;
+                        var region = document.getElementById('division_id');
+                        region.add(option);
+                    })
+                    })
+                }
+    })
+}
+
+
+function getdivision_circle() {
+        var division_id = document.getElementById("division_id").value;
+       document.getElementById('distribution_center_id').innerHTML = '';
+        mydata = { "division_id": division_id }
+        $.ajax({
+            type: 'get',
+            url: "{% url 'tkc_division_circle_list' %}",
+            data: mydata,
+            success: function (data) {
+                Object.entries(data).forEach(([_, value]) => {
+                    value.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.id;
+                        option.text = element.DC_Name_E;
+                        var region = document.getElementById('distribution_center_id');
+                        region.add(option);
+                    })
+                    })
+                }
+    })
+}
+</script>
+
+<style>
+    label:not(.form-check-label):not(.custom-file-label)
+    {
+        font-weight: 400;
+    }
+</style>
+
+
+{% endblock body %}

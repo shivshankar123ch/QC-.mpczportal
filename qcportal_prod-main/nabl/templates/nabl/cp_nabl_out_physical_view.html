@@ -1,0 +1,119 @@
+{% extends 'nabl/nabl_Base.html' %} 
+{% load static %}
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+      <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1 font-weight-bold" style="font-weight: bold; font-size: medium; ">Dashboard</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/basic">
+              <span class="sidenav-mini-icon"> BI </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/rejected_doc">
+              <span class="sidenav-mini-icon"> RD </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/UpdateNablProfile">
+              <span class="sidenav-mini-icon"> AS </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update  Profile </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+          </a>
+        </li>
+      <li class="nav-item ">
+          <a class="nav-link " href="#">
+              <span class="sidenav-mini-icon"> Noti </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+          </a>
+      </li>
+      <li class="nav-item ">
+          <a class="nav-link " href="/nabl/nabl_trf">
+              <span class="sidenav-mini-icon">T M R</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">RCA Material Report </span>
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical">
+          <span class="sidenav-mini-icon">Phy Test Out</span>
+          <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link active" href="/nabl/nabl_out_physical_view">
+          <span class="sidenav-mini-icon">Phy Test View</span>
+          <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/">
+              <span class="sidenav-mini-icon">LO</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+          </a>
+      </li>
+  </ul>
+</div>
+{% endblock active %}
+
+{% block body %}
+<div class="table-responsive">
+  <h5>
+    Central Purchase Tested View Outward
+  </h5>
+  <form method="POST" action="/nabl/nabl_out_physical_view2">
+    {% csrf_token %}
+  <table class="table table-bordered table-hover bg-white col-3" cellspacing="1" style="vertical-align: top;">
+  <thead class="bg-dark text-light" style="vertical-align: top;">
+      <tr>
+          <th style="width:10%; text-align: center;">S No.</th>
+          <th style="width:20%; text-align: center;">Manufacturer</th>
+          <th style="width:20%; text-align: center;">Material Serial No.</th>
+          <th style="width:15%; text-align: center;">Material Capacity / Type</th>
+          <th style="width:25%; text-align: center;">Outward <br> Gatepas ID</th>
+          <th style="width:25%; text-align: center;">Outward <br> Gatepas Date</th>
+          <th style="width:25%; text-align: center;">Remark</th>
+          <th style="width:25%; text-align: center;">Report File</th>
+      </tr>
+      </thead>
+      <tbody>  
+          {% for sc in sc_obj %}
+          <tr class="bg-light center">
+            <td style="text-align: center;"><b>{{forloop.revcounter}}</b></td>
+            <td style="text-align: center;"><b>{{sc.company_name}}</b></td>
+            <td style="text-align: center;"><b><input style="background-color: transparent;border: none;" size=10 value="{{sc.material_serial_number}}" name="XMRList" id="XMRList" type="text" readonly="readonly"></b></td>
+            <td style="text-align: center;"><b><input style="background-color: transparent;border: none;" size=10 value="{{sc.material_name}}" name="CapacityList" id="CapacityList" type="text" readonly="readonly" ></b></td>
+            
+            {% if sc.GatepassOutward.gatepassAreaStoreOutward_file %}
+              <td style="text-align: center;"><a href="{{sc.GatepassOutward.gatepassAreaStoreOutward_file.url}}" target="_blank">{{sc.GatepassOutward.id}}</a></td>
+            {% else %}
+              <td style="text-align: center;"><a onclick="alert('Please Upload Scanned Outward pass')" href="/nabl/nabl_out_physical_view_gatepass/{{sc.GatepassOutward.id}}">{{sc.GatepassOutward.id}}</a></td>
+            {% endif %}
+            
+            <td style="text-align: center;"><b>{{sc.GatepassOutward.IssueDate}}</b></td>
+            <td style="text-align: center;"><b><input style="background-color: transparent;border: none;" size=10 value="{{sc.FinalRemark}}" name="RemarkList" id="RemarkList" type="text" readonly="readonly"></b></td>
+            
+            {% if sc.sampleCode_report %}
+              <td style="text-align: center;"><a href="{{sc.sampleCode_report.url}}" target="_blank">View</a></td>
+            {% else %}
+              <td style="text-align: center;">Physically Rejected/Report Not Uploaded</a></td>
+            {% endif %}
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </form>
+</div>
+{% endblock body %}

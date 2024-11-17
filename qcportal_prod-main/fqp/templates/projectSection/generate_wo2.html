@@ -1,0 +1,38 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+
+ <div class="card card-default">
+     <form action="/fqp/generate_wo3/{{procurement.id}}" method="POST">
+		 <div class="m-3">
+           {% csrf_token %}
+   <div class="form-group">
+
+<!--------------------------------------------------------------------------------------------- ACCEPTANCE ----------------------------------------------------------------------------------------------->
+           <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+
+<!------------------------------------------------------------------------------------------- Schedule--------------------------------------------------------------------------------------------->
+  <p>Enter Term and Conditions To  With Appropriate Format </p>
+   {{ form.media }}
+        {{ form.work_order|safe }}
+
+
+      <p>Enter Copy To Information With Format </p>
+        {{ form.media }}
+        {{ form.copy_to|safe }}
+
+    <div>
+          <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Save And View</button>
+    </div>
+
+    </div>
+         </div>
+     </form>
+                 </div>
+
+</div>
+
+</body>
+
+{% endblock body %}

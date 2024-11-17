@@ -1,0 +1,459 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-information mb-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Create Work Order
+          </h2>
+        </div>
+        <!--                                {% if messages %}-->
+        <!--<ul class="messages">-->
+        <!--    {% for message in messages %}-->
+        <!--    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
+        <!--    {% endfor %}-->
+        <!--</ul>-->
+        <!--{% endif %}-->
+
+
+        <form action="/fqp/procurement_generate_wo" onsubmit="return validateForm()" name="myForm" method="POST">
+          {% csrf_token %}
+          <!-- --------------------- Step 1 -------------------------------- -->
+          <div class="card-body" id="formStep1">
+            <div class="ed-form-block">
+              <div class="ed-form-title">
+                <h6>
+                  <span class="ed-text">
+                    Work Order Details 
+                  </span>
+                </h6>
+              </div>
+              <div class="ed-form-body">
+
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Select Package
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select name="package" class="form-control ed-textbox"  onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" >
+                    <option value="">Please Select</option>
+                    {% for data in package_data %}
+                    <option value="{{data.id}}">{{ data.package_name }}</option>
+                    {% endfor %}
+                  </select>
+                  <span id="selectionn" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Select Supplier Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select name="vendor" class="form-control ed-textbox"  onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" >
+                    <option value="">Please Select</option>
+                    {% for data in vendor %}
+                    <option value="{{data.User_Id}}">{{ data.CompanyName_E }}</option>
+                    {% endfor %}
+                  </select>
+                  <span id="selectionn" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Erp Supplier Number
+                    <span class="text-danger">*</label>
+                  <input type="Number" name="Supplier_Erp_no" class="form-control ed-textbox" onkeypress='validate(event)' autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                    <span id="no_nu" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Enter Contract No
+                    <span class="text-danger">*</label>
+                  <input type="text" name="contract_no" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="co_num" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Contract Date
+                    <span class="text-danger">* </label>
+                  <input type="date" name="contract_date" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"  />
+                  <span id="conDate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Contract Effective Date
+                    <span class="text-danger">*</label>
+                  <input type="date" name="contract_effective_date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"  />
+                    <span id="coEdate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Scheme Code <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="scheme_code" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="scCode" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Scheme Name <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="scheme_name" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="scName" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Select Payment Mode
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select name="payment_mode" class="form-control ed-textbox" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" >
+                    <option value="">Please Select</option>
+                    {% for data in payment_mode %}
+                    <option value="{{data.Payment_Mode}}">{{ data.Payment_Mode }}</option>
+                    {% endfor %}
+                  </select>
+                  <span id="pay" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Payment Term <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="payment_term" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="payTerm" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Quotation No <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="quotation_no" class="form-control ed-textbox" onkeyup="validateForm()"
+                  onfocus="validateForm()" onchange="validateForm()"  required autocomplete="off"  />
+                  <span id="quu_no" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Contract Offer No <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="contract_offer_no" onkeyup="validateForm()"
+                  onfocus="validateForm()" onchange="validateForm()"  required class="form-control ed-textbox" autocomplete="off"
+                     />
+                     <span id="off_co_no" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Contract Offer Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="Date" name="contract_offer_date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"onkeypress="return false"  />
+                          <span id="ofDate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Order Description <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="order_description" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                    <span id="ofDes" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Letter Number Prefix <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="wo_prefix" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="preLetter" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Work Order Approval Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="wo_approval_date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"  />
+                    <span id="appuDatee" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    NIT No <span class="text-danger">*</span>
+                    
+                  </label>
+                  <input type="text" name="nit_no" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                  <span id="niiNUm" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Document Sale Open Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="Document_Sale_Open_Date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"   />
+                    <span id="opnnDate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Document Sale Closed Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="Document_Sale_Closed_Date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"  />
+                    <span id="cllDate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Bid Submission Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="Bid_Submission_Date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()"onkeypress="return false"   />
+                    <span id="biSubb" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Bid Opening Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="Bid_Opening_Date" class="form-control ed-textbox" autocomplete="off"
+                    onkeyup="validateForm()"onkeypress="return false" 
+                          onfocus="validateForm()" onchange="validateForm()"  />
+                    <span id="biOpen" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    Tender Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="Tender_Date" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"   />
+                  <span id="ttDate" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <label class="ed-form-label">
+                    NIT Date <span class="text-danger">*</span>
+                  </label>
+                  <input type="date" name="nit_date" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress="return false"   />
+                  <span id="n_datee" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </div>
+                <div class="form-group">
+                  <div class="form-action text-right">
+                    <button type="submit" class="btn ed-submit ed-submitNext" onclick="validateForm()" id="nextStep1">
+                      <span class="ed-submit-text">
+                        Next
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function validateForm(){
+      let select1 = document.forms["myForm"]["vendor"].value;
+      let number = document.forms["myForm"]["Supplier_Erp_no"].value;
+      let co_no = document.forms["myForm"]["contract_no"].value;
+      let co_date = document.forms["myForm"]["contract_date"].value;
+      let e_date = document.forms["myForm"]["contract_effective_date"].value;
+      let s_code = document.forms["myForm"]["scheme_code"].value;
+      let s_name = document.forms["myForm"]["scheme_name"].value;
+      let payment = document.forms["myForm"]["payment_mode"].value;
+      let term = document.forms["myForm"]["payment_term"].value;
+      let qu_no = document.forms["myForm"]["quotation_no"].value;
+      let con_off_no = document.forms["myForm"]["contract_offer_no"].value;
+      let offerDate = document.forms["myForm"]["contract_offer_date"].value;
+      let orderD = document.forms["myForm"]["order_description"].value;
+      let letterNum = document.forms["myForm"]["wo_prefix"].value;
+      let app_datee = document.forms["myForm"]["wo_approval_date"].value;
+      let nit_no = document.forms["myForm"]["nit_no"].value;
+      let salDate = document.forms["myForm"]["Document_Sale_Open_Date"].value;
+      let clDate = document.forms["myForm"]["Document_Sale_Closed_Date"].value;
+      let bid_subDate = document.forms["myForm"]["Bid_Submission_Date"].value;
+      let bid_cuDate = document.forms["myForm"]["Bid_Opening_Date"].value;
+      let tenDate = document.forms["myForm"]["Tender_Date"].value;
+      let nitDate = document.forms["myForm"]["nit_date"].value;
+
+
+
+      if (select1 == "") {
+           document.getElementById('selectionn').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('selectionn').innerHTML = "";
+      }
+      if (number == "") {
+           document.getElementById('no_nu').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('no_nu').innerHTML = "";
+      }
+      if (co_no == "") {
+           document.getElementById('co_num').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('co_num').innerHTML = "";
+      }
+      if (co_date == "") {
+           document.getElementById('conDate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('conDate').innerHTML = "";
+      }
+      if (e_date == "") {
+           document.getElementById('coEdate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('coEdate').innerHTML = "";
+      }
+      if (s_code == "") {
+           document.getElementById('scCode').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('scCode').innerHTML = "";
+      }
+      if (s_name == "") {
+           document.getElementById('scName').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('scName').innerHTML = "";
+      }
+      if (payment == "") {
+           document.getElementById('pay').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('pay').innerHTML = "";
+      }if (term == "") {
+           document.getElementById('payTerm').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('payTerm').innerHTML = "";
+      }
+      if (qu_no == "") {
+           document.getElementById('quu_no').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('quu_no').innerHTML = "";
+      }
+      if (con_off_no == "") {
+           document.getElementById('off_co_no').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('off_co_no').innerHTML = "";
+      }
+      if (offerDate == "") {
+           document.getElementById('ofDate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('ofDate').innerHTML = "";
+      }if (orderD == "") {
+           document.getElementById('ofDes').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('ofDes').innerHTML = "";
+      }
+      if (letterNum == "") {
+           document.getElementById('preLetter').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('preLetter').innerHTML = "";
+      }
+      if (app_datee == "") {
+           document.getElementById('appuDatee').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('appuDatee').innerHTML = "";
+      }
+      if (nit_no == "") {
+           document.getElementById('niiNUm').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('niiNUm').innerHTML = "";
+      }
+      if (salDate == "") {
+           document.getElementById('opnnDate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('opnnDate').innerHTML = "";
+      }
+      if (clDate == "") {
+           document.getElementById('cllDate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('cllDate').innerHTML = "";
+      }
+      if (bid_subDate == "") {
+           document.getElementById('biSubb').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('biSubb').innerHTML = "";
+      }
+      if (bid_cuDate == "") {
+           document.getElementById('biOpen').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('biOpen').innerHTML = "";
+      }
+      if (tenDate == "") {
+           document.getElementById('ttDate').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('ttDate').innerHTML = "";
+      }
+      // if (letterNum == "") {
+      //      document.getElementById('ttDate').innerHTML = "Please fill the required detail"
+      //       return false;
+      //      } else {
+      //       document.getElementById('ttDate').innerHTML = "";
+      // }
+      if (nitDate == "") {
+           document.getElementById('n_datee').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('n_datee').innerHTML = "";
+      }
+  }
+</script>
+<script>
+  function validate(evt) {
+var theEvent = evt || window.event;
+
+// Handle paste
+if (theEvent.type === 'paste') {
+key = event.clipboardData.getData('text/plain');
+} else {
+// Handle key press
+var key = theEvent.keyCode || theEvent.which;
+key = String.fromCharCode(key);
+}
+var regex = /[0-9]|\./;
+if (!regex.test(key)) {
+theEvent.returnValue = false;
+if (theEvent.preventDefault) theEvent.preventDefault();
+}
+}
+</script>
+
+{% endblock body %}

@@ -1,0 +1,124 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+
+
+
+
+<link id="pagestyle" href="{% static '/css/select2.min.css' %}" rel="stylesheet" />
+
+
+
+
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      All Pending Vendor
+    </h2>
+  </div>
+
+  <form action="/factory_inspection_initiate/{{data.User_Id}}" name="myForm" onsubmit="return validateForm()"
+    method="POST">
+    {% csrf_token %}
+
+    <div class="card-body">
+
+      <div class="ed-form-block border-0 p-0"> 
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label">
+              Name Of Company
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{data.CompanyName_E}}" readonly />
+          </div>
+          <div class="form-group">
+            <label class="ed-form-label">
+              Name Of Authorised Person
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{data.Authorised_person_E}}" readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Registration Date
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{data.Uploaded_Date|date:'d-M-Y'}}" readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Company Address
+            </label>
+<input type="text" class="form-control ed-textbox ed-textbox1" value="{{c_add.Company_add_1}} {{c_add.Company_add_2}} {{c_data.Company_dist}} {{c_data.Company_state}} {{c_data.Company_pin_code}}"/>
+          </div>
+
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Choose Inspecting Officer
+            </label>
+            <select id="inputStatus" name="officer" class="form-control ed-textbox" required>
+              <option>Choose Officer</option>
+              {% for data in employee %}
+              <option value="{{data.id}}">{{data.user_zone}} // {{data.officer_name}} //
+                {{data.officer_designation}} // {{data.officer_address}} </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Choose Inspecting Date
+            </label>
+            <input name="date" type="date" onkeypress="return false" class="form-control ed-textbox" required>
+          </div>
+
+          <div class="form-group">
+            <div class="text-right">
+              <button class="btn ed-submit btn-info" type="reset" id="resetButton" title="Go Back">Reset</button>
+              <button class="btn ed-submit ed-formsubmit" onclick="return confirm('Are you sure you want to submit ?');"
+                type="submit" title="Submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+<script src="{% static '/js/jquery.slim.min.js' %}"></script>
+<script src="{% static '/js/popper.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static '/js/select2.min.js' %}"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#inputStatus").select2({
+      placeholder: "",
+      allowClear: true
+    });
+  });
+</script>
+
+<script>
+  // Get references to the elements you want to reset
+  const tableBody = document.querySelector('#tableBody'); // Replace with the actual table body ID
+
+  // Get a clone of the original table body content
+  const originalTableBody = tableBody.cloneNode(true);
+
+  // Attach a click event listener to the reset button
+  const resetButton = document.querySelector('#resetButton');
+  resetButton.addEventListener('click', () => {
+    // Replace the current table body with the original content
+    tableBody.innerHTML = originalTableBody.innerHTML;
+  });
+</script>
+{% endblock body %}

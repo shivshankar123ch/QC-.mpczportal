@@ -1,0 +1,122 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %}
+{% block a %} <span class="ms-1 font-weight-bold">{{userdata.Name}}</span>{% endblock a %}
+<form class="multisteps-form__form mb-8" action="vendor_reg_eight" name="myForm" onsubmit="return validateForm()" method="POST">
+    {% csrf_token %}
+    <h5 class="font-weight-bolder mb-0">Personal Info</h5>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+
+               
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td>Name Of Collection Agent</td>
+                    <td>{{userdata.Name}}</td>
+                </tr>
+                <tr>
+                    
+                    <td>Authorised Person Name</td>
+                    <td>{{userdata.Name}}</td>
+                </tr>
+               
+                <tr>
+                   
+                    <td>Contact Number</td>
+                    <td>{{userdata.Mobile}}</td>
+                </tr>
+                <tr>
+                   
+                    <td>Email ID</td>
+                    <td>{{userdata.Email_Id}}</td>
+                </tr>
+                <tr>
+                   
+                    <td>Contractor Id</td>
+                    <td>{{userdata.Contractor_Id}}</td>
+                </tr>
+                  <tr>
+                   
+                    <td> Pan Number</td>
+                    <td>{{userdata.Pan}}</td>
+                </tr>
+                 <tr>
+                   
+                    <td>  Gst Number  </td>
+                    <td>{{userdata.Gst}}</td>
+                </tr>
+                 
+                <tr>
+                   
+                    <td>   Ivrs Number    </td>
+                    <td>{{userdata.Ivrs_No}}</td>
+                </tr>
+                 <tr>
+                   
+                    <td>City</td>
+                    <td>{{userdata.City}}</td>
+                </tr>
+                <tr>
+                   
+                    <td>Bank</td>
+                    <td>{{userdata.Bank_name}}</td>
+                </tr>
+                <tr>
+                   
+                    <td>  Account .Holder Name   </td>
+                    <td>{{userdata.Account_Holder_Name}}</td>
+                </tr>
+                 <tr>
+                   
+                    <td>  Account . Number    </td>
+                    <td>{{userdata.Account_Number}}</td>
+                </tr>
+                <tr>
+                   
+                    <td>Ifsc Code</td>
+                    <td>{{userdata.IFSC}}</td>
+                </tr>
+              
+                
+                <!-- <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp6</td>
+                    <td>&nbsp&nbsp&nbspUser Type</td>
+                    <td>&nbsp&nbsp&nbsp{{userdata.User_type}}</td>
+                </tr> -->
+
+                <tr></tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.container-fluid -->
+    <!-- {% if not userdata.Complete_Details %}
+    <div class="row">
+        <div class="col-8"> -->
+    <!-- <a class="nav-link" href="/vendor/vendor_reg_seven"> <button style="background-color:#007bff" type="button" class="btn btn-info">Document Upload </button></a> -->
+    <!-- </div>
+    </div>
+    {% endif %}
+</form>
+{% if userdata.work_approval and userdata.finance_approval and not userdata.factory_approval_payment %}
+<form class="multisteps-form__form mb-8" action="/vendor/vendor_factory_pay/{{userdata.User_Id}}" method="POST">
+    {% csrf_token %}
+    <div class="row card-body">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <button type="Submit" class="btn-success"> Go For Payment For Factory Inspection </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %} -->
+    <!---end here-->
+
+
+
+
+    <!-- /.content -->
+    {% endblock body %}

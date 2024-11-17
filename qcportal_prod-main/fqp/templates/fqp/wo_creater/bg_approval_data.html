@@ -1,0 +1,137 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Work Order BG Details
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table
+                                class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Bank Name</th>
+                                        <th>BG Type</th>
+                                        <th>BG Guarantee_no</th>
+                                        <th>BG Issue Date</th>
+                                        <th>BG Valid Date</th>
+                                        <th>BG Amount</th>
+                                        <th>BG Copy</th>
+                                        <th>Action</th>
+                                        <th>Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for Supply in BG %}
+                                    <tr>
+                                        <td>
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Bank_name}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Type}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Guarantee_no}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Issue_Date}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Valid_Date}}
+                                        </td>
+                                        <td>
+                                            {{Supply.BG_Amount}}
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{Supply.BG_Copy.url}}">
+                                                <button class="btn ed-submit btn-success">
+                                                    <span class="ed-submit-text">
+                                                        View BG
+                                                    </span>
+                                                </button>
+                                            </a>
+
+                                        </td>
+                                        <td>{% if Supply.BG_Approved_Status == 0 %}
+                                            <form action="/fqp/submit_bg_approval/{{Supply.id}}"
+                                                onsubmit="return validateForm()" name="myForm" method="POST">
+                                                {% csrf_token %}
+                                                <div class="orderaction-items">
+                                                    <div class="radio-groups-items">
+                                                        <label class="radio-groups">
+                                                            <input type="radio" name="action" value="1" />
+                                                            Accept
+                                                        </label>
+                                                        <label class="radio-groups">
+                                                            <input type="radio" name="action" value="0" />
+                                                            Reject
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="remark"
+                                                            class="form-control ed-textbox">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="radio-groups"> Upload Approved Copy
+                                                            <input type="file" name="{{Supply.id}}" class="upload file">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn ed-submit btn-info">
+                                                    <span class="ed-submit-text">
+                                                        Submit
+                                                    </span>
+                                                </button>
+                                            </form>
+                                            {% elif Supply.BG_Approved_Status == -1 %}
+                                            <a href="" class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    BG Rejected
+                                                </span>
+                                            </a>
+                                            {% elif Supply.BG_Approved_Status == 1 %}
+                                            <a href="" class="btn ed-submit btn-success">
+                                                <span class="ed-submit-text">
+                                                    BG Approved
+                                                </span>
+                                            </a>
+
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if Supply.BG_Approved_Remark %}
+                                            <span class="ed-submit-text">
+
+                                                {{ Supply.BG_Approved_Remark}}
+                                            </span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        {% endblock body %}

@@ -1,0 +1,50 @@
+{% extends 'rca/RCA_base.html' %} {% load static %} {% block heading %} DTR Issued {% endblock heading %} {% block body %} {% block DTR_Issued %}
+<!-- <li class="nav-item active" style="list-style-type: none;"> -->
+    {% endblock DTR_Issued %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>DTR Issued</h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-5">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable ">
+                        <thead>
+                            <tr> 
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>Purchase Order No.</th>
+                                <th>Vendor</th>
+                                <th>Release Order No.</th>
+                                <th >Store Name</th>
+                                <th scope="col-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in data %}
+                            <tr>
+                                <td class="text-center">{{forloop.counter}}</td>
+                                <td>MP{{info.rca_cell.user_zone}}WO{{ info.wo.id}}</td>
+                                <td>{{ info.wo.vendor_id.CompanyName_E}}</td>
+                                <td>RO00{{ info.id}}</td>
+                                <td>
+                                    {{ info.store.Name }}
+                                </td>
+                                <td> 
+                                    <a href="/rca/rca_di_view/{{info.id}}" class="ed-links">
+                                        <label class="ed-textinfo">
+                                            <i class="fas fa-eye"></i>
+                                            View
+                                        </label>
+                                    </a>   
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    {% endblock body %}

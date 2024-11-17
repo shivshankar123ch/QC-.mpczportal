@@ -1,0 +1,536 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+        
+    }
+    .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 132px;
+}
+.nav-link {
+    
+    padding: -0.5rem 1rem;
+}
+.rightSide {
+    text-align: right;
+    margin-top: -26px;
+}
+  </style>
+
+  <style>
+    #blink {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: sans-serif;
+    }
+    /* .ed-tablefixed-info .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+    max-height: 690px !important;
+} */
+</style>
+
+<style>
+    .table-container {
+    max-height: 700px; /* Set a max height for the table to enable scrolling */
+    overflow: auto;   /* Enable scrolling within the container */
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #f1f1f1; /* Set the background color of the sticky header */
+    z-index: 1; /* Ensure the sticky header appears above other content */
+}
+</style>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="ed-information">
+    <div class="card ed-card-block">
+      <div class="ed-card-inner">
+        <div class="card-header">
+          <h6>
+            Material Offer Details
+            <p class="rightSide">
+                <a href = "https://qcportal.mpcz.in/static/pdf/Material_Categories.pdf" target = "__blank">
+                
+                <span id="blink">Circular for PDI/DI/Sampling (A, B, C & D)
+                of Materials Used in RDSS Project.</span>
+            </p>
+        </a>
+          </h6>
+          
+        </div>
+        <div class="card-body">
+            <h4 class="text-center">Confirmation of inspection offer </h4>
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive ed-tablefixed-info table-wrapper table-container">
+
+                            <table id="approve_offer"
+                                class="table table-striped table-bordered display text-center ed-table-block ">
+                                <thead class="table-dark sticky-header">
+                                    <tr>
+                                        <th>S No</th>
+                                        <th style="width:20%">
+                                            Item Name
+                                        </th>
+                                        <th style="width:10%">
+                                            Unit
+                                        </th>
+                                        <th style="width:10%">
+                                            Item Code
+                                        </th>
+                                        {% comment %} <th style="width:10%">
+                                            LOA Qty
+                                        </th>
+                                        
+                                        <th style="width:10%">
+                                            Balance Qty.
+                                        </th>
+                                        <th style="width:10%">
+                                            Offer Quantity
+                                        </th> {% endcomment %}
+                                        <th style="width:10%">
+                                            Readiness Date
+                                        </th>
+                                        <th style="width:10%">
+                                            Offer Letter of TKC
+                                        </th>
+                                        <th style="width:10%">
+                                            View Offer Details
+                                        </th>
+
+                                        <th style="width:10%">
+                                            Offer Counts
+                                        </th>
+
+                                        <th style="width:20% text-center">Action</th>
+                                        <th style="width:30%">Remarks</th>
+                                        <th style="width:40%">Choose Material category </th>
+                                        <th style="width:40%">Submit</th>
+
+                                        {% comment %} <th style="width:15%">PDI Status</th>
+                                        <th style="width:15%">Inspecting Officer</th>
+                                        <th style="width:15%">PDI Report</th>
+                                        <th style="width:15%">PDI Letter</th>
+                                        <th style="width:15%">DI Status</th> {% endcomment %}
+                                        
+                                                                            
+                                        
+
+                                    </tr>
+                                </thead>
+                                {% for k,v in offer %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{k.TKCVendor.Material_id.Material_Specification}}</td>
+                                    <td>{{k.wo_material.uom}}</td>
+
+                                    
+                                        <td>
+                                            {% if wo_discom == 'CZ' %}
+                                                {{k.TKCVendor.Material_id.item_code}} 
+                                            {% elif wo_discom == 'WZ' %}
+                                                {{k.TKCVendor.Material_id.item_code_wz}}
+                                            {% elif wo_discom == 'EZ' %}
+                                                {{k.TKCVendor.Material_id.item_code_ez}}
+                                            {% endif %}
+                                            
+                                        </td>
+                                    {% comment %} <td>{{k.wo_material.total_order_qty}}</td>
+                                    <td>{{k.wo_material.balance_qty}}</td>
+                                    <td>{{k.quantity}} </td> {% endcomment %}
+                                    <td>{{k.readiness_date}} </td>
+                                    <td>
+                                        {% if k.offer_material_docs %}
+                                        <a href="{{k.offer_material_docs.url}}">
+                                            
+                                                <span class="btn  btn-info btn-sm">
+                                                    View
+                                                </span>
+                                            
+                                        </a>
+                                        {% else %}
+                                           
+                                                <span class="btn  btn-danger btn-sm">
+                                                    Not Uploded
+                                                </span>
+                                            
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+                                        <a href="/fqp/view_offered_material_details/{{k.wo.id}}/{{k.offer_no}}/{{k.wo_material.id}}">
+                                            
+                                                <span class="btn  btn-info btn-sm">
+                                                    View
+                                                </span>
+                                            
+                                        </a>
+
+                                    </td>
+
+                                    <td>
+                                        {{v.1}}
+                                    </td>
+
+                                    <form
+                                    action="/fqp/material_offer_approval/{{k.TKCVendor.TKCWoInfo.id}}/{{k.offer_no}}/{{k.wo_material.id}}"
+                                     name="myForm" onsubmit="return checkButton()" method="POST"  enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <td style="width:20%">{% if k.Material_Offer_Submit_Approved_Status == 0 %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="actionVal" value="1" onclick="radioButtonUnable(id)" id="{{k.wo_material.uom}}_{{forloop.counter}}">
+                                            <label class="form-check-label" for="accept">
+                                            Accept
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input " type="radio" name="actionVal" value="0" onclick="radioButtonDisable(id)"  id="{{k.wo_material.uom}}_{{forloop.counter}}"  >
+                                            <label class="form-check-label" for="reject">
+                                                Reject
+                                            </label>
+                                        </div>
+                                        <div >
+                                            <input type="text"style="width:170px" name="remark" class="form-control" value=""id="remark"  placeholder="Please fill Remark" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Acceptance/Rejection Document</label>
+                                            <input type="file" name="other_acceptance_rejection_doc" class="form-control ed-textbox" required>
+                                        </div>
+                                          
+                                           
+                                       
+                                        {% elif k.Material_Offer_Submit_Approved_Status == -1 %}
+                                        <a href="" >
+                                            <span class="btn btn-danger btn-sm">
+                                                Rejected
+                                            </span>
+                                        </a>
+                                        {% elif k.Material_Offer_Submit_Approved_Status == 1 %}
+                                        <a href="" >
+                                            <span class="btn  btn-success btn-sm">
+                                                Approved
+                                            </span>
+                                        </a>
+
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if k.Material_Offer_Submit_Approved_Remark %}
+                                        <span class="ed-submit-text">
+                                            {{ k.Material_Offer_Submit_Approved_Remark}}
+                                        </span>
+                                        {% endif %}
+                                    </td>
+
+                                    
+                                    <td>
+                                        {% if  k.Material_Offer_Submit_Approved_Status == 0 %}
+                                        <div class="form-check">
+                                            <input class="form-check-input {{k.wo_material.uom}}_{{forloop.counter}}" type="radio" name="material_category"  value="PDI & DI & Sampling" >
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                           <b>A</b>. PDI & DI & Sampling
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input {{k.wo_material.uom}}_{{forloop.counter}}" type="radio" name="material_category"  value="PDI & DI (Sampling Not Required)" >
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            <b>B</b>. PDI & DI (Sampling Not Required)
+                                        </label>
+                                        </div>
+                                         <div class="form-check">
+                                        <input class="form-check-input {{k.wo_material.uom}}_{{forloop.counter}}" type="radio" name="material_category"  value="Direct DI (PDI & Sampling Not Required)" >
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            <b>C</b>. Direct DI (PDI & Sampling Not Required)
+                                        </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input {{k.wo_material.uom}}_{{forloop.counter}}" type="radio" name="material_category"  value="DI & Sampling (PDI Not Required)" >
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                <b>D</b>. DI & Sampling (PDI Not Required)
+                                            </label>
+                                            </div>
+                                        
+                                   
+
+                                    {% else %}
+
+                                    <span class="btn  btn-success btn-sm">
+                                        {{k.material_category}}
+                                    </span>
+
+                                    {% endif %}
+                                </td>
+
+
+                                    
+                                    <td>
+                                        {% if  k.Material_Offer_Submit_Approved_Status == 0 %}
+                                    <button type="submit" class="btn btn-info btn-sm" >
+                                            Submit
+                                    </button>
+                                    
+
+                                    {% else %}
+
+                                    <span class="btn  btn-success btn-sm">
+                                        Submitted
+                                    </span>
+
+                                    {% endif %}
+                                </td>
+                                </form>
+                                    {% comment %} <td>
+                                        {% if Supply.PDI_Complete == 1 and Supply.PDI_Approved_Status == 1 %}
+                                            
+                                                <span class="btn  btn-success btn-sm">
+                                                    Completed
+                                                </span>
+                                           
+
+                                        {% elif Supply.PDI_Complete == 0 and Supply.PDI_Assign == 1 and Supply.PDI_Approved_Status == 0 %}
+                                        
+                                            <span class="btn  btn-success btn-sm">
+                                                PDI Assigned
+                                            </span>
+                                        
+                                            
+                                        {% elif Supply.PDI_Complete == 1 and Supply.PDI_Approved_Status == 0 %}
+                                            
+                                                <span class="btn btn-success btn-sm">
+                                                    Pending for Approval 
+                                                </span>
+                                            
+                                        {% elif Supply.PDI_Complete == o and Supply.PDI_Approved_Status == 0 %}
+                                        
+                                            <span class="btn btn-danger btn-sm">
+                                                Not Completed
+                                            </span>
+                                      
+                                        {% endif %}
+                                    </td>
+
+                                    <td> 
+
+                                        {% if Supply.PDI %}
+
+                                        {{Supply.PDI.officer.officer_name}}
+
+                                        {% else %}
+                                            
+                                                <span class="btn btn-success btn-sm">
+                                                    Pdi Not Assign 
+                                                </span>
+                                           
+                                        {% endif %}
+                                    </td>
+                                    
+                                    <td> 
+
+                                        {% if Supply.PDI.pdi_report %}
+
+                                        <a class="nav-link " href="{{Supply.PDI.pdi_report.url}}"
+                                         target=”_blank”>
+                                         <span class="btn btn-info btn-sm"> View</span></a>
+                                         {% elif Supply.PDI.pdi_report_url %}
+                        
+                                        <a class="nav-link " href="{{Supply.PDI.pdi_report_url}}"
+                                        target=”_blank”>
+                                        <span class="btn btn-info btn-sm"> View</span></a>
+
+                                        {% else %}
+                                            
+                                                <span class="btn  btn-danger btn-sm">
+                                                    Not Uploaded 
+                                                </span>
+                                           
+                                        {% endif %}
+                                    </td>
+                                    <td> 
+
+                                        {% if Supply.PDI.letter_report %}
+
+                                        <a class="nav-link btn btn-info btn-sm" href="{{Supply.PDI.letter_report.url}}"
+                                         target=”_blank”>
+                                         view</a>
+
+                                        {% else %}
+                                            
+                                                <span class="btn btn-danger btn-sm">
+                                                    Not Uploaded 
+                                                </span>
+                                          
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if Supply.DI_Created_Status == 1 %}
+                                            
+                                                <span class="btn btn-success btn-sm">
+                                                    DI created
+                                                </span>
+                                           
+
+                                        {% elif Supply.DI_Created_Status == 0 %}
+                                     
+                                            <span class="btn btn-danger btn-sm">
+                                                DI Pending
+                                            </span>
+                                        
+
+                                        {% endif %}
+                                    </td> {% endcomment %}
+
+
+
+                                    
+                                    
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div> 
+
+                    </div>
+                </div>
+                </form>
+                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+<!-- <script>
+$(document).ready( function () {
+    $('#approve_offer').DataTable();
+} );
+</script> -->
+<script>
+     function checkButton(){   
+   
+        var remark = document.getElementById("remark").value; 
+        //const radioButtons = document.querySelectorAll('input[name="actionVal"]');
+   //console.log(radioButtons[0].value)
+   //console.log(radioButtons[1].value)
+        // var action1 = document.getElementById("KM_1").value; 
+        // console.log(action1);
+        
+
+        var getSelectedValue = document.querySelector('input[name="material_category"]:checked');   
+        var actionValue = document.querySelector('input[name="actionVal"]:checked');   
+        var actionVal = document.querySelector('input[name="actionVal"]:checked');   
+       //console.log(actionVal.value);
+       
+                
+              
+            if(actionValue == null) {   
+                alert ("Please choose the Option of acceptance"); 
+                return false; 
+            } 
+            if(actionVal.value == "1"){
+                if(getSelectedValue == null) {   
+                    alert ( "Please choose the Material Category" ); 
+                    return false; 
+                }
+            }
+            if(remark.trim() ==null){
+              alert ( "Please Fill the Remark" ); 
+            return false;
+        }
+            
+
+           
+        }  
+        function radioButtonDisable(idHidden){
+           
+             let heddenId = document.getElementsByClassName(idHidden);
+             for (let i = 0; i < heddenId.length; i++) {
+                heddenId[i].disabled = true;
+            
+        }} 
+        function radioButtonUnable(idHidden){
+          
+             let heddenId = document.getElementsByClassName(idHidden);
+             for (let i = 0; i < heddenId.length; i++) {
+                heddenId[i].disabled = false;
+            
+        }} 
+    </script>
+
+    <script type="text/javascript">
+        var blink = 
+            document.getElementById('blink');
+  
+        setInterval(function () {
+            blink.style.opacity = 
+            (blink.style.opacity == 0 ? 1 : 0);
+        }, 1000); 
+    </script>
+
+<!-- <script>
+    $(document).ready(function() {
+      $('#approve_offer').DataTable({
+        scrollY: '400px', // Set an appropriate value
+        scrollCollapse: true,
+        paging: false,
+        fixedHeader: true // Enable DataTables' fixedHeader plugin
+      });
+    });
+  </script> -->
+
+  <!-- <script>
+    $(document).ready(function() {
+      $('#approve_offer').DataTable({
+        scrollY: '300px', // Set an appropriate value
+        scrollCollapse: true,
+        paging: false,
+        scrollX: true, // Enable horizontal scrolling
+        scroller: {
+          loadingIndicator: true
+        },
+        fixedHeader: true // Enable DataTables' fixedHeader plugin
+      });
+    });
+    </script> -->
+
+
+
+    <!-- <script>
+        $(document).ready( function () {
+    $('#approve_offer').DataTable();
+} );
+    </script> -->
+
+
+    <script>
+        $(document).ready(function() {
+        $('#approve_offer').DataTable({
+            "paging": true,     // Enable pagination
+            "pageLength": 10,  // Number of rows per page
+            // Other DataTable options...
+        });
+    });
+    </script>
+{% endblock body %}

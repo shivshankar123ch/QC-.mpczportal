@@ -1,0 +1,407 @@
+{% extends 'fqp/wo_approver/approver_base.html' %}
+{% load static %} 
+{% block body %} 
+
+{% block basic %}
+<li class="nav-item active" style="list-style-type: none;">
+{% endblock basic %}
+
+<div class="ed-infocontant"> 
+    <div class="card ed-card-block"> 
+        <div class="card-header">
+            <h2>
+                FQP Intimation Detail
+            </h2>
+        </div>
+        <div class="card-body"> 
+            <div id="infomodel" class="modal fade" role="dialog">
+                <div class="modal-dialog estimate_datamodel" style="margin-top: 110px !important;">
+
+
+
+                    
+                </div>
+            </div> 
+
+            <div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+                <div class="table-responsive">
+                    <table class="table table-striped ed-table-block text-center">
+                        <thead>
+                            <tr>  
+                                <th class="w-45">Name</th>
+                                <th class="w-50">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in int_data %}
+                            <tr>
+                                <th>Work Order No.</th>  
+                                <td>{{data.wo.Contract_Number}}</td>
+                            </tr>
+                            <tr>
+                                
+                                <th>Work Order Subject.</th>
+                                <td>{{data.wo.Header.Contract_Description}}</td>
+                            </tr>
+                            <tr>
+                                <th>TKC Name</th>
+                                <td>{{data.wo.supplier.CompanyName_E}}</td>
+                            </tr>
+                            <tr>
+                                <th>View Work-Order</th>
+                                <td>
+                                    {% if data.wo.Wo_Digital %}
+                                        <a class="btn ed-submits btn-success"
+                                        href="{{data.wo.Wo_Digital.url}}" target="_blank">View</a> 
+                                    
+                                    {% else %}
+                                        <a class="btn ed-submits btn-primary"
+                                        href="#">Work Order Not Uploaded</a> 
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            
+                            <tr>
+                                <th>Brief Description Of Work</th>
+                                <td>{{data.brief_description_of_work}}</td>
+                            </tr>
+                        
+                            <tr>
+                                <th>Work Execution Detail</th>
+                                <td>{{data.work_execution_detail}}</td>
+                            </tr>
+                           
+                            
+                                <tr>
+                                <th>Region</th>
+                                    <td>{{data.region.Region_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Circle</th>
+                                    <td>{{data.circle.Circle_Name_E}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Division</th>
+                                    <td>{{data.division.Division_Name_E}}</td>
+                                </tr>
+
+                                
+
+                                <tr>
+                                    <th>Work Execution/Milestone Pdf</th>
+                                    <td>
+                                        {% if data.work_execution_milestone_pdf %}
+                                        <a class="btn ed-submits btn-success"
+                                        href="{{data.work_execution_milestone_pdf.url}}" target="_blank">View</a> 
+                                            
+                                        {% else %}
+                                        <a class="btn ed-submits btn-primary"
+                                        href="#">Execution Pdf Not Uploaded</a> 
+                                       
+                                        {% endif %}
+                                        </td>
+                                    </tr>
+                                    
+
+                                    <tr>
+                                    <th>Layout/Sld Of Work Execution/Completion</th>
+                                    <td>
+                                        {% if data.layout_sld_of_work_execution %}
+                                        <a class="btn ed-submits btn-success"
+                                        href="{{data.layout_sld_of_work_execution.url}}" target="_blank">view</a> 
+                                            
+                                        {% else %}
+                                        <a class="btn ed-submits btn-primary"
+                                        href="#">Layout Pdf Not Uploaded</a> 
+                                       
+                                        {% endif %}
+                                        </td>
+                                    </tr>
+
+                                   <tr>
+                                    <th>Tentative Date Of Execution</th>
+                                    <td>{{data.tentative_date_of_execution}}</td>
+                                </tr> 
+
+                                <tr>
+                                    <th>Remark</th>
+                                    <td>{{data.remark}}</td>    
+                                </tr>
+
+                                {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div> 
+ 
+
+           
+
+               
+            <div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+                <h4>
+                    FQP Observation Detail
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-striped ed-table-block text-center">
+                        <thead>
+                            <tr>   
+                                <th class="W-5 text-center">S.No.</th>
+                                 <th>Milestone</th>
+                                <th>Milestone Category</th>
+                                <th>Milestone Sub-Category</th>
+                                <th>Milestone Sub-Category Activity And Operation </th>
+                                <th>Milestone Sub-Category Charactics</th>
+                                <th>Milestone Sub-Category Class Of Check </th>
+                                <th>Milestone Sub-Category Type Of Check </th>
+                                <th>Milestone Sub-Category Quantum Of check Contractor</th>
+                                <th>Milestone Sub-Category Quantum Of Check TPQMA </th>
+                                <th>Milestone Sub-Category acceptance_norms </th>
+                                <th>Milestone Sub-Category format_of_record </th>
+                                <th>Observation Remark </th>
+                                <th>Observation Image </th>
+                                <th>Observation Location </th>
+                                <th>Observation Date </th>
+                                <th>Observation Status </th>
+                                <th>Observation Latitude </th>
+                                <th>Observation Longitude </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                             {% for data in observation_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <!-- <td>{{data.wo.wo_no}}</td>
+                                    <td>{{data.fqpintimation.id}}</td> -->
+                                    <td>{{data.milestone_subcategory_data.milestone_main_subcategory.milestone_main_category.milestone_main}}</td>
+                                    <td>{{data.milestone_subcategory_data.milestone_main_subcategory.milestone_main_category.milestone_category_name}}</td>
+                                    <td>{{data.milestone_subcategory_data.milestone_main_subcategory.milestone_subcategory_name}}</td>
+                                    <td>{{data.milestone_subcategory_data.activity_and_operation}}</td>
+                                    <td>{{data.milestone_subcategory_data.characteristics}}</td>
+                                    <td>{{data.milestone_subcategory_data.class_of_check}}</td>
+                                    <td>{{data.milestone_subcategory_data.type_of_check}}</td>
+                                    <td>{{data.milestone_subcategory_data.quantum_of_check_contractor}}</td>
+                                    <td>{{data.milestone_subcategory_data.quantum_of_check_tpqma}}</td>
+                                    <td>{{data.milestone_subcategory_data.acceptance_norms}}</td>
+                                    <td>{{data.milestone_subcategory_data.format_of_record}}</td>
+                                    
+                            
+                                    <td>{{data.observation_remark}}</td>
+                                    <td>
+                                        {% if data.observation_image %}
+                                        <img src="{{data.observation_image.url}}"  alt="Observation Image" style="height:90%;width:90%;"></br>
+                                        <a class="btn ed-submits btn-success"
+                                    href="{{data.observation_image.url}}" target="_blank">Observation Image</a> 
+                                        
+                                    {% else %}
+                                    <a class="btn ed-submits btn-primary"
+                                    href="#">Observation Image Not Uploaded</a> 
+                                   
+                                    {% endif %}
+                                    </td>
+                                    <td>{{data.observation_location}}</td>
+                                    <td>{{data.observation_date}}</td>
+                                 <td>
+                                    {% if data.observation_status == 1 %}
+                                    <a class="btn ed-submits btn-primary"
+                                    href="#">OK</a> 
+                                        
+                                    {% elif data.observation_status == 2 %}
+                                    <a class="btn ed-submits btn-primary"
+                                    href="#">NOT OK</a> 
+                                   
+                                    {% endif %}
+                                </td>
+
+                                <td>{{data.observation_lat}}</th>
+                                    <td>{{data.observation_long}}</th>
+                                </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>   
+                </div>
+            </div>
+   
+
+
+<div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+    <h4>
+        FQP Inspection Officer List
+    </h4>
+    <div class="table-responsive">
+        <table class="table table-striped ed-table-block text-center">
+            <thead>
+                <tr>   
+                    <th class="W-5 text-center">S.No.</th>
+                    
+                    <th>Officer Fullname</th>
+                    <th>Officer Mobile</th>
+                    <th>Officer Designation</th>
+                    <th>Representative From</th>
+            
+                </tr>
+            </thead>
+            <tbody>
+                
+                 {% for i in officer_data %}
+                 <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.officer_fullname}}</td>
+                        <td>{{i.officer_mobile}}</td>
+                        <td>{{i.officer_designation}}</td>
+                        <td>{{i.representative_from}}</td>
+                </tr>
+
+                    {% endfor %}
+            </tbody>
+        </table>   
+    </div>
+</div>
+
+
+<div class="ed-tableinfo-block ed-orderinfo-block mb-4">
+    <h4>
+        FQP Inspection Image
+    </h4>
+    <div class="table-responsive">
+        <table class="table table-striped ed-table-block text-center">
+            <thead>
+                <tr>   
+                    <th class="W-5 text-center">S.No.</th>
+                    
+                    <th>Image 1</th>
+                    <th>Image 2</th>
+                    <th>Image 3</th>
+                    <th>Inspection Remark</th>
+                    <th>Inspection Latitude</th>
+                    <th>Inspection Longitude</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                 {% for i in close_inti %}
+                 <tr>
+                        <td>{{forloop.counter}}</td>
+
+                        <td>
+                        {% if i.image_1 %}
+                        <img src="{{i.image_1.url}}" alt="Close Inspection Image" style="height:50%;width:55%;"></br>
+                        <a class="btn ed-submits btn-success"
+                        href="{{i.image_1.url}}" target="_blank">Close Inspection Image</a> 
+                            
+                        {% else %}
+                        <a class="btn ed-submits btn-primary"
+                        href="#">Close Inspection Image Not Uploaded</a> 
+                       
+                        {% endif %}
+                        </td>
+
+                        <td>
+                            {% if i.image_2 %}
+                            <img src="{{i.image_2.url}}" alt="Close Inspection Image" style="height:50%;width:55%;"></br>
+                            <a class="btn ed-submits btn-success"
+                            href="{{i.image_2.url}}" target="_blank">Close Inspection Image</a> 
+                                
+                            {% else %}
+                            <a class="btn ed-submits btn-primary"
+                            href="#">Close Inspection Image Not Uploaded</a> 
+                           
+                            {% endif %}
+                            </td>
+                            <td>
+                                {% if i.image_3 %}
+                                <img src="{{i.image_3.url}}" alt="Close Inspection Image" style="height:50%;width:55%;"></br>
+                                <a class="btn ed-submits btn-success"
+                                href="{{i.image_3.url}}" target="_blank">Close Inspection Image</a> 
+                                    
+                                {% else %}
+                                <a class="btn ed-submits btn-primary"
+                                href="#">Close Inspection Image Not Uploaded</a> 
+                               
+                                {% endif %}
+                                </td>                           
+                        <td>{{i.close_remark}}</td>
+                        <td>{{i.close_lat}}</td>
+                        <td>{{i.close_long}}</td>
+                    </tr>
+
+                    {% endfor %}
+            </tbody>
+        </table>   
+    </div>
+</div>
+
+</div>
+</div> 
+
+
+
+
+
+
+<style>
+.ed-tableinfo-block .ed-table-block td table th {
+    white-space: nowrap;
+}
+ 
+ .ed-tableinfo-block .ed-table-block td table td {
+    white-space: nowrap;
+}
+ 
+</style>
+                                    
+
+
+
+ 
+
+<script type="text/javascript">
+  
+    function myFunc(cone){
+      let x = document.getElementsByClassName(cone);
+      let acc = document.getElementById("accept"+cone);
+      // let rej = document.getElementById("reject"+cone);
+      // console.log(x)
+      if(x.length == 1){
+        if(acc.checked == true){
+            let model = document.getElementById('InspectionModal');
+            let modal_yes = document.getElementById('modal_yes');
+            let modal_no = document.getElementById('modal_no');
+            let btn = document.getElementById(cone);
+            let inspection_info_input_id = document.getElementById('inspection_info_input_id');
+            let modal_inspction_submit = document.getElementById('modal_inspction_submit').innerText;
+             let modal_yes = document.getElementById('modal_yes');
+             let modal_no = document.getElementById('model_no');
+            // btn.setAttribute("type", "button");
+            btn.setAttribute("data-toggle", "modal");
+            btn.setAttribute("data-target", "#InspectionModal");
+            inspection_info_input_id.innerText = modal_inspction_submit;
+
+            // document.getElementById("modal_yes").addEventListener("click", model_submit);
+            // document.getElementById("model_no").addEventListener("click", model_submit);
+            //      function modal_submit(){
+        
+      
+            //        btn.setAttribute("type", "submit");
+         
+
+            // }     
+          }
+      }
+    }
+    
+
+
+    
+
+    </script>
+
+{% endblock body %}

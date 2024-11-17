@@ -1,0 +1,86 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<style>
+  #errorexpanded {
+    display: none;
+  }
+
+  #errorexpanded2 {
+    display: none;
+  }
+
+  #errorexpanded3 {
+    display: none;
+  }
+</style>
+
+ 
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>Select NABL</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="/po/select_nabl2/{{ro_id}}/{{final_mat_lst}}/{{user_zone}}">
+      {% csrf_token %}
+      <div class="discomoption-block">
+        <h4>Select NABL for material testing</h4>
+        <h6> <b> {{user_zone}}</b> Discom </h6>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-6">
+              <select name="sub_radio" id="sub_radio" class="form-control ed-textbox">
+                {% for i in usr_obj %}
+                <option value="{{i.CompanyName_E}}">{{i.CompanyName_E}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn ed-submit ed-formsubmit" value="Submit" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  document.querySelectorAll('input[type="radio"][name="radio"]').forEach(e => {
+    e.addEventListener('change', function () {
+      if (this.value == "CZ") {
+        errorexpanded.style.display = "block";
+      } else {
+        errorexpanded.style.display = "none";
+      }
+    })
+  })
+
+
+  document.querySelectorAll('input[type="radio"][name="radio"]').forEach(e => {
+    e.addEventListener('change', function () {
+      if (this.value == "WZ") {
+        errorexpanded2.style.display = "block";
+      } else {
+        errorexpanded2.style.display = "none";
+      }
+    })
+  })
+
+  document.querySelectorAll('input[type="radio"][name="radio"]').forEach(e => {
+    e.addEventListener('change', function () {
+      if (this.value == "EZ") {
+        errorexpanded3.style.display = "block";
+      } else {
+        errorexpanded3.style.display = "none";
+      }
+    })
+  })
+</script>
+ 
+</style>
+
+{% endblock body %}

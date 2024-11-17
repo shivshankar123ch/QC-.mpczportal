@@ -1,0 +1,147 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      <!-- All RCA Order -->
+      Work Order Information
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block mb-3">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable ">
+          <tr>
+            <th class="w-45 text-left">
+              Work Order No
+            </th>
+            <td class="w-50 text-left">
+              MPCZ00{{ ro.wo.id}}
+            </td>
+          </tr>
+          <tr>
+            <th class="w-45 text-left">
+              RCA Vendor Company name
+              </td>
+            <td class="w-50 text-left">
+              {{ ro.wo.vendor_id.CompanyName_E}}
+            </td>
+          </tr>
+          <tr>
+            <th class="w-45 text-left">
+              Material
+              </td>
+            <td>
+              {{ ro.wo.wo_specification}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="ed-tableinfo-block mb-3">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <tr>
+              <th class="">
+                Rating
+              </th>
+              <th class="">
+                Description
+              </th>
+              <th class="">
+                Quantity
+              </th>
+              <th class="">
+                Rate
+              </th>
+              <th class="">
+                Total amount
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+            <tr>
+              <td>{{data.rating}}</td>
+              <td>{{data.description}}</td>
+              <td>{{data.quantity}}</td>
+              <td>{{data.rate}}</td>
+              <td>{{data.total_rate}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div class="ed-tableinfo-block mb-3">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <tr>
+              <th class="">
+                Rating
+              </th>
+              <th class="">
+                XMR Code
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in xmr %}
+            <tr>
+              <td>{{data.material.rating}}</td>
+              <td>{{data.xmr}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <form action="/vendor/oil_request1/{{ro.id}}" method="POST">
+      {% csrf_token %}
+
+      <div class="forms-informations">
+        <div class="ed-form-block p-0 border-0">
+          <div class="ed-form-body">
+            <div class="form-group">
+              <label class="ed-form-label">
+                Enter Oil Amount (Liter)
+                <span class="text-danger">*</span>
+              </label>
+              <input type="Number" name="quantity" id="sched_desc" onfocus="validateForm()"
+                onkeyup="fill();validateForm()" onchange="fill();" class="form-control ed-textbox"
+                placeholder="Oil Amount In Liter" required>
+              <span id="address" class="d-block ed-warningtext text-danger"></span>
+            </div>
+          </div>
+
+
+          <div class="form-group mt-2">
+            <div class="btn-actionblock text-right">
+              <input type="submit" onclick="check()" name="submit" value="Request" class="btn ed-submit ed-formsubmit"
+                autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> 
+
+
+
+
+{% endblock body %}

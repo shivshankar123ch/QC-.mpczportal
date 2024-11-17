@@ -1,0 +1,116 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<!-- Main content -->
+<section class="content">
+
+  <form action="/po/select_received_material/{{dataid}}/{{erp_di_no}}" method="post">
+    {% csrf_token %}
+    <div class="ed-information">
+      <div class="card ed-card-block">
+        <div class="ed-card-inner">
+          <div class="card-header">
+            <h2>
+              Select Material
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="ed-tableinfo-block">
+              <div class="table-responsive">
+                <table class="table table-striped projects table-bordered display">
+                  <thead class="table-dark">
+                    <tr>
+                      
+                      {% comment %} <th style="width: 3%">Sr No.</th> {% endcomment %}
+                      
+                      <th class="text-center"><input type="checkbox" name="box" onClick="toggle(this)">
+                        <span>Select All</span>
+                        {% comment %} <input type="checkbox">Select All Received Materials {% endcomment %}
+                      </th>
+                      <th style="width: 3%">Sr No.</th>
+                      <th class="text-center">Item Name</th>
+                      <th class="text-center">Serial Number/Batch No</th>
+
+
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for name in data %}
+                    <tr>
+                      {% comment %} <td>
+                        {{ forloop.counter }}
+                      </td> {% endcomment %}
+                      <!-- <td>{% if name.received_material == 1 %} Received 
+                        {% elif name.received_material == -1 %}Rejected  
+                        {% else %}
+                        <input type="checkbox" name="{{name.id}}" value="2" checked>  <input hidden type="checkbox" name="{{name.id}}" value="0">{% endif %}</td> -->
+
+                      <!-- <td>{% if name.received_material == 1%} Accpected  <input type="checkbox" name="{{name.id}}" value="1" checked hidden> {% elif name.received_material == -1 %}Rejected  <input type="checkbox" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                            <input type="checkbox" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="checkbox" name="{{name.id}}" value="-1"> Reject
+                       {% endif %}</td> -->
+
+
+                      <td class="text-center">
+                        {% if name.received_material == 1 %}
+                        Received
+                        <input type="checkbox" name="{{name.id}}" class="received_material" value="1" checked hidden>
+                        {% elif name.received_material == -1 %}
+                        Rejected
+                        <input type="checkbox" name="{{name.id}}" class="received_material" value="-1" checked hidden>
+                        {% else %}
+                        <input type="checkbox" name="{{name.id}}"  class="received_material" value="2">
+                        {% endif %}
+                      </td>
+                      <td class="text-center">
+                        {{ forloop.counter }}
+                      </td>
+
+                      <td class="text-center">
+                        <b>{{name.material}}</b>
+                      </td>
+
+                      <td class="project_progress text-center" >
+                        {% if name.serial_no %}
+                        {{name.serial_no}}
+                        {% else %}
+                        {{name.batch_no}}
+                        {% endif %}
+                      </td>
+
+
+                    </tr>
+                    {% endfor %}
+
+
+                  </tbody>
+                </table>
+                <br>
+                <center><button class="btn-secondary btn">Submit</button></center>
+                <br>
+              </div>
+  </form>
+  <!-- /.card-body -->
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+
+<script>
+    
+    function toggle(source) {
+      checkboxes = document.getElementsByClassName('received_material');
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+    } );
+  </script>
+
+{% endblock body %}

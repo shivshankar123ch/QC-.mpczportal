@@ -1,0 +1,192 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+    <div class="ed-infocontant">
+        <div class="ed-information mb-4">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        All Assigned PDI Inspection
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <!-- <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                        {% if msg1 %}
+                        {{ msg1 }}
+                        {% endif %}
+                    </p> -->
+                    <div class="ed-tableinfo-block ed-orderinfo-block ">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover display text-center " id="pdi_assigned">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="w-5">S.No</th>
+                                        <th>Item Code</th>
+                                        <th>Item Name</th>
+                                        <th>Offered Quantity</th>
+                                        <th>Pdi Done On</th>
+                                        <th>Pdi Report</th>
+                                        <th>PDI Status</th>
+                                        <th>PDI Remark</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in data1 %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.Material.wo_material.item_code}} </td>
+                                        <td>{{data.Material.wo_material.material_name}} </td>
+                                        <td>{{data.quantity}} </td>
+                                        <td>{{data.perform_date}} </td>
+                                        {% comment %} <td>
+                                            <a target="_blank" href="/pdi_inspection_data/{{data.item_code}}/{{offer_no}}">
+                                                <span class="btn btn-info">View</span>
+                                            </a>
+                                        </td> {% endcomment %}
+                                        
+                                        <td>
+                                            {% if data.Material.PDI_Complete == 0 %}
+                                            <a  class="btn btn-info btn-sm" target="" href="#" onclick="alert_msg()" > View</a> 
+                                            {% elif data.pdi_report or  data.pdi_report_url  %}
+                                            <a  class="btn btn-info btn-sm" target="" href="/pdi_inspection_data/{{data.item_code}}/{{offer_no}}" id="pdi" > View</a> 
+
+                                            
+                                            {% else %} 
+                                            <a  class="btn btn-info btn-sm" target="" href="#" onclick="pdiReport()" > View</a>  
+                                            {% endif%}
+
+
+                                        </a> 
+                                                                                               
+                                     </td>
+                                        <td>
+                                            {% if data.Material.PDI_Complete == 1 %}
+                                            Completed
+                                            
+                                            {% else %}
+                                            <strong style="color:red;">Pending</strong>
+                                            {% endif %}
+                                        </td>
+                                        <td>{% if data.fake_call_remark %}
+                                            {{data.fake_call_remark}}
+                                        
+                                        {% else %}
+                                        {{data.Material.Remark}}
+                                        {% endif %}</td>
+
+                                        {% comment %} <td>
+                                            {% if data.Status == 0 %}
+                                            <strong style="color:red;">Pending</strong>
+                                            {% else %}
+                                            PDI Complete
+                                            {% endif %}
+                                        </td>
+                                        <td>{{data.assign_date}} </td>
+                                        <td>{{data.perform_date}} </td> {% endcomment %}
+                                        {% comment %} <td>
+                                            {% if data.Status == 1 %}
+                                            <strong style="color:dark;"><a href="/pdi_inspection_data">View</a></strong>
+                                            {% else %}
+                                            <strong style="color:red;">View</strong>
+                                            {% endif %}
+                                        </td> {% endcomment %}
+
+                                        {% comment %} <td>
+
+                                            <div class="btn-actions-block mt-2 text-center">
+                                                {% if data.PDI_Approved_Status == 1 %}
+                                                <p>Accepted</p>
+                                                {% elif data.PDI_Approved_Status == -1 %}
+                                                <p>Rejected</p>
+                                                {% else %}
+
+                                                <a href="/pdi_accept/{{data.offer_no}}">
+                                                    <button class="btn ed-submit ed-formsubmit mr-2">
+                                                        Pending
+                                                    </button>
+                                                </a>
+                                                {% endif %}
+
+                                            </div>
+                                        </td> {% endcomment %}
+
+
+
+                                        <td>
+
+                                            {% if data.Material.PDI_Approved_Status == 1 %}
+                                            <span class="btn btn-success">
+                                                Accepted
+                                            </span>
+                                            {% elif data.Material.PDI_Approved_Status == -1 %}
+                                            <span class="btn btn-danger">
+                                                Rejected
+                                            </span>
+                                            {% elif data.Material.PDI_Approved_Status == -2 %}
+                                            <span class="btn btn-danger">
+                                                Fake Called
+                                            </span>
+                                            {% else %}
+                                            <span class="btn btn-Warning">
+                                                Pending
+                                            </span>
+
+                                            {% endif %}
+
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% comment %} <div class="row">
+                                <div class="col-12 text-right">
+                                {% for data in data1 %}
+                                <a href="/submit_button/{{data.offer_no}}">
+                                    {% endfor %}
+                                    <button class="btn btn-info">
+                                        <span class="ed-submit-text">
+                                            Submit
+                                        </span>
+                                    </button>
+                                    </a>
+                            </div>
+                        </div> {% endcomment %}
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+    $('#pdi_assigned').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+</script>
+<script>
+    function alert_msg(){
+             alert("PDI Not Completed");  
+     }
+     function pdiReport(){
+         alert("PDI Report Not Uploaded");  
+ }
+ </script>
+
+
+
+{% endblock body %}

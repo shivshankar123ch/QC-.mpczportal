@@ -1,0 +1,89 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    RCA Vendor Pending for Factory Inspection 
+                </h2>
+            </div>
+            <div class="card-body">
+                <!-- <p
+                    style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p> -->
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover display" id="factory_initiate_rca">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="w-5">S.No.</th>
+                                    <th>
+                                        Name Of Company
+                                    </th>
+                                    <th>
+                                        Name of Authorized Person
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                    <th>
+                                        Registration Date
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.CompanyName_E}}</td>
+                                    <td>{{data.Authorised_person_E}}</td>
+                                    <td>{{data.Company_add_1}}, {{data.Company_add_2}}, {{data.Company_pin_code}},
+                                        {{data.Company_dist}}, {{data.Company_state}}</td>
+
+                                    <td>{{data.Registration_Date}}</td>
+                                    <td>
+                                        <a href="/factory_inspection_initiate_rca/{{data.User_Id}}" class="ed-links">
+                                            <label class="ed-textinfo">
+                                                <span class="text-primary">
+                                                    Initiate Factory Inspection
+                                                </span>
+                                            </label>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+
+        
+        <script>
+            $(document).ready(function () {
+                $('#factory_initiate_rca').DataTable({
+                    pagingType: 'full_numbers',
+                });
+            });
+        </script>
+        {% endblock body %}

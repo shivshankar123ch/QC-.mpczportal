@@ -1,0 +1,134 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+<!-- <table class="table table-striped m-4 " border="2" style="width:90%">
+  <thead class="bg-primary">
+    <tr>
+      <th colspan="2">Work Order Information</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>Work Order No</td>
+      <td><b>MPCZ00{{ ro.wo.id}}</b></td>
+    </tr>
+    <tr>
+      <td>RCA Vendor Company name</td>
+      <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+    </tr>
+    <tr>
+      <td> Material </td>
+      <td><b>{{ ro.wo.wo_specification}}</b></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-striped m-4 " border="2" style="width:90%">
+  <thead class="bg-primary">
+    <tr>
+      <th scope="col-3"> Rating </th>
+      <th scope="col-3"> Description </th>
+      <th scope="col-9"> Quantity </th>
+      <th scope="col-9"> Rate </th>
+      <th scope="col-9"> Total amount </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for data in material %}
+    <tr>
+      <td>{{data.rating}}</td>
+      <td>{{data.description}}</td>
+      <td>{{data.quantity}}</td>
+      <td>{{data.rate}}</td>
+      <td>{{data.total_rate}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+ -->  {{m_offer.quanity_offered}}
+
+ {% for i in m_offer %}
+       <label> Quantity Offer for RCA : {{ i.quanity_offered }}</label> 
+{% endfor %}
+
+
+{% for j in rmi %}
+        <label> RMI : {{ j.rating }}</label> 
+{% endfor %}
+
+{{rmi.mo_capacity}}
+ <table class="table table-striped m-4 " border="2" style="width:90%">
+ <thead>
+    <tr>
+      <!-- <th><input type="checkbox"></th> -->
+      <th>XMR Repaired</th>
+      <th>OK</th>
+      <th>Not OK</th>
+      <th>Remark</th>
+    </tr>
+  </thead>
+
+
+ <tbody>
+    {% for a in xmr %} <tr>
+      <!-- <td><input type="checkbox"></td> -->
+      <td>{{a.xmr}}</td>
+      <th><input type="checkbox"></th> 
+      <th><input type="checkbox"></th> 
+      <td><input type="text"></td>
+    </tr>{% endfor %}
+    <!-- <tr>
+      <!-- <td><input type="checkbox"></td> -->
+      <!-- <td>foo</td>
+      <!-- <td>foo@foo.com</td> -->
+    <!-- </tr> -->
+    <!-- <tr>
+      <!-- <td><input type="checkbox" disabled></td> -->
+      <!-- <td>bar</td>
+      <td>bar@bar.com</td> -->
+    <!-- </tr> -->
+  </tbody>
+</table>
+
+<form action="/po/rca_as_di_info/{{ro.id}}" method="POST">
+  {% csrf_token %}
+
+      <div class="col-md-6 float-right">
+        <a href="/po/rca_di_view/{{ro.id}}" class="m-4"><input type="button" onclick="check()" name="submit"
+            value="Save And Next" class="btn btn-success btn-primary m-2" autocomplete="off"></a>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+  
+  $('[data-type="adhaar-number"]').keyup(function () {
+    console.log('wwwwwwwwwttttttttttttttwwwwwwwwwww')
+    var value = $(this).val();
+    value = value.replace(/\D/g, "").split(/(?:([\d]{2}))(?:([\d]{5}))(?:([\d]{1}))/g).filter(s => s.length > 0).join("-");
+    $(this).val(value);
+  });
+
+  $('[data-type="adhaar-number"]').on("change, blur", function () {
+    var value = $(this).val();
+    var maxLength = $(this).attr("maxLength");
+    if (value.length != maxLength) {
+      $(this).addClass("highlight-error");
+    } else {
+      $(this).removeClass("highlight-error");
+    }
+
+
+  });
+</script>
+
+{% endblock body %}

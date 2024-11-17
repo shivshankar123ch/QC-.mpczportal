@@ -1,0 +1,258 @@
+{% extends 'rca/RCA_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script>
+</head>
+
+
+
+<div class="ed-card-inner mb-5">
+    <div class="card-header">
+        <h2>Bank Details</h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable " id="example2">
+                    <tbody>
+                        <tr>
+                            <th>PO number </th>
+                            <td>MP{{data.wo.rca_cell.user_zone}}WO{{data.wo..id}} </td>
+                        </tr>
+
+                        <tr>
+                            <th> Bank Name</th>
+                            <td> {{data.add_bg_bank}} </td>
+                        </tr>
+                        <tr>
+                            <th>IFSC</th>
+                            <td>{{data.add_ifsc}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Account No.</th>
+                            <td>{{data.add_ac_number}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Account Holder Name</th>
+                            <td>{{data.add_Account_Holder_Name}}</td>
+                        </tr>
+                    <tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>Bank Guarantee Details</h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-5">
+            <form action="/rca/additional_bg_confirm/{{data.id}}" name="myForm" id="myForm" method="POST"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable " id="example2">
+                        <tbody>
+                        <tbody>
+                            <tr>
+                                <th>PO number</th>
+                                <td>MP{{data.wo.rca_cell.user_zone}}WO{{data.wo.id}}</td>
+                            </tr>
+
+                            <!-- <tr>
+                            <td>Bank Name</td>
+                            <td>{{data.bg_bank}}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>IFSC</td>
+                            <td>{{data.ifsc}}</td>
+                        </tr>
+                        
+
+                        <tr>
+                            <td>Account No.</td>
+                            <td>{{data.ac_number}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Account Holder Name</td>
+                            <td>{{data.Account_Holder_Name }}</td>
+
+                        </tr> -->
+
+
+
+                            <tr>
+                                <th>Bank Guarantee No</th>
+                                <td>{{data.add_bg_no}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Amount</th>
+                                <td>{{data.add_amount}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Issue Date</th>
+                                <td>{{data.add_issue_date}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Valid Upto</th>
+                                <td>{{data.add_valid_date}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Claim Date</th>
+                                <td>{{data.add_claim_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>Bg Document</th>
+                                <td style="text-align: left;"><a href="{{data.add_bg_upload.url}}" target="_blank"
+                                        class="fas fa-eye text-secondary">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+
+        <div class="form-informations">
+            <div class="form-group">
+                <label class="ed-radio-block"> Accept
+                    <input type="radio" name="options1" id="option1" onclick="reject1()" autocomplete="off" value="ok">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="ed-radio-block"> Reject
+                    <input type="radio" name="options1" id="option2" onclick="reject();" autocomplete="off"
+                        value="not_ok">
+                    <span class="checkmark"></span>
+                </label>
+                <label id="remark1" hidden="true">
+                    Remark
+                    <input type="text" name="remark" id="remark" placeholder="Enter Your Remark" hidden="true"
+                        style="width:250px;" class="form-control" required="">
+                </label>
+            </div>
+
+
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Acceptance Letter
+                    <span class="text-danger">*</span>
+                </label>
+                <div class="md-customefile">
+                    <input type="file" name="bg_acceptance_let" class="form-control ed-textbox" id="uploadFile"
+                        onchange="pdfUpload()">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-action text-right">
+                    <input type="submit" class="btn ed-submit ed-formSubmit" id="submitBtn"
+                        onclick="return submitForm()"></input>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+
+<script>
+    function reject() {
+        document.getElementById('remark').hidden = false;
+        document.getElementById('remark1').hidden = false;
+        document.getElementById("remark").setAttribute("required", "true")
+        let accBtn2 = document.getElementById("option2").checked;
+        if (accBtn2 == true) {
+            document.getElementById("uploadFile").disabled = true;
+            document.getElementById("uploadFile").style.display = "none";
+        }
+    }
+</script>
+<script>
+    function reject1() {
+        document.getElementById("remark").removeAttribute("required")
+        document.getElementById("uploadFile").disabled = false;
+        document.getElementById('remark').hidden = true;
+        document.getElementById('remark1').hidden = true;
+        document.getElementById("uploadFile").style.display = "block";
+
+
+
+    }
+</script>
+<script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#bg_valid_upto1').attr('min', today);
+</script>
+<script>
+    function pdfUpload() {
+        let uploadFile = document.getElementById("uploadFile");
+        let fileName = uploadFile.files[0].name;
+        console.log(fileName)
+    }
+
+    let submitForm = () => {
+        let uploadFile = document.getElementById("uploadFile");
+        let accBtn = document.getElementById("option1").checked;
+        let accBtn2 = document.getElementById("option2").checked;
+
+        console.log(accBtn, uploadFile.files[0])
+        if (accBtn == true && uploadFile.files[0] != undefined) {
+            console.log(accBtn, uploadFile.files[0])
+            return true;
+        } else if (accBtn == false && uploadFile.files[0] != undefined) {
+
+            alert("Please select accept button")
+            return false
+
+        } else if (accBtn2 == true) {
+            console.log("part 12 ")
+            return true;
+        }
+        else {
+            alert("Please Upload file first.")
+            return false;
+        }
+
+    }
+
+</script>
+
+{% endblock body %}

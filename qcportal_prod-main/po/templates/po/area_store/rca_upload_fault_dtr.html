@@ -1,0 +1,28 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Rapaired inward {% endblock heading %}
+{% block body %}
+
+
+<body style="margin-top: 30px;margin-left: 30px;">
+    <form action = "/po/rca_upload_fault_dtr"  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file"
+               title="Upload excel file"
+               name="excel_file"
+               style="border: 1px solid black; padding: 5px;"
+               required="required">
+        <p>
+            <input type="submit" class="btn btn-primary m-3" value="Upload File">
+    </form>
+
+    <p></p>
+    <hr>
+
+    {% for row in excel_data %}
+        {% for cell in row %}
+            {{ cell }}&nbsp;&nbsp;
+        {% endfor %}
+        <br>
+    {% endfor %}
+    {% endblock body %}

@@ -1,0 +1,128 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+ 
+  <!-- Main content -->
+   <section class="content">
+     
+    <form action="/tkc/site_store_item_received_officer/{{tkc_di_id}}/{{dataid}}" method="post">
+      {% csrf_token %}
+      
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Select Received Material</h3>
+
+         
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                     <th>
+                      <input type="checkbox" onclick="selectAll()" id="select_btn">
+                        Select Received Materials 
+                    </th>
+                  
+                     <th>
+                         Item Name 
+                     </th>
+                     <th>
+                         Serial Number/Betch Number
+                     </th>
+
+                     <th>
+                    Circle Name  
+                    </th>
+
+                  
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                  
+
+                       <td>{% if name.Physical_Status_officer_check == 1 %} Received  <input type="checkbox" name="{{name.id}}" value="1" checked hidden> {% elif name.Physical_Status_officer_check == -1 %}Rejected  <input type="checkbox" name="{{name.id}}" value="-1" checked hidden> 
+                        
+                        {% else %}
+                        <input type="checkbox" name="{{name.id}}" value="2" class="table_col" >
+                   {% endif %}</td>
+
+                       <td>
+                        <b>{{name.wo_material.material_name}}</b>
+                     </td>
+                    
+                     {% if name.offer.excel_type == True %}
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                     {% elif name.offer.excel_type == False %}
+
+                        <td class="project_progress">
+                          {{name.batch_no}}
+                          </td>
+
+                          {% endif %}
+
+                     <td class="project_progress">
+                      {{name.offer.circle.Circle_Name_E}}
+              </td>
+                   
+            
+
+                
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+        <center><button class="btn-lg">Submit</button></center>
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+ <script>
+ 
+ function selectAll(){
+
+  let select_btn = document.getElementById('select_btn');
+  let table_col = document.getElementsByClassName('table_col');
+  
+  if(select_btn.checked == true){
+    for(i of table_col){
+      i.checked = true;
+    }
+  }else{
+    for(i of table_col){
+      i.checked = false;
+    }
+  }
+
+ }
+ 
+  </script>
+ {% endblock body %}
+

@@ -1,0 +1,106 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+  [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+    margin: 5px;
+}
+
+</style>
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        All Purchase Order
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-tableinfo-block  mb-4">
+        <div class="table-responsive">
+          <table class="table table-striped display table-bordered text-center" id="vendor_ins_approval" >
+            <thead class="table-dark">
+              <tr>
+                <th>Sr No.</th>
+                <th class>PO No.</th>
+                <th>Vendor Name</th>
+                <th>PO Subject</th>
+                <th>PO Date</th>
+                <th>Item Name</th>
+                <th>Offer ID</th>
+                <th>Offer Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for name in data%}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{name.po.po_no}}</td>
+                <td>{{name.po.vendor.CompanyName_E}}</td>
+                <td>{{name.po.po_subject}}</td>
+                <td>{{name.po.erp_created_date}}</td>
+                <td>{{name.material.specification}} </td>
+                <td>MP{{name.po.zone}}{{name.id}}</td>
+                <td>{{name.date}} </td>
+                
+                {% if name.Offer == 1 %}
+                <td class="project-actions text-center">
+                  <button class="btn btn-success btn-sm"> Accepted </button> 
+                    <a  href="/po/vendor_offer_view/{{name.po.id}}/{{name.id}}"><button class="btn btn-info btn-sm" >View Offer</button></a>
+                </td>
+                {% elif name.Offer == -1 %}
+                <td class="project-actions text-center">
+                  <button class="btn btn-danger btn-sm"> Rejected </button>
+                  <a  href="/po/vendor_offer_view/{{name.po.id}}/{{name.id}}"><button class="btn btn-info btn-sm"> View Rejected Offer</button></a>
+                </td>
+                  {% else %}
+                <td class="project-actions text-center">
+                  <a  href="/po/vendor_ins_approved/{{name.po.id}}/{{name.id}}"
+                    onclick="return confirm('Are you sure you want to Accept this Offer Material ?');">
+                     <button class="btn btn-primary btn-sm">Accept</button>
+                  </a>
+                  <a href="/po/vendor_ins_reject/{{name.po.id}}/{{name.id}}"
+                    onclick="return confirm('Are you sure you want to Reject this Offer Material ?');">
+                     <button class="btn btn-danger btn-sm">Reject</button>
+                  </a>
+                  {% if name.po.Po_doc %}
+                  <a href="{{name.po.Po_doc.url}} "><button class="btn btn-success btn-sm">PO</button> </a>
+                  {% else %}
+                  <a> <button class="btn btn-success btn-sm">PO</button></a>
+                  {% endif %}
+                  <a  href="/po/vendor_offer_view/{{name.po.id}}/{{name.id}}"><button class="btn btn-info btn-sm"> View Offer</button></a>
+                  <a  href="/po/procurement_status/{{name.po.id}}"><button class="btn btn-success btn-sm">Status</button></a>
+                </td>
+                
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $('#vendor_ins_approval').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+</script>
+
+
+{% endblock body %}>

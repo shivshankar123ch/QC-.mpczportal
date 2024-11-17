@@ -1,0 +1,190 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+  {% endblock rejected_doc %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    /* border: 0; */
+    width: 110px;
+}
+</style>
+
+  <div class="ed-card-inner">
+    <div class="card-header">
+      <h2>
+        Material Offer 
+      </h2>
+    </div>
+
+    <div class="card-body">
+      <div class="forms-informations">
+        <div class="ed-form-block p-0 border-0">
+          <!-- <div class="ed-form-title">
+        <h6>
+            <span class="ed-text">
+                Liaison Info
+            </span>
+        </h6>
+    </div> -->
+          <p class="block text-info">
+            {% if msg2 %}
+            {{ msg2 }}
+            {% endif %}
+          </p>
+          <form action="/vendor/vendor_offer_xmr_save/{{offer.id}}" method="POST" name="myForm"
+            onsubmit="return validateForm()" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="ed-form-body">
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Material Specification
+                  <!-- <span class="text-danger">*</span> -->
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{offer.specification}}" disabled>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Unit Of Measurement
+                  <!-- <span class="text-danger">*</span> -->
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{offer.unit}}" disabled>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Total Order Quantity
+                  <!-- <span class="text-danger">*</span> -->
+                </label>
+                <input type="text" name="category" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{offer.Quantity}}" disabled>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Offer Item Quantity
+                  <!-- <span class="text-danger">*</span> -->
+                </label>
+                <input type="number" name="quantity" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="{{quantity1}}" disabled>
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Enter Serial No./Batch No.
+                  <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="input_serial_no" class="form-control ed-textbox" id="exampleInputEmail1"
+                  placeholder="Serial no. First -/To Last">
+              </div>
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Date of Readiness
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input type="date" name="readiness_date" class="form-control ed-textbox" onkeypress="return false" id="exampleInputEmail1" placeholder=" ">
+                
+
+              </div>
+
+
+              <div class="form-group">
+                <label class="ed-form-label">
+                  Upload Routine Test Report
+                  <span class="text-danger">*</span>
+                </label>
+                <input type="file" name='file' id="file33" accept="application/pdf" placeholder="Upload File"
+                  onclick="validateForm()" required>
+                <span id="file22" class="d-block ed-warningtext text-danger"></span>
+              </div>
+
+
+              <div class="form-group">
+                <div class="btn-actionblock text-center">
+                  <button type="submit" id="submit" onclick="validateForm()"
+                    class="btn btn-success btn-sm" style="font-size:18px;"> Offer </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--        <div class="col-md-6">-->
+  <!--<div class="form-group">-->
+  <!--       <label for="exampleInput1">Upload CSV For Bulk Quantity</label>-->
+  <!-- <input type="file" name='file' class="form-control" id="exampleInput1" placeholder="Upload CSB File">-->
+  <!--</div>-->
+  <!--        </div>-->
+  <!--       <div class="col-md-6">-->
+  <!--<div class="card-body">-->
+  <!--  <table id="example2" class="table table-bordered table-hover">-->
+  <!--  <thead>-->
+  <!--    <tr>-->
+  <!--        <th style="width:5%">-->
+  <!--             Serial No-->
+  <!--        </th>-->
+  <!--        <th style="width: 25%">-->
+  <!--            Item Serial No-->
+  <!--        </th>-->
+  <!--    </tr>-->
+  <!--    </thead>-->
+  <!--    <tbody>-->
+  <!--    {% for data in quantity %}-->
+  <!--    <tr>-->
+  <!--      <td>{{forloop.counter}}</td>-->
+  <!--      <td>-->
+  <!--       <input type="text" name={{forloop.counter0}} class="form-control" id="exampleInputEmail1" placeholder="Enter Offer Item Serial  No" required>-->
+  <!--      </td>-->
+  <!--    </tr>-->
+  <!--      {% endfor %}-->
+  <!--    </tbody>-->
+  <!--  </table>-->
+  <!--</div>-->
+  <!--      </div>-->
+
+  <!-- /.row -->
+  <!-- /.row -->
+
+  <!-- /.card-body -->
+
+
+
+  <script>
+    function validateForm() {
+      console.log("funceijfwo")
+      let fileup = document.forms["myForm"]["file"].value;
+      let fileee = document.getElementById("file33").value;
+      var allowedExtensions = /(\.pdf)$/i;
+      let fileInput_Result1 = allowedExtensions.test(fileee);
+
+      if (fileup == "") {
+        document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+        return false;
+      } else {
+        //document.getElementById('Twenty_two').innerHTML = "";
+        if (fileInput_Result1 == false) {
+          document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+          return false;
+        } else {
+          // document.getElementById('file1').innerHTML = "";
+          const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+          if (oFile > 2) {
+            alert("File size must be less than or equal to 2 MB");
+            document.getElementById("file33").value = "";
+            return false;
+
+          } else {
+            document.getElementById('file22').innerHTML = "";
+          }
+        }
+      }
+    }
+  </script>
+  {% endblock body %}

@@ -1,0 +1,81 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 145px;
+}
+
+.ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+</style>
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+
+
+<table class="table table-bordered table-striped display text-center" id="partial_mrc_sign_list">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col-1">S.No.</th>
+      <th scope="col-2">Vendor</th>
+      <th scope="col-2">Work Order No.</th>
+      <th scope="col-2">Release Order No.</th>
+      <!-- <th scope="col-2" style="text-align: center;">Rating</th> -->
+      <th scope="col-2">MRC No.</th>
+      <th scope="col-3">Store Name</th>
+      <th scope="col-3">Action</th>
+      <th scope="col-3">Upload & Approve</th>
+      <th scope="col-3">Download digitally signed pdf</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for info in data %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td><b>{{ info.ro.wo.vendor_id.CompanyName_E}}</b></td>
+      <td><b>MP{{info.ro.wo.rca_cell.user_zone}}WO{{ info.ro.wo.id}}</b></td>
+      <td><b>RO00{{ info.ro.id}}</b></td>
+      <!-- <td style="text-align: center;"><b>{{ info.rating}}</b></td> -->
+      <td><b>{{ info.id}}</b></td>
+      <td></b>{{ info.ro.store.Name }}</b></td>
+      <td><a href="/po/partial_mrc_view/{{info.id}}" > <button class="btn btn-info btn-sm">View MRC</button> </a></td>
+      <td> <a href="/po/upload_digi_partial_mrc/{{info.id}}"><button class="btn btn-primary btn-sm">Upload link</button></a></td>
+      {% if info.digi_flag_pr %}
+          <td ><a href="{{info.digi_sign_pr.url}}" target="_blank" ><button class="btn btn-success btn-sm">Uploaded</button></a></td>
+      {% else %}
+          <td ><a  onclick="alert('File not uploaded yet!')"> <button class="btn btn-danger btn-sm">Not Uploaded</button></a></td>    
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready( function () {
+    $('#partial_mrc_sign_list').DataTable();
+} );
+</script>
+
+{% endblock body %}

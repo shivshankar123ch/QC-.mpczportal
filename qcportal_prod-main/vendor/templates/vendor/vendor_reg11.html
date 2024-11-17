@@ -1,0 +1,376 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink { background-color:
+#007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px; width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page content) / .tabcontent
+{ color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;} #General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details {background-color: white;}
+#Declaration Details{background-color: white;} td{ padding-right: 20px; } {% endblock style %} {% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg11.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<!----start herse-->
+<form class="multisteps-form__form mb-8" action="vendor_reg_eleven" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Technical Details
+            </h2>
+        </div>
+
+        <div class="card-body">
+            <div class="venreg-blocks">
+                <ul class="technical-listems">
+                    <li class="nav-item">
+                        <h6>
+                            PREVIOUS SUPPLY ORDER COPIES/COMPLETION CERTIFICATE/DOCUMENTARY EVIDENCE REQUIRED(mininum experience criteria Annex-II)
+                            <a href="{% static '/pdf/Annex-2.pdf' %}" target="_blank" class="btn ed-submits btn-info">
+                                View  
+                            </a>
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <!-- <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Document Issued By
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="multisteps-form__select form-control ed-textbox ed-textbox"
+                                            type="text" name="name_office" id="v_office_name_supply"
+                                            onblur="errorFrom(id)" required="required" placeholder="Enter Office Name">
+                                        <span id="v_office_name_supply_span"
+                                            class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Document Serial No.
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="multisteps-form__select form-control ed-textbox "
+                                            name="seven" id="v_supply_criteria" maxlength="15"
+                                            class="form-control ed-textbox" onblur="errorFrom(id)" required="required"
+                                            placeholder="9999...">
+                                        <span id="v_supply_criteria_span"
+                                            class="d-block ed-warningtext text-danger"></span>
+                                    </div> -->
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="eight" id="v_upload_file_ele" accept="application/pdf" required="required">
+                                        <span id="v_upload_file_ele_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            LIST OF PLANTS & MACHINERIES
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" accept="application/pdf" id="v_file_upload_elev" name="nine" required="required">
+                                        <span id="V_file_upload_elev" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <h6>
+                            LIST OF TESTING EQUIPMENT
+                            <span class="text-danger">*</span>
+                        </h6>
+
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="ten" accept="application/pdf" id="v_upload_file_eleve" required="required">
+                                        <span id="V_upload_file_eleve" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <h6>
+                            CALIBRATION CERTIFICATE FOR ALL TESTING EQUIPMENT(shall be cross verify during factory inspection)
+                            <span class="text-danger">*</span>
+                        </h6>
+
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="eleven" accept="application/pdf" id="v_file_upload_eleven" required="required">
+                                        <span id="V_file_upload_eleven" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            BIS LICENCE (if applicable)
+
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                         
+                                        </label>
+                                        <input type="file" name="thirteen" accept="application/pdf" id="v_upload_se1">
+                                        <span id="bsi_11" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <h6>
+                            ISI LICENCE
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="fifteen" accept="application/pdf" id="upload_eight"
+                                            required="required">
+                                        <span id="file_2" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+
+                    <li class="nav-item">
+                        <h6>
+                            INTERNAL QUALITY PLAN OF VENDOR FIRM
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Name Of Method Adopted For Quality Control
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="eighteen" id="v_method_ten" class="form-control ed-textbox" onblur="errorFrom(id)" required="required">
+                                        <span id="v_method_ten_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="nineteen" accept="application/pdf" id="v_upload_ten" required="required">
+                                        <span id="file4" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            SOURCE OF SUPPLY OF RAW MATERIAL WITH ADDRESS(list)
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Supplier name with address
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea type="textarea" name="twenty" id="v_eleven_source" class="form-control ed-textbox ed-textbox1" required="required" onblur="errorFrom(id)"></textarea>
+                                        <span id="v_eleven_source_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="twenty_one" accept="application/pdf" id="v_eleven_upload_one" required="required">
+                                        <span id="data11" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            LIST OF ITEMS HOLDING ISO 9001 CERTIFICATE
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Name Of Items (Separated by comma)
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="v_office_list_two" id="v_office_list_two" class="form-control ed-textbox" onblur="errorFrom(id)" required="required">
+                                        <span id="v_office_list_two_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Upload file
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="twenty_three" accept="application/pdf" id="v_upload_file_two" required="required">
+                                        <span id="data13" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <h6>
+                            Electricity Bill Of Firm/Company Primises
+                            <span class="text-danger">*</span>
+                        </h6>
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Electricity Connection No.
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="tel" name="twenty_four" id="Twenty_four_78" maxlength="15" minlength="5" class="form-control ed-textbox" onblur="errorFrom(id)" required="required">
+                                        <span id="Twenty_four_78_span" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Latest bill upload
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="file" name="twenty_five_90" accept="application/pdf" id="Twenty_five" required="required">
+                                        <span id="data35" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+
+
+            <div class="form-group mt-2">
+                <div class="btn-actionblock text-right">
+                    <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="new">Prev</a></button> -->
+                    <button class="btn ed-submit ed-formsubmit" value="Submit" type="Submit" title="Save & Next">
+                        Save & Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent = document.getElementsByClassName("tabcontent"); for (i = 0; i
+< tabcontent.length; i++) { tabcontent[i].style.display="none" ; } tablinks=document.getElementsByClassName( "tablink" ); for (i=0; i < tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; } document.getElementById(pageName).style.display="block"
+    ; elmnt.style.backgroundColor=color; } // Get the element with id="defaultOpen" and click on it document.getElementById( "defaultOpen" ).click(); $(document).ready(function() { var currentItem=1; $( '#insert-more' ).click(function(){ currentItem++; $(
+    '#items' ).val(currentItem); var strToAdd='<tr id="row1"><th>Select Material<div><select id="food-zone-user' +currentItem+ '"
+          name="food-zone-user' +currentItem+ '" class=" multiselect-ui form-control ed-textbox user-input form-control ed-textbox form-control ed-textbox-submit"
+          required="required">
+          <option value="select-option-user-three" disabled selected hidden selected>Power Transformer</option>
+          <option value="5MVA, 33/11 KV">Transformer</option>
+          <option value="8MVA, 33/11 KV">Conductor</option>
+          <option value="2500 KVA, 33/11 KVA">Cable</option>
+          <option value="1.6 MVA, 33/11 KV">Meter</option>
+          </div>
+          </th>
+          <th>Select Material Specification<div><select id="food-zone-user1' +currentItem+ '"
+                name="food-zone-user1' +currentItem+ '"
+                class=" multiselect-ui form-control ed-textbox user-input form-control ed-textbox form-control ed-textbox-submit" required="required">
+                <option value="select-option-user-three" disabled selected hidden selected>Material Specification</option>
+                <option value="63 KVA, 11/0.4 KV">63 KVA, 11/0.4 KV</option>
+                <option value="200 KVA, 33/0.4 KV">200 KVA, 33/0.4 KV</option>
+                <option value="16 KVA, 11/0.4 KV">16 KVA, 11/0.4 KV</option>
+                <option value="630 KVA, 33/0.433 KV">630 KVA, 33/0.433 KV</option>
+                <option value="100 KVA, 11/0.4 KV">100 KVA, 11/0.4 KV</option>
+                <option value="200 KVA, 11/0.4 KV">200 KVA, 11/0.4 KV</option>
+                <option value="315 KVA, 11/0.4 KV">315 KVA, 11/0.4 KV</option>
+                <option value="25 KVA, 11/0.4 KV">25 KVA, 11/0.4 KV</option>
+            </div>
+          </th>
+          <th>Type tests upload file<input type="file" name="v_upload_file_media' +currentItem+ '"
+              id="v_upload_file_media' +currentItem+ '" class="form-control ed-textbox" required="required"></th>
+          <th>GTP upload file<input type="file" name="v_upload_file_media' +currentItem+ '"
+              id="v_upload_file_media' +currentItem+ '" class="form-control ed-textbox" required="required"></th>
+          <th>others upload file<input type="file" name="v_upload_file_media' +currentItem+ '"
+              id="v_upload_file_media' +currentItem+ '" class="form-control ed-textbox" required="required"></th>
+          <!-- <th><input type="button"  class="button btn btn-primary" value="View"></th>E -->
+          <th><input type="button" onclick="rowData()" class="button btn btn-primary" value="Delete"></th>
+          </tr>' ; $( '#myTable' ).append(strToAdd); }); }); {% endblock script %}

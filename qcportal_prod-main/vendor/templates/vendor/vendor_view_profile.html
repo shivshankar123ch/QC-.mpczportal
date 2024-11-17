@@ -1,0 +1,428 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+
+<form action="/vendor/update_profile" method="POST">
+    {% csrf_token %}
+
+    <h5 class="font-weight-bolder mb-0">Basic Details</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table table-dark">
+                <tr>
+                    <th scope="col" class="text-center" style="width: 10px;">
+                        S.No.</th>
+                    <th scope="col">
+                        Title </th>
+                    <th scope="col">
+                        Value </th>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td class="text-center" scope="row">1</td>
+                        <td>ID</td>
+                        <td>{{basic.User_Id}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">2</td>
+                        <td>DISCOM</td>
+                        <td>{{basic.User_zone}}
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">3</td>
+                        <td>Type of Business</td>
+                        <td>{{basic.Type_of_business}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">4</td>
+                        <td>User Type</td>
+                        <td>{{basic.User_type}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">5</td>
+                        <td>Name Of Company/Firm</td>
+                        <td>{{basic.CompanyName_E}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">6</td>
+                        <td>Authorised Person</td>
+                        <td>{{basic.Authorised_person_E}}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="text-center" scope="row">7</td>
+                        <td>Contact Number</td>
+                        <td>{{basic.ContactNo}}</td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="text-center" scope="row">8</td>
+                        <td>Email ID</td>
+                        {% if company.Email_Id == 'None' %}
+                        <td><input type="text" name="seven" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" readonly='readonly'></td>
+
+                        {% else %}
+                        <td>{{basic.Email_Id}}</td>
+                        {% endif %}
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">9</td>
+                        <td>Company/Firm PAN Card</td>
+                        {% if company.Company_Pan_No == 'None' %}
+                        <td><input type="text" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" name="eight" id="pan" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" onfocus="validateForm()" onchange="validateForm()" style="background-color: #11cdef;"
+                                readonly='readonly'></td>
+
+                        {% else %}
+                        <td>{{company.Company_Pan_No}}</td>
+                        {% endif %}
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">10</td>
+                        <td>Company/Firm Gumasta Number</td>
+                        {% if company.Company_Gumastha_No == 'None' %}
+                        <td><input type="text" name="nine" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" style="background-color: #11cdef;" readonly='readonly'></td>
+
+                        {% else %}
+                        <td>{{company.Company_Gumastha_No}}</td>
+                        {% endif %}
+
+                    </tr>
+                    <tr>
+                        <td class="text-center" scope="row">11</td>
+                        <td>Company/Firm GST Number</td>
+                        {% if company.Company_Gst_No == 'None' %}
+                        <td><input type="text" name="ten" placeholder="Not Fill" style="background-color: #11cdef!important;" class="btn btn-secondary bg-warning text-bold" readonly='readonly'></td>
+
+                        {% else %}
+                        <td>{{company.Company_Gst_No}}</td>
+                        {% endif %}
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-center" scope="row">12</td>
+                        <td>Company/Firm FAX Number</td>
+                        {% if company.Company_Fax == 'None' %}
+                        <td><input type="text" name="twelve" pattern="^\d{10}$" maxlength="10" minlength="5" style="background-color: #11cdef;" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" readonly='readonly'></td>
+
+
+                        {% else %}
+                        <td>{{company.Company_Fax}}</td>
+                        {% endif %}
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                </tbody>
+        </table>
+        <br/>
+        <hr/>
+        <br/>
+        <h5 class="font-weight-bolder mb-0">Permanent Address</h5>
+        <table class="table table-bordered table-responsive">
+            <thead class="table table-dark">
+                <tr>
+                    <th scope="col" class="text-center" style="width: 10px;">
+                        S.No.</th>
+                    <th scope="col">
+                        Title </th>
+
+                    <th scope="col" style="width: 42%;">
+                        Value </th>
+            </thead>
+
+
+            <tr>
+                <td class="text-center" scope="row">1</td>
+                <td>Address 1</td>
+                {% if company.Company_add_1 == 'None' %}
+                <td><input type="text" name="thireteen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" readonly='readonly' style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_add_1}}</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td>&nbsp&nbsp&nbsp&nbsp&nbsp2</td>
+                <td>&nbsp&nbsp&nbspAddress 2</td>
+                {% if company.Company_add_2 == 'None' %}
+                <td><input type="text" name="fourteen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_add_2}}</td>
+                {% endif %}
+
+            </tr>
+
+            <tr>
+                <td class="text-center" scope="row">2</td>
+                <td>City</td>
+                {% if company.Company_add_2 == 'None' %}
+                <td><input type="text" name="city_p" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_city}}</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td class="text-center" scope="row">3</td>
+                <td>Pin Code</td>
+                {% if company.Company_pin_code == 'None' %}
+                <td><input type="text" name="fifteen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color: #5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_pin_code}}</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td class="text-center" scope="row">4</td>
+                <td>District</td>
+                {% if company.Company_dist == 'None' %}
+                <td><input type="text" name="sixteen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_dist}}</td>
+                {% endif %}
+
+            </tr>
+
+            <tr>
+                <td class="text-center" scope="row">5</td>
+                <td>State</td>
+                {% if company.Company_state == 'None' %}
+                <td><input type="text" name="seventeen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_state}}</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+
+            </tr>
+
+            </tbody>
+        </table>
+        <h5 class="font-weight-bolder mb-0">Communication Address</h5>
+        <table class="table table-bordered table-responsive">
+            <thead class="table table-dark">
+                <tr>
+                    <th scope="col" class="text-center" style="width: 10px;">
+                        S.No.</th>
+                    <th scope="col">
+                        Title </th>
+
+                    <th scope="col" style="width: 42%;">
+                        Value </th>
+            </thead>
+            <tr>
+                <td class="text-center" scope="row">1</td>
+                <td>Address 1</td>
+                {% if company.Company_t_add_1 == 'None' %}
+                <td><input type="text" name="eighteen" class="btn btn-secondary bg-warning text-bold" placeholder="Not Fill" required style="background-color: #F8AF77 ;">
+                </td>
+
+                {% else %}
+
+                <td>{{company.Company_t_add_1}}</td>
+
+                {% endif %}
+
+
+            </tr>
+            <tr>
+                <td class="text-center" scope="row">2</td>
+                <td>Address 2</td>
+                {% if company.Company_t_add_2 == 'None' %}
+                <td><input type="text" name="nineteen" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color: #F8AF77 ;">
+                </td>
+                {% else %}
+
+                <td>{{company.Company_t_add_2}}</td>
+
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td class="text-center" scope="row">2</td>
+                <td>City</td>
+                {% if company.Company_add_2 == 'None' %}
+                <td><input type="text" name="city_t" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required style="background-color:#5e72e4;"></td>
+
+                {% else %}
+                <td>{{company.Company_t_city}}</td>
+                {% endif %}
+
+            </tr>
+
+            <tr>
+                <td class="text-center" scope="row">3</td>
+                <td>Pin Code</td>
+                {% if company.Company_t_pin_code == 'None' %}
+                <td><input type="text" name="twenty" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required></td>
+                {% else %}
+                <td>{{company.Company_t_pin_code}}</td>
+
+                {% endif %}
+
+            </tr>
+            <tr>
+                <td class="text-center" scope="row">4</td>
+                <td>District</td>
+                {% if company.Company_t_dist == 'None' %}
+                <td><input type="text" name="twentyone" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required></td>
+
+                {% else %}
+                <td>{{company.Company_t_dist}}</td>
+
+                {% endif %}
+
+            </tr>
+
+            <tr>
+                <td class="text-center" scope="row">5</td>
+                <td>&nbsp&nbsp&nbspState</td>
+                {% if company.Company_t_state == 'None' %}
+                <td><input type="text" name="twentytwo" placeholder="Not Fill" class="btn btn-secondary bg-warning text-bold" required></td>
+
+                {% else %}
+                <td>{{company.Company_t_state}}</td>
+                {% endif %}
+
+            </tr>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</form>
+
+
+
+<!----start trial here-->
+<!-----end here-->
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="table table-dark">
+            <tr>
+                <th scope="col"> Document Name </th>
+                <th scope="col"> Document Number </th>
+                <th scope="col"> View Document</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for data in vendor_document %}
+            <tr>
+
+                <td><b>{{data.Types_of_Docs}}</b></td>
+                <td><b>{{data.Document_Number}}</b></td>
+
+                <td> <a href="{{data.Ddocfile.url}} " target="_blank" class="btn btn-info text-capitalize fw-bold view_button" style="width: 160px;">View</a></td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <thead class="table table-dark">
+            <tr>
+                <th scope="col"> Document Name </th>
+
+                <th scope="col"> View Document</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for data in vendor_balance %}
+            <tr>
+                <td><b>{{data.document_name}}</b></td>
+
+                <td> <a href="{{data.Balance_Sheet.url}} " target="_blank" class="btn btn-info text-capitalize fw-bold view_button" style="width: 160px;">View</a></td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <thead class="table table-dark">
+            <tr>
+                <th scope="col"> Document Name </th>
+                <th scope="col" style="width:20.50%;"> View Document</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for data in vendor_tech %}
+            <tr>
+                <td><b>{{data.Types_of_Docs}}</b></td>
+
+                <td> <a href="{{data.Document_Doc.url}} " target="_blank" class="btn btn-info text-capitalize fw-bold view_button" style="width: 160px;">View</a></td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+<!-- /.card-body -->
+</div>
+<!-- /.card -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+
+
+
+
+</div>
+</form>
+
+
+
+<!----start trial here-->
+<!-----end here-->
+
+
+
+
+{% endblock body %}

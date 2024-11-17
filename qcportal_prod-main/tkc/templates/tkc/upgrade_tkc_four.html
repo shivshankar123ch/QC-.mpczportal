@@ -1,0 +1,98 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+<script>container(
+  margin: const EdgeInsets.all(15.0),
+  padding: const EdgeInsets.all(3.0),
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.blueAccent)
+  ),
+  child: Text('My Awesome Border'),
+)</script>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+
+                </div>
+                <div class="card-body border border-primary">
+                    <form action="/tkc/upgrade_tkc_four" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                          <center>
+                                  <center> <h5 class="font-weight-bolder">
+                           Payment Details
+                                      <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="custom-control-label" for="defaultInline1">Deposit Money For Contractor Class Upgrade <span
+                                    style="color: red">*</span></label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                        <label class="custom-control-label" for="defaultInline1">Online Payment</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></center>
+                       <center> <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Security Amount <span style="color: red">*</span></label>
+                                    <p>{{ amount1 }}  Rs </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contractor Type <span style="color: red">*</span></label>
+                                    <p>{{ amount.Name }}</p>
+                                </div>
+                            </div>
+                        </div></center>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label" for="inlineCheckbox1">All the details provided by me are completely
+                    correct, if found to be wrong / forged in future, the company Can take any kind of legal action
+                    against me<span style="color: red">*</span></label>
+                                    <input class="form-check-input" type="checkbox" id="oyt" name="defaultCheck" id="defaultCheck1" required />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                            <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" name="submit" value="submit" class="btn btn-success" autocomplete="off">Payment</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox({
+                alwaysShowClose: true
+            });
+        });
+
+        $('.filter-container').filterizr({
+            gutterPixels: 3
+        });
+        $('.btn[data-filter]').on('click', function() {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
+    })
+</script>
+{% endblock body %}

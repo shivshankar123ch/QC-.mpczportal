@@ -1,0 +1,155 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="card">
+          <h4 class="float-left"> Tier2 Inspection Offer List</h4>
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 5%">
+                          #
+                      </th>
+                      <th style="width: 10%">
+                          PO No
+                      </th>
+                           <th style="width: 10%">
+                            Milestone Complete
+                      </th>
+                      <th style="width: 10%">
+                          Milestone For Inspection
+                      </th>
+                      <th style="width: 20%">
+                        Choose  Inspection Date
+                      </th>
+                       <th style="width: 20%">
+                         Choose Inspection Officer
+                      </th>
+                        <th style="width: 30%">
+                         Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                      <td>
+                         1
+                      </td>
+                      <td>
+                         <b>MPCZ004</b>
+                      </td>
+                        <td>
+                         <b>100%</b>
+                        </td>
+                      <td>
+                          100%
+                      </td>
+                      <td class="project_progress">
+                          <input type="date" ></td>
+                      </td>
+                      <td>
+                   <select id="vendor"  name="vendor" class="form-control custom-select" required>
+                  <option selected disabled value="" >Choose Officer</option>
+                   {% for name in officer %}
+                    <option value='{{name.v_email}}'>{{name.officer_name}}</option>
+                     {% endfor %}
+                   </select>
+                      </td>
+                      <td class="project-actions text-center">
+                          <a class="btn btn-primary btn-sm" href="/vendor_gtp_approved/{{name.id}}">
+                               View
+                          </a>
+                         <a class="btn btn-primary btn-sm" href="/vendor_gtp_approved/{{name.id}}">
+                               Create
+                          </a>
+                      </td>
+                  </tr>
+                      <tr>
+                      <td>
+                         2
+                      </td>
+                      <td>
+                         <b>MPCZ008</b>
+                      </td>
+                        <td>
+                         <b>100%</b>
+                        </td>
+                      <td>
+                          100%
+                      </td>
+                      <td class="project_progress">
+                          <input type="date" ></td>
+                      </td>
+                      <td>
+                   <select id="vendor"  name="vendor" class="form-control custom-select" required>
+                  <option selected disabled value="" >Choose Officer</option>
+                   {% for name in officer %}
+                    <option value='{{name.v_email}}'>{{name.officer_name}}</option>
+                     {% endfor %}
+                   </select>
+                      </td>
+                      <td class="project-actions text-center">
+                          <a class="btn btn-primary btn-sm" href="/vendor_gtp_approved/{{name.id}}">
+                               View
+                          </a>
+                             <a class="btn btn-primary btn-sm" href="/vendor_gtp_approved/{{name.id}}">
+                               Create
+                          </a>
+
+                      </td>
+                  </tr>
+
+                 {% for name in data%}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>MPCZ00{{name.id}}</b>
+                      </td>
+                      <td>
+                          {{name.item_category}}
+                      </td>
+                      <td class="project_progress">
+                              {{name.item_name}}
+                      </td>
+                      <td>
+                           {{name.item_quantity}}
+                      </td>
+                      <td class="project-actions text-center">
+                          <a class="btn btn-primary btn-sm" href="/vendor_gtp_approved/{{name.id}}">
+                               Detail
+                          </a>
+
+                      </td>
+                  </tr>
+              {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+
+{% endblock body %}

@@ -1,0 +1,43 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+
+
+<!-- <div class="row"> -->
+<!-- <div class="col-12 col-lg-8 m-auto"> -->
+<form  action="/tkc/tkc_wo_select_testing_nabl/{{data.offer_no}}" name="myForm"  method="POST">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">Select NABL For Material Testing</h5>
+  
+    <div class="multisteps-form__content">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label class="labelName text-capitalize">NABL<span style="color: red;">*</span></label>
+                <select class="form-control op1 form-select form-select-lg" aria-label=".form-select-lg example" name="nabl" id="work_experience" required onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                 <option selected disabled value="">Select NABL</option>
+                    {% for data2 in nabl %}
+                    {% for data in data2 %}
+                    {{data}}
+                    <option selected value="{{data.CompanyName_E}}">
+                        {{data.CompanyName_E}}
+                    </option>
+                    {% endfor %}
+                    {% endfor %}
+               
+              </select>
+                <span id="Work_experience" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+         
+        </div>
+
+
+        <div class="button-row d-flex mt-4">
+		<button class="btn btn-primary text-capitalize fw-bold custom ms-auto mb-0" onclick="validateForm();" value="Submit" type="submit" title="Next">Save</button>
+            <!-- </div> -->
+</form>
+</div>
+<!-- </div> -->
+
+<!--single form panel-->
+
+{% endblock body %}

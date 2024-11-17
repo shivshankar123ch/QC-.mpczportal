@@ -1,0 +1,243 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <!--    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reject.js"></script>-->
+    </head>
+    <div class="wrapper mb-12">
+        <br /><br />
+        <!---try start here-->
+        <h5 class="font-weight-bolder mb-0">List Of Rejected Doc By W&P</h5>
+        <div class="table-responsive">
+            {% with name=100 %} {% for data in data %}
+            <form action="/vendor/rejected_doc_save/{{data.Vendor_Document_Id}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <table class="table table-responsive table-bordered " id="datatable-search">
+                    <thead">
+                        <tr>
+                            <th><label><b>{{data.Types_of_Docs}}</b></label></th>
+                        </tr>
+                        <tr>
+                          
+
+                            <th>Issued Date<br> <b>{{data.Doc_issue_date}}</b><input type="date" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" name='issue_date' id="issue_id" value="{{data.Doc_issue_date}}">
+                                <br> <span id="issue" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+
+                            <th>Expired Date<br> {{data.Doc_expiry_date}}</b><input type="date" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" name='expire_date' id="expire_id" value="{{data.Doc_expiry_date}}">
+                                <br> <span id="expire" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+
+                            <th>Upload File<br> <input type="file" name="file" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" id="file123" accept="application/pdf" class="form-control">
+                                <br> <span id="upoadFile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{{data.Ddocfile.url}} " class="btn btn-primary" style="background-color: #423d64;margin-left: 50px;">View</a>
+                            </td>
+                            <td colspan="5"><textarea id="task" rows="2" cols="24" placeholder='{{data.DGM_remark}}' disabled></textarea></td>
+                            <td><button type="Submit" value="Submit" class="btn btn-primary ms-auto mb-0" style="width: 160px;">Resubmit</button></td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            {% endfor %} {% endwith %}
+        </div>
+        <hr />
+        <br />
+        <!---end here-->
+        <!--second trial here-->
+        <h5 class="font-weight-bolder mb-0 text-dark">List Of Rejected Doc By Finance Department</h5>
+        <div class="table-responsive">
+            {% with name=100 %} {% for data in data1 %}
+            <form action="/vendor/rejected_doc_save/{{data.Vendor_Document_Id}}" method="POST" enctype="multipart/form-data" name="myForm1" onsubmit="return valid()">
+                {% csrf_token %}
+                <table class="table table-flush table-bordered table-hover table-responsive" id="datatable-search">
+                    <label>{{data.Types_of_Docs}}</label>
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Document Name<br> <input type="text" name='doc_name1' onkeyup="valid()" onfocus="valid()" onchange="valid()" placeholder="{{data.document_name}}">
+                                <br>
+                            </th>
+
+                            <th>Upload File<br> <input type="file" id="file_file1" accept="application/pdf" onkeyup="valid()" onfocus="valid()" onchange="valid()" name="file2" class="form-control">
+                                <br> <span id="file_file" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <a href="{{data.Balance_Sheet.url}} " class="btn btn-info" target="_blank" style="background-color: #423d64;margin-left: 50px;">View</a>
+                            </td>
+                            <td colspan="5"><textarea class="form-control" id="task" rows="2" required="required" cols="20" placeholder='{{data.Primary_remark}}' disabled></textarea></td>
+                            <td><button type="Submit" value="Submit" class="btn btn-primary ms-auto mb-0">Resubmit</button></td>
+
+                        </tr>
+
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <br> {% endfor %} {% endwith %}
+        </div>
+
+
+
+
+
+        <hr />
+        <br />
+
+        <h5 class="font-weight-bolder mb-0">List Of Rejected Technical Doc By W&P</h5>
+        <div class="table-responsive">
+            {% with name=100 %} {% for data3 in data2 %}
+            <form action="/vendor/rejected_doc_save/{{data3.id}}" method="POST" enctype="multipart/form-data" name="myForm3" onsubmit="return valid()">
+                {% csrf_token %}
+                <table class="table table-responsive table-bordered " id="datatable-search">
+                    <thead">
+                        <tr>
+                            <th><label><b>{{data3.Types_of_Docs}}</b></label></th>
+                        </tr>
+                        <tr>
+                          
+
+
+                            <th>Upload File<br> <input type="file" name="file3" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" id="file123" accept="application/pdf" class="form-control">
+                                <br> <span id="upoadFile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{{data3.Document_Doc.url}} " class="btn btn-primary" style="background-color: #423d64;margin-left: 50px;">View</a>
+                            </td>
+                            <td colspan="5"><textarea id="task" rows="2" cols="24" placeholder='{{data3.DGM_remark}}' disabled></textarea></td>
+                            <td><button type="Submit" value="Submit" class="btn btn-primary ms-auto mb-0" style="width: 160px;">Resubmit</button></td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            {% endfor %} {% endwith %}
+        </div>
+        <hr />
+        <br />
+
+
+
+
+
+        <h5 class="font-weight-bolder mb-0">List Of Rejected Material</h5>
+        <div class="table-responsive">
+            {% with name=100 %} {% for data4 in data3 %}
+            <form action="/vendor/rejected_doc_save/{{data4.id}}" method="POST" enctype="multipart/form-data" name="myForm4" onsubmit="return valid()">
+                {% csrf_token %}
+                <table class="table table-responsive table-bordered " id="datatable-search">
+                    <thead">
+                      
+                        <tr>
+                          
+
+                            <th>Material Name<br> <b>{{data3.Material_Name}}</b><input type="text" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"  value="{{data4.Material_Name}}" readonly>
+                                <br> <span id="issue" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                            <th>Material Specification<br> <b>{{data3.Material_Specification}}</b><input type="text" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"  value="{{data4.Material_Specification}}" readonly>
+                                <br> <span id="issue" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+
+
+
+                            <th>Material Test Doc<br> <input type="file" name="file4" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" id="file123" accept="application/pdf" class="form-control">
+                                <br> <span id="upoadFile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                            <th>Material GTP Doc<br> <input type="file" name="file5" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" id="file123" accept="application/pdf" class="form-control">
+                                <br> <span id="upoadFile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                            <th>Material Other Doc<br> <input type="file" name="file6" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" id="file123" accept="application/pdf" class="form-control">
+                                <br> <span id="upoadFile" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{{data3.Material_Test_Doc.url}} " class="btn btn-primary" style="background-color: #423d64;margin-left: 50px;">Test Doc</a>
+                            </td>
+                            <td>
+                                <a href="{{data3.Material_GTP_Doc.url}} " class="btn btn-primary" style="background-color: #423d64;margin-left: 50px;">GTP Doc</a>
+                            </td>
+                            <td>
+                                <a href="{{data3.Material_Other_Doc.url}} " class="btn btn-primary" style="background-color: #423d64;margin-left: 50px;">Other Doc</a>
+                            </td>
+                            <td colspan="5"><textarea id="task" rows="2" cols="24" placeholder='{{data3.DGM_remark}}' disabled></textarea></td>
+                            <td><button type="Submit" value="Submit" class="btn btn-primary ms-auto mb-0" style="width: 160px;">Resubmit</button></td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            {% endfor %} {% endwith %}
+        </div>
+        <hr />
+        <br />
+
+
+
+
+
+
+
+
+
+        </script>
+        <script>
+            let dtElem = document.getElementById('issue_id');
+            let maxDate = new Date();
+            dtElem.max = formatDate(maxDate);
+
+            function formatDate(date) {
+                let dd = String(date.getDate()).padStart(2, '0');
+                let mm = String(date.getMonth() + 1).padStart(2, '0');
+                let yyyy = date.getFullYear();
+                return `${yyyy}-${mm}-${dd}`;
+            }
+        </script>
+        <script language="javascript">
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            $('#expire_id').attr('min', today);
+        </script>
+        <!--second trial end here-->
+
+
+        {% endblock body %}

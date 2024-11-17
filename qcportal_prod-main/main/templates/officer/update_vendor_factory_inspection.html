@@ -1,0 +1,90 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %} 
+
+
+
+
+<link id="pagestyle" href="{% static '/css/select2.min.css' %}" rel="stylesheet" />
+
+
+
+<div class="container">
+    <h2>Reassign inspeting Officer</h2>
+    
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <form action="/Update_factory_inspection_initiate/{{data.User_Id}}" name="myForm" onsubmit="return validateForm()" method="POST">
+                {% csrf_token %}
+                <table class="table table-bordered table-hover">
+                    <thead class="font-weight-bold bg-primary" style="font-size: 15px; Height:30px;">
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                           <tr>
+                                <td>Name Of Company</td>
+                                <td><b>{{data.CompanyName_E}}</b></td>
+                            </tr>
+                             <tr>
+                                 <td>Name Of Authorised Person</td>
+                                 <td>{{data.Authorised_person_E}}</td>
+                             </tr>
+                             <tr>
+                                <td>Registration Date</td>
+                                <td>{{data.Uploaded_Date|date:"d-M-Y"}}</td>
+                             </tr>
+                             <tr>
+                                <td>Company Address</td>
+                                <td>{{c_add.Company_add_1}} {{c_add.Company_add_2}} {{c_data.Company_dist}} {{c_data.Company_state}} {{c_data.Company_pin_code}}</td>
+                             </tr>
+                             <tr>
+                                <td>Previous Factory Inspection Assigned Officer </td>
+                                <td>{{pofficer}}</td>
+                             </tr>
+                           <tr>
+                                <td>Choose Inspecting Officer</td>
+                             <td>
+                               <select id="inputStatus" name="officer" class="form-control" required>
+                          <option selected value="">Choose Officer</option>
+                          {% for data in employee %}
+                          <option  value="{{data.id}}">{{data.user_zone}} // {{data.officer_name}} // {{data.officer_designation}} // {{data.officer_address}} </option>
+                          {% endfor %}
+                             </select>
+                            </td>
+                        </tr>
+                              <tr>
+                                <td>Choose Inspecting Date</td>
+                                <td><input name="date" type="date" required></td>
+                             </tr>
+                                <tr>
+                                    <td>Reassign Remark</td>
+                                    <td><input name="cancel_remark" type="text" required placeholder="please fill remark"></td>
+                             </tr>
+                    </tbody>
+                </table>
+                <div class="button-row d-flex mt-4">
+                    <button class="btn bg-gradient-light  js-btn-prev m-4" type="reset" title="Go Back">Reset</button>
+                    <button class="btn bg-gradient-primary ms-auto m-4" onclick="return confirm('Are you sure you want to submit ?');" type="submit" title="Submit";>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{% static '/js/jquery.slim.min.js' %}"></script>
+<script src="{% static '/js/popper.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script> 
+<script src="{% static '/js/select2.min.js' %}"></script> 
+
+    <script>
+      $("#inputStatus").select2({
+          placeholder: "",
+          allowClear: true
+      }); 
+    </script>
+{% endblock body %}

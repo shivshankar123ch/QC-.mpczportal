@@ -1,0 +1,78 @@
+{% extends 'officer/tmqm_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_recv_rca">
+                  <span class="sidenav-mini-icon"> SR </span>
+                  <span class="sidenav-normal">Sample Received</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_return_rca">
+                  <span class="sidenav-mini-icon"> SD/R </span>
+                  <span class="sidenav-normal">Sample Return</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="/tmqm_job_order_rca">
+                  <span class="sidenav-mini-icon"> JO </span>
+                  <span class="sidenav-normal">Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Report_success_rca">
+                  <span class="sidenav-mini-icon"> TR </span>
+                  <span class="sidenav-normal">Test Report</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+
+{% block body %}
+<form method="POST" action="/tmqm_job_order3_rca/{{trf_id}}">
+  {% csrf_token %}
+  <table class="table table-bordered table-hover bg-white  col-6 " cellspacing="0">
+
+    <thead class="bg-dark" >
+      <tr>
+      <th style="width:10%">Sample Code</th>
+      <th style="width:10%">Testing Date</th>
+      <th style="width:10%">Enter Employ Name</th>
+      <th style="width:10%">Check</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for sc in f_list %}
+        {% if sc.is_rejected == 0 %}
+        <tr class="bg-light">
+        <td><b><input type="text" name="sample_code" id="sample_code" placeholder={{sc.sample_code}} value={{sc.sample_code}} readonly></b></td>
+        <td><b><input type="date" name="date[]" id="date[]"></b></td>
+        <td>
+           <div class="form-group">
+            <select name="officer" id="officer" class="form-select form-select-lg" aria-label=".form-select-lg example">
+              <option value="" selected="selected">Select officer name</option>
+              {% for ofc in officer_obj %}
+              <option value="{{ofc.officer_id}}" selected="selected">{{ofc.officer_name}}</option>
+              {% endfor %}
+            </select>
+           </div>
+        </td>
+        <td><b><input type="checkbox" name="check[]" id="check[]"></b></td>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+<a href="/tmqm_job_order3_rca/{{trf_id}}"><button type="submit" class="button btn btn-primary">Submit</button></a>
+
+</form>
+
+{% endblock body %}

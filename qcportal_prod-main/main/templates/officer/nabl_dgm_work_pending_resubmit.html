@@ -1,0 +1,55 @@
+{% extends 'officer/dgm_base.html' %} {% load static %} {% block body %} {% block Resubmit %}
+                                        <li class="nav-item active" style="list-style-type:none;">
+										{% endblock Resubmit %}
+<div class="container">
+     <h5 class="font-weight-bolder">All Pending Contractor</h5>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-responsive">
+                <thead class="table table-dark">
+                  <tr>
+
+                    <th class="text-center" style="width:10px;">
+                        S.No
+                    </th>
+                        <th>
+                            Name Of Company
+                        </th>
+                        <th>
+                            Name of Authorized Person
+                        </th>
+                        <th>
+                            Registration Date
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Contact Number
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td class="text-center">{{forloop.counter}}</td>
+                        <td>{{data.CompanyName_E}}</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                        <td>{{data.Uploaded_Date|date:"d-M-Y"}}</td>
+                        <td>{{data.Email_Id}}</td>
+                        <td>{{data.ContactNo}}</td>
+                        <td> <a href="/resubmit_view/{{data.User_Id}}"> View Details </a></td>
+                    </tr>
+                    {% endfor %}
+                <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,95 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+}
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    All Approved Vendor 
+                </h2>
+            </div>
+            <div class="card-body">
+                <p
+                    style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <table class="table table-bordered display table-hover" id="cgm_complete_vendor_rca">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="text-center">
+                                        Sr.No.
+                                    </th>
+                                    <th class="text-center">
+                                        Name Of Company
+                                    </th>
+                                    <th class="text-center">
+                                        Name of Authorised Person
+                                    </th>
+                                    <th class="text-center">
+                                        Registration Date
+                                    </th>
+                                    <th class="text-center">
+                                        Email
+                                    </th>
+                                    <th class="text-center">
+                                        Contact Number
+                                    </th>
+
+                                    <th class="text-center">
+                                        Action
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in data %}
+                                <tr>
+                                    <td class="text-center">{{forloop.counter}}</td>
+                                    <td>{{data.CompanyName_E}}</td>
+                                    <td>{{data.Authorised_person_E}}</td>
+                                    <td class="text-cenetr">{{data.Registration_Date}}</td>
+                                    <td class="text-center">{{data.Email_Id}}</td>
+                                    <td class="text-center">{{data.ContactNo}}</td>
+                                    <!-- <td> <a href="/vendor_cgm_evaluate/{{data.User_Id}}">Detail View</a></td> -->
+                                    <!-- <td> <a href="/vendor_cgm_evaluate2/{{data.User_Id}}">Detail View</a></td> -->
+                                    <td> <a href="/rca_cgm_view_complete_vendor/{{data.User_Id}}"><span class="btn btn-info btn-sm">View Details</span></a></td>
+
+
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+            <script>
+                $(document).ready(function () {
+                    $('#cgm_complete_vendor_rca').DataTable({
+                        pagingType: 'full_numbers',
+                    });
+                });
+            </script>
+            {% endblock body %}

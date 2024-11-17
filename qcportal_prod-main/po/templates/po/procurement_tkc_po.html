@@ -1,0 +1,112 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Create New TKC Purchase order</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+     <form   action="tkc_purchase1" method="POST">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Select TKC</label>
+                   <select id="vendor"  name="vendor" class="form-control custom-select" required>
+                  <option selected disabled value="" >Choose TKC </option>
+                   {% for name in data %}
+                    <option value='{{name.v_email}}'>{{name.C_Name}}</option>
+                     {% endfor %}
+                   </select>
+                    </div>
+                <!-- /.form-group -->
+
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Tendor &amp; Enquiry No </label>
+                     <input type="text" name="tendor" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> NIT Number </label>
+                     <input type="text" name="price" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+            </div>
+
+
+                  <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Quantity </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Contract Price </label>
+                     <input type="number" name="price" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+            </div>
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter PO Number </label>
+                     <input type="text" name="price" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+            </div>
+
+            </div>
+
+                <div class="form-group">
+    <label for="exampleFormControlTextarea1">1. Add References</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+  </div>
+
+                <div class="form-group">
+    <label for="exampleFormControlTextarea1">2. Award Of Contract And Its Scope</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+  </div>
+                       <div class="form-group">
+    <label for="exampleFormControlTextarea1">3. Enter Contract Price Component Wise</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+  </div>
+                           <div class="form-group">
+    <label for="exampleFormControlTextarea1">4. Enter Terms &amp; Condition</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+  </div>
+
+                                    <div class="form-group">
+    <label for="exampleFormControlTextarea1">5. Add Some Extra Condition</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+  </div>
+
+
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1">Generate PO</button>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+
+        </div>
+
+     </form>
+</div>
+{% endblock body %}

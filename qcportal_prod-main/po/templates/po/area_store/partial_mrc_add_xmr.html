@@ -1,0 +1,255 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+<div class="mx-auto" style="width: 85%;">
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th colspan="2">Work Order Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Work Order No</td>
+                <td><b>MPCZ00{{ ro.wo.id}}</b></td>
+            </tr>
+            <tr>
+                <td>RCA Vendor Company name</td>
+                <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+            </tr>
+            <tr>
+                <td> Material </td>
+                <td><b>{{ ro.wo.wo_specification}}</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col-3"> Rating </th>
+                <th scope="col-3"> Description </th>
+                <th scope="col-9"> Quantity </th>
+                <!-- <th scope="col-9"> Rate </th>
+                <th scope="col-9"> Total amount </th> -->
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in material %}
+            <tr>
+                <td>{{data.rating}}</td>
+                <td>{{data.description}}</td>
+                <td>{{data.quantity}}</td>
+                <!-- <td>{{data.rate}}</td>
+                <td>{{data.total_rate}}</td>
+            </tr> -->
+            {% endfor %}
+        </tbody>
+    </table>
+   
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead >
+            <tr>
+                <th scope="col-3">Partial MRC No. </th>
+                <th scope="col-3">Partial MRC Date </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr>
+                <td>{{pr.id}}</td>
+                <td>{{pr.partial_date}}</td>
+              
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <!-- <th><input type="checkbox"></th> -->
+                <th>XMR Submitted</th>
+                <th>Rating</th>
+                <th>Partial MRC No.</th>
+                <th>Uneconomical/Repaired Status</th>
+                <th>XMR Type </th>
+                <th>XMR Status</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in xmr_sub %}
+            <tr>
+                
+                    <td>{{a.xmr}}</td>
+
+                    <td>{{a.material.rating}}</td>
+
+                    <td>{{a.partial_mrc_details.id}}</td>
+
+                    <td>
+
+                        {% if a.uneco_status == 1 %}
+                        <b>Uneconomical</b><br>
+
+                        {% else %}
+                        <b> Repaired </b><br>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {% if a.new_design == 1 %}
+                        <b>New Design</b>
+                        {% elif a.old_l1 == 1 %}
+                        <b>Old L1</b>
+                        {% elif a.old_l2 == 1 %}
+                        <b>Old L2</b>
+                        {% elif a.design_non_star == 1 %}
+                        <b>Non Star(Old Design)</b>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if a.partial_mrc_xmr_submit %}
+                        <b>submitted</b>
+                        {% else %}
+                        <b></b>
+                       
+                        {% endif %}
+
+                    </td>
+
+
+                
+            </tr>
+            {% endfor %}
+
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <!-- <th><input type="checkbox"></th> -->
+                <th>XMR</th>
+                <th>Rating</th>
+                <th>Partial MRC No.</th>
+                <th>Uneconomical/Repaired Status</th>
+                <th>XMR Type </th>
+                <th>XMR Submit</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in xmr %}
+            <tr>
+                <form action="/po/partial_mrc_xmr_accepted/{{pr.id}}" method="POST">
+                    {% csrf_token %}
+                    <!-- <td><input type="checkbox"></td> -->
+                    <td>{{a.xmr}}</td>
+
+                    <td>{{a.material.rating}}</td>
+
+                    <td>{{a.partial_mrc_details.id}}</td>
+
+                    <td>
+
+                        {% if a.uneco_status == 1 %}
+                        <b>Uneconomical</b><br>
+
+                        {% else %}
+                        <b> Repaired </b><br>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {% if a.new_design == 1 %}
+                        <b>New Design</b>
+                        {% elif a.old_l1 == 1 %}
+                        <b>Old L1</b>
+                        {% elif a.old_l2 == 1 %}
+                        <b>Old L2</b>
+                        {% elif a.design_non_star == 1 %}
+                        <b>Non Star(Old Design)</b>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if a.partial_mrc_xmr_submit %}
+                        <b>submitted</b>
+                        {% else %}
+                        <label>
+                            <input type="checkbox" id="xmr_det" name="xmr_det" value="{{a.id}}">
+                        </label>
+                        {% endif %}
+
+                    </td>
+
+
+                
+            </tr>
+            {% endfor %}
+
+
+
+        </tbody>
+    </table>
+</div>
+
+<div class="mx-auto" style="width: 82%">
+    <div class="form-group">
+        <button type="Submit" class="btn-success" style="width: 150px ; height: 50px ;background-color: #04AA6D;color: #f1f5f1;"
+           >Submit</button>
+        </a>
+    
+
+
+
+</form>
+
+&nbsp; &nbsp;
+<a class="form-group aglin-right m-6 btn-lg" href="/po/partial_mrc_view/{{pr.id}}" button
+    style="padding: 13px 40px;height:25px;width: 35%;background-color: #04AA6D;color: #f1f5f1;">Generate MRC</a>
+
+
+</div>
+</div>
+
+
+{% endblock body %}

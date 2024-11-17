@@ -1,0 +1,80 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 160px;
+}
+</style>
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Check DI Areastore Status</h3>
+
+         <!-- <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div> -->
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center" id="check_pending_areastore">
+             <thead class="table-dark">
+                 <tr>
+                    <th>Sr No.</th>
+                     <th>Areastore Name</th>
+                     <th>P_Verification Status</th>
+                    <!-- <th>Action</th> -->
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in area %}
+                 <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td><b>{{name.areastore}}</b></td>
+
+                    {% if name.send_to_gm == 2 and name.di_master.send_to_cgm == 1 %}
+                     <span class="btn btn-success btn-sm">Sent to CGM</span>
+
+                    {% elif name.send_to_gm == 2 and name.di_master.send_to_cgm == 0 %}
+                    <td><a class="btn btn-success btn-sm" href="#" >P_Verification Completed and send to CGM </a></td>
+
+                    {% elif name.send_to_gm == 1 %}
+                    <td><button class="btn btn-primary btn-sm">Physically Checked and Ready for Sampling</button></td>
+
+                    {% elif name.delivered_status == True and name.status == False  %}
+                    <td><button class="btn btn-warning btn-sm">Delivery Process Pending</button></td>
+                    
+                    {% else %}
+                    <td><button class="btn btn-warning btn-sm">Physically Verification Pending</button></td>
+                    {% endif %}
+                   </tr>
+             {% endfor %}
+
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ 
+
+ <script>
+  $(document).ready( function () {
+    $('#nabl_check_di_status').DataTable();
+} )
+</script>
+{% endblock body %}

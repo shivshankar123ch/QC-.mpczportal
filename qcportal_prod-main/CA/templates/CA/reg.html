@@ -1,0 +1,1025 @@
+{% extends 'main/base.html' %} {% load static%} {% block title %}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="{% static '/assets/js/Validation/reg_second.js' %}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script> 
+    <script src="jquery-3.6.1.min.js"></script>
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+        </style>
+</head>
+
+
+<div class="alert bg-light fade show" role="alert">
+    <strong>राजस्व संग्रहण एजेंसी/संस्था के लिए मार्गदर्षिका </strong>
+    <p style="font-size: 10px;" align="left | right | center | justify"><br> 1. म.प्र.म.क्षे.वि.वि.कं.लिमि., के अंतर्गत
+        विभिन्न वितरण केंद्रों में विद्युत बिलों के राजस्व संग्रहण के लिये इच्छुक व्यक्ति/एजेंसी /संस्था से आवेदन
+        आमंत्रित किये गए हैं। राजस्व संग्रहण का कार्य म.प्र.म.क्षे.वि.वि.कं.लिमि., के पोर्टल portal.mpcz.in अथवा निष्ठा
+        मोबाईल एप के माध्यम से किया जायेगा।
+        <br>
+        2. राजस्व संग्रहण हेतु इच्छुक व्यक्ति/एजेंसी/संस्था की पात्रता:-
+        - आवेदक भारतीय नागरिक होना चाहिए।
+        - इच्छुक व्यक्ति/एजेंसी/संस्था का GSTIN अथवा पैननंबर आवश्यक है।
+        - पहचान पत्र जैसेः -आधार कार्ड/पैन कार्ड/ड्रायविंग लाईसेंस आदि होना चाहिए।
+        - राष्ट्रीयकृत बैंक/निजी बैंक में जमा खाता होना चाहिए।
+        - व्यक्ति/एजेंसी/संस्था के पास इंटरनेट सुविधा युक्त एंड्रायड स्मार्ट फोन अथवा एवं कम्प्यूटर के साथ-साथ रसीद
+        प्रिंट करने हेतु ब्लूटूथ प्रिंटर या डेस्कटाॅप प्रिंटर होना चाहिए।
+        - म.प्र.म.क्षे.वि.वि.कं.लिमि., में कार्यरत अथवा बाह्य स्त्रोत एजेंसी से उपलब्ध कराये गये मध्य क्षेत्र विद्युत
+        वितरण कंपनी के कर्मचारी नहीं होना चाहिए।
+        - म.प्र.म.क्षे.वि.वि.कं.लिमि., के पोर्टल पर पंजीकृत व्यक्ति/एजेंसी/संस्था के नाम पर एक लाॅगइन आईडी बनाई जायेगी,
+        जिसका पासवर्ड पंजीकृत व्यक्ति
+        के नाम से ही होगा। आवस्यकतानुसार समय-समय पर पासवर्ड बदला भी जा सकता है। पोर्टल के माध्यम से ही पंजीकृत
+        व्यक्ति/संस्था/एजेंसी के द्वारा उपभोक्ता के विद्युत बिल का भुगतान किया जाना अनिवार्य है।
+        <br>
+        3. पंजीयन की प्रक्रियाः-
+        इच्छुक व्यक्ति को म.प्र.म.क्षे.वि.वि.कं.लि. को पोर्टल portal.mpcz.in पर जाकर कलेक्शन एजेंट के अंतर्गत
+        ‘‘रजिस्ट्रेशन फार्म‘‘ का चयन करना होगा।
+        - आवेदन में व्यक्ति के मोबाइल नं. को दर्ज करने के पष्चात् पासवर्ड (OTP) प्राप्त होगा जिसे दर्ज करने पर पंजीकरण
+        फार्म उपलब्ध होगा।
+        - फार्म में आवेदक का नाम, जन्मतिथि, लिंग, मोबाइल नं., पता दर्ज हो जाएगा। आवेदक को पेनकार्ड की प्रति अपलोड करनी
+        है।
+        - आवेदक को उसके बैंक का नाम, आईएफएससी कोड, खाताधारक का नाम, अकाउंट नं. दर्ज करना है। - इसके पच्छात आवेदक को
+        आईव्हीआरएस क्रं. दर्ज करना है। आवेदक का नाम, पता, डीसी कोड स्वय प्रदर्षित हो जाएगा।
+        - Add Record बटन दबाने पर आपके मोबाइल में 6 अंकों का पासवर्ड (OTP) प्राप्त होगा, जिसे निर्धारित स्थान पर दर्ज
+        करना है। इस प्रकार उपरोक्त जानकारी का सत्यापन हो जाएगा। उपरोक्त सत्यापन के पष्चात् सुरक्षा निधि के रुप में रु.
+        1000/- ऑनलाइन क्रेडिट कार्ड/डेबिट कार्ड के द्वारा जमा करना है।
+        - राशि जमा होने के पष्चात् जमा राशि की पावती प्राप्त होगी एवं कम्प्यूटर स्क्रीन पर सफलतापूर्वक पंजीकरण का सन्देश
+        प्रदर्षित होगा।
+        - सफलतापूर्वक पंजीकरण के पश्चात यूजर का नाम एवं पासवर्ड की जानकारी आवेदक के ई-मेल एवं पंजीकृत मोबाइल पर उपलब्ध
+        हो जाएगी। इसके पष्चात् आवेदक अधिकृत संग्रह एजेंट के रुप में राजस्व संग्रहण का कार्य कर सकता हैं |<br>
+        4. राजस्व संग्रहण हेतु निर्धारित प्रक्रियाः-
+        - राजस्व संग्रहण हेतु निर्धारित प्रक्रियाः-म.प्र.म.क्षे.वि.वि.कं.लि. के पोर्टल (portal.mpcz.in) के कलेक्शन एजेंट
+        के अंतर्गत कलेक्शन पोर्टल पर जाकर उपलब्ध कराये गये यूजर का नाम एवं पासवर्ड को दर्ज कर लाॅग-इन करना है।
+        - लाॅग-इन करने पर वर्तमान समय तक किये गये ट्रांज़ैक्शन , जमा राषि, कमीशन , आज की राशि , वर्तमान माह की राशि एवं
+        आज दिनांक तक की जानकारी स्क्रीन पर उपलब्ध होगी।
+        - Quick Pay ऑप्शंस का उपयोग कर उपभोक्ता के विद्युत बिल का आईव्हीआरएस कं. दर्ज करने तथा शहरी/ग्रामीण का चयन करने
+        पर विद्युत बिल का विवरण, नियत दिनांक, मोबाइल नं., बकाया राशि प्रदर्शित होगी।
+        - कम्प्यूटर स्क्रीन पर पे-फुल बिल,पे-पार्ट बिल एवं पे-एडवांस बिल का विकल्प उपलब्ध है।जिसका चयन कर उपभोक्ता से
+        राशि प्राप्त कर भुगतान किया जा सकता है।
+        - भुगतान के लिए बिल डेस्क पेमेंट गेटवे के रुप में विकल्प उपलब्ध है, जिसमें से किसी एक विकल्प का चयन कर यूपीआई,
+        क्रेडिट कार्ड, डेबिट कार्ड, इंटरनेट बैकिंग आदि में से किसी एक विकल्प का चयन कर भुगतान किया जा सकता है। यूपीआई
+        एवं रुपे कार्ड के माध्यम से भुगतान करने पर किसी भी प्रकार का लेन-देन प्रभार नहीं लगेगा। क्रेडिट कार्ड, डेबिट
+        कार्ड एवं इंटरनेट बैकिंग के द्वारा राशि भुगतान करने पर नियमानुसार लेन-देन प्रभार देय होगा।
+        - किसी भी उपभोक्ता के द्वारा मासिक बिल की राषि से कम राशि भुगतान नहीं किया जायेगा। भविष्य में यदि शासन द्वारा
+        कोई प्रभार जोड़ा जाता है तो वह संबंधित व्यक्ति/एजेंसी/संस्था को देय होगा।किसी भी उपभोक्ता के द्वारा मासिक बिल की
+        राशि से कम राशि भुगतान नहीं किया जायेगा।
+        - राशि भुगतान होने के पष्चात् प्रणाली जनित पावती प्रदर्षित होगी जिसे प्रिंट कर उपभोक्ता को दिया जाना आवश्यक है।
+        उपभोक्ता के पंजीकृत मोबाईल पर कंपनी के द्वारा राशि प्राप्त होने से संबंधित एसएमएस भी प्रेषित किया जाएगा।
+        - इस पोर्टल पर बिल भुगतान हिस्ट्री भी उपलब्ध है। जिसके अंतर्गत पूर्व में जमा किये गये विद्युत बिलों से संबंधित
+        जानकारी उपलब्ध रहेगी।
+        <br>
+        5. पंजीकृत व्यक्ति/एजेंसी/संस्था को विद्युत बिल का राजस्व संग्रहण करने पर निम्नानुसार कमीशन प्रदाय किया
+        जायेगा।अ. विद्युत बिल राशि रू. 5000/- तक होने पर - कमीशन दर 5 रू. प्रति बिल ब. विद्युत बिल की राशि रू. 5000 से
+        अधिक होने पर - कमीशन दर 10 रू. प्रति बिल उपरोक्त दर के अतिरिक्त GST का भुगतान कंपनी द्वारा संबंधित
+        व्यक्ति/एजेंसी/संस्था को किया जायेगा
+        <br>
+        6. GST के अतिरिक्त अन्य किसी भी प्रकार के कर के लिये संबंधित व्यक्ति/एजेंसी/संस्था जिम्मेदार होगी।
+    </p>
+    <center>Close<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</center>
+<main class="main-content  mt-0">
+
+    <section>
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-7 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left" data-offset="0">
+                                <h5 class="font-weight-bolder text-info">Registration Form</h5>
+
+                                
+                                <form action="/ca/regca" method="POST" class="row g-3 needs-validation" name="myForm"
+                                     enctype="multipart/form-data" onsubmit="return validForm()">
+                                    {% csrf_token %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputStatus" class="labelName">Name<span
+                                                    style="color: red;">*</label>
+                                            <input type="text" id="user_name" name="name" 
+                                                class="form-control ed-textbox" required onblur="error_msg(id)">
+                                            <span id="user_name_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="v_company_name">Father Name <span
+                                                    style="color: red;">*</span></label>
+                                            <input type="text" id="father_name" name="fname" 
+                                                class="form-control ed-textbox" required onblur="error_msg(id)">
+
+                                            <span id="father_name_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="v_company_name">Aadhar Card Number<span
+                                                    style="color: red;">*</span></label>
+                                            <div class="input-group cainput-group">
+                                                <input type="number" id="user_adhar_no"
+                                                    class="form-control ed-textbox far" name="aadhar" onblur="myFunction1(id), error_msg(id)" onclick="myFunction2(id)" required>
+                                                    <i class="far fa-eye" id="togglePassword"
+                                                    onclick="myFunction()"></i>  
+                                            </div>
+                                            <span class="d-block text-danger font-weight-bold" id="user_adhar_no_span"></span> 
+                                            <span id="adhNo" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fax">Mobile number (Number will used for login)</label>
+                                            <input type="tel" minlength="10" id="mobile1" name="mobile"
+                                                value="{{mobile}}"  class="form-control ed-textbox" maxlength="10"
+                                                 readonly="readonly">
+                                            <span id="mobileNumber" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pan">Email ID<span style="color: red;">*</span></label>
+                                            <input type="email" id="email" name="email" 
+                                                class="form-control ed-textbox" title="Please fill the correct Email"
+                                                style="text-transform: lowercase;" placeholder="abcd@gmail.com" required onblur="error_msg(id)">
+                                            <span id="email_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>DOB<span style="color: red;">*</span></label>
+                                            <input type="date" id="dob" name="dob" 
+                                                class="form-control ed-textbox" title="Please fill the correct DOB"
+                                                style="text-transform: lowercase;" placeholder="" required onblur="error_msg(id)">
+                                            <span id="" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pan">Gender<span style="color: red;">*</span></label>
+                                             <div>
+                                                <select id="gender" name="gender" class="form-control">
+                                                    <option selected disabled value=""> select one</option>
+                                                    <option value="male">male</option>
+                                                    <option value="female">female</option>
+                                                    <option value="other">other</option>
+                                                </select>
+                                              
+                                             </div>
+                                        </div>
+                                    </div>
+
+                                   
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="v_mobile">Energy Bill Number(IVRS)<span
+                                                    style="color: red;">*</span></label>
+                                            <input type="text" id="ivrs_no" name="bill"
+                                                minlength="11" maxlength="11" 
+                                                class="form-control ed-textbox" required onblur="error_msg(id)">
+                                            <span id="ivrs_no_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Upload Energy Bill(In .Pdf Format)<span
+                                                    style="color: red;">*</span></label>
+                                            <input type="file" class="multisteps-form__input form-control"
+                                                accept="application/pdf" name="bill_twenty" id="uploadFile_one"
+                                                class="form-control ed-textbox" required
+                                                onblur="error_msg(id)">
+                                            <span id="uploadFile_one_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="reg_no">Pan Card Number<span
+                                                    style="color: red;">*</span></label>
+                                            <input type="text" name="pan" id="pan_no"
+                                               
+                                                class="form-control ed-textbox" minlength="10" maxlength="10"
+                                                
+                                                style="text-transform: uppercase;" required onblur="error_msg(id)">
+                                            <span id="pan_no_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Upload Pan Card(In .Pdf Format)<span
+                                                    style="color: red;">*</span></label>
+                                            <input type="file" class="multisteps-form__input form-control"
+                                                accept="application/pdf" name="twenty_two" id="uploadFile_two"
+                                                class="form-control ed-textbox" required
+                                                onblur="error_msg(id)">
+                                            <span id="uploadFile_two_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="reg_date">GST Number</label>
+                                            <input type="text" name="gst"  id="gst_no"
+                                                
+                                                class="form-control ed-textbox" 
+                                                style="text-transform: uppercase;" required onblur="error_msg(id)">
+                                            <span id="gst_no_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Upload GST(In .Pdf Format)</label>
+                                            <input type="file" class="multisteps-form__input form-control"
+                                                accept="application/pdf" name="twenty" id="uploadFile_three"
+                                                class="form-control ed-textbox" required onblur="error_msg(id)">
+                                            <span id="uploadFile_three_span" class="text-danger font-weight-bold"></span>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h5><b>Address Details</b></h5>
+                                    </div>
+                                     
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="add1">Address Line 1<span style="color: red;">*</span></label>
+                                            <input type="text" name="add1" id="address" 
+                                                required onblur="error_msg(id)"
+                                                class="form-control ed-textbox">
+                                            <span id="address_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="add2">Address Line 2</label>
+                                            <input type="text" name="add2" id="txtadd2" value="{{add1}}"
+                                                class="form-control ed-textbox">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="zip">Pincode <span style="color: red;">*</span></label>
+                                            <input type="number" name="zip"  id="txtzip"
+                                                pattern="^\d{6}$" required maxlength="6" minlength="6"
+                                                class="form-control ed-textbox"
+                                                
+                                                onblur="error_msg(id),setZipInfo()">
+                                                
+                                            <span id="txtzip_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="city">City <span style="color: red;">*</span></label>
+                                            <select id="txtcity" name="city"
+                                                value="" class="form-control ed-textbox">
+                                                <option value="">select</option>
+                                            </select>
+                                            <span class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    
+                                    </div> 
+                                    <div class="col-md-6">
+                                      
+                                        <div class="form-group">
+                                            <label for="add2">District<span style="color: red;">*</span></label>
+                                            <input type="text" name="district" id="txtdistrict"
+                                                class="form-control ed-textbox" required
+                                                value="">
+                                            <span id="Add3" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                        <div class="form-group">
+                                            <label for="add2">State<span style="color: red;">*</span></label>
+                                            <input type="text" name="add4" id="txtstate" class="form-control ed-textbox"
+                                                required
+                                            >
+                                            <span id="state1" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    
+                                        
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h5><b>Bank Details</b></h5>
+                                        </div>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div id="myDropdown" class="form-group">
+                                            <label for="bank_name">Bank Name <span style="color: red;">*</span></label>
+                                            <select class="form-control ed-textbox form-select form-select-lg"
+                                                name="bank_name" id="bank_name" aria-label=".form-select-lg example"
+                                                required onblur="error_msg(id)">
+                                                <option value="">Select Bank</option>
+                                                <option value="AU Small Finance Bank Limited">AU Small Finance Bank
+                                                    Limited</option>
+                                                <option value="Abhyudaya Cooperative Bank">Abhyudaya Cooperative Bank
+                                                </option>
+                                                <option value="Abu Dhabi Commercial Bank">Abu Dhabi Commercial Bank
+                                                </option>
+                                                <option value="Ahmedabad Mercantile Cooperative Bank">Ahmedabad
+                                                    Mercantile Cooperative Bank</option>
+                                                <option value="Airtel Payments Bank Limited">Airtel Payments Bank
+                                                    Limited</option>
+                                                <option value="Akola Janata Commercial Cooperative Bank">Akola Janata
+                                                    Commercial Cooperative Bank</option>
+                                                <option value="Allahabad Bank">Allahabad Bank</option>
+                                                <option value="Almora Urban Co-Operative Bank ltd">Almora Urban
+                                                    Co-Operative Bank ltd</option>
+                                                <option value="Andhra Bank">Andhra Bank</option>
+                                                <option value="Andhra Pragathi Grameena Bank">Andhra Pragathi Grameena
+                                                    Bank</option>
+                                                <option value="Apna Sahakari Bank Ltd">Apna Sahakari Bank Ltd</option>
+                                                <option value="Australia and New Zealand Banking Group Ltd">Australia
+                                                    and New Zealand Banking Group Ltd</option>
+                                                <option value="Axis Bank">Axis Bank</option>
+                                                <option value="BNP Paribas Bank">BNP Paribas Bank</option>
+                                                <option value="Bandhan Bank Limited">Bandhan Bank Limited</option>
+                                                <option value="Bank Internasional Indonesia">Bank Internasional
+                                                    Indonesia</option>
+                                                <option value="Bank of America">Bank of America</option>
+                                                <option value="Bank of Bahrein and Kuwait">Bank of Bahrein and Kuwait
+                                                </option>
+                                                <option value="Bank of Baroda">Bank of Baroda</option>
+                                                <option value="Bank of Ceylon">Bank of Ceylon</option>
+                                                <option value="Bank of India">Bank of India</option>
+                                                <option value="Bank of Maharashtra">Bank of Maharashtra</option>
+                                                <option value="Bank of Tokyo Mitsubishi Ltd">Bank of Tokyo Mitsubishi
+                                                    Ltd</option>
+                                                <option value="Barclays Bank">Barclays Bank</option>
+                                                <option value="Bassein Catholic Co-Op Bank Ltd">Bassein Catholic Co-Op
+                                                    Bank Ltd</option>
+                                                <option value="Bharat Cooperative Bank Mumbai Ltd">Bharat Cooperative
+                                                    Bank Mumbai Ltd</option>
+                                                <option value="Bharatiya Mahila Bank Ltd">Bharatiya Mahila Bank Ltd
+                                                </option>
+                                                <option value="Bhopal Co-operative Central Bank Limited">Bhopal
+                                                    Co-operative Central Bank Limited</option>
+                                                <option value="CITI Bank">CITI Bank</option>
+                                                <option value="Canara Bank">Canara Bank</option>
+                                                <option value="Capital Local Area Bank Ltd">Capital Local Area Bank Ltd
+                                                </option>
+                                                <option value="Capital Small Finance Bank Ltd">Capital Small Finance
+                                                    Bank Ltd</option>
+                                                <option value="Catholic Syrian Bank">Catholic Syrian Bank</option>
+                                                <option value="Central Bank of India">Central Bank of India</option>
+                                                <option value="Chinatrust Commercial Bank">Chinatrust Commercial Bank
+                                                </option>
+                                                <option value="Citizen Credit Cooperative Bank">Citizen Credit
+                                                    Cooperative Bank</option>
+                                                <option value="City Union Bank Ltd">City Union Bank Ltd</option>
+                                                <option value="Commonwealth Bank of Australia">Commonwealth Bank of
+                                                    Australia</option>
+                                                <option value="Corporation Bank">Corporation Bank</option>
+                                                <option value="Credit Agricole Corporate and Investment Bank">Credit
+                                                    Agricole Corporate and Investment Bank</option>
+                                                <option value="Credit Suisse AG">Credit Suisse AG</option>
+                                                <option value="DBS Bank Ltd">DBS Bank Ltd</option>
+                                                <option value="DCB Bank Ltd">DCB Bank Ltd</option>
+                                                <option value="Dena Bank">Dena Bank</option>
+                                                <option value="Deogiri Nagari Sahakari Bank Ltd. Aurangabad">Deogiri
+                                                    Nagari Sahakari Bank Ltd. Aurangabad</option>
+                                                <option
+                                                    value="Deposit Insurance and Credit Guarantee Corporation (DICGC)">
+                                                    Deposit Insurance and Credit Guarantee Corporation (DICGC)</option>
+                                                <option value="Development Bank of Singapore DBS">Development Bank of
+                                                    Singapore DBS</option>
+                                                <option value="Dhanlakshmi Bank">Dhanlakshmi Bank</option>
+                                                <option value="Doha Bank QSC">Doha Bank QSC</option>
+                                                <option value="Dombivli Nagari Sahakari Bank Ltd">Dombivli Nagari
+                                                    Sahakari Bank Ltd</option>
+                                                <option value="Equitas Small Finance Bank Limited">Equitas Small Finance
+                                                    Bank Limited</option>
+                                                <option value="Esaf Small Finance Bank Limited">Esaf Small Finance Bank
+                                                    Limited</option>
+                                                <option value="Export Import Bank of India">Export Import Bank of India
+                                                </option>
+                                                <option value="FINO Payments Bank">FINO Payments Bank</option>
+                                                <option value="Federal Bank Ltd">Federal Bank Ltd</option>
+                                                <option value="Firstrand Bank Ltd">Firstrand Bank Ltd</option>
+                                                <option value="G P Parsik Bank">G P Parsik Bank</option>
+                                                <option value="Gurgaon Gramin Bank Ltd">Gurgaon Gramin Bank Ltd</option>
+                                                <option value="HDFC Bank Ltd">HDFC Bank Ltd</option>
+                                                <option value="HSBC">HSBC</option>
+                                                <option value="Himachal Pradesh State Co-Operative Bank Ltd">Himachal
+                                                    Pradesh State Co-Operative Bank Ltd</option>
+                                                <option value="ICICI Bank Ltd">ICICI Bank Ltd</option>
+                                                <option value="IDBI Ltd">IDBI Ltd</option>
+                                                <option value="IDFC Bank Ltd">IDFC Bank Ltd</option>
+                                                <option value="Idukki District Co-Operative Bank Ltd">Idukki District
+                                                    Co-Operative Bank Ltd</option>
+                                                <option value="Indian Bank">Indian Bank</option>
+                                                <option value="Indian Overseas Bank">Indian Overseas Bank</option>
+                                                <option value="Indusind Bank Ltd">Indusind Bank Ltd</option>
+                                                <option value="Industrial Bank of Korea">Industrial Bank of Korea
+                                                </option>
+                                                <option value="Industrial and Commercial Bank of China Ltd">Industrial
+                                                    and Commercial Bank of China Ltd</option>
+                                                <option value="JP Morgan Chase Bank NA">JP Morgan Chase Bank NA</option>
+                                                <option value="Jalgaon Janata Sahkari Bank Ltd">Jalgaon Janata Sahkari
+                                                    Bank Ltd</option>
+                                                <option value="Jammu and Kashmir Bank">Jammu and Kashmir Bank</option>
+                                                <option value="Janaseva Sahakari Bank (Borivli) Ltd">Janaseva Sahakari
+                                                    Bank (Borivli) Ltd</option>
+                                                <option value="Janaseva Sahakari Bank Ltd">Janaseva Sahakari Bank Ltd
+                                                </option>
+                                                <option value="Janata Sahakari Bank Ltd (Pune)">Janata Sahakari Bank Ltd
+                                                    (Pune)</option>
+                                                <option value="Jankalyan Sahakari Bank Ltd">Jankalyan Sahakari Bank Ltd
+                                                </option>
+                                                <option value="KEB Hana Bank">KEB Hana Bank</option>
+                                                <option value="Kallappanna Awade Ichalkaranji Janata Sahakari Bank Ltd">
+                                                    Kallappanna Awade Ichalkaranji Janata Sahakari Bank Ltd</option>
+                                                <option value="Kalupur Commercial Cooperative Bank">Kalupur Commercial
+                                                    Cooperative Bank</option>
+                                                <option value="Kalyan Janata Sahakari Bank Ltd">Kalyan Janata Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="Kapol Cooperative Bank">Kapol Cooperative Bank</option>
+                                                <option value="Karnataka Bank Ltd">Karnataka Bank Ltd</option>
+                                                <option value="Karnataka Vikas Grameena Bank">Karnataka Vikas Grameena
+                                                    Bank</option>
+                                                <option value="Karur Vysya Bank">Karur Vysya Bank</option>
+                                                <option value="Kerala Gramin Bank">Kerala Gramin Bank</option>
+                                                <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                                                <option value="Kozhikode District Cooperative Bank Ltd">Kozhikode
+                                                    District Cooperative Bank Ltd</option>
+                                                <option value="Laxmi Vilas Bank">Laxmi Vilas Bank</option>
+                                                <option value="Mahanagar Cooperative Bank Ltd">Mahanagar Cooperative
+                                                    Bank Ltd</option>
+                                                <option value="Maharashtra Gramin Bank">Maharashtra Gramin Bank</option>
+                                                <option value="Maharashtra State Cooperative Bank">Maharashtra State
+                                                    Cooperative Bank</option>
+                                                <option value="MashreqBank PSC">MashreqBank PSC</option>
+                                                <option value="Mizuho Bank Ltd">Mizuho Bank Ltd</option>
+                                                <option value="NKGSB Cooperative Bank Ltd">NKGSB Cooperative Bank Ltd
+                                                </option>
+                                                <option value="Nagar Urban Co-Operative Bank">Nagar Urban Co-Operative
+                                                    Bank</option>
+                                                <option value="Nagpur Nagrik Sahakari Bank Ltd">Nagpur Nagrik Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="National Australia Bank">National Australia Bank</option>
+                                                <option value="National Bank of Abu Dhabi PJSC">National Bank of Abu
+                                                    Dhabi PJSC</option>
+                                                <option value="New India Cooperative Ban Ltd">New India Cooperative Ban
+                                                    Ltd</option>
+                                                <option value="North Malabar Gramin Bank">North Malabar Gramin Bank
+                                                </option>
+                                                <option value="Nutan Nagarik Sahakari Bank Ltd">Nutan Nagarik Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="Oman International Bank">Oman International Bank</option>
+                                                <option value="Oriental Bank of Commerce">Oriental Bank of Commerce
+                                                </option>
+                                                <option value="PT Bank Maybank Indonesia TBK">PT Bank Maybank Indonesia
+                                                    TBK</option>
+                                                <option value="Paytm Payments Bank Ltd">Paytm Payments Bank Ltd</option>
+                                                <option value="Pragathi Krishna Gramin Bank">Pragathi Krishna Gramin
+                                                    Bank</option>
+                                                <option value="Prathama Bank">Prathama Bank</option>
+                                                <option value="Prime Co-Operative Bank Ltd">Prime Co-Operative Bank Ltd
+                                                </option>
+                                                <option value="Punjab National Bank">Punjab National Bank</option>
+                                                <option value="Punjab and Maharashtra Cooperative Bank Ltd">Punjab and
+                                                    Maharashtra Cooperative Bank Ltd</option>
+                                                <option value="Punjab and Sind Bank">Punjab and Sind Bank</option>
+                                                <option value="RBL Bank Limited">RBL Bank Limited</option>
+                                                <option value="Rabobank International">Rabobank International</option>
+                                                <option value="Rajgurunagar Sahakari Bank Ltd">Rajgurunagar Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="Rajkot Nagarik Sahakari Bank Ltd">Rajkot Nagarik Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="Reserve Bank of India">Reserve Bank of India</option>
+                                                <option value="SBER Bank">SBER Bank</option>
+                                                <option value="SBM Bank Mauritius Ltd">SBM Bank Mauritius Ltd</option>
+                                                <option value="Sahebrao Deshmukh Co-Op. Bank Ltd">Sahebrao Deshmukh
+                                                    Co-Op. Bank Ltd</option>
+                                                <option value="Samarth Sahakari Bank Ltd">Samarth Sahakari Bank Ltd
+                                                </option>
+                                                <option value="Saraswat Cooperative Bank Ltd">Saraswat Cooperative Bank
+                                                    Ltd</option>
+                                                <option value="Shikshak Sahakari Bank Ltd">Shikshak Sahakari Bank Ltd
+                                                </option>
+                                                <option value="Shinhan Bank">Shinhan Bank</option>
+                                                <option value="Shivalik Mercantile Co Operative Bank Ltd">Shivalik
+                                                    Mercantile Co Operative Bank Ltd</option>
+                                                <option value="Shri Chhatrapati Rajashri Shahu Urban Co-Op Bank Ltd">
+                                                    Shri Chhatrapati Rajashri Shahu Urban Co-Op Bank Ltd</option>
+                                                <option value="Societe Generale">Societe Generale</option>
+                                                <option value="Solapur Janata Sahkari Bank Ltd">Solapur Janata Sahkari
+                                                    Bank Ltd</option>
+                                                <option value="South Indian Bank">South Indian Bank</option>
+                                                <option value="Standard Chartered Bank">Standard Chartered Bank</option>
+                                                <option value="State Bank of Bikaner and Jaipur">State Bank of Bikaner
+                                                    and Jaipur</option>
+                                                <option value="State Bank of Hyderabad">State Bank of Hyderabad</option>
+                                                <option value="State Bank of India">State Bank of India</option>
+                                                <option value="State Bank of Mauritius Ltd">State Bank of Mauritius Ltd
+                                                </option>
+                                                <option value="State Bank of Mysore">State Bank of Mysore</option>
+                                                <option value="State Bank of Patiala">State Bank of Patiala</option>
+                                                <option value="State Bank of Travancore">State Bank of Travancore
+                                                </option>
+                                                <option value="Sumitomo Mitsui Banking Corporation">Sumitomo Mitsui
+                                                    Banking Corporation</option>
+                                                <option value="Surat National Cooperative Bank Limited">Surat National
+                                                    Cooperative Bank Limited</option>
+                                                <option value="Suryoday Small Finance Bank Limited">Suryoday Small
+                                                    Finance Bank Limited</option>
+                                                <option value="Sutex Cooperative Bank Ltd">Sutex Cooperative Bank Ltd
+                                                </option>
+                                                <option value="Syndicate Bank">Syndicate Bank</option>
+                                                <option value="TJSB Sahakari Bank Ltd">TJSB Sahakari Bank Ltd</option>
+                                                <option value="Tamilnad Mercantile Bank Limited">Tamilnad Mercantile
+                                                    Bank Limited</option>
+                                                <option value="Telangana State Coop Apex Bank">Telangana State Coop Apex
+                                                    Bank</option>
+                                                <option value="Textile Traders Co-Operative Bank Ltd">Textile Traders
+                                                    Co-Operative Bank Ltd</option>
+                                                <option value="The A.P. Mahesh Co-Op Urban Bank Ltd">The A.P. Mahesh
+                                                    Co-Op Urban Bank Ltd</option>
+                                                <option value="The Akola District Central Co-Operative Bank">The Akola
+                                                    District Central Co-Operative Bank</option>
+                                                <option value="The Andhra Pradesh State Coop Bank Ltd">The Andhra
+                                                    Pradesh State Coop Bank Ltd</option>
+                                                <option value="The Bank of Nova Scotia">The Bank of Nova Scotia</option>
+                                                <option value="The Baramati Sahakari Bank Ltd">The Baramati Sahakari
+                                                    Bank Ltd</option>
+                                                <option value="The Cosmos Cooperative Bank Ltd">The Cosmos Cooperative
+                                                    Bank Ltd</option>
+                                                <option value="The Delhi State Cooperative Bank Ltd">The Delhi State
+                                                    Cooperative Bank Ltd</option>
+                                                <option value=">The Gadchiroli District Central Cooperative Bank Ltd">
+                                                    The Gadchiroli District Central Cooperative Bank Ltd</option>
+                                                <option value="The Greater Bombay Co-operative Bank Ltd">The Greater
+                                                    Bombay Co-operative Bank Ltd</option>
+                                                <option value="The Gujarat State Co-Operative Bank Ltd">The Gujarat
+                                                    State Co-Operative Bank Ltd</option>
+                                                <option value="The HASTI Co-Operative Bank Ltd">The HASTI Co-Operative
+                                                    Bank Ltd</option>
+                                                <option value="The Jalgaon Peoples Co-Op Bank">The Jalgaon Peoples Co-Op
+                                                    Bank</option>
+                                                <option value="The Kangra Central Cooperative Bank Ltd">The Kangra
+                                                    Central Cooperative Bank Ltd</option>
+                                                <option value="The Kangra Cooperative Bank Ltd">The Kangra Cooperative
+                                                    Bank Ltd</option>
+                                                <option value="The Karad Urban Co-op Bank Ltd">The Karad Urban Co-op
+                                                    Bank Ltd</option>
+                                                <option value="The Karanataka State Co-Operative Apex Bank Limited">The
+                                                    Karanataka State Co-Operative Apex Bank Limited</option>
+                                                <option value="The Kurmanchal Nagar Sahkari Bank Ltd">The Kurmanchal
+                                                    Nagar Sahkari Bank Ltd</option>
+                                                <option value="The Mehsana Urban Cooperative Bank Ltd">The Mehsana Urban
+                                                    Cooperative Bank Ltd</option>
+                                                <option value="The Mumbai District Central Co-Op Bank Ltd">The Mumbai
+                                                    District Central Co-Op Bank Ltd</option>
+                                                <option value="The Municipal Co Operative Bank Ltd, Mumbai">The
+                                                    Municipal Co Operative Bank Ltd, Mumbai</option>
+                                                <option value="The Nainital Bank Ltd">The Nainital Bank Ltd</option>
+                                                <option value="The Nasik Merchants Co-Op Bank Ltd">The Nasik Merchants
+                                                    Co-Op Bank Ltd</option>
+                                                <option value="The Navnirman Co-Operative Bank Limited">The Navnirman
+                                                    Co-Operative Bank Limited</option>
+                                                <option value="The Pandharpur Urban Co Op. Bank Ltd. Pandharpur">The
+                                                    Pandharpur Urban Co Op. Bank Ltd. Pandharpur</option>
+                                                <option value="The Rajasthan State Cooperative Bank Ltd">The Rajasthan
+                                                    State Cooperative Bank Ltd</option>
+                                                <option value="The Royal Bank of Scotland N.V.">The Royal Bank of
+                                                    Scotland N.V.</option>
+                                                <option value="The Seva Vikas Co-Operative Bank Ltd">The Seva Vikas
+                                                    Co-Operative Bank Ltd</option>
+                                                <option value="The Shamrao Vithal Cooperative Bank Ltd">The Shamrao
+                                                    Vithal Cooperative Bank Ltd</option>
+                                                <option value="The Sindhudurg District Central Coop Bank Ltd">The
+                                                    Sindhudurg District Central Coop Bank Ltd</option>
+                                                <option value="The Surat District Co Operative Bank Ltd">The Surat
+                                                    District Co Operative Bank Ltd</option>
+                                                <option value="The Surat Peoples Co-Op Bank Ltd">The Surat Peoples Co-Op
+                                                    Bank Ltd</option>
+                                                <option value="The Tamilnadu State Apex Cooperative Bank">The Tamilnadu
+                                                    State Apex Cooperative Bank</option>
+                                                <option value="The Thane Bharat Sahakari Bank Ltd">The Thane Bharat
+                                                    Sahakari Bank Ltd</option>
+                                                <option value="The Thane District Central Co-Op Bank Ltd">The Thane
+                                                    District Central Co-Op Bank Ltd</option>
+                                                <option value="The Thane Janata Sahakari Bank Ltd">The Thane Janata
+                                                    Sahakari Bank Ltd</option>
+                                                <option value="The Varachha Co-Op. Bank Ltd">The Varachha Co-Op. Bank
+                                                    Ltd</option>
+                                                <option value="The Vishweshwar Sahakari Bank Ltd">The Vishweshwar
+                                                    Sahakari Bank Ltd</option>
+                                                <option value="The West Bengal State Cooperative Bank Ltd">The West
+                                                    Bengal State Cooperative Bank Ltd</option>
+                                                <option value="The Zoroastrian Cooperative Bank Limited">The Zoroastrian
+                                                    Cooperative Bank Limited</option>
+                                                <option value="Tumkur Grain Merchants Cooperative Bank Ltd">Tumkur Grain
+                                                    Merchants Cooperative Bank Ltd</option>
+                                                <option value="UCO Bank">UCO Bank</option>
+                                                <option value="Ujjivan Small Finance Bank Limited">Ujjivan Small Finance
+                                                    Bank Limited</option>
+                                                <option value="Union Bank of India">Union Bank of India</option>
+                                                <option value="United Bank of India">United Bank of India</option>
+                                                <option value="United Overseas Bank">United Overseas Bank</option>
+                                                <option value="Utkarsh Small Finance Bank">Utkarsh Small Finance Bank
+                                                </option>
+                                                <option value="Vasai Vikas Sahakari Bank Ltd">Vasai Vikas Sahakari Bank
+                                                    Ltd</option>
+                                                <option value="Vijaya Bank">Vijaya Bank</option>
+                                                <option value="Westpac Banking Corporation">Westpac Banking Corporation
+                                                </option>
+                                                <option value="Woori Bank">Woori Bank</option>
+                                                <option value="Yes Bank Ltd">Yes Bank Ltd</option>
+                                                <option value="Zila Sahkari Bank Ltd Ghaziabad">Zila Sahkari Bank Ltd
+                                                    Ghaziabad</option>
+                                                <option value="deutsche bank">deutsche bank</option>
+                                            </select>
+                                            <span id="bank_name_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>IFSC code <span style="color: red;">*</span></label>
+                                
+                                            <input type="text" id="ifsc" name="ifsc" minlength="1" maxlength="15"
+                                                class="form-control ed-textbox" onblur="error_msg(id)"
+                                                style="text-transform: uppercase" placeholder="ABCD0005943" required>
+                                            <span id="ifsc_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Account holder name <span style="color: red;">*</span></label>
+                            
+                                            <input type="text" id="ac_holder_name" name="ac_holder_name"
+                                               
+                                                style="text-transform: uppercase"  class="form-control ed-textbox"
+                                                placeholder="Enter Account holder name" required onblur="error_msg(id)" title="Please fill the Account holder name">
+                                            <span id="ac_holder_name_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Account number <span style="color: red;">*</span></label>
+                                            <input type="number" id="account_no" name="ac_number"
+                                                class="form-control ed-textbox" onselectstart="return false"
+                                                oncopy="return false" onblur="myFunction1(id), error_msg(id)" onclick="myFunction2(id)"
+                                                placeholder="Enter Account number " pattern="^\d{9,18}$" maxlength="18"
+                                                minlength="9" title="Please fill the Account number" required>
+                                            <span id="account_no_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Re-enter account number <span style="color: red;">*</span></label>
+                                            <input type="number" id="re_ac_number" name="re_ac_number"
+                                                oncopy="return false" onpaste="return false" onselectstart="return false"
+                                                oncopy="return false"
+                                                class="form-control ed-textbox"
+                                                placeholder="Enter Re-enter Account number" pattern="^\d{9,18}$"
+                                                maxlength="18" minlength="9"
+                                                title="Please fill the Re-enter Account number" required onblur="error_msg(id)">
+                                            <span id="re_ac_number_span" class="text-danger font-weight-bold"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="form-check pt-1 pb-1">
+                                                    <input class="form-check-input form-check-input-cve" type="checkbox"
+                                                        name="defaultCheck" id="cbfill" value="yes" required
+                                                       >
+                                                    <label class="form-check-label " for="defaultCheck1"
+                                                        style="text-align: left;">
+                                                        मैं घोषणा करता/करती हूं कि मेरे द्वारा इस आवदेन में दी गई
+                                                        उपरोक्त समस्त जानकारियां पूर्ण एवं सत्य हैं तथा किसी भी स्तर पर
+                                                        असत्य पाये जाने पर मेरी सेवाएं समाप्त/नियमानुसार कार्यवाही करने
+                                                        का मध्य प्रदेश मध्य क्षेत्र विद्युत वितरण कम्पनी लिमिटेड, भोपाल
+                                                        को पूर्ण अधिकार होगा । मैंने राजस्व संग्रहण से सम्बंधित
+                                                        MPMKVVCL,Bhopal की सभी शर्तें पढ़ ली है एवं मैं उपरोक्त शर्तों
+                                                        एवं नियम से सहमति प्रदान करता हूँ |
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center">
+
+                                        <input id="loginButton" name="submit"  type="submit"
+                                            data-text="Next" class="btn btn-primary w-100 mt-4 mb-0" >
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div
+                        class="col-md-5 d-lg-flex d-none h-100 my-auto pe-0 top-0 end-0  position-fixed text-center justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                        style="background-image: url('{% static '/assets/img/mpeb_wrapper.jpg' %}');
+                        background-size: cover;" >
+                            
+
+
+                            <h6 class="mt-5 text-white font-weight-bolder position-relative">Instructions
+                            </h6>
+                            <p class="text-white position-relative"><b>
+                                    <ul style="list-style-type: square; text-align: left; color:white">
+                                        <li style="font-size: 10px;">राजस्व संग्रहण एजेंसी/संस्था के लिए मार्गदर्षिका
+
+                                        </li>
+
+                            </p>
+
+
+                            </ul></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+        .cainput-group {
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+            height: 42px;
+            flex-wrap: nowrap;
+            border: 1px solid #ced4da;
+        }
+
+        .cainput-group .form-control {
+            width: 100%;
+            height: 100%;
+            border: 0 !important;
+            outline: none !important;
+            box-shadow: none;
+            padding: 4px 10px;
+            background: transparent !important;
+        }
+
+        .input-group .form-control:focus {
+            border: 0 !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .cainput-group .input-group-addon {
+            padding: 0 10px;
+        }
+    </style>
+
+
+</main>
+
+<script>
+    console.log("Hiii")
+    
+        function myFunction1(id) {
+            let x = document.getElementById(id);
+            if (x.type === "number") {
+                x.type = "password"
+            }
+        }
+        function myFunction2(id) {
+            let x = document.getElementById(id);
+            if (x.type === "password") {
+                x.type = "number"
+            }
+        }
+        function myFunction() {
+            var x = document.getElementById("user_adhar_no");
+            if (x.type === "password") {
+                x.type = "number";
+            } else {
+                x.type = "password";
+            }
+        }
+        
+        
+
+    function error_msg(inp_id){
+        let inp = document.getElementById(inp_id);
+        if(inp.value == ""){
+        let x = document.getElementById(inp.id+"_span");
+        x.innerHTML = "Please fill the required details";
+        }else{
+        let x = document.getElementById(inp.id+"_span");
+        x.innerHTML = "";
+        }
+    }        
+        
+    function validForm() {
+        let user_name = document.getElementById('user_name');
+        let father_name = document.getElementById('father_name');
+        let user_adhar_no = document.getElementById('user_adhar_no');
+        let email = document.getElementById('email');
+        let ivrs_no = document.getElementById('ivrs_no');
+        let pan_no = document.getElementById('pan_no');
+        let uploadFile_one = document.getElementById('uploadFile_one');
+        let uploadFile_two = document.getElementById('uploadFile_two');
+        let uploadFile_three = document.getElementById('uploadFile_three');
+        let ifsc = document.getElementById('ifsc');
+        let ac_holder_name = document.getElementById('ac_holder_name');
+        let account_no = document.getElementById('account_no');
+        let re_ac_number = document.getElementById('re_ac_number');
+        let gst_no = document.getElementById('gst_no');
+        let regexp1 = new RegExp(/^[A-Za-z ]+$/);
+        let regex3 = new RegExp(/^\d{12}$/);
+        let regex6 = new RegExp(/^[N]{1}[0-9]{10}$/);
+        let regex2 = new RegExp(/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/);
+        let regex4 = new RegExp(/^[A-Z]{4}0[A-Z0-9]{6}$/);
+        let regex5 = new RegExp(/^\d{9,18}$/);
+        let regex7 = new RegExp(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/);
+        let RegExp_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+
+        if(user_name.value != "") {
+                let result = regexp1.test(user_name.value);
+                if (result == false) {
+                    alert("Name should be in letter only.")
+                    return false;
+                }
+        
+        }
+        if(father_name.value != ""){
+            let result = regexp1.test(father_name.value);
+                if (result == false) {
+                    alert("Father Name should be in letter only.")
+                    return false;
+                }
+        }
+        if(user_adhar_no.value != ""){
+            let result = regex3.test(user_adhar_no.value);
+                if (result == false) {
+                    alert("Adhar number should be in number and 12 digit only.")
+                    return false;
+                }
+        }
+        if(email.value != ""){
+            let result = RegExp_email.test(email.value);
+                if (result == false) {
+                    alert("Please Enter valid email.")
+                    return false;
+                }
+        }
+        if(ivrs_no.value != ""){
+            let result = regex6.test(ivrs_no.value);
+            if(result == false){
+                alert("Please Enter IVRS number in valid format.");
+                return false;
+            }
+        }
+        // if( gst_no.value != ""){
+        //     let result = regex7.test(gst_no.value);
+        //     if(result == false){
+        //         alert("Please enter GST number must be in capital letter and valid format.");
+        //         return false;
+        //     }
+        // }
+        if(pan_no.value != ""){
+            let result = regex2.test(pan_no.value);
+                if (result == false) {
+                    alert("Pan Number should be in valid Format .")
+                    return false;
+                }
+        }
+        
+        if(ifsc.value != ""){
+            let result = regex4.test(ifsc.value);
+                if (result == false) {
+                    alert("IFSC code should be in valid Format .")
+                    return false;
+                }
+        }
+        if(ac_holder_name.value != ""){
+            let result = regexp1.test(ac_holder_name.value);
+                if (result == false) {
+                    alert("Account holder Name should be in letter only. .")
+                    return false;
+                }
+        }
+        if(account_no.value != ""){
+            let result = regex5.test(account_no.value);
+                if (result == false) {
+                    alert("Account number must be Number only.")
+                    return false;
+                }
+        }
+        if(account_no.value != re_ac_number.value){
+            alert("pleas enter Account number and re-enter Account number, must be same.");
+            return false;
+        }
+       
+       
+
+
+}
+  
+    function setZipInfo(){
+        console.log("fireererer")
+        let pin = $('#txtzip').val();
+        let url1 = ` https://qcportal.mpcz.in/ca/detail_by_pincode/${pin}`
+
+        fetch(url1)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                let data1 = data.data
+                data1.forEach(element => {
+                    $('#txtstate').val(element.State)
+                    $('#txtdistrict').val(element.District)
+                });
+                var html = '';
+                data1.forEach(element => {
+                    console.log("eleeee cityyye", element.City)
+                    html = html + (`<option value="${element.City}">${element.City}</option>`);
+                });
+                $('#txtcity').html(html);
+            })
+
+        $.ajax({
+            type: 'get',
+            url: ` http://qcportal.mpcz.in/ca/detail_by_pincode/${pin}`,
+            success: function (data) {
+                
+                let d = data.data;
+                var html = '';
+                d.forEach(element => {
+                    console.log("eleeee cityyye",element.City)
+                     html2 = html2 + (`<option value="${element.pincode_Id}">${element.City}</option>`);
+                });
+                $('#txtcity').html(html2);
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        })
+    }
+    
+
+</script>
+{% if messages %}
+<div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %} role="alert">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="fas fa-comment-dots" {% endif %}> {{ message }}</li>
+            {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+</body>
+{% endblock title %}

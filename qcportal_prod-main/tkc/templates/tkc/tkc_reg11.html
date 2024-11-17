@@ -1,0 +1,50 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<form class="multisteps-form__form mb-8" action="tkc_reg_eleven" method="POST">
+    {% csrf_token %}
+
+
+    <div class="ed-information mb-2">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Digital Signature
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <p>
+                        I hereby declare that the details furnished above are true and correct to the best of my
+                        knowledge and belief and in case if any document found Incorrect or false or any information
+                        provided in
+                        application form found incorrect or false then registration may be cancelled at any time.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="ed-radio-block">Online Verification through OTP
+                        <input type="radio" name="opinions" id="radio-1" class="form-check-input" checked />
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <div class="form-group mt-2">
+                    <div class="text-right">
+                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_twelve">Prev</a></button> -->
+                        <button class="btn ed-submits ed-formsubmit" value="Submit" type="submit" title="Save & Next">
+                            Save & Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+{% endblock body %}

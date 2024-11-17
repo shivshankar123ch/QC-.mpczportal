@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Loading...</title>
+</head>
+
+<body onload="document.payuForm.submit()">
+    <form action='https://secure.payu.in/_payment' method='post' name="payuForm">
+        <input type="hidden" name="key" value="GHeH7D" />
+        <input type="hidden" name="txnid" value="{{txnid}}" readonly/>
+        <input type="hidden" name="amount" value="1000.00" />
+        <input type="hidden" name="furl" value="https://qcportal.mpcz.in/ca/payment/failure" /></td>
+        <!-- <input type="hidden" name="service_provider" value="{{posted.service_provider}}" size="64" /> -->
+        <input type="hidden" name="firstname" value="{{n}}" />
+        <input type="hidden" name="lastname" value="Jaiswal" />
+        <input type="hidden" name="phone" value="{{b}}" />
+        <input type="hidden" name="hash" value="{{posted}}" />
+        <input type="hidden" name="surl" value="https://qcportal.mpcz.in/ca/payment/success" />
+        <input type="hidden" name="productinfo" value="Portal Fees" />
+        <input type="hidden" name="email" value="{{e}}" />
+
+    </form>
+</body>
+
+</html>

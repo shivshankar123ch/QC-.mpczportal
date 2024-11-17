@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Procurement | Dashboard</title>
+    <meta charset="utf-8">
+       {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static 'assets1/scss/main.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <style>
+        .ed-wrapper-block .ed-sidebar-block .navbar-nav .nav-item .nav-link .nav-icon svg path {
+    /* fill: #fff; */
+    stroke: #b7c0cd;
+}
+</style>
+
+
+
+    <div class="ed-wrapper-block">
+        <div class="ed-wrapper-contant" id="edContainer">
+            <nav class="navbar ed-header-navbar ed-header-block" id="edHeader">
+                <div class="navbar-container">
+                    <ul class="navbar ed-nav-left">
+                        <li class="nav-item">
+                            <a href="javascript:;" class="nav-link" id="navMenu">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="3" y1="12" x2="21" y2="12" />
+                                    <line x1="3" y1="6" x2="21" y2="6" />
+                                    <line x1="3" y1="18" x2="21" y2="18" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar ed-nav-right">
+                        <li class="nav-item ed-profilemenu-block">
+                            <a class="nav-link " href="#" data-toggle="dropdown">
+
+                                <span class="ed-imgbox">
+                                      {% if officer.image %}
+                                    <img src="{{officer.image.url}}"  class="img-fluid ed-userimg"
+                                        alt="User profile" />
+                                    {% else %}
+                                     <img src="{% static 'assets1/images/userimg.jpg' %}" class="img-fluid ed-userimg"
+                                        alt="User profile" />
+                                    {% endif %}
+                                </span>
+                                <span class="ed-text">
+                                    {{ officer.employ_name }}
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item ed-logout-block">
+                        <a class="nav-link " href="javascript:;" onclick="CustomAlert.show()">
+                            <span class="ed-imgbox">
+                                <img src="assest/images/logout.png" class="img-fluid ed-logout" alt="Logout" />
+                            </span>
+                        </a>
+                    </li> -->
+
+                        <li class="nav-item ed-logout-block">
+                            <a class="nav-link " href="/mpeb_login" title="Logout">
+                                <span class="ed-imgbox">
+                                    <img src="{% static 'assets1/images/logout.png' %}" class="img-fluid ed-logout" alt="Logout" />
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+            <div class="ed-sidebar-block" id="edSidebar">
+                <div class="navbar-logo">
+                    <span class="ed-logo-item">
+                        <img src="{% static 'assets1/images/rcalogo.png' %}" alt="Logo" class="img-fluid ">
+                    </span>
+                    <span class="ed-navbar-profile">
+                        <span class="ed-navbar-name">
+                           {{ officer.employ_name }}
+                        </span>
+                        <span class="ed-hdesignation-name">
+                             {{ officer.designation}}
+                        </span>
+                         <span class="ed-hdesignation-name">
+                            ( {{officer.Discom.Discom_Short_Name}})
+                        </span>
+                    </span>
+                </div>
+                <ul class="navbar-nav ed-menulist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Project
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link" href="#" data-toggle="dropdown">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                            </span>
+                            <span class="nav-text">
+                                Project Item
+                                <span class="ed-right-angel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu ed-menudropdown-block">
+                            <li class="menu-item">
+                                <a class="menu-link" href="/fqp/view_item">View Item/Physical</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="menu-link" href="/fqp/fqp_reject_di">Rejected DI/GatePass</a>
+                            </li>
+                            
+                             <li class="menu-item">
+                                <a class="menu-link" href="/fqp/fqp_gatepass">GatePass History</a>
+                            </li>
+                            
+                               <li class="menu-item">
+                                <a class="menu-link" href="/fqp/fqp_wo_trf_create">Create TRF</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/officersop" target="_blank">
+                            <span class="nav-icon">
+                                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.13 4.13 9.37.37A1.26 1.26 0 0 0 8.48 0H3.75A1.25 1.25 0 0 0 2.5 1.25v13.5A1.25 1.25 0 0 0 3.75 16h8.5a1.25 1.25 0 0 0 1.25-1.25V5a1.26 1.26 0 0 0-.37-.87zm-.88 10.62h-8.5V1.25h3.48V5a1.25 1.25 0 0 0 1.25 1.27h3.77zm0-9.73H8.48V1.25L12.25 5z"/><path d="M5 7.5h6v1.25H5zM5 10h6v1.25H5z"/></svg>
+                            </span>
+                            <span class="nav-text">
+                                officer SOP
+                            </span>
+                        </a>
+                    </li> 
+                </ul>
+            </div>
+
+            <!--  ---------------------- sidebar ----------------------- -->
+            <!--  ---------------------- sidebar ----------------------- -->
+
+
+            <!--  ---------------   Body part start ------------------------------------------- -->
+            <!--  ---------------   Body part start ------------------------------------------- -->
+
+
+
+            <div class="ed-infocontant">
+
+                <div class="ed-pagetitle-block">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
+                            <div class="media ed-pagetitle-info">
+                                <span class="ed-iconbox">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        <polyline points="9 22 9 12 15 12 15 22" />
+                                    </svg>
+                                </span>
+                                <div class="ed-ed-pagetitle-item">
+                                    <h4>
+                                        {% block pagetitle %} Dashboard {% endblock pagetitle %}
+
+                                    </h4>
+                                   {% include 'fqp/wo_creater/message.html' %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                            <ul class="navbar ed-pagetitle-link">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link active">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                            <polyline points="9 22 9 12 15 12 15 22" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <span class="nav-link nav-icon">
+                                        /
+                                    </span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link nav-menuitem">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+<div style="min-height: 400px;">
+{% block body %}
+
+
+
+
+{% endblock body %}
+    </div>
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+
+            <div class="ed-footer-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>
+                            © 2022, All Rights Reserved By
+                            <a href="#" class="link">MPMKVVCL</a>
+                            .
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <a href="#" class="links">
+                                Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co.
+                                Ltd. Nishtha Parisar Govindpura, Bhopal.
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<!--    <script src="https://code.jquery.com/jquery-3.1.1.min.js">-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+    $(function(){
+    $('.toast').toast(option);
+    })
+
+
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            $('#navMenu').click(function () {
+                $('#edHeader').toggleClass('ed-header-collpase');
+                $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                $('#edContainer').toggleClass('ed-wrapper-collpase');
+            });
+        });
+
+        $('#ed-menulist .nav-item').on('click', function () {
+            // var target = $(this).attr('data-rel');
+            $('#ed-menulist .nav-item .nav-link').removeClass('active');
+            $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+            $('#ed-menulist .nav-item').removeClass('active');
+            $(this).addClass('active');
+            // $('#ed-menulist .nav-item').addClass('active');
+            $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+            // alert();
+            // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+            return false;
+        });
+    </script>
+
+    <script>
+        const dialogModal = document.getElementById('dialog-modal');
+        const CustomAlert = new function () {
+            this.show = function (msg) {
+                $('body').addClass('bodymodel');
+                dialogModal.style.visibility = 'visible';
+                dialogModal.style.opacity = 1;
+                dialogModal.style.top = '40%';
+            }
+
+            this.close = function () {
+                $('body').removeClass('bodymodel');
+                dialogModal.style.visibility = 'hidden';
+                dialogModal.style.opacity = 0;
+                dialogModal.style.top = '-40%';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+<script>
+
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+
+
+    function add_fields() {
+        document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+    }
+
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+    }
+    function add_fields1() {
+        document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+    }
+</script>
+
+<!---->
+</body>
+</html>
+
+
+
+
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $("#nextStep1").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").show();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+
+<!--        $("#nextStep2").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").show();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+
+<!--        $("#nextStep3").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").show();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+
+<!--        $("#nextStep4").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").show();-->
+<!--        });-->
+
+<!--    });-->
+<!--</script>-->
+
+
+<script>
+    $('.material-wrapper').on('click', '.remove', function () {
+        $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+    });
+    $('.material-wrapper').on('click', '.addMaterial', function () {
+        $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+    });
+</script>

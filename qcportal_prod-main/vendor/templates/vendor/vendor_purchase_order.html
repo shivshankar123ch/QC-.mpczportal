@@ -1,0 +1,76 @@
+ {% extends 'vendor/vendorBase.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}  {% block vendor_purchase %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock vendor_purchase %}
+
+
+
+<!----- trial start here-->
+<h5 class="font-weight-bolder mb-0">All Purchase Order</h5>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+            <tr>
+                <th scope="col" style="width: 10px;">S.No.</th>
+                <th>PO. No.</th>
+                <th>Item Category</th>
+                <th>Item Name</th>
+                <th>Item Quantity</th>
+                <th>Item Class</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for name in data%}
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="customCheck1">
+                        </div>
+                        <p class="text-xs font-weight-bold ms-2 mb-0">{{ forloop.counter }}</p>
+                    </div>
+                </td>
+                <td class="font-weight-bold">
+                    <span class="my-2 text-xs">MPCZ00{{name.id}}</span>
+                </td>
+                <td class="text-xs font-weight-bold">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
+                        <span>{{name.item_category}}</span>
+                    </div>
+                </td>
+                <td class="text-xs font-weight-bold">
+                    <div class="d-flex align-items-center">
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
+                        <span>{{name.item_name}}</span>
+                    </div>
+                </td>
+                <td class="text-xs font-weight-bold">
+                    <span class="my-2 text-xs">{{name.item_quantity}}</span>
+                </td>
+                <td class="text-xs font-weight-bold">
+                    <span class="my-2 text-xs">{{name.item_class}}</span>
+                </td>
+                <td class="text-xs font-weight-bold project-actions text-right">
+                    {% if not name.dispatch_status %}
+                    <a class="btn btn-primary btn-sm float-left" href="/vendor/procurement_Dispatch/{{name.id}}">
+                    Dispatch
+                  </a> {% endif %}
+                    <a class="btn btn-success btn-sm" href="/vendor/vendor_view_di/{{name.id}}">
+                    View DI
+                  </a>
+                    <a class="btn bg-gradient-primary ms-auto mb-0" href="{{name.Po_doc.url}} " class="btn btn-success mr-3">Download</a>
+                    <a class="btn bg-gradient-primary ms-auto mb-0" href="/vendor/vendor_procurement_status/{{name.id}}">
+                    Status
+                  </a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-----trial end here-->
+{% endblock body %}

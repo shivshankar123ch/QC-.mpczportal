@@ -1,0 +1,82 @@
+{% extends 'tkc/site_store_base.html' %}
+{% load static %}
+{% block heading %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock heading %}
+
+{% block body %}
+
+<!-- <body onkeydown="return (event.keyCode != 116)">  
+    <h1>  
+        Click this page to set focus.  
+    </h1>  
+</body>  -->
+
+
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            TKC View Sampled Material
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                    <thead>
+                        <tr>
+                            <th class="w-5">S.No.</th>
+                            <th> Sample Code </th>
+                            <th> Material Name </th>
+                            <th> Sampled Item Site Store Name </th>
+                            <th> Sampled By Officer </th>
+                            <th> Sampled By Officer Circle </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sample_number in final_zip %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            {% if sample_number.offer.excel_type == True %}
+                            <td class="project_progress">
+                                    {{sample_number.serial_no}}
+                            </td>
+                            {% elif sample_number.offer.excel_type == False %}
+       
+                               <td class="project_progress">
+                                 {{sample_number.batch_no}}
+                                 </td>
+       
+                                 {% endif %}
+       
+                            <td>{{sample_number.offer.wo_material.material_name}} </td>
+                            <td>{{sample_number.site_store}} </td>
+                            <td>{{sample_number.sampled_by.employ_name}} </td>
+                            <td>{{sample_number.sampled_by.Circle.Circle_Name_E}} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    {
+        function ValidateRating(event, inputText) {
+            event.preventDefault();
+            //remaining function logic goes here
+        }
+    }
+
+</script>
+
+</div>
+
+{% endblock body %}

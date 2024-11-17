@@ -1,0 +1,122 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+  [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+}
+.table th{
+  text-align: center !important;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 195px;
+}
+</style>
+
+      
+
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+
+    <div class="card-header">
+      <h2>
+        <p>Offer No. - {{offer_data.offer_no}}</p>
+            <p>Material Spec - {{offer_data.wo_material.material_name}}</p>
+                <p>Quantity - {{offer_data.quantity}}</p>
+      </h2>
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="ed-tableinfo-block mb-4">
+        <div class="table-responsive">
+
+    {% if offer_data.excel_type == True %}
+          <table class="table table-striped display table-bordered text-center " id="po_view_DI_list">
+            <thead class="table-dark">
+              <tr>
+                <th class="w-5">Sr No.</th>
+                <th>
+                  Material Serial Number
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in offer_serial_data %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+
+                <td>
+                    {{ i.serial_no }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+    {% elif offer_data.excel_type == False %}
+
+    <table class="table table-striped display table-bordered text-center " id="po_view_DI_list">
+        <thead class="table-dark">
+          <tr>
+            <th class="w-5">Sr No.</th>
+            <th>
+              Material Batch/Lot/Drum Number
+            </th>
+            <th>
+                Quantity
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in offer_serial_data %}
+          <tr>
+            <td>
+              {{ forloop.counter }}
+            </td>
+            <td>
+                {{ i.batch_no }}
+            </td>
+            <td>
+                {{ i.batch_qty }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% endif %}
+
+    
+        </div>
+      </div> 
+
+    </div>
+  </div>
+</div> 
+
+<script>
+  $(document).ready(function () {
+       $('#po_view_DI_list').DataTable({
+           pagingType: 'full_numbers',
+       });
+   });
+</script>
+
+{% endblock body %}>

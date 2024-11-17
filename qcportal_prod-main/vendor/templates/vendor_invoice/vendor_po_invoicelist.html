@@ -1,0 +1,125 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %}
+
+<!-- {% block cert %} 
+    <p class="mb-0">
+        {% if userdata.digital_cert_upload == 1 %}
+            <label class="text-success text-sm font-weight-bolder">{{userdata.Authentication_id}}</label>
+        {% elif userdata.Authentication_id  %}
+            <a class="text-success text-sm font-weight-bolder" onclick="alert('Certificate generated but not digitally signed')">{{userdata.Authentication_id}}</a>
+        {% else %}
+            <a class="text-success text-sm font-weight-bolder" onclick="alert('Certificate not uploaded')" >Not Available</a>
+        {% endif %}
+    </p>
+{% endblock cert %} -->
+
+{% block body %} {% block Vendor_Basic %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock Vendor_Basic %}
+</li>
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Purchase-Order Invoice
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered text-center" id="vendor_po_invoice_list">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="w-5 text-center">Sr.No.</th>
+                                <th>PO. No.</th>
+                                <th>Subject</th>
+                                <th>PO. Date</th>
+                                <th>Firm Name</th>
+                                <th>View PO Detail</th>
+                                <th>PO. Amount (In Rupees)</th>
+                                <th>PO. Approved Amount (In Rupees)</th>
+                                <th>View Invoice</th>
+                                <th>Create Invoice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for po in po_data %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td>
+                                    {{po.po_no}} 
+                                </td>
+                                <td>
+                                    {{po.po_subject}}
+                                </td>
+                                <td>
+                                    {{po.erp_created_date}}
+                                </td>
+                                <td>
+                                    {{po.vendor.CompanyName_E}}
+                                </td> 
+
+                                <td>
+                                    {% if po.Po_doc %}
+                                    <a class="btn  btn-info" href="{{po.Po_doc.url}}" target="_blank">View Purchase Order</a>
+                                    {% else %}
+                                    <a class="btn  btn-danger" href="#">Digital Order Not Uploaded</a>
+                                    {% endif %}
+                                </td>
+
+                                
+                                <td>
+                                       {% for pm in pomd %}
+                                            {% if po.id == pm.po %}
+                                            {{pm.total_amount|default:"0"}} Rupees
+                                            {% endif %}
+                                            {% endfor %}
+                                </td> 
+                                  <td>
+                                    {{po.total_invoice_ammount|default:"0"}} Rupees
+                                </td>
+  
+                                <td>
+                                <a class="btn  btn-info" onclick="msg()"
+                                        href="/vendor/vendor_invoice_list/?poid={{po.id}}">View Invoices</a>
+                                </td>
+                                <td>
+                            <a class="btn  btn-secondary" onclick="msg()"
+                                href="/vendor/vendor_invoice_generate/?poid={{po.id}}">Create Invoice</a>
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<script>
+    // function msg(){
+    //     alert(" All details sucessfully submitted.")
+    // }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#vendor_po_invoice_list').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+
+                {% endblock body %}
+

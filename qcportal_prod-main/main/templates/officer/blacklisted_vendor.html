@@ -1,0 +1,158 @@
+{% extends 'officer/dgm_work.html' %} {% load static %} {% block body %}
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script> -->
+
+<head>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reg8.js' %}"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+    <script type="text/javascript">
+        $(function () {
+            $("#ddlTime").change(function () {
+                if ($(this).val() == "temporary") {
+                    $("#dvdate_period").show();
+                } else {
+                    $("#dvdate_period").hide();
+                }
+            });
+        });
+    </script>
+</head>
+
+  
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Blacklist Vendor
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <form action="blacklisted_save" name="myForm" onsubmit="return validateForm()" method="POST"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="forms-informations">
+                <div class="ed-form-block p-0 border-0">
+                    <!-- <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Liaison Info
+                        </span>
+                    </h6>
+                </div> -->
+                    <div class="ed-form-body">
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Select Contractor
+                                <!-- <span class="text-danger">*</span> -->
+                            </label>
+                            <select id="Vendor_type" name="vendor_name" class="form-control ed-textbox"
+                                aria-label=".form-select-lg example" required onfocus="validateForm()"
+                                onkeyup="validateForm()" onchange="validateForm()" required>
+                                <option value="select-option-user" selected>
+                                    Select Contractor Type</option>
+                                {% for data in data %}
+                                <option value="{{data.CompanyName_E}}">{{data.CompanyName_E}}</option>
+                                {% endfor %}
+                            </select>
+                            <span id="select2" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Blacklist Proposed By
+                                <!-- <span class="text-danger">*</span> -->
+                            </label>
+                            <input type="text" name="order_by" onkeyup="validateForm()"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                                onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox">
+                            <span id="companyNameEnglish" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Blacklisted Order
+                                <!-- <span class="text-danger">*</span> -->
+                            </label>
+                            <input type="file" name="order" onkeyup="validateForm()"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                                onfocus="validateForm()" onchange="validateForm()" class="">
+                            <span id="companyNameEnglish" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Time Period
+                                <!-- <span class="text-danger">*</span> -->
+                            </label>
+                            <select id="ddlTime" name="timeperiod" class="form-control ed-textbox"
+                                aria-label=".form-select-lg example" required onfocus="validateForm()"
+                                onkeyup="validateForm()" onchange="validateForm()" required>
+                                <option value="select-option-user disabled" selected> Select Time Period Type</option>
+                                <option value="permanent">Permanent</option>
+                                <option value="temporary">Temporary</option>
+                            </select>
+                            <span id="select2" class="d-block ed-warningtext text-danger"></span>
+                        </div>
+
+
+
+                        <div class="form-group" id="dvdate_period" style="display: none">
+                            <label class="ed-form-label">
+                                Select Period
+                                <!-- <span class="text-danger">*</span> -->
+                            </label>
+                            <input type="date" name="date_period" class="form-control ed-textbox"
+                                aria-label=".form-select-lg example">
+                            <!-- <span id="select2" class="text-danger font-weight-bold" style="font-size: 80%;"></span> -->
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <div class="btn-actionblock text-right">
+                                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev"><a href="#" style="color: white;">Prev</a></button> -->
+                                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                <button class="btn btn-info" type="submit" onclick="validateForm()"
+                                    title="Send">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+
+{% endblock body %}

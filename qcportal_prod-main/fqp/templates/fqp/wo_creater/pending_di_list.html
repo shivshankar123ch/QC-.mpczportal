@@ -1,0 +1,109 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                       Approved Offered Material's Pending DI List 
+                                    </h2>
+                                </div>
+
+   <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Offer No.</th>
+                <th>TKC Supplier</th>
+                <th>Work Order No.</th>
+                <th>View WO</th>
+                <th>Action</th>
+                <th>View DI</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Data in offer_material_data %}
+            <tr>
+                  <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{Data.offer_no}}
+                </td>
+                 <td>
+                    {{Data.wo.supplier.CompanyName_E}}
+                </td>
+                 <td>
+                    {{Data.wo.Contract_Number}}
+                </td>
+                <td>
+                    <a target="_blank" href="{{Data.wo.Wo_Digital.url}}">
+                        <button class="btn ed-submit btn-success">
+                            <span class="ed-submit-text">
+                                 View WO
+                            </span>
+                        </button>
+                            </a>
+                </td>
+                <!-- <td>
+                    <a  href="/fqp/verify_and_create_di/{{Data.wo.id}}/{{Data.offer_no}}">
+                    <button class="btn ed-submit btn-success">
+                        <span class="ed-submit-text">
+                             View Materials
+                        </span>
+                    </button>
+                        </a>
+                    </td> -->
+
+                <td>
+                    <a  href="/fqp/view_erp_offered_approved_material/{{Data.wo.id}}/{{Data.offer_no}}">
+                    <button class="btn ed-submit btn-success">
+                        <span class="ed-submit-text">
+                                View Materials
+                        </span>
+                    </button>
+                        </a>
+                </td>
+
+                <td>
+                <a  href="/fqp/view_and_create_multiple_DI/{{Data.wo.id}}/{{Data.offer_no}}">
+                <button class="btn ed-submit btn-success">
+                    <span class="ed-submit-text">
+                    View DI
+                    </span>
+                </button>
+                    </a>
+                </td>
+                
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

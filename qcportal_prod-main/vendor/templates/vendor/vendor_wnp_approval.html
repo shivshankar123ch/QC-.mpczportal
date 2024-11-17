@@ -1,0 +1,499 @@
+
+{% extends 'vendor/vendor_wnp_htmlbase.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+<form   action="/vendor/vendor_wnp_approval/{{data.id}}" method="POST">
+  {% csrf_token %}
+<div class="col-12 col-md-12">
+    <div class="card">
+        <div class="card-body">
+            
+        </div>
+    </div>
+</div>  
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h3 class="card-title">Generate PO List</h3> -->
+          </div>
+          <!-- <div class="card-header">
+            <button type="Add Test" id="submit" class="btn btn-success float-right mr-3">Dispatch</button>
+
+
+          </div> -->
+          <!-- /.card-header -->
+
+
+
+          <h3 class="pt-3">Vendor Basic Detail</h3>
+          <div  class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="width:20%">
+                  Serial Number</th>
+                  <th style="width: 20%">
+                    Report Name </th>
+                  <th style="width:20%">
+                    Docuement Number/Value</th>
+                    <th style="width: 20%">
+                      Document </th>
+                    <th style="width: 20%">
+                      Response</th>
+          
+                  <th style="width: 5%">
+                    Work Remark
+                  </th>
+          
+              </tr>
+              </thead>
+              <tbody>
+          
+          
+          
+          <tr>
+              <td>1</td>  
+              <td>Company Name</td>
+              <td>{{data.v_company_name}}</td>
+             
+                <td></td>
+               
+                <td><select id="inputStatus" name="cnameone" class="form-control custom-select required">
+                  <option selected disabled value="">select</option>
+                  <option>Ok</option>
+                  <option>Not Ok</option>
+                </select></td>
+                   
+                        <td>
+                            <input type="text"   name="cname">
+                          </td>
+           
+                
+          
+            </tr>
+
+             
+          <tr>
+            <td>2</td>  
+            <td>Company Type</td>
+            <td>{{data.v_service_type}}</td>
+            <td>
+              <!-- <input type="text" name="remark1" readonly="readonly" value="{{work_remark.ok1}}"> -->
+              <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+              <!-- <button type="button" id="button1" value="{{data.v_upload_se.url}}" class="btn btn-success mr-3">View</button> -->
+              </td>
+              
+              <td><select id="inputStatus" name="cnametwo" class="form-control custom-select required">
+                <option selected disabled value="">select</option>
+                <option>Ok</option>
+                <option>Not Ok</option>
+              </select></td>
+               
+                 
+                      <td>
+                          <input type="text" name="ctype">
+                        </td>
+         
+              
+        
+          </tr>
+
+        
+          <tr>
+            <td>3</td>
+          <td> Aadhar Card</td>
+          <td>{{data.v_company_dir_aadhar}}</td>
+          <td>
+            <a href="{{data.v_upload_file_father.url}} " class="btn btn-success mr-3" >View</a>
+            <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+            <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+            </td>
+            <td><select id="inputStatus" name="cnamefive" class="form-control custom-select">
+              <option selected disabled value="">select</option>
+              <option>Ok</option>
+              <option>Not Ok</option>
+            </select></td>
+                <td>
+                    <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                      <input type="text" name="aadhar">
+                    </td>
+        </tr>
+
+          <tr>
+            <td>4</td>
+          <td> Father Aadhar Card</td>
+          <td>{{data.v_father_number}}</td>
+          <td>
+            <a href="{{data.v_upload_file_father.url}} " class="btn btn-success mr-3" >View</a>
+            <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+            <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+            </td>
+            <td><select id="inputStatus" name="eight" class="form-control custom-select">
+              <option selected disabled value="">select</option>
+              <option>Ok</option>
+              <option>Not Ok</option>
+            </select></td>
+                <td>
+                    <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                      <input type="text" name="remark7">
+                    </td>
+        </tr>
+    
+    
+         
+        <tr>
+          <td>5</td>
+        <td> Mother Aadhar Card</td>
+        <td>{{data.v_mother_number}}</td>
+        <td>
+          <a href="{{data.v_upload_file_mother.url}} " class="btn btn-success mr-3" >View</a>
+          <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+          <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+          </td>
+          <td><select id="inputStatus" name="nine" class="form-control custom-select">
+            <option selected disabled value="">select</option>
+            <option>Ok</option>
+            <option>Not Ok</option>
+          </select></td>
+              <td>
+                  <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                    <input type="text" name="remark8">
+                  </td>
+      </tr>
+    
+      <tr>
+  
+      
+          
+                      </tbody>
+                    </table>
+       
+
+        <h3 class="pt-3">Vendor Technical Detail</h3>
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="width:20%">
+                  Serial Number</th>
+                  <th style="width: 20%">
+                    Report Name </th>
+                  <th style="width:20%">
+                    Docuement Number/Value</th>
+                    <th style="width: 20%">
+                      Document </th>
+                    <th style="width: 20%">
+                      Response</th>
+
+                    <th style="width: 5%">
+                    Remark
+                  </th>
+                  <!-- <th style="width:35%">
+                      Material Parameter
+                  </th> -->
+                  <!-- <th style="width: 15%">
+                    
+                    Select Vendor
+                  </th> -->
+              </tr>
+              </thead>
+              <tbody>
+          
+            <tr>
+              <td>1</td>
+              <td>BIS LICENSE No</td>
+              <td>{{data.v_bis_license_no}}</td>
+              <td>
+                <a href="{{data.v_upload_se.url}} " class="btn btn-success mr-3" >View</a>
+                <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                <!-- <button type="button" id="button1" value="{{data.v_upload_se.url}}" class="btn btn-success mr-3">View</button> -->
+                </td>
+                <td><select id="inputStatus" name="one" class="form-control custom-select required">
+                  <option selected disabled value="">select</option>
+                  <option>Ok</option>
+                  <option>Not Ok</option>
+                </select></td>
+                    <td>
+                        <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                        <input type="text" name="remark1">
+                        </td>
+                
+         
+            </tr>
+            <tr>
+                <td>2</td>
+              <td>ISI LICENSE No</td>
+              <td>{{data.v_isi_licence}}</td>
+              <td>
+                <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                <!-- <button type="button" id="button2" class="btn btn-success mr-3">View</button> -->
+                <a href="{{data.v_upload_eight.url}} " class="btn btn-success mr-3" >View</a>
+                </td>
+                <td><select id="inputStatus" name="two" class="form-control custom-select required">
+                  <option selected disabled value="">select</option>
+                  <option>Ok</option>
+                  <option>Not Ok</option>
+                </select></td>
+                    <td>
+                        <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                          <input type="text" name="remark2">
+                        </td>
+            </tr>
+            <tr>
+                <td>3</td>
+              <td>PRODUCTS MANUFACTURED WITH COMPLETE DESCRIPTION </td>
+              <td>{{data.v_office_name_nine}}</td>
+              <td>
+                <a href="{{data.v_upload_nine.url}} " class="btn btn-success mr-3" >View</a>
+
+                <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                <!-- <button type="button" id="button3" class="btn btn-success mr-3">View</button> -->
+                </td>
+                <td><select id="inputStatus" name="three" class="form-control custom-select required">
+                  <option selected disabled value="">select</option>
+                  <option>Ok</option>
+                  <option>Not Ok</option>
+                </select></td>
+                    <td>
+                        <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                          <input type="text" name="remark3">
+                        </td>
+            </tr>
+            <tr>
+                <td>4</td>
+              <td>METHOD ADOPTED FOR QUALITY CONTROL </td>
+              <td>{{data.v_product_nine}}</td>
+              <td>
+                <a href="{{data.v_upload_ten.url}} " class="btn btn-success mr-3" >View</a>
+                
+                <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+                </td>
+                <td><select id="inputStatus" name="four" class="form-control custom-select required">
+                  <option selected disabled value="">select</option>
+                  <option>Ok</option>
+                  <option>Not Ok</option>
+                </select>
+                    </td>
+                    <td>
+                        <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                          <input type="text" name="remark4">
+                        </td>
+            </tr>
+
+            <tr>
+              <td>5</td>
+            <td>SOURCE OF SUPPLY OF RAW MATERIAL WITH ADDRESS </td>
+            <td>{{data.v_method_ten}}</td>
+            <td>
+              <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+             
+              </td>
+              <td><select id="inputStatus" name="five" class="form-control custom-select">
+                <option selected disabled value="">select</option>
+                <option>Ok</option>
+                <option>Not Ok</option>
+              </select></td>
+                  <td>
+                      <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                        <input type="text" name="remark5">
+                      </td>
+          </tr>
+
+
+
+
+          <tr>
+            <td>6</td>
+          <td>LIST OF ITEMS HOLDING ISO 9001 CERTIFICATE </td>
+          <td>{{data.v_eleven_source}}</td>
+          <td>
+            <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+          
+            </td>
+            <td><select id="inputStatus" name="six" class="form-control custom-select">
+              <option selected disabled value="">select</option>
+              <option>Ok</option>
+              <option>Not Ok</option>
+            </select></td>
+                <td>
+                    <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                      <input type="text" name="remark6">
+                    </td>
+        </tr>
+
+        <tr>
+          <td>7</td>
+        <td>PROOF OF FIRM/COMPANY REGISTRATION </td>
+        <td>{{data.v_p_reg_number}}</td>
+        <td>
+          <a href="{{data.v_upload_file.url}} " class="btn btn-success mr-3" >View</a>
+          <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+          <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+          </td>
+          <td><select id="inputStatus" name="seven" class="form-control custom-select">
+            <option selected disabled value="">select</option>
+            <option>Ok</option>
+            <option>Not Ok</option>
+          </select></td>
+              <td>
+                  <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                    <input type="text" name="remark10">
+                  </td>
+      </tr>
+
+   
+    <td>8</td>
+  <td> Factory license number  </td>
+  <td>{{data.v_faculty_license_number}}</td>
+  <td>
+    <a href="{{data.v_upload_file_mother.url}} " class="btn btn-success mr-3" >View</a>
+    <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+    <!-- <button type="button" id="button" class="btn btn-success mr-3">View</button> -->
+    </td>
+    <td><select id="inputStatus" name="ten" class="form-control custom-select">
+      <option selected disabled value="">select</option>
+      <option>Ok</option>
+      <option>Not Ok</option>
+    </select></td>
+        <td>
+            <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+              <input type="text" name="remark9">
+            </td>
+</tr>
+
+            </tbody>
+          </table>
+
+        </tbody>
+      </table>
+      
+      <h3 class="pt-3">Vendor Item Detail</h3>
+      <div  class="card-body">
+        <table id="example2" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th style="width:20%">
+              Serial Number</th>
+              <th style="width: 20%">
+                Material  </th>
+              <th style="width:20%">
+                Material Specification </th>
+                <th style="width: 20%">
+                  Type tests reports upload file </th>
+                <th style="width: 20%">
+                  GTP and Drawing upload file </th>
+      
+              <th style="width: 5%">
+                other upload file 
+              </th>
+      
+              <th style="width: 5%">
+                Works Remark 
+              </th>
+      
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+      
+      
+             
+      
+          <tr>
+            <td>1</td>  
+            <td>{{data.v_item_name}}</td>
+            <td>{{data.v_item_for_apply}}</td>
+            <td>
+              
+              <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+              <!-- <button type="button" id="button1" value="{{data.v_upload_file_e.url}}" class="btn btn-success mr-3">View</button> -->
+              <a href="{{data.v_upload_file_e.url}} " class="btn btn-success mr-3" >View</a>
+            </td>
+              <td>
+                <a href="{{data.v_upload_file_media.url}} " class="btn btn-success mr-3" >View</a>
+                <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                <!-- <button type="button" id="button1" value="{{data.v_upload_file_media.url}}" class="btn btn-success mr-3">View</button> -->
+                
+              </td>
+                <td>
+                  <a href="{{data.v_upload_file_add_last.url}} " class="btn btn-success mr-3" >View</a>
+      
+                  <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                  <!-- <button type="button" id="button1" value="{{data.v_upload_file_add_last.url}}" class="btn btn-success mr-3">View</button> -->
+                  </td>
+               
+                 
+                      <td>
+                        <!-- <a href="http://127.0.0.1:8000/vendor_wnp_evaluate"> -->
+                          <input type="text" name="remark2">
+                        </td>
+         
+              
+        
+          </tr>
+      
+          
+      
+      
+                  </tbody>
+                </table>
+      
+
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+<div class="card-body text-center">
+    <div class="mb-3">
+      <button type="Submit" class="btn btn-primary toggle-disabled" style="background-color: #e7e7e7; color: black;" disabled>Approve</button>
+      <!-- <button type="Submit" class="btn btn-primary toggle-disabled" style="background-color: #e7e7e7; color: black;" disabled>Reject</button> -->
+      
+      <!-- <button class="btn btn-primary">Reject</button> -->
+    </div>
+
+
+</div>
+</section>
+<!-- /.content -->
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+$(document).on("change keyup", ".required", function (e) {
+      let Disabled = true;
+      $(".required").each(function () {
+        let value = this.value;
+        if (value && value.trim() != "") {
+          Disabled = false;
+        } else {
+          Disabled = true;
+          return false;
+        }
+      });
+    
+      if (Disabled) {
+        $(".toggle-disabled").prop("disabled", true);
+      } else {
+        $(".toggle-disabled").attr('style',  'background-color:green');
+        $(".toggle-disabled").prop("disabled", false);
+      } 
+    });
+    
+    
+</script>
+{% endblock body %}
+
+

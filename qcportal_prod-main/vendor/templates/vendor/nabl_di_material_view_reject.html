@@ -1,0 +1,303 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+    
+
+
+
+    <div class="ed-card-inner"> 
+        <div class="card-header">
+            <h2>
+                Rejected DI Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive"> 
+                    <!-- <form class="multisteps-form__form mb-8" 
+                        action="/vendor/#/{{data.id}}"
+                        name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data"> -->
+                        {% csrf_token %}
+                        <table class="table table-striped table-bordered display text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>PO Number</th>
+                                    <th>DI Number</th>
+                                    <th>Vendor Name</th>
+                                    <th>PO Date</th>
+                                    <th>Subject</th>
+                                    <th>View</th>
+                                    <!-- <th>View DI</th> -->
+                                    <th>Rejected Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for data in data %}
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.po.po_no}} </td>
+                                    <td>{{data.erp_di_number}}</td>
+                                    <td>{{data.po.vendor.CompanyName_E}} </td>
+
+                                    <td>{{data.po.erp_created_date}}</td>
+
+                                    <td>
+                                        <span>{{data.di_subject}}</span>
+                                    </td>
+
+                                    {% if data.po.Po_doc %}
+                                    <td>
+                                        <a class="btn ed-submit btn-info" target="blank" href="{{data.po.Po_doc.url}}">View PO</a>
+                                    <!-- </td> -->
+                                    {% else %}
+                                    <!-- <td>  -->
+                                        <a class="btn ed-submit btn-danger" href=" ">PO_doc Not Uploaded</a>
+                                    <!-- </td> -->
+                                    {% endif %}
+
+                                    {% if data.di_doc %}
+                                    <!-- <td> -->
+                                        <a class="btn ed-submit btn-info" target="blank" href="{{data.di_doc.url}}">View DI</a>
+                                    <!-- </td> -->
+                                    {% else %}
+                                    <!-- <td>  -->
+                                        <a class="btn ed-submit btn-danger" href="#">DI_doc Not Uploaded</a>
+                                    </td>
+                                    {% endif %}
+
+                                    <td>
+                                        <a href="/vendor/nabl_reject_di_areastore/{{data.id}}" class="btn ed-submit btn-primary">View Areastore </a>
+                                    </td>    
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    <!-- </form>  -->
+                </div>
+            </div>
+        </div>
+    </div>  
+
+
+
+
+
+    <!-- <div id="dialog-container" class="ed-dialog-container">
+        <div class="ed-modal-block" id="dialog-modal">
+            <div class="ed-modal-content">
+                <div class="ed-modal-header">
+                    <h4>Custom Alert Dialog</h4>
+                </div>
+                <div id="dialog-body" class="ed-modal-body">
+                    <p>
+                        This is the custom alert message. Click Ok to close this.
+                    </p>
+                </div>
+                <div class="ed-dialog-footer">
+                    <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+                        <span class="ed-submit-text">
+                            Ok
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+  
+
+
+
+    <div class="modal" id="bankGModle">
+        <div class="modal-dialog ed-customemodel-block">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bank Guarantee Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ed-form-block">
+                        <!-- <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                    Vendore Details
+                                </span>
+                            </h6>
+                        </div> -->
+                        <form class="multisteps-form__form mb-8" action="/vendor/vendor_dispatch_b_sd_save/{{data.id}}"
+                            name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- <div class="ed-form-body">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    BG Type
+                                </label>
+                                <select class="form-control ed-textbox" name="bgbank">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    BG Number
+                                </label>
+                                <input type="text" class="form-control ed-textbox " autocomplete="off" name="bg_no" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Issue Date
+                                </label>
+                                <input type="date" class="form-control ed-textbox " autocomplete="off"
+                                    name="bg_issu_date" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Valid Up to
+                                </label>
+                                <input type="date" class="form-control ed-textbox" autocomplete="off"
+                                    name="bg_valid_upto" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Amount
+                                </label>
+                                <input type="text" class="form-control ed-textbox" autocomplete="off" name="amount" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    BG File
+                                </label>
+                                <input type="file" class="form-control ed-textbox" autocomplete="off" name="file" />
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-row d-flex mt-4">
+                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="/vendor/vendor_purchase_b/">Prev</a></button> -->
+                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" value="Submit" type="submit"
+                    title="Next">Submit BG Details</button>
+                <!-- </div> -->
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+        $(document).ready(function () {
+            $('#navMenu').click(function () {
+                $('#edHeader').toggleClass('ed-header-collpase');
+                $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                $('#edContainer').toggleClass('ed-wrapper-collpase');
+            });
+        });
+
+        $('#ed-menulist .nav-item').on('click', function () {
+            // var target = $(this).attr('data-rel');
+            $('#ed-menulist .nav-item .nav-link').removeClass('active');
+            $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+            $('#ed-menulist .nav-item').removeClass('active');
+            $(this).addClass('active');
+            // $('#ed-menulist .nav-item').addClass('active');
+            $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+            // alert();
+            // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+            return false;
+        });
+    </script>
+
+    <script>
+        const dialogModal = document.getElementById('dialog-modal');
+        const CustomAlert = new function () {
+            this.show = function (msg) {
+                $('body').addClass('bodymodel');
+                dialogModal.style.visibility = 'visible';
+                dialogModal.style.opacity = 1;
+                dialogModal.style.top = '40%';
+            }
+
+            this.close = function () {
+                $('body').removeClass('bodymodel');
+                dialogModal.style.visibility = 'hidden';
+                dialogModal.style.opacity = 0;
+                dialogModal.style.top = '-40%';
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+
+    </body>
+
+    </html>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#nextStep1").click(function () {
+                $("#formStep1").hide();
+                $("#formStep2").show();
+                $("#formStep3").hide();
+                $("#formStep4").hide();
+                $("#formStep5").hide();
+            });
+
+            $("#nextStep2").click(function () {
+                $("#formStep1").hide();
+                $("#formStep2").hide();
+                $("#formStep3").show();
+                $("#formStep4").hide();
+                $("#formStep5").hide();
+            });
+
+            $("#nextStep3").click(function () {
+                $("#formStep1").hide();
+                $("#formStep2").hide();
+                $("#formStep3").hide();
+                $("#formStep4").show();
+                $("#formStep5").hide();
+            });
+
+            $("#nextStep4").click(function () {
+                $("#formStep1").hide();
+                $("#formStep2").hide();
+                $("#formStep3").hide();
+                $("#formStep4").hide();
+                $("#formStep5").show();
+            });
+
+        });
+    </script>
+
+
+    <script>
+        $('.material-wrapper').on('click', '.remove', function () {
+            $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+        });
+        $('.material-wrapper').on('click', '.addMaterial', function () {
+            $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+        });
+    </script>
+    {% endblock body %}

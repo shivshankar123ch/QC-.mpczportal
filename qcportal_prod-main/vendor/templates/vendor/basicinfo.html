@@ -1,0 +1,127 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %}
+
+{% block cert %} 
+    <p class="mb-0">
+        {% if userdata.digital_cert_upload == 1 %}
+            <label class="text-success text-sm font-weight-bolder">{{userdata.Authentication_id}}</label>
+        {% elif userdata.Authentication_id  %}
+            <a class="text-success text-sm font-weight-bolder" onclick="alert('Certificate generated but not digitally signed')">{{userdata.Authentication_id}}</a>
+        {% else %}
+            <a class="text-success text-sm font-weight-bolder" onclick="alert('Certificate not uploaded')" >Not Available</a>
+        {% endif %}
+    </p>
+{% endblock cert %}
+
+{% block body %} {% block Vendor_Basic %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock Vendor_Basic %}
+</li>
+<div class="card">
+    <div class="card-body table-responsive">
+       
+            <h5 class="font-weight-bolder mb-0">Basic Details</h5> 
+            <table class="table table-responsive table-bordered">
+                <thead class="table table-dark">
+                    <tr>
+                        <th scope="col" class="text-center" style="width: 10px;">S.No.</th>
+                        <th scope="col">Report Name</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="text-center">1</th>
+                        <td>Type of Company/Firm</td>
+                        <td>{{userdata.Type_of_business}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center">2</th>
+                        <td>Authorised Person Name</td>
+                        <td>{{userdata.Authorised_person_E}}</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center">3</th>
+                        <td>Company/Firm Name</td>
+                        <td>{{userdata.CompanyName_E}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center">4</th>
+                        <td>Contact Number</td>
+                        <td>{{userdata.ContactNo}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center">5</th>
+                        <td>Email ID</td>
+                        <td>{{userdata.Email_Id}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-center">6</th>
+                        <td>User Type</td>
+                        <td>{{userdata.User_type}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">7</td>
+                        <td>Registration Certificate</td>
+                        {% if userdata.cert_image  %}
+							<td><a class="nav-link" href="{{userdata.cert_image.url}}" target=”_blank”>{{userdata.Authentication_id}}</a></td>
+						{% elif userdata.Authentication_id %}
+							<td>{{userdata.Authentication_id}}</td>
+						{% else %}
+							<td>Not Available</td>
+						{% endif %}
+                    </tr>
+                    <tr>
+
+
+                    </tr>
+                </tbody>
+            </table>
+            <!-- /.container-fluid -->
+            {% if not userdata.Complete_Details %}
+            <div class="row">
+                <div class="col-8">
+                    <a class="nav-link" href="/vendor/vendor_reg_seven"> <button type="button" class="btn btn-primary text-capitalize fw-bold custom">Document Upload </button></a>
+                </div>
+            </div>
+            {% endif %}
+       
+    </div>
+</div>
+{% if userdata.work_approval == 1 and userdata.finance_approval == 1 and userdata.factory_approval_payment == 0 and userdata.factory_waiver == 0 %}
+
+    <div class="row card-body">
+        <div class="col-lg-5">
+            <div class="form-group">
+                <a href="/vendor/factory_payment_form"><button type="Submit" class="btn btn-info text-capitalize fw-bold custom"> Factory Inspection Payment</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% elif userdata.work_approval == 1 and userdata.finance_approval == 1 and userdata.factory_approval_payment == 0 and userdata.factory_waiver == 3 %}
+<div class="row card-body">
+    <div class="col-lg-5">
+        <div class="form-group">
+            <a href="/vendor/factory_payment_form"><button type="Submit" class="btn btn-info text-capitalize fw-bold custom"> Factory Inspection Payment</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% elif userdata.work_approval == 1 and userdata.finance_approval == 1 and userdata.factory_approval_payment == 0 and userdata.factory_waiver == 1 %}
+<div class="row card-body">
+    <div class="col-lg-5">
+        <div class="form-group">
+            <a href="#"><button type="Submit" class="btn btn-info text-capitalize fw-bold custom"> You have applied for factory inspection fee waiver, Kindly wait for Approval.</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+<!---end here-->
+
+
+
+
+<!-- /.content -->
+{% endblock body %}

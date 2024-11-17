@@ -1,0 +1,191 @@
+<html>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<head>
+<center>
+<style>
+
+    .signature, .title { 
+        float:left;
+        border-top: 2px solid #000;
+        width: 200px; 
+        text-align: center;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #example2 {
+        width: 213px;
+        padding: 10px;
+        height: 66px;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="auto-mx" style="width:100%; padding:5px; text-align:center; border: 10px solid black">
+        <div class="auto-mx" style="padding:2px; text-align:center; border: 4px solid black">
+            <table style="padding:20px; width:100%; border: 2px solid black;">
+        <tr>
+            {% if cert_u_obj.User_Zone == "CZ" %}
+                <td><img src="{% static 'assets\images\mpmk.png' %}" alt="" border=3 height=120 width=150></img></td>
+                <td align ="center"><span style="font-size:24px; font-weight:bold;text-align: center;">M.P. MADHYA KSHETRA VIDYUT VITRAN COMPANY LIMITED</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:66px">Regd. Office: Nishtha Parisar, Govindpura Bhopal 462023</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:170px"> Website portal.mpcz.in</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015119</span>
+                </td>
+            {% elif cert_u_obj.User_Zone == "EZ" %}	
+                <td><img src="{% static 'assets\images\mppok.png' %}" alt="" border=3 height=120 width=150></img></td>
+                <td align ="center"><span style="font-size:24px; font-weight:bold;text-align: center;">M.P. POORV KSHETRA VIDYUT VITRAN COMPANY LIMITED</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:66px">Regd. Office: Shakti Bhawan, PO: Vidyut Nagar, Rampur, Jabalpur 482008</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:170px">0761 - 2661795, 2702800 Website http://www.mpez.co.in/ </span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015120</span>
+                </td>
+            {% elif cert_u_obj.User_Zone == "WZ" %}
+                <td><img src="{% static 'assets\images\mppk.png' %}" alt="" border=3 height=120 width=150></img></td>
+                <td align ="center"><span style="font-size:24px; font-weight:bold;text-align: center;">M.P. PASCHIM KSHETRA VIDYUT VITRAN COMPANY LIMITED</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:66px">Regd. Office: GPH Compound polo ground, Indore 452003</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:170px">0731 - 2426109, 2426166 & 2426111/144,  Website http://www.mpwz.co.in/</span>
+                    <br>
+                    <span style="font-size:20px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015121</span>
+                </td>
+            {% endif %}
+        </tr>
+    </table>
+            <hr style="height:2px;border-width:0;color:black;background-color:black;" />
+            <h3 class="text-center text-primary font-weight-bolder" style="color: blue;">CONTRACTOR REGISTRATION CERTIFICATE</h3>
+            <table class="table table-bordered table-sm" style="font-size:18px; border: 2px solid black; border-collapse: collapse;">
+                <tbody>
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Company Name & <br>Address</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;"><span><b>M/s {{cert_u_obj.company_name}}
+                                </b></span><br> Registered Office Address:{{cert_u_obj.Company_add_1}}
+                            {{cert_u_obj.Company_add_2}}, {{cert_u_obj.Company_dist}}, {{cert_u_obj.Company_state}},
+                            <br>{{cert_u_obj.Company_pin_code}}</td>
+                    </tr>
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Authorised Person</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;"><b>{{cert_u_obj.Authorised_person_E}}</b></td>
+                    </tr>
+    
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Registration No.</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;"><b>{{cert_u_obj.no}}</b></td>
+                    </tr>
+    
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Contractor Class</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;"><b>{{cert_u_obj.tkc_class_contractor}}</b></td>
+                    </tr>
+    
+    
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Date of Issue</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;">{{ cert_u_obj.day | slice:"-2:" }}-{{ cert_u_obj.day | slice:"-5:-3" }}-{{ cert_u_obj.day | slice:"0:4" }}</td>
+                    </tr>
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Valid up To</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;">{{ cert_u_obj.electic_liecense_date | slice:"-11:-9" }}-{{ cert_u_obj.electic_liecense_date | slice:"-14:-12" }}-{{ cert_u_obj.electic_liecense_date | slice:"-19:-15" }}</td>
+                    </tr>
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td style="border: 2px solid black; border-collapse: collapse;">Area of supply</td>
+                        <td style="border: 2px solid black; border-collapse: collapse;">MP Discom(CZ/EZ/WZ)</td>
+                    </tr>
+                   
+                    <tr class="text-center" style="border: 2px solid black; border-collapse: collapse;">
+                        <td>
+                           <table
+                            style="margin-top:10px;float:right; border: 2px solid black; border-collapse: collapse;">
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td id="example2">
+                                <br><br><br></td>
+                            </tr>
+                            <tr style="border: 2px solid black; border-collapse: collapse;" class="text-center">
+                                <td>Signed by <br>
+                                    <b>{{ cert_u_obj.designation }}</b></td>
+                            </tr>
+                          
+                        </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+          <tr>
+            <th><button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button></th>
+                <form action="/uplaod_cert/{{no}}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th> 
+                    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+                </form>
+          </tr>
+    </table>
+    <a href='/cgm_pending_tkc'><button class="btn btn-primary"  style="text-align: center; font-size: 20px;">Return to Dashboard</button></a> -->
+    <!-- <a href='/cgm_pending_tkc/User_Zone'><button class="btn btn-primary"  style="text-align: center; font-size: 20px;">Return to Dashboard</button></a> -->
+    
+{% if var_show %}
+<script>
+    function printpage() {
+        var download_var = document.getElementById("download");
+        var certFile_var = document.getElementById("digitalCert");
+        var sub_var = document.getElementById("sub");
+		var return2dash = document.getElementById("return2dash");
+     
+        download_var.style.visibility = 'hidden';
+        certFile_var.style.visibility = 'hidden';
+        sub_var.style.visibility = 'hidden';
+		return2dash.style.visibility = 'hidden';
+
+        window.print()
+        
+        download_var.style.visibility = 'visible';
+        certFile_var.style.visibility = 'visible';
+        sub_var.style.visibility = 'visible';  
+		return2dash.style.visibility = 'visible';
+    }
+</script>
+
+<table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+	  <tr>
+	    <th><button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button></th>
+		    <form action="/uplaod_cert_new_tkc/{{cert_u_obj.no}}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th> 
+			    <th><input style="text-align: center; font-size: 20px;" type="submit" id="sub" value="Submit"></th>
+			</form>
+	  </tr>
+</table>
+{% endif %}
+</center>
+</body>
+<center>
+        <a href='/digital_sign_cert_new_tkc/TKC'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+</center>
+</html>

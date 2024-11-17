@@ -1,0 +1,104 @@
+{% extends 'approver/base.html' %}
+ {% load static %}
+{% block body %}
+<div class="card card-default width-90 m-4" style="width:85%">
+          <div class="card-header">
+            <h3 class="card-title">Bank Guarantee/Bank Details </h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%"><b>MPCZ000{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+                   <tr>
+                  <td> <label for="exampleInputEmail1"> Supplier Name </label> </td>
+                    <td><b>{{data.supplier.CompanyName_E}} </b>
+                </tr>
+                    <tr>
+                  <td colspan="2" class="text-center"> <label for="exampleInputEmail1">Bank Guarantee Details </label> </td>
+                </tr>
+                <tr>
+                  <td> <label for="exampleInputEmail1">Bank Guarantee Bank Name </label> </td>
+                    <td><b>{{data.Bg.bg_bank_name}}</b>
+                </tr>
+                     <tr>
+                  <td>   <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                         <td>   <b>{{data.Bg.bg_guarantee_no}}</b></td>
+
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                   <td><b>{{data.Bg.bg_issue_date}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                  <td><b>{{data.Bg.bg_valid_date}}</b></td>
+                </tr>
+                      <tr>
+                  <td>   <label for="exampleInputEmail1">Amount </label> </td>
+                         <td><b>{{data.Bg.bg_amount}}</b></td>
+                     </tr>
+                    <tr>
+                  <td>   <label for="exampleInputEmail1">Upload Bank Guarantee</label> </td>
+                        <td><a target="_blank" href="{{data.Bg.bg.url}} " class="btn btn-primary btn-sm" style="width:120px;"> View BG</a></td>
+                     </tr>
+                       <tr>
+                  <td> <label for="exampleInputEmail1">Reviewer Remark </label> </td>
+                   <td><b>{{data.Bg.review_remark}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Review At </label> </td>
+                  <td><b>{{data.Bg.review_at}}</b></td>
+                </tr>
+                      <tr>
+                  <td>   <label for="exampleInputEmail1">Review By </label> </td>
+                         <td><b>{{data.Bg.review_by}}</b></td>
+                     </tr>
+
+                                   <tr>
+                  <td colspan="2" class="text-center"> <label for="exampleInputEmail1">Bank  Details </label> </td>
+                </tr>
+                <tr>
+                  <td> <label for="exampleInputEmail1"> Bank Name </label> </td>
+                    <td><b>{{data.Bank.Bank_name}}</b>
+                </tr>
+                     <tr>
+                  <td>   <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                         <td>   <b>{{data.Bank.Account_Holder_Name}}</b></td>
+
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                   <td><b>{{data.Bank.Account_Number}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                  <td><b>{{data.Bank.IFSC}}</b></td>
+                </tr>
+                        <tr>
+                  <td> <label for="exampleInputEmail1">Reviewer Remark </label> </td>
+                   <td><b>{{data.Bank.review_remark}}</b></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Review At  </label> </td>
+                  <td><b>{{data.Bank.review_at}}</b></td>
+                </tr>
+                      <tr>
+                  <td>   <label for="exampleInputEmail1">Review By </label> </td>
+                         <td><b>{{data.Bank.review_by}}</b></td>
+                     </tr>
+
+                </tbody>
+              </table>
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+    </div>
+{% endblock body %}

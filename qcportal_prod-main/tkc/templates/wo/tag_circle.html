@@ -1,0 +1,126 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+    <div class="ed-infocontant">
+                            <div class="ed-tableinfo-block ed-orderinfo-block">
+                                <div class="table-responsive">
+                                    <table class="table table-striped ed-table-block">
+                                        <thead>
+                                            <tr>
+                                                <th class="wc1">Sr. No.</th>
+                                                <th class="">WO No.</th>
+                                                <th>Subject</th>
+                                                <th>Firm</th>
+                                                <th>Date</th>
+                                                <th>Region</th>
+                                                <th>Circle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for data in wo %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{data.Contract_Number}} </td>
+                                                <td>{{data.Header.Contract_Description}}</td>
+                                                 <td>{{data.Discom.Discom_Short_Name}}</td>
+                                                 <td>{{data.Contract_Date}}</td>
+                                                <td>
+                                                          <a target="_blank" href="{{data.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Digital Order
+                                                            </span>
+                                                        </button>
+                                                            </a>
+
+                                                         {% if data.Wo_Agreement_Upload_Status == 1 %}
+                                                            <a target="_blank" href="{{data.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Agreement
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                                                    {% elif not data.Wo_Agreement_Upload_Status == 1 and Wo_Digital_Upload_Status %}
+                                                        <button class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Agreement Not Uploaded
+                                                            </span>
+                                                        </button>
+                                                    {% endif %}
+
+                                                </td>
+                                                <td>
+                                                    {% if bank_detail_exist == 0 %}
+                                                           <a  href="/tkc/upload_bank/{{data.id}}">
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                 Upload Bank Details
+                                                            </span>
+                                                        </button>
+                                                    </a>
+
+                                                    {% else %}
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                 Bank Details Already Uploaded
+                                                            </span>
+                                                        </button>
+                                                    {% endif %}
+                                                            
+                                                         <a  href="/tkc/upload_bg/{{data.id}}">
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                 Upload BG
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                                                        <a  href="/tkc/upload_loc/{{data.id}}">
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                Upload LOC
+                                                            </span>
+                                                        </button>
+                                                        </a>
+                                                        <a  href="/tkc/upload_pert/{{data.id}}">
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                Upload Pert
+                                                            </span>
+                                                        </button>
+                                                        </a>
+
+                                                        <a  href="/tkc/upload_mqpdoc/{{data.id}}">
+                                                            <button class="btn ed-submit btn-info m-1">
+                                                                <span class="ed-submit-text">
+                                                                    Upload MQP Plan
+                                                                </span>
+                                                            </button>
+                                                            </a>
+
+                                                            <a  href="/tkc/upload_fqpdoc/{{data.id}}">
+                                                                <button class="btn ed-submit btn-info m-1">
+                                                                    <span class="ed-submit-text">
+                                                                        Upload FQP Plan
+                                                                    </span>
+                                                                </button>
+                                                            </a>
+
+                                                        <a  href="/tkc/upload_otherdoc/{{data.id}}">
+                                                            <button class="btn ed-submit btn-info m-1">
+                                                                <span class="ed-submit-text">
+                                                                    Upload Other Documents
+                                                                </span>
+                                                            </button>
+                                                            </a>
+
+                                                </td>
+                                            </tr>
+                                       {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+            </div>
+    {% endblock body %}

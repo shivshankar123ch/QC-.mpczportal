@@ -1,0 +1,135 @@
+{% extends 'officer/auditor_base.html' %} {% load static %} {% block body %}
+{% load cart %}
+{% block active_tkc %}
+                                     <li class="nav-item active" style="list-style-type:none;">
+                                     {% endblock active_tkc %}
+
+                 <script>
+                   function printpage() {
+                       var download_var = document.getElementById("download");
+                    
+                       download_var.style.visibility = 'hidden';
+                 
+                       window.print()
+                       
+                       download_var.style.visibility = 'visible';
+                          
+                   }
+                   
+               </script>
+               <style>
+                   .table-bordered td {
+                   font-size: 15px;
+                   width: 15px !important;
+               }
+               
+               .table-bordered thead th {
+                   font-size: 15px;
+                   width: 15px !important;
+                   word-break: break-word;
+               }
+               </style>
+               
+                                     
+               <div class="text-right d-flex" style="justify-content: flex-end;">
+                 <a href="/export_users_csv" class="btn btn-primary mr-3">Export CSV</a> 
+                 <button class="btn btn-primary" id="download" onclick="printpage()">Print List </button>
+               </div>
+                                   
+                                     
+                                     </form>
+                                            <h5 class="font-weight-bolder">All Contractor as on {{today}}</h5>
+                                         <div class="panel panel-default">
+                                             <!-- <div class="panel-heading">Panel Heading</div>
+                                             <div class="panel-body">Panel Content</div> -->
+                                             <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                     <thead class="table table-dark">
+                                                       <tr>
+                                                         <th class="text-center align-middle" style="width:10px;">
+                                                             S.NO.</th>
+                                                             <th class="text-center align-middle" >Discom </th>
+                                                             <th>Registration <br>Number </th>
+                                                             
+                                                             <th class="text-center align-middle" >Valid Up To</th>
+                                                             <th class="text-center align-middle">Status</th>
+                                                             <th>Firm/Company<br> Name </th>
+                                                             <th>Authorised<br> Person<br> Name </th>
+                                                             <th>Contact<br> Number</th>
+                                                             <th>Date of<br> Approval</th>
+                                                             <th>View <br>Certificate </th>
+                                                             <th>View <br>Details </th>
+                                                       </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                       {% for data in data %}
+                                                      
+                                                       <tr>
+                                                         <td class="text-center">{{forloop.counter}}</td>
+                                                         <td class="text-center">{{data.User_zone}}</td>
+                                                         <td class="text-center">{{data.Authentication_id}}</td>
+                                                         <td>{{data|last_date:doc|date:"d-M-Y"}}</td>
+                                     
+                                     
+                                                           {% now "Y-m-d" as to_daaa %}
+                                                           {% if data.Authentication_id and data.blacklisted == 2 %}
+                                                        <td style="color: red;"> Debarred </td>
+
+                                                         {% elif data.Authentication_id and data.deregister == 0 %}
+                                                                      
+                                                               {% if to_daaa <= data|last_date:doc|date:"Y-m-d" %}
+                                                             <td> Active</td> 
+                                                               {% else %}
+                                                             <td> Inactive</td> 
+                                                               {% endif %}
+                                  
+                                                           {% elif data.Authentication_id and data.deregister == 1 %}
+                                                           <td> Deregistered </td> 
+
+                                                           {% else %}
+                                                           <td>Inactive</td>
+                                                           {% endif %}
+                                                         
+                                                         <td style="width=auto;">{{data.CompanyName_E}}</td>
+                                                         <td style="width=auto;">{{data.Authorised_person_E}}</td>
+                                                         <td>{{data.ContactNo}}</td>
+                                                         <td>{{data.date_of_approved}}</td>
+                                                           
+                                                 
+                                                         {% if data.cert_image%}
+                                                         <td class="text-center"> <a href="{{data.cert_image.url}} " target="_blank" class="fas fa-eye text-secondary"></a></td>
+                                                         {% else %}
+                                                          <td> <h6> Certificate Not Uploaded</h6></td>
+                                       
+                                                         {% endif %}
+
+                                                         <td> <a href="/contractor_details_view/{{data.User_Id}}">View Details</a></td>
+
+                                     
+                                                         </tr>
+                                               
+                                                 {% endfor %}
+                                                 <tr></tr>
+                                                 </tbody>
+                                                 </table>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     {% endblock body %}
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     

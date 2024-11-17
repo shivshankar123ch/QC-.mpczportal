@@ -1,0 +1,89 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block heading %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock heading %}
+
+{% block body %}
+
+<!-- <body onkeydown="return (event.keyCode != 116)">  
+    <h1>  
+        Click this page to set focus.  
+    </h1>  
+</body>  -->
+
+
+
+{% comment %} <style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+<img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> {% endcomment %}
+
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            {% comment %} User All Data {% endcomment %}
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                    <thead>
+                        <tr> 
+                            <th> Serial Number </th>
+                            <th>DI No.</th>
+                            <th>DI Subjct</th>
+                            <th> Nabl Name </th>
+                            <th> Area Store Name </th>
+                            <th> Material Name </th>
+                            <th> PO NO </th>
+                            <th> Sample Code </th>
+                            <th> Serial Number </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in di_mosn_obj %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{ i.area_store_id.di_master.erp_di_number}}</td>
+                            <td>{{ i.area_store_id.di_master.di_subject}}</td>
+                            <td>{{i.area_store_id.di_master.nabl_name}} </td>
+                            <td>{{i.area_store}} </td>
+                            <td>{{i.offer.material.specification}} </td>
+                            <td>{{i.po.po_no}} </td>
+                            <td>{{i.area_store_id.material_sample_code}} </td>
+                            <td>{{i.serial_no}} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+    <script>
+        {
+            function ValidateRating(event, inputText) {
+                event.preventDefault();
+                //remaining function logic goes here
+            }
+        }
+
+    </script>
+
+</div>
+
+{% endblock body %}

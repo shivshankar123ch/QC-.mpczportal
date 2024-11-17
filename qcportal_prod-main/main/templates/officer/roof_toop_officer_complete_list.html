@@ -1,0 +1,72 @@
+
+{% extends 'officer/RoofTop_Viewer_base.html' %} {% load static %} {% block body %}{% load static %}
+<div class="container">
+  <h2>All Pending RoofTop Vendor</h2>
+  <div class="panel panel-default">
+      <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+      <div class="table-responsive">
+         <table class="table table-bordered table-hover">
+              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                    <th>
+                         Serial Number
+                    </th>
+                    <th>
+                        Name Of Agency
+                    </th>
+                  
+                    <th>
+                      Email
+                  </th>
+                  <th>
+                    Contact Number
+                </th>
+                <th>
+                  Approver Officer Status
+              </th>
+              <th>
+              View Certificate
+            </th>
+              
+             
+                    <th>
+                      Action
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                  <td>{{data.agency_name}}</td>
+             
+                  <td>{{data.email}}</td>
+                  <td>{{data.contact}}</td>
+
+                  {% if data.approver_officer == 1  %}
+                  <td><span class="badge badge-success badge-sm">Approve</span></td>
+                      {% elif data.approver_officer == 2  %}
+                      <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                      {% else %}
+                      <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                      {% endif %}
+
+
+                      {% if data.imageCert %}
+                      <td> <a href="{{data.imageCert.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+
+                      {% else %}
+                      <td> <a href="#" target="_self" class="fas fa-eye text-secondary">View</a></td>
+                      {% endif %}
+                 
+                    <td> <a href="/roof_toop_officer_complete_view/{{data.id}}">View Details</a></td>
+                 
+                  {%  endfor %}
+              <tr></tr>
+                </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock body %}

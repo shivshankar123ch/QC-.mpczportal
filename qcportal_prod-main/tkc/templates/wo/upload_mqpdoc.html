@@ -1,0 +1,210 @@
+{% extends 'wo/wo_base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                View Mqp Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-4">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered text-center ">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="w-5">S.No.</th>
+                                <th>Company Name</th>
+                                <th>Mqp Documents</th>
+                                <th>Action</th>
+                                <th>Approval Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Supply in mqpdoc %}
+                            <tr>
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{Supply.tkcwoinfo.Discom.Discom_Short_Name}}
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{Supply.mqpdoc.url}}">
+                                      
+                                            <span class="btn btn-sm btn-info">
+                                                View Mqp Documents
+                                            </span>
+                                       
+                                    </a>
+                                </td>
+                                <td>{% if not Supply.mqpdoc_submit %}
+                                  
+                                        <a href="/tkc/mqpdoc_delete/{{data.id}}/{{Supply.id}}"
+                                           >
+                                            <span class="btn btn-sm btn-danger">
+                                                Delete
+                                            </span>
+                                        </a>
+                                        <a href="/tkc/mqpdoc_sumit_for_approval/{{data.id}}/{{Supply.id}}"
+                                           >
+                                            <span class="btn btn-sm btn-primary">
+                                                Submit
+                                            </span>
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                   
+                                        <span class="btn btn-sm btn-success">
+                                            Mqp Documents Submitted
+                                        </span>
+                                    </a>
+                                    {% endif %}
+                                </td>
+                                <td>{% if Supply.mqpdoc_approved_status == 0 and Supply.mqpdoc_submit == 1 %}
+                                   
+                                        <span class="ed-submit-text">
+                                            Pending
+                                        </span>
+                                    
+                                    {% elif Supply.mqpdoc_approved_status == -1 %}
+                                  
+                                        <span class="btn btn-sm btn-danger">
+                                            MQP Rejected
+                                        </span>
+                                   
+                                    {% elif Supply.mqpdoc_approved_status == 1 %}
+                                   
+                                        <span class="btn btn-sm btn-success">
+                                            MQP Approved
+                                        </span>
+                                    </a>
+
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if Supply.mqpdoc_approved_remark %}
+                                    <span class="btn btn-sm btn-secondary">
+                                        {{ Supply.mqpdoc_approved_remark}}
+                                    </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Upload Mqp Documents Details
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+
+                    <form action="/tkc/upload_mqpdoc/{{data.id}}" method="POST" name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work order number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly" value="{{data.Contract_Number}}"
+                                readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Company Name/TKC
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Discom.Discom_Short_Name}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Subject
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Header.Contract_Description}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Date
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Contract_Date}}" readonly />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Upload Mqp Documents
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" name="mqpdoc_file" class="" id="file33" onkeyup="validateForm()"
+                            onfocus="validateForm()" onchange="validateForm()"accept="application/pdf" required>
+                            <span id="file22" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="text-right">
+                                <button type="submit" id="btnsave"  onclick="validateForm()" class="btn ed-submits btn-info">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function  validateForm(){
+    let fileup = document.forms["myForm"]["mqpdoc_file"].value;
+    let fileee = document.getElementById("file33").value;
+    var allowedExtensions = /(\.pdf)$/i;
+    let fileInput_Result1 = allowedExtensions.test(fileee);
+
+    if (fileup == "") {
+              document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+              return false;
+               } else {
+              //document.getElementById('Twenty_two').innerHTML = "";
+             if (fileInput_Result1 == false) {
+              document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+               return false;
+              } else {
+               // document.getElementById('file1').innerHTML = "";
+              const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+              if (oFile > 10) {
+                alert("File size must be less than or equal to 10 MB");
+                document.getElementById("file33").value = "";
+                return false;
+
+              } else {
+                document.getElementById('file22').innerHTML = "";
+             }
+         }
+      }
+}
+</script>
+
+
+{% endblock body %}

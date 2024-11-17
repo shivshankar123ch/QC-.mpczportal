@@ -1,0 +1,208 @@
+{% extends 'vendor/base1.html' %}
+{% load static %}
+
+{% block style %}
+
+        * {box-sizing: border-box}
+
+        /* Set height of body and the document to 100% */
+        body, html {
+          height: 100%;
+          margin: 0;
+          font-family: Arial;
+        }
+
+        /* Style tab links */
+        .tablink {
+          background-color: #007bff;
+          color: white;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          font-size: 17px;
+          width: 20%;
+        }
+
+        .tablink:hover {
+          background-color: #777;
+        }
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+          color: black;
+          display: none;
+          padding: 100px 20px;
+          height: 100%;
+        }
+
+        #Instruction {background-color: white;}
+        #General/personal Details {background-color: white;}
+        #Technical Details {background-color: white;}
+        #Financial Details {background-color: white;}
+        #Declaration Details{background-color: white;}
+
+{% endblock style %}
+
+
+{% block body %}
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
+<div class="wrapper mb-12" xmlns="http://www.w3.org/1999/html">
+ <section class="content-header">
+  <div class="container-fluid">
+ 
+  </div>
+</section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-body" >
+                <button class="tablink" style="background-color: #007bff;color: white;" onclick="openPage('Instruction', this, 'orange')" id="defaultOpen">Instruction</button>
+                <button class="tablink" style="background-color: #007bff;color: white;" onclick="openPage('General_personal_Details', this, 'orange')" disabled>General/personal Details</button>
+                <button class="tablink" style="background-color: #007bff;color: white;" onclick="openPage('Technical_Details', this, 'orange')" disabled>Technical Details</button>
+                <button class="tablink" style="background-color: #007bff;color: white;" onclick="openPage('Financial_Details', this, 'orange')" disabled>Financial Details</button>
+                <button class="tablink" style="background-color: orange; color:black;" onclick="openPage('Declaration_Details', this, 'orange')" disabled>Declaration Details</button>
+                <div id="Instruction" class="tabcontent">
+                </div>
+
+
+                <div id="General_personal_Details" class="tabcontent">
+                </div>
+
+                <div id="Technical_Details" class="tabcontent">
+                </div>
+
+
+                <div id="Financial_Details" class="tabcontent">
+                </div>
+
+
+                <div id="Declaration_Details" class="tabcontent">
+                  <form action="vendor_reg_fourteen" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body col-lg-12">
+                            <div class="form-group">
+                                <article>
+                                      <h3>Choose the materials</h3>
+                                      <p></p>
+                                      <h6>Can choose one or more product/material.</h6>
+                                      <p></p>
+                                      <h5 class="text-light-black fw-700 register-heading">Power Transformer</h5>
+                                      <div class="row">
+                                          <label for="fo1">Power :</label>
+                                            <select id="fo1" name="fo1" class=" multiselect-ui form-control user-input form-control form-control-submit" multiple="multiple" required="required">
+                                            <option value="5MVZ, 33/11 KV">5MVZ, 33/11 KV</option>
+                                            <option value="8MVZ, 33/11 KV">8MVZ, 33/11 KV</option>
+                                            <option value="2500 KVA, 33/11 kva">2500 KVA, 33/11 kva</option>
+                                            <option value="1.6 MVA, 33/11 KV">1.6 MVA, 33/11 KV</option>
+                                            <option value="3.5 MVA, 33/11 KV">3.5 MVA, 33/11 KV</option>
+                                            </select>
+                                      </div>
+                                </article>
+                            </div>
+
+                            <div class="form-group">
+                                <article>
+
+                                  <h5 class="text-light-black fw-700 register-heading">Distribution Transformer</h5>
+                                  <div class="row">
+
+                                    <label for="fo2">Zone :</label>
+
+                                    <select id="fo2" name="fo2" class=" multiselect-ui form-control user-input form-control form-control-submit" multiple="multiple" required="required">
+                                        <option value="63 KVA, 11/0.4 KV">63 KVA, 11/0.4 KV</option>
+                                        <option value="200 KVA, 33/0.4 KV">200 KVA, 33/0.4 KV</option>
+                                        <option value="16 KVA, 11/0.4 KV">16 KVA, 11/0.4 KV</option>
+                                        <option value="630 KVA, 33/0.433 KV">630 KVA, 33/0.433 KV</option>
+                                        <option value="100 KVA, 11/0.4 KV">100 KVA, 11/0.4 KV</option>
+                                        <option value="200 KVA, 11/0.4 KV">200 KVA, 11/0.4 KV</option>
+                                        <option value="315 KVA, 11/0.4 KV">315 KVA, 11/0.4 KV</option>
+                                        <option value="25 KVA, 11/0.4 KV">25 KVA, 11/0.4 KV</option>
+                                    </select>
+
+                                  </div>
+                                </article>
+                            </div>
+
+                            <!-- <button style="margin-right: 880px; margin-top: 10px; margin-left: 5px; height:60px; width:105px" class="button btn btn-primary" onclick="">Previous</button> -->
+
+                            <a href="vendor_reg_fourteen"> <button type="Submit" style="margin-top: 10px; height:60px; width:105px" class="button btn btn-success">Save and Next</button> </a>
+                    </div>
+                  </form>
+                </div>
+
+              <div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock body %}
+
+
+
+{% block script %}
+
+            function openPage(pageName,elmnt,color) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+          document.getElementById(pageName).style.display = "block";
+          elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+
+        $(document).ready(function() {
+        var currentItem = 1;
+        $('#insert-more').click(function(){
+        currentItem++;
+        $('#items').val(currentItem);
+        var strToAdd = '<tr id="row1"><th>Select Material<div><select id="food-zone-user' +currentItem+'" name="food-zone-user' +currentItem+'" class=" multiselect-ui form-control user-input form-control form-control-submit" required="required"><option value="select-option-user-three" disabled selected hidden selected>Power Transformer</option><option value="5MVA, 33/11 KV">Transformer</option><option value="8MVA, 33/11 KV">Conductor</option><option value="2500 KVA, 33/11 KVA">Cable</option><option value="1.6 MVA, 33/11 KV">Meter</option></div></th><th>Select Material Specification<div><select id="food-zone-user1'+currentItem+'" name="food-zone-user1'+currentItem+'" class=" multiselect-ui form-control user-input form-control form-control-submit" required="required"><option value="select-option-user-three" disabled selected hidden selected>Material Specification</option><option value="63 KVA, 11/0.4 KV">63 KVA, 11/0.4 KV</option><option value="200 KVA, 33/0.4 KV">200 KVA, 33/0.4 KV</option><option value="16 KVA, 11/0.4 KV">16 KVA, 11/0.4 KV</option><option value="630 KVA, 33/0.433 KV">630 KVA, 33/0.433 KV</option><option value="100 KVA, 11/0.4 KV">100 KVA, 11/0.4 KV</option><option value="200 KVA, 11/0.4 KV">200 KVA, 11/0.4 KV</option><option value="315 KVA, 11/0.4 KV">315 KVA, 11/0.4 KV</option><option value="25 KVA, 11/0.4 KV">25 KVA, 11/0.4 KV</option></div></th><th>Type tests upload file<input type="file" name="v_upload_file_media' +currentItem+'" id="v_upload_file_media' +currentItem+'" class="form-control" required="required"></th><th>GTP upload file<input type="file" name="v_upload_file_media' +currentItem+'" id="v_upload_file_media' +currentItem+'" class="form-control" required="required"></th><th>others upload file<input type="file" name="v_upload_file_media'+currentItem+'" id="v_upload_file_media'+currentItem+'" class="form-control" required="required"></th><th><input type="button"  class="button btn btn-primary" value="View"></th><th><input type="button"  onclick="rowData()" class="button btn btn-primary" value="Delete"></th></tr>';
+          $('#myTable').append(strToAdd);
+         });
+ });
+
+
+
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+{% endblock script %}
+
+
+
+
+
+
+

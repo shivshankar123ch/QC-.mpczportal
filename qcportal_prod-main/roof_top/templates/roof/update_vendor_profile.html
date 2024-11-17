@@ -1,0 +1,123 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block body %}  {% block update_profile %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock update_profile %}
+
+<form action="/roof_top/update_profile" method="POST">
+    {% csrf_token %}
+    <div class="container">
+       <h5>Basic Details</h5>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">Panel Heading</div>
+                                                                  <div class="panel-body">Panel Content</div> -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                        <tr>
+                            <th style="width:5% ">
+                                S.No.</th>
+                            <th style="width: 45% ">
+                                Title </th>
+                            <th style="width: 20% ">
+                                Value </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+
+                        <tr>
+                            <td class="text-center align-middle">1</td>
+                            <td class="align-middle">User Type</td>
+                            <td class="text-center align-middle"><input type="text" name="one" value="{{basic.user_type}}" class="form-control" readonly></td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center align-middle">2</td>
+                            <td class="align-middle">Update User Type</td>
+                            <td class="text-center align-middle">
+                                <div class="col-sm-6">
+                                    <select id="inputStatus" name="user_type"  style="width: 353px";
+                                        class="form-select form-select-lg" 
+                                        aria-label=".form-select-lg example" required="required"
+                                        onkeyup="validateForm()" onfocus="validateForm()"
+                                        onchange="validateForm()">
+                                        <option selected disabled value="">Select one</option>
+                                        <option value="Empanelled for solar subsidy"> Empanelled for solar subsidy</option>
+                                        <option value="Non Empanelled for solar subsidy">Non Empanelled for solar subsidy</option>
+                                    </select>
+                                    <span id="slect" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center align-middle">3</td>
+                            <td class="align-middle">Agency/Firm Name</td>
+                            <td class="text-center align-middle"><input type="text" name="two" value="{{basic.agency_name}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">4</td>
+                            <td class="align-middle">Contact Number</td>
+                            <td class="align-middle text-center"><input type="text" name="eight" value="{{basic.contact}}" class="form-control" readonly></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">5</td>
+                            <td class="align-middle">Name Of Authorised Person</td>
+                            <td class="text-center align-middle"><input type="text" name="three" value="{{basic.name_of_auth}}" class="form-control"></td>
+
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td class="text-center align-middle">6</td>
+                            <td class="align-middle">Addess</td>
+                            <td class="text-center align-middle"><input type="text" name="four" value="{{basic.address}}" class="form-control"></td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="text-center align-middle">7</td>
+                            <td class="align-middle">GST Number</td>
+                            <td class="text-center align-middle"><input type="text" name="five" value="{{basic.gst}}" class="form-control"></td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td class="text-center align-middle">8</td>
+                            <td class="align-middle">PAN Card Number</td>
+                            <td class="align-middle text-center"><input type="text" name="six" value="{{basic.pan_card}}" class="form-control"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">9</td>
+                            <td class="align-middle">Email ID</td>
+                            <td class="align-middle text-center"><input type="text" name="seven" value="{{basic.email}}" class="form-control" ></td>
+
+                        </tr>
+                      
+                      
+
+
+
+                         </tr>
+                        <tr></tr>
+
+                    </tbody>
+                </table>
+                <div class="col-lg-6">
+
+                    <button type="Submit" class="btn btn-primary float-center" style="width: 160px;">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock body %}

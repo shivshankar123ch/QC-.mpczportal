@@ -1,0 +1,156 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+
+               <div class="card-body pb-5">
+                   <div class="ed-tableinfo-block ed-orderinfo-block">
+                       <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                      <tr>
+                          <th style="width:10%">
+                               Work Order No
+                          </th>
+                          <th style="width:30%">
+                               Work Order Description
+                          </th>
+                          <th style="width:20%">
+                               Vendor Name
+                          </th>
+                           <th style="width:20%">
+                               Material Name
+                          </th>
+                          <th style="width:10%">
+                              Item Code
+                          </th>
+                          <th style="width:10%">
+                              Offer Quantity
+                          </th>
+                              <th style="width:5%" >Action</th>
+                <th style="width:5%" >Approval Status</th>
+                <th style="width:10%" >Remarks</th>
+                        </tr>
+                    </thead>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>VENDOR DETAILS</span></u></b></p>
+                    {% for Supply in material_offer %}
+                    <tr>
+                         <td><b>{{Supply.TKCVendor.TKCWoInfo.Contract_Number}}</b></td>
+                            <td><b>{{Supply.TKCVendor.TKCWoInfo.Header.Contract_Description}}</b></td>
+                         <td><b>{{Supply.TKCVendor.Vendor.CompanyName_E}}</b></td>
+                        <td><b>{{Supply.TKCVendor.Material_id.Material_Name}}</b></td>
+                          <td><b>{{Supply.TKCVendor.Material_id.item_code}}</b>
+                          <td><b>{{Supply.Quantity}}</b>
+                         <td>{% if not Supply.Material_Offer_Submit_Submit_At %}
+                     <div class="poaction-info">
+                      <a href="/tkc/material_offer_delete/{{Vendor.id}}/{{Supply.id}}"  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                             Delete
+                                                        </span>
+                                                       </a>
+                          <a href="/tkc/upload_item/{{Supply.id}}"  class="btn ed-submit btn-info">
+                                                        <span class="ed-submit-text">
+                                                             Enter Serial Number
+                                                        </span>
+                                                       </a>
+                          <a href="/tkc/material_offer_submit/{{Vendor.id}}/{{Supply.id}}"  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                             Submit
+                                                        </span>
+                                                       </a>
+                     </div>
+                    {% else %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                              Submitted
+                                                        </span>
+                                                       </a>
+                    {% endif %}
+                </td>
+             <td>{% if  Supply.Material_Offer_Submit_Approved_Status == 0 and Supply.Material_Offer_Submit_Submit_At == 1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                              Pending
+                                                        </span>
+                                                       </a>
+                    {% elif Supply.Material_Offer_Submit_Approved_Status == -1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                              Rejected
+                                                        </span>
+                                                       </a>
+                     {% elif Supply.Material_Offer_Submit_Approved_Status == 1 %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                              Approved
+                                                        </span>
+                                                       </a>
+
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if  Supply.Material_Offer_Submit_Approved_Remark %}
+                     <span class="ed-submit-text">
+
+                         {{ Supply.Material_Offer_Submit_Approved_Remark}}
+                     </span>
+                     {% endif %}
+                </td>
+
+                  </tr>
+                    {% endfor %}
+                </table>
+              </div>
+                       </div>
+                   </div>
+
+  <div id="welcomeDiv"  style="" class="answer_list pb-5   " >
+  <form   action="/tkc/material_offer/{{Vendor.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> Upload Vendor Details </label>
+                     </th>
+                      <th style="width:50%"><b></b></th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1"> Enter Offered Quantity/Batch Number  <span style="color: red;">*</span> </label> </td>
+                  <td>
+                 <input type="Number" name="quantity" class="form-control ed-textbox" required>
+                  </td>
+
+                 </tr>
+
+                 <tr>
+                  <td> <label for="exampleInputEmail1">Date Of Readiness<span style="color: red;">*</span> </label> </td>
+                  <td>
+                    <input type="date" name="date_of_readiness" class="form-control ed-textbox" required>
+                  </td>
+                 </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+      <div class="text-right">
+              <button type="submit" id="submit" class="btn ed-submit ed-submits  btn-info full-width mr-5">Save Next</button>
+<!--    <input type="button" class="btn ed-submit ed-submits btn-primary mr-2 mb-2"  value="Add Vendor" onclick="showDiv()"/>-->
+                </div>
+
+  </form>
+         </div>
+          <!-- /.card-body -->
+<script>
+function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+}
+
+</script>
+{% endblock body %}

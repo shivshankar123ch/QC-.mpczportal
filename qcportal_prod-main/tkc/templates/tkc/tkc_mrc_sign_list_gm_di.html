@@ -1,0 +1,177 @@
+{% extends 'officer/gm_circle_login.html' %}
+{% load static %}
+{% block heading %} MRC Format {% endblock heading %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 145px;
+}
+</style>
+<div class="ed-information">
+  <div class="card ed-card-block">
+    <div class="ed-card-inner">
+      
+
+
+
+<div class="p-4" style="background:#fff;">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="table-responsivse">
+        <table class="table table-bordered ed-table m-4 " border="2" style="width:100%">
+          
+          {% for data1 in data|slice:":1" %}
+          <tr>
+            <th>Work Order Number
+            </th>
+            <td>{{data1.wo.Contract_Number}}
+            </td>
+          </tr>
+          <tr>
+            <th>Work Order Description
+            </th>
+            
+              <td>{{data1.wo.Header.Contract_Description}}
+            </td>
+          </tr>
+          <tr>
+            <th>TKC Name
+            </th>
+            <td>{{data1.supplier.CompanyName_E}}
+            </td>
+          </tr>
+          <tr>
+            <th>Work Order Date
+            </th>
+            <td>{{data1.wo.Wo_Approved_At}}
+            </td>
+          </tr>
+          <tr>
+            <th>TKC Site store Address
+            </th>
+            <td>{{data1.site_store}}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+  
+    
+        <div class="card-header">
+          <h2>
+           All Materials
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+  <table class="table table-bordered text-center" id="diMaterial">
+    <thead class="table-dark ">
+      <tr>
+          <th>Sr. No.</th>
+
+          <th>DI Number with Date</th>
+          <th>Offer Number with Date</th>
+          <th>Vendor Name</th>
+          
+          <th>Circle Where Item To be Utilize</th>
+
+          {% comment %} <th>Action</th> {% endcomment %}
+          <th>MRC Number and Date</th>
+
+          <th>Digital Signed MRC</th>
+          <th>Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in data %}
+      <tr>
+        <td >{{forloop.counter}}</td>
+
+        <td>{{data.tkc_di.erp_di_number}},{{data.tkc_di.created_date}}</td>
+        <td>{{data.offer_no}}, {{data.created_at}}</td>
+
+        <td>{{data.TKCVendor.Vendor}}</td>
+        
+        <td>{{data.circle.Circle_Name_E}}</td>
+
+
+        {% comment %} {% if data.tkc_mrc_initiate == 1 %}
+        <td><a href="/tkc/format_tk_create_stc_di/{{data.id}}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> MRC Created </a></td>
+        {% else %}
+        
+        <td><a href="/tkc/format_tk_create_stc_di/{{data.id}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Create MRC </a></td>
+
+        {% endif %} {% endcomment %}
+
+        <td>{{data.tkc_mrc.id}},{{data.tkc_mrc.date}}</td>
+
+
+        {% if data.tkc_mrc_initiate == 1 %}
+        
+            {% if data.tkc_mrc.digi_signflag == 1 %}
+            <td> <a href="{{data.tkc_mrc.digi_sign.url}}" target="_blank" class="btn btn-success btn-sm"><i class="fas fa-eye"></i>Uploaded</a></td>
+            {% else %}
+            <td></td>
+
+            {% comment %} <td> <a href="/tkc/upload_digi_tkc_mrc_stc_di/{{data.tkc_mrc.id}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i>Upload link</a></td> {% endcomment %}
+            {% endif %}
+          
+          
+        {% else %}
+        <td></td>
+        {% endif %}
+
+
+
+        {% if data.tkc_mrc_initiate == 1 %}
+        
+          {% if data.tkc_mrc.digi_signflag == 1 %}
+
+          <td > <span class="btn btn-success btn-sm" style="cursor:unset;"> MRC Uploaded</span></td>
+          {% else %}  
+          <td > <span class="btn-danger btn btn-sm"  style="cursor:unset;"> MRC Created but Not Uploaded </span></td>
+          {% endif %}
+        
+        {% else %}
+        <td> <span class="btn btn-warning btn-sm"  style="cursor:unset;"> Pending </span></td>
+        {% endif %}
+
+
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<script>
+  $(document).ready( function () {
+    $('#diMaterial').DataTable();
+} );
+</script>
+
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends 'officer/RoofTop_Viewer_base.html' %}
+{% load static %}
+{% load cart %}
+{% block body %}
+
+            <div class="card-body table-responsive">
+              <h3 class="card-title m-2 table-responsive"> <b> All Released LOA </b></h3>
+              <div>
+              <table class="table table-bordered table-hover bg-white " cellspacing="0" border="2" >
+                <thead class="bg-dark">
+                  <tr>
+                    <th style="color: white; ">
+                        S NO.</th>
+
+                        <th style="width:1%;color: white;  ">
+                         Firm/Agency Name</th>
+        
+                            <th style="color: white; ">
+                                BG Expity Date </th>
+        
+                            <th style="color: white;  ">
+                              BG Amount </th>
+                              <th style="color: white;  ">
+                                BG File </th>
+
+
+                 
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in data %}
+                 
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    
+                    <td>{{data.agency_name}}</td>
+                    <td style="color: rgb(226, 27, 53);"><b>{{data.valid_date|date:'d-m-Y'}}</b></td>
+                    <td>{{data.amount}}</td>
+
+                    <td class="text-center"> <a href="{{data.bg_document.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                    
+            {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
+
+
+     
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </div>
+
+  </div>
+</section>
+<!-- /.content -->
+
+{% endblock body %}

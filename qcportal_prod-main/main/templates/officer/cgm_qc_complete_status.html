@@ -1,0 +1,198 @@
+{% extends 'main/mpeb_base.html' %}
+{% load cart %}
+{% load static %}
+{% block body %}
+
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+
+  [type=button]:not(:disabled),
+  [type=reset]:not(:disabled),
+  [type=submit]:not(:disabled),
+  button:not(:disabled) {
+    cursor: pointer;
+    width: 140px;
+  }
+</style>
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      All Approved Contractor
+    </h2>
+  </div>
+  <div class="card-body">
+    <!-- <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+          {% if msg1 %}
+          {{ msg1 }}
+          {% endif %}
+        </p> -->
+    <!-- <form action="/tkc/gm_verify_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform" onsubmit="return validateForm()"> -->
+    <div class="ed-tableinfo-block ed-orderinfo-block ">
+      <div class="table-responsive">  
+        <table class="table table-bordered table-hover display" id="cgm_qc_complete_status">
+          <thead class="table-dark">
+            <tr>
+              <th class="w-5">S.No.</th>
+              <th class="w-10">
+                User Type
+              </th>
+              <th class="w-30">
+                Name Of Company
+              </th>
+              <th class="w-30">
+                Name of Authorized Person
+              </th>
+
+              <th class="w-15">
+                Registration Date
+              </th>
+              <th class="w-15">
+                Contact Number
+              </th>
+              <th class="w-10">
+                DGM(W&P) Status
+              </th>
+              <th class="w-10">
+                DGM(Finance) Status
+              </th>
+              <th class="w-10">
+                CGM/GM Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in data %}
+
+            <tr>
+              <td>{{forloop.counter}}</td>
+              {% if data.User_type == 'VENDOR' %}
+              <td><span><button class="btn ed-submit btn-info">VENDOR</button></span></td>
+              {% elif data.User_type == 'TKC' %}
+              <td>
+                <span><button class="btn  ed-submit btn-info ed-submit">Contractor</button></span>
+              </td>
+              {% else %}
+              <td><span><button class="btn ed-submit btn-info">NABL</button></span></td>
+              {% endif %}
+
+              <td>{{data.CompanyName_E}}</td>
+              <td>{{data.Authorised_person_E}}</td>
+              <!-- <td>{{data.Uploaded_Date}}</td> -->
+              <td>{{data.reg_date|date:"d-M-Y"}}</td>
+              <!--  <td>{{data.Uploaded_Date|date:"d-M-Y"}}</td>-->
+              <td>{{data.ContactNo}}</td>
+              {% if data.work_approval == 1 %}
+              <td>
+
+                <span>
+                  <button class="btn ed-submit btn-success ">Approve</button>
+
+                </span>
+
+              </td>
+              {% elif data.work_approval == 2 %}
+              <td>
+
+
+                <span>
+                  <button class="btn btn-danger ed-submit">
+                    Rejected
+                  </button>
+
+                </span>
+
+              </td>
+              {% else %}
+              <td>
+
+                <span>
+                  <button class="btn btn-danger ed-submit"> Pending</button>
+                </span>
+
+              </td>
+
+              {% endif %}
+
+              {% if data.finance_approval == 1 %}
+              <td>
+
+                <span>
+                  <button class="btn ed-submit btn-success">Approve</button>
+                </span>
+
+              </td>
+
+              {% elif data.finance_approval == 2 %}
+              <td>
+
+                <span>
+                  <button class="btn btn-danger ed-submit"> Rejected</button>
+                </span>
+
+              </td>
+
+              {% else %}
+              <td>
+
+                <span>
+                  <button class="btn btn-warning ed-submit"> Pending</button>
+                </span>
+
+              </td>
+
+              {% endif %}
+              {% if data.cgm_approval == 1 %}
+              <td>
+
+
+                <span>
+                  <button class="btn btn-success ed-submit">Approve</button>
+                </span>
+
+              </td>
+
+              {% elif data.cgm_approval == 2 %}
+              <td>
+
+                <span>
+                  <button class="btn btn-danger ed-submit"> Rejected</button>
+                </span>
+
+              </td>
+              {% else %}
+              <td>
+
+
+                <span>
+                  <button class="btn btn-warning ed-submit">Pending</button>
+                </span>
+
+              </td>
+              {% endif %}
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    $('#cgm_qc_complete_status').DataTable({
+      pagingType: 'full_numbers',
+    });
+  });
+</script>
+{% endblock body %}

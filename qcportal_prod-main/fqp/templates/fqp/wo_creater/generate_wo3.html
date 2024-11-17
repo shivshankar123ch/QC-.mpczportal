@@ -1,0 +1,383 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+<script>
+  console.log("scripttt")
+  window.onload = function () {
+      var tbcheck = document.getElementById("table").rows.length;
+      console.log("tableee", tbcheck)
+      if (tbcheck < 3) {
+          console.log("comee if")
+          var d = document.getElementById("nextStep3");
+          console.log("ddddddd", d)
+          d.style.setProperty("display", "none", "important");
+      } else {
+          var dd = document.getElementById("nextStep3");
+          dd.style.display == "";
+      }
+}
+</script>
+<div class="ed-information mb-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Time Schedule Details
+          </h2>
+        </div>
+        <!-- --------------------- Step 3 -------------------------------- -->
+        <div class="card-body" id="formStep3">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center " id="table">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Stage </th>
+                    <th colspan="2"> Completion Period</th>
+                    <th rowspan="2">Completion Date</th>
+                    <th rowspan="2">Contract Amount(%)</th>
+                    <th rowspan="2">Stage Amount </th>
+                    <th rowspan="2">Remarks </th>
+                    <th rowspan="2">Action</th>
+                  </tr>
+                  <tr>
+                    <th>
+                      Month
+                    </th>
+                    <th>
+                      Days
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for Time in Time %}
+                  <tr>
+                    <td>
+                      {{Time.Stage}}
+                    </td>
+                    <td>
+                      {{Time.Month}}
+                    </td>
+                    <td>
+                      {{Time.Days}}
+                    </td>
+                    <td>
+                      {{Time.Completion_date}}
+                    </td>
+                    <td>
+                      {{Time.Contract_Amount_Percentage}}
+                    </td>
+                    <td>
+                      {{Time.Stage_Amount}}
+                    </td>
+                    <td>
+                      {{Time.Remarks}}</b>
+                    </td>
+                    <td>
+                      <div class="poaction-info">
+                        <a href="/fqp/delete_time/{{wo.id}}/{{Time.id}}" class="btn ed-submit btn-danger">
+                          <span class="ed-submit-text">
+                            Delete
+                          </span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!--</div>-->
+            <form action="/fqp/procurement_generate_wo3/{{wo.id}}" onsubmit="return validateForm()" name="myForm"
+              method="POST">
+              {% csrf_token %}
+              <div class="ed-form-block">
+                <div class="ed-form-title">
+                  <h6>
+                    <span class="ed-text">
+                      Time Schedule Details
+                    </span>
+                  </h6>
+                </div>
+                <div class="ed-form-body material-wrapper">
+                  <div class="material-elements">
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Stage<span class="text-danger">*</span>
+                      </label>
+                      <input name="Stage" type="Number" class="form-control ed-textbox"onkeyup="validateForm()"
+                      onfocus="validateForm()" onkeypress='validate(event)' onchange="validateForm()"required autocomplete="off" />
+                      <span id="selectionn" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Month<span class="text-danger">*</span>
+                      </label>
+                      <input name="Month" type="Number" class="form-control ed-textbox" onkeyup="validateForm()"
+                      onfocus="validateForm()" onkeypress='validate(event)' onchange="validateForm()"required autocomplete="off" />
+                      <span id="month1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Day <span class="text-danger">*</span>
+                      </label>
+                      <input name="Day" type="Number" class="form-control ed-textbox" autocomplete="off" onkeyup="validateForm()"
+                      onfocus="validateForm()" onkeypress='validate(event)' onchange="validateForm()"required />
+                      <span id="day1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Completion Date <span class="text-danger">*</span>
+                      </label>
+                      <input name="Completion_date" type="Date" class="form-control ed-textbox"onkeyup="validateForm()"
+                      onfocus="validateForm()" onchange="validateForm()"required autocomplete="off" />
+                      <span id="coDate1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Contract Amount(%) <span class="text-danger">*</span>
+                      </label>
+                      <input name="Contract_Amount_Percentage" step="0.01" max="100" ,min="0" onkeypress='validate(event)' onkeyup="validateForm()"
+                      onfocus="validateForm()" onchange="validateForm()"required type="Number"
+                        class="form-control ed-textbox" autocomplete="off" />
+                        <span id="coAmount1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Stage Amount <span class="text-danger">*</span>
+                      </label>
+                      <input name="Stage_Amount" step="0.01" type="Number" onkeyup="validateForm()"
+                      onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' required class="form-control ed-textbox"
+                        autocomplete="off" />
+                        <span id="stAmount1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="ed-form-label">
+                        Remarks
+                      </label>
+                      <input name="Remarks" type="Text" class="form-control ed-textbox" onkeyup="validateForm()"
+                      onfocus="validateForm()" onchange="validateForm()"required autocomplete="off" />
+                      <span id="remark1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="form-action text-right">
+                        <button type="submit" id="btnsave" class="btn ed-submit btn-info" onclick="validateForm()">
+                          <span class="ed-submit-text">
+                            Add More
+                          </span>
+                        </button>
+                        <a href="/fqp/procurement_generate_wo4/{{wo.id}}" class="btn ed-submit ed-submitNext"
+                         id="nextStep3">
+                          <span class="ed-submit-text">
+                            Next
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div> 
+        <!-- --------------------- Step 4 -------------------------------- -->   
+      </div>   
+    </div>  
+  </div>
+</div><script>
+  function validate(evt) {
+var theEvent = evt || window.event;
+
+// Handle paste
+if (theEvent.type === 'paste') {
+key = event.clipboardData.getData('text/plain');
+} else {
+// Handle key press
+var key = theEvent.keyCode || theEvent.which;
+key = String.fromCharCode(key);
+}
+var regex = /[0-9]|\./;
+if (!regex.test(key)) {
+theEvent.returnValue = false;
+if (theEvent.preventDefault) theEvent.preventDefault();
+}
+}
+</script>
+<script>
+   function validateForm(){
+      let stage = document.forms["myForm"]["Stage"].value;
+      let month = document.forms["myForm"]["Month"].value;
+      let day_1 = document.forms["myForm"]["Day"].value;
+      let co_date = document.forms["myForm"]["Completion_date"].value;
+      let co_amout = document.forms["myForm"]["Contract_Amount_Percentage"].value;
+      let st_amt = document.forms["myForm"]["Stage_Amount"].value;
+      let remark = document.forms["myForm"]["Remarks"].value;
+
+      if (stage == "") {
+           document.getElementById('selectionn').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('selectionn').innerHTML = "";
+      }
+      if (month == "") {
+           document.getElementById('month1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('month1').innerHTML = "";
+      }
+      if (day_1 == "") {
+           document.getElementById('day1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('day1').innerHTML = "";
+      }
+      if (co_date == "") {
+           document.getElementById('coDate1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('coDate1').innerHTML = "";
+      }
+      if (co_amout == "") {
+           document.getElementById('coAmount1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('coAmount1').innerHTML = "";
+      }
+      if (st_amt == "") {
+           document.getElementById('stAmount1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('stAmount1').innerHTML = "";
+      }
+      if (remark == "") {
+           document.getElementById('remark1').innerHTML = "Please fill the required detail"
+            return false;
+           } else {
+            document.getElementById('remark1').innerHTML = "";
+      }
+
+  }
+</script>
+  <script>
+    // Insert Data
+    $("#btnsave").click(function () {
+      console.log("Save Button Clicked");
+      output = "";
+      let sid = $("#stuid").val();
+      let nm = $("#item").val();
+      let em = $("#amount").val();
+      let pw = $("#passwordid").val();
+      let csr = $("input[name=csrfmiddlewaretoken").val();
+      if (nm == "") {
+        console.log("Please Enter Name");
+      } else if (em == "") {
+        console.log("Please Enter Email");
+      } else {
+        console.log(nm);
+        console.log(em);
+        //console.log(pw);
+        mydata = {
+          stuid: sid,
+          name: nm,
+          email: em,
+          password: pw,
+          csrfmiddlewaretoken: csr,
+        };
+        $.ajax({
+          url: "{% url 'procurement_generate_po' %}",
+          method: "POST",
+          data: mydata,
+          dataType: "json",
+          success: function (data) {
+            //console.log(data);
+            x = data.student_data;
+            if (data.status == "Save") {
+              $("#msg").text("Form Submitted Successfully");
+              $("#msg").show();
+              //console.log(x);
+              for (i = 0; i < x.length; i++) {
+                output +=
+                  "<tr><td>" +
+                  x[i].id +
+                  "</td><td>" +
+                  x[i].name +
+                  "</td><td>" +
+                  x[i].email +
+                  "</td><td>" +
+                  x[i].password +
+                  "</td><td> <input type='button' class='btn btn-warning btn-sm btn-edit' value='Edit'  data-sid=" +
+                  x[i].id +
+                  "> <input type='button' class='btn btn-danger btn-sm btn-del' value='Delete' data-sid=" +
+                  x[i].id +
+                  ">";
+              }
+              $("#tbody").html(output);
+              $("#stuid").val("");
+              $("form")[0].reset();
+            }
+            if (data.status == 0) {
+              $("#msg").text("Unable to Save Data");
+              $("#msg").show();
+              $("#stuid").val("");
+              $("form")[0].reset();
+            }
+          },
+        });
+      }
+    });
+
+    // Delete Data
+    $("tbody").on("click", ".btn-del", function () {
+      //console.log("Delete Button Clicked");
+      let id = $(this).attr("data-sid");
+      let csr = $("input[name=csrfmiddlewaretoken").val();
+      //console.log(id);
+      mydata = { sid: id, csrfmiddlewaretoken: csr };
+      mythis = this;
+      $.ajax({
+        url: "{% url 'procurement_generate_po' %}",
+        method: "POST",
+        data: mydata,
+        success: function (data) {
+          //console.log(data);
+          if (data.status == 1) {
+            $("#msg").text("Data Deleted Successfully");
+            $("#msg").show();
+            $(mythis).closest("tr").fadeOut();
+          }
+          if (data.status == 0) {
+            $("#msg").text("Unable to Delete Data");
+            $("#msg").show();
+          }
+        },
+      });
+    });
+
+    // Edit Data
+    $("tbody").on("click", ".btn-edit", function () {
+      //console.log("Edit Button Clicked");
+      let id = $(this).attr("data-sid");
+      let csr = $("input[name=csrfmiddlewaretoken").val();
+      //console.log(id);
+      mydata = { sid: id, csrfmiddlewaretoken: csr };
+      $.ajax({
+        url: "{% url 'procurement_generate_po' %}",
+        method: "POST",
+        data: mydata,
+        dataType: "json",
+        success: function (data) {
+          //console.log(data);
+          $("#stuid").val(data.id);
+          $("#nameid").val(data.name);
+          $("#emailid").val(data.email);
+          $("#passwordid").val(data.password);
+        },
+      });
+    });
+  </script>
+</div>
+{% endblock body %}

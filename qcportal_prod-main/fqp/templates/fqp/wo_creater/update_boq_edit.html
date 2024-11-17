@@ -1,0 +1,251 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+<style>
+    .btn_save {
+        float: right;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+    {% comment %} .table_scoll{
+        overflow:auto;
+        width:100%;
+        height:500px;
+      }
+      thead {
+          position: relative;
+          z-index: 999999999;
+      }
+      td,
+      th {
+        border: 1px solid #000;
+        width: 100px;
+      }
+      th {background-color:black;}
+      
+      table {
+        table-layout: fixed;
+        width:100%;
+      }
+      td:first-child, th:first-child {
+        position:sticky;
+        left:0px;
+        z-index:1;
+        background-color:black;
+        color: white;
+      }
+      td:nth-child(2), th:nth-child(2) {
+        position:sticky;
+        left:100px;
+        z-index:1;
+        background-color:black;
+        color: white;
+      }
+      td:nth-child(3), th:nth-child(3) {
+        position:sticky;
+        left:200px;
+        z-index:1;
+        background-color:black;
+        color: white;
+      }
+      td:nth-child(4), th:nth-child(4) {
+        position:sticky;
+        left:18rem;
+        z-index:1;
+        background-color:black;
+        color: white;
+      
+       
+      }
+     
+     
+      thead tr th {
+        position:sticky;
+        top:0;
+      }
+      th:first-child, th:last-child {z-index:2;} {% endcomment %}
+   
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Update Order information
+
+                </h2>
+            </div>
+            <div class="card-body">
+                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+
+                {% if wo_instance.is_boq_added == 1 %}
+                <form action="/fqp/save_boq/{{wo_instance.id}}/1" method="POST" name="myform" id="myform">
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+                        </div>
+                        {% comment %} <div class="table_scoll"> {% endcomment %}
+                        <table class="table table-striped ed-table-block display table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th style="min-width:60px;">Total Order Qty</th>                                    
+                                    {% for getcircle in circles %}
+                                    <th style="min-width:140px;" class="circle">{{getcircle.circle_name}}</th>                                    
+                                    {% endfor %}                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for data in boq_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>
+                                    <td id="{{data.item_code}}_qty">{{data.total_order_qty}}</td>                                                                      
+                                    {% for key,value in item_dict.items %}
+                                        {% if data.item_code == key %}
+                                    
+                                            {% for a in value %}
+                                            <td>
+                                                <input type="number" step="any" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data {{data.item_code}}" value="{{a}}"    id="{{data.item_code}}" onchange="getTotalOrderQty(id)">
+                                            </td>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}                                                               
+                                </tr>                                                                                                        
+                                {% endfor %}                                    
+                            </tbody>
+                        </table>
+                 
+                    {% comment %} </div> {% endcomment %}
+                    <span id="error_span" class="text-danger"></span>
+                    <div class="row btn_save">
+                        <div class="col">
+                            <a href="/fqp/save_boq_info/{{wo_instance.id}}/0">                           
+                                    <button  class="btn ed-submit btn-info" onclick="sava_boq_info_data()">
+                                    <span class="ed-submit-text ml-1 mr-2">
+                                        Save
+                                    </span>
+                                </button> 
+                            </a>                         
+                        </div>                
+                         <div class="col">
+                            <button type="submit" class="btn ed-submit btn-info" onclick="return validateForm()">
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Submit
+                                </span>
+                            </button>
+                        </div> 
+                        </form>
+                    </div>
+                </div>
+                {% elif wo_instance.is_boq_added == 2  %}
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+                        </div>
+                        {% comment %} <div class="table_scoll"> {% endcomment %}
+                        <table class="table table-hover display table-bordered " >
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th style="min-width:60px;">Total Order Qty</th>                                    
+                                    {% for getcircle in circles %}
+                                    <th style="min-width:140px;" class="circle">{{getcircle.circle_name}}</th>
+                                    {% endfor %}
+                                    <th style="min-width:100px;">Total</th>
+                                </tr>
+                            </thead>
+                           
+                            <tbody>
+                                {% for data in boq_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>
+                                    <td>{{data.total_order_qty}}</td>                                                                     
+                                    {% for key,value in item_dict.items %}
+                                        {% if data.item_code == key %}                                   
+                                            {% for a in value %}
+                                            <td>
+                                                <input type="number" step="any" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data" value="{{a}}" readonly >
+                                            </td>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}                                
+                                </tr>                               
+                                {% endfor %}                                    
+                            </tbody>
+                        </table>
+                    {% comment %} </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</div>
+<script>
+    function getTotalOrderQty(class_name){
+    // alert(class_name);
+    var item_value=0;
+     const item_qty = document.getElementsByClassName(class_name);
+     const total_item_qty = document.getElementById(class_name+"_qty").innerHTML;
+     
+    for (let i = 0; i < item_qty.length; i++) {
+        item_value= item_value + Number(item_qty[i].value);   
+    }    
+    if(total_item_qty < item_value){
+        alert("Total Circle Quantity should be Less than Total Order Quantity");
+    }
+}
+</script>
+<script>
+    function sava_boq_info_data(){              
+        document.getElementById("myform").action = "/fqp/save_boq_info/{{wo_instance.id}}/1";
+    }
+</script>
+<script>
+    function validateForm(){
+       const collection = document.getElementsByClassName("Circle_data");
+       let val = document.getElementById("error_span");
+       for (let i = 0; i < collection.length; i++) {
+           if(collection[i].value==''){
+   
+            val.innerHTML=" Please fill the required details ";
+            return false;    
+           }
+           else{
+               val.innerHTML="";
+           }
+       }
+       return true;
+   
+       }
+</script>
+{% endblock body %}

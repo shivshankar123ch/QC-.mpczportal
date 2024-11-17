@@ -1,0 +1,144 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block body %}
+
+<form action="/vendor/update_profile" method="POST">
+    {% csrf_token %}
+
+    <h5 class="font-weight-bolder mb-0">&nbspBasic Data</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                <tr>
+                    <th style="width:30% ">S.No.</th>
+                    <th style="width:50% ">Title</th>
+                    <th style="width:20% ">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp1</td>
+                    <td>&nbsp&nbsp&nbspUser Type</td>
+                    <td>{{userdata.user_type}}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp2</td>
+                    <td>&nbsp&nbsp&nbspName Of Agency/Firm</td>
+                    <td>{{userdata.agency_name}}
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp3</td>
+                    <td>&nbsp&nbsp&nbspName Of Authorised Person</td>
+                    <td>{{userdata.name_of_auth}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp4</td>
+                    <td>&nbsp&nbsp&nbspGST No.</td>
+                    <td>{{userdata.gst}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp5</td>
+                    <td>&nbsp&nbsp&nbspPan Card No.</td>
+                    <td>{{userdata.pan_card}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp6</td>
+                    <td>&nbsp&nbsp&nbspEmail</td>
+                    <td>{{userdata.email}}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp7</td>
+                    <td>&nbsp&nbsp&nbspAddress</td>
+                    <td>{{userdata.address}}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp8</td>
+                    <td>&nbsp&nbsp&nbspContact Number</td>
+                    <td>{{userdata.contact}}
+                    </td>
+
+                </tr>
+              
+
+
+
+
+               
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <div class="panel-heading">
+            <h5>Document Uploaded</h5>
+        </div>
+      
+            <div class="table-responsive">
+                 <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> View Document</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in doc %}
+                        <tr>
+                            <td><b>{{data.Types_of_Docs}}</b></td>
+                            <td>{{data.Document_Number}}</td>
+                            <td class="text-center"> <a href="{{data.Ddocfile.url}} " target="_blank" class="fas fa-eye text-secondary"></a></td>
+                              
+                        {% endfor %} {% endwith %}
+                   <tr></tr>
+                    </tbody>
+
+                </table>
+            </div>
+        <br/>
+        <hr/>
+        <br/>
+     
+</div>
+<!-- /.card-body -->
+</div>
+<!-- /.card -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+
+
+
+
+</div>
+</form>
+
+
+
+<!----start trial here-->
+<!-----end here-->
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,64 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h6>RCA Vendor Pending for Factory Inspection</h6>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <form action="/factory_inspection_initiate_rca/{{data.User_Id}}" name="myForm" onsubmit="return validateForm()" method="POST">
+                {% csrf_token %}
+                <table class="table table-bordered table-hover">
+                    <thead class="font-weight-bold bg-primary" style="font-size: 15px; Height:30px;">
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                           <tr>
+                                <td>Name Of Company</td>
+                                <td><b>{{data.CompanyName_E}}</b></td>
+                            </tr>
+                             <tr>
+                                 <td>Name Of Authorised Person</td>
+                                 <td>{{data.Authorised_person_E}}</td>
+                             </tr>
+                             <tr>
+                                <td>Address</td>
+                                <td>{{data.Company_add_1}}, {{data.Company_add_2}}, {{data.Company_dist}}, {{data.Company_pin_code}}, {{data.Company_state}}</td>
+                            </tr>
+                                                    
+                         
+                           <tr>
+                                <td>Choose Inspecting Officer</td>
+                             <td>
+                               <select id="inputStatus" name="officer" required>
+                          <option selected value="">Choose Officer</option>
+                          {% for data in employee %}
+                          <option  value="{{data.id}}">{{data.user_zone}} // {{data.officer_name}} // {{data.officer_designation}} // {{data.officer_address}} </option>
+                          {% endfor %}
+                             </select>
+                            </td>
+                        </tr>
+                              <tr>
+                                <td>Choose Inspecting Date</td>
+                                <td><input name="date" type="date" required></td>
+                             </tr>
+                                <tr> 
+                    </tbody>
+                </table>
+				<p>
+				
+									<b>Note: If the inspection officer is not in the list populated above, please add through "Add Officer" button</b>
+									</p>
+                <div class="button-row d-flex mt-4">
+                    <a href="/Add_Factory_Officer" class="btn bg-gradient-primary  m-4">Add officer</a>
+                    <button class="btn bg-gradient-primary ms-auto m-4" onclick="return confirm('Are you sure you want to submit ?');" type="submit" title="Submit";>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

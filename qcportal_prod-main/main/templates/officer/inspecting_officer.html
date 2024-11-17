@@ -1,0 +1,554 @@
+ {% extends 'main/mpeb_base.html' %}
+{% load static %} {% block body %}
+
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+
+  .btn.btn-round {
+    border-radius: 0.875rem;
+    padding-top: 12px;
+    margin-top: 11px;
+  }
+</style>
+{% comment %} style for header sticky {% endcomment %}
+
+
+{% comment %} style for scroll footer {% endcomment %}
+<style>
+  .fixed-header {
+    position: sticky;
+    top: 68px;
+  }
+
+  form label {
+    color: blue;
+  }
+
+  .form-control {
+    border: 1px solid black;
+  }
+
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+</style>
+
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold"><span style="color: #344767;">Register Inspecting Officer</span>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-1" style="font-size:12px">
+        <!-- <form id="myForm" method="post" action="/add_inspecting_off_info" onsubmit="return addValid()"> -->
+        <form id="myForm" method="post" action="/add_inspecting_off_info">
+          {% csrf_token %}
+
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-name">Employee Id <span
+                style="color: red;">*</span></label>
+            <input type="text" id="emp_Id" class="form-control validate" name="employee_id" minlength="5" maxlength="15"
+              required oninvalid="this.setCustomValidity('Please fill the Employee Id')">
+            <span id="emp_error" class="error"></span>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Officer Name <span
+                style="color: red;">*</span> </label>
+            <input type="text" id="officer_name" class="form-control validate" name="employee_name" minlength="2"
+              maxlength="15" required oninvalid="this.setCustomValidity('Please fill the Officer Name')">
+            <span id="officer_error" class="error"></span>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Contact No <span
+                style="color: red;">*</span></label>
+            <input type="text" id="contact" class="form-control validate" name="contact" maxlength="10" required
+              oninvalid="this.setCustomValidity('Please fill the Contact No')">
+            <span id="contact_error" class="error"></span>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Email Id<span
+                style="color: red;">*</span></label>
+            <input type="email" id="email" class="form-control validate" name="email" maxlength="30" required
+              oninvalid="this.setCustomValidity('Please fill the Email')">
+            <span id="email_error" class="error"></span>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Designation <span
+                style="color: red;">*</span></label>
+            <input type="text" id="desig_id" class="form-control validate" name="designation" required
+              oninvalid="this.setCustomValidity('Please fill the Designation')">
+            <span id="designation_error" class="error"></span>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Region <span
+                style="color: red;">*</span></label>
+
+            <select name="region" id="region_Id" class="form-control" required
+              oninvalid="this.setCustomValidity('Please fill the Region')">
+              <option value="">--Please choose region <span style="color: red;">*</span></option>
+              {% for i in region %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+
+
+            </select>
+            <span id="region_error" class="error"></span>
+
+
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Office Address <span
+                style="color: red;">*</span></label>
+            <input type="text-area" id="officer_add" class="form-control validate" name="address">
+            <span id="address_error" class="error"></span>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" onclick="return chkVal()" class="btn btn-primary">Save</button>
+      </div>
+      </form>
+      {% comment %} <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary">Register</button>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</div>
+
+
+
+{% comment %} Update Modal Form {% endcomment %}
+<div class="modal fade" id="modalRegisterForm_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold"><span style="color: red;">Update Inspecting Officer</span></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-1" style="font-size:12px">
+        <form id="myForm1" method="POST" action="/update_inspecting_off_info">
+          {% csrf_token %}
+          <div class="md-form mb-3">
+
+            <label data-error="wrong" data-success="right" for="orangeForm-name">Employee Id <span
+                style="color: red;">*</span></label>
+            <input type="text" id="officer_employee_id" class="form-control validate" name="officer_employee" value=""
+              minlength="5" maxlength="15" readonly>
+            <input type="text" id="id_value" class="form-control validate" required name="id_value" value="" hidden>
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Officer Name <span
+                style="color: red;">*</span></label>
+            <input type="text" id="employee_name" class="form-control validate" required name="employee_name" value=""
+              minlength="2" maxlength="15">
+          </div>
+
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Contact No <span
+                style="color: red;">*</span></label>
+            <input type="text" id="contact_id" class="form-control validate" required name="contact" name="contact"
+              value="" maxlength="10" oninvalid="this.setCustomValidity('Please fill the Contact No')">
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Email Id <span
+                style="color: red;">*</span></label>
+            <input type="email" id="email_id" class="form-control validate" name="email" value="" maxlength="30"
+              required oninvalid="this.setCustomValidity('Please fill the Email')">
+          </div>
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Designation <span
+                style="color: red;">*</span></label>
+            <input type="text" id="designation_id" class="form-control validate" name="designation" value="" required
+              oninvalid="this.setCustomValidity('Please fill the Designation')">
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Region <span style="color: red;"
+                required oninvalid="this.setCustomValidity('Please fill the Region')">*</span></label>
+            <select name="region" id="region" class="form-control">
+              {% for i in region %}
+              <option value="{{i}}">{{i}}</option>
+              {% endfor %}
+
+            </select>
+
+
+
+          </div>
+
+          <div class="md-form mb-3">
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Office Address <span
+                style="color: red;">*</span></label>
+            <input type="text-area" id="address_id" class="form-control validate" name="address" value="" required
+              oninvalid="this.setCustomValidity('Please fill the Address')">
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" onclick="return chkVal_1()" class="btn btn-primary btn-sm" form="myForm1">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      Inspecting Officer List
+      <span style="margin-left:30px;">
+        <a href="" class="btn ed-submit btn-info  text-center " data-toggle="modal" data-target="#modalRegisterForm">
+          Add Inspecting Officer
+        </a>
+      </span>
+    </h2>
+  </div>
+
+
+  {% comment %}
+  <div class="pagination">
+    <button class="prev-btn">Previous</button>
+    <button class="next-btn">Next</button>
+  </div>
+  {% endcomment %}
+  <div class="card-body">
+    <div class="ed-tableinfo-block">
+      <div class="table-responsives">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center"
+          id="inspecting_officer">
+          <thead>
+            <tr>
+              <th class="w-10">Sr. No.</th>
+              <th class="w-10">Officer Employee ID</th>
+              <th class="w-10">Officer Name</th>
+              <th class="w-10">Contact NO.</th>
+              <th class="w-10">Email Id</th>
+              <th class="w-10">Officer Designation</th>
+              <th class="w-10">Officer Address</th>
+              <th class="w-10">Officer Region</th>
+              <th class="w-10">Officer Zone</th>
+              <th class="w-10">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for item1 in data %}
+
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{item1.officer_employ_id}} </td>
+              <td>{{item1.officer_name}} </td>
+              <td>{{item1.contact_no}}</td>
+              <td>{{item1.officer_email}}</td>
+              <td>{{item1.officer_designation}}</td>
+              <td>{{item1.officer_address}}</td>
+              <td>{{item1.officer_region}}</td>
+              <td>{{item1.user_zone}}</td>
+              <td>
+                <button class="btn btn-sm btn-warning" style="width: 120px;" id="{{item1.id}}" data-toggle="modal"
+                  data-target="#modalRegisterForm_1" onclick="updateInspectingOfficer(this.id)">Update</button>
+                <a href="/del_ins_officer/{{item1.id}}"
+                  onclick="return(confirm('Are you sure to delete this officer ?')) " href=""
+                  class="btn btn-sm btn-danger" style="width: 120px;" id="del">Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function updateInspectingOfficer(updateId) {
+    //console.log(updateId)
+    $.ajax({
+      type: 'get',
+      //url: `https://qcdev.mpcz.in:8080/api/getInspectingData/${updateId}`,
+      url: `/api/getInspectingData/${updateId}`,
+      
+      success: function (data) {
+        console.log(data)
+
+        $("#id_value").val(data.data.id);
+        $("#contact_id").val(data.data.contact_no);
+        $("#officer_employee_id").val(data.data.officer_employ_id);
+        $("#employee_name").val(data.data.officer_name);
+        $("#address_id").val(data.data.officer_address);
+        $("#email_id").val(data.data.officer_email);
+        $("#designation_id").val(data.data.officer_designation);
+        $("#region_id").append('<option value=' + data.data.officer_region + ' selected>' + data.data.officer_region + '</option>');
+      }
+    });
+
+  }
+</script>
+
+
+
+
+{% comment %} JS for header sticky {% endcomment %}
+<script>
+  window.addEventListener('scroll', function () {
+    var table = document.querySelector('table');
+    var header = table.querySelector('thead');
+    var rect = table.getBoundingClientRect();
+
+    if (rect.top <= 0 && rect.bottom > header.offsetHeight) {
+      header.classList.add('fixed-header');
+    } else {
+      header.classList.remove('fixed-header');
+    }
+  });
+
+</script>
+{% comment %} JS for scroll bar {% endcomment %}
+<script>
+  window.addEventListener('scroll', function () {
+    var scrollbar = document.getElementById('scrollbar');
+    var content = document.querySelector('.content');
+    var rect = content.getBoundingClientRect();
+
+    if (rect.bottom <= window.innerHeight) {
+      scrollbar.style.visibility = 'visible';
+    } else {
+      scrollbar.style.visibility = 'hidden';
+    }
+  });
+
+</script>
+
+
+
+
+
+<script>
+  function chkVal() {
+    // Get input values
+    let emp_Id = document.getElementById("emp_Id").value;
+    let officer_name = document.getElementById("officer_name").value;
+    let contact = document.getElementById("contact").value;
+    let email = document.getElementById("email").value;
+    let designation_id = document.getElementById("desig_id").value;
+    let officer_add = document.getElementById("officer_add").value;
+    let region_Id = document.getElementById("region_Id").value;
+
+    let isValid = true;
+
+    document.querySelectorAll(".error").forEach((errorElement) => {
+      errorElement.textContent = "";
+    });
+
+    // Regular expressions for validation
+    let regName = /^[0-9]{5,15}$/;
+    let regNameOfficer = /^[a-zA-Z ]+$/;
+    let regMobile = /^[6789]\d{9}$/;
+    let regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+
+    if (emp_Id.trim() === "") {
+      //alert("Please enter the Employee ID.");
+      document.getElementById("emp_error").textContent = "Please enter the Employee ID.";
+      document.getElementById("emp_Id").focus();
+      isValid = false;
+    } if (!regName.test(emp_Id)) {
+      //alert("Please enter a valid Employee ID");
+      document.getElementById("emp_error").textContent = "Please enter the Valid Employee ID.";
+      document.getElementById("emp_Id").focus();
+      isValid = false;
+    }
+
+    if (officer_name.trim() === "") {
+      // alert("Please enter the Officer Name.");
+      document.getElementById("officer_error").textContent = "Please enter the Officer Name.";
+      document.getElementById("officer_name").focus();
+      isValid = false;
+    }
+    if (!regNameOfficer.test(officer_name)) {
+      //alert("Please enter a valid Officer Name.");
+      document.getElementById("officer_error").textContent = "Please enter the Valid Officer Name.";
+      document.getElementById("officer_name").focus();
+      isValid = false;
+    }
+
+    if (contact.trim() === "") {
+      //alert("Please enter the Contact No.");
+      document.getElementById("contact_error").textContent = "Please enter the Contact.";
+      document.getElementById("contact").focus();
+      isValid = false;
+    }
+    if (!regMobile.test(contact)) {
+      //alert("Please enter a valid Mobile Number.");
+      document.getElementById("contact_error").textContent = "Please enter the Valid Contact No.";
+      document.getElementById("contact").focus();
+      isValid = false;
+    }
+
+    if (email.trim() === "") {
+      //alert("Please enter the Email.");
+      document.getElementById("email_error").textContent = "Please enter the Email.";
+      document.getElementById("email").focus();
+      isValid = false;
+    }
+    if (!regEmail.test(email)) {
+      //alert("Please enter a valid Email Id.");
+      document.getElementById("email_error").textContent = "Please enter the Valid Email.";
+      document.getElementById("email").focus();
+      isValid = false;
+    }
+
+    if (designation_id.trim() === "") {
+      //alert("Please enter the Designation.");
+      document.getElementById("designation_error").textContent = "Please enter the Designation Name.";
+      document.getElementById("desig_id").focus();
+      isValid = false;
+    }
+    if (!regNameOfficer.test(designation_id)) {
+      //alert("Please enter a valid Designation Name.");
+      document.getElementById("designation_error").textContent = "Please enter the Valid Designation Name.";
+      document.getElementById("desig_id").focus();
+      isValid = false;
+    }
+
+
+    if (region_Id.trim() === "") {
+      document.getElementById("region_error").textContent = "Please enter the Region.";
+      document.getElementById("region_Id").focus();
+      isValid = false;
+    }
+
+    if (officer_add.trim() === "") {
+      document.getElementById("address_error").textContent = "Please enter the Address.";
+      document.getElementById("officer_add").focus();
+      isValid = false;
+    }
+    return isValid;
+  }
+
+</script>
+
+
+<script>
+  // Define a function to display the pop-up message after page load
+  function showMsg(message) {
+    alert(message)
+    // setTimeOut(()=>{
+    //   alert(message)
+    // },10000)
+  }
+
+  // Call the displayPopupMessage function after the page has loaded
+  window.onload = function () {
+    var message = "{{ msg|escapejs }}"; // Replace with the actual message from Jinja template
+    if (message != "") {
+      showMsg(message);
+    }
+
+  };
+
+</script>
+
+
+
+
+
+<script>
+  function chkVal_1() {
+    let officer_employee_id = document.getElementById("officer_employee_id").readOnly = true;
+    let employee_name = document.getElementById("employee_name").value;
+    let contact_id = document.getElementById("contact_id").value;
+    let email_id = document.getElementById("email_id").value;
+    let address_id = document.getElementById("address_id").value;
+    let designation_id = document.getElementById("designation_id").value;
+    let region = document.getElementById("region").value;
+
+
+    //let regName = /[0-9]{5,15}/;
+    let regNameOfficer = /^[a-zA-Z ]+$/;
+    let RegExp_mobile = /^[6789]\d{9}$/;
+    let RegExp_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (employee_name === "") {
+      alert("Please enter the name.");
+      return false;
+    } else if (contact_id === "") {
+      alert("Please enter the Contact No.");
+      return false;
+    } else if (email_id === "") {
+      alert("Please enter the Email.");
+      return false;
+    } else if (address_id === "") {
+      alert("Please enter the Address.");
+      return false;
+    } else if (designation_id === "") {
+      alert("Please enter the Designation.");
+      return false;
+    } else if (region === "") {
+      alert("Please enter the Region.");
+      return false;
+    } else if (regNameOfficer.test(employee_name) === false) {
+      alert("Please Enter Valid Officer Name.");
+      return false;
+    } else if (regNameOfficer.test(designation_id) === false) {
+      alert("Please Enter Valid Designation Name.");
+      return false;
+    } else if (RegExp_mobile.test(contact_id) === false) {
+      alert("Please Enter Valid Mobile Number.");
+      return false;
+    } else if (RegExp_email.test(email_id) === false) {
+      alert("Please enter valid Email Id.");
+      return false;
+    }
+  }
+</script>
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    $('#inspecting_officer').DataTable();
+  });
+</script>
+{% endblock body %}

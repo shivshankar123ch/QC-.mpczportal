@@ -1,0 +1,212 @@
+{% extends 'officer/gm_circle_login.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+
+<style>
+    .btn_save {
+        padding: 10px;
+        float: right;
+    }
+    .ed-tableinfo-block .dataTables_length{
+        display: block;
+    }
+.ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+}
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Update Order information 
+                </h2>
+            </div>
+            <div class="card-body">
+                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                <form action="/gm_save_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform" onsubmit="return validateForm()">
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+                        </div>
+                        <table class="table table-striped ed-table-block display table-bordered" id="gm_data_data" >
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th style="min-width:60px;">Total Order Qty</th>
+                                    <th style="min-width:60px;">{{officer_circle}}</th>
+                                    <th style="min-width:140px;">Verified Quantity</th>
+                                    <th class="text-center" style="min-width:140px;">Status</th>
+                                    {% comment %} <th class="text-center" style="min-width:140px;">PMA Recommendation</th> {% endcomment %}
+                                </tr>  
+                            </thead>    
+                            <tbody>
+                                {% for data in stored_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>                                 
+                                    <td>{{data.total_order_qty}}</td> 
+                                    <td>{{data.circle_quantity}}</td>                                    
+                                    <td>
+                                        {% if data.gm_status == 0 %}
+                                        <input type="number" step="any" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data" value="{{data.verified_circle_qty}}">
+                                        {% else %}
+                                        <input type="number" step="any" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data" value="{{data.gm_verified_circle_qty}}" readonly  >
+                                        {% endif %}
+                                        </td> 
+                                        {% if data.gm_status == 0 %}
+                                        <td class="text-center"> <span class="btn ed-submits btn-danger">Not Approved </span></td>
+                                        {% else %}
+                                        <td class="text-center"><span class="btn ed-submits btn-success">Approved </span></td>
+                                        {% endif %}   
+                                        {% comment %} <td>{{data.pma_boq_recommendation}}</td>                            {% endcomment %}
+                                </tr> 
+                                {% endfor %}                      
+                             </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 btn_save">
+                            <span id="error_span" class="text-danger"></span>
+                                <button type="submit" class="btn ed-submit btn-info float-right" >
+                                    <span class="ed-submit-text ml-1 mr-2">
+                                        Accept
+                                    </span>
+                                </button>
+                        </div>                      
+                    
+
+
+                </div>
+                   <!-- <div class="row btn_save">
+                       <span id="error_span" class="text-danger"></span>
+                       <a href="/gm_reject_boq/{{wo_instance.id}}">
+                           <button type="button" class="btn ed-submit btn-info", style="background-Color:red;" >
+                               <span class="ed-submit-text ml-1 mr-2">
+                                   Reject
+                               </span>
+                           </button>
+                        </a>
+                       </div>  -->
+                    </form> 
+                <div class="table-responsive">
+                    <form action="/gm_save_new_data/{{wo_instance.id}}" method="POST" name="requested_data">       
+                        <table class="table table-striped ed-table-block display table-bordered" id="gm_requested_data">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>                                  
+                                    <th style="min-width:140px;">Circle Name</th>
+                                    <th style="min-width:140px;">Circle Qty.</th>
+                                    <th style="min-width:140px;">GM Verified Circle Qty.</th>
+                                </tr>
+                            </thead>
+                           
+                            <tbody>
+                                {% for new_material in requested_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{new_material.material_name}}</td>   
+                                    <td>{{new_material.item_code}} </td>                                                                 
+                                    <td>{{new_material.circles_name}}</td> 
+                                    <td>{{new_material.circle_qty}}</td>
+                                   
+                                    {% if new_material.gm_verified_circle_qty == 0 %} 
+                                    <td>
+                                        <input type="number" step="any" style="text-align: center;" name="{{new_material.item_code}}"value="{{new_material.gm_verified_circle_qty}}" class="form-control Circle Circle_data">                                 
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <input type="number" step="any" style="text-align: center;" name="{{new_material.item_code}}"value="{{new_material.gm_verified_circle_qty}}" class="form-control Circle Circle_data" readonly>                                 
+                                    </td>
+                                    {% endif %}
+                                </tr> 
+                        {% endfor %}
+                            </tbody>
+                        </table> 
+                </div>       
+                    <div class="row">
+                        <div class="col-12 btn_save">
+                            <button type="submit" class="btn btn-info float-right" >
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Submit
+                                </span>
+                            </button>
+                        </div>
+                    </div> 
+                </form> 
+                
+            </div> 
+                <div class="col">                    
+                    <label ><h6>PMA Remarks:</h6></label>
+                    <input type="text" name="recommendations" class="form-control" id="recommendations" value="{{pma_remarks}}" readonly>
+                </div>
+                   
+                {% if recommendation_data == ' ' %}
+            <form action="/gm_save_remarks/{{wo_instance.id}}" method="POST" name="myform" id="myform">
+                <div class="row">
+                    <div class="col">                    
+                        <label ><h4>Remarks/Recommendations</h4></label>
+                        <input type="text" name="recommendations" class="form-control" id="recommendations" value="" required>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-12 btn_save">
+                        <button type="submit" class="btn ed-submit btn-info " >
+                        <span class="ed-submit-text ml-1 mr-2"> Submit </span>
+                        </button> 
+                    </div> 
+                </div>
+            </form>
+                {% else %}
+                <div class="row">              
+                    <div class="col">                    
+                        <label ><h4>Remarks/Recommendations</h4></label>
+                        <input type="text" name="recommendations" class="form-control" id="recommendations" value="{{recommendation_data}}" readonly>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+                </div>
+           </div>
+        </div>
+    </div>
+
+{% comment %} <script>
+    $(document).ready(function () {
+        $('#gm_requested_data').DataTable({
+            pagingType: 'full_numbers',
+        });
+       
+    });  
+</script>
+<script>
+    $(document).ready(function () {
+        $('#gm_data_data').DataTable({
+            pagingType: 'full_numbers',
+        });
+       
+    });  
+</script> {% endcomment %}
+
+
+{% endblock body %}

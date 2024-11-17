@@ -1,0 +1,45 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %} {% block heading %} ALL RO Order {% endblock heading %} {% block body %} {% block all_oil_request %}
+<li class="nav-item active" style="list-style-type:none;">
+    {% endblock all_oil_request %}
+    <div class="container">
+        <h5 class="font-weight-bolder">All OIL Request</h5>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">Panel Heading</div>
+<div class="panel-body">Panel Content</div> -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-responsive">
+                    <thead class="table table-dark">
+                        <tr>
+
+                            <th class="text-center" style="width:10px;">
+                                S.No
+                            </th>
+                            <th scope="col-2">Vendor</th>
+                            <th scope="col-2">Release Order No.</th>
+                            <th scope="col-3">Requested Oil (Liter)</th>
+                            <th scope="col-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for info in data %}
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td><b>{{ info.ro.wo.vendor_id.CompanyName_E}}</b></td>
+                            <td><b>RO00{{ info.ro.id}}</b></td>
+                            <td>
+                                </b>{{ info.v_request_quantity }}</b>
+                            </td>
+                            <td>
+                                {% if not info.as_forward_to_rca %}
+                                <a href="/po/oil_request_forward/{{info.id}}" class="text-primary">Forward To RCA</a></td>
+                            {% else %}
+                            <b>Request Forwarded</b> {% endif %}
+                        </tr>
+                        {% endfor %}
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}

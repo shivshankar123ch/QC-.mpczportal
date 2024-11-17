@@ -1,0 +1,56 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        Bank Information
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-tableinfo-block  mb-4">
+        <div class="table-responsive">
+          <table class="table table-bordered  table-hover display text-left">
+            <tr>
+              <td class=""> Bank Name </td>
+              <td>{{sd.Bank_name}}</td>
+            </tr>
+            <tr>
+              <td> Account Holder Name </td>
+              <td>{{sd.Account_Holder_Name}}</td>
+            </tr>
+            <tr>
+              <td> IFSC Code </td>
+              <td>{{sd.IFSC}}</td>
+            </tr>
+            <tr>
+              <td> Account Number </td>
+              <td>{{sd.Account_Number}}</td>
+            </tr>
+            <tr>
+              <td> Passbook/Cancelled Cheque Copy </td>
+              <td>
+                <a href="{{sd.file.url}} " target="_blank" class="btn ed-submits btn-info">
+                  <i class="fas fa-eye text-secondary text-white"></i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+
+  {% endblock body %}

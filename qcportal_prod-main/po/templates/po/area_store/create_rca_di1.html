@@ -1,0 +1,297 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+ <style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style>
+ 
+ <div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Add Material
+        </h2>
+    </div>
+    <div class="card-body mb-4">
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            RCA Information
+                        </span>
+                    </h6>
+                </div> 
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA No
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="MP{{ro.rca_cell.user_zone}}00{{ ro.wo.id}}" readonly >
+                    </div> 
+                    
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA Vendor Company name
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.vendor_id.CompanyName_E}}" readonly >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly >
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-2">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ext-center display">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                Description 
+                            </th>
+                            <th class="text-center">
+                                Quantity 
+                            </th>
+                            <!-- <th class="text-center"> Rate </th> -->
+                            <!-- <th class="text-center"> Total amount </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td> 
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-2">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                ERP Gate Pass No. 
+                            </th>
+                            <th class="text-center">
+                                ERP Gate Pass Date 
+                            </th>
+                            <th class="text-center">
+                                ERP Gatekeeper Name
+                            </th>
+                            <!-- <th scope="col-9"> Rate </th> -->
+                            <!-- <th scope="col-9"> Total amount </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for det in gp %}
+                        <tr>
+                        <td>{{det.as_issue_gp_num}}</td>
+                        <td>{{det.as_issue_gp_date}}</td>
+                        <td>{{det.as_issue_pr_name}}</td>
+                        <!-- <td>{{data.rate}}</td>
+                        <td>{{data.total_rate}}</td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<form action="/po/create_rca_di_add_material/{{ro.id}}" method="POST" enctype="multipart/form-data" name="myForm"
+    onsubmit="return validateForm()">
+    {% csrf_token %}
+
+    <div class="card-body">
+        <div class="forms-informations">
+            <div class="ed-form-block  border-0 p-0"> 
+                <div class="ed-form-body border-0 p-0">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Select Capacity
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select name="material" id="vendor" class="form-control ed-textbox" onfocus="validateForm()" required="required" onkeyup="validateForm()" onchange="validateForm();">
+                            <option value="" selected>Select Capacity </option>
+                            {% for data in material %}
+                            <option value="{{data.id}}">{{data.rating}}</option>
+                            {% endfor %} 
+                        </select>
+                        <span id="cap" class="d-block ed-warningtext text-danger" ></span>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center" id="create_rca_di_add_material">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center"> 
+                                S.No.
+                            </th>
+
+                            <th class="text-center">
+                                Capacity
+                            </th>
+
+                            <th class="text-center">
+                                XMER Code (To be Uploaded through Excel file)
+                            </th>
+
+                            <th class="text-center">
+                                Action
+                            </th>
+                         
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {% for data in xmr %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+
+                            <td>{{data.material.rating}}</td>
+                          
+                            <td id="Dataxmr">{{data.xmr}}</td>
+
+                            <td>
+
+                                {% if data.new_design or data.old_l1 or data.old_l2 or data.design_non_star %}
+            
+                                <a>  <span class="btn btn-success">Uploaded</span></a>
+                  
+                                {% else %}
+                                
+                                <a  style="width: 160px;" onclick="myFunction()"
+                                    href="/po/delete/{{data.id}}/{{ro.id}}"><span class="btn btn-danger">Delete</span> </a>
+            
+                                {% endif %}
+            
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-body mt-0">
+        <div class="forms-informations">
+            <div class="ed-form-block border-0 p-0"> 
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Please click on the "Choose file" button to upload the excel file with xmer code.
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input id="id_docfile" type="file" name="myfile" onkeyup="validateForm()" onchange="validateForm();">
+                                <span id="file_11" class="d-block ed-warningtext text-danger" style="font-size: 80%;"></span>
+                            </div> 
+                            <div class="col-sm-5">
+                                <button type="submit" class="btn btn-primary ed-formSubmit" value="browse">Upload</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="card-body mt-0">
+    <div class="forms-informations">
+        <div class="ed-form-block border-0 p-0"> 
+            <div class="form-action text-right">  
+                <span id="address" class="d-block ed-warningtext text-danger"></span>
+                <a href="/po/rca_di_view/{{ro.id}}">
+                    <input type="submit" onclick="check();validateForm()"  name="submit" value="Save And Next" class="btn btn-secondary ed-formSubmit" autocomplete="off">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+</form>
+<script>
+    $(document).ready(function () {
+        $('#create_rca_di_add_material').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $('[data-type="adhaar-number"]').keyup(function () {
+        console.log('wwwwwwwwwttttttttttttttwwwwwwwwwww')
+        var value = $(this).val();
+        value = value.replace(/\D/g, "").split(/(?:([\d]{2}))(?:([\d]{5}))(?:([\d]{1}))/g).filter(s => s.length > 0).join("-");
+        $(this).val(value);
+    });
+
+</script>
+<script>
+    function validateForm() {
+        let file_dtaa = document.forms["myForm"]["myfile"].value;
+        
+        if (file_dtaa == "") {
+            console.log("hii111");
+           
+            document.getElementById('file_11').innerHTML = "No excel file uploaded yet";
+            return false;
+        } else {
+            console.log("222222");
+            document.getElementById('file_11').innerHTML = "";
+        }
+    }
+</script>
+
+<script>
+    function myFunction() {
+        document.getElementById("myTable").deleteRow(0);
+    }
+   
+</script>
+
+<style>
+  table td, table th {
+    white-space: normal !important;
+  }
+</style>
+
+{% endblock body %}

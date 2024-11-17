@@ -1,0 +1,110 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Dispatch to NABL {% endblock heading %}
+{% block body %}
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+<img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+<div class="mx-auto" style="width: 85%;">
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th colspan="2">Work Order Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Work Order No</td>
+                <td><b>MPCZ00{{ ro.wo.id}}</b></td>
+            </tr>
+            <tr>
+                <td>RCA Vendor Company name</td>
+                <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+            </tr>
+            <tr>
+                <td> Material </td>
+                <td><b>{{ ro.wo.wo_specification}}</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col-3"> Rating </th>
+                <th scope="col-3"> Description </th>
+                <th scope="col-9"> Quantity </th>
+                <th scope="col-9"> Rate </th>
+                <th scope="col-9"> Total amount </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in material %}
+            <tr>
+                <td>{{data.rating}}</td>
+                <td>{{data.description}}</td>
+                <td>{{data.quantity}}</td>
+                <td>{{data.rate}}</td>
+                <td>{{data.total_rate}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col-3"> Capacity </th>
+                <th scope="col-3"> Quantity </th>
+                <th scope="col-3"> Store </th>
+                <!-- <th scope="col-3">Accepted</th> -->
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for data in mo %}
+            <tr>
+                <td>{{ data.mo_capacity.rating }}</td>
+                <td>{{ data.quanity_offered }}</td>
+                <td>{{ data.ro.store.Name}}</td>
+                <!-- <td>{{ data.issue_di }} </td> -->
+                   
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-striped m-4 " border="2" style="width:90%">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col-3"> Rating </th>
+                <th colspan="2" scope="col-3"> XMR Code </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in xmr %}
+            <tr>
+                <td>{{data.material.rating}}</td>
+                <td>{{data.xmr}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <div class="p-4 mb-4">
+
+        {% if var == 0 %}
+            <a class="btn btn-primary btn-sm float-left mb-4" onclick="alert('Proceeding to Test Request Form!')" href="/po/test_request_form_rca/{{id}}">Dispatch to NAbl</a>
+        {% else %}
+            <button class="btn btn-primary btn-sm float-left mb-4" type="button" disabled>Dispatched</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

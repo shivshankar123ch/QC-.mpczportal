@@ -1,0 +1,192 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Purchase Order {% endblock pagetitle %}
+{% block body %}
+  <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                        Create Purchase Order
+                                    </h2>
+                                </div>
+
+                             <!-- --------------------- Step 3 -------------------------------- -->
+
+
+
+
+                                <div class="card-body" id="formStep3">
+
+                                    <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Material Specification</th>
+                <th>Unit</th>
+                <th>Quantity </th>
+                <th>Amount  </th>
+                <th>Tax  </th>
+                <th>Total Amount</th>
+                 <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in Material %}
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                 <td>
+                  {{data.specification}}
+                </td>
+                <td>
+                  {{data.unit}}
+                </td>
+                <td>
+                  {{data.Quantity}}
+                </td>
+                <td>
+                    {{data.Amount}}
+                </td>
+                   <td>
+                    {{data.tax}}
+                </td>
+                  <td>
+                   {{data.total_amount}}
+                </td>
+
+
+                <td>
+                     <div class="poaction-info">
+                        <button class="btn ed-submit btn-danger">
+                            <span class="ed-submit-text">
+                                Delete
+                            </span>
+                        </button>
+                     </div>
+                </td>
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+</div>
+                                    <form action="/po/procurement_generate_po2/{{po.id}}" onsubmit="return validateForm()" name="myForm" method="POST">
+                                     {% csrf_token %}
+                                    <div class="ed-form-block">
+                                        <div class="ed-form-title">
+                                            <h6>
+                                                <span class="ed-text">
+                                                    Material Details
+                                                </span>
+                                            </h6>
+                                        </div>
+                                        <div class="ed-form-body material-wrapper">
+                                            <div class="material-elements">
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Material Specification
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select name="specification" class="form-control ed-textbox" required>
+                                                        <option value="Specification 1">Specification 1</option>
+                                                        <option value="Specification 2">Specification 2</option>
+                                                        <option value="Specification 3">Specification 3</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Unit
+                                                    </label>
+                                                    <input name="unit" type="text" class="form-control ed-textbox"
+                                                        autocomplete="off" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Quantity <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input name="quantity" type="Number" class="form-control ed-textbox"
+                                                        autocomplete="off" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Amount(In Rs) <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input name="amount" type="Number" class="form-control ed-textbox"
+                                                        autocomplete="off" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Tax <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input name="tax" type="Number" class="form-control ed-textbox"
+                                                        autocomplete="off" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="ed-form-label">
+                                                        Total Amount <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input name="total_amount" type="Number" class="form-control ed-textbox"
+                                                        autocomplete="off" required />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="results"></div>
+
+
+                                            <div class="form-group">
+                                                <div class="form-action text-right">
+                                                    <button type="submit" class="btn ed-submit btn-info">
+                                                        <span class="ed-submit-text">
+                                                            Add More
+                                                        </span>
+                                                    </button>
+                                                   <a href="/po/procurement_generate_po2/{{po.id}}"  class="btn ed-submit ed-submitNext" id="nextStep3">
+                                                        <span class="ed-submit-text">
+                                                            Next
+                                                        </span>
+                                                       </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </form>
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+                                <div class="card-body" id="formStep5" style="display:none ;">
+                                    <div class="ed-form-block">
+                                        <div class="ed-form-title">
+                                            <h6>
+                                                <span class="ed-text">
+                                                    Pdf View
+                                                </span>
+                                            </h6>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

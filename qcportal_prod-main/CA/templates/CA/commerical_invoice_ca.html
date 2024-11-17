@@ -1,0 +1,338 @@
+{% extends 'CA/commercial_sales.html' %}  {% load static %}  {% block body %}
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg10.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+ 
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+	<script type = "text/javascript" >  
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+</script> 
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+    
+    html {
+        height: 100%
+    }
+    
+    h2 {
+        color: #2F8D46;
+    }
+    
+    #form {
+        text-align: center;
+        position: relative;
+        margin-top: 20px
+    }
+    
+    #form fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 20px;
+        position: relative
+    }
+    
+    .finish {
+        text-align: center
+    }
+    
+    #form fieldset:not(:first-of-type) {
+        display: none
+    }
+    
+    #form .previous-step,
+    .next-step {
+        width: 100px;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px 10px 0px;
+        float: right
+    }
+    
+    .form,
+    .previous-step {
+        background: #616161;
+    }
+    
+    .form,
+    .next-step {
+        background: #2F8D46;
+    }
+    
+    #form .previous-step:hover,
+    #form .previous-step:focus {
+        background-color: #000000
+    }
+    
+    #form .next-step:hover,
+    #form .next-step:focus {
+        background-color: #2F8D46
+    }
+    
+    .text {
+        color: #2F8D46;
+        font-weight: normal
+    }
+    
+    #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: lightgrey
+    }
+    
+    #progressbar .active {
+        color: #2F8D46
+    }
+    
+    #progressbar li {
+        list-style-type: none;
+        font-size: 15px;
+        width: 25%;
+        float: left;
+        position: relative;
+        font-weight: 400
+    }
+    
+    #progressbar #step1:before {
+        content: "1"
+    }
+    
+    #progressbar #step2:before {
+        content: "2"
+    }
+    
+    #progressbar #step3:before {
+        content: "3"
+    }
+    
+    #progressbar #step4:before {
+        content: "4"
+    }
+    
+    #progressbar #step5:before {
+        content: "5"
+    }
+    
+    #progressbar #step6:before {
+        content: "6"
+    }
+    
+    #progressbar #step7:before {
+        content: "7"
+    }
+    
+    #progressbar #step8:before {
+        content: "8"
+    }
+    
+    #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        background: green;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px
+    }
+    
+    #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1
+    }
+    
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+        background: #2F8D46
+    }
+    
+    .progress {
+        height: 20px
+    }
+    
+    .progress-bar {
+        background-color: #2F8D46
+    }
+</style>
+
+<script type="text/javascript">  
+    function PrintDiv() 
+   {  
+       var divContents = document.getElementById("printdivcontent").innerHTML;  
+       var printWindow = window.open('', '', 'height=200,width=300');  
+       printWindow.document.write('<html><head><title>Print DIV Content</title>');  
+       printWindow.document.write('</head><body >');  
+       printWindow.document.write(divContents);  
+       printWindow.document.write('</body></html>');  
+       printWindow.document.close();  
+       printWindow.print();  
+    }  
+</script>   
+  <div class="content" id="printdivcontent">
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="roof_top_upload" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <style>
+            table,td,th {
+                border:1px solid #ddd;
+            }
+            table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
+}
+        </style>
+        
+        <table class="table table-bordered" border="1">
+            <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                <tr>
+                    <th colspan="5" class="text-center">
+                        INVOICES SUMMARY</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Total Invoices</th>
+                    <th>Total Commision</th>
+                    <th>Total TDS</th>
+                    <th>Total GST</th>
+                    <th>Total Payable Amount</th>
+
+
+                </tr>
+                <tr>
+                    <th>{{total_invoice}}</th>
+                    <th>{{total_Commission_Amount}}</th>
+                    <th>0.0</th>
+                    <th>{{gst_sgst}}</th>
+                    <th>{{all_total}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <div class="table-responsive" id='DivIdToPrint'>
+        <table class="table table-bordered">
+            <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                <tr>
+                    <th colspan="14" class="text-center">
+                        DETAILS</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <th>Agent Name</th>
+                    <th>Mobile</th>
+                    <th>Bank A/c</th>
+                    <th>Bank Name</th>
+                    <th>IFSC</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Invoice Number</th>
+                    <th>Total Commision</th>
+                    <th>Total TDS</th>
+                    <th>CGST</th>
+                    <th>SGST</th>
+                    <th>Payable Amount</th>
+                </tr>
+                {% for data1 in Generated_list %}
+                {% for data in data1 %}
+                <tr>
+                    
+                    <td>{{data.Name}}</td>
+                    <td>{{data.Mobile}}</td>
+                    <td>{{data.Account_Number}}</td>
+                    <td>{{data.Bank_name}}</td>
+                    <td>{{data.IFSC}}</td>
+                    <td>{{data.Service_Date|slice:"5:8"}}</td>
+                    <td>{{data.Service_Date|slice:"0:4"}}</td>
+                    <td>{{data.Invoice_Number}}</td>
+                    <td>{{data.Commission_Amount}}</td>
+                    <td>0</td>
+                    <td>{{data.Cgst}}</td>
+                    <td>{{data.Sgst}}</td>
+                    <td>{{data.Payable_Amount}}</td>
+                </tr>
+                {% endfor %}
+                 {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+
+</form>
+<p>Bills Verified Rs. : {{total_Commission_Amount}}</p>
+<p>Less TDS Rs:0.0 </p>
+<p>Net Payable Rs.:{{all_total}} </p>
+<p>Pass for Payments Rs.: {{all_total}}</p>
+<br>
+<br>
+<br>
+<br>
+<div class="col-md-12"><p align="left">Manager(IT)</p><p align="right">DGM(Gommercial)</p></div>
+<center>
+     <button class="btn btn-primary me-2   btn-lg"  onclick="PrintDiv();" style="color: black;" >
+                                                   Print
+                                                </button>
+   
+</center>
+</div>
+
+<script>
+    $(function() {
+        $("input:first").click(function() {
+            window.print();
+        });
+        $(".description").each(function() {
+            var text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat malesuada sodales. Nulla convallis neque lorem, ac varius enim. Ut dapibus, orci at feugiat eleifend, dui mi lobortis tortor, ac egestas neque enim et neque. Donec tempus mi quis tellus dapibus eu blandit magna sagittis. Curabitur ac ultrices tortor. Aliquam id tincidunt urna. Nunc id neque ac urna congue convallis. Etiam eget massa vitae justo aliquam pulvinar vitae ut diam.";
+            text = text.substr(0, Math.ceil(Math.random() * 100));
+            $(this).text(text);
+        });
+        $(".number").each(function() {
+            var text = (Math.random() * 1000).toFixed(2);
+            $(this).text(text);
+        });
+    });
+</script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap Datatable js -->
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+{% endblock body %} 

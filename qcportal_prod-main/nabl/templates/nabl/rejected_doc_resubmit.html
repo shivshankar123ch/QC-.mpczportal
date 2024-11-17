@@ -1,0 +1,201 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+    <script type="text/javascript" src="/static/assets/js/Validation/nabl_reject.js"></script>
+
+    <!----trial start here-->
+    <div class="ed-card-inner">
+        <div class="card-header">
+            {% with name=100 %}
+            <h2>
+                List Of Rejected Documents DGM(QC)
+            </h2>
+        </div>
+        <div class="card-body">
+            {% for data in data %}
+            <form class="multisteps-form__form mb-8" name="myForm" onsubmit="return validateForm()"
+                action="/nabl/rejected_doc_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h4>
+                    {{data.Types_of_Docs}}
+                </h4>
+                <div class="forms-informations">
+                    <div class="ed-form-block">
+                        <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                </span>
+                            </h6>
+                        </div>
+                        <div class="ed-form-body">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Issued Office
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="text" name='office' onchange="validateForm()" onfocus="validateForm()"
+                                    onkeyup="validateForm()" placeholder="{{data.Issued_office_Name}}"
+                                    class="form-control ed-textbox">
+                                <span id="office_1" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Document Name
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="text" name='doc_name' onchange="validateForm()" onfocus="validateForm()"
+                                    onkeyup="validateForm()" placeholder="{{data.Document_Name}}"
+                                    class="form-control ed-textbox">
+                                <span id="name_1" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Issued Date
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <b>{{data.Doc_issue_date}}</b>
+                                <input type="date" name='issue_date' onchange="validateForm()" onfocus="validateForm()"
+                                    onkeyup="validateForm()" value="{{data.Doc_issue_date}}"
+                                    class="form-control ed-tetxbox">
+                                <span id="issue" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Expired Date
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <b>{{data.Doc_expiry_date}}</b>
+                                <input type="date" name='expire_date' onchange="validateForm()" onfocus="validateForm()"
+                                    onkeyup="validateForm()" value="{{data.Doc_expiry_date}}"
+                                    class="form-control ed-tetxbox">
+                                <span id="expire" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Upload File
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="file" name="file" id="file_inputt" accept="application/pdf"
+                                    onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                <span id="file_11" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-action text-right">
+                                    <a href="{{data.Ddocfile.url}}" target="_blank"
+                                        class="btn ed-submit ed-formSubmit mr-2">View</a>
+                                    <textarea id="task" rows="1" placeholder='{{data.Primary_remark}}'
+                                        disabled></textarea>
+                                    <button type="Submit" value="Submit"
+                                        class="btn ed-submit ed-formSubmit mt-2">Resubmit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% endfor %} {% endwith %}
+            {% with name=100 %}
+            <h4>
+                List Of Rejected Document CGM(QC)
+            </h4>
+            {% for data in data1 %}
+            <form class="multisteps-form__form mb-8" name="myForm" onsubmit="return validateForm1()"
+                action="/nabl/rejected_doc_cgm_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h6>{{data.Types_of_Docs}}</h6>
+
+                <div class="forms-informations">
+                    <div class="ed-form-block">
+                        <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                </span>
+                            </h6>
+                        </div>
+                        <div class="ed-form-body">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Issued Office
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="text" name='office' onchange="validateForm1()" onfocus="validateForm1()"
+                                    onkeyup="validateForm1()" placeholder="{{data.Issued_office_Name}}"
+                                    class="form-control ed-textbox">
+                                <span id="ioffice" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Document Name
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="text" name='doc_name' onchange="validateForm1()" onfocus="validateForm1()"
+                                    onkeyup="validateForm1()" placeholder="{{data.Document_Name}}"
+                                    class="form-control ed-textbox">
+                                <span id="docName" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Issued Date
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <b>{{data.Doc_issue_date}}</b>
+                                <input type="date" name='issue_date' onchange="validateForm1()"
+                                    onfocus="validateForm1()" onkeyup="validateForm1()" value="{{data.Doc_issue_date}}"
+                                    class="form-control ed-textbox">
+                                <span id="issueDate" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Expired Date
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                {{data.Doc_expiry_date}}
+                                <input type="date" name='expire_date' onchange="validateForm1()"
+                                    onfocus="validateForm1()" onkeyup="validateForm1()" value="{{data.Doc_expiry_date}}"
+                                    class="form-control ed-textbox">
+                                <span id="expireDate" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Upload File
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <input type="file" accept="application/pdf" name="file" id="file_main"
+                                    onchange="validateForm1()" onfocus="validateForm1()" onkeyup="validateForm1()">
+                                <span id="uploadFilee" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-action text-right">
+                                    <a href="{{data.Ddocfile.url}}" target="_blank"
+                                        class="btn ed-submit ed-formSubmit mr-2">View</a>
+                                    <textarea class="form-control" id="task" rows="2" required="required"
+                                        placeholder='{{data.CGM_remark}}' disabled></textarea>
+                                    <button type="Submit" value="Submit"
+                                        class="btn ed-submit ed-formSubmit mt-2">Resubmit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% endfor %} {% endwith %}
+        </div>
+    </div>
+             
+                    {% endblock body %}

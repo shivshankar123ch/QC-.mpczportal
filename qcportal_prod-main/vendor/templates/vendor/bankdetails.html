@@ -1,0 +1,386 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+
+
+    <div class="ed-card-inner">  
+        <div class="card-header">
+            <h2>
+                Bank Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped ed-table-block">
+                        <thead>
+                            <tr>
+                                <th>PO Number</th>
+                                <th>Vendor Name</th>
+                                <th>PO Date</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Add Bank Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{data.po_no}} </td>
+                                <td>{{data.vendor.CompanyName_E}} </td>
+
+                                <td>{{data.erp_created_date}}</td>
+
+                                <td >
+                                    <span >{{data.po_subject}}</span>
+                                </td>
+                                <td >
+                                    <span >{{data.erp_created_date}}</span>
+                                </td>
+
+
+                                <td>
+                                    <div class="poaction-info">
+                                        <button class="btn ed-submit btn-info" data-toggle="modal"
+                                            data-target="#bankGModle">
+                                            <span class="ed-submit-text">
+                                                Add
+                                            </span>
+                                        </button>
+                                    </div>
+                                </td>
+  
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+
+    <!-- <div id="dialog-container" class="ed-dialog-container">
+        <div class="ed-modal-block" id="dialog-modal">
+            <div class="ed-modal-content">
+                <div class="ed-modal-header">
+                    <h4>Custom Alert Dialog</h4>
+                </div>
+                <div id="dialog-body" class="ed-modal-body">
+                    <p>
+                        This is the custom alert message. Click Ok to close this.
+                    </p>
+                </div>
+                <div class="ed-dialog-footer">
+                    <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+                        <span class="ed-submit-text">
+                            Ok
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!--  ---------------   Body part end ------------------------------------------- -->
+    <!--  ---------------   Body part end ------------------------------------------- -->
+
+
+    <!--  ---------------   Footer Start ------------------------------------------- -->
+    <!--  ---------------   Footer Start ------------------------------------------- -->
+
+ 
+
+
+
+    <div class="modal" id="bankGModle">
+        <div class="modal-dialog ed-customemodel-block">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bank Details</h4>
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                </div>
+                <div class="modal-body">
+                    <div class="ed-form-block border-0 p-0">
+                        <!-- <div class="ed-form-title">
+                            <h6>
+                                <span class="ed-text">
+                                    Vendore Details
+                                </span>
+                            </h6>
+                        </div> -->
+                        <form class="multisteps-form__form mb-6" action="/vendor/vendor_dispatch_b_bd_save/{{data.id}}"
+                            name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="ed-form-body">
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Bank Name
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox" autocomplete="off"
+                                        onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                                        name="bankname" required="required" />
+                                    <span id="name" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Bank IFSC
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox " minlength="11" maxlength="11"
+                                        onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                                        autocomplete="off" name="ifsc" required="required" />
+                                    <span id="code" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Account Number
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox " autocomplete="off"
+                                        name="account" minlength="12" maxlength="16" onkeypress='validate(event)'
+                                        maconkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                                        required="required" />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Account Holder Name
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox" autocomplete="off"
+                                        name="account_holder" onkeyup="validateForm()" onfocus="validateForm()"
+                                        onchange="validateForm()" style="text-transform: uppercase"
+                                        onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                                        required="required" />
+                                    <span id="acc_name" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Passbook/Cancled check Copy
+                                    </label>
+                                    <input type="file" class="" autocomplete="off" name="file"
+                                        id="fileApply" accept="application/pdf" onkeyup="validateForm()"
+                                        onfocus="validateForm()" onchange="validateForm()" required="required" />
+                                        <p class="text-info">Uploaded file(Pdf) Size maximum 3 MB.</p>
+                                    <span id="upload_file" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                        
+                                </div>  
+
+                                <div class="form-group mt-2">
+                                    <div class="btn-actionblock text-right">
+                                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="/vendor/vendor_purchase_b/">Prev</a></button> -->
+                                        <button class="btn ed-submit ed-formsubmit" value="Submit" onclick="validateForm()" type="submit" title="Next">
+                                            Submit Bank Details
+                                        </button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <script>
+            function validateForm() {
+                let bankName = document.forms["myForm"]["bankname"].value;
+                let ifscCode = document.forms["myForm"]["ifsc"].value;
+                let accNumber = document.forms["myForm"]["account"].value;
+                let accName = document.forms["myForm"]["account_holder"].value;
+                let filee = document.forms["myForm"]["file"].value;
+                let fileCheck1 = document.getElementById('fileApply').value;
+                var allowedExtensions = /(\.pdf)$/i;
+                var fileResult1 = allowedExtensions.test(fileCheck1);
+
+                if (bankName == "") {
+                    document.getElementById('name').innerHTML = " Please fill the required field.  ";
+                    return false;
+                } else {
+                    document.getElementById('name').innerHTML = " ";
+                }
+                if (ifscCode == "") {
+                    document.getElementById('code').innerHTML = " Please fill the required field.  ";
+                    return false;
+                } else {
+                    document.getElementById('code').innerHTML = " ";
+                }
+                if (accNumber == "") {
+                    document.getElementById('number').innerHTML = " Please fill the required field.  ";
+                    return false;
+                } else {
+                    document.getElementById('number').innerHTML = " ";
+                }
+                if (accName == "") {
+                    document.getElementById('acc_name').innerHTML = " Please fill the required field.  ";
+                    return false;
+                } else {
+                    document.getElementById('acc_name').innerHTML = " ";
+                }
+
+                if (filee == "") {
+                    document.getElementById('upload_file').innerHTML = "Please the Upload file(In .pdf format)";
+                    return false;
+                } else {
+                    //document.getElementById('Twenty_two').innerHTML = "";
+                    if (fileResult1 == false) {
+                        document.getElementById('upload_file').innerHTML = "  Please Upload valid file format(In .pdf) ";
+                        return false;
+                    } else {
+                        // document.getElementById('file3').innerHTML = "";
+                        const oFile = document.getElementById("fileApply").files[0].size / 1024 / 1024;
+                        if (oFile >= 3) {
+                            alert("File size must be less than or equal to 3 MB");
+                            document.getElementById("fileApply").value = "";
+                            return false;
+
+                        } else {
+                            document.getElementById('upload_file').innerHTML = "";
+                        }
+                    }
+                }
+            }
+        </script>
+        <script>
+
+            function validate(evt) {
+                var theEvent = evt || window.event;
+
+                // Handle paste
+                if (theEvent.type === 'paste') {
+                    key = event.clipboardData.getData('text/plain');
+                } else {
+                    // Handle key press
+                    var key = theEvent.keyCode || theEvent.which;
+                    key = String.fromCharCode(key);
+                }
+                var regex = /[0-9]|\./;
+                if (!regex.test(key)) {
+                    theEvent.returnValue = false;
+                    if (theEvent.preventDefault) theEvent.preventDefault();
+                }
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+
+
+            $(document).ready(function () {
+                $('#navMenu').click(function () {
+                    $('#edHeader').toggleClass('ed-header-collpase');
+                    $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                    $('#edContainer').toggleClass('ed-wrapper-collpase');
+                });
+            });
+
+            $('#ed-menulist .nav-item').on('click', function () {
+                // var target = $(this).attr('data-rel');
+                $('#ed-menulist .nav-item .nav-link').removeClass('active');
+                $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+                $('#ed-menulist .nav-item').removeClass('active');
+                $(this).addClass('active');
+                // $('#ed-menulist .nav-item').addClass('active');
+                $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+                // alert();
+                // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+                return false;
+            });
+        </script>
+
+        <script>
+            const dialogModal = document.getElementById('dialog-modal');
+            const CustomAlert = new function () {
+                this.show = function (msg) {
+                    $('body').addClass('bodymodel');
+                    dialogModal.style.visibility = 'visible';
+                    dialogModal.style.opacity = 1;
+                    dialogModal.style.top = '40%';
+                }
+
+                this.close = function () {
+                    $('body').removeClass('bodymodel');
+                    dialogModal.style.visibility = 'hidden';
+                    dialogModal.style.opacity = 0;
+                    dialogModal.style.top = '-40%';
+                }
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+
+
+        </body>
+
+        </html>
+
+
+
+
+
+        <script>
+            $(document).ready(function () {
+                $("#nextStep1").click(function () {
+                    $("#formStep1").hide();
+                    $("#formStep2").show();
+                    $("#formStep3").hide();
+                    $("#formStep4").hide();
+                    $("#formStep5").hide();
+                });
+
+                $("#nextStep2").click(function () {
+                    $("#formStep1").hide();
+                    $("#formStep2").hide();
+                    $("#formStep3").show();
+                    $("#formStep4").hide();
+                    $("#formStep5").hide();
+                });
+
+                $("#nextStep3").click(function () {
+                    $("#formStep1").hide();
+                    $("#formStep2").hide();
+                    $("#formStep3").hide();
+                    $("#formStep4").show();
+                    $("#formStep5").hide();
+                });
+
+                $("#nextStep4").click(function () {
+                    $("#formStep1").hide();
+                    $("#formStep2").hide();
+                    $("#formStep3").hide();
+                    $("#formStep4").hide();
+                    $("#formStep5").show();
+                });
+
+            });
+        </script>
+
+
+        <script>
+            $('.material-wrapper').on('click', '.remove', function () {
+                $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+            });
+            $('.material-wrapper').on('click', '.addMaterial', function () {
+                $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+            });
+        </script>
+        {% endblock body %}

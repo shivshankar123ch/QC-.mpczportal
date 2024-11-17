@@ -1,0 +1,173 @@
+{% extends 'officer/gm_work_base.html' %} {% load cart %} {% load static %} {% block body %} {% block active_tkc %}
+<li class="nav-item active" style="list-style-type:none;">
+    {% endblock active_tkc %}
+
+    <!-- <script> -->
+    <!-- function printpage() { -->
+    <!-- var download_var = document.getElementById("download"); -->
+
+    <!-- download_var.style.visibility = 'hidden'; -->
+
+    <!-- window.print() -->
+
+    <!-- download_var.style.visibility = 'visible'; -->
+
+    <!-- } -->
+    <!-- </script> -->
+
+    <!-- 
+    <style>
+        .table-bordered td {
+            font-size: 15px;
+            width: 15px !important;
+        }
+        
+        .table-bordered thead th {
+            font-size: 15px;
+            width: 15px !important;
+            word-break: break-word;
+        }
+        
+        .ed-tableinfo-block .dataTables_length {
+            display: block;
+        }
+        
+        .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+            background: #e5e9ed;
+            color: #fff;
+            border-color: #1b1c1c;
+        }
+        
+        .btn:not(:disabled):not(.disabled) {
+            /* cursor: pointer; */
+            width: 118px;
+        }
+    </style> -->
+
+
+    <div class="text-right d-flex justify-content-end mt-2 mb-2" id="exportcsv">
+        <a href="/export_users_csv" class="btn ed-submit  btn-primary mr-3">Export CSV</a>
+        <button class="btn ed-submit btn-primary" id="download" onclick="qcprintpage()">
+          Print List
+        </button>
+      </div>
+
+
+    </form>
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                All Contractor as on {{today}}
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center ed-table-block" id="Active_tkc">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO.
+                                </th>
+                                <th>Discom </th>
+                                <th>Registration <br>Number </th>
+
+                                <th>Valid Up To</th>
+                                <th>Status</th>
+                                <th>Firm/Company<br> Name </th>
+                                <th>Authorised<br> Person<br> Name </th>
+                                <th>Contact<br> Number</th>
+                                <th>Date of<br> Approval</th>
+                                <th>View <br>Certificate </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in data %}
+
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.User_zone}}</td>
+                                <td>{{data.Authentication_id}}</td>
+                                <td>{{data|last_date:doc|date:"d-M-Y"}}</td>
+                                {% now "Y-m-d" as to_daaa %}
+
+                                {% if data.Authentication_id and data.blacklisted == 2 %}
+                                <td style="color: red;"> Debarred </td>
+
+                                {% elif data.Authentication_id and data.deregister == 0 %}
+
+                                {% if to_daaa <= data|last_date:doc|date:"Y-m-d" %} <td>Active</td>
+
+                                    {% else %}
+                                    <td> Inactive</td>
+                                    {% endif %}
+
+                                    {% elif data.Authentication_id and data.deregister == 1 %}
+                                    <td> Deregistered </td>
+
+                                    {% else %}
+                                    <td>Inactive</td>
+
+                                    {% endif %}
+
+                                    <td>{{data.CompanyName_E}}</td>
+                                    <td>{{data.Authorised_person_E}}</td>
+                                    <td>{{data.ContactNo}}</td>
+                                    <td>{{data.date_of_approved}}</td>
+
+
+                                    {% if data.cert_image %}
+                                    <td class="text-center">
+                                        <a href="{{data.cert_image.url}} " target="_self"> <span
+                                                class="btn ed-submit btn-info">
+                                                view
+                                            </span>
+                                        </a>
+                                    </td>
+                                    {% else %}
+                                    <td> <span class="btn ed-submit btn-danger">
+                                            Certificate Not Uploaded
+                                        </span>
+                                    </td>
+
+                                    {% endif %}
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+
+
+<script>
+
+    function qcprintpage() {
+      document.getElementById("qcsidenavMain").style.display = 'none';
+      document.getElementById("qcheaderMenu").style.display = 'none';
+      document.getElementById("qcsidenavMain").style.display = 'none';
+      document.getElementById("exportcsv").style.display = 'none';
+      $('#qccontantBlock').css('padding', '0');
+      window.print();
+      document.getElementById("qcsidenavMain").style.display = 'block';
+      document.getElementById("qcheaderMenu").style.display = 'block';
+      document.getElementById("qcsidenavMain").style.display = 'block';
+      document.getElementById("exportcsv").style.display = 'block';
+      $('#qccontantBlock').removeAttr('style');
+    }
+  </script>
+
+
+
+
+<!-- <script>
+        $(document).ready(function () {
+            $('#Active_tkc').DataTable();
+        });
+    </script> -->
+
+{% endblock body %}

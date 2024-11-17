@@ -1,0 +1,65 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>Blacklisted Vendor</h2>
+    </div>
+    <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+    <div class="card-body">
+        <div class="ed-tableinfo-block mb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Name Of Company
+                            </th>
+                            <th>
+                                User Type
+                            </th>
+                            <th>
+                                Blacklist Type
+                            </th>
+                            <th>
+                                Blacklist Till
+                            </th>
+                            <th>
+                                Proposed By
+                            </th>
+                            <th>
+                                Recommended Order
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in data %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{data.CompanyName_E}}</td>
+                            <td>{{data.user_type}}</td>
+                            <td>{{data.blacklisted_type}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.recommended_by}}</td>
+                            <td> <a href="{{data.recommended_order.url}} " target="_self"
+                                    class=" btn ed-submit btn-info">
+                                </a>
+                                <span>
+                                    view
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}

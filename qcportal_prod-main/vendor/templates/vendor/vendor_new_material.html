@@ -1,0 +1,74 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+<script type="text/javascript">
+    window.history.forward();
+
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+<!----start here-->
+<form class="multisteps-form__form mb-8" action="vednor_new_material"  name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">Material Information</h5>
+    <!-- <p class="mb-0 text-sm">Mandatory informations</p> -->
+    <div class="multisteps-form__content ">
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th scope="col">Material</th>
+                        <th scope="col">Specification</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in employees %}
+                    <tr>
+                        <td>{{ emp.Material_Name }}</td>
+                        <td>{{ emp.Material_Specification }}</td>
+                      
+                      
+
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-row d-flex mt-4">
+            <!-- <button class="btn btn-primary mb-0 js-btn-prev" type="Submit" title="Prev">Add Material</button>
+          <a href="vendor_reg_eleven"><button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" value="Submit" type="button" title="Save & Next">Save & Next</button></a> -->
+            <!-- </div> -->
+            <button class="btn bg-gradient-light mb-0 js-btn-prev" type="Submit"   title="Add Material">Add Material</button>
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" name="work1" type="submit" onclick="validateForm()" title="Save & Next"><a href="/vendor/vendor_reg_fifteen" style="color: white;">Save & Next</a><span id="workk" class="text-danger font-weight-bold"
+                                                    style="font-size: 80%;"></span></button>
+</form>
+</div>
+
+<p class="text-danger mt-5">
+    <b>Note : </b> Dear Vendor, please add all the material at once during through "Add Material" Button, after that you will have to pay a separate factory inspection fee to add the material later.
+</p>
+<!-----end here-->
+
+
+<script>
+    function validateForm() {
+    let button = document.forms["myForm"]["work1"].value;
+
+    if (button == "") {
+        document.getElementById('workk').innerHTML = " Please add the material ";
+        return false;
+    } else {
+        document.getElementById('workk').innerHTML = "";
+    }
+    }
+</script>
+
+{% endblock body %}

@@ -1,0 +1,564 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/Validation/tkc_reg10.js"></script>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+                    <h5 class="font-weight-bolder">
+                        Upload Your Document
+                    </h5>
+                    <p class="mb-0">
+                        All <span style="color: red">(*)</span> marked fields are mandatory
+                    </p>
+                </div>
+                <div class="card-body">
+                    <form action="/tkc/upgrade_tkc_three" name="myForm" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        
+                        <label>1). ACTIVE GST NO (ALONG WITH COPY OF LATEST PAID CHALLAN AND ITS RECEIPT </label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> ACTIVE GST SERIAL NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="six" id="v_office_name_supply" maxlength="15"
+                                        minlength="15" class="form-control" placeholder="11AAAAA1111Z1A1"
+                                         required="required">
+                                    <span id="doc2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="seven" id="v_office_name_supply2" class="form-control" onkeypress=" return false "
+                                         required="required">
+                                    <span id="issue2" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="nine" id="v_office_name_supplyfile2" class="form-control"
+                                        accept="application/pdf"
+                                        required="required">
+                                    <span id="file2" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                      
+
+                        <label>2. PAN CARD DETAILS </label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>PAN NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="fifty_one" id="v_office_name_supplyPAN"
+                                        style="text-transform: uppercase" maxlength="10" minlength="10"
+                                        class="form-control"
+                                        required="required" style="text-transform: uppercase" placeholder="ABCTY1234D">
+                                    <span id="doc11" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="fifty_two" id="v_office_name_supply19" class="form-control" onkeypress=" return false "
+                                     required="required">
+                                    <span id="issue11" class="text-danger font-weight-bold" style="font-size: 80%;">
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="fifty_three" id="v_office_name_supplyfile11"
+                                        class="form-control" accept="application/pdf" required="required">
+                                    <span id="file11" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <label>3. ELECTRICAL LICENSE </label> 
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>ELECTRICAL LICENSE NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="twentee_one" id="v_office_name_supply" class="form-control"
+                                         required="required">
+                                    <span id="doc5" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="twentee_two" id="v_office_name_supply7" onkeypress=" return false "
+                                        class="form-control"
+                                        required="required">
+                                    <span id="issue5" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Valid Upto <span style="color: red">*</span></label>
+                                    <input type="date" name="twentee_three" id="v_office_name_supply8" onkeypress=" return false "
+                                        class="form-control" 
+                                        required="required">
+                                    <span id="expire5" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="twentee_four" id="v_office_name_supplyfile5"
+                                        class="form-control" accept="application/pdf" required="required">
+                                    <span id="file5" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <label>4.EPF(ALONG WITH COPY OF LATEST PAID CHALLAN AND ITS RECEIPT) </label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>EPF REGISTRATION NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="twentee_six" id="v_office_name_supply" class="form-control"
+                                         required="required">
+                                    <span id="doc6" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="twentee_seven" id="v_office_name_supply9" onkeypress=" return false "
+                                        class="form-control"
+                                        required="required">
+                                    <span id="issue6" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="twentee_nine" id="v_office_name_supplyfile6"
+                                        class="form-control" accept="application/pdf" required="required">
+                                    <span id="file6" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <label>5. ESIC REGISTRATION (ALONG WITH COPY OF LATEST PAID CHALLAN AND ITS RECEIPT) </label>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>ESIC REGISTRATION NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="thiety_one" id="v_office_name_supply" class="form-control"
+                                         required="required">
+                                    <span id="doc7" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="thiety_two" id="v_office_name_supply11" onkeypress=" return false "
+                                        class="form-control" 
+                                        required="required">
+                                    <span id="issue7" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="thiety_four" id="v_office_name_supplyfile7"
+                                        class="form-control" accept="application/pdf"  required="required">
+                                    <span id="file7" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <label>6. EXPERIENCE CERTIFICATE AND RELATED WORKS FOR:3 YEARS UP TO A3 CLASS AND 7 YEARS
+                            FOR A4 & A5</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>EXP. CERTIFICATE NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="thiety_six" id="v_office_name_supply" class="form-control"
+                                         required="required">
+                                    <span id="doc8" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="thiety_seven" id="v_office_name_supply13" onkeypress=" return false "
+                                        class="form-control"
+                                        required="required">
+                                    <span id="issue8" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="thiety_nine" id="v_office_name_supplyfile8"
+                                        class="form-control" accept="application/pdf"  required="required">
+                                    <span id="file8" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                    <td>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        
+                        <label>7. DETAIL OF CONTRACTOR/SUPERVISOR/RELATIVE WHETHER EX-EMPLOYEE/EMPLOYEE OF
+                            MPEB/MPSEB/MP
+                            DISCOM/OTHER STATE DISCOM </label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>IDENTITY NUMBER<span style="color: red">*</span></label>
+                                    <input type="text" name="sixteen" id="v_office_name_supply" class="form-control"
+                                         required="required">
+                                    <span id="doc4" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Issued Date <span style="color: red">*</span></label>
+                                    <input type="date" name="seventeen" id="v_office_name_supply5" class="form-control" onkeypress=" return false "
+                                         required="required">
+                                    <span id="issue4" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Document Upload<span style="color: red">*</span></label>
+                                    <input type="file" name="nineteen" id="v_office_name_supplyfile4"
+                                        class="form-control" accept="application/pdf"  required="required">
+                                    <span id="file4" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="button-row d-flex mt-4">
+                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                            <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send">
+                                Save And Next</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var month = String(today.getMonth()+4).padStart(2,'0');
+    today = yyyy + '-' + mm + '-' + dd;
+    maxExp = yyyy+3 + '-' + month + '-' + dd;
+    $('#v_office_name_supply1').attr('max', today);
+    $('#v_office_name_supply2').attr('max', today);
+    $('#v_office_name_supply3').attr('max', today);
+    $('#v_office_name_supply19').attr('max', today);
+    $('#v_office_name_supply7').attr('max', today);
+    $('#v_office_name_supply8').attr('max', maxExp);
+    $('#v_office_name_supply9').attr('max', today);
+    $('#v_office_name_supply11').attr('max', today);
+    $('#v_office_name_supply13').attr('max', today);
+    $('#v_office_name_supply15').attr('max', today);
+    $('#v_office_name_supply17').attr('max', today);
+    $('#v_office_name_supply5').attr('max', today);
+    
+</script>
+<!-- <script>
+    let dtElem = document.getElementById('v_office_name_supply1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem1 = document.getElementById('v_office_name_supply2');
+    let maxDate1 = new Date();
+    dtElem1.max = formatDate(maxDate1);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem2 = document.getElementById('v_office_name_supply3');
+    let maxDate2 = new Date();
+    dtElem2.max = formatDate(maxDate2);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem3 = document.getElementById('v_office_name_supply5');
+    let maxDate3 = new Date();
+    dtElem3.max = formatDate(maxDate3);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem4 = document.getElementById('v_office_name_supply7');
+    let maxDate4 = new Date();
+    dtElem4.max = formatDate(maxDate4);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem5 = document.getElementById('v_office_name_supply9');
+    let maxDate5 = new Date();
+    dtElem5.max = formatDate(maxDate5);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem6 = document.getElementById('v_office_name_supply11');
+    let maxDate6 = new Date();
+    dtElem6.max = formatDate(maxDate6);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem7 = document.getElementById('v_office_name_supply13');
+    let maxDate7 = new Date();
+    dtElem7.max = formatDate(maxDate7);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem8 = document.getElementById('v_office_name_supply15');
+    let maxDate8 = new Date();
+    dtElem8.max = formatDate(maxDate8);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem9 = document.getElementById('v_office_name_supply17');
+    let maxDate9 = new Date();
+    dtElem9.max = formatDate(maxDate9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem_9 = document.getElementById('v_office_name_supply19');
+    let maxDate_9 = new Date();
+    dtElem_9.max = formatDate(maxDate_9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<!- end the future function............. -->
+
+
+<!-- past date not select function................ -->
+
+<!-- <script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supplyDate_past').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply4').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply6').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply8').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply10').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply12').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply14').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply16').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply18').attr('min', today);
+</script>
+ -->
+
+ 
+
+<!-- end the function of past date........... -->
+<script>
+    $(function () {
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox({
+                alwaysShowClose: true
+            });
+        });
+
+        $('.filter-container').filterizr({
+            gutterPixels: 3
+        });
+        $('.btn[data-filter]').on('click', function () {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
+    })
+</script>
+{% endblock body %}

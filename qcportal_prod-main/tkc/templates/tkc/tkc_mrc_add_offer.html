@@ -1,0 +1,112 @@
+{% extends 'officer/gm_circle_login.html' %}  {% load static %}
+{% block heading %} Create MRC {% endblock heading %}
+{% block body %}  
+
+
+
+{% comment %} <script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+    window.history.forward();
+  }
+</script> {% endcomment %}
+</head>
+
+
+{% comment %} <form method="POST" action="/tkc/format_tk/{{data.id}}" name="myForm" onsubmit="return validateForm()"> {% endcomment %}
+
+<form method="POST" action="/tkc/tkc_mrc_add_offer/{{data.id}}" name="myForm" onsubmit="return validateForm()">
+  {% csrf_token %}
+
+  <div class="ed-card-inner">
+    <div class="card-header">
+      <h2>
+       MRC Add
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-form-block border-0 p-0">
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label">
+              Work Order
+             
+            </label>
+            <input type="text" class="form-control ed-textbox" value="MP{{data.wo.zone}}WO {{data.wo.id}}" readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+                Offer Number 
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{data.offer_no}}" readonly />
+          </div>
+
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              MRC Creation Date
+              <span class="text-lowercase">
+                (mm/dd/yyyy)
+              </span>
+             
+            </label>
+            <input type="date" id="order_date1" name="mrc_order_date" required="required" onkeyup="validateForm()"
+              onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox">
+            <span id="order" class="d-block ed-warningtext text-danger"></span>
+          </div>
+
+          
+          <div class="form-group">
+            <label class="ed-form-label">
+                Remark  
+            </label>
+            <input type="text" class="form-control ed-textbox" value="" name="remark"/>
+          </div>
+
+
+
+          <div class="form-group">
+            <div class="form-action text-right">
+              {%  if data.tkc_mrc_initiate == 0%}
+              <input type="submit" onclick="validateForm()" name="submit" value="Save"
+                class="btn ed-submit ed-formSubmit" autocomplete="off">
+            {% else %}
+                  <a href="/tkc/format_tk/{{pr.id}}" class=""><input type="button" name="submit"
+                      value="Create MRC" class="btn ed-submit ed-next" autocomplete="off"></a>
+              {% endif %}
+               
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+</form>
+
+
+
+{% comment %} <script>
+  function validateForm() {
+
+    let schedule11 = document.forms["myForm"]["wo"].value;
+    let schedule12 = document.forms["myForm"]["store"].value;
+
+
+    if (schedule11 == "") {
+      document.getElementById('address').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('address').innerHTML = "";
+    }
+    if (schedule12 == "") {
+      document.getElementById('add2').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('add2').innerHTML = "";
+    }
+  }
+</script> {% endcomment %}
+
+{% endblock body %}

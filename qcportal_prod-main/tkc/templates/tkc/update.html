@@ -1,0 +1,352 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+
+
+
+<form action="updatedata" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <h3 class="pt-3"> FINANCE DATA</h3>
+                            <div class="card-body ">
+
+                                <table border="1" width="100%" ID="Table2" class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:30% ">
+                                                Serial Number</th>
+                                            <th style="width: 50% ">
+                                                Year </th>
+
+                                            <th style="width: 20% ">
+                                                Amount </th>
+
+
+                                            <!-- <th style="width: 15% ">
+            
+            Select Vendor
+          </th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{one.Financial_year}}</td>
+                                            <td><input type="text" name="Amount" value="{{one.Amount}}"
+                                                    class="btn btn-secondary"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>2</td>
+                                            <td>{{two.Financial_year}}</td>
+                                            <td><input type="text" name="Amount2" value="{{two.Amount}}"
+                                                    class="btn btn-secondary"></td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>3</td>
+                                            <td>{{three.Financial_year}}</td>
+                                            <td><input type="text" name="Amount3" value="{{three.Amount}}"
+                                                    class="btn btn-secondary"></td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                            <h3 class="pt-3">TAX RETURN DATA</h3>
+                                <div class="card-body ">
+
+                                    <table border="1" width="100%" ID="Table2"
+                                        class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:30% ">
+                                                    Serial Number</th>
+                                                <th style="width: 50% ">
+                                                    Year </th>
+
+                                                <th style="width: 20% ">
+                                                    Amount </th>
+
+
+                                                <!-- <th style="width: 15% ">
+                    
+                    Select Vendor
+                  </th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>{{finance.Financial_year}}</td>
+                                                <td><input type="text" name="Amount" value="{{finance.Amount}}"
+                                                        class="btn btn-secondary"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>2</td>
+                                                <td>{{finance_two.Financial_year}}</td>
+                                                <td><input type="text" name="Amount2" value="{{finance_two.Amount}}"
+                                                        class="btn btn-secondary"></td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>3</td>
+                                                <td>{{finance_three.Financial_year}}</td>
+                                                <td><input type="text" name="Amount3" value="{{finance_three.Amount}}"
+                                                        class="btn btn-secondary"></td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                    <h3 class="pt-3"> TECHNICAL DATA</h3>
+                                    <div class="card-body ">
+    
+                                        <table border="1" width="100%" ID="Table2"
+                                            class="table table-bordered table-hover ">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10% ">
+                                                        Serial Number</th>
+                                                    <th style="width: 30% ">
+                                                        Document Name </th>
+    
+                                                    <th style="width: 10% ">
+                                                        Document Number </th>
+
+                                                            <th style="width: 40% ">
+                                                                Document </th>
+
+                                                                <th style="width: 40% ">
+                                                                   Re Upload </th>
+    
+    
+                         
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Aadhar Card</td>
+                                                    <td><input type="text" name="number1" value="{{document10.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+
+                                                            <td>
+                                    
+                                                                <a href="{{document10.Ddocfile.url}}"  target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+
+                                                            <td>
+                                                            <input type="file" name="file_one" id="uploadFromPC" class="myButton"  value= "{{document10.Ddocfile}}" style="float:left;">
+                                                                </td>
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>ACTIVE GST NO</td>
+                                                    <td><input type="text" name="number2" value="{{document9.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document9.Ddocfile.url}}"   target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+
+                                                            <td>
+                                                                <input type="file" name="file2" value="{{document9.Ddocfile.url}} "  class="form-control" >
+                                                                    </td>
+    
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td> LAST THREE YEAR FINANCE DOCUMENT</td>
+                                                    <td><input type="text" name="number3" value="{{document8.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document8.Ddocfile.url}}"  target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file3"  value="{{document8.Ddocfile.url}} "  class="form-control" >
+                                                                    </td>
+
+                                                            
+    
+                                                </tr>
+
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>DETAIL OF CONTRACTOR</td>
+                                                    <td><input type="text" name="number4" value="{{document7.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document7.Ddocfile.url}} " class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file4" value="{{document7.Ddocfile.url}}" class="form-control" >
+                                                                    </td>
+
+
+
+                                                            
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>ELECTRICAL LICENSE </td>
+                                                    <td><input type="text" name="number5" value="{{document6.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document6.Ddocfile.url}}"  target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file5" value="{{document6.Ddocfile.url}}" id="v_office_name_supply"  class="form-control" >
+                                                                    </td>
+
+    
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td> AEPF</td>
+                                                    <td><input type="text" name="number6" value="{{document5.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document5.Ddocfile.url}}"   target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file6" value="{{document5.Ddocfile.url}}" id="v_office_name_supply"  class="form-control">
+                                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>7</td>
+                                                    <td> ESI REGISTRATION</td>
+                                                    <td><input type="text" name="number7" value="{{document4.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document4.Ddocfile.url}}"   target="_blank" class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file7" value="{{document4.Ddocfile.url}}" id="v_office_name_supply"   class="form-control" >
+                                                                    </td>
+
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>8</td>
+                                                    <td>EXPERIENCE CERTIFICATE </td>
+                                                    <td><input type="text" name="number8" value="{{document3.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document3.Ddocfile.url}}"  target="_blank" class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file8" value="{{document3.Ddocfile.url}}" id="v_office_name_supply"  class="form-control" >
+                                                                    </td>
+
+                                                           
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>9</td>
+                                                    <td> NAME AND REGISTRATION NO OF SUPERVISOR  </td>
+                                                    <td><input type="text" name="number9" value="{{document2.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document2.Ddocfile.url}}"  target="_blank" class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file9" value="{{document2.Ddocfile.url}}" id="v_office_name_supply" class="form-control" >
+                                                                    </td>
+
+                                                          
+                                                </tr>
+    
+                                                <tr>
+                                                    <td>10</td>
+                                                    <td> NAME OF CONTRACTOR</td>
+                                                    <td><input type="text" name="number10" value="{{document1.Document_Number}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document1.Ddocfile.url}}" target="_blank"  class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file10" value="{{document1.Ddocfile.url}}" id="v_office_name_supply"   class="form-control">
+                                                                    </td>
+
+                                                          
+                                                
+                                                            </tr>
+
+                                                <tr>
+                                                    <td>11</td>
+                                                    <td> PAN CARD NUMBER  </td>
+                                                    <td><input type="text" name="number11" value="{{document0.Issued_office_Name}}"
+                                                            class="btn btn-secondary"></td>
+                                                            <td>
+                                    
+                                                                <a href="{{document0.Ddocfile.url}}"  target="_blank" class="btn btn-success mr-3" >View</a>
+                                                                </td>
+                                                            <td>
+                                                                <input type="file" name="file11" value="{{document0.Ddocfile.url}}" id="v_office_name_supply"   class="form-control">
+                                                                    </td>
+
+                                                          
+    
+                                                </tr>
+    
+    
+                                            </tbody>
+                                        </table>
+    
+                                        <div class="col-lg-6">
+
+
+
+                                            <button type="Submit" class="btn-success ">Submit</button>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                    <div class="card-body text-center ">
+                        <div class="mb-3 ">
+                            <!-- <button type="Submit " class="btn btn-primary ">Accept</button>
+                <button class="btn btn-primary ">Reject</button> -->
+                        </div>
+                    </div>
+    </section>
+    <!-- /.content -->
+    {% endblock body %}

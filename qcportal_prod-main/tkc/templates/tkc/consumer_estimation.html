@@ -1,0 +1,86 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} 
+{% comment %} <style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+</style> {% endcomment %}
+</head>
+<body>
+    
+<div class="ed-information mb-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card ed-card-block">
+                    <div class="card-header">
+                        <h2>
+                            Details of Application
+                        </h2>
+                    </div>
+                    <div class="card-body"> 
+                        <div class="ed-tableinfo-block">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped ed-table-block" >
+                                    {% comment %} id="consumer_estimation"> {% endcomment %}
+                                    <thead class="table-dark">
+                                        <tr> 
+                                            <th>Application No</th>
+                                            <th>Applicant Name</th>
+                                            <th>Applicant Address</th>
+                                            <th>Task Name</th>
+                                            <th>Status</th>
+                                            <th>Opening Bid Date</th> 
+                                            <th>Closing Bid Date</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                        
+                                        {% for i in response %}
+                                        <tr>
+                                            <td scope="row">{{i.consumerApplicationNo}}</td>
+                                            <td scope="row">{{i.consumerName}}</td>
+                                            <td scope="row">{{i.address}}</td>
+                                            <td>
+                                                <a href="{% if i.bid_expiry >= currenTime %}/tkc/contractor-details/{{i.consumerApplicationNo}}
+                                                    {% else %}javascript:alert('Bid Already Expired!!!')
+                                                    {% endif %}" class="ed-links" style="text-decoration:underline;">{{i.shortDescriptionOfWork}}</a>
+                                            </td>
+                                            
+                                            <td scope="row">{% if currenTime <=  i.bid_expiry %}<span style="color:green; font-size:11px;">Active</span>{% else %}<span style="color:red; font-size:11px;">Expired</span>{% endif %}</td>
+                                            <td>{{i.bid_created}}</td>
+                                            
+                                            <td>{{i.bid_expiry}}</td>
+                                        </tr>
+                                        {% endfor %}   
+                                    </tbody>
+                                </table>
+                                {% comment %} <a class="btn btn-dark" href="{% url 'consumer-estimation-offline' %}">Put Bid after expiry</a> {% endcomment %}
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .table-bordered thead td, .table-bordered thead th {
+        border-bottom-width: 2px;
+        white-space: nowrap;
+    }
+</style>
+
+{% comment %} <script>
+    $(document).ready( function () {
+        $('#consumer_estimation').DataTable();
+    } );
+</script>  {% endcomment %}
+
+</body>
+</html>
+{% endblock body %}

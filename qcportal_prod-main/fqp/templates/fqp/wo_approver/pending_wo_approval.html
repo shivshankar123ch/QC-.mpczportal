@@ -1,0 +1,57 @@
+
+{% extends 'fqp/wo_approver/approver_base.html' %}
+{% load static %} {% block body %}
+
+
+
+<div class="ed-information">
+   <div class="card ed-card-block">
+     <div class="ed-card-inner">
+       <div class="card-header">
+         <h2>
+           To Do List
+         </h2>
+       </div>
+       <div class="card-body">
+         <div class="ed-tableinfo-block">
+           <div class="table-responsive">
+ <table class="table table-bordered table-striped display text-center ">
+   <thead class="table-dark">
+     <tr>
+         <th>Work Order No.</th>
+         <th>WO Subject</th> 
+         <th>TKC/Supllier</th> 
+         <th>WO Date</th>          
+         <th>Action</th>
+         
+     </tr>
+   </thead>
+   <tbody>
+{% for i in wo %}
+<tr>
+   <td>{{i.Contract_Number}}</td>
+   <td>{{i.Header.Contract_Description}}</td>
+   <td>{{i.supplier.CompanyName_E}}</td>
+   <td>{{i.Contract_Date}}</td>
+   <td>
+       <a href = "/fqp/approver_view_work_order/{{i.id}}">
+       <button class="btn ed-submit btn-info">
+           <span class="ed-submit-text">
+               Approve WO 
+           </span>
+       </button>
+   </a>
+   </td>
+   
+   
+</tr>
+{% endfor %}
+   
+
+   
+   </tbody>
+ </table>
+</div>
+</div>
+
+{% endblock body %}

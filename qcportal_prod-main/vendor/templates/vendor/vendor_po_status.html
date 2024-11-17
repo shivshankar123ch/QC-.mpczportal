@@ -1,0 +1,85 @@
+{% extends 'vendor/vendorBase.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+  
+
+
+
+<!---trial start here-->
+<div class="row">
+  <h5 class="font-weight-bolder mb-0">PO Status</h5>
+  <div class="col-12 col-lg-12 mx-auto mt-4 mb-sm-5 mb-3">
+    <div class="multisteps-form__progress">
+
+      <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info" style="color: green;">
+        <span>1. GTP Drawing Approved</span>
+      </button>
+      <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info" style="color: blue;">
+        <span>2. Submit SD</span>
+      </button>
+      <!-- <button class="multisteps-form__progress-btn" type="button" title="Media">2. Submit SD</button> -->
+      <button class="multisteps-form__progress-btn" type="button" title="Socials">3. Material offer</button>
+      <button class="multisteps-form__progress-btn" type="button" title="Pricing">4. Material Dispatch</button>
+      <button class="multisteps-form__progress-btn" type="button" title="Pricing">5. Material In Local Store</button>
+      <button class="multisteps-form__progress-btn" type="button" title="Pricing">6. Material  Testing</button>
+      <button class="multisteps-form__progress-btn" type="button" title="Pricing">7. Material In store</button>
+    </div>
+  </div>
+</div>
+<form class="multisteps-form__form mb-8" action="vendor_reg_eight"  name="myForm" onsubmit="return validateForm()"  method="POST">
+  {% csrf_token %}
+  <!--single form panel-->
+  <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">PO Details</h5>
+    <!-- <p class="mb-0 text-sm">Mandatory informations</p> -->
+    <div class="multisteps-form__content">
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label>Purchase Order No.</label>
+          <input type="text"  name="category" class="multisteps-form__input form-control" id="exampleInputEmail1" placeholder="MPCZ00{{data.id}}" disabled>
+          
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label>Class Of Item</label>
+          <input type="text"  name="category" class="multisteps-form__input form-control" id="exampleInputEmail1" placeholder="{{data.item_class}}" disabled>
+          
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label>Enter Item Category</label>
+          <input type="text"  name="category" class="multisteps-form__input form-control" id="exampleInputEmail1" placeholder="{{data.item_category}}" disabled>
+        </div>
+        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+          <label>Item Name</label>
+          <input type="text"  name="name" class="multisteps-form__input form-control" id="exampleInputEmail1" placeholder="{{data.item_name}}" disabled>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-6">
+          <label>Total Quantity In PO</label>
+          <input type="number" name="quantity" class="form-control multisteps-form__input" id="exampleInputEmail1" placeholder="{{data.item_quantity}}" disabled>
+
+        </div>
+      </div>
+      
+      
+      <div class="button-row d-flex mt-4">
+        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_seven">Prev</a></button> -->
+        <!-- <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" onclick="validateForm();" value="Submit" type="submit" title="Next">Save & Next</button> -->
+      <!-- </div> -->
+    </form>  
+    </div>
+  <!-- </div> -->
+<!---trial end here-->
+
+
+
+
+
+
+
+
+  
+  {% endblock body %}

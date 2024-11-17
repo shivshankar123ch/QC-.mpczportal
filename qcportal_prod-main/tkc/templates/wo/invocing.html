@@ -1,0 +1,70 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+    <div class="ed-infocontant">
+                            <div class="ed-tableinfo-block ed-orderinfo-block">
+                                <div class="table-responsive">
+                                    <table class="table table-striped ed-table-block">
+                                        <thead>
+                                            <tr>
+                                                <th class="wc1">Sr. No.</th>
+                                                <th class="">WO No.</th>
+                                                <th>Subject</th>
+                                                <th>Company</th>
+                                                <th>Date</th>
+                                                <th>View</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for data in wo %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{data.Contract_Number}} </td>
+                                                <td>{{data.Header.Contract_Description}}</td>
+                                                 <td>{{data.Discom.Discom_Short_Name}}</td>
+                                                 <td>{{data.Contract_Date}}</td>
+                                                <td>
+                                                          <a target="_blank" href="{{data.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Digital Order
+                                                            </span>
+                                                        </button>
+                                                            </a>
+
+                                                         {% if data.Wo_Agreement_Upload_Status == 1 %}
+                                                            <a target="_blank" href="{{data.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Agreement
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                                                    {% elif not data.Wo_Agreement_Upload_Status == 1 and Wo_Digital_Upload_Status %}
+                                                        <button class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Agreement Not Uploaded
+                                                            </span>
+                                                        </button>
+                                                    {% endif %}
+
+                                                </td>
+                                                <td>
+                                                        <a  href="http://urjastesting3.mpwin.co.in:9090/centralinvoicingBE/vendor-mgmt-dt/dtl?erp_vendor_id={{data.Supplier_Erp_no}}&erp_vendor_name={{con.Authorised_person_E}}&erp_vendor_mobno={{con.ContactNo}}&companycode=MP{{data.zone}}">
+
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                Go For Invoice
+                                                            </span>
+                                                        </button>
+                                                        </a>
+                                                </td>
+                                            </tr>
+                                       {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+            </div>
+    {% endblock body %}

@@ -1,0 +1,153 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Dispatch Instruction {% endblock pagetitle %}
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+
+
+<div class="ed-information mb-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card ed-card-block">
+                <div class="card-header">
+                    <h2>
+                        Create Dispatch Instruction 
+                    </h2>
+                </div>
+                <form action="/po/create_di_step/{{po_data.id}}" method="POST" name="myForm"
+                    onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    <!-- --------------------- Step 1 -------------------------------- -->
+                    <div class="card-body" id="formStep1">
+                        <div class="ed-form-block">
+                            <div class="ed-form-title">
+                                <h6>
+                                    <span class="ed-text">
+                                        Dispatch Instruction Details
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="ed-form-body">
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Vendor Name
+                                    </label>
+                                    <input type="text" class="form-control ed-textbox"
+                                        value="{{po_data.vendor.CompanyName_E}}" readonly />
+                                    <span id="x" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        ERP DI Number
+                                        <span class="text-danger">* </label>
+                                    <input type="Number" name="DI_no" class="form-control ed-textbox"
+                                        onfocus="validateForm()" onkeyup="validateForm()" autocomplete="off"
+                                        required="required" />
+                                    <span id="number" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        DI Subject <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_subject" onfocus="validateForm()"
+                                        onkeyup="validateForm()" class="form-control ed-textbox" autocomplete="off"
+                                        required="required" />
+                                    <span id="subject" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Letter Dispatch No <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_prefix" onfocus="validateForm()"
+                                        onkeyup="validateForm()" class="form-control ed-textbox" autocomplete="off"
+                                        required="required" />
+                                    <span id="prefix" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Scheme Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="di_scheme_name" class="form-control ed-textbox" value="" autocomplete="off" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="ed-form-label">
+                                        Scheme Code <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" name="di_scheme_code" class="form-control ed-textbox" value="" autocomplete="off"  required/>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="form-action text-right">
+                                        <button type="submit" class="btn ed-submit ed-submitNext"
+                                            onfocus="validateForm()" onkeyup="validateForm()" id="nextStep1">
+                                            <span class="ed-submit-text">
+                                                Next
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validateForm() {
+        var two_2 = document.forms["myForm"]["DI_no"].value;
+        var two_3 = document.forms["myForm"]["di_subject"].value;
+        var two_4 = document.forms["myForm"]["di_prefix"].value;
+
+        if (two_2 == "") {
+            document.getElementById('number').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('number').innerHTML = "";
+        }
+
+        if (two_3 == "") {
+            document.getElementById('subject').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('subject').innerHTML = "";
+        }
+        if (two_4 == "") {
+            document.getElementById('prefix').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('prefix').innerHTML = "";
+        }
+    }
+</script>
+<script>
+    let dtElem_9 = document.getElementById('futureDate');
+    let maxDate_9 = new Date();
+    dtElem_9.max = formatDate(maxDate_9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+
+{% endblock body %}

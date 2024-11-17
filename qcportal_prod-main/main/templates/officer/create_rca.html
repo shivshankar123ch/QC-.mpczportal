@@ -1,0 +1,157 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}Gatepass inward{% endblock pagetitle %}
+
+{% block fa %}
+<ul class="nav nav-treeview">
+  <li class="nav-item">
+    <a href="/po/area_process" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>Open Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/po/area_stock" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>In Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/gp_inward_rca" class="nav-link">
+      <i class="far fa fa-circle nav-icon"></i>
+      <p>Gatepass Inward</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="far fa fa-check-circle nav-icon"></i>
+      <p>Add Details</p>
+    </a>
+  </li>
+</ul>
+{% endblock fa %}
+
+{% block body %}
+<style>
+    .gradient-custom {
+  /* fallback for old browsers */
+  background: #f093fb;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 255), rgba(255, 255, 255, 255))
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+}
+.card-registration .select-arrow {
+  top: 13px;
+}
+</style>
+<script>
+    ar subjectObject = {
+"Material": {
+
+    "A.B.SWITCHES":[
+    "11 KV AB Switch Porceline 400 Amp with Complete accessories.",
+    "33 KV AB Switch Porceline 600 Amp with Complete accessories.",
+    "11 KV AB Switch Polymer type 400 Amp with Complete fitting",
+    "33 KV AB Switch Polymer type 400 Amp with Complete fitting",
+    ],
+    }
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var MaterialSel = document.getElementById("Material");
+  var SpecificationSel = document.getElementById("Specification");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    SpecificationSel.length = 1;
+    MaterialSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      MaterialSel.options[MaterialSel.options.length] = new Option(y, y);
+    }
+  }
+  MaterialSel.onchange = function() {
+    //empty Chapters dropdown
+    SpecificationSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      SpecificationSel.options[SpecificationSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+</script>
+<div class="mx-auto" style="width:40%;">
+<form action="/two2_rca/{{trf_id}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<h3 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Add Gate Pass Details</h3>
+ <div class="form-group">
+    <select name="Material" id="Material" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%;">
+        {% for i in po_obj %}
+      <option value="{{i.item_name}}" selected="selected">{{i.item_name}}</option>
+        {% endfor %}
+    </select>
+   <label><b>Material:</b><span style="color: red;">*</span></label>
+</div>
+<div class="form-group">
+    <select name="Specification" id="Specification" class="form-select form-select-lg" aria-label=".form-select-lg example" style="width:100%;">
+        {% for i in po_obj %}
+      <option value="{{i.specification}}" selected="selected">{{i.specification}}</option>
+        {% endfor %}
+    </select>
+    <label for="Specification"><b>Specification:</b><span style="color: red;">*</span></label>
+</div>
+
+
+ <div class="form-group">
+     <input type="text" name="Vehicle_number" id="Vehicle_number" class="form-control"><b>Vehicle Number</b>
+</div>
+  <div class="form-group">
+  <input type="text" name="Driver_name" id="Driver_name" class="form-control"><b>Driver Name</b>
+</div>
+  <div class="form-group">
+  <input type="date" name="Date" id="Date" class="form-control"><b>Date</b>
+</div>
+  <div class="form-group">
+  <input type="text" name="Submitted_by" id="Submitted_by" class="form-control"><b>Submitted By</b>
+</div>
+  <div class="form-group">
+  <input type="text" name="Test_Request_Form_by" id="Test_Request_Form_by" class="form-control"><b>Test Request Form By</b>
+</div>
+
+<div class="form-group">
+  <textarea id="material_number_list" name="material_number_list" rows="4" cols="50" placeholder="1234,4567,3456,6789,3456"></textarea>
+  <label for="material_number_list">Material number list (Separated by commas)</label>
+</div>
+
+<div class="form-group">
+  <input type="text" name="Allot_no" id="Allot_no" class="form-control"><b>Allot No.</b>
+</div>
+<div class="form-group">
+  <input type="text" name="Material_id" id="Material_id" class="form-control"><b>Material Id.</b>
+</div>
+<div class="form-group">
+  <input type="date" name="Start_date" id="Start_date" class="form-control"><b>Start date</b>
+</div>
+<div class="form-group">
+    <input type="date" name="End_Date" id="End_Date" class="form-control"><b>End Date</b>
+</div>
+
+<center>
+    <a href="/new2_rca/{{trf_id}}" style="color:white;"><button type="submit" class="button btn btn-success mb-4">Generate</button></a>
+</center>
+
+</form>
+</div>
+{% endblock body %}

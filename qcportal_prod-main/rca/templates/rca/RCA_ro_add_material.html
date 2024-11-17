@@ -1,0 +1,241 @@
+{% extends 'rca/RCA_base.html' %}
+{% load static %}
+{% block heading %} Create Release Order {% endblock heading %}
+{% block body %}
+
+<!-- <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet"> -->
+
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+    window.history.forward();
+  }
+</script>
+</head>
+<form action="/rca/rca_ro_add_rating/{{ro.id}}" method="POST" name="myForm" onsubmit="return validateForm()">
+  {% csrf_token %}
+
+  <div class="ed-card-inner">
+    <div class="card-header">
+      <h2>Add material information</h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-tableinfo-block mb-5">
+        <div class="table-reponsive">
+          <table class="table table-striped table-bordered ed-table-block ed-centertable ">
+            <thead>
+              <tr>
+                <th> Capacity </th>
+                <th> Description </th>
+                <th> Quantity </th>
+                <!--  <th> Rate </th>
+                      <th>Total amount </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for data in ro_m %}
+              <tr>
+                <td>{{data.rating}}</td>
+                <td>{{data.description}}</td>
+                <td>{{data.quantity}}</td>
+                <!-- <td>{{data.rate}}</td>
+                  <td>{{data.total_rate}}</td> -->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <div class="forms-informations">
+        <div class="ed-form-block">
+          <div class="ed-form-title">
+            <h6>
+              <span class="ed-text">
+                Add Material
+              </span>
+            </h6>
+          </div>
+          <div class="ed-form-body">
+            <div class="form-group">
+              <label class="ed-form-label">
+                Select Capacity
+                <!-- <span class="text-danger">*</span> -->
+              </label>
+              <select name="rating" id="sched_name" required="required" onkeyup="validateForm()"
+                onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox">
+                <option value="" selected>Enter Capacity </option>
+                <option> 25KVA</option>
+                <option> 63KVA</option>
+                <option> 100KVA</option>
+                <option> 200KVA</option>
+              </select>
+              <span id="capcityy" class="d-block ed-warningtext text-danger"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="ed-form-label">
+                Enter Description
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text" name="description" id="sched_desc" class="form-control ed-textbox"
+                placeholder="Description" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm();"
+                required="required">
+              <span id="descriptionn" class="d-block ed-warningtext text-danger"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="ed-form-label">
+                Enter Quantity
+                <span class="text-danger">*</span>
+              </label>
+              <input type="number" name="quantity" id="sched_desc1" onfocus="add1();validateForm();"
+                onkeyup="add1();validateForm()" onkeypress='validate(event)' onchange="add1();"
+                class="form-control ed-textbox" placeholder="quantity" required="required">
+              <span id="quantitty" class="d-block ed-warningtext text-danger"></span>
+            </div>
+            <!-- <div class="col-md-10 m-2">
+                      <div class="form-group">
+                      <label for="add1"> Enter Unit Rate <span style="color: red;">*</span></label>
+                      <input type="number" name="rate" id="sched_desc2" onfocus="add1();validateForm();"
+                      onkeyup="add1();validateForm()" onkeypress='validate(event)' onchange="add1();" class="form-control" placeholder="Unit Rate"
+                      required="required">
+                      <span id="rateee" class="text-danger font-weight-bold" style="font-size: 100%;"></span>
+                      </div>
+                      </div>
+
+                      <div class="col-md-10 m-2">
+                      <div class="form-group">
+                      <label for="add1"> Enter Total amount <span style="color: red;">*</span></label>
+                      <input type="number" name="total" id="sched_desc3" onfocus="add1();validateForm();" onkeyup="add1();validateForm();" onchange="add1();validateForm();"
+                      class="form-control" placeholder="Total Amount" readonly>
+                      <span id="amount" class="text-danger font-weight-bold" style="font-size: 100%;"></span>
+                      </div>
+                      </div> -->
+
+            <div class="form-group">
+              <div class="form-action text-right">
+                <input type="submit" onclick="validateForm()" name="submit" value="Add Material"
+                  class="btn ed-submit ed-formSubmit mr-2" autocomplete="off">
+                <!--  <button onclick="myFunction()">Try it</button>  -->
+                <a href="/rca/rca_ro_order_add_schedule/{{ro.id}}">
+                  <input type="button" name="submit" value="Save And Next" class="btn ed-submit ed-next"
+                    autocomplete="off">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+<script>
+  let dtElem = document.getElementById('order_date');
+  let maxDate = new Date();
+  dtElem.max = formatDate(maxDate);
+
+  function formatDate(date) {
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = date.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function myFunction() {
+    var y = document.getElementById("sched_desc1").value;
+    var z = document.getElementById("sched_desc2").value;
+    var x = y * z;
+    document.getElementById("sched_desc3").innerHTML = x;
+  }
+</script>
+<script>
+  function add1() {
+    console.log("kkkkkk");
+    let data1 = document.getElementById("sched_desc1").value;
+    console.log(data1);
+    let data2 = document.getElementById("sched_desc2").value;
+    console.log(data2);
+    let data3 = parseFloat(data1) * parseFloat(data2);
+    console.log(data3);
+    let data4 = document.getElementById("sched_desc3").value = data3;
+
+  }
+</script>
+<script>
+  function validateForm() {
+
+    let schedule11 = document.forms["myForm"]["rating"].value;
+    let description_1 = document.forms["myForm"]["description"].value;
+    let quantityy = document.forms["myForm"]["quantity"].value;
+    let unit = document.forms["myForm"]["rate"].value;
+    let amount_1 = document.forms["myForm"]["total"].value;
+
+
+    if (schedule11 == "") {
+      document.getElementById('capcityy').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('capcityy').innerHTML = "";
+    }
+    if (description_1 == "") {
+      document.getElementById('descriptionn').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('descriptionn').innerHTML = "";
+    }
+    if (quantityy == "") {
+      document.getElementById('quantitty').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('quantitty').innerHTML = "";
+    }
+    if (unit == "") {
+      document.getElementById('rateee').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('rateee').innerHTML = "";
+    }
+    if (amount_1 == "") {
+      document.getElementById('amount').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('amount').innerHTML = "";
+    }
+
+  }
+</script>
+<script>
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      // Handle key press
+      var key = theEvent.keyCode || theEvent.which;
+      key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>
+{% endblock body %}

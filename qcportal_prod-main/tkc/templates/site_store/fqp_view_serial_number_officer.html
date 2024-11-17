@@ -1,0 +1,106 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+ 
+
+  <!-- Main content -->
+   <section class="content">
+    <form action="/tkc/tkc_site_store_material_received_officer/{{tkc_di_id}}/{{dataid}}" method="post">
+      {% csrf_token %}
+      
+ 
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Receive Material</h3>
+
+         
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                    
+                     <th>
+                         item Name 
+                     </th>
+                     <th>
+                         Serial Number/Betch Number
+                     </th>
+                     <th>
+                        Physically Status
+                    </th>
+                    <th>Remark</th>
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        <b>{{name.wo_material.material_name}}</b>
+                     </td>
+                    
+                     {% if name.offer.excel_type == True %}
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                     {% elif name.offer.excel_type == False %}
+
+                        <td class="project_progress">
+                          {{name.batch_no}}
+                          </td>
+
+                          {% endif %}
+                   
+                     <td>{% if name.Physical_Status == 1%} Accpected  <input type="radio" name="{{name.id}}" value="1" checked hidden> {% elif name.Physical_Status == -1 %}Rejected  <input type="radio" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                         <input type="radio" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="radio" name="{{name.id}}" value="-1"> Reject
+                    {% endif %}</td>
+
+                     <td>
+                      {% if name.Physical_Status == 1%}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+                      
+                      {% elif name.Physical_Status == -1 %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+
+                      {% else %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" required>
+                      {% endif %}
+                       
+                     </td>
+                   
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+        <center><button class="btn-lg">Submit</button></center>
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

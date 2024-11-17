@@ -1,0 +1,93 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+  <div class="ed-information">
+      <div class="card ed-card-block">
+        <div class="ed-card-inner">
+          <div class="card-header">
+            <h2>
+                Offered Material Details
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="ed-tableinfo-block">
+              <div class="table-responsive">
+                <table id="offered_data" class="table table-bordered table-hover display">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>
+                            Sr No.
+                       </th>
+                          <th style="width:10%">
+                               Work Order No.
+                          </th>
+                          <th style="width:40%">
+                               WO Subject
+                          </th>
+                           <th style="width:10%">
+                            WO Date
+                          </th>
+                          <th style="width:10%">
+                            WO Zone
+                          </th>
+                          <th style="width:10%">
+                            Offered Materials Status
+                          </th>
+                        </tr>
+                    </thead>
+                
+                    {% for data in wo_data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+
+                        <td>{{data.Contract_Number}}</td>
+                         <td>{{data.Header.Contract_Description}}</td>
+                        <td>{{data.Contract_Date}}</td>
+                         <td>{{data.zone}}</td>
+                         <td>
+                            <a href="/tkc/tkc_offered_materials/{{data.id}}">
+                            <button class="btn ed-submit btn-success m-1">
+                                <span class="ed-submit-text">
+                                    View
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+
+
+                  </tr>
+                    {% endfor %}
+                </table>
+              </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+
+
+          <!-- /.card-body -->
+<script>
+function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "block";
+}
+
+</script>
+<script>
+    $(document).ready( function () {
+        $('#offered_data').DataTable();
+    } );
+</script>
+{% endblock body %}

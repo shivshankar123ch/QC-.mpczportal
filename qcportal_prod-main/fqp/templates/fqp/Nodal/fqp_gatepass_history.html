@@ -1,0 +1,77 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Gatepass</h3>
+
+         <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div>
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped table-bordered display  projects">
+             <thead class="table-dark">
+                 <tr>
+                    <th style="width:10%">
+                               Work Order No
+                          </th>
+                          <th style="width:10%">
+                               GatePass No
+                          </th>
+                          <th style="width:30%">
+                               Work Order Description
+                          </th>
+                          <th style="width:20%">
+                               Contractor Name
+                          </th>
+                           <th style="width:20%">
+                               Item
+                          </th>
+                     <th>
+                         View Gatepass 
+                     </th>
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for Supply in data %}
+                 <tr>
+                     <td><b>{{Supply.area_store.TKCVendor.TKCWoInfo.Contract_Number}}</b></td>
+                     <td><b>{{Supply.id}}</b></td>
+                            <td><b>{{Supply.area_store.TKCVendor.TKCWoInfo.Header.Contract_Description}}</b></td>
+                         <td><b>{{Supply.area_store.TKCVendor.Vendor.CompanyName_E}}</b></td>
+                        <td><b>{{Supply.area_store.TKCVendor.Material_id.Material_Specification}}</b></td>
+            
+                    <td class="text-center"> <a href="/fqp/fqp_gatepass_history/{{Supply.id}}">View</a></td>
+                     
+
+                   </tr>
+             {% endfor %}
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

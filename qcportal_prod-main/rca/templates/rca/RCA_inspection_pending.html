@@ -1,0 +1,79 @@
+{% extends 'rca/RCA_inspection_officer_base.html' %}
+
+{% load static %}
+
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1">RCA Inspecting Officer</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+    <li class="nav-item active">
+      <a class="nav-link active" href="/rca/rca_inspection_pending">
+        <span class="sidenav-mini-icon"> PO </span>
+        <span class="sidenav-normal"> Pending Inspection</span>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link " href="/rca/rca_inspection_complete">
+        <span class="sidenav-mini-icon"> CO </span>
+        <span class="sidenav-normal"> Complete Inspection</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock active %}
+
+
+{% block body %}
+
+<h5>Pending Inspection</h5>
+<div class="table-responsive text-nowrap">
+<table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          Release Order ID
+                      </th>
+                      <th style="width:20%">
+                          Area Store
+                      </th>
+                      <th style="width:20%">
+                          Material Name
+                      </th>
+                      <th >
+                       Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>
+                         <b>1</b>
+                      </td>
+                      <td>
+                         <b>MPCZ004</b>
+                      </td>
+                      <td>
+                           <b>Bhopal</b>
+                      </td>
+                      <td class="project_progress">
+                             <b>DTR</b>
+                      </td>
+                      <td class="project-actions text-center">
+                          <a class="btn btn-primary btn-sm" href="/vendor/view_rca" style="width:150px;">
+                               View RCA Order
+                          </a>
+                          <a href="/rca/rca_inspection_pending2" class="btn btn-success btn-sm" style="width:150px;"> Proceed </a>
+                      </td>
+                  </tr>
+           </tbody>
+          </table>
+</div>
+{% endblock body %}

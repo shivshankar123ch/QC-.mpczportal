@@ -1,0 +1,110 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} Create MRC {% endblock heading %}
+{% block body %}
+
+
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+    window.history.forward();
+  }
+</script>
+</head>
+
+
+
+
+
+
+
+<form method="POST" action="/po/rca_mrc_add_release/{{data.id}}" name="myForm" onsubmit="return validateForm()">
+  {% csrf_token %}
+
+  <div class="ed-card-inner">
+    <div class="card-header">
+      <h2>
+        MRC Add Release
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-form-block border-0 p-0">
+        <div class="ed-form-body">
+          <div class="form-group">
+            <label class="ed-form-label">
+              Work Order
+              <!-- <span class="text-danger">*</span> -->
+            </label>
+            <input type="text" class="form-control ed-textbox" value="MP{{data.wo.rca_cell.user_zone}}WO {{ data.wo.id }}" readonly />
+          </div>
+
+          <div class="form-group">
+            <label class="ed-form-label">
+              Release Order
+              <!-- <span class="text-danger">*</span> -->
+            </label>
+            <input type="text" class="form-control ed-textbox" value="MP{{data.wo.rca_cell.user_zone}}RO {{ data.id }}" readonly />
+          </div>
+
+<!--           <div class="form-group">
+            <label class="ed-form-label">
+              Rating 
+            </label>
+            <input type="text" class="form-control ed-textbox" value="{{ data.rating }}" readonly />
+          </div>
+ -->
+          <div class="form-group">
+            <label class="ed-form-label">
+              MRC Creation Date
+              <span class="text-lowercase">
+                (mm/dd/yyyy)
+              </span>
+              <!-- <span class="text-danger">*</span> -->
+            </label>
+            <input type="date" id="order_date1" name="mrc_order_date" required="required" onkeyup="validateForm()"
+              onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox">
+            <span id="order" class="d-block ed-warningtext text-danger"></span>
+          </div>
+
+
+          <div class="form-group">
+            <div class="form-action text-right">
+              <!-- <a href="/po/rca_mrc_add_copy/{{info.id}}" class="m-4"><input type="submit" onclick="validateForm()" name="submit"
+                value="Save And Next" class="btn btn-success m-3" autocomplete="off"></a> -->
+              <input type="submit" onclick="validateForm()" name="submit" value="Save And Next"
+                class="btn ed-submit ed-formSubmit" autocomplete="off">
+              <!--<a name="submit" href="/rca/rca_ro_view/{{id}}"-->
+              <!--  class="btn btn-success btn-primary button button1" autocomplete="off"-->
+              <!-- style="height:50px;border: 1px solid darkblue;border-radius: 8px;margin-top: 2px;margin-left:10px;">Save And View Work Order</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+</form>
+
+<script>
+  function validateForm() {
+
+    let schedule11 = document.forms["myForm"]["wo"].value;
+    let schedule12 = document.forms["myForm"]["store"].value;
+
+
+    if (schedule11 == "") {
+      document.getElementById('address').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('address').innerHTML = "";
+    }
+    if (schedule12 == "") {
+      document.getElementById('add2').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('add2').innerHTML = "";
+    }
+  }
+</script>
+
+{% endblock body %}

@@ -1,0 +1,100 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Reject Items</h3>
+
+         <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div>
+       </div>
+       <form action="/po/PoDiStatus/{{dataid}}" method="post">
+           {% csrf_token %}
+       <div class="card-body p-0">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                    
+                     <th>
+                         item Name 
+                     </th>
+                     <th>
+                         Serial Number
+                     </th>
+                     <th>
+                        Physically Status
+                    </th>
+                    <th>Remark</th>
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                 
+                 <td><b>{{name.Offer_Material.TKCVendor.Material_id.Material_Specification}}</b></td>
+                   
+                    
+                     <td class="project_progress">
+                             {{name.Item_Serial_No}}
+                     </td>
+                   
+                     <td>{% if name.Physical_Status == 1%} Accpected  <input type="radio" name="{{name.id}}" value="1" checked hidden> {% elif name.Physical_Status == -1 %}Rejected  <input type="radio" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                         <input type="radio" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="radio" name="{{name.id}}" value="-1"> Reject
+                    {% endif %}</td>
+
+                     <td>
+                      {% if name.Physical_Status == 1%}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+                      
+                      {% elif name.Physical_Status == -1 %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+
+                      {% else %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" required>
+                      {% endif %}
+                       
+                     </td>
+                   
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+      
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

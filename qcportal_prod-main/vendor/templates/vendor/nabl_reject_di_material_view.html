@@ -1,0 +1,80 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+
+  <!-- Main content -->
+   <section class="content">
+     
+      {% csrf_token %}
+      
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title"> Material</h3>
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center">
+             <thead class="table-dark">
+                 <tr>
+                     <th style="width: 1%">Sr No.</th>
+                     <!-- <th>Select Received Materials</th> -->
+                     <th>Item Code</th>
+                    <th>Item Name</th>
+                     <th>Serial No/Batch No</th>
+                  
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                      <b>{{name.area_store_id.material_sample_code}}</b>
+                   </td>
+                       <td>
+                        <b>{{name.material}}</b>
+                     </td>
+                    {% if name.serial_no %}
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                     {% else %}
+                     <td class="project_progress">
+                      {{name.batch_no}}
+                    </td>
+                    {% endif %}
+                   
+                   
+                   
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+         <!-- <div class="text-end">
+          <button class="btn btn-primary btn-sm">Submit</button> 
+         </div> -->
+       
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

@@ -1,0 +1,208 @@
+{% extends 'wo/wo_base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                View Other Details
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-4">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                        <thead>
+                            <tr>
+                                <th class="w-5">S.No.</th>
+                                <th>Company Name</th>
+                                <th>Other Documents</th>
+                                <th>Action</th>
+                                <th>Approval Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for Supply in otherdoc %}
+                            <tr>
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{Supply.tkcwoinfo.Discom.Discom_Short_Name}}
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{Supply.otherdoc.url}}">
+                                        <button class="btn ed-submits btn-success">
+                                            <span class="ed-submit-text">
+                                                View Other Documents
+                                            </span>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td>{% if not Supply.otherdoc_submit %}
+                                    <div class="poaction-info">
+                                        <a href="/tkc/otherdoc_delete/{{data.id}}/{{Supply.id}}"
+                                            class="btn ed-submits btn-danger">
+                                            <span class="ed-submit-text">
+                                                Delete
+                                            </span>
+                                        </a>
+                                        <a href="/tkc/otherdoc_sumit_for_approval/{{data.id}}/{{Supply.id}}"
+                                            class="btn ed-submits btn-danger">
+                                            <span class="ed-submit-text">
+                                                Submit
+                                            </span>
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    <a href="" class="btn ed-submits btn-success">
+                                        <span class="ed-submit-text">
+                                            Other Documents Submitted
+                                        </span>
+                                    </a>
+                                    {% endif %}
+                                </td>
+                                <td>{% if Supply.otherdoc_approved_status == 0 and Supply.otherdoc_submit == 1 %}
+                                    <a href="" class="btn ed-submits btn-info">
+                                        <span class="ed-submit-text">
+                                            Pending
+                                        </span>
+                                    </a>
+                                    {% elif Supply.otherdoc_approved_status == -1 %}
+                                    <a href="" class="btn ed-submits btn-danger">
+                                        <span class="ed-submit-text">
+                                            OD Rejected
+                                        </span>
+                                    </a>
+                                    {% elif Supply.otherdoc_approved_status == 1 %}
+                                    <a href="" class="btn ed-submits btn-success">
+                                        <span class="ed-submit-text">
+                                            OD Approved
+                                        </span>
+                                    </a>
+
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if Supply.otherdoc_approved_remark %}
+                                    <span class="ed-submit-text">
+                                        {{ Supply.otherdoc_approved_remark}}
+                                    </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Upload Other Documents Details
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+
+                    <form action="/tkc/upload_otherdoc/{{data.id}}" method="POST" name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work order number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly" value="{{data.Contract_Number}}"
+                                readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Company Name/TKC
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Discom.Discom_Short_Name}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Subject
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Header.Contract_Description}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Date
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Contract_Date}}" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Upload Other Documents
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" name="otherdoc_file" class="" id="file33" onkeyup="validateForm()"
+                            onfocus="validateForm()" onchange="validateForm()"accept="application/pdf" required>
+                            <span id="file22" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="text-right">
+                                <button type="submit" id="btnsave"  onclick="validateForm()" class="btn ed-submits btn-info">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function  validateForm(){
+    let fileup = document.forms["myForm"]["otherdoc_file"].value;
+    let fileee = document.getElementById("file33").value;
+    var allowedExtensions = /(\.pdf)$/i;
+    let fileInput_Result1 = allowedExtensions.test(fileee);
+
+    if (fileup == "") {
+              document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+              return false;
+               } else {
+              //document.getElementById('Twenty_two').innerHTML = "";
+             if (fileInput_Result1 == false) {
+              document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+               return false;
+              } else {
+               // document.getElementById('file1').innerHTML = "";
+              const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+              if (oFile > 2) {
+                alert("File size must be less than or equal to 2 MB");
+                document.getElementById("file33").value = "";
+                return false;
+
+              } else {
+                document.getElementById('file22').innerHTML = "";
+             }
+         }
+      }
+}
+</script>
+
+
+{% endblock body %}

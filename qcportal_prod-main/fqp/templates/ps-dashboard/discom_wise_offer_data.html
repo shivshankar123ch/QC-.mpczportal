@@ -1,0 +1,89 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+  
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+  </style>
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Material Offers List
+        </h2>
+    </div>
+
+    <div class="card-body">
+        <div class="ed-tableinfo-block ">
+            <div class="table-responsive">
+                <table class="table  table-bordered  text-center display" id="vendor_purchase_B">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="w-5 text-center">S.No.</th>
+                            <th class=" text-center">Offer No.</th>
+                            <th class=" text-center">TKC</th>
+                            <th class=" text-center">Vendor</th>
+                            <th class=" text-center">Offer Date</th>
+                            <th class=" text-center">Action</th>
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            {% for i in offer_data %}
+                            <tr>
+                            <td>
+                               <b> {{forloop.counter}}</b>
+                            </td>
+
+                            <td>
+                               <b> {{i.offer_no}}</b>
+                            </td>
+                            <td>
+                               <b> {{i.wo.supplier.CompanyName_E}}</b>
+                            </td>
+       
+
+                            <td>
+                              <b> {{i.TKCVendor.Vendor.CompanyName_E}}</b>
+                            </td>
+
+                            <td>
+                              <b>{{i.created_at}}</b>
+                             </td>
+
+                            <td>
+                                <a href="#" target="_blank">
+                                    <button class="btn  btn-info btn-sm">
+                                        <span>
+                                            View Offer
+                                        </span>
+                                    </button>
+                                </a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script>
+    $(document).ready( function () {
+    $('#vendor_purchase_B').DataTable();
+} );
+ </script> 
+
+
+{% endblock body %}

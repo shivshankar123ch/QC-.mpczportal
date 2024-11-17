@@ -1,0 +1,204 @@
+{% extends 'officer/RoofTop_Viewer_base.html' %} {% load static %} {% block body %}
+
+
+<style>
+    .button {
+        background-color: #007bff;
+        /* Green */
+        border: none;
+        color: 2px solid white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .button1 {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid darkblue;
+        width: 155px;
+    }
+
+    .button1:hover {
+        background-color: darkblue;
+        color: white;
+        border: 1px solid white;
+    }
+</style>
+
+
+<script type="text/javascript" src="/static/assets/js/Validation/vendor_reg8.js"></script>
+<script type="text/javascript">
+    window.history.forward();
+
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+<!--form panels-->
+<!-- <div class="row"> -->
+<!-- <div class="col-12 col-lg-8 m-auto"> -->
+<form class="multisteps-form__form mb-8" action="roof_toop_officer_loa" name="myForm" onsubmit="return validateForm()"
+    method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">Upload LOA For Solar Vendor</h5>
+    <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p>
+    <div class="multisteps-form__content">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>Select Solar Vendor<span style="color: red;">*</span></label>
+                <select class="form-control op1 form-select form-select-lg" aria-label=".form-select-lg example"
+                    name="user_name" id="work_experience" required onkeyup="validateForm()" onfocus="validateForm()"
+                    onchange="validateForm()">
+                    <option value="" selected="selected">Select One</option>
+                    {% for data in data %}
+                    <option selected value="{{data.agency_name}}">
+                        {{data.agency_name}}
+                    </option>
+                    {% endfor %}
+                </select>
+                <span id="Work_experience" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Choose LOA File(In .PDF Format)<span style="color: red;">*</span></label>
+                <input type="file" class="multisteps-form__input form-control" accept="application/pdf" name="file"
+                    id="inputName_31" class="form-control" required="required" onkeyup="validateForm()"
+                    onchange="validateForm()" onfocus="validateForm()">
+                <span id="Twenty_two" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+            
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Upload All Annexures (Single PDF Format) <span style="color: red;">*</span></label>
+                <input type="file" class="multisteps-form__input form-control" accept="application/pdf" name="file2"
+                    id="inputName_312" class="form-control" required="required" onkeyup="validateForm()"
+                    onchange="validateForm()" onfocus="validateForm()">
+                <span id="Twenty_two2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Vendor related document <span style="color: red;">*</span></label>
+                <input type="file" class="multisteps-form__input form-control" accept="application/pdf" name="file3"
+                    id="inputName_9" class="form-control" required="required" onkeyup="validateForm()"
+                    onchange="validateForm()" onfocus="validateForm()">
+                <span id="Twenty_two3" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+
+        <div class="button-row d-flex mt-4">
+
+            <button class="btn bg-gradient-primary ms-auto mb-0" onclick="validateForm();" value="Submit" type="submit"
+                title="Next">Save & Next</button>
+            <!-- </div> -->
+</form>
+</div>
+<!-- </div> -->
+
+<!--single form panel-->
+<script>
+    function validateForm() {
+        let slect1 = document.forms["myForm"]["user_name"].value;
+        if (slect1 == "") {
+            document.getElementById('Work_experience').innerHTML = " Please select the required details";
+            return false;
+        } else {
+            //alert("hiii ns");
+            document.getElementById('Work_experience').innerHTML = "";
+        }
+        let file1 = document.forms["myForm"]["file"].value;
+        let fileCheck1 = document.getElementById('inputName_31').value;
+        var allowedExtensions = /(\.pdf)$/i;
+        let fileResult1 = allowedExtensions.test(fileCheck1);
+        if (file1 == "") {
+            document.getElementById('Twenty_two').innerHTML = "Please upload the file in pdf format only";
+            return false;
+        } else {
+
+            if (fileResult1 == false) {
+                document.getElementById('Twenty_two').innerHTML = " Please Upload valid file format(In .pdf format)";
+                return false;
+            } else {
+
+                const oFile = document.getElementById("inputName_31").files[0].size / 1024 / 1024;
+                if (oFile > 10) {
+                    alert("File size must be less than or equal to 10 MB");
+                    document.getElementById("inputName_31").value = "";
+                    return false;
+
+                } else {
+                    // Proceed further
+                    console.log("jjjjj999");
+                    document.getElementById('Twenty_two').innerHTML = "";
+                }
+            }
+        }
+        let file2 = document.forms["myForm"]["file2"].value;
+        let fileCheck2 = document.getElementById('inputName_312').value;
+        let fileResult2 = allowedExtensions.test(fileCheck2);
+        if (file2 == "") {
+            document.getElementById('Twenty_two2').innerHTML = "Please upload the file in pdf format only";
+            return false;
+        } else {
+
+            if (fileResult1 == false) {
+                document.getElementById('Twenty_two2').innerHTML = " Please Upload valid file format(In .pdf format)";
+                return false;
+            } else {
+
+                const oFile = document.getElementById("inputName_312").files[0].size / 1024 / 1024;
+                if (oFile > 10) {
+                    alert("File size must be less than or equal to 10 MB");
+                    document.getElementById("inputName_312").value = "";
+                    return false;
+
+                } else {
+                    // Proceed further
+                    console.log("jjjjj999");
+                    document.getElementById('Twenty_two2').innerHTML = "";
+                }
+            }
+        }
+        let file3 = document.forms["myForm"]["file3"].value;
+        let fileCheck3 = document.getElementById('inputName_9').value;
+        let fileResult3 = allowedExtensions.test(fileCheck3);
+        if (file3 == "") {
+            document.getElementById('Twenty_two3').innerHTML = "Please upload the file in pdf format only";
+            return false;
+        } else {
+
+            if (fileResult1 == false) {
+                document.getElementById('Twenty_two3').innerHTML = " Please Upload valid file format(In .pdf format)";
+                return false;
+            } else {
+
+                const oFile = document.getElementById("inputName_9").files[0].size / 1024 / 1024;
+                if (oFile > 10) {
+                    alert("File size must be less than or equal to 10 MB");
+                    document.getElementById("inputName_9").value = "";
+                    return false;
+
+                } else {
+                    // Proceed further
+                    console.log("jjjjj999");
+                    document.getElementById('Twenty_two3').innerHTML = "";
+                }
+            }
+        }
+
+    }
+</script>
+
+
+
+
+
+{% endblock body %}

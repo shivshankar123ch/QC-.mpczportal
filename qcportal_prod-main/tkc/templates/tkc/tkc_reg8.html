@@ -1,0 +1,124 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+
+<head>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/tkc_reg8.js' %}"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card-header pb-0 text-start">
+                <h5 class="font-weight-bolder">
+                    Contractor Registration
+                </h5>
+                <p class="mb-0">
+                    All <span style="color: red">(*)</span> marked fields are mandatory
+                </p>
+            </div>
+            <div class="card-body">
+                <form action="tkc_reg_eight" name="myForm" onsubmit="return validateForm()" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Work Experience (In Years)<span style="color: red">*</span></label>
+                                <select class="form-control op1 form-select form-select-lg"
+                                    aria-label=".form-select-lg example" name="work_experience" id="work_experience"
+                                    class="form-control" required onkeyup="validateForm()" onfocus="validateForm()"
+                                    onchange="validateForm()">
+                                    <option selected disabled value="">Select One</option>
+                                    <option value="0"> 0</option>
+                                    <option value="1"> 1</option>
+                                    <option value="2"> 2</option>
+                                    <option value="3"> 3</option>
+                                    <option value="4"> 4</option>
+                                    <option value="5"> 5</option>
+                                    <option value="6"> 6</option>
+                                    <option value="7"> 7</option>
+                                    <option value="8"> 8</option>
+                                    <option value="9"> 9</option>
+                                    <option value="10"> 10</option>
+                                    <option value="11"> 11</option>
+                                    <option value="12"> 12</option>
+                                    <option value="13"> 13</option>
+                                    <option value="14"> 14</option>
+                                    <option value="15"> 15</option>
+                                    <option value="16"> 16</option>
+                                    <option value="17"> 17</option>
+                                    <option value="18"> 18</option>
+                                    <option value="19"> 19</option>
+                                    <option value="20"> 20</option>
+                                </select>
+                                <span id="workk" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Year Turn-Over (In Lakhs) <span style="color: red">*</span></label>
+                                <input type="tel" min="1" onkeypress='validate(event)' minlength="1" maxlength="10"
+                                    name="turn_over" id="turn_over" class="form-control" required
+                                    placeholder="TurnOver (In Lakhs)" onkeyup="validateForm()" onfocus="validateForm()"
+                                    onchange="validateForm()">
+                                <span id="over" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label>Select Contractor Type<span style="color: red">*</span></label>
+                                <select id="Vendor_type" name="VendorType"
+                                    class="form-control op1 form-select form-select-lg"
+                                    aria-label=".form-select-lg example" required onfocus="validateForm()"
+                                    onkeyup="validateForm()" onchange="validateForm()" required>
+                                    <option value="select-option-user" selected>
+                                        Select Contractor Type</option>
+                                    {% for data in payment %}
+                                    <option value="{{data.id}}">{{data.Name}}</option>
+                                    {% endfor %}
+
+                                </select>
+                                <span id="select2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="button-row d-flex mt-4">
+                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev"><a href="#" style="color: white;">Prev</a></button> -->
+                <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" onclick="validateForm()"
+                    title="Send">Save And
+                    Next</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+{% endblock body %}

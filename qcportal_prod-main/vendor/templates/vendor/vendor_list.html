@@ -1,0 +1,110 @@
+
+ {% extends 'vendor/vendor_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+  <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DI list</h3>
+              </div>
+              <div class="card-header">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search" ></i></button>
+
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width: 15%">
+                        Vendor
+                     </th>
+                      <th style="width:5%">
+                        Purchase Order</th>
+                      <th style="width: 25%">
+                        Product Name</th>
+                    
+                     
+                      <th style="width: 15%">
+                        Area Storage </th>
+                        <th style="width: 15%">
+                            Dispatch date
+                        </th>
+                            <th style="width: 15%">
+                                Quantity  </th>
+
+                                <th style="width: 15%">
+                                  Dispatch  </th>
+                     
+                  </tr>
+                  </thead>
+                  <tbody>
+              {% for data in user %}
+
+                <tr>
+                  <td>{{data.select_vendor}}</td>
+                  <td>{{data.po_number}}</td>
+
+
+                  <td>{{data.select_material}}</td>
+                    
+                  <td>{{data.area_storage}}</td>
+                  <td>{{data.dispatch_date}}</td>
+
+                  <td>{{data.dis_quantity}}</td>
+
+                  <td><input type="checkbox" id="vehicle1"></td>
+
+                
+
+                 
+                </tr>
+                 
+              {% endfor %}
+
+                </tbody>
+              </table>
+              <button type="submit" id="submit" class="btn btn-success float-right mr-3" style="margin-left: 700px;">Send</button>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

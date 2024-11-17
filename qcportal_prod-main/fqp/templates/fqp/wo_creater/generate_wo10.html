@@ -1,0 +1,91 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+<div class="ed-information mb-2">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Work Order Terms & Conditions/Order Content 
+          </h2>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if "success" == message.tags %}
+        <form action="/fqp/procurement_generate_wo10/{{wo.id}}/{{message_rendered}}" onsubmit="return validateForm()" name="myForm"
+          method="POST">
+          {% csrf_token %}
+          <!-- --------------------- Step 2 -------------------------------- -->
+          <div class="card-body" id="formStep2">
+            <div class="ed-form-block">
+              <div class="ed-form-title">
+                <h6>
+                  <span class="ed-text">
+                    Content
+                  </span>
+                </h6>
+              </div>
+              <div class="ed-form-body">
+                <div class="form-group">
+                  <!--                                                <textarea class="form-control ed-textbox ed-lattertextbox">-->
+                  {{ form.media }}
+                  {{ form.Work_Order_Term_And_Condition|safe }} 
+                </div>
+                <div class="form-group">
+                  <div class="form-action text-right">
+                    <button type="submit" class="btn ed-submit ed-submitNext" id="nextStep2">
+                      <span class="ed-submit-text">
+                        Next
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <form action="/fqp/procurement_generate_wo10/{{wo.id}}/{{message_rendered}}" onsubmit="return validateForm()" name="myForm"
+        method="POST">
+        {% csrf_token %}
+        <!-- --------------------- Step 2 -------------------------------- -->
+        <div class="card-body" id="formStep2">
+          <div class="ed-form-block">
+            <div class="ed-form-title">
+              <h6>
+                <span class="ed-text">
+                  Content
+                </span>
+              </h6>
+            </div>
+            <div class="ed-form-body">
+              <div class="form-group">
+                <!--                                                <textarea class="form-control ed-textbox ed-lattertextbox">-->
+                {{ form.media }}
+                {{ form.Work_Order_Term_And_Condition|safe }} 
+              </div>
+              <div class="form-group">
+                <div class="form-action text-right">
+                  <button type="submit" class="btn ed-submit ed-submitNext" id="nextStep2">
+                    <span class="ed-submit-text">
+                      Next
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

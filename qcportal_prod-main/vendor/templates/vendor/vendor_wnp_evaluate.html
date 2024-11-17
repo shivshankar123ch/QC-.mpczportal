@@ -1,0 +1,61 @@
+{% extends 'vendor/vendor_wnp_htmlbase.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h3 class="card-title">Generate PO List</h3> -->
+          </div>
+          <!-- <div class="card-header">
+            <button type="Add Test" id="submit" class="btn btn-success float-right mr-3">Dispatch</button>
+
+
+          </div> -->
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="width:20%">
+                  Vendor Number</th>
+                  <th style="width: 20%">
+                    Name </th>
+                  <th style="width:20%">
+                    Date of Application</th>
+                    <th style="width: 20%">
+                      Action </th>
+
+
+                    <!-- <th style="width: 25%">
+                      Material Specification</th> -->
+
+                    <!-- <th style="width: 5%">
+                    Material Class
+                  </th> -->
+                  <!-- <th style="width:35%">
+                      Material Parameter
+                  </th> -->
+                  <!-- <th style="width: 15%">
+                    
+                    Select Vendor
+                  </th> -->
+              </tr>
+              </thead>
+              <tbody>
+            {% for user in data %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{user.Docs_Name}}</td>
+              <td>{{user.Document_Number}}</td>
+              <td>
+                <a href="/vendor/vendor_wnp_approval/{{user.id}}">
+                <button type="button" id="button" class="btn btn-success mr-3">Evaluate</button>
+                </td>
+                
+                {% endfor %}
+            {% endblock body %}

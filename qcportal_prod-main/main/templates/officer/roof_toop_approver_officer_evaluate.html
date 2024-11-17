@@ -1,0 +1,139 @@
+{% extends 'officer/RoofTop_Approver_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>User All Basic Details</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th><b>S. No </b></th>
+                        <th><b>Details</b></th>
+                        <th><b>Value</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>User Type</td>
+                        <td>{{data.user_type}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>2</td>
+                        <td>Company Name</td>
+                        <td>{{data.agency_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Contact Number</td>
+                        <td>{{data.contact}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Email ID</td>
+                        <td>{{data.email}}</td>
+                    </tr>
+                  
+                 
+                    <tr>
+                        <td>5</td>
+                        <td>Pan Card No</td>
+                        <td>{{data.pan_card}}</td>
+                    </tr>
+                
+                    
+                    <tr>
+                        <td>6</td>
+                        <td>Name Of Authorised Person</td>
+                        <td>{{data.name_of_auth}}</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>GST No</td>
+                        <td>{{data.gst}}</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Address</td>
+                        <td>{{data.address}}</td>
+                    </tr>
+                   
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <h5>Document Uploaded By RoofTop Vendor</h5>
+        </div>
+
+        
+        <form action="/root_top_otp/{{data.id}}" method="POST">
+            {% csrf_token %}
+            <div class="table-responsive">
+                 <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th> Document Name </th>
+                        <th> Document Number </th>
+                      
+                        <th> View Document</th>
+                        <th> Status </th>
+                        <th> Decision</th>
+                        <th> Remark</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    {% with name=100 %} {% for data in abc %}
+                    <tr>
+                        <td><b>{{data.Types_of_Docs}}</b></td>
+                        <td>{{data.Document_Number}}</td>
+                        
+                        <td class="text-center"> <a href="{{data.Ddocfile.url}} " target="_self" class="fas fa-eye text-secondary"></a></td>
+                    
+                        <td>
+                            {% if data.Primary_verification_Status_approver == 1 %}
+                       <b>Accepted</b>
+                           {% elif data.Primary_verification_Status_approver == 2 %}
+                          Resubmit
+                          {% else %}
+                          Pending
+                          {% endif %}
+                           </td>
+                      <td>
+                          {% if data.Primary_verification_Status_approver == 1 %}
+                          <b>Accepted</b>
+                          {% else %}
+                          <div class="custom-control custom-radio">
+                              <input type="radio" class="form-check-input" id="radio1" name={{name|add:forloop.counter0}} value="OK" checked required>
+                              <label class="form-check-label" for="radio1">Accepted</label>
+                          </div>
+                          <div class="custom-control custom-radio">
+                              <input type="radio" class="form-check-input" id="radio2" name={{name|add:forloop.counter0}} value="NOT">
+                              <label class="form-check-label" for="radio2">Rejected</label>
+                          </div>
+                          {% endif %}
+                      </td>
+                      {% if data.Primary_verification_Status_approver == 1 %}
+                      {% if data.Primary_remark %}
+                      <td colspan="5">{{data.Primary_remark}}</td>
+                      {% endif %}
+                      {% else %}
+                      <td colspan="5"><textarea style="min-width:300px;" class="form-control" id="task" name={{forloop.counter0}} rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="Write Remark"></textarea></td>
+                      {% endif %}
+                      </tr>
+                    {% endfor %} {% endwith %}
+               <tr></tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="button-row d-flex mt-4">
+                <input class="btn bg-gradient-primary ms-auto mb-0" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

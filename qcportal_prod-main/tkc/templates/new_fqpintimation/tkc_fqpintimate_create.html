@@ -1,0 +1,337 @@
+{% extends 'tkc/creater_base.html' %}
+
+{% block body %}
+<style>
+    .btn:not(:disabled):not(.disabled) {
+    
+    width: 214px;
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<div class="ed-information">
+    <div class="card ed-card-block">
+        <div class="ed-card-inner">
+            <div class="card-header">
+                          <h2>
+                            Create New FQP Intimation
+                          </h2>
+                        </div>
+                        <div class="card-body">
+                          <div class="ed-tableinfo-block">
+                            <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-hover ed-table-block">
+                    <thead>
+                        <th>Work Order No. and Date</th>
+                        <th>Work Order Description</th>
+                        <th>TKC Name</th>
+                        <th>Work-order Amount (In rupees)</th>
+                        <th>Action</th>
+                 
+                    </thead>
+                    <tbody>
+
+                        {% for wd in wo_data %}
+                            <tr>
+                            <td>{{wd.Contract_Number}} - {{wd.Contract_Date|date:"d/m/Y"}}</td>
+                            <td>{{wd.Header.Contract_Description}}</td>
+                            <td>{{wd.supplier.CompanyName_E}}</td>
+                            <td>{{wd.loa_amount|default:"---"}}</td>
+                            <td>
+                                <a class="btn ed-submits btn-info"
+                                    href="/tkc/tkc_new_fqpintimation_list/?woid={{wd.id}}">View FQP Intimation</a>
+                            
+                                   <br>
+                                {% if wd.Wo_Digital %}
+                                <a class="btn ed-submits btn-info" href="{{wd.Wo_Digital.url}}">View Work Order</a>
+                                {% else %}
+                                <a class="btn ed-submits btn-primary" href="#">Work Order Not Uploaded</a>
+                                {% endif %}
+                            </td>
+
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-header">
+            <h2>
+                FQP Intimation
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="forms-informations">
+                <div class="ed-form-block p-0 border-0">
+
+                    <div class="ed-form-body">
+                        <form action="/tkc/tkc_new_fqpintimation_create/" method="POST" enctype="multipart/form-data"
+                            onsubmit="return validateFunction()">
+                            {% csrf_token %}
+                            {% for wtd in wo_task_data %}
+                            <input type="text" name="woid" value="{{wtd.wo_id}}" hidden class="form-control ed-textbox"
+                                >
+                            <input type="text" name="wotask_id" value="{{wtd.id}}" hidden
+                                class="form-control ed-textbox" required>
+                                <input type="text" name="feeder_id" value="{{wtd.gis_feeder_id}}" hidden
+                                class="form-control ed-textbox" required>
+                            {% endfor %}
+
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Milestone
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <select name="wotask_milestone" id="wotask_milestone_id" class="form-control ed-textbox"
+                                    onchange="getmilestonecategory()" required>
+                                    <option value="" selected  style="width:250px;">Please Select Milestone
+                                    </option>
+                                    {% for m in mile_data %}
+                                    <option style="width:250px;" value="{{m.id}}" > {{m.milestone_name}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Milestone category
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <div id="milestone_category_id" class="cucheckboxinfo">
+
+                                </div> 
+                                
+                                    <!-- <select name="milestone_category[]" id="milestone_category_id"
+                                    class="form-control ed-textbox" required>
+                                    <option value="" multiselected style="width:250px;">Please Select Milestone Category
+                                    </option>
+                                </select> -->
+                                <!-- <div id="milestone_category_id">
+
+                                </div>
+                                
+
+                            <div id="milestone_category_id6">
+
+                            </div> -->
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label class="ed-form-label">
+                                    Milestone Category
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="checkbox" id="milestone_category_id" name="milestone_category" value="">
+                            </div> -->
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Brief Description Of Work/Task
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="brief_description_of_work" 
+                                    class="form-control ed-textbox" value="" required>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Execution Detail
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="text" name="work_execution_detail" id="" class="form-control ed-textbox"
+                                    value="" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Execution/Milestone Image 1
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="file" name="work_execution_milestone_image1" class="form-control" placeholder="" value=""
+                                    accept="application/pdf" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Execution/Milestone Image 2
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="file" name="work_execution_milestone_image2" class="form-control" placeholder="" value=""
+                                    accept="application/pdf" required>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label class="ed-form-label">
+                                    Layout/Sld Of Work Execution/Completion
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="file" name="layout_sld_of_work_execution" placeholder="" value=""
+                                    accept="application/pdf" required>
+                            </div> -->
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Date Of Execution
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="date" id="date_of_execution_id" name="date_of_execution" placeholder="dd/mm/yy"
+                                    class="form-control ed-textbox"  onkeypress="return false" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                Date of readines
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="date" id="date_of_readines_id" name="date_of_readines" placeholder="dd/mm/yy"
+                                    class="form-control ed-textbox"  onkeypress="return false" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Date of completion
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="date" id="date_of_completion_id"  name="date_of_completion" placeholder="dd/mm/yy"
+                                    class="form-control ed-textbox"  onkeypress="return false" required>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label class="ed-form-label">
+                                   Prapose date of work 
+                                    <span class="text-danger">* </span>
+                                </label>
+                                <input type="date" name="prapose_date_of_work" placeholder="dd/mm/yy"
+                                    class="form-control ed-textbox" required>
+                            </div> -->
+
+
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                  Intimation Remark
+                                    <!-- <span class="text-danger">* </span> -->
+                                </label>
+                                <input type="textarea" name="intimation_remark" placeholder=""
+                                    class="form-control ed-textbox" value="">
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button type="submit" class="btn ed-submits ed-formsubmit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+<script>
+
+    function getmilestonecategory() {
+            var wotask_milestone_id = document.getElementById("wotask_milestone_id").value;
+           document.getElementById('milestone_category_id').innerHTML = '';
+            mydata = { "wotask_milestone_id": wotask_milestone_id }
+            console.log(mydata)
+            console.log("ppp",mydata)
+            $.ajax({
+                type: 'get',
+                url: "{% url 'tkc_fqpintimation_milestone_category_list' %}",
+                data: mydata,  
+                success: function (data) {
+                    console.log(data);
+                    console.log("qqqq",data)
+                    Object.entries(data).forEach(([_, value]) => {
+                        value.forEach(element => {
+                            var checkbox = document.createElement('input');
+                                var Milestone_category = 'milestone_category[]';                            
+                                checkbox.type = 'checkbox';
+                                checkbox.name = Milestone_category;
+                                checkbox.value = element.id;
+                                checkbox.checked = false;
+                                var label = document.createElement('label')
+                               
+                                label.appendChild(document.createTextNode(element.milestone_category_name));
+
+                                var br = document.createElement('br');
+
+                                var circle_name = document.getElementById('milestone_category_id');
+                                circle_name.appendChild(checkbox);
+                                circle_name.appendChild(label);
+                                circle_name.appendChild(br);
+                        })
+                        })
+                    }
+
+        })
+        }
+
+
+
+
+        //   let dtElem2 = document.getElementById('date_of_execution_id');
+        //   let maxDate2 = new Date();
+        //   dtElem2.max = formatDate(maxDate2);
+      
+        //   function formatDate(date) {
+        //       let dd = String(date.getDate()).padStart(2, '0');
+        //       let mm = String(date.getMonth() + 1).padStart(2, '0');
+        //       let yyyy = date.getFullYear();
+        //       return `${yyyy}-${mm}-${dd}`;
+        //   }
+      
+          //end date selection
+          let today = new Date();
+          let dd = String(today.getDate()).padStart(2, '0');
+          let mm = String(today.getMonth() + 1).padStart(2, '0');
+          let yyyy = today.getFullYear();
+      
+          today = yyyy + '-' + mm + '-' + dd;
+          $('#date_of_execution_id').attr('min', today);
+          $('#date_of_completion_id').attr('min', today);
+          $('#date_of_readines_id').attr('min', today);
+
+</script>
+
+<style>
+    .cucheckboxinfo {
+    position: relative;
+}
+
+.cucheckboxinfo label {
+    margin: 0;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 400 !important;
+}
+
+.cucheckboxinfo input[type="checkbox"] {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+}
+</style>
+
+
+{% endblock body %}

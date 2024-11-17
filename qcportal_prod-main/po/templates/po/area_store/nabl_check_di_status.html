@@ -1,0 +1,93 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 160px;
+}
+</style>
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Check DI Testing Status</h3>
+
+         <!-- <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div> -->
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center" id="nabl_check_di_status">
+             <thead class="table-dark">
+                 <tr>
+                     <th >Sr No.</th>
+                     <th >PO No.</th>
+                     <th >DI No.</th>
+                     <th>Vendor Name</th>
+                     <th>Item Name </th>
+                     <th>Item Quantity</th>
+                     <th>View</th>
+                    <th>Action</th>
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td><b>{{name.po.po_no}}</b></td>
+                     <td><b>{{name.di_master.erp_di_number}}</b></td>
+                     <td><b>{{name.po.vendor.CompanyName_E}}</b></td>
+                     <td class="project_progress">{{name.offer_item.material.specification}}
+                     </td>
+                     <td>{{name.deliverable_qty}}</td>
+                     <td>
+                        <a class="btn btn-info btn-sm" target="_blank" href="{{name.di_master.di_doc.url}}" >View DI</a>
+                      <!-- </td>
+                      <td> -->
+                      <a class="btn btn-info btn-sm" target="_blank" href="{{name.po.Po_doc.url}}" >View PO</a>
+                      
+                      </td>
+                    {% if name.samp_accepted_flag == 1 and name.mrc_create_flag == True %}
+                    <td><a class="btn btn-info btn-sm" href="las_view_mrc/{{name.id}}" >Check MRC Status</a></td>
+                    {% elif name.samp_accepted_flag == 1 %}
+                    <td><button class="btn btn-success btn-sm">LOT Accepted and Sent for MRC</button></td>
+                    {% elif name.samp_rejected_flag == 1 %}
+                    <td><button class="btn btn-danger btn-sm">LOT Rejected</button></td>
+                    {% elif name.resampling_flag == 1 %}
+                    <td><button class="btn btn-warning btn-sm">Resampling</button></td>
+                    {% elif name.sampling_flag == 1 %}
+                    <td><button class="btn btn-warning btn-sm">Sampled</button></td>
+                    {% else %}
+                    <td><button class="btn btn-primary btn-sm">Process Pending</button></td>
+                    {% endif %}
+                   </tr>
+             {% endfor %}
+
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ 
+
+ <script>
+  $(document).ready( function () {
+    $('#nabl_check_di_status').DataTable();
+} )
+</script>
+{% endblock body %}

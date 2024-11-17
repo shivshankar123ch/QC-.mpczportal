@@ -1,0 +1,134 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+<div class="card card-default width-75">
+     <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Item Name</th>
+                <th>Item Specification</th>
+                <th>Item Unit </th>
+                <th>Serial No </th>
+                <th>Action</th>
+                <th>Approval Status</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in item %}
+            <tr>
+                  <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Name}}
+                </td>
+                  <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Specification}}
+                </td>
+                  <td>
+                    {{data.Offer_Material.TKCVendor.Material_id.Material_Specification}}
+                </td>
+                 <td>
+                    {{data.Item_Serial_No}}
+                </td>
+
+                <td>{% if not offer.Material_Offer_Submit %}
+                     <div class="poaction-info">
+                      <a href="/tkc/item_delete/{{offer.id}}/{{data.id}}"  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                             Delete
+                                                        </span>
+                                                       </a>
+                     </div>
+                    {% else %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                             Already Pert Submitted
+                                                        </span>
+                                                       </a>
+                    {% endif %}
+                </td>
+                    <td>{% if  offer.Material_Offer_Submit_Approved_Status == 0 and offer.Material_Offer_Submit == 1 %}
+                        <a href=""  class="btn ed-submit btn-info">
+                                                        <span class="ed-submit-text">
+                                                              Pending
+                                                        </span>
+                                                       </a>
+                    {% elif offer.Material_Offer_Submit_Approved_Status == -1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                            Rejected
+                                                        </span>
+                                                       </a>
+                     {% elif offer.Material_Offer_Submit_Approved_Status == 1 %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                              Approved
+                                                        </span>
+                                                       </a>
+
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if  offer.Material_Offer_Submit_Approved_Remark %}
+                     <span class="ed-submit-text">
+
+                         <b>{{ offer.Material_Offer_Submit_Approved_Remark}}</b>
+                     </span>
+                     {% endif %}
+                </td>
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+
+     <form   action="/tkc/upload_item/{{offer.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+               <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1">Upload Item/Batch Serial No</label>
+                     </th>
+                      <th style="width:50%"><b>{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                  <td> <label for="exampleInputEmail1"> Upload Serial Number Excel : <span style="color: red;">*</span> </label> </td>
+                  <td> <input type="file" name="file" class="form-control" id="exampleInputEmail1" placeholder=""></td>
+                </tr>
+                </tbody>
+              </table>
+                                               <div class="form-action text-right m-2">
+                                                    <button  type="submit" id="btnsave" class="btn ed-submit btn-info" >
+                                                        <span class="ed-submit-text">
+                                                            Submit
+                                                        </span>
+                                                    </button>
+
+                                                </div>
+
+           </form>
+          </div>
+
+
+        <div>
+            <p>
+                Click Here to download sample Excel for uploading Serial number of item
+                <a href="/vendor/download_demo_excel">
+                <b>Download Excel</b>
+            </a>
+            </p>
+        </div>
+
+{% endblock body %}
+

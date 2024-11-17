@@ -1,0 +1,95 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+  <!-- Main content -->
+   <section class="content">
+     
+    <!-- <form action="/po/select_received_material/{{dataid}}/{{material.di_master.erp_di_number}}" method="post"> -->
+      <form action="/po/select_material_for_getpass/{{dataid}}/{{material.di_master.erp_di_number}}" method="post">
+      {% csrf_token %}
+      
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title"> Material</h3>
+         <!-- {{material.di_master.erp_di_number}} -->
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center">
+             <thead class="table-dark">
+                 <tr>
+                     <th style="width: 1%">Sr No.</th>
+                     <th>Select Received Materials</th>
+                    <th>Item Name</th>
+                     <th>Serial Number</th>
+                  
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <!-- <td>{% if name.received_material == 1 %} Received 
+                        {% elif name.received_material == -1 %}Rejected  
+                        {% else %}
+                        <input type="checkbox" name="{{name.id}}" value="2" checked>  <input hidden type="checkbox" name="{{name.id}}" value="0">{% endif %}</td> -->
+                   
+                        <!-- <td>{% if name.received_material == 1%} Accpected  <input type="checkbox" name="{{name.id}}" value="1" checked hidden> {% elif name.received_material == -1 %}Rejected  <input type="checkbox" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                            <input type="checkbox" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="checkbox" name="{{name.id}}" value="-1"> Reject
+                       {% endif %}</td> -->
+
+
+                      <td>
+                        {% if name.received_material == 1 %} 
+                        Received  
+                      <input type="checkbox" name="{{name.id}}" value="1" checked hidden> 
+                        {% elif name.received_material == -1 %}
+                        Rejected  
+                      <input type="checkbox" name="{{name.id}}" value="-1" checked hidden> 
+                        {% else %}
+                      <input type="checkbox" name="{{name.id}}" value="2" >
+                        {% endif %}</td>
+                       <td>
+                        <b>{{name.material}}</b>
+                     </td>
+                    
+                     <td class="project_progress">
+                             {{name.serial_no}}
+                     </td>
+                   
+                   
+                   
+                   
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+         <div class="text-end">
+          <button class="btn btn-primary btn-sm">Submit</button> 
+         </div>
+       
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

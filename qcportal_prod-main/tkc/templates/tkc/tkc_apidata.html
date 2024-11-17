@@ -1,0 +1,64 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+
+
+<form method="post" action="/tkc/api_response_data">
+    {% csrf_token %}
+<table class="table table-striped table-center">
+  <tr>
+    <th>Work Description</th>
+    <th>Consumer Application No</th>
+    <th>Created Date</th>
+    <th>Scheme Name</th>
+    <th>Consumer Name</th>
+    <th>Mobile No</th>
+    <th>Work Type Name</th>
+    <th>DC Name</th>
+    <th>Division</th>
+    <th>Circle</th>
+  </tr>
+
+
+  {% for a, b ,c ,d ,e ,f ,g ,h ,i ,j ,k ,l in final_zip %}
+ <tr>
+    <td>{{a}}</td>
+    <td>{{b}}</td>
+    <td>{{c}}</td>
+    <td>{{d}}</td>
+    <td>{{e}}</td>
+    <td>{{f}}</td>
+    <td>{{g}}</td>
+    <td>{{h}}</td>
+    <td>{{i}}</td>
+    <td>{{j}}</td>
+    
+    {% if k == None %}
+      <tr>
+      <th scope="row">Accept <input type="radio" value="false|{{l}}" name="ac"></th>
+      <td><th scope="row">Reject<input type="radio" value="true|{{l}}" name="ac"></td>
+    
+      <td style="font-weight:bold;"><input type="text" name="remark"></td>
+      <td><button type="submit" onclick="alert('Are you sure?');">Submit</button></td>
+    </tr>
+    {% elif k == True %}
+     <tr>
+   <td> <h5 style="color:red;" >Rejected</h5></td>
+    </tr>
+     {% elif k == False %}
+      <tr>
+    <td> <h5 style="color:green;" >Accepted</h5></td>
+     </tr>
+    {% endif %}
+ </tr>
+  
+  {% endfor %} 
+</table>
+</form>
+<div>
+    
+    
+</div>
+</div> 
+
+
+
+{% endblock body %}

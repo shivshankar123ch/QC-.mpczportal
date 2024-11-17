@@ -1,0 +1,72 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>Upload Digital Certificate</h5>
+        </div>
+  
+        <form action="/cert_upload_download_rca/{{var_show.User_Id}}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading">Panel Heading</div>
+                                                                          <div class="panel-body">Panel Content</div> -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                                <tr>
+                                    <th style="width:5% ">
+                                        S.No.</th>
+                                    <th style="width: 45% ">
+                                        Title </th>
+                                    <th style="width: 20% ">
+                                        Value </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        
+                               
+        
+                                <tr>
+                                    <td class="text-center align-middle">1</td>
+                                    <td class="align-middle">Company Name</td>
+                                    <td class="text-center align-middle"><input type="text"  value="{{var_show.CompanyName_E}}" class="form-control" readonly></td>
+        
+                                </tr>
+                                <tr>
+                                    <td class="text-center align-middle">2</td>
+                                    <td class="align-middle">Authentication Number</td>
+                                    <td class="align-middle text-center"><input type="text"  value="{{var_show.Authentication_id}}" class="form-control" readonly></td>
+        
+                                </tr>
+                                
+        
+        
+        
+        
+                                <tr>
+                                    <td class="text-center align-middle">3</td>
+                                    <td class="align-middle">Upload Signed Certificate</td>
+                                    <td class="text-center align-middle"><input type="file" name="four" value="{{basic.Email_Id}}" class="form-control"></td>
+        
+                                </tr>
+        
+        
+                                 </tr>
+                                <tr></tr>
+        
+                            </tbody>
+                        </table>
+                        <div class="col-lg-6">
+        
+                            <button type="Submit" class="btn btn-primary float-center" style="width: 160px;">Submit</button>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+               </div>
+</div>
+{% endblock body %}

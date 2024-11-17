@@ -1,0 +1,85 @@
+{% extends 'CA/fi_dashborad.html' %} {% load static %} {% block body %} {% block a %} <span class="ms-1 font-weight-bold">{{a.Name}}</span> {% endblock %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg10.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="roof_top_upload" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h4 class="font-weight-bolder mb-0 text-center mt-6">M.P. MADHYA KSHETRA VIDYUT VITARAN CO. LTD.</h4>
+  <div class="table-responsive">
+    <table class="table  table-bordered table-hover" id="example_table123">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">
+                    S.No.</th>
+                <th class="text-center">
+                    Reference No.</th>
+                <th class="text-center">
+                    Receipt No.</th>
+                <th class="text-center">
+                   Security Deposite</th>
+                <th class="text-center">
+                   Mobile</th>
+                <th class="text-center">
+                   Created D&T</th>
+                <th class="text-center">
+                   Views Voucher</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+           {% for data in Cash_Voucher %}
+            <tr>
+                <td class="text-center">{{forloop.counter}}</td>
+                <td>{{data.Reference_No}}</td>
+                <td>{{data.voucher_code}}</td>
+                <td>{{data.Deposit_amount}}</td>
+                <td>{{data.Mobile}}</td>
+                <td>{{data.updated_date}}</td>
+                <td><a href="/ca/finance_security_refund_cash_Voucher/{{data.id}}">Views</a></td>
+                
+                <!-- <td></td> -->
+
+            </tr>
+            {% endfor %}
+           
+            
+   
+        
+</div>
+
+    <div class="multisteps-form__content">
+
+
+        <!-- <div class="button-row d-flex mt-4">
+            
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" type="Submit" title="Save & Next">Save & Next</button> -->
+            
+</form>
+</div>
+<!---trial end here-->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap Datatable js -->
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+
+
+{% endblock body %}

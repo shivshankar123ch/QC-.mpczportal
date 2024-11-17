@@ -1,0 +1,35 @@
+{% extends 'rca/RCA_inspection_officer_base.html' %}
+
+{% load static %}
+
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+    <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1">RCA Inspecting Officer</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+    <li class="nav-item ">
+      <a class="nav-link " href="/rca/rca_inspection_pending">
+        <span class="sidenav-mini-icon"> PO </span>
+        <span class="sidenav-normal"> Pending Inspection</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link active" href="/rca/rca_inspection_complete">
+        <span class="sidenav-mini-icon"> CO </span>
+        <span class="sidenav-normal"> Complete Inspection</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock active %}
+
+
+{% block body %}
+
+<h1>Complete</h1>
+
+{% endblock body %}

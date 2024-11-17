@@ -1,0 +1,114 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="ed-information mb-2">
+    <div class="card ed-card-block">
+        <div class="card-body">
+
+
+
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Upload Discrepancies found in Survey Documents
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+
+                    <form action="/tkc/Discrepancies_found_in_Survey/{{data.id}}" method="POST" name="myForm" onsubmit="return validateForm()" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work order number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly" value="{{data.Contract_Number}}"
+                                readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Company Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Discom.Discom_Short_Name}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Subject
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Header.Contract_Description}}" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Order Date
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control ed-textbox ed-readonly"
+                                value="{{data.Contract_Date}}" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Upload Discrepancies found in Survey Documents
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" name="Discrepancies_found_in_Survey" class="" id="file33" onkeyup="validateForm()"
+                            onfocus="validateForm()" onchange="validateForm()"accept="application/pdf" required>
+                            <span id="file22" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <div class="text-right">
+                                <button type="submit" id="btnsave"  onclick="validateForm()" class="btn ed-submits btn-info">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function  validateForm(){
+    let fileup = document.forms["myForm"]["otherdoc_file"].value;
+    let fileee = document.getElementById("file33").value;
+    var allowedExtensions = /(\.pdf)$/i;
+    let fileInput_Result1 = allowedExtensions.test(fileee);
+
+    if (fileup == "") {
+              document.getElementById('file22').innerHTML = "Please the Upload file(In .pdf format)";
+              return false;
+               } else {
+              //document.getElementById('Twenty_two').innerHTML = "";
+             if (fileInput_Result1 == false) {
+              document.getElementById('file22').innerHTML = "  Please Upload valid file format(In .pdf) ";
+               return false;
+              } else {
+               // document.getElementById('file1').innerHTML = "";
+              const oFile = document.getElementById("file33").files[0].size / 1024 / 1024;
+              if (oFile > 2) {
+                alert("File size must be less than or equal to 2 MB");
+                document.getElementById("file33").value = "";
+                return false;
+
+              } else {
+                document.getElementById('file22').innerHTML = "";
+             }
+         }
+      }
+}
+</script>
+
+
+{% endblock body %}

@@ -1,0 +1,56 @@
+
+{% extends 'officer/RoofTop_Viewer_base.html' %} {% load static %} {% block body %}{% load static %}
+<div class="container">
+  <h2>LOA Details</h2>
+  <div class="panel panel-default">
+      <!-- <div class="panel-heading">Panel Heading</div>
+      <div class="panel-body">Panel Content</div> -->
+      <div class="table-responsive">
+         <table class="table table-bordered table-hover">
+              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                    
+                    <th>
+                        Name Of Agency
+                    </th>
+             
+                    <th>
+                        User Type
+                    </th>
+                    <th>
+                        Name Of Authoreised Person </th>
+
+                    <th>
+                    GST </th>
+
+                    <th>
+                        Email </th>
+
+                        <th>
+                            Contact </th>
+                
+                        
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in data %}
+                <tr>
+                  <td>{{data.agency_name}}</td>
+                  <td>{{data.user_type}}</td>
+                  <td>{{data.name_of_auth}}</td>
+                  <td>{{data.gst}}</td>
+                  <td>{{data.email}}</td>
+                  <td>{{data.contact}}</td>
+
+
+             
+                 
+               
+                  {%  endfor %}
+              <tr></tr>
+                </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock body %}

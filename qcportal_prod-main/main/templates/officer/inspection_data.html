@@ -1,0 +1,663 @@
+{% extends 'main/inspecting_officer_base.html' %} {% load static %} {% block body %}
+<div class="insepection-block">
+    <div class="container">
+        <div id="printid">
+            <h2 class="insepection-title" style="text-align:center;">PRE DELIVERY INSPECTION REPORT</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        {% for i in list %}
+                        <td class="w-5">
+                            <p>
+                                1
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Authorization Reference
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                               {{forloop.counter}}.PRE DELIVERY INSPECTION REPORT
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                2
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Name of Authority Allocating the inspection
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                CGM(QC)
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        
+                        <td class="w-5">
+                            <p>
+                                3
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            
+                            <label class="label-text">
+                                Contract / P.O. No.
+                            </label>
+                        </td>
+                        
+                        <td class="w-50">
+                           
+                            <label class="label-text">
+                                {{i.wo.Contract_Number}}
+                            </label>
+                            
+                        </td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                4
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            
+                            <label class="label-text">
+                                Name & Designation of Inspecting Engineer
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            
+                            <label class="label-text"> {{i.PDI.officer.officer_name}}
+                            </label>                           
+                        </td>
+                       
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                5
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Name of Supplier
+                            </label>
+                        </td>
+                        <td class="w-50">
+                         
+                            <label class="label-text">
+                                {{i.supplier.CompanyName_E}}
+                            </label>
+                           
+                        </td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                6
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Name of Manufacture
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.TKCVendor.Vendor.CompanyName_E}}
+                            </label>
+                        </td>
+                    
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                7
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            
+                            <label class="label-text">
+                                Date of Inspection
+                            </label>
+                        </td>
+                        <td class="w-50">
+                         
+                            <label class="label-text">
+                                {{i.PDI.inspection_date}}
+                            </label>
+                          
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                8
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Particulars of Item Inspected
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                             
+                                {{i.TKCVendor.Material_id.Material_Specification}}
+                              
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                9
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Quantity Indicated in inspection Requisition received from Client
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                               
+                                {{i.quantity}}
+                              
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                10
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Quantity Inspected
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                               
+                                {{i.Quantity_Inspected}}
+                                
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                11
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Documents Referred
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.Document_Referred}}
+                            </label>
+                            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                12
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Test Witnessed
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.Test_Witnessed}}
+                            </label>
+                           
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                13
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Raw Material TCs
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.Raw_material}}
+                            </label>
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                14
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Gtp
+                            </label>
+                        </td>
+                        <td class="w-50">
+                           <a class="nav-link" href="{{i.TKCVendor.vendor_gtp_file.url}}"target=”_blank”>
+                                <span class="btn btn-info btn-sm">View</span>
+                            </a>
+                        </td>
+                    </tr>
+
+                    
+                    
+                   
+                        <td class="w-5">
+                            <p>
+                                17
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Long.-Lat.
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                              
+                                {{i.Lat}} , {{i.Log}}
+                            
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                18
+                            </p>
+                        </td>
+                        <td class="w-50" colspan="2">
+                            <label class="label-text">
+                                <b>Remarks :</b>
+                            </label>
+                            <label class="label-text">
+                                i) Inspection carried out on the basis of inspection call letter of CGM (QCMM), O/o MD,
+                                MPMKVVCL, Bhopal as per approved Technical Specification/ Approved Drawings & GTP.
+
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                19
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Observations
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                             
+                                {{i.Observations}}
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                20
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Ready Quantity
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.ready_quantity}}
+                            </label>
+                         
+                        </td>
+                    </tr>
+                    <tr>
+                        <tr>
+                            <td class="w-5">
+                                <p>
+                                    21
+                                </p>
+                            </td>
+                            <td class="w-50">
+                                <label class="label-text">
+                                    Passed Quantity
+                                </label>
+                            </td>
+                            <td class="w-50">
+                                <label class="label-text">
+                                    {{i.passed_quantity}}
+                                </label>
+                             
+                            </td>
+                        </tr>
+                        <tr>
+                            <tr>
+                                <td class="w-5">
+                                    <p>
+                                        22
+                                    </p>
+                                </td>
+                                <td class="w-50">
+                                    <label class="label-text">
+                                        Failed Quantity
+                                    </label>
+                                </td>
+                                <td class="w-50">
+                                    <label class="label-text">
+                                        {{i.failed_quantity}}
+                                    </label>
+                                 
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                23
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                Conclusion
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                {{i.Remark}}
+                            </label>
+                         
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-5">
+                            <p>
+                                24
+                            </p>
+                        </td>
+                        <td class="w-50">
+                            <label class="label-text">
+                                View PDI Report
+                            </label>
+                        </td>
+                        <td class="w-50">
+                            {% if i.PDI.pdi_report %}
+                            <a class="nav-link " href="{{i.PDI.pdi_report.url}}"
+                            target=”_blank”>
+                           <span class="btn btn-info btn-sm"> View</span></a>
+                           {% elif i.PDI.pdi_report_url %}
+                        
+                            <a class="nav-link " href="{{i.PDI.pdi_report_url}}"
+                            target=”_blank”>
+                            <span class="btn btn-info btn-sm"> View</span></a> 
+                        
+                            {% else %}
+
+                            PDI report not uploaded
+                            
+                            {% endif %}
+                        </td>
+
+                      
+                    </tr>
+                   
+                            
+
+                            
+                    {% endfor %}
+                 
+                
+                </table>
+            </div>
+              <div class="card-body">
+                <h5 class="card-title m-2 font-weight-bolder"> <b>Factory Images</b></h5>
+             <table class="table table-bordered">
+                <thead class="table table-dark">
+                        <tr>
+                            <th> Serial Number </th>
+                            <th> Image </th>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in factory_image %}
+                        <tr class="bg-light">
+                            <td>{{forloop.counter}}</td>
+                            <td class="text-center">
+                                <a href="{{data.Image.url}}" target="_blank">View</a>
+                            </td>
+                           
+                            <tr>
+                                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="ed-tableinfo-block ed-orderinfo-block">
+                <div class="table-responsive">
+                    <h5 class="card-title m-2 font-weight-bolder"> <b>List of Officer present during Inspection</b></h5>
+                    <table class="table table-striped ed-table-block">
+                        <thead>
+                            <tr>
+                                <th class="wc1">Sr. No.</th>
+                                <th class="">Name</th>
+                                <th>Designation</th>
+                                <th>Representative from</th>
+                                <th>Mobile No</th>
+                                <th>Image</th>
+                               
+                                                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                        {% for rep_data in representative_data %}
+                            {% comment %} {% for value in wo_data %}  {% endcomment %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{rep_data.name}} </td>
+                                    <td>{{rep_data.designation}}</td>
+                                    <td>{{rep_data.representative_from}}</td> 
+                                    <td>{{rep_data.mobile_no}}</td>
+                                    <td class="text-center">
+                                       
+                                        <a href="{{rep_data.image_1.url}}" target="_blank">View</a>
+                                    </td>
+        
+                                   
+                                                                   
+                                  
+                                </tr>
+                               
+                           
+                       {% endfor %}
+                        </tbody>
+                    </table>
+                   
+                        
+                    </form>
+                </div>
+            </div>
+
+
+            <!--<div class="insepection-infromation">-->
+            <!--    <div class="signbox-block">-->
+            <!--        <div class="row m-0">-->
+            <!--            <div class="col-sm-6 col-6 p-0">-->
+            <!--                <div class="signbox-item">-->
+            <!--                    <h4>(Authorised Signatory)</h4>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="col-sm-6 col-6 p-0">-->
+            <!--                <div class="signbox-item signbox-item1">-->
+            <!--                    <p>For ………………………</p>-->
+            <!--                    <br><br><br>-->
+            <!--                    <h4>(Authorised Signatory)</h4>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div>-->
+
+            <style>
+                body {
+                    font-family: 'Josefin Sans', sans-serif;
+                    font-family: 'Poppins', sans-serif;
+                }
+
+                .insepection-block {
+                    position: relative;
+                    padding: 20px;
+                }
+
+                .insepection-block .insepection-title {
+                    text-align: center;
+                    font-weight: 600;
+                    font-size: 24px;
+                    margin: 0 0 20px;
+                }
+
+                .insepection-block .table {
+                    border: 1px solid #212529;
+                    border-spacing: 0;
+                }
+
+                .insepection-block .table td {
+                    border: 1px solid #dee2e6;
+                    border-bottom: 0;
+                    border: 1px solid #212529;
+                }
+
+                .insepection-block .table td p {
+                    margin: 0;
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+
+                .insepection-block .table td label {
+                    font-size: 14px;
+                    margin: 0;
+                    display: block;
+                }
+
+                .insepection-block .table-responsive {}
+
+                .insepection-block .insepection-infromation {
+                    margin: 10px 0 20px;
+                }
+
+                .insepection-block .insepection-infromation .signbox-item {
+                    border: 1px solid #212529;
+                    min-height: 154px;
+                    padding: 18px;
+                }
+
+                .insepection-block .insepection-infromation .signbox-item h4 {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin: 0;
+                }
+
+                .insepection-block .insepection-infromation .signbox-item p {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin: 0;
+                }
+
+                .insepection-block .notes {
+                    margin: 20px 0 0;
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+
+                .w-5 {
+                    width: 5%;
+                }
+
+                .w-35 {
+                    width: 35%;
+                }
+
+                .w-60 {
+                    width: 60%;
+                }
+
+                .w-50 {
+                    width: 50%;
+                }
+                table, td { 
+                    border: 1px solid #212529;
+                }
+            </style>
+
+        </div>
+
+       
+        
+        
+        <div class="notes">
+            <b>Note:</b> This inspection is purely technical in nature and without prejudice to other terms and
+            conditions of the P.O. The firm is not absolved of the responsibility of supplying the material
+            confirming to Approved GTP/ Specification/ Drawings.
+        </div>
+    </div>
+</div>
+
+
+
+ 
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+
+
+{% endblock body %}

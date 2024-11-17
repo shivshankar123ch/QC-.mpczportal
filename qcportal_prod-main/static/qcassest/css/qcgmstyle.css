@@ -1,0 +1,114 @@
+.ed-tableinfo-block .ed-table-block thead th {
+    min-width: 20px;
+    padding: 10px 4px;
+    font-size: 13px;
+    line-height: 26px;
+}
+
+.ed-tableinfo-block .ed-table-block td {
+    min-width: 20px;
+    padding: 4px 2px;
+    font-size: 13px;
+    line-height: 26px;
+    font-weight: 400;
+}
+
+.ed-card-block .card-header h2 {
+    font-size: 18px;
+    margin: 0 0 4px;
+    padding: 0 0 5px;
+}
+
+.ed-card-block .card-header {
+    padding: 8px 8px 0;
+}
+
+.ed-card-block .card-body {
+    padding: 8px;
+}
+
+.qc-sidenav-block .qc-navbar-nav {
+    padding-bottom: 80px;
+}
+
+.qc-sidenav-block {
+    width: 210px;
+}
+
+.qc-sidenav-block .qc-sidenav-header .navbar-brand img {
+    width: 36px;
+    height: 36px;
+    padding: 3px;
+}
+.qc-sidenav-block .qc-sidenav-header .navbar-brand {
+    font-size: 12px;
+}
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link {
+    padding: 6px 5px;
+    letter-spacing: 0;
+    font-size: 13px;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link .iconbox {
+    width: 24px;
+    height: 24px;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link .textitem_main {
+    padding-left: 5px;
+}
+
+.qc-contant-block {
+    padding-left: 220px;
+}
+
+.qc-header-block .qc-container-block {
+    padding-left: 220px;
+}
+
+.qc-header-block .qc-container-block .navbar-nav .nav-item .nav-link {
+    width: 42px;
+    height: 42px;
+    padding: 7px;
+}
+
+.qc-header-block .qc-container-block .navbar-nav .nav-item .qc-profilemenu .qc-imgbox {
+    width: 42px;
+    height: 42px;
+}
+
+.ed-footer-block {
+    padding: 10px 0px;
+    position: relative;
+    margin: 10px 0 0px;
+}
+
+.ed-menudropdown-block .menu-item .menu-link {
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
+.qc-sidenav-block .qc-navbar-nav {
+    padding-top: 0;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link {
+    font-size: 11px;
+    padding: 4px 2px;
+    line-height: normal;
+    font-weight: 600;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link .textitem_main .ed-right-angel {
+    display: none;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link .iconbox svg {
+    width: 13px;
+    height: 13px;
+}
+
+.qc-sidenav-block .qc-navbar-nav .nav-item .nav-link .iconbox {
+    width: 16px;
+    height: 16px;
+}

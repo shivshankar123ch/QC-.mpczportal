@@ -1,0 +1,205 @@
+{% extends 'main/mpeb_base.html' %}
+{% load static %}
+{% block heading %}
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock heading %}
+
+{% block body %}
+
+<!-- <body onkeydown="return (event.keyCode != 116)">  
+    <h1>  
+        Click this page to set focus.  
+    </h1>  
+</body>  -->
+
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Sampled Data 
+        </h2>
+    </div>
+    <div class="card-body mb-2">
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            Work Order Information
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Work Order No
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="MPCZ00{{ ro.wo.id}}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA Vendor Firm Name
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ro.wo.vendor_id.CompanyName_E}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Release / Allotment No.
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="RO00{{ro.id}}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-2">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                Description
+                            </th>
+                            <th class="text-center">
+                                Quantity
+                            </th>
+                            <!-- <th class="text-center"> Rate </th> -->
+                            <!-- <th class="text-center"> Total amount </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td>
+                            <!-- <td>{{data.rate}}</td>
+                            <td>{{data.total_rate}}</td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-2">
+        <form name="formcontact1"" method=" POST" action="/po/forward_nabl_submit/{{ro.id}}">
+        {% csrf_token %}
+
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered display">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-center">
+                                    Rating
+                                </th>
+                                <th class="text-center">
+                                    XMR Code
+                                </th>
+                                <th class="text-center">
+                                    XMR Type
+                                </th>
+                                <!-- <th class="text-center"> Rate </th> -->
+                                <!-- <th class="text-center"> Total amount </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in xmr_random %}
+                            <tr>
+                                <td><input type='text' name='rating' size="36" value="{{data.material.rating}}"
+                                        readonly="readonly" class="form-control ed-textbox" /></td>
+                                <td><input type='text' name='xmrcode' size="36" value="{{data.xmr}}" readonly="readonly" class="form-control ed-textbox" /> </td>
+                                <td>
+                                    {% if data.new_design == 1 %}
+                                    Non-star(New Design)
+                                    {% elif data.old_l1 == 1 %}
+                                    Level-1(Old)
+                                    {% elif data.old_l2 == 1 %}
+                                    Level-2(Old)
+                                    {% elif data.design_non_star == 1 %}
+                                    Non-Star(Old Design)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+
+        </form> 
+
+        <div class="form-group" id="printsinfo">
+            <div class="form-action text-center">
+                <button onclick="windoPrint()" class="btn btn-primary">Print</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+ 
+
+
+<script>
+    function windoPrint()
+    {
+        document.getElementById('printsinfo').style.display='none';
+        document.getElementById('headerMenu').style.display='none';
+        
+        $('.ed-footer-block ').hide();
+        $('.edrca-contant-block').css('padding-top','10px');
+        window.print();
+        document.getElementById('printsinfo').style.display='block';
+        document.getElementById('headerMenu').style.display='block';
+        $('.ed-footer-block ').show();
+        $('.edrca-contant-block').css('padding-top','85px');
+    }
+
+
+
+    
+
+    {
+        function ValidateRating(event, inputText) {
+            event.preventDefault();
+            //remaining function logic goes here
+        }
+    } 
+</script>
+ 
+
+{% endblock body %}

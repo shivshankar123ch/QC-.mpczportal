@@ -1,0 +1,100 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+<style>
+  .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 160px;
+}
+</style>
+
+  <!-- Main content -->
+   <section class="content">
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">DI Approve In NABL Testing</h3>
+
+         <!-- <div class="card-tools">
+           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+             <i class="fas fa-minus"></i>
+           </button>
+           <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+             <i class="fas fa-times"></i>
+           </button>
+         </div> -->
+       </div>
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center" id="nabl_reject_di">
+             <thead class="table-dark">
+                 <tr>
+                     <th >Sr No.</th>
+                     <th >PO No.</th>
+                     <th >DI No.</th>
+                     <th>Vendor Name</th>
+                     <th>Item Name </th>
+                     <th>Approve Quantity</th>
+                     <th>View DI</th>
+                     <th>view Approved items</th>
+                     <!-- <th>Inward Gatepass</th> -->
+                    <!-- <th>Action</th> -->
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td><b>{{name.po.po_no}}</b></td>
+                     <td><b>{{name.di_master.erp_di_number}}</b></td>
+                     <td><b>{{name.po.vendor.CompanyName_E}}</b></td>
+                     <td class="project_progress">{{name.offer_item.material.specification}}</td>
+                     <td>{{name.deliverable_qty}}</td>
+                     <td>
+                        <a class="btn btn-info btn-sm" target="_blank" href="{{name.di_master.di_doc.url}}" >View DI</a>
+                    </td>
+                    <td>
+                    <a  href="/po/nabl_approve_di_material_view/{{name.id}}"><button class="btn btn-primary btn-sm">View Approved Items</button></a>
+                    </td>
+                    <!-- {% if name.gatepass == 2 %}
+                    <td><button class="btn btn-success btn-sm">Outward Gatepass created</button></td>
+                    {% else %}
+                       <td>
+                         <a  href="/po/create_nabl_reject_di_gatepass/{{name.id}}/{{name.di_master.erp_di_number}}"><button class="btn btn-primary btn-sm">Create Outward Gatepass</button></a>
+                       </td> -->
+                       <!-- <td> <a class="btn btn-primary btn-sm float-left" href="/po/select_material_for_getpass/{{name.id}}">Create Gatepass</a><td> -->
+                    <!-- {% endif %} -->
+
+
+                    <!-- {% if name.gatepass == 1 and name.di_master.nabl_status == 1 %}
+                    <td><a<button class="btn btn-success btn-sm">Sent for MRC</button></a></td> -->
+                    
+                    <!-- {% elif name.gatepass == 2 %}
+                        <td> <a  href="/po/rejected_di_send_to_Vendor/{{name.di_master.id}}"><button class="btn btn-primary btn-sm">click for Send to MRC</button></a></td>
+
+                    {% else%}
+                    <td><a<button class="btn btn-danger btn-sm">LOT Accepted </button></a></td>
+                    {% endif %} -->
+
+                   </tr>
+             {% endfor %}
+
+          </tbody>
+         </table>
+       </div>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ 
+ 
+
+ <script>
+  $(document).ready( function () {
+    $('#nabl_reject_di').DataTable();
+} )
+</script>
+{% endblock body %}

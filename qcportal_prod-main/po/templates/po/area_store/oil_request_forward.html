@@ -1,0 +1,128 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+
+<div class="mx-auto" style="width: 85%;">
+  <table class="table table-striped m-4 " border="2" style="width:90%">
+    <thead class="bg-primary">
+      <tr>
+        <th colspan="2">Work Order Information</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>Work Order No</td>
+        <td><b>MPCZ00{{ ro.wo.id}}</b></td>
+      </tr>
+      <tr>
+        <td>RCA Vendor Company name</td>
+        <td><b>{{ ro.wo.vendor_id.CompanyName_E}}</b></td>
+      </tr>
+      <tr>
+        <td> Material </td>
+        <td><b>{{ ro.wo.wo_specification}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table class="table table-striped m-4 " border="2" style="width:90%">
+    <thead class="bg-primary">
+      <tr>
+        <th scope="col-3"> Rating </th>
+        <th scope="col-3"> Description </th>
+        <th scope="col-9"> Quantity </th>
+        <th scope="col-9"> Rate </th>
+        <th scope="col-9"> Total amount </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in material %}
+      <tr>
+        <td>{{data.rating}}</td>
+        <td>{{data.description}}</td>
+        <td>{{data.quantity}}</td>
+        <td>{{data.rate}}</td>
+        <td>{{data.total_rate}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <table class="table table-striped m-4 " border="2" style="width:90%">
+    <thead class="bg-primary">
+      <tr>
+        <th scope="col-3"> Rating </th>
+        <th scope="col-3"> XMR Code </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in xmr %}
+      <tr>
+        <td>{{data.material.rating}}</td>
+        <td>{{data.xmr}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="col-md-4 m-2">
+    <div class="form-group">
+      <label for="add1"> Requested Oil Amount :</label>
+      <b>{{oil.v_request_quantity}} Liter</b>
+      <!-- <span id="address" class="text-danger font-weight-bold" style="font-size: 80%;"></span> -->
+    </div>
+  </div>
+  <form action="/po/oil_request_forward/{{oil.id}}" method="POST" name="myForm" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="col-md-4 m-2">
+      <div class="form-group">
+        <label for="add1"> Enter Available Oil Amount (Liter) <span style="color: red;">*</span></label>
+        <input type="Number" name="quantity" id="sched_desc" onfocus="validateForm()" onkeyup="validateForm()"
+          onchange="validateForm()"  onkeypress='validate(event)' class="form-control" placeholder="Oil Amount In Liter" required>
+        <span id="address" class="text-danger font-weight-bold" style="font-size: 100%;"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <input type="submit" onclick="validateForm()" name="submit" value="Forward To RCA"
+          class="btn btn-success float-right m-4" autocomplete="off">
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  function validateForm() {
+
+    let schedule11 = document.forms["myForm"]["quantity"].value;
+
+    if (schedule11 == "") {
+      document.getElementById('address').innerHTML = " Please fill the required field ";
+      return false;
+    } else {
+      document.getElementById('address').innerHTML = "";
+    }
+  }
+</script>
+<script>
+  function validate(evt) {
+        var theEvent = evt || window.event;
+      
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+        // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if( !regex.test(key) ) {
+          theEvent.returnValue = false;
+          if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+      }
+</script>
+{% endblock body %}

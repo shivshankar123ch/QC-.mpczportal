@@ -1,0 +1,248 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} Gatepass Outward {% endblock heading %}
+{% block body %}
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+/* input[type=number] {
+  -moz-appearance: textfield;
+} */
+</style>
+
+<div class="card p-5">
+    <div class="table-responsives">
+        <table class="table table-striped" border="2">
+            <thead class="bg-primary">
+                <tr>
+                    <th colspan="2">PO Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PO No</td>
+                    <td><b>{{ data.po.po_no}}</b></td>
+                </tr>
+                <tr>
+                    <td>Vendor Company name</td>
+                    <td><b>{{ data.po.vendor.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                    <td> Material </td>
+                    <td><b>{{ data.offer_item.material.specification}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+    <h3 class="card-title m-2 table-responsive"> <b> Gatepass Material Details </b></h3> 
+    <div class="table-responsives">
+        <table class="table table-bordered table-responsive" cellspacing="0">
+            <thead class="bg-primary">
+            <tr>
+              <th style="width:5% ">
+                  S NO.</th>
+                  <th style="width:5% ">
+                  Material Name </th>
+                  <th style="width:5% ">
+                  Material Serial Number </th>
+  
+               
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+           
+            <tr class="bg-light">
+              <td>{{forloop.counter}}</td>
+              <td><b>{{data.material}}</b></td>
+              <td><b>{{data.serial_no}}</b></td>
+        
+         {% endfor %}
+      </tbody>
+      </table>
+    </div>   
+
+
+
+    
+    <form action="/po/po_nabl_gatepass_resampling/{{data.id}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateFunc()">
+        {% csrf_token %}
+        <div>
+            <table class="table table-striped mt-2" border="2">
+                 <tr>
+                    <th>NABL Name:<span style="color: red;">*</span></th>
+                    <td><b>{{ data.nabl_name}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th>DI Number:<span style="color: red;">*</span></th>
+                    <td><b>{{ data.di_master.erp_di_number}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th> Gatepass Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                    <td><input type="date" id="gatepass_date" name="gatepass_date" required="required" placeholder="" style="width:250px;">
+                        <span id="date" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatepass No: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="number" name="gatepass_no" id="gatepass_num" placeholder=""
+                            style="width:250px;" required="required">
+                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatekeeper Name <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="gk_name" id="gatekeepar_name" placeholder="" style="width:250px;"
+                            required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Vehicle No. <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="vehicle_no" id="vehical-no" placeholder="" style="width:250px;"
+                            required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Name: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_name" id="driver-name" placeholder="" style="width:250px;"
+                            required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Phone: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_phone" id="driver-phone" placeholder="" style="width:250px;"
+                            required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Material Received By: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="mat_rece_by" id="mat-rec-name" placeholder="" style="width:250px;"
+                            required="required">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                
+                <tr>
+                    <th>Outward Quantity: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" value="{{outward_qty}}" name="outward_qty" style="width:250px;"
+                     readonly>
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    
+
+                    <td> <label for="driver_aadhar">Driver Aadhar Upload&nbsp;</label></td>
+                    <td> <input type="file" name="driver_aadhar" accept="application/pdf" style="width: 200px" required>
+                        <p style="color:red">Only pdf accepted*</p>
+                    </td>
+                    
+                </tr>
+
+            </table>
+            <div class="col-md-12">
+                <input type="submit" name="submit" value="Generate Gatepass"
+                    class="btn m-2 float-right" autocomplete="off">
+
+            </div>
+        </div>
+
+        <input type="hidden" name="gatepass_id" value="{{data1.id}}" required>
+        
+
+    </form>
+</div>
+
+   
+    <!-- <a href=">Next</a> -->
+    <script>
+
+        function validateFunc(){
+
+            let gatekeepar_name = document.getElementById('gatekeepar_name');
+            let drivername = document.getElementById('driver-name');
+            let vehicalno = document.getElementById('vehical-no');
+            let matrecname = document.getElementById('mat-rec-name');
+            let driverphone = document.getElementById('driver-phone');
+
+            // regex
+            let mob = new RegExp(/^\d{10}$/);
+            //let mob_regex = new RegExp(/[6-9]{1}[0-9]{9}/);
+            let regexp1 = new RegExp(/^[A-Za-z ]+$/);
+
+            console.log(mob.test(drivername.value))
+
+            if(regexp1.test(gatekeepar_name.value) == false){
+                alert("Gatekeepar name should be in letter only.");
+                    return false;
+            }else if(regexp1.test(drivername.value) == false){
+                alert("Driver name should be in letter only.");
+                return false;
+            }else if(regexp1.test(matrecname.value) == false){
+                alert("Material Received By name should be in letter only.");
+                return false;
+            }else if(mob.test(driverphone.value) == false){
+                alert("Please enter mobile number in valid format. ex:-{7896543210}");
+                return false
+
+            }
+            
+
+        }
+    </script>
+    {% endblock body %}

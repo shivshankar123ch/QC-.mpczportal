@@ -1,0 +1,248 @@
+{% extends 'roof/agentBase.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink { background-color:
+#007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px; width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page content) / .tabcontent
+{ color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;} #General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details {background-color: white;}
+#Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/agent2.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="roof_top_upload" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h4 class="font-weight-bolder mb-0 text-center">Document Uploads</h4>
+    <!-- <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</span> -->
+    </p>
+    <table class="table table-flush table-responsive table-bordered table-hover" id="datatable-search" border="2">
+        <thead class="thead-light">
+            <tr><th style="width:10% ">
+                S.No.</th>
+                <th style="width:10% ">
+                    Name</th>
+                <th style="width: 40% ">
+                    Document No. </th>
+                <th style="width:20% ">
+                    Document File </th>
+                    
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><b>Company Registration Certificate</b></td>
+                <td><input type="tel" name="one" minlength="1" maxlength="30" required="required" id="v_p_reg_number" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control">
+                    <span id="Company_1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_1" name="two" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><b>Active GST Certificate with  Challan</b></td>
+                <td><input type="tel" name="three" minlength="15" maxlength="15" required="required" id="v_p_reg_number" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control">
+                    <span id="Company_3" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_2" name="four" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_4" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><b>Pan Card Details</b></td>
+                <td><input type="tel" name="five" minlength="10" maxlength="10" required="required" id="v_p_reg_number_6" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control">
+                    <span id="Company_5" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_3" name="six" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_6" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><b>A/B class Electrical License or Undertaking Document</b>
+                </td>
+                <td><input type="tel" name="seven" minlength="1" maxlength="30" required="required" id="v_p_reg_number98" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control">
+                    <span id="Company_7" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_4" name="eight" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_8" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><b>Aadhar Card Details</b></td>
+                <td><input type="tel" name="nine" minlength="12" maxlength="12" required="required" id="adh_reg_number" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)'  class="form-control">
+                    <span id="Company_9" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_5" name="ten" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_10" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><b>MSME Registration Certificate for Solar System</b></td>
+                <td><input type="tel" name="eleven" minlength="1" maxlength="30" required="required" id="v_p_reg_number95" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" class="form-control">
+                    <span id="Company_11" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                </td>
+                <td> <input type="file" required="required" id="v_upload_file_6" name="twelve" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_12" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+                
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><b>Non Blacklisted Affidavit</b></td>
+                <td></td>
+                <td><input type="file" required="required" id="v_upload_file_7" name="sixteen" accept="application/pdf" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+                    <span id="Company_13" class="text-danger font-weight-bold" style="font-size: 80%;"></span></td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <div class="multisteps-form__content">
+        
+
+        <div class="button-row d-flex mt-4">
+            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_nine">Prev</a></button> -->
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" type="Submit" title="Save & Next">Save & Next</button>
+            <!-- </div> -->
+</form>
+</div>
+<!---trial end here-->
+
+<script>
+    function fileValidation() {
+        var fileInput =
+            document.getElementById('v1_upload_file_material');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        } else {
+
+            // Image preview
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(
+                            'imagePreview').innerHTML =
+                        '<img src="' + e.target.result +
+                        '"/>';
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    }
+</script>
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key)
+
+
+
+            ;
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)
+
+
+
+        ) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+<script>
+    let dtElem = document.getElementById('v_issue_date');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+    let dtElem2 = document.getElementById('v_p_issue_date');
+    let maxDate2 = new Date();
+    dtElem2.max = formatDate(maxDate2);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    //end date selection
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_end_date21').attr('min', today);
+    $('#v_end_date2').attr('min', today);
+    $('#v_end_date').attr('min', today);
+    $('#v_p_end_date').attr('min', today); ///v_p_end_date //v_end_date21
+</script>
+<script>
+    let today1 = new Date();
+    let dd1 = String(today.getDate()).padStart(2, '0');
+    let mm1 = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy1 = today1.getFullYear();
+
+    today = yyyy1 + '-' + mm1 + '-' + dd1;
+    $('#v_end_date21').attr('min', today1);
+</script>
+<script></script>
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event; // Handle paste if (theEvent.type === 'paste') { key = event.clipboardData.getData('text/plain'); } else { // Handle key press var key = theEvent.keyCode || theEvent.which; key = String.fromCharCode(key)
+        ;
+    }
+    var regex = /[0-9]|\./;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+    }
+</script>
+
+
+
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent = document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display="none" ; }
+    tablinks=d ocument.getElementsByClassName( "tablink"); for (i=0 ; i < tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; } document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element with
+    id="defaultOpen" and click on it document.getElementById( "defaultOpen").click(); {% endblock script %}

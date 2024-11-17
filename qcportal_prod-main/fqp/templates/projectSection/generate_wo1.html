@@ -1,0 +1,78 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+
+ <div class="card card-default">
+     <form action="/fqp/generate_wo2/{{procurement.id}}" method="POST">
+		 <div class="m-3">
+           {% csrf_token %}
+   <div class="form-group">
+
+<!--------------------------------------------------------------------------------------------- ACCEPTANCE ----------------------------------------------------------------------------------------------->
+           <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+
+   <!---------------------------------------------------------- Schedule--------------------------------------------------------------------------------------------->
+
+    <p class=MsoNormal style='margin-bottom:0in;line-height:normal;text-autospace:
+    none'><b><span lang=EN-AU style='font-size:12.0pt;font-family:"Times New Roman",serif'> <u>SUBMISSION OF MILESTONE:-</u></span></b></p>
+
+
+               <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <tr>
+                      <th style="width:10%">
+                           Phase Of Milestone
+                      </th>
+                      <th style="width: 70%">
+                          Add List of Task
+                      </th>
+                      <th style="width:30%">
+                          Add Percentage
+                      </th>
+                    </tr>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>MILESTONE</span></u></b></p>
+                    {% if not schedule  %}
+                    {% with name=100 %}
+                 {% for data1 in quantity %}
+                    <tr>
+                     <td><b>Stage : {{forloop.counter}}</b></td>
+                     <td><textarea class="form-control" id="task" name={{forloop.counter0}} placeholder="" rows="3" required></textarea></td>
+                     <td><input type="number" name={{name|add:forloop.counter0}} id="percentage" class="form-control"  required>
+                    </td>
+                  </tr>
+                     {% endfor %}
+                    {% endwith %}
+                    {% else %}
+                      {% with name=100  %}
+                    {% with id=1000  %}
+                    {% for data1 in schedule %}
+                    <tr>
+                     <td><b>Stage : {{forloop.counter}}</b></td>
+                     <td><textarea class="form-control" id="task" name={{forloop.counter0}} rows="3" value="{{data1.task}}" placeholder="{{data1.task}}"></textarea></td>
+                     <td><input type="number" name={{name|add:forloop.counter0}} id="percentage" class="form-control" placeholder="{{data1.percentage}}"> </td>
+<!--                        <input type="number" name={{id|add:forloop.counter0}} id="percentage" class="form-control" value="data1.id" type="hidden">-->
+
+                  </tr>
+                    {% endfor %}
+                    {% endwith %}
+                    {% endwith %}
+                    {% endif %}
+
+                </table>
+              </div>
+    <div>
+          <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Save And Next</button>
+    </div>
+
+    </div>
+         </div>
+         </div>
+    </form>
+</div>
+
+</body>
+
+{% endblock body %}

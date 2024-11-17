@@ -1,0 +1,24 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} MRC {% endblock heading %}
+{% block body %}
+
+<form action="/po/upload_digi_partial_mrc/{{pr.id}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div id="options">
+
+        <label for="digital_pdf">Upload digitally signed pdf here &nbsp;</label>
+        <input type="file" name="digi_pdf_pr" style="width: 200px">
+
+        <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+
+
+
+        <!-- <button id="printpagebutton1" type="Submit" style=" width:200px" class="btn btn-primary m-3"><a
+                class="btn btn-danger" onclick="myFunction()" href="/po/upload_digi/{{digipdf.id}}">Submit & Approve
+            </a> -->
+
+        </button>
+    </div>
+</form>
+{% endblock body %}

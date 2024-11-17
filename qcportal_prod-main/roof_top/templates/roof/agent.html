@@ -1,0 +1,109 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block style %} * {box-sizing: border-box} / Set height of
+body and the document to 100% / body, html { height: 100%; margin: 0; font-family: Arial; } / Style tab links / .tablink
+{ background-color:
+#007bff; color: white; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; font-size: 17px;
+width: 20%; } .tablink:hover { background-color: #777; } / Style the tab content (and add height:100% for full page
+content) / .tabcontent
+{ color: black; display: none; padding: 100px 20px; height: 100%; } #Instruction {background-color: white;}
+#General/personal Details {background-color: white;} #Technical Details {background-color: white;} #Financial Details
+{background-color: white;}
+#Declaration Details{background-color: white;} {% endblock style %} {% block body %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
+</head>
+
+<!---trial startgg-->
+<form class="multisteps-form__form mb-8" action="vendor_reg_ten" name="myForm" onsubmit="return validateForm()"
+    method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="multisteps-form__content">
+        <div class="row mt-3"><b><h3>AGENCY REGISTRATION</h3></b></div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label><h6>Agency Name (Work On Application)</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                    name="one" id="input1"  class="form-control"
+                    placeholder="Registration Number">
+                           </div>
+            <div class="col-sm-6">
+                <label><h6>Password (/uwp_rooftop2/logout)</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="two" id="input2"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label><h6>Address</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="three" id="input3"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+               <div class="col-sm-6">
+                <label><h6>State</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="four" id="input4"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+
+                <label><h6>District</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                    name="five" id="input5"  class="form-control"
+                    placeholder="Registration Number">
+                           </div>
+            <div class="col-sm-6">
+                <label><h6>Pan Number</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="six" id="input6"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label><h6>Contact Number</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="seven" id="input7"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+               <div class="col-sm-6">
+                <label><h6>Mobile</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="eight" id="input8"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <label><h6>Email</h6></label>
+                <input class="multisteps-form__select form-control" type="tel" 
+                name="nine" id="input9"  class="form-control"
+                placeholder="Registration Number">
+               </div>
+        </div><br>
+        <hr/>
+        
+        <div class="button-row d-flex mt-4">
+            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_nine">Prev</a></button> -->
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" type="Submit" title="Save & Next">Submit</button>
+            <!-- </div> -->
+</form>
+</div>
+<!---trial end here-->
+
+
+
+
+
+{% endblock body %} {% block script %} function openPage(pageName,elmnt,color) { var i, tabcontent, tablinks; tabcontent
+= document.getElementsByClassName("tabcontent"); for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display="none" ; } tablinks=d ocument.getElementsByClassName( "tablink" ); for (i=0 ; i <
+    tablinks.length; i++) { tablinks[i].style.backgroundColor="" ; }
+    document.getElementById(pageName).style.display="block" ; elmnt.style.backgroundColor=c olor; } // Get the element
+    with id="defaultOpen" and click on it document.getElementById( "defaultOpen" ).click(); {% endblock script %}

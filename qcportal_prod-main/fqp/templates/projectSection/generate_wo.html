@@ -1,0 +1,194 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Create TKC New Work order</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+     <form   action="/fqp/generate_wo1" method="POST"    id="myform"  enctype="multipart/form-data" >
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>PO Number</label>
+                  <input type="text" class="form-control" id="po_no" name="po_no"  placeholder="{{data.PO_NUMBER}}" value="{{data.PO_NUMBER}}" readonly/>
+                    </div>
+              </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Tendor &amp; Enquiry No </label>
+                     <input type="text" name="tendor" class="form-control" id="exampleInputEmail1" placeholder="{{data.TENDOR_NO}}{{data.LEGACY_PO_NUMBER}}" ,value="{{data.TENDOR_NO}}{{data.LEGACY_PO_NUMBER}}" readonly>
+                  </div>
+             </div>
+                 </div>
+
+                  <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>CREATION DATE</label>
+                  <input type="text" class="form-control" id="po_no" name="CREATION_DATE"  placeholder="{{data.CREATION_DATE}}" value="{{data.CREATION_DATE}}" readonly/>
+                    </div>
+              </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Contractor/Supplier </label>
+                     <input type="text" name="SUPPLIER" class="form-control" id="exampleInputEmail1" placeholder="{{data.SUPPLIER}}" ,value="{{data.SUPPLIER}}" readonly>
+                  </div>
+             </div>
+                 </div>
+                  <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>SUPPLIER ADDRESS</label>
+                  <input type="text" class="form-control" id="po_no" name="SUP_ADDRESS"  placeholder="{{data.SUP_ADDRESS}}" value="{{data.SUP_ADDRESS}}" readonly/>
+                    </div>
+              </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> SHIP TO LOC </label>
+                     <input type="text" name="SHIP_TO_LOC" class="form-control" id="exampleInputEmail1" placeholder="{{data.SHIP_TO_LOC}}" ,value="{{data.SHIP_TO_LOC}}" readonly>
+                  </div>
+             </div>
+                 </div>
+                  <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>BILL TO LOC</label>
+                  <input type="text" class="form-control" id="po_no" name="BILL_TO_LOC"  placeholder="{{data.BILL_TO_LOC}}" value="{{data.BILL_TO_LOC}}" readonly/>
+                    </div>
+              </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> PO CREATED BY</label>
+                     <input type="text" name="PO_CREATED_BY" class="form-control" id="exampleInputEmail1" placeholder="{{data.PO_CREATED_BY}}" ,value="{{data.PO_CREATED_BY}}" readonly>
+                  </div>
+             </div>
+                 </div>
+              <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>PO STATUS</label>
+                  <input type="text" class="form-control" id="po_no" name="PO_STATUS"  placeholder="{{data.PO_STATUS}}" value="{{data.PO_STATUS}}" readonly/>
+                    </div>
+              </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> TYPE OF PO</label>
+                     <input type="text" name="TYPE_OF_PO" class="form-control" id="exampleInputEmail1" placeholder="{{data.TYPE_OF_PO}}" ,value="{{data.TYPE_OF_PO}}" readonly>
+                  </div>
+             </div>
+                 </div>
+              <div class="row">
+              <div class="col-md-12">
+              <div class="form-group">
+                  <label>Subject</label>
+                  <textarea type="text" class="form-control text-justify" id="po_no" name="COMMENTS"  placeholder="{{data.COMMENTS}}" value="{{data.COMMENTS}}"  readonly></textarea>
+                    </div>
+              </div>
+                 </div>
+              <div class="table-responsive">
+                     <table class="table table-responsive table-bordered">
+                <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center">
+                            Sr. No.
+                        </th>
+                        <th>
+                             TYPE
+                        </th>
+                        <th>
+                             ITEM CODE
+                        </th>
+                        <th>
+                             CATEGORY
+                        </th>
+
+                        <th>
+                            DESCRIPTION
+                        </th>
+                         <th>
+                             UNIT
+                        </th>
+                        <th>
+                             QUANTITY
+                        </th>
+                         <th>
+                            UNIT RATE
+                        </th>
+                        <th>
+                            AMOUNT
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in material %}
+                    <tr>
+                        <td class="text-cenetr">{{data.R_LINES.LINE_NUM}}</td>
+                        <td>{{data.R_LINES.LINE_TYPE}}</td>
+                        <td>{{data.R_LINES.ITEM}}</td>
+                        <td>{{data.R_LINES.CATEGORY}}</td>
+                        <td>{{data.R_LINES.DESCRIPTION}}</td>
+                         <td>{{data.R_LINES.UNIT}}</td>
+                        <td>{{data.R_LINES.QUANTITY}}</td>
+                        <td>{{data.R_LINES.UNIT_RATE}}</td>
+                        <td>{{data.R_LINES.AMOUNT}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+                 </div>
+               <div class="row">
+                     <div class="col-md-6">
+                     <div class="form-group">
+                      <label for="exampleInputEmail1"> NIT Number </label>
+                     <input type="text" name="nit" class="form-control" id="exampleInputEmail1" placeholder="{{data.NIT_NUMBER}}" ,value="{{data.NIT_NUMBER}}" readonly>
+                     </div>
+                   </div>
+                      <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Total No Of Milestone  </label>
+                     <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" placeholder="" required>
+                  </div>
+                   </div>
+              </div>
+         <div class="row">
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> LOA Number </label>
+                     <input type="text" name="loa" class="form-control" id="exampleInputEmail1" placeholder="{{data.LEGACY_PO_NUMBER}}" value="{{LEGACY_PO_NUMBER}}" readonly>
+                   </div>
+            </div>
+                   <div class="col-md-6">
+                      <div class="form-group">
+                      <label for="exampleInputEmail1"> Contract Amount </label>
+                     <input type="number" name="price" class="form-control" id="exampleInputEmail1" placeholder="",value="" required>
+                   </div>
+            </div>
+
+<!--                 <div class="col-md-6">-->
+<!--                   <div class="form-group">-->
+<!--                      <label for="exampleInputEmail1"> Upload LOA  </label>-->
+<!--                     <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder="">-->
+<!--                   </div>-->
+<!--                </div>-->
+            </div>
+              <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Save And Next </button>
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,1124 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+<style>
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  table {
+    border-collapse: collapse;
+    vertical-align: middle;
+  }
+
+  th,
+  td {
+    border-collapse: collapse;
+    vertical-align: middle;
+    /* word-break: break-all; */
+    white-space: normal;
+  }
+
+  thead {
+    width: 100%;
+    background-color: #BFBFBF;
+    background: #BFBFBF;
+    text-align: center;
+  }
+  p{
+    text-align: justify;
+  }
+</style>
+
+
+
+<div class="ed-information mb-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div id="printid">
+        <div class="card ed-card-block">
+          <div class="card-body">
+            <table cellpadding="0" cellspacing="0" style="width:100%; border:0">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <!--                                    <img src="" style="width: 100%;">-->
+                    <div class="cgm-logo-block">
+                      {% if wo.Discom.Discom_Header %}
+
+                      <img src="{{wo.Discom.Discom_Header.url}}" class="cgm-logo" style="width:100%"
+                        alt="Header Not Load" />
+
+                      {% endif %}
+                    </div>
+                    <h4 style="font-size:20px;text-align:center;font-weight:600;margin: 0 0 30px;">
+                      Turnkey Contract Details Report for Contract Number {{wo.Contract_Number}}
+                    </h4>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0">
+              <tbody>
+                <tr>
+                  <td style="width: 50%;">
+                    <h4 style="font-size:13px;text-align:left;font-weight:400;margin-left:10px;">
+                      <b>{{wo.Header.WO_Prefix}}/{{wo.Contract_Number}}</b>
+                    </h4>
+                  </td>
+                  <td style="width: 50%;">
+                    <h4 style="font-size:13px;text-align:right;font-weight:400;margin-right:20px;">
+                      <b>Date </b> : {{wo.Contract_Date}}
+                    </h4>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:0;margin-bottom: 20px;">
+                      <tbody>
+                        <tr>
+                          <td style="width: 40%; vertical-align: top;">
+                            <table cellpadding="2" cellspacing="2"
+                              style="width:100%; border:0px solid #000;text-align: left;">
+                              <tbody>
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contract Number :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Contract_Number}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contract Date :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Contract_Date}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Scheme Code :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Scheme_code}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td style="width: 60%;vertical-align: top;">
+                            <table cellpadding="2" cellspacing="2"
+                              style="width:100%; border:0px solid #000; text-align: left;">
+                              <tbody>
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contract Effective Date :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Contract_Effective_Date}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Scheme Name :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Scheme_Name}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Payment Mode :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Payment_Mode}}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Payment Term :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Payment_Term}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <hr style="width: 80%; margin:0 auto;">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:0;margin-bottom: 10px;">
+                      <tbody>
+                        <tr>
+                          <td style="width: 40%;">
+                            <table cellpadding="2" cellspacing="2"
+                              style="width:100%; border:0px solid #000;text-align: left;">
+                              <tbody>
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Quotation No :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%; ">
+                                    {{wo.Header.Quotation_No}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contract Offer Number :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Contract_Offer_No}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contract Offer Date :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{wo.Header.Contract_Offer_Date}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td style="width: 60%;">
+                            <table cellpadding="2" cellspacing="2"
+                              style="width:100%; border:0px solid #000;text-align: left;">
+                              <tbody>
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contractor Name :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{Company.CompanyName_E}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contractor Site :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{Company.CompanyName_E}}
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th
+                                    style="font-size: 12px; font-weight:600; padding: 4px;vertical-align: top; width: 50%;">
+                                    Contractor Address :
+                                  </th>
+                                  <td
+                                    style="font-size: 12px; font-weight:400; padding: 4px;vertical-align: top;width: 50%;">
+                                    {{Company.Company_add_1}}<br>
+                                    {{Company.Company_add_2}} {{Company.Company_dist}}
+                                    {{Company.Company_state}}<br>
+                                    Pincode:{{Company.Company_pin_code}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:0;margin-bottom: 00px;">
+                      <tbody>
+                        <tr>
+                          <td style="width: 50%;">
+                            <table cellpadding="2" cellspacing="2"
+                              style="width:45%; border:0px solid #000; text-align: left;">
+                              <tbody>
+                                <tr>
+                                  <th style="font-size: 12px; font-weight:600; padding: 4px;">
+                                    Communication :
+                                  </th>
+                                  <td style="font-size: 12px; font-weight:400; padding: 4px;">
+
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th style="font-size: 12px; font-weight:600; padding: 4px;">
+                                    Phone:
+                                  </th>
+                                  <td style="font-size: 12px; font-weight:400; padding: 4px;">
+                                    {{wo.supplier.ContactNo}}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th style="font-size: 12px; font-weight:600; padding: 4px;">
+                                    Email:
+                                  </th>
+                                  <td style="font-size: 12px; font-weight:400; padding: 4px;">
+                                    {{wo.supplier.Email_Id}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <br><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- <hr style="width: 80%; margin:0 auto;">  -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <p style="font-size:14px;text-align:left;font-weight:400;margin: 0 0 5px;text-align: justify;">
+              <b>Order Description :</b>
+              {{wo.Header.Contract_Description}}
+            </p>
+
+
+            <p class='application-info' style="font-size:12px;text-align:justify;">
+              {{wo.Work_Order_Term_And_Condition|safe}}
+            </p>
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">Contract
+                      Prices</h4>
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+                      <thead style="width:100%; background: #BFBFBF;">
+                        <tr>
+                          <th
+                            style="border:1px solid #000;width: 10%; font-size: 12px; font-weight:600; text-align: left; padding: 4px; width: 5%;">
+                            S.No
+                          </th>
+                          <th
+                            style="border:1px solid #000;width: 10%; font-size: 12px; font-weight:600; text-align: left; padding: 4px; width: 65%;">
+                            Items in Package
+                          </th>
+                          <th
+                            style="border:1px solid #000;width: 10%;font-size: 12px; font-weight:600; text-align: left; padding: 4px; width: 30%;">
+                            Amount (In Rs.)
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for Price in Price %}
+                        <tr>
+                          <td
+                            style="border:1px solid #000;width: 10%; font-size: 12px; font-weight:400; text-align: left; padding: 4px;">
+                            {{forloop.counter}}
+                          </td>
+                          <td
+                            style="border:1px solid #000;width: 10%; font-size: 12px; font-weight:400; text-align: left; padding: 4px;">
+                            {{Price.Item_Name}}
+                          </td>
+                          <td
+                            style="border:1px solid #000;width: 10%; text-align:right; font-size: 12px; font-weight:400;padding: 4px;">
+                            {{Price.Amount}}
+                          </td>
+                        <tr>
+                          {% endfor %}
+                          <td
+                            style="border:1px solid #000;width: 10%; font-size: 12px; font-weight:400; text-align: left; padding: 4px;">
+
+                          </td>
+                          <td
+                            style="border:1px solid #000;width: 65%; font-size: 12px; font-weight:600; text-align: left; padding: 4px;">
+                            Total Evaluated Lot Price with taxes
+                          </td>
+                          <td
+                            style="border:1px solid #000;width: 25%; font-size: 12px; font-weight:400; text-align:right; padding: 4px;">
+                            <b> {{ Price| total_contract_price|floatformat:'2' }}</b>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <p style="font-size: 12px; font-weight:400; padding: 4px; margin: 0 0 10px;">
+              <b>Advances</b> <br>
+              {% for Advance in Advance %}
+              {{Advance.Name}}(%) <span style="padding: 0 10px;">:</span> {{Advance.Amount_Percentage}} <br>
+              {% endfor %}
+            </p>
+
+            <p style="font-size: 12px; font-weight:400; padding: 4px; margin: 0 0 10px;">
+              <b>Tender Details</b> <br>
+              Document Sale Open Date<span style="padding: 0 10px;">:</span> {{wo.Header.Document_Sale_Open_Date}}
+              <br>
+              Document Sale Closed Date<span style="padding: 0 10px;">:</span>
+              {{wo.Header.Document_Sale_Closed_Date}}
+              <br>
+              Bid Submission Date<span style="padding: 0 10px;">:</span> {{wo.Header.Bid_Submission_Date}} <br>
+              Bid Opening Date<span style="padding: 0 10px;">:</span> {{wo.Header.Bid_Opening_Date}} <br>
+              Tender Date<span style="padding: 0 10px;">:</span> {{wo.Header.Tender_Date}} <br>
+              NIT Number<span style="padding: 0 10px;">:</span>{{wo.Header.Nit_No}} <br>
+              NIT Date<span style="padding: 0 10px;">:</span>{{wo.Header.Nit_Date}}
+            </p>
+
+
+
+            <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+              Time Schedule
+            </h4>
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+              <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                <tr>
+                  <th rowspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Stage
+                  </th>
+                  <th colspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Completion Period
+                  </th>
+                  <th rowspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Completion Date
+                  </th>
+                  <th rowspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Contract
+                    Amt (%)
+                  </th>
+                  <th rowspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Stage Amount
+                  </th>
+                  <th rowspan="2" style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Remarks
+                  </th>
+                </tr>
+                <tr>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Months
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                    Days
+                  </th>
+                </tr>
+              </thead>
+              <tbody style="width:100%;   text-align: center;">
+                <tr>
+                  {% for Time in Time %}
+                <tr>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Stage}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Month}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Days}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Completion_date}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Contract_Amount_Percentage}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Stage_Amount}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{Time.Remarks}}</b>
+                  </td>
+                <tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0; margin-top: 20px;">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+                      List of Schedule : Supply
+                    </h4>
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+                      <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                        <tr>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 5%;">
+                            Sch. No.
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 45%;">
+                            Description
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 15%;">
+                            Unit
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 15%;">
+                            Qty
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 15%;">
+                            Unit price (Incl Tax)<br>(in Rupees)
+                          </th>
+                        </tr>
+                         
+                      </thead>
+                      <tbody style="width:100%;   text-align: center;">
+
+                        {% for Supply in Supply %}
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_No}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_Description}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Quantity}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit_Price_With_Tax}}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0; margin-top: 20px;">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+                      List of Schedule : Installation
+                    </h4>
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+                      <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                        <tr>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 5%;">
+                            Sch. No.
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 40%;">
+                            Description
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Unit
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Qty
+                          </th>
+                          <th
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 20%;">
+                            Unit price (Incl Tax)<br>(in Rupees)
+                          </th>
+                        </tr>
+                         
+                      </thead>
+                      <tbody style="width:100%;   text-align: center;">
+                        {% for Supply in Install %}
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_No}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_Description}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Quantity}}
+                          </td>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit_Price_With_Tax}}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0; margin-top: 20px;">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+                      Schedule Details (Supply) Item
+                    </h4>
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+                      <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                        <tr>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 10%;">
+                            Sch. No.
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 30%;">
+                            Particulars
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Item Code
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Unit
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Qty
+                          </th>
+                          <th colspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Material Cost
+                          </th>
+                        </tr>
+                        <tr>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                            Ex-works Cost per unit Rs.
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                            Total Rs.
+                          </th>
+                        </tr>
+                         
+                      </thead>
+                      <tbody style="width:100%;   text-align: center;">
+                        {% for Supply in Supply_Item %}
+                        <tr>
+
+
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_Supply.Schedule_No}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 30%;">
+                            {{Supply.Item_Description}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Item_Code}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Quantity}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit_Price_With_Tax}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{ Supply.Unit_Price_With_Tax | multiply:Supply.Quantity|floatformat:'2' }}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                          </td>
+                          <td colspan="5" width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            Grand Total </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{ Supply_Item |grand_total|floatformat:'2' }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:0; margin-top: 20px;">
+              <tbody>
+                <tr>
+                  <td style="width: 100%;">
+                    <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+                      Schedule Details (Install) Item
+                    </h4>
+                    <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+                      <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                        <tr>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 10%;">
+                            Sch. No.
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 30%;">
+                            Particulars
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Item Code
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Unit
+                          </th>
+                          <th rowspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Qty
+                          </th>
+                          <th colspan="2"
+                            style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                            Material Cost
+                          </th>
+                        </tr>
+                        <tr>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                            Ex-works Cost per unit Rs.
+                          </th>
+                          <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;">
+                            Total Rs.
+                          </th>
+                        </tr>
+                         
+                      </thead>
+                      <tbody style="width:100%;   text-align: center;">
+                        {% for Supply in Install_Item %}
+                        <tr>
+
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Schedule_Installation.Schedule_No}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 30%;">
+                            {{Supply.Item_Description}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Item_Code}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Quantity}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{Supply.Unit_Price_With_Tax}}
+                          </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{ Supply.Unit_Price_With_Tax | multiply:Supply.Quantity|floatformat:'2' }}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                          </td>
+                          <td colspan="5" width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            Grand Total </td>
+
+                          <td width=""
+                            style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                            {{ Install_Item |grand_total|floatformat:'2' }}
+                          </td>
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+              List of Major Items of Plant and services
+            </h4>
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+              <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                <tr>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 5%;">
+                    Sr. No.
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 35%;">
+                    Particular
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                    Item Code
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                    Unit
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                    Qty
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 20%;">
+                    Ex-works Cost Per-Unit Rs.
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 15%;">
+                    Total Rs.
+                  </th>
+                </tr>
+                 
+              </thead>
+              <tbody style="width:100%;   text-align: center;">
+                {% for major in Major_Item %}
+                <tr>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px; ">
+                    {{forloop.counter}}
+                  </td>
+
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px; ">
+                    {{major.Item_Description}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px; ">
+                    {{major.Item_Code}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px; ">
+                    {{major.Unit}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{major.Quantity}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{major.Unit_Price_With_Tax}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;">
+                    {{ major.Unit_Price_With_Tax | multiply:major.Quantity|floatformat:'2' }}
+                  </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                  </td>
+                  <td colspan="5" width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    Grand Total </td>
+
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{ Major_Item |grand_total|floatformat:'2' }}
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <h4 style="font-size:14px;text-align:left;font-weight:600;margin: 0 0 5px;">
+              List of Price Variable Items
+            </h4>
+            <table cellpadding="2" cellspacing="2" style="width:100%; border:1px solid #000">
+              <thead style="width:100%; background: #BFBFBF; text-align: center;">
+                <tr>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 5%;">
+                    S. No.
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 25%;">
+                    Particular
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 15%;">
+                    Item Code
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                    Unit
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px;width: 10%;">
+                    Qty
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 20%;">
+                    Ex-works Cost Per-Unit Rs.
+                  </th>
+                  <th style="border:1px solid #000; font-size: 12px; font-weight:600; padding: 4px; width: 20%;">
+                    Total Rs.
+                  </th>
+                </tr>
+                 
+              </thead>
+              <tbody style="width:100%;   text-align: center;">
+                {% for major in Variable_Item %}
+                <tr>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{forloop.counter}}
+                  </td>
+
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{major.Item_Description}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{major.Item_Code}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{major.Unit}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{major.Quantity}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{major.Unit_Price_With_Tax}}
+                  </td>
+                  <td width=""
+                    style="border:1px solid #000; text-align:center;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{ major.Unit_Price_With_Tax | multiply:major.Quantity|floatformat:'2' }}
+                  </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                  </td>
+                  <td colspan="5" width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    Grand Total </td>
+
+                  <td width=""
+                    style="border:1px solid #000;  font-size: 12px; font-weight:400;padding: 4px; height: 45px;width: 10%;">
+                    {{ Variable_Item |grand_total|floatformat:'2' }}
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <table style="width:100%; border: 0px solid #ddd; margin-top:40px;">
+              <tr>
+                <td style="width:100%; border: 0px solid #ddd; text-align: right; padding: 10px 0;">
+                  <div style=" display: inline-block; ">
+
+                    <span style="display:block; border:1px solid #ccc; height:80px; width:160px; margin-left: 46px;">
+                      
+                    </span>
+
+                    <br>
+                    <h4 style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                      {{wo.Discom.TKC_Main_Sign}}
+                      <!-- Director (Technical) -->
+                      <!-- CHIEF GENERAL MANAGER -->
+                      <!--({{vd.rca_cell.Region.Region_Name_E}}-->
+                      <!--(Region)-->
+                    </h4>
+                    <h4 style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                      {{wo.Discom.Discom_Short_Name}}
+                      <!-- MPMKVVCL -->
+                    </h4>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            
+            <table class="table copy-table-block mt-2" style="width:100%; border: 0px solid #ddd; text-align:left;">
+              <thead>
+                <tr>
+                  <th colspan="2"
+                    style="font-size:12px; width: 100%;  border-bottom: 1px solid #ddd;padding: 8px 10px; text-align:left;">
+                    Copy to :-
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in Copy_To %}
+                <tr>
+                  <td class="copy-wd2"
+                    style="font-size:12px; width: 8%;  border-bottom: 0px solid #ddd;padding: 6px 10px;">
+                    <p style="font-size:12px;margin: 0;">
+                      <b>{{forloop.counter}}</b>
+                    </p>
+                  </td>
+                  <td class="copy-wd8"
+                    style="font-size:12px; width: 92%;  border-bottom: 0px solid #ddd;padding: 6px 10px;">
+                    <p style="font-size:12px;margin: 0;">
+                      {{data.Copy_To}}
+                    </p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <table style="width:100%; border: 0px solid #ddd; margin-top:40px;">
+              <tr>
+                <td style="width:100%; border: 0px solid #ddd; text-align: right; padding: 10px 0;">
+                  <div style=" display: inline-block; ">
+
+                    <span
+                      style="display:block;border:1px solid #ccc; height:80px; width:160px; margin;0 0 10px;"></span>
+
+                    <br>
+                    <h4 style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                      {{wo.Discom.TKC_Copy_To_Sign}}
+                      <!-- DIRECTOR (TECHNICAL) -->
+                      <!-- CHIEF GENERAL MANAGER -->
+                      <!--({{vd.rca_cell.Region.Region_Name_E}}-->
+                      <!--(Region)-->
+                    </h4>
+                    <h4 style="font-size:12px;margin-bottom:4px;font-weight: 600; text-align: center;">
+                      {{wo.Discom.Discom_Short_Name}}
+                      <!-- MPMKVVCL -->
+                    </h4>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+
+          <div class="print-action-block mt-2 mb-3 text-center">
+            <div id="options">
+              <input onclick="Prints()" type="button" value="Print" class="btn ed-submits ed-formSubmit btn-print"
+                id="printpagebutton">
+
+              <!--<input id="printpagebutton" class="btn btn-primary btn-print" type="button" value="Print Order"
+            onclick="printpage()" /> -->
+              {% if not wo.Wo_Send_To_Approval_Status == 1 and wo.Status == 1 %}
+              <a href="/fqp/send_to_approval/{{wo.id}}">
+                <input id="printpagebutton1" type="Submit" class="btn btn ed-submits ed-formSubmit btn-print"
+                  type="button" value="Send To Approval" />
+              </a>
+              {% else %}
+              <a href="">
+                <input id="printpagebutton1" type="hidden" style="width:200px" class="btn btn-primary btn-print"
+                  type="button" value="" />
+                {% endif %}
+
+
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br>
+  </div>
+
+  <script>
+
+    function Prints() {
+      document.getElementById('options').style.display = 'none';
+      document.getElementById('edHeader').style.display = 'none';
+      document.getElementById('edSidebar').style.display = 'none';
+      $('.ed-wrapper-block .ed-wrapper-contant').css('padding', '10px');
+      $('.ed-pagetitle-block').hide();
+      $('.ed-footer-block').hide();
+      window.print();
+      document.getElementById('options').style.display = 'block';
+      document.getElementById('edHeader').style.display = 'block';
+      document.getElementById('edSidebar').style.display = 'block';
+      $('.ed-wrapper-block .ed-wrapper-contant').css('padding', '95px 16px 10px 265px');
+      $('.ed-pagetitle-block').show();
+      $('.ed-footer-block').show();
+    }
+
+
+  </script>
+
+  {% endblock body %}

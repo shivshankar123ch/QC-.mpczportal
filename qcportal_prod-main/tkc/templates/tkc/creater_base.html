@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Contractor | Dashboard</title>
+      <meta charset="utf-8">
+      {% load static %}
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+       <!-- Main Login Validation -->
+      <!-- <script  src="{% static '/assets/js/Validation/jquery.js' %}"></script> -->
+      <!-- <script  src="{% static '/assets/js/Validation/datatables.js' %}"></script> -->
+      <!-- <link rel="stylesheet" href="{% static 'assets1/scss/main.css' %}"> -->
+     
+      
+   
+      <!-- <link rel="stylesheet" href="{% static 'assets1/css/bootstrap.min.css"> -->
+     
+      <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/fontawesome-free/css/all.min.css' %}">
+      <!-- Ionicons -->
+      <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"> -->
+      <!-- Tempusdominus Bootstrap 4 -->
+         <!-- <link rel="stylesheet" href="{% static 'dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}"> -->
+      <!-- iCheck -->
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/jqvmap/jqvmap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'dashboard/dist/css/adminlte.min.css' %}">
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/daterangepicker/daterangepicker.css' %}">
+      <!-- summernote -->
+      <link rel="stylesheet" href="{% static 'dashboard/plugins/summernote/summernote-bs4.min.css' %}">
+      <!-- <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">  -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+      
+    <!-- yogesh changes -->
+    <link rel="stylesheet" href="{% static 'assets1/scss/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/datatables.css' %}">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"> -->
+    <script src="{% static '/assets/js/Validation/jquery.js' %}"></script>
+    <!-- add search drup down  -->
+    <script src="{% static '/assets/js/select2.min.js' %}"></script>
+    <link href="{% static '/assets/css/select2.min.css' %}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
+    
+
+    
+
+    
+
+         
+   <link href="{% static '/assets/css/jquery-ui2.css' %}" rel="stylesheet" />
+   <!--    <script src="{% static '/assets/js/jquery1.min.js' %}"></script> -->
+   
+      <script src="{% static '/assets/js/jquery-ui2.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      
+   </head>
+   <style>
+      .dataTables_filter {
+   width: 50%;
+   float: right;
+   text-align: right;
+}
+   </style>
+   <body>
+      <div class="ed-wrapper-block">
+      <div class="ed-wrapper-contant" id="edContainer">
+         <nav class="navbar ed-header-navbar ed-header-block" id="edHeader">
+            <div class="navbar-container">
+               <ul class="navbar ed-nav-left">
+                  <li class="nav-item">
+                     <a href="javascript:;" class="nav-link" id="navMenu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                           stroke-linejoin="round">
+                           <line x1="3" y1="12" x2="21" y2="12" />
+                           <line x1="3" y1="6" x2="21" y2="6" />
+                           <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                     </a>
+                  </li>
+               </ul>
+               <ul class="navbar ed-nav-right">
+                  <li class="nav-item ed-logout-block">
+                     <a class="nav-link " href="/tkc/tkc_todo_list">
+                         <span>
+                             <h5>
+                           <span class="btn btn-info btn-sm"style="width:95px">TO DO</span>
+                             </h5>
+                         </span> 
+                     </a>
+                 </li> 
+                  <li class="nav-item ed-profilemenu-block">
+                     <a class="nav-link " href="#" data-toggle="dropdown">
+                     <span class="ed-imgbox">
+                     {% if officer.image %}
+                     <img src="{{officer.image.url}}"  class="img-fluid ed-userimg"
+                        alt="User profile" />
+                     {% else %}
+                     <img src="{% static 'assets1/images/userimg.jpg' %}" class="img-fluid ed-userimg"
+                        alt="User profile" />
+                     {% endif %}
+                     </span>
+                     <span class="ed-text">
+                     {{ officer.employ_name }}
+                     </span>
+                     </a>
+                  </li>
+                  <!-- <li class="nav-item ed-logout-block">
+                     <a class="nav-link " href="javascript:;" onclick="CustomAlert.show()">
+                         <span class="ed-imgbox">
+                             <img src="assest/images/logout.png" class="img-fluid ed-logout" alt="Logout" />
+                         </span>
+                     </a>
+                     </li> -->
+                  <li class="nav-item ed-logout-block" >
+                     <a href="/" class="nav-link " href="javascript:;" data-toggle="tooltip" title="Logout" >
+                     <span class="ed-imgbox" >
+                     <img src="{% static 'assets1/images/logout.png' %}" class="img-fluid ed-logout" alt="Logout"  />
+                     </span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+         <!--  ---------------------- sidebar ----------------------- -->
+         <!--  ---------------------- sidebar ----------------------- -->
+         <div class="ed-sidebar-block" id="edSidebar">
+            <div class="navbar-logo">
+               <span class="ed-logo-item">
+               <img src="{% static 'assets1/images/rcalogo.png' %}" alt="Logo" class="img-fluid ">
+               </span>
+               <span class="ed-navbar-profile">
+               <span class="ed-navbar-name">
+               {{con.CompanyName_E}}
+               </span>
+               <span class="ed-hdesignation-name">
+               Supplier(TKC)
+               </span>
+               </span>
+            </div>
+            <ul class="navbar-nav ed-menulist">
+               <!--                    <li class="nav-item">-->
+               <!--                        <a class="nav-link" href="#">-->
+               <!--                            <span class="nav-icon">-->
+               <!--                                <svg xmlns="#" width="24" height="24" viewBox="0 0 24 24"-->
+               <!--                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"-->
+               <!--                                    stroke-linejoin="round">-->
+               <!--                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />-->
+               <!--                                    <polyline points="9 22 9 12 15 12 15 22" />-->
+               <!--                                </svg>-->
+               <!--                            </span>-->
+               <!--                            <span class="nav-text">-->
+               <!--                                {{con.CompanyName_E}}-->
+               <!--                            </span>-->
+               <!--                        </a>-->
+               <!--                    </li>-->
+               <li class="nav-item dropdown active">
+                  <a class="nav-link" href="#" data-toggle="dropdown">
+                     <span class="nav-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                           stroke-linejoin="round">
+                           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                           <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                     </span>
+                     <span class="nav-text">
+                        Contractor Details
+                        <span class="ed-right-angel">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round">
+                              <polyline points="9 18 15 12 9 6" />
+                           </svg>
+                        </span>
+                     </span>
+                  </a>
+                  <ul class="dropdown-menu ed-menudropdown-block">
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/basic">Basic Info</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/requested_bid_data">New Bid Request/DSP Portal Request</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/place_bid_data">Place Bid</a>
+                     </li>
+                  
+                     <li class="menu-item">
+                      
+                        <a class="menu-link" href="/tkc/contractor_selectiondisplay">Contractor Status</a>
+                        
+                     </li>
+                     <li class="menu-item">
+                      
+                        <a class="menu-link" href="/tkc/contractor_bid_details1">Contractor bid details</a>
+                        
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/rejected_doc">Rejected Document</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/fake_called">Fake Called </a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/rejected_offer">Rejected PDI's </a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/update_profile">Update Profile</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/profile_status">Profile Status</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/transaction_history">All Transaction's</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/activation_payment_check">Activation</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/upgrade">Up-gradation</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="">GIS Survey</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/wo">Work Order</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/add-site-store">Add Site Store</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/view-site-store">View Site Store</a>
+                     </li>
+                     <!--                      <li class="menu-item">
+                        <a class="menu-link" href="/tkc/invoicing">Invoicing</a>
+                     </li> 
+                    
+                commented by shubham tripathi guide by yashwant sir
+                    --> 
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/upload_vendor">Materials Vendor Approval</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/all_vendor">Material Offer</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/tkc_wo_offred_material_data">Already Offered Material Status</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/all_di">DI/Dispatch</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="">Work Progress</a>
+                     </li>
+                     <!-- <li class="menu-item">
+                        <a class="menu-link" href="/tkc/api_response_data">API Response</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="">EMB </a>
+                     </li> -->
+                     <!-- <li class="menu-item">
+                        <a class="menu-link" href="/tkc/tag_circle">Tag Circle</a>
+                     </li> -->
+
+
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/qio_list">Quality Inspection Observation</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/verify_boq_list">Verify BOQ </a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/tkc_fqpintimation">FQP Intimation</a>
+                     </li>
+
+                  
+
+
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/tkc_new_fqpintimation_wo">New FQP Intimation</a>
+                     </li>
+
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/place_bid_data">Place Bid</a>
+                     </li>
+                     <li class="menu-item">
+                        <a class="menu-link" href="/tkc/requested_bid_data">New Bid Request</a>
+                     </li>
+                     <li class="menu-item">
+                      
+                        <a class="menu-link" href="/tkc/contractor_selectiondisplay">Contractor Status</a>
+                        
+                     </li>
+                     <li class="menu-item">
+                      
+                        <a class="menu-link" href="/tkc/contractor_bid_details1">Contractor bid details</a>
+                        
+                     </li>
+
+                     <li class="menu-item">
+                      <a class="menu-link" href="/tkc/tkc_wo_invoice_list">TKC Invoice</a>
+                   </li>
+                     <li class="menu-item">
+                     <a class="menu-link" href="/tkc/tkc_mrc_offer_list_tkc/">Show OLD MRC</a>
+                     </li>
+                     <li class="menu-item">
+                     <a class="menu-link" href="/tkc/tkc_mrc_offer_list_tkc_di/">Show MRC</a>
+                     </li>
+                     
+                  </ul>
+               </li>               
+            </ul>
+         </div>
+         <!--  ---------------------- sidebar ----------------------- -->
+         <!--  ---------------------- sidebar ----------------------- --> 
+         <!--  ---------------   Body part start ------------------------------------------- -->
+         <!--  ---------------   Body part start ------------------------------------------- -->
+         <div class="ed-infocontant">
+            <div class="ed-pagetitle-block">
+               <div class="row align-items-center">
+                  {% comment %} <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
+                     <div class="media ed-pagetitle-info">
+                        <span class="ed-iconbox">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round">
+                              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                              <polyline points="9 22 9 12 15 12 15 22" />
+                           </svg>
+                        </span>
+                        <div class="ed-ed-pagetitle-item">
+                           <h4>
+                              {% block pagetitle %} Dashboard{% endblock pagetitle %}
+                           </h4>
+                           <p>
+                              {% include 'wo/message.html' %}
+                              <!-- {% for message in messages %}
+                              <label for="mobile" style="font-size: 20px;color: red;">{{message}}</span></label>
+                              {% endfor %} -->
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-4">
+                     <ul class="navbar ed-pagetitle-link">
+                        <li class="nav-item">
+                           <a href="#" class="nav-link active">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                 <polyline points="9 22 9 12 15 12 15 22" />
+                              </svg>
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <span class="nav-link nav-icon">
+                           /
+                           </span>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="nav-link nav-menuitem">
+                           Dashboard
+                           </a>
+                        </li>
+
+                     </ul>
+                  </div> -->
+                     </ul> 
+                  </div>
+                  {% endcomment %}
+                  <marquee class="bidding-anamation" direction="left" scrollamount="2">
+                     <a href="/tkc/place_bid_data"><b>Click Here For Bidding</b></a>
+                   </marquee>
+                   <marquee class="bidding-anamation" direction="right" scrollamount="2">
+                      <a href="/tkc/contractor_selectiondisplay"><b>Click Here To See Contractor Status Who Placed Bid</b></a>
+                   </marquee> 
+               </div>
+            </div>
+            <!-- {% include 'wo/message.html' %} -->
+            {% block body %}
+            <p style="min-height:500px;"></p>
+            {% endblock body %}
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <!--  ---------------   Footer Start ------------------------------------------- -->
+            <div class="ed-footer-block mt-4">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <p>
+                        © 2022, All Rights Reserved By
+                        <a href="#" class="link">MPMKVVCL</a>
+                        .
+                     </p>
+                  </div>
+                  <div class="col-sm-6">
+                     <p>
+                        <a href="#" class="links">
+                        Developed and Maintained by IT Cell, Madhya Pradesh Madhya Kshetra Vidyut Vitran Co.
+                        Ltd. Nishtha Parisar Govindpura, Bhopal.
+                        </a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script> -->
+      <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> 
+      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>  -->
+      <!-- yogesh chenges -->
+    <script src="{% static '/assets/js/Validation/datatables.js' %}"></script>
+    <script src="{% static '/assets/js/bootstrap.bundle.min.js' %}"></script>
+   <script>
+      // let popupId = document.getElementById("").innerHTML;
+      setTimeout(function(){ $('#myPopup').hide() }, 3000);
+
+
+   </script>
+      <script> 
+         $(document).ready(function () {
+             $('#example').DataTable();
+         });
+         
+         
+         $(document).ready(function () {
+             $('#navMenu').click(function () {
+                 $('#edHeader').toggleClass('ed-header-collpase');
+                 $('#edSidebar').toggleClass('ed-sidebar-collpase');
+                 $('#edContainer').toggleClass('ed-wrapper-collpase');
+             });
+         });
+         
+         $('#ed-menulist .nav-item').on('click', function () {
+             // var target = $(this).attr('data-rel');
+             $('#ed-menulist .nav-item .nav-link').removeClass('active');
+             $('#ed-menulist .nav-item .ed-menudropdown-block').css('display', 'none');
+             $('#ed-menulist .nav-item').removeClass('active');
+             $(this).addClass('active');
+             // $('#ed-menulist .nav-item').addClass('active');
+             $('#ed-menulist .nav-item.active .ed-menudropdown-block').css('display', 'block');
+             // alert();
+             // $("#" + target).fadeIn('slow').siblings(".tab-box").hide();
+             return false;
+         });
+      </script>
+      <script>
+         const dialogModal = document.getElementById('dialog-modal');
+         const CustomAlert = new function () {
+             this.show = function (msg) {
+                 $('body').addClass('bodymodel');
+                 dialogModal.style.visibility = 'visible';
+                 dialogModal.style.opacity = 1;
+                 dialogModal.style.top = '40%';
+             }
+         
+             this.close = function () {
+                 $('body').removeClass('bodymodel');
+                 dialogModal.style.visibility = 'hidden';
+                 dialogModal.style.opacity = 0;
+                 dialogModal.style.top = '-40%';
+             }
+         }
+      </script>
+      <script>
+         $(document).ready(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+         });
+      </script>
+      <!---->
+   </body>
+</html>
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $("#nextStep1").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").show();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+<!--        $("#nextStep2").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").show();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+<!--        $("#nextStep3").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").show();-->
+<!--            $("#formStep5").hide();-->
+<!--        });-->
+<!--        $("#nextStep4").click(function () {-->
+<!--            $("#formStep1").hide();-->
+<!--            $("#formStep2").hide();-->
+<!--            $("#formStep3").hide();-->
+<!--            $("#formStep4").hide();-->
+<!--            $("#formStep5").show();-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+   $('.material-wrapper').on('click', '.remove', function () {
+       $('.remove').closest('.material-wrapper').find('.material-elements').not(':first').last().remove();
+   });
+   $('.material-wrapper').on('click', '.addMaterial', function () {
+       $('.addMaterial').closest('.material-wrapper').find('.material-elements').first().clone().appendTo('.results');
+   });
+</script>

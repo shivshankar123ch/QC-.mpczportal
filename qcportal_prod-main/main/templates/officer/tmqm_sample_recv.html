@@ -1,0 +1,84 @@
+{% extends 'officer/tmqm_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item active">
+                <a class="nav-link active" href="/tmqm_sample_recv">
+                  <span class="sidenav-mini-icon"> SR </span>
+                  <span class="sidenav-normal">Sample Received</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_return">
+                  <span class="sidenav-mini-icon"> SD/R </span>
+                  <span class="sidenav-normal">Sample Return</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_job_order">
+                  <span class="sidenav-mini-icon"> JO </span>
+                  <span class="sidenav-normal">Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Report_success">
+                  <span class="sidenav-mini-icon"> TR </span>
+                  <span class="sidenav-normal">Test Report</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+
+{% block body %}
+
+<div class="col-lg-12 mb-4 mb-lg-0">
+  <div class="card z-index-2 h-100">
+    <div class="card-header pb-0 pt-3 bg-transparent">
+      <h6 class="text-capitalize">Sample Received Form</h6>
+      <div class="card-body pt-0 pb-10">
+
+    <div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Material</th>
+                <th scope="col">Specification</th>
+                <th scope="col">Vehicle_number</th>
+                <th scope="col">Date</th>
+                <th scope="col" colspan="2" style="text-align:center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.select_material }}</td>
+                    <td>{{ emp.select_specification }}</td>
+                    <th scope="row">{{ emp.Vehicle_number }}</th>
+                    <th scope="row">{{ emp.Date }}</th>
+
+                    {% if emp.sample_received == 0 %}
+                    <td>
+                        <a href="/tmqm_sample_recv2/{{emp.TRF_Id}}"><button type="button" class="button btn btn-primary">Generate Sample Code</button> </a>
+                    </td>
+                    {% else %}
+                    <td>
+                        <a href="/tmqm_sample_recv2/{{emp.TRF_Id}}"><button type="button" class="button btn btn-primary">View</button> </a>
+                    </td>
+                    {% endif %}
+                    <td>
+                        <a href="/tmqm_sample_reject/{{emp.TRF_Id}}"><button type="button" class="button btn btn-primary">Reject</button> </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

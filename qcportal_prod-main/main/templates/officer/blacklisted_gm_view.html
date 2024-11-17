@@ -1,0 +1,67 @@
+
+{% extends 'officer/gm_work_base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+                <div class="row">
+                    <!-- <div class="col-12 col-lg-8 m-auto"> -->
+                    <form class="multisteps-form__form mb-8" action="/blacklisted_gm_evaluate_save/{{data.user.id}}" name="myForm" onsubmit="return validateForm()" method="POST">
+                        {% csrf_token %}
+                    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+                    <h5 class="font-weight-bolder mb-0">Blacklisted Contractor</h5>
+                    <p class="mb-0 text-sm">Mandatory informations</p>
+                    <div class="multisteps-form__content">
+                    <div class="row mt-3">
+                    <div class="col-12 col-sm-6">
+                    <label>Blacklisted Contractor</label>
+                    <input class="multisteps-form__input form-control" type="text" name="order_by" value="{{data.CompanyName_E}}" readonly />
+                    </div>
+                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Blacklisted Recommended By</label>
+                    <input class="multisteps-form__input form-control" type="text" value="{{data.recommended_by}}" readonly />
+                    </div>
+                    </div>
+                    <div class="row mt-3">
+                    <div class="col-12 col-sm-6">
+                    <label>Blacklisted Order</label>
+                    <a href="{{data.recommended_order.url}} " target="_self" class="fas fa-eye text-secondary btn bg-gradient-primary ms-auto mb-0" style="
+                    margin-left: 100px; color: white;"> view</a> 
+                    </div>
+                    <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                    <label>Blacklisted Type</label>
+                    <input class="multisteps-form__input form-control" type="text" value="{{data.blacklisted_type}}" readonly />
+                    </div>
+                    </div>
+                    <div class="row mt-3 ">
+                    <div class="col-12 col-sm-6">
+                    <label>Blacklisted Till</label>
+                    <input class="multisteps-form__input form-control" type="text" value="{{data.date}}" readonly />
+                    </div>
+                 
+            <!-- </div> -->
+        </div>
+    </div>
+</form>
+<script>
+        function validate(evt) {
+        var theEvent = evt || window.event;
+    
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    </script>
+    
+{% endblock body %}

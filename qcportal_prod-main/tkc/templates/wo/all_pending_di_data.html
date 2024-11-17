@@ -1,0 +1,87 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+    <div class="ed-infocontant">
+        <div class="card-body mb-2">  
+            <p class="text-info">
+                {% if msg2 %}
+                {{ msg2 }}
+                {% endif %}
+            </p>
+            </div>
+                            <div class="ed-tableinfo-block ed-orderinfo-block">
+                                <div class="table-responsive">
+                                    <table class="table table-striped ed-table-block">
+                                        <thead>
+                                            <tr>
+                                                <th class="wc1">Sr. No.</th>
+                                                <th class="">WO No.</th>
+                                                <th>DI No.</th>
+                                                <th>Offer No.</th>
+                                                <th>DI Date</th>
+                                                <th>View WO</th>
+                                                <th>View DI</th>
+                                                <th>Dispatch DI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for data in wo %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{data.wo.Contract_Number}} </td>
+                                                <td>{{data.tkc_di.erp_di_number}} </td>
+                                                <td>{{data.offer_no}}</td>
+                                                 <td>{{data.tkc_di.created_date}}</td>
+                                                <td>
+                                                          <a target="_blank" href="{{data.wo.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Digital Order
+                                                            </span>
+                                                        </button>
+                                                            </a>
+
+                                                         {% if data.Wo_Agreement_Upload_Status == 1 %}
+                                                            <a target="_blank" href="{{data.Wo_Digital.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View Agreement
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                                                    {% elif not data.Wo_Agreement_Upload_Status == 1 and Wo_Digital_Upload_Status %}
+                                                        <button class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Agreement Not Uploaded
+                                                            </span>
+                                                        </button>
+                                                    {% endif %}
+
+                                                </td>
+                                                <td>
+                                                    <a target="_blank" href="{{data.tkc_di_doc.url}}">
+                                                        <button class="btn ed-submit btn-success m-1">
+                                                            <span class="ed-submit-text">
+                                                                 View
+                                                            </span>
+                                                        </button>
+                                                            </a>
+                                                </td>
+                                                <td>
+                                                        <a href="/tkc/view_di_material/{{data.tkc_di.id}}">
+
+                                                        <button class="btn ed-submit btn-info m-1">
+                                                            <span class="ed-submit-text">
+                                                                View Details
+                                                            </span>
+                                                        </button>
+                                                        </a>
+                                                </td>
+                                            </tr>
+                                       {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+            </div>
+    {% endblock body %}

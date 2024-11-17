@@ -1,0 +1,147 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+
+{% block heading %} Rapaired inward {% endblock heading %}
+
+{% block body %}
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            Forward To NABL Store
+        </h2>
+    </div>
+    <div class="card-body mb-4">
+        <div class="forms-informations">
+            <div class="ed-form-block">
+                <div class="ed-form-title">
+                    <h6>
+                        <span class="ed-text">
+                            RCA Information
+                        </span>
+                    </h6>
+                </div>
+                <div class="ed-form-body">
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA No
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="MPCZ00{{ ro.wo.id}}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            RCA Vendor Company name
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.vendor_id.CompanyName_E}}"
+                            readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Material
+                        </label>
+                        <input type="text" class="form-control ed-textbox" value="{{ ro.wo.wo_specification}}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-4">
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                Description
+                            </th>
+                            <th class="text-center">
+                                Quantity
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in material %}
+                        <tr>
+                            <td>{{data.rating}}</td>
+                            <td>{{data.description}}</td>
+                            <td>{{data.quantity}}</td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body mb-4">
+        <h4> Details of Sampled DTR are shown below </h4>
+        <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered display text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">
+                                Rating
+                            </th>
+                            <th class="text-center">
+                                XMR Code
+                            </th>
+                            <th class="text-center">
+                                XMR Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in xmr_random1 %}
+                        
+                        <tr>
+                            <td>{{data.material.rating}}</td>
+                            <td>{{data.xmr}}</td>                           
+                            <td>
+                                {% if data.new_design == 1 %}
+                                Non-Star(New Design)
+                                {% elif data.old_l1 == 1 %}
+                                Level-1(Old)
+                                {% elif data.old_l2 == 1 %}
+                                Level-2(Old)
+                                {% elif data.design_non_star == 1 %}
+                                Non-Star(Old Design)
+                                {% endif %}
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-action text-right">
+                <a class="btn btn-primary" onclick="alert('Proceeding to NABL selection.')" href="/po/select_nabl/{{ ro.id }}/{{final_mat_lst}}">
+                    Dispatch to NABL Lab
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

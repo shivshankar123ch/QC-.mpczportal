@@ -1,0 +1,113 @@
+{% extends 'ps-dashboard/psBase.html' %} {% load static %} {% block body %}
+
+
+<div class="edrca-dashboard-contant d-block">
+    <div class="edrca-dashboard-list psh-dashboard-list">
+        <div class="col-12">
+            <h3 class="pl-3 mt-2">All Discom's Package wise Summary</h3>
+        </div>
+        <ul class="psinfo-list">
+            {% for i,j in package_work_data.items%}  
+    
+            <li class="nav-item">
+                <a href = "/fqp/Package-Wo-Data/{{j.0}}">
+                <div class="card ed-card-block">
+                    <div class="ed-card-inner">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-8 col-8">
+                                    <div class="numbers ">
+                                        <h4 class="">
+                                            {{i}}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-4">
+                                    <div class="iconbox">
+                                        <i class="ni ni-money-coins text-lg opacity-10 "
+                                            aria-hidden="true"></i>
+                                    </div>
+                                    
+                                    <h6 class="text-center">
+                                        <b> WO Counts: {{ j.1 }}</b>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </a>
+ 
+            </li>
+
+       
+            {% endfor %}
+  
+        </ul>
+    </div>
+</div>  
+
+
+<style>
+    .edrca-dashboard-list.psh-dashboard-list {
+        position: relative;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list {
+        list-style: none;
+        padding: 15px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item {
+        width: 33.33%;
+        position: relative;
+        padding: 0 15px;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item:nth-child(even) .card {
+        background: #5e72e4;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item:nth-child(odd) .card {
+        background: #28a745;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item .card {
+        min-height: 180px;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item .ed-card-block h4 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        line-height: 24px;
+    text-align: justify;
+    }
+    
+    .edrca-dashboard-list.psh-dashboard-list .psinfo-list .nav-item .ed-card-block h6 {
+      
+    font-size: 14px;
+    margin: 20px 0 2px;
+    text-align: center;
+    width: 100%;
+    }
+    .edrca-dashboard-contant .edrca-dashboard-list .ed-card-block .iconbox i {
+    font-size: 50px !important;
+}
+.edrca-dashboard-contant .edrca-dashboard-list .ed-card-block .iconbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+
+
+
+
+
+
+
+{% endblock body %}

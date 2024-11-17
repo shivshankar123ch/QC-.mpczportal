@@ -1,0 +1,307 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+</style>
+<div class="ed-information">
+    <div class="card ed-card-block">
+      <div class="ed-card-inner">
+        <div class="card-header">
+          <h2>
+            Create Work-Order Invoice
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="ed-tableinfo-block">
+                   <div class="table-responsive">
+                        <table id="example2" class="table table-bordered tabble-stripped display">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>WO. No.</th>
+                                    <th>Subject</th>
+                                    <th>WO. Contract Date</th>
+                                    <th>Firm Name</th>
+                                    <th>View Work Order Detail</th>
+                                    <th>WO. Amount (In Rupees)</th>
+                                    <th>WO. Approved Amount (In Rupees)</th>
+                                    <th>View Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                                <tr>
+                                    <td>
+                                        {{wo_data.Contract_Number}}
+                                    </td>
+                                    <td>
+                                        {{wo_data.Header.Contract_Description}}
+                                    </td>
+                                    <td>
+                                        {{wo_data.Contract_Date}}
+                                    </td>
+                                    <td>
+                                        {{wo_data.supplier.CompanyName_E}}
+                                    </td>
+
+
+                                    <td>
+                                        {% if wo_data.Po_doc %}
+                                        <a class="btn btn-info btn-sm" href="{{wo_data.Po_doc.url}}" target="_blank">View Digital Work-Order </a><br>
+                                        {% else %}
+                                        <a class="btn  btn-danger btn-sm" href="#">Digital Work-Order Not Uploaded </a><br>
+                                        {% endif %}
+                                    </br>
+                                            
+                                    {% if wo_data.Wo_Agreement %}
+                                    <a class="btn btn-info btn-sm" href="{{wo.Wo_Agreement.url}}" target="_blank">View Work-Order Agreement</a>
+                                    {% else %}
+                                    <a class="btn  btn-danger btn-sm" href="#">Work-Order Agreement Not Uploaded</a>
+                                    {% endif %}
+                                    </td>
+
+                                      <td >
+                                       {{wo_amt.Amount__sum|default:"0"}} Rupees
+                                       <input value="{{wo_amt.Amount__sum}}" id="pass_amt"  hidden/>
+                                       <!-- <input value="{{500000000}}" id="pass_amt"  hidden/> -->
+                                    </td>
+                                    
+                                    <td >
+                                        {{in_amount.total_invoice_amount__sum|default:"0"}} Rupees
+                                        <input value="{{in_amount.total_invoice_amount__sum}}" id="inv_amt" hidden/>
+                                    </td>
+
+                                    <td>
+                                
+                                        <a class="btn ed-submits btn-primary" onclick="msg()"
+                                            href="/tkc/tkc_invoice_list/?woid={{wo_data.id}}">View Invoices</a>
+                                        
+                                            <!--     <button type="button" class="btn ed-submits ed-formsubmit" data-toggle="modal" data-target="#WorkOrder">
+                                            Create Invoice
+                                            </button> -->
+            
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>  
+
+                <div class="">
+                    <h6 class="">
+                        Work-Order Invoice
+                    </h6> 
+                    <div class="forms-informations">
+                        <div class="ed-form-block p-0 border-0">
+                            <!-- 
+                                <div class="ed-form-title">
+                                    <h6>
+                                        <span class="ed-text">
+                                            Liaison Info
+                                        </span>
+                                    </h6>
+                                </div>
+                            -->
+                            <div class="ed-form-body"> 
+                                <form action="/tkc/tkc_invoice_generate/" method="POST" enctype="multipart/form-data" onsubmit="return validateFunction()">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="ed-form-label">  
+                                            Invoice Date
+                                            <span class="text-danger">* </span>
+                                        </label>
+                                        <input type="date" id="" name="invoice_date" placeholder="dd/mm/yy" class="form-control ed-textbox" onkeypress="return false" required>
+                                        <input type="text" name="wo_id"  placeholder="" value="{{wo_data.id}}" hidden required>
+                                    </div>  
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Invoice Type
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <select name="invoicetype" id="" class="form-control ed-textbox" required>
+                                          <option value="" style="width:250px;">Please Select Invoice Type</option>
+                                            {% for itd in it_data %}
+                                          <option value="{{itd.id}}" style="width:250px;">{{itd.invoice_type}}</option>
+                                            {% endfor %} 
+                                        </select>
+                                    </div> 
+
+                                    
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Invoice No
+                                                <span class="text-danger">* </span>
+                                            </label> 
+                                            <input type="text" name="invoice_no" id="" class="form-control ed-textbox" value="" pattern="[a-zA-Z0-9-]+" title="It is required and please do not use special character" required maxlength="48">
+                                        </div>
+                                      
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Amount Without Taxes
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <input type="number" step="0.01" name="invoice_amount_withought_taxes" id="amt_wit_tax" onblur="total_amt()" class="form-control ed-textbox" required placeholder=""  value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Invoice Amount CGST
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <input type="number" step="0.01" name="invoice_amount_cgst" id="inv_amt_cgst" onblur="total_amt()" class="form-control ed-textbox"  placeholder="" required  pattern="\d+(\.\d+)?" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Invoice Amount SGST
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <input type="number" step="0.01" name="invoice_amount_sgst" id="inv_amt_sgst" onblur="total_amt()" class="form-control ed-textbox" required placeholder="" pattern="\d+(\.\d+)?" value="">
+                                    </div>   
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Total Invoice Amount 
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <input type="text" name="total_invoice_amount" id="total_inv_amt" required class="form-control ed-textbox"  placeholder=""  value="" readonly>
+                                    </div>   
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Invoice PDF
+                                            <span class="text-danger">* </span>
+                                        </label> 
+                                        <input type="file" name="invoice_pdf" placeholder=""  value="" accept="application/pdf" required>
+                                    </div>    
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            BG PDF
+                                            <span class="text-danger">* </span>
+                                        </label>  
+                                        <input type="file" name="bg_pdf" placeholder=""  value="" accept="application/pdf" required>
+                                    </div>    
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            BG Acceptance Letter
+                                            <span class="text-danger">* </span>
+                                        </label>  
+                                        <input type="file" name="bg_acceptance_letter" placeholder=""  value="" accept="application/pdf" required>
+                                    </div>    
+
+                                    
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Supporting Document Name
+                                                <!-- <span class="text-danger">* </span> -->
+                                            </label>  
+                                            <input type="textarea" name="supporting_document_name" placeholder="" id="supporting_name_id" onblur="support_data_file()" class="form-control ed-textbox">
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Supporting Document
+                                            <!-- <span class="text-danger">* </span> -->
+                                        </label>  
+                                        <input type="file" name="supporting_document" placeholder=""  value="" hidden="hidden" accept="application/pdf" id="supporting_document_id">
+                                    </div>    
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Invoice Remark
+                                            <!-- <span class="text-danger">* </span> -->
+                                        </label>  
+                                        <input type="textarea" name="invoice_remark" placeholder="" class="form-control ed-textbox"   value="">
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <div class="text-right">   
+                                            <button  type="submit" class="btn ed-submits ed-formsubmit"> 
+                                                Submit Invoice 
+                                            </button> 
+                                        </div>  
+                                    </div>   
+                                </form>    
+                            </div>  
+                        </div>  
+                    </div>  
+                </div>   
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+        <script>
+            function support_data_file(){
+                
+                let supporting_name_id = document.getElementById('supporting_name_id');
+                //  console.log("supporting_name_id---------",supporting_name_id.value)
+                 let supporting_document_id = document.getElementById('supporting_document_id');
+                //  console.log(supporting_name_id.value)
+                 if(supporting_name_id.value == ""){
+                    supporting_document_id.setAttribute("hidden",true);
+                     supporting_document_id.removeAttribute("required");
+                   
+                 }else{
+                    //  console.log("else")
+                     supporting_document_id.removeAttribute("hidden");
+                    supporting_document_id.setAttribute("required",true);
+                    
+                 }
+            }
+
+            function total_amt(){
+                let amt_wit_tax = document.getElementById('amt_wit_tax');
+                let inv_amt_cgst = document.getElementById('inv_amt_cgst');
+                let inv_amt_sgst = document.getElementById('inv_amt_sgst');
+                let total_inv_amt = document.getElementById('total_inv_amt');
+                let pass_amt = document.getElementById('pass_amt').value;
+                let inv_amt = document.getElementById('inv_amt').value;
+                if(inv_amt == "None" || NaN){
+                    inv_amt = 0;
+                }
+                let x = Number(amt_wit_tax.value) + Number(inv_amt_cgst.value) + Number(inv_amt_sgst.value);
+                total_inv_amt.value = x;
+                let y = Number(pass_amt) - Number(inv_amt);
+                // console.log(y,total_inv_amt.value)
+                if(y < total_inv_amt.value){
+                    alert("Total Invoice Amount should not be grater then the diffrence of WO value and invoice pass amount value.");
+                    return false
+                }
+               // console.log(x,amt_wit_tax.value,inv_amt_cgst.value,inv_amt_sgst.value)
+               
+
+            }
+
+            function validateFunction(){
+                let pass_amt = document.getElementById('pass_amt').value;
+                let inv_amt = document.getElementById('inv_amt').value;
+                
+                if(inv_amt == "None" || NaN){
+                    inv_amt = 0;
+                }
+
+                let total_inv_amt = document.getElementById('total_inv_amt').value;
+                let y = Number(pass_amt) - Number(inv_amt)
+                if(y < total_inv_amt){
+                    alert("Total Invoice Amount should not be grater then the diffrence of WO value and invoice pass amount value.");
+                    return false
+                }else{
+                    return true;
+                }
+            }
+        </script>
+
+        {% endblock body %}

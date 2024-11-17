@@ -1,0 +1,201 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script>
+</head>
+
+
+
+
+<div class="ed-card-inner">
+    <div class="card-header">
+        <h2>
+            RCA BG Order List Details
+        </h2>
+    </div>
+    <div class="card-body mb-5">
+        <div class="ed-form-block">
+            <div class="ed-form-title">
+                <h6>
+                    <span class="ed-text">
+                        Bank Details
+                    </span>
+                </h6>
+            </div>
+            <div class="ed-form-body">
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        PO number
+                    </label>
+                    <input type="text" name="" value="MP{{data.rca_cell.user_zone}}WO{{data.id}}"
+                        class="form-control ed-textbox" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Bank Name
+                    </label>
+                    <input type="text" name="" value="{{data.bg_bank}}" class="form-control ed-textbox" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        IFSC
+                    </label>
+                    <input type="text" name="" value="{{data.ifsc}}" class="form-control ed-textbox" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Account No.
+                    </label>
+                    <input type="text" name="" value="{{data.ac_number}}" class="form-control ed-textbox" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="ed-form-label">
+                        Account Holder Name
+                    </label>
+                    <input type="text" name="" value="{{data.Account_Holder_Name}}" class="form-control ed-textbox"
+                        readonly>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="card-body mb-5">
+        <div class="ed-form-block">
+            <div class="ed-form-title">
+                <h6>
+                    <span class="ed-text">
+                        Bank Guarantee Details
+                    </span>
+                </h6>
+            </div>
+            <div class="ed-form-body">
+                <form action="/vendor/rca_ven_bg_save/{{data.id}}" name="myForm" onsubmit="return validateForm()"
+                    method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Bank Guarantee No
+                        </label>
+                        <input type="text" name="" value="{{data.bg_no}}" class="form-control ed-textbox" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Issue Date
+                        </label>
+                        <input type="text" name="" value="{{data.issue_date}}" class="form-control ed-textbox" readonly>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Valid Upto
+                        </label>
+                        <input type="text" name="" value="{{data.valid_date}}" class="form-control ed-textbox" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Claim Date
+                        </label>
+                        <input type="text" name="" value="{{data.claim_date}}" class="form-control ed-textbox" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="ed-form-label">
+                            Amount
+                        </label>
+                        <input type="text" name="" value="{{data.amount}} " class="form-control ed-textbox" readonly>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="ed-form-label">
+                                    Bg Document
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="{{data.rca_bg_upload.url}}" target="_blank" class="ed-links">
+                                  
+                                    <label class="ed-textinfo">
+                                        <span class="text-primary">
+                                            <i class="fas fa-eye"></i>
+                                        View
+                                        </span>
+                                    </label>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        <!-- <tr>
+                                <td> <label for="exampleInputEmail1">PO number</label> </td>
+                                <td> <label for="exampleInputEmail1">MPCZWO{{data.id}} </label> </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.bg_bank}} </label> </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.ifsc}} </label> </td>
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Account No. </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.ac_number}} </label> </td>
+                            </tr> -->
+        <!-- 
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Account Holder Name </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.Account_Holder_Name}} </label>
+                                </td>
+                            </tr> -->
+
+
+
+ 
+
+<script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#bg_valid_upto1').attr('min', today);
+</script>
+
+{% endblock body %}

@@ -1,0 +1,110 @@
+
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% block body %} {% block a %} 
+<span class="ms-1 font-weight-bold"></span> {% endblock a %} 
+
+
+<h4 class="card-title m-2"> <b> Verify and Confirm your account details For Deregistration</b></h4>
+<form class="form-group" action="{% url 'ca_deregistered_req' %}" method="POST" id="myForm">
+    {% csrf_token %}
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Name:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.Name}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Mobile:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.Mobile}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">Bank name:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.Bank_name}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Account Number:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.Account_Number}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="fname">IFSC:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.IFSC}}" class="form-control" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="fname">Security Deposit:</label><br>
+                    <input type="text" name="Mobile" value="{{user_data.Security_Deposit}}" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+        
+
+<br>
+    
+    </div>
+    <p><b style="color: red;">NOTE :</b> कृपया नीचे दिए गए बिंदु को ध्यान से पढ़ें</p>
+    <ul>
+        <li>
+            कृपया निरस्त्रीकरण (Deregistration) से पूर्व अपनी इनवॉइस बना ले ,निरस्त्रीकरण के पश्चात आप इनवॉइस नहीं बना सकेंगे|
+        </li>
+        <li>
+            कृपया अपनी बैंक डिटेल्स भली भाति सुनिश्चित कर ले| सिक्योरिटी डिपाजिट (SD ) 15 दिन के अंदर रिफंड कर दे जाएगी|
+        </li>
+        
+        <li>
+            बैंक खाते से सम्बंधित जानकारी को परिवर्तित करने के लिए आपको नयी बैंक से सम्बंधित जानकारी और रद्द चेक की पीडीऍफ़ को अपलोड करना होगा|
+        </li>
+        <li>
+            अगर आप अपना बैंक विवरण नवीनीकरण करना चाहते हैं| कृपया व्यवस्थापक से संपर्क करें|
+        </li>
+        <li>
+            इसके पच्छात आप पोर्टल पर लॉगिन नहीं कर सकेंगे|
+        </li>
+        
+    </ul>
+        <label> <input type="checkbox" name="chbox" id="chbox" required> मैंने सभी बिंदुओं को पढ़ लिया है और मैं पंजीकरण रद्द करने के लिए सहमत हूं</label>
+        &nbsp; 
+        <div class="col-12 col-sm-12 clearfix">
+            <input type="submit" id="submit" class="btn btn-primary" value="Deregistered" style="float: left ; " onclick="return confirm('Are you sure want to Deregistered ?');">
+          
+        
+        </div>
+    </form>
+    <br>
+    <div class="col-12 col-sm-12" style=" margin-top: -25px;">
+        <a href="{% url 'ca_bank_update' %}"><button  class="btn btn-dark  btn-sm"  type="submit">Update Your bank details</button></a>
+    </div>
+  
+
+
+    {% endblock body %}
+    
+    <script type="text/javascript">
+        $(function ()
+        {
+            $("#myForm").on('submit', function ()
+            {
+                if (document.getElementById("chbox").checked)
+                {
+                    $("#myForm").submit();
+                }
+                else
+                {
+                    e.preventDefault();
+                    alert('Please check the box before submitting the form');
+                }
+            });
+        });
+    </script>
+    

@@ -1,0 +1,18 @@
+from django.contrib import admin
+
+from django.contrib import admin
+
+from .models import *
+admin.site.register(NABL_Document)
+admin.site.register(Product)
+admin.site.register(Product_Specification)
+admin.site.register(List_Of_Test)
+admin.site.register(Product_List_Of_Test)
+admin.site.register(Perform_Test_By_NABL)
+
+
+
+
+
+
+

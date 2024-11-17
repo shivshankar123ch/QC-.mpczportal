@@ -1,0 +1,88 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+
+{% block body %}
+<section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          Work Order ID
+                      </th>
+                      <th style="width:10%">
+                          LOA NO
+                      </th>
+                      <th style="width:10%">
+                          NIT NO
+                      </th>
+                       <th style="width:10%">
+                          Total Schedule
+                      </th>
+                      <th>
+                       Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for name in name %}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>MPCZ00{{name.id}}</b>
+                      </td>
+                      <td>
+                          {{name.wo_no}}
+                      </td>
+                      <td class="project_progress">
+                              {{name.nit_no}}
+                      </td>
+                      <td>
+                           {{name.milestone}}
+                      </td>
+                      <td class="project-actions text-center">
+                          {% if name.bg %}
+                          <a target="_blank" href="{{name.bg.url}} " class="btn btn-success btn-sm" style="width:130px;"> View BG</a>
+                          {% else %}
+                          <a href="/tkc/upload_bg/{{name.id}}" class="btn btn-primary  btn-sm" style="width:130px;"> Upload BG</a>
+                          {% endif %}
+                          {% if name.loc %}
+                          <a target="_blank" href="{{name.loc.url}} " class="btn btn-success btn-sm" style="width:130px;"> View LOC</a>
+                          {% else %}
+                          <a href="/tkc/upload_loc/{{name.id}}" class="btn btn-primary  btn-sm" style="width:130px;"> Upload LOC</a>
+                          {% endif %}
+                      </td>
+                  </tr>
+              {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+
+{% endblock body %}
+

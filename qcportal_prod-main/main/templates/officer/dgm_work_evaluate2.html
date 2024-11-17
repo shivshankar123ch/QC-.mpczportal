@@ -1,0 +1,99 @@
+{% extends 'officer/dgm_work.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h4>Uploaded All Document</h4>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>User All Basics Details</h5>
+        </div>
+        <!-- <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="text-light bg-dark" style="font-size: 15px;">
+                  <tr>
+                        <th><b>Serial Number</b></th>
+                        <th><b>Report Name</b></th>
+                        <th><b>Value</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td >1</td>
+                        <td>Type of Business</td>
+                        <td>{{data.Type_of_business}}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Authorised Person Name</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Company Name</td>
+                        <td>{{data.CompanyName_E}}</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Contact Number</td>
+                        <td>{{data.ContactNo}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Email ID</td>
+                        <td>{{data.Email_Id}}</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td> Contractor Class</td>
+                        <td>{{data.User_type}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-heading">
+            <h5>Document Uploaded By NABL</h5>
+        </div>
+        <form action="/dgm_work_evaluate_save/{{data.User_Id}}" method="POST">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="text-light bg-dark" style="font-size: 15px;">
+                      <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> Issued Date </th>
+                            <th> Expired Date </th>
+                            <th> View Document</th>
+                            <th> Status </th>
+                            <!-- <th> Decision</th>
+                            <th> Remark</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% with name=100 %} {% for data in doc %}
+                        <tr>
+
+                            <td><b>{{data.Types_of_Docs}}</b></td>
+                            <td>{{data.Document_Number}}</td>
+                            <td>{{data.Doc_issue_date|date:"d-M-Y"}}</td>
+
+                            <td>{{data.Doc_expiry_date|date:"d-M-Y"}}</td>
+                            <td> <a href="{{data.Ddocfile.url}} " class="fas fa-eye text-secondary">View</a></td>
+                            {% if data.Primary_remark_rejection_counter == 2 %}
+                            <td><span class="badge badge-danger badge-sm">Resubmit</span></td>
+                            {% else %}
+                            <td><span class="badge badge-success badge-sm">Submit</span></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %} {% endwith %}
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock body %}

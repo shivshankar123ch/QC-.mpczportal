@@ -1,0 +1,114 @@
+{% extends 'officer/RoofTop_Viewer_base.html' %}
+{% load static %}
+{% load cart %}
+{% block body %}
+
+            <div class="card-body table-responsive">
+              <h3 class="card-title m-2 table-responsive"> <b> All Released LOA </b></h3>
+              <div>
+              <table class="table table-bordered table-hover bg-white " cellspacing="0" border="2" >
+                <thead class="bg-dark">
+                  <tr>
+                    <th style="color: white; ">
+                        S NO.</th>
+
+                        <th style="width:1%;color: white;  ">
+                         Firm/Agency Name</th>
+        
+                            <th style="color: white; ">
+                                LOA Approver Offcier Status </th>
+        
+                            <th style="color: white;  ">
+                              View LOA </th>
+                              <th style="color: white;  ">
+                                LOA Approval Offcier </th>
+
+                                <th style="color: white;  ">
+                                  Annexure </th>
+
+                                
+                                  <th style="color: white;  ">
+                                    Vendor Related Document </th>
+
+                              <th style="color: white;  ">
+                                Remark </th>
+                                <th style="color: white;  ">
+                                  Re-Upload </th>
+                                  <th style="color: white;  ">
+                                    Submit </th>
+                                    <th style="color: white;  ">
+                                      Upload Bg Details </th>
+
+                 
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in data %}
+                 
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    
+                    <td>{{data.user_name}}</td>
+                    {% if data.approver == 1  %}
+                    <td><span class="badge badge-success badge-sm">Approve</span></td>
+                        {% elif data.approver == 2  %}
+                        <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                        {% else %}
+                        <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                        {% endif %}
+
+
+                    <td class="text-center"> <a href="{{data.loa_file.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+
+
+                    {% if data.signed_loa_file %}
+                    <td class="text-center"> <a href="{{data.signed_loa_file.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                    {% else %}
+                    <td class="text-center"> <a href="#" target="_self" class="fas fa-eye text-secondary"></a></td>
+
+                    {% endif %}
+                    
+                    <td class="text-center"> <a href="{{data.annexure.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+                    <td class="text-center"> <a href="{{data.vendor_document.url}} " target="_self" class="fas fa-eye text-secondary">View</a></td>
+
+
+                    <td>{{data.remark}}</td>
+                    {% if data.approver == 2 %}
+                    <form action="/loa_resubmit/{{data.user_id}}" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                    <td class="text-center"> <input type="file" name="newloafile" class="form-control"/> </td>
+                    <td class="text-center"><button type="submit" >Re-Submit</button></td>
+                    </form>
+                    {% elif data.approver == 1 and data.bg_status == 0 %}
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><a href="/solar_vendor_bg/{{data.user_id}}">Bank Details</a></td>
+                    {% else %}
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    {% endif %}
+            {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
+
+
+     
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </div>
+
+  </div>
+</section>
+<!-- /.content -->
+
+{% endblock body %}

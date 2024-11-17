@@ -1,0 +1,97 @@
+{% extends 'officer/dgm_work.html' %} {% load static %} {% block body %}
+<div class="card card-default width-75 m-4" style="width:85%">
+          <div class="card-header">
+            <h3 class="card-title">Uploaded Factory Inspection Details </h3>
+          </div>
+     <form   action="/factory_inspection_already/{{data.User_Id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+           <div class="card-body col-12 mt-4">
+                               <table class="table table-bordered table-hover">
+                                  <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                                    <tr>
+                                          <th class="text-center" width="5%"><b> S. No.</b></th>
+                                        <th colspan="2">
+                                             Company Details
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       <tr>
+                                            <td class="text-center">1</td>
+                                            <td>Area Of Land Occupied By Factory (sq. ft.)</td>
+                                              <td>   {{fac.Area_of_land}}    </td>
+                                        </tr>
+                                         <tr> <td class="text-center">2</td>
+                                            <td>Number Of Working Shift in Factory *</td>
+                                              <td>{{fac.No_of_Shifts}}</td>
+                                        </tr>
+                                         <tr>
+                                              <td class="text-center">3</td>
+                                            <td>Other Personnel Working In Factory *</td>
+                                              <td>{{fac.Outsourced_person}}</td>
+                                        </tr>
+                                         <tr>
+                                              <td class="text-center">4</td>
+                                            <td>Buit Up Area Of Factory (sq. ft.)*</td>
+                                              <td>{{fac.Area_built_up}}</td>
+                                        </tr>
+                                          <tr>
+                                               <td class="text-center">5</td>
+                                            <td>Product Capacity Per Annum(QUANTITY) *</td>
+                                              <td>{{fac.Yearly_Production}}</td>
+                                        </tr>
+                                        <tr>
+                                               <td class="text-center">6</td>
+                                            <td>Factory Latitude</td>
+                                              <td>{{fac.lat}}</td>
+                                        </tr>
+                                        <tr>
+                                               <td class="text-center">7</td>
+                                            <td>Factory Longitude</td>
+                                              <td>{{fac.log}}</td>
+                                        </tr>
+                                         <tr>
+                                               <td class="text-center">7</td>
+                                            <td>Factory Inspecting Date</td>
+                                              <td>{{fac.date}}</td>
+                                        </tr>
+                                        <tr>
+                                               <td class="text-center">8</td>
+                                              <td>Inspection Report</td>
+                                              <td class="text-center"> <a href="{{fac.Ddocfile.url}} " target="_self">View</a></td>
+                                        </tr>
+                     <tr>
+                   </tr>
+                </tbody>
+                </table>
+               <div class="panel-heading mt-4">
+                       <h5> Factory Image  </h5>
+                    </div>
+                        <div class="row">
+                             {% for data in fac_image %}
+                  <div class="col-md-4 text-center" >
+                     <div class="thumbnail">
+                    <a target="_self" href="{{data.Image.url}}">
+                  <img src="{{data.Image.url}}" alt="Not Available" style="width:100%;height:100px;object-fit: fill;">
+                 <div class="caption">
+          <p>Image {{forloop.counter}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+{% endfor %}
+                        </div>
+                         <div class="custom-control custom-radio">
+                                    <input type="radio" class="form-check-input" id="radio1" name="status" value="OK" checked required>
+                                    <label class="form-check-label" for="radio1">Accepted</label>
+
+                                    <input type="radio" class="form-check-input" id="radio2" name="status" value="NOT">
+                                    <label class="form-check-label" for="radio2">Rejected</label>
+                                </div>
+                                 <button type="submit" id="submit" class="btn btn-success"> Submit</button>
+          </div>
+     </form>
+        </div>
+    </div>
+{% endblock body %}

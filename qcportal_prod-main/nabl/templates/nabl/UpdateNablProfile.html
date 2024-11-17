@@ -1,0 +1,377 @@
+{% extends "nabl/nabl_Base.html" %} {% load static %} {% block body %} {% block UpdateNablProfile %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock UpdateNablProfile %}
+
+    <form action="/nabl/UpdateNablProfile" method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+
+
+        <!-- <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header"> -->
+
+        <!-- <h5 class="pt-3"> Basic Details</h5> -->
+        <div class="card-body ">
+
+            <table border="1" width="100%" ID="Table2" class="table table-bordered table-responsive ">
+                <thead class="table table-dark">
+                    <tr>
+                        <h5 class="font-weight-bolder">Basic Details</h5>
+                    </tr>
+                    <tr>
+                        <th class="text-center" style=" width:10px;">
+                            S.No.</th>
+                        <th>
+                            Title </th>
+
+                        <th>
+                            Value </th>
+
+
+                        <!-- <th style="width: 15% ">
+                
+                Select Vendor
+              </th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">1</td>
+                        <td>ID</td>
+                        <td><input type="text " name="one " class="form-control " value="{{basic.User_Id}} " readonly='readonly'></td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">2</td>
+                        <td>Discom</td>
+                        <td><input type="text " name="zero " class="form-control " value="{{basic.User_zone}} " readonly></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">3</td>
+                        <td>Type Of Business</td>
+                        <td><input type="text " name="two " class="form-control " value="{{basic.Type_of_business}} " readonly></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">4</td>
+                        <td>User Type</td>
+                        <td><input type="text " name="three " class="form-control " value="{{basic.User_type}} " readonly='readonly'></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">5</td>
+                        <td>Name Of Company/Firm</td>
+                        <td><input type="text " name="four " class="form-control " value="{{basic.CompanyName_E}} "></td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">6</td>
+                        <td>Authorised Person</td>
+                        <td><input type="text " name="five " class="form-control " value="{{basic.Authorised_person_E}} "></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align: center;">7</td>
+                        <td>Contact Number</td>
+                        <td><input type="text " name="six " class="form-control " value="{{basic.ContactNo}} "></td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align: center;">8</td>
+                        <td>Email ID</td>
+                        {% if company.Email_Id == 'None' %}
+                        <td><input type="text " name="seven " class="form-control " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold "></td>
+
+                        {% else %}
+                        <td><input type="text " name="seven " class="form-control " value="{{basic.Email_Id}} "></td>
+                        {% endif %}
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">9</td>
+                        <td>Company/Firm PAN Card</td>
+                        {% if company.Company_Pan_No == 'None' %}
+                        <td><input type="text " pattern="[A-Z]{5}[0-9]{4}[A-Z]{1} " name="eight " id="pan " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " onfocus="validateForm() " onchange="validateForm() " readonly></td>
+
+                        {% else %}
+                        <td><input type="text " name="eight " class="form-control " pattern="[A-Z]{5}[0-9]{4}[A-Z]{1} " value="{{company.Company_Pan_No}} "></td>
+                        {% endif %}
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: center;">10</td>
+                        <td>Company/Firm Gumasta Number</td>
+                        {% if company.Company_Gumastha_No == 'None' %}
+                        <td><input type="text " name="nine " class="form-control " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                        {% else %}
+                        <td><input type="text " class="form-control " name="nine " value="{{company.Company_Gumastha_No}} " required></td>
+                        {% endif %}
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">11</td>
+                        <td>Company/Firm GST Number</td>
+                        {% if company.Company_Gst_No == 'None' %}
+                        <td><input type="text " class="form-control " name="ten " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                        {% else %}
+                        <td><input type="text " class="form-control " name="ten " value="{{company.Company_Gst_No}} " required></td>
+                        {% endif %}
+
+                    </tr>
+
+                    <!-- <tr>
+                                                <td>11</td>
+                                                <td>Company/Firm Registration Date</td>
+                                                <td><input type="text " name="eleven " value="{{company.Registration_Date}} "
+                                                       ></td>
+    
+                                            </tr> -->
+
+
+                    <tr>
+                        <td style="text-align: center;">12</td>
+                        <td>Company/Firm FAX Number</td>
+                        {% if company.Company_Fax == 'None' %}
+                        <td><input type="text " name="twelve " class="form-control " pattern="^\d{10}$ " maxlength="10 " minlength="5 " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+
+                        {% else %}
+                        <td><input type="text " class="form-control " name="twelve " value="{{company.Company_Fax}} " required></td>
+                        {% endif %}
+
+                    </tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+
+
+            <section class="content ">
+                <div class="table-responsive">
+                    <div>
+                        <div class="row ">
+                            <div class="col-12 ">
+
+
+                                <!-- <h3 class="pt-3 "> Parmanent Address</h3> -->
+
+
+                                <table border="1 " width="100% " ID="Table2 " class="table table-bordered table-responsive ">
+                                    <thead class="table ">
+                                        <tr>
+                                            <h5 class="font-weight-bolder">Parmanent Address</h5>
+                                        </tr>
+                                        <tr>
+                                            <th style="width:10px;" class="text-center">
+                                                S.No.</th>
+                                            <th>
+                                                Title </th>
+
+                                            <th>
+                                                Value </th>
+
+                                            <tr>
+                                                <td style="text-align: center;">1</td>
+                                                <td>Address 1</td>
+                                                {% if company.Company_add_1 == 'None' %}
+                                                <td><input type="text " name="thireteen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                {% else %}
+                                                <td><input type="text " name="thireteen " value="{{company.Company_add_1}} " class="form-control " placeholder="{{company.Company_add_1}} " required></td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;">2</td>
+                                                <td>Address 2</td>
+                                                {% if company.Company_add_2 == 'None' %}
+                                                <td><input type="text " name="fourteen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                {% else %}
+                                                <td><input type="text " name="fourteen " placeholder="{{company.Company_add_2}} " class="form-control " value="{{company.Company_add_2}} " required></td>
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align: center;">3</td>
+                                                <td>Pin Code</td>
+                                                {% if company.Company_pin_code == 'None' %}
+                                                <td><input type="text " name="fifteen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                {% else %}
+                                                <td><input type="text " name="fifteen " placeholder="{{company.Company_pin_code}} " class="form-control " value="{{company.Company_pin_code}} " required></td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;">4</td>
+                                                <td>District</td>
+                                                {% if company.Company_dist == 'None' %}
+                                                <td><input type="text " name="sixteen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                {% else %}
+                                                <td><input type="text " name="sixteen " class="form-control " placeholder="{{company.Company_dist}} " value="{{company.Company_dist}} " required></td>
+                                                {% endif %}
+
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align: center;">5</td>
+                                                <td>State</td>
+                                                {% if company.Company_state == 'None' %}
+                                                <td><input type="text " name="seventeen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                {% else %}
+                                                <td><input type="text " name="seventeen " placeholder="{{company.Company_state}} " class="form-control " value="{{company.Company_state}} " required></td>
+                                                {% endif %}
+
+                                            </tr>
+                                            <tr>
+
+                                            </tr>
+
+                                            </tbody>
+                                </table>
+
+
+
+
+                                <section class="content ">
+                                    <div>
+                                        <div class="row ">
+                                            <div class="col-12 ">
+
+                                                <!-- <h3 class="pt-3 "> Comunication Address</h3> -->
+
+
+                                                <table border="1 " width="100% " ID="Table2 " class="table table-bordered table-responsive ">
+                                                    <thead>
+                                                        <tr>
+                                                            <h5 class="font-weight-bolder">Comunication Address</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="width:10px;" class="text-center">
+                                                                S.No.</th>
+                                                            <th>
+                                                                Title </th>
+
+                                                            <th>
+                                                                Value </th>
+
+                                                            <tr>
+                                                                <td style="text-align: center;">1</td>
+                                                                <td>Address 1</td>
+                                                                {% if company.Company_t_add_1 == 'None' %}
+                                                                <td><input type="text " name="eighteen " class="btn btn-secondary bg-warning text-bold " placeholder="Not Fill " required>
+                                                                </td>
+
+                                                                {% else %}
+
+                                                                <td><input type="text " name="eighteen " placeholder="{{company.Company_t_add_1}} " class="form-control " value="{{company.Company_t_add_1}} " required></td>
+
+                                                                {% endif %}
+
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center;">2</td>
+                                                                <td>Address 2</td>
+                                                                {% if company.Company_t_add_2 == 'None' %}
+                                                                <td><input type="text " name="nineteen " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required>
+                                                                </td>
+                                                                {% else %}
+
+                                                                <td><input type="text " name="nineteen " placeholder="{{company.Company_t_add_2}} " class="form-control " value="{{company.Company_t_add_2}} " required></td>
+
+                                                                {% endif %}
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td style="text-align: center;">3</td>
+                                                                <td>Pin Code</td>
+                                                                {% if company.Company_t_pin_code == 'None' %}
+                                                                <td><input type="text " name="twenty " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+                                                                {% else %}
+                                                                <td><input type="text " name="twenty " placeholder="{{company.Company_t_pin_code}} " class="form-control " value="{{company.Company_t_pin_code}} " required></td>
+
+                                                                {% endif %}
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center;">4</td>
+                                                                <td>District</td>
+                                                                {% if company.Company_t_dist == 'None' %}
+                                                                <td><input type="text " name="twentyone " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                                {% else %}
+                                                                <td><input type="text " name="twentyone " placeholder="{{company.Company_t_dist}} " class="form-control " value="{{company.Company_t_dist}} " required></td>
+
+                                                                {% endif %}
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td style="text-align: center;">5</td>
+                                                                <td>State</td>
+                                                                {% if company.Company_t_state == 'None' %}
+                                                                <td><input type="text " name="twentytwo " placeholder="Not Fill " class="btn btn-secondary bg-warning text-bold " required></td>
+
+                                                                {% else %}
+                                                                <td><input type="text " name="twentytwo " placeholder="{{company.Company_t_state}} " class="form-control " value="{{company.Company_t_state}} " required></td>
+                                                                {% endif %}
+
+                                                            </tr>
+                                                            <tr>
+
+                                                            </tr>
+
+                                                            </tbody>
+                                                </table>
+
+                                                <div class="col-lg-6 ">
+
+
+
+                                                    <!-- <button type="Submit " class="btn-success ">Submit</button> -->
+                                                    <button type="Submit" class="btn btn-primary" style="width: 160px;">Submit</button>
+
+                                                </div>
+
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                    <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container-fluid -->
+                        <div class="card-body text-center ">
+                            <div class="mb-3 ">
+                                <!-- <button type="Submit " class="btn btn-primary ">Accept</button>
+            <button class="btn btn-primary ">Reject</button> -->
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+                    <!-- /.content -->
+    </form>
+    {% endblock body %}

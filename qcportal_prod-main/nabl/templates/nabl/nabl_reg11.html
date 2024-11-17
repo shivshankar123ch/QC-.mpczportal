@@ -1,0 +1,36 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} 
+{% block body %}
+
+<form class="multisteps-form__form mb-8" action="vendor_otp_verify" method="POST">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">Digital Signature </h5>
+    <!-- <p class="mb-0 text-sm">Mandatory informations</p> -->
+    <div class="multisteps-form__content">
+        <div class="row m-3">
+            <div class="col-12 col-sm-12">
+                <p>I hereby declare that the details furnished above are true and correct to the best of my knowledge and belief and in case if any document found Incorrect or false or any information provided in application form found incorrect or false then registration may be cancelled at any time.</p>
+                <input type="radio" name="opinions" id="radio-1" checked/>
+                <label for="radio-1"></label>
+                <label for="radio-1">Online Verification through OTP</label><br>
+            </div>
+        </div>
+<!--        &lt;!&ndash;&#45;&#45;loke21-03here&ndash;&gt;-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="rca_ven">If you are  </label>-->
+<!--            <input type="checkbox" id="rca_ven" name="rca_ven" value="checked">-->
+<!--            <span id="rca_ven" class="text-danger font-weight-bold"></span>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; </div> &ndash;&gt;-->
+        <div class="button-row d-flex m-4">
+            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="vendor_reg_twelve">Prev</a></button> -->
+            <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" type="submit" title="Save & Next"><a  style="color: white;">Save & Next</a></button>
+            <!-- </div> -->
+        </div>
+    </div>
+   </form>
+</div>
+<!----trial end here-->
+{% endblock body %}

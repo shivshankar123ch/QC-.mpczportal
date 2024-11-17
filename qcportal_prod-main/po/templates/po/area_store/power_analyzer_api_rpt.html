@@ -1,0 +1,761 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            font-size: 14px;
+            vertical-align: top;
+            padding: 4px;
+            font-weight: 500;
+            line-height: 24px;
+        }
+
+        table,
+        td,
+        th {
+            font-size: 14px;
+            vertical-align: top;
+            padding: 4px;
+            font-weight: 500;
+            line-height: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            vertical-align: top;
+        }
+    </style>
+
+<div id="printid">
+
+    <table class="" style="border:1px solid #ddd;">
+        <tr>
+            <td style="padding: 20px;">
+                <h4 style="text-transform: uppercase; margin:0 0 10px; font-size: 16px;
+                text-align: center;font-weight: 700;">
+                    MPMKVVCL <br> TRAnsformer testing report({{dtr.ro.store.Name}})
+                </h4>
+                <table style="border:0px solid #ddd;">
+                    <tr>
+                        <td style="width: 40%; text-align:left;">
+                            <table style="border:0px solid #ddd;">
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Customer :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{ dtr.ro.wo.vendor_id.CompanyName_E }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Equipment :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{ dtr.pa_api.xmr }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Order Info :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{ dtr.pa_api.OrderInfo }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <td style="width: 20%; text-align:left;">
+                        </td>
+
+                        <td style="width: 40%; text-align:right;">
+                            <table style="border:0px solid #ddd;">
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Test Date :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{dtr.pa_api.TestDate|date}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Serial :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{ dtr.pa_api.serial }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%; text-align:left;">
+                                        Order Date :
+                                    </td>
+                                    <td style="width: 50%; text-align:left;text-transform: uppercase;">
+                                        {{ dtr.pa_api.OrderDate|date }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <h4
+                    style="text-transform: uppercase; margin:20px 0 10px; font-size: 14px;text-align: center; font-weight: 500;">
+                    technical specification of transformer
+                </h4>
+<style>
+    .custometable, .custometable td{
+        border: 0 !important;
+    }
+</style>
+
+                <table class="table">
+                    <tr>
+                        <td style="width: 33.333%; text-align:left; padding: 0;">
+                            <table class="table custometable" style="border:1px solid #ddd  !important;">
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Rating (KVA)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.Rating }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Type
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.Type }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        No Load voltage HV(Volt)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.NlHvVolts|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        No Load voltage LV(Volt)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.NlLvVolts|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        (Line Current HV(Amp)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.hvAmp|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Line Current LV(Amp)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.LVamp|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        No.of Phases
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.Phase|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Vector Group
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.VectorGroup }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <td style="width: 33.333%; text-align:left;padding: 0;">
+                            <table  class="table custometable" style="border:1px solid #ddd  !important; ">
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Feequency
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.Freq }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Impedence Volts (%)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.ImpedenceVolts|floatformat:2 }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Type of Cooling
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.CoolingType }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Temp.Rise of Oil(Ltrs)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.TempRise }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Volume of Oil(kg)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.OilVolume }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Wt.of Core & Wdg.Ass
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.CoreWeight }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Wt.of Core & Wdg.Ass
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.CoreWeight }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Total weight(kg)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.TotalWeight }} 
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+
+                        <td style="width: 33.333%; text-align:left;padding: 0;">
+                            <table  class="table custometable" style="border:1px solid #ddd  !important;">
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Mfg. year
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.MfgYear }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Winding material
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.WindMaterial }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Reference Standard
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.RefStd }}
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Oil test (BDV Test)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.OilTest }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Guranteed load loss@50
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.LoadLoss50|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Guranteed load loss@100
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.LoadLoss100|floatformat:2 }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Max HVR/phase at 20 degC (oh1)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.MaxHVR|floatformat:2 }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 65%; text-align:left; text-transform: capitalize;">
+                                        Max LVR/phase at 20degC(ohn)
+                                    </td>
+                                    <td style="width: 35%; text-align:left;">
+                                        {{ dtr.pa_api.MaxLVR|floatformat:2}} 
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table" style="border:0px solid #ddd; margin-top: 20px;margin-bottom: 20px;">
+                    <tr>
+                        <td style="width: 50%; text-align:left; padding: 0; text-transform: uppercase;">
+                            Measurment of voltage ratio test
+                        </td>
+                        <td style="width: 50%; text-align:left; padding: 0;text-transform: capitalize;">
+                            measured Ratio
+                        </td>
+                    </tr>
+                </table>
+                <table class="table" style="border:1px solid #ddd; vertical-align: middle; text-align: center;">
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            Tap No.
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            HV <br> (V)
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            LV <br> (V)
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            Calculated <br> Ratio
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            1U-1V <br>
+                            <span style="border-top:1px solid #ccc ; padding:2px;">
+                                2U-2V
+                            </span>
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            1V-1W <br>
+                            <span style="border-top:1px solid #ccc ; padding:2px;">
+                                2V-2W
+                            </span>
+                        </td>
+                        <td
+                            style="text-align:center; text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            1W-1U <br>
+                            <span style="border-top:1px solid #ccc ; padding:2px;">
+                                2W-2U
+                            </span>
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 600;border:1px solid #ddd;">
+                            Acceptance Limit <br> @ 0.5% Limit
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center; min-height: 45px;">
+                        </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ dtr.pa_api.NlHvVolts|floatformat:2 }} </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ dtr.pa_api.NlLvVolts|floatformat:2 }} </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{c_rat|floatformat:2}} </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ dtr.pa_api.VoltRatio1|floatformat:2 }} </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ dtr.pa_api.VoltRatio2|floatformat:2 }} </td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ dtr.pa_api.VoltRatio3|floatformat:2 }}</td>
+                        <td style="text-align:center; min-height: 45px;border:1px solid #ddd;"> {{ap_lower|floatformat:2}} to {{ap_upper|floatformat:2}} </td>
+                    </tr>
+                </table>
+                <h4
+                    style="text-transform: capitalize; margin:0px 0 10px; font-size: 14px;text-align: left; font-weight: 500;">
+                    
+                </h4>
+
+
+
+                <h4
+                    style="text-transform: uppercase; margin:15px 0 10px; font-size: 14px;text-align: left; font-weight: 500;">
+                    WINding resistance test
+                </h4>
+                <table class="table" style="border:1px solid #ddd; vertical-align: middle; text-align: center;">
+                    <tr>
+                        <td colspan="7"
+                            style="text-align:left;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            HV Winding resistance in Ohms
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Tap No.
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Temp. C
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            1U-1V
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            1V-1W
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            1W-1U
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Average resistance
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Phases resistance
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ dtr.pa_api.Ambient|floatformat:2 }}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ dtr.pa_api.HvRes1|floatformat:2 }}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ dtr.pa_api.HvRes2|floatformat:2 }}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ dtr.pa_api.HvRes3|floatformat:2 }}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ ag_rt_ohm|floatformat:2 }}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ dtr.pa_api.HVRperphaseat75|floatformat:2 }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7"
+                            style="text-align:left;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            LV Winding resistance in MilliOhms
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Tap No.
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Temp. C
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            2u-2v
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            2v-2w
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            2w-2u
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Average resistance
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            Phases resistance
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{dtr.pa_api.Ambient|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{dtr.pa_api.LvRes1|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{dtr.pa_api.LvRes2|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{dtr.pa_api.LvRes3|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ag_rt_alohm|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;">
+                            {{ph_rt|floatformat:2}}
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <h4
+                    style="text-transform: uppercase; margin:15px 0 10px; font-size: 14px;text-align: left; font-weight: 500;">
+                    Insulation resistance test
+                </h4>
+                <table class="table" style="border:1px solid #ddd; vertical-align: middle; text-align: center;"> 
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd; width: 50%;">
+                            HV to Earth (M-Ohms)
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            LV to Earth (M-Ohms)
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            LV to HV (M-Ohms)
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd; width: 50%;">
+                            {{dtr.pa_api.IR1|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            {{dtr.pa_api.IR2|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            {{dtr.pa_api.IR3|floatformat:2}}
+                        </td>  
+                    </tr>
+                </table>
+
+
+
+                <h4
+                    style="text-transform: uppercase; margin:15px 0 10px; font-size: 14px;text-align: left; font-weight: 500;">
+                    no load test
+                </h4>
+                <table class="table" style="border:1px solid #ddd; vertical-align: middle; text-align: center;"> 
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd; width: 50%;">
+                            Voltage Applied Across LV(Volts)
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            Measurment of Noload Current
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            Measurment of Noload Loss
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd; width: 50%;">
+                            {{dtr.pa_api.nlvoltage|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            {{dtr.pa_api.nlil1|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 25%;">
+                            {{dtr.pa_api.NLpower|floatformat:2}}
+                        </td>  
+                    </tr>
+                </table>
+                <h4
+                    style="text-transform: uppercase; margin:px 0 70px; font-size: 18px;text-align: center; font-weight: 500;">
+                    {% if dtr.pa_result == 1 and dtr.new_design and dtr.pa_max_loss_per <= 10 %}
+                    <b>Pass</b>
+
+                    {% elif dtr.pa_result == 1 and dtr.new_design and dtr.pa_max_loss_per > 10 and dtr.pa_max_loss_per <= 15 %}
+                    <b>Pass (With 10% of repairing charges as penalty) <b>
+
+                    {% elif dtr.pa_result == 1 and dtr.new_design and dtr.pa_max_loss_per > 15 %}
+                    <b>Pass (marked as white band ) <b>
+
+                    {% elif dtr.pa_result == 1 and dtr.old_l1 and dtr.pa_max_loss_per <= 10 %}
+                    <b>Pass<b>
+
+                    {% elif dtr.pa_result == 1 and dtr.old_l1 and dtr.pa_max_loss_per > 10 and dtr.pa_max_loss_per <= 15 %}
+                    <b>Pass (With 10% of repairing charges as penalty) <b>
+
+                    {% elif dtr.pa_result == -1 and dtr.old_l1 and dtr.pa_max_loss_per > 15 %}
+                    <b>Fail <b>
+                    
+                    {% elif dtr.pa_result == 1 and dtr.old_l2 and dtr.pa_max_loss_per <= 10 %}
+                    <b>Pass<b>
+
+                    {% elif dtr.pa_result == 1 and dtr.old_l2 and dtr.pa_max_loss_per > 10 and dtr.pa_max_loss_per <= 15 %}
+                    <b>Pass (With 10% of repairing charges as penalty) <b>
+
+                    {% elif dtr.pa_result == -1 and dtr.old_l2 and dtr.pa_max_loss_per > 15 %}
+                    <b>Fail <b>
+
+                    {% endif %}
+                </h4>
+
+
+                <h4
+                    style="text-transform: uppercase; margin:15px 0 10px; font-size: 14px;text-align: left; font-weight: 500;">
+                    load less test
+                </h4>
+                <table class="table" style="border:1px solid #ddd; vertical-align: middle; text-align: center;"> 
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd; width: 15%;">
+                            Frequency
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            Voltage
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            Current(Amps)
+                        </td> 
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            measured Losses
+                        </td>  
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            Total Loss At 75
+                        </td>  
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            %Z at 75 degC
+                        </td>  
+                    </tr>
+                    <tr>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{dtr.pa_api.FLfreq|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{dtr.pa_api.FLvoltage|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{dtr.pa_api.flil1|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{dtr.pa_api.FLpower|floatformat:2}}
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{ dtr.pa_api.TotalLossat75|floatformat:2 }} 
+                        </td>
+                        <td
+                            style="text-align:center;  text-transform: capitalize; font-weight: 500;border:1px solid #ddd;width: 15%;">
+                            {{dtr.pa_api.RatAmb|floatformat:2}}
+                        </td> 
+                    </tr>
+                </table>
+                {%  if dtr.pa_result == 1 %}
+                <h2 class="text-center" style="text-align: center;">
+                Pass
+                </h2>
+                {% endif %}
+
+
+
+
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+    <div class="form-group text-center" style="text-align: center;">
+        <!-- <input onclick="printDiv('printid')" type="button" value="Print " class="btn ed-submit btn-primary"> -->
+        <input type="button" value="Print " class="btn ed-submit btn-primary btn-lg" onclick="prints();">
+        
+    </div>
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <script>
+        function prints()
+        {
+            window.print();
+        }
+    </script>
+</body>
+
+</html>

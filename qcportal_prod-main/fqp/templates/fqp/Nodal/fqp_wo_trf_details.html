@@ -1,0 +1,113 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %} Item Details {% endblock pagetitle %}
+{% block body %}
+
+
+<div class="ed-information mb-2">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Work order Details
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+                <thead>
+                  <tr>
+                    <th>
+                      Work Order No
+                    </th>
+                    <th>
+                      DI NUmber
+                    </th>
+                    <th>
+                      DI Description
+                    </th>
+                    <th>
+                      Contractor Name
+                    </th>
+                    <th>
+                      Item
+                    </th>
+                    <th>
+                      View Items Number
+                    </th>
+                    <th>
+                      Create GatePass For NABL
+                    </th>
+                    <th>
+                      Create TRF
+                    </th>
+                    <th>
+                      NABL Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for Supply in data1 %}
+                  <tr>
+                    <td>{{Supply.wo.Contract_Number}}</td>
+                    <td>{{Supply.erp_di_number}}</td>
+                    <td>{{Supply.di_subject}}</td>
+                    <td>{{Supply.wo_material.TKCVendor.TKCWoInfo.Header.Contract_Description}}</td>
+                    <td>{{Supply.wo_material.TKCVendor.Vendor.CompanyName_E}}</td>
+                    <td>{{Supply.wo_material.TKCVendor.Material_id.Material_Specification}}</td>
+                    <td>
+                      <a target="_blank" href="/fqp/fqp_wo_di_sampled_item/{{Supply.wo_material.id}}">
+                        <button class="btn ed-submit btn-success">
+                          <span class="ed-submit-text">
+                            View
+                          </span>
+                        </button>
+                      </a>
+                    </td>
+
+                    <td>
+                      {% if Supply.wo_material.nabl_gatepass == 0 %}
+                      <a target="_blank" href="/fqp/fqp_wo_nabl_gatepass/{{Supply.wo_material.id}}">
+                        <button class="btn ed-submit btn-success">
+                          <span class="ed-submit-text">
+                            Create Gatepass
+                          </span>
+                        </button>
+                      </a>
+                      {% elif Supply.wo_material.nabl_gatepass == 1 %}
+                      <label class="">Gatepass Created</label>
+                      {% else %}
+                      <label class="text-success"> </label>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if Supply.wo_material.nabl_gatepass == 1 and Supply.wo_material.send_to_nabl == 0 %}
+
+                      <a href="/fqp/fqp_wo_test_request_form_submit/{{Supply.wo_material.id}}" class="btn ed-submit btn-success">
+                        Send To NABL
+                      </a>
+
+                      {% elif Supply.wo_material.send_to_nabl == 1 %}
+                      <label class="">Sent NABL</label>
+                      {% else %}
+
+                      <label class="">Gatepass Not Create</label>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock body %}

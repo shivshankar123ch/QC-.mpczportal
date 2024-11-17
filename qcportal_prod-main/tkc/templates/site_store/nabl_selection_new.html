@@ -1,0 +1,87 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %}
+
+<!-- <div class="row"> -->
+<!-- <div class="col-12 col-lg-8 m-auto"> -->
+
+
+<div class="card ed-card-block">
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>Select NABL For Material Testing New</h2>
+        </div>
+        <div class="card-body">
+
+    {% if offer_data%}
+
+
+            <form name="myForm" action="/tkc/tkc_wo_select_testing_nabl_new/{{tkc_di_id}}/{{offer_no}}" method="POST">
+                {% csrf_token %}
+                <div class="">
+                    <div class="ed-tableinfo-block">
+                        <div class="table-responsive">
+                            <table id="example2"
+                                class="table table-bordered table-striped display text-center ed-table-block">
+                                <thead>
+                                    <tr>
+                                        <th class="w-5">Sno. </th>
+                                        <th class="w-20">Offer Number </th>
+                                        <th class="w-20">DI Number </th>
+                                        <th class="w-20">Material Specification</th>
+                                        <th class="w-20"> Item Code</th>
+                                        <th class="w-20"> Nabl Select</th>
+                                        <!-- <th style="width:10%"> Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in offer_data %}
+
+                                    <tr>
+                                        <td>{{forloop.counter}}<input type="text" name="item_id[]" value="{{item.id}}"
+                                                hidden></td>
+                                        <td>{{item.offer_no}}<input type="text" name="offer_no"
+                                                value="{{item.offer.offer_no}}" hidden></td>
+                                        <td>{{item.offer.tkc_di.erp_di_number}}<input type="text" name="tkc_di_id"
+                                                value="{{item.offer.tkc_di_id}}" hidden></td>
+                                        <td>{{item.offer.wo_material.material_name}}</td>
+                                        <td>{{item.wo_material.item_code}}<input type="text" name="wo_item_code[]"
+                                                value="{{item.offer.wo_material_id}}" hidden></td>
+                                        <td>
+                                            <select class="form-control op1 form-select form-select-lg"
+                                                name="nabl_user_id[]" aria-label=".form-select-lg example" required>
+                                                <option value="">Please Select NABL</option>
+                                                {% for data in all_nabl_user %}
+                                                <option value="{{data.User_Id}}">
+                                                    {{data.CompanyName_E}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-right">
+                            <button class="btn btn-primary text-capitalize fw-bold custom ms-auto mb-0" value="Submit"
+                                type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+{% else %}
+            <h4 class="text-center">
+                Data not found 
+            </h4>
+{% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

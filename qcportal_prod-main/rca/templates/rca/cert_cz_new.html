@@ -1,0 +1,310 @@
+<html>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    var sheet = document.createElement('style')
+    sheet.innerHTML = "div {border: 12px solid red; background-color: blue;}";
+    document.body.appendChild(sheet);
+</script>
+<link rel="stylesheet" type="text/css" media="print">
+
+<head>
+    <center>
+        <!-- <link rel="stylesheet" type="text/css" media="print"> -->
+        <style>
+            .signature,
+            .title {
+                float: left;
+                border-top: 1px solid #000;
+                width: 200px;
+                text-align: center;
+            }
+            
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            #example2 {
+                width: 213px;
+                padding: 10px;
+                height: 66px;
+                border: 1px solid black;
+            }
+            
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+            .table-responsive{
+                width: 97%;
+            }
+            
+            
+            .table-bordered-2x {
+                border: 2px solid #000;
+            }
+            .table-bordered-2x td {
+                border: 2px solid #000;
+            }
+            @media print {
+                #btn1 {
+                    display: none;
+                }
+            }
+        </style>
+
+        <style>
+  .rcacertificate-block .rcacertificate-itemss {
+    position: relative;
+    padding: 50px;
+    border: 1px solid #000;
+    max-width: 860px;
+}
+
+.rcacertificate-block {
+    position: relative;
+    padding: 30px;
+    position: relative;
+    padding: 20px;
+    border: 0px solid #000;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcaca-header {
+    margin: 0 0 10px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcaca-header .rcas_headers {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 0px solid #000;
+    padding: 0 0 10px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcaca-header .rcas_headers .left-info {
+    margin-right: 20px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcaca-header .rcas_headers h4 {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 4px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcaca-header .rcas_headers h5 {
+    font-family: auto;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 4px;
+    font-size: 15px;
+}
+
+.rcacertificate-block .rcacertificate-itemss  hr {
+    border: 1px solid #000;
+    max-width: 100%;
+    margin: 10px auto;
+    margin-bottom: 30px;
+}
+
+.rcacertificate-block .rcacertificate-itemss h6 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    font-family: serif;
+    margin: 0 0 40px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-item {}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-item table {
+    border: 1px solid #000;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-item table td, .rcacertificate-block .rcacertificate-itemss .rcacertificate-item table th {
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-item table td {
+    font-size: 16px;
+    text-align: center;
+    line-height: 24px;
+    width: 70%;
+    vertical-align: middle;
+    padding: 4px 8px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-item table td:first-child {
+    width: 30%;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-signs {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-signs .sign-items {
+    text-align: center;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-signs .sign-items .signatuer-box {
+    width: 260px !important;
+    padding: 15px;
+    height: 90px !important;
+    border: 1px solid black;
+    margin: 0 0 10px;
+}
+
+.rcacertificate-block .rcacertificate-itemss .rcacertificate-signs .sign-items p {
+    font-size: 14px;
+    margin: 0 0 4px;
+}
+.rcacertificate-actions {
+    margin: 20px 0 0;
+    text-align: center;
+}
+
+.rcacertificate-actions button {
+    font-size: 16px;
+    text-transform: capitalize;
+    border-radius: 2px;
+}
+        </style>
+
+</head>
+
+<body>
+
+    <!-- <div style="width:800px; height:auto; padding:10px; text-align:center; border: 10px solid #787878"> -->
+
+
+        <div class="rcacertificate-block" id="b1">
+            <div class="rcacertificate-itemss">
+                <table class="table rcaca-header">
+                    <tr>
+                        <td>
+                            <div class="rcas_headers">
+                                <div class="left-info">
+                                    <img src="{% static 'assets\images\mpmk.png' %}" alt="mpmk" class="img-fluid center">
+                                </div>
+                                <div class="right-info">
+                                    <h4>MADHYA PRADESH MADHYA KSHETRA VIDYUT VITRAN CO. LTD.</h4>
+                                    <h5><i>(Government of M. P. Undertaking)</i></h5>
+                                    <h5>Regd. Office: Nishtha Parisar, Govindpura Bhopal 462023</h5>
+                                    <h5>755-2601300, Ext-501, Website portal.mpcz.in </h5>
+                                    <h4> CIN NUMBER: U40109MP2002SGC015119</h4>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <h6 class="text-center text-primary" style="color: blue;">
+                    CERTIFICATE <br>FOR TRANSFORMER REPAIRING UNDER RCA
+                </h6>
+
+                <div class="rcacertificate-item">
+                    <table class="table rcaca-bodyinfo">
+                        <tbody >
+                            <tr class="text-center">
+                                <td>RCA Vendor Name & Address</td>
+                                <td><span><b>{{company_name}}</b></span><br> {{UCDM_obj.Company_add_1}} {{UCDM_obj.Company_add_2}}, {{UCDM_obj.Company_dist}}, {{UCDM_obj.Company_state}}<br>{{UCDM_obj.Company_pin_code}}</td>
+
+                            </tr>
+                            <tr class="text-center">
+                                <td>Registration No</td>
+                                <td>{{no}}</td>
+
+                            </tr>
+                            <tr class="text-center">
+                                <td>Date of Issue</td>
+                                <td>{{day}}</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>Valid up To</td>
+                                <td>{{valid_upto}}</td>
+                            </tr>
+                            <!-- <tr class="text-center">
+                                <td>Applicable for</td>
+                                <td>MP Discom(CZ/EZ/WZ)</td>
+                            </tr> -->
+                            <tr class="text-center">
+                                <td>Name of work</td>
+                                <td>Repairing of BGP failed Distribution Transformer (25 KVA to 200 KVA)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="rcacertificate-signs">
+                    <div class="sign-items">
+                        <div class="signatuer-box" id="example2">
+                            
+                        </div>
+                        <p>
+                            Signed by:<b>{{Officer_obj.employ_name}}</b><br> <b>{{Officer_obj.designation}}</b>
+                        </p>
+                        <p>
+                            <small>Upload your digital signature </small>
+                        </p>
+                        <!-- <p>
+                            Date: <b>{{day}}</b>
+                        </p>
+                        <p>
+                            ime: <b>{{current_time}}</b> 
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function printpage() {
+                var download_var = document.getElementById("download");
+                var certFile_var = document.getElementById("digitalCert");
+                var sub_var = document.getElementById("sub");
+                var return2dash = document.getElementById("return2dash");
+             
+                download_var.style.visibility = 'hidden';
+                certFile_var.style.visibility = 'hidden';
+                sub_var.style.visibility = 'hidden';
+                return2dash.style.visibility = 'hidden';
+        
+                window.print()
+                
+                download_var.style.visibility = 'visible';
+                certFile_var.style.visibility = 'visible';
+                sub_var.style.visibility = 'visible';  
+                return2dash.style.visibility = 'visible';
+            }
+        </script>
+        
+        <table class="justify-content" style=" width:100%; border:1;">
+            <tbody style="width: 100%;">
+              <tr>
+                <td style="width: 25%; text-align: left;">
+                    <button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button>
+                </td>
+                <td  style="width: 50%; text-align: center;"> 
+               
+                </th>
+                <td style="width: 15%; text-align: right;">
+                    <a style="align-items: right;" href='/digital_sign_cert_rca/RCA/CZ'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </body>
+
+</html>
+
+
+​

@@ -1,0 +1,357 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Purchase Order {% endblock pagetitle %}
+{% block body %}
+<script>
+    console.log("scripttt")
+    window.onload = function () {
+        var tbcheck = document.getElementById("table").rows.length;
+        console.log("tableee", tbcheck)
+        if (tbcheck < 2) {
+            console.log("comee if")
+            var d = document.getElementById("nextStep3");
+            console.log("ddddddd", d)
+            d.style.setProperty("display", "none", "important");
+        } else {
+            var dd = document.getElementById("nextStep3");
+            dd.style.display == "";
+        }
+    }
+
+
+</script>
+<div class="ed-information mb-4">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                Create Purchase Order
+            </h2>
+        </div>
+        <div class="card-body" id="formStep3">
+            <div class="ed-tableinfo-block  mb-4">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center"
+                        id="table">
+                        <thead>
+                            <tr>
+                                <th class="w-5">Sr No.</th>
+                                <th>Material Specification</th>
+                                <th>Unit</th>
+                                <th>Quantity </th>
+                                <th>Amount </th>
+                                <th>Tax(In %) </th>
+                                <th>Unit Amount Including Freight Charges</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in Material %}
+                            <tr>
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{data.specification}}
+                                </td>
+                                <td>
+                                    {{data.unit}}
+                                </td>
+                                <td>
+                                    {{data.Quantity}}
+                                </td>
+                                <td>
+                                    {{data.Amount}}
+                                </td>
+                                <td>
+                                    {{data.tax}}
+                                </td>
+                                <td>
+                                    {{data.total_amount}}
+                                </td>
+                                <td>
+                                    <div class="poaction-info">
+                                        <a href="/po/material_delete/{{data.id}}/{{po.id}}" onclick="return(confirm('Are you sure you want to delete this Material Specification ?'))">
+                                            <button class="btn ed-submit btn-danger">
+                                                <span class="ed-submit-text">
+                                                    Delete
+                                                </span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <form action="/po/procurement_generate_po2/{{po.id}}" onsubmit="return validateForm()" name="myForm"
+                method="POST">
+                {% csrf_token %}
+                <div class="ed-form-block">
+                    <div class="ed-form-title">
+                        <h6>
+                            <span class="ed-text">
+                                Material Details
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="ed-form-body material-wrapper">
+                        <div class="material-elements">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Material Specification
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select name="specification" class="form-control ed-textbox" onkeyup="validateForm()"
+                               onfocus="validateForm()" onchange="validateForm()"
+                                    required>
+                                    {% for data in Item %}
+                                    <option value="{{ data.Material_Specification }}">
+                                        {{data.Material_Specification}}</option>
+                                    {% endfor %}
+
+                                </select>
+                                <span id="option_1" class="d-block ed-warningtext text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Unit Of Measure(UOM)
+                                </label>
+                                <select name="unitOfMeasure" class="form-control ed-textbox" id="unitOfMeasure" step="0.01" required onblur="errorFrom(id)">
+                                    {% for i in UOM %}
+                                    <option value={{i.UOM}}>{{i.UOM}}</option>
+                                    {% endfor %}
+                                </select>
+                                <!-- <input name="unit" type="text" onkeyup="validateForm()"
+                        onfocus="validateForm()" onchange="validateForm()" class="form-control ed-textbox"
+                                    autocomplete="off" required />
+                                <span id="unit_1" class="d-block ed-warningtext text-danger"></span> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Quantity <span class="text-danger">*</span>
+                                </label>
+                                <input name="quantity" type="Number" step="0.01" onkeypress='validate(event)'
+                                    onkeyup="validateForm()"
+                        onfocus="validateForm()" onchange="validateForm()" id="quantity1" onkeyup="calculate()"
+                                    class="form-control ed-textbox" autocomplete="off" required />
+                                <span id="quantity_1" class="d-block ed-warningtext text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Amount Per Unit(In Rs) <span class="text-danger">*</span>
+                                </label>
+                                <input name="amount" type="Number" step="0.01" onkeyup="validateForm()"
+                        onfocus="validateForm()" onchange="validateForm()" id="amounnt"
+                                    onkeyup="calculate()" onkeypress='validate(event)' class="form-control ed-textbox"
+                                    autocomplete="off" required />
+                                <span id="amount_1" class="d-block ed-warningtext text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Tax(In Percent) <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" name="tax" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength = "2 pattern="\d{2}" onclick="validateForm()"
+                                  onchange="calculate()" id="taxx"
+                                    onkeyup="calculate()"   onkeypress='validate(event)' class="form-control ed-textbox"
+                                    autocomplete="off" required />
+                                <span id="over" class="d-block ed-warningtext text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Tax Amount(In Rs) <span class="text-danger">*</span>
+                                </label>
+                                <input name="tax1" type="Number" step="0.01" id="tax_amount"  
+                                    onkeypress='validate(event)' onkeyup="calculate()" onchange="calculate()" class="form-control ed-textbox"
+                                    autocomplete="off" required />
+                                <span id="tax_1" class="d-block ed-warningtext text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Unit Amount Including Freight Charges<span class="text-danger">*</span>
+                                </label>
+                                <input name="total_amount" step="0.01" type="Number" id="tottal"
+                                 onkeyup="calculate()" onchange="calculate()" onkeypress='validate(event)'
+                                    class="form-control ed-textbox" autocomplete="off" required />
+                                <span id="total_1" class="d-block ed-warningtext text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="results"></div>
+
+
+                        <div class="form-group">
+                            <div class="form-action text-right">
+                                <button type="submit" class="btn ed-submit ed-formSubmit" onclick="validateForm()">
+                                    <span class="ed-submit-text">
+                                        Add More
+                                    </span>
+                                </button>
+
+                                <a href="/po/procurement_generate_po2/{{po.id}}" class="btn ed-submit ed-submitNext"
+                                    id="nextStep3">
+                                    <span class="ed-submit-text">
+                                        Next
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+            <!-- --------------------- Step 4 -------------------------------- -->
+
+            <div class="card-body" id="formStep5" style="display:none ;">
+                <div class="ed-form-block">
+                    <div class="ed-form-title">
+                        <h6>
+                            <span class="ed-text">
+                                Pdf View
+                            </span>
+                        </h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function calculate() {
+        
+        var quantity11 = document.getElementById("quantity1").value;
+        var inputAmount = document.getElementById("amounnt").value;
+        var inputTax = document.getElementById("taxx").value;
+        var inputTax2 = document.getElementById("tax_amount").value;
+        var result = document.getElementById("tottal").value;
+        
+        // var total_tax = Number(inputAmount) + Number(inputTax);
+        // var taxAmount = document.getElementById("tax_amount").value = total_tax;
+        // var tot_amount = Number(quantity11) * Number(total_tax);
+        // var result = document.getElementById("tottal").value = tot_amount;
+        
+        var data = parseFloat(quantity11) * parseFloat(inputAmount);
+        console.log(quantity11)
+        var percent = parseFloat(data) / 100 * parseFloat(inputTax);
+        var amount1 = percent.toFixed(2);
+        var result = parseFloat(data) + parseFloat(percent);
+        var final_res = result.toFixed(2);
+
+        if (percent) {
+            var finalAmount = document.getElementById("tottal").value = final_res;
+            var taxAmount = document.getElementById("tax_amount").value = amount1;
+        }
+        else {
+            console.log("jfej")
+        }
+
+    }
+</script>
+
+
+<!-- <script>
+    function calculate() {
+      var quantity11 = Number(document.getElementById("quantity1").value);
+      var inputAmount = Number(document.getElementById("amounnt").value);
+      var inputTax = Number(document.getElementById("taxx").value);
+    
+      var data = quantity11 * inputAmount;
+      var percent = (data / 100) * inputTax;
+      var amount1 = percent.toFixed(2);
+      var result = data + percent;
+      var final_res = result.toFixed(2);
+    
+      if (!isNaN(final_res)) {
+        document.getElementById("tottal").textContent = final_res;
+        document.getElementById("tax_amount").textContent = amount1;
+      } else {
+        console.log("Error occurred during calculation.");
+      }
+    }
+    </script> -->
+
+<script>
+    function validateForm() {
+        console.log("fireeeeeeeeeee")
+        var select1 = document.forms["myForm"]["specification"].value;
+        var input_unit = document.forms["myForm"]["unit"].value;
+        var input_quantity = document.forms["myForm"]["quantity"].value;
+        var input_amount = document.forms["myForm"]["amount"].value;
+        var input_tax = document.forms["myForm"]["tax"].value;
+        let inputTaxx = document.getElementById("taxx").value;
+ 
+       
+        if (select1 == "") {
+            document.getElementById('option_1').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('option_1').innerHTML = "";
+        }
+        if (input_unit == "") {
+            document.getElementById('unit_1').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('unit_1').innerHTML = "";
+        }
+        if (input_quantity == "") {
+            document.getElementById('quantity_1').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('quantity_1').innerHTML = "";
+        }
+        if (input_amount == "") {
+            document.getElementById('amount_1').innerHTML = " Please fill the required detail  ";
+            return false;
+        } else {
+            document.getElementById('amount_1').innerHTML = "";
+        }
+         if (input_tax == "") {
+         document.getElementById('over').innerHTML = "Please fill the required detail ";
+    
+        } else {
+         document.getElementById('over').innerHTML = "";
+        }
+    }
+</script>
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key)
+                ;
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
+{% endblock body %}

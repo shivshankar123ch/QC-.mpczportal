@@ -1,0 +1,99 @@
+{% extends 'tkc/tkc_Base.html' %} {% load static %} {% block body %}
+<head>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+</head>
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header pb-0 text-start">
+                    <h5 class="font-weight-bolder">
+                        Basic Information
+                    </h5>
+                </div>
+
+                <div class="card-body table-responsive">
+                    <form action="/basic/" method="POST">
+                        {% csrf_token %}
+                           <table class="table table-bordered table-hover">
+                              <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                                <tr>
+                                    <th scope="col">S.No.</th>
+                                    <th scope="col">Report Name</th>
+                                    <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Type of Business</td>
+                                    <td>{{userdata.Type_of_business}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Authorised Person Name</td>
+                                    <td>{{userdata.Authorised_person_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Company Name</td>
+                                    <td>{{userdata.CompanyName_E}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Contact Number</td>
+                                    <td>{{userdata.ContactNo}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Email ID</td>
+                                    <td>{{userdata.Email_Id}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>User Type</td>
+                                    <td>{{userdata.User_type}}</td>
+                                </tr>
+                                 <tr>
+                                    <th scope="row">7</th>
+                                    <td>User Registration Date</td>
+                                    <td>{{userdata.Updated_Date|date:"d-M-Y"}}</td>
+                                </tr>
+                                     <tr>
+                                    <th scope="row">8</th>
+                                    <td>User Registration End Date</td>
+                                    <td>{{doc.Doc_expiry_date|date:"d-M-Y"}}</td>
+                                </tr>
+                            <tr></tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <h6 class="m-3">
+                   <b>Note:-</b> Activation charges before license expiry is Rs 500.00/- , After expiration of license it will be Rs 2000.00/-
+                </h6>
+                {% if expiry_date > registration_date %}
+                <p class="m-3"> Your Registration has expired after <b>{{days}}</b> Days</p>
+                <p class="m-3"> Activation charges is Rs 500.00/- </p>
+                <div class="button-row d-flex mt-4">
+                    <a href="/tkc/activation_before_expired" class="m-3"><button class="btn bg-gradient-primary mb-3" type="button"
+                            title="Send">Go For Activation</button></a>
+                     </div>
+                {% else %}
+                 <p class="text-danger m-3">  Your Registration has expired <b>{{days}}</b> Days before </p>
+                 <p class="m-3"> Activation charges is Rs 2000.00/- </p>
+                    <div class="button-row d-flex mt-4">
+                    <a href="/tkc/activation_after_expired" class="m-3"><button class="btn bg-gradient-primary mb-3" type="button"
+                            title="Send">Go For Activation </button></a>
+                     </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

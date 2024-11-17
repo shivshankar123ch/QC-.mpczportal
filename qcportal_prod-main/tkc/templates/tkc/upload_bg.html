@@ -1,0 +1,70 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="card card-default width-75 m-4" style="width:85%">
+          <div class="card-header">
+            <h3 class="card-title">Upload Bank Guarantee Details </h3>
+          </div>
+     <form   action="/tkc/upload_bg_save/{{data.id}}" method="POST" enctype="multipart/form-data" onsubmit="validateForm()">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50%">
+                         <label for="exampleInputEmail1"> WORK ORDER NUMBER :</label>
+                     </th>
+                      <th style="width:50%"><b>MPCZ000{{data.id}}</b></th>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td> <label for="exampleInputEmail1">Bank Guarantee Bank Name<span style="color: red;">*</span> </label> </td>
+                  <td><input type="text"  name= "bgbank" id="bgbank"  onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="bank_Name" class="text-danger font-weight-bold"></td>
+                  </span>
+                </tr>
+                     <tr>
+                  <td>   <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                         <td>   <input type="text" name= "bg_no" id="bg_no" placeholder="" required>
+                          <span id="bank_no" class="text-danger font-weight-bold"></td></td>
+
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                  <td><input type="date"  name= "bg_issu_date" id="bg_issu_date1" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="issueDate" class="text-danger font-weight-bold"></td></td>
+                </tr>
+                     <tr>
+                  <td> <label for="exampleInputEmail1"> Valid Up To </label> </td>
+                  <td><input type="date" name= "bg_valid_upto" id="bg_valid_upto1" onkeyup="validateForm()"
+                    onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+                    <span id="validDate" class="text-danger font-weight-bold"></td></td>
+                </tr>
+                      <tr>
+                  <td>   <label for="exampleInputEmail1">Amount </label> </td>
+                         <td>   <input type="text" min="1" name= "amount" id="amount" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' placeholder="" required>
+                          <span id="amount1" class="text-danger font-weight-bold"></td>
+                     </tr>
+                </tbody>
+              </table>
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Upload Bank Guarantee  </label>
+                     <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+                </div>
+            </div>
+              <button type="submit" id="submit" class="btn-second btn-success full-width float-right m-5 p-1"> Upload BG</button>
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+    </div>
+{% endblock body %}
+

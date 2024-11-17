@@ -1,0 +1,177 @@
+{% extends 'CA/fi_dashborad.html' %} {% load static %} {% block body %} {% block a %} <span class="ms-1 font-weight-bold">{{a.Name}}</span> {% endblock %}
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_reg10.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<script type="text/javascript">  
+    function PrintDiv()
+    
+   {  
+    var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + '#printPageButton{display:none;}';
+        style = style + '#abc{border:none;}';
+        style = style + 'h4,h5{text-align: center; }';
+        style = style + "</style>";
+       var divContents = document.getElementById("printdivcontent").innerHTML;  
+       var printWindow = window.open('', '', 'height=200,width=400');  
+       printWindow.document.write('<html><head><title>Print DIV Content</title>');  
+       printWindow.document.write('</head><body >'); 
+       printWindow.document.write(style); 
+       printWindow.document.write(divContents);  
+       printWindow.document.write('</body></html>');  
+       printWindow.document.close();  
+       printWindow.print();  
+    }  
+</script>      
+<div class="content" id="printdivcontent" style="text-align: center;">
+    <h4>M.P. MADHYA KSHETRA VIDYUT VITARAN CO. LTD.</h4>
+    <h5>DEREGISTRATION RECEIPT</h5>
+    </br>
+    </br>
+    <table style="width:100% " border="0" class ="table-responsive">
+       <h5 style="text-align: center;">Pay to :- <u>{{Cash_Voucher.Name}}</u> </h5>
+       <tr>
+          <td style="text-align: left; width:33%;"><b>CIRCLE: </b></td>
+          <td style="text-align: left; width:33%;"><b>RECEIPT NO: </b>{{Cash_Voucher.voucher_code}}</td>
+          <td style="text-align: left; width:34%;"><b>DISPATCH NO: </b></td>
+       </tr>
+       <tr>
+          <td style="text-align: left;"><b>DOC TYPE: </b>F34 </td>
+          <td style="text-align: left;"><b>DOCUMENT: </b></td>
+          <td style="text-align: left;"><b>LOC. CODE: </b></td>
+       </tr>
+       <tr>
+          <td style="text-align: left;"><b>REFERENCE NO: </b>{{Cash_Voucher.Reference_No}}</td>
+          <td  style="text-align: left;" colspan="2"><b>Date & Time: </b>{{Cash_Voucher.updated_date}}</td>
+       </tr>
+    </table>
+    </br>
+    </br>
+    </br>
+    <div class="table-responsive">
+       <table style="width:100% " class="table table-flush table-responsive table-bordered table-hover" id="example_table123">
+          <thead class="thead-light">
+             <tr>
+                  <th rowspan="2" style="width:5% " class="text-center">
+                   S.No.
+                  </th>
+                  <th  rowspan="2" style="width:10% " class="text-center">
+                     Account Code
+                  </th>
+                  <th  rowspan="2" style="width:10% " class="text-center">
+                     Account Head 
+                  </th>
+                  <th  rowspan="2" style="width:10% " class="text-center">
+                     Estimate No.
+                  </th>
+                  <th  rowspan="2" style="width:5% " class="text-center">
+                     Type
+                  </th>
+                  <th style="width:15% " class="text-center" colspan="2">
+                     Debit Amount
+                  </th>
+                  <th style="width:15% " class="text-center" colspan="2">
+                     Credit Amount
+                  </th>
+                  <th style="width:15% " class="text-center" colspan="2">
+                     Bill Reference
+                  </th>
+                  <th style="width:15% " rowspan="2" class="text-center">
+                     NARRATION
+                  </th>
+             </tr>
+             <tr>
+               <td><b>RS.</b></td>
+               <td><b>P.</b>
+               <td><b>RS.</b></td>
+               <td><b>P.</b></td>
+               <td><b>No.</b></td>
+               <td><b>Date</b></td>
+               <!-- <td >
+                  
+               </td> -->
+            </tr>
+          </thead>
+          <tbody>
+               
+             <tr>
+                <td style="padding-bottom: 180px;" class="text-center">1</td>
+                <td style="padding-bottom: 180px;">48.150</td>
+                <td style="padding-bottom: 180px;">SD refund</td>
+                <td style="padding-bottom: 180px;"> </td>
+                <td style="padding-bottom: 180px;"> DR</td>
+                <td style="padding-bottom: 180px;"> {{Cash_Voucher.Deposit_amount}}</td>
+                <td style="padding-bottom: 180px;"></td>
+                <td style="padding-bottom: 180px;"></td>
+                <td style="padding-bottom: 180px;"></td>
+                <td style="padding-bottom: 180px;"></td>
+                <td style="padding-bottom: 180px;"></td>
+                <td ><p>Refund of SD amount {{Cash_Voucher.Deposit_amount}}<br>
+                  to {{Cash_Voucher.Name}} collection agent<br>
+                  account no. {{Cash_Voucher.Account_Number}} bank name<br>
+                  {{Cash_Voucher.Bank_name}} and IFSC code {{Cash_Voucher.IFSC}}
+               </p></td>
+                <!-- <td></td> -->
+             </tr>
+             <tr>
+                <td class="text-center">2</td>
+                <td>46.410</td>
+                <td></td>
+                <td></td>
+                <td>CR</td>
+                <td></td>
+                <td></td>
+                <td>{{Cash_Voucher.Deposit_amount}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+             </tr>
+             <tr>
+             </tr>
+          </tbody>
+       </table>
+    </div>
+    <div style="float: right; margin-top: 65px;">
+      <p>DGM(COMM) </p>
+    </div>
+    
+ </div>
+ <div class="multisteps-form__content">
+    <!-- <div class="button-row d-flex mt-4">
+       <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit" type="Submit" title="Save & Next">Save & Next</button> -->
+    </form>
+ </div>
+</div>
+<center style="margin-top: 80px;">
+     <button class="btn btn-primary me-2   btn-lg"  onclick="PrintDiv();" style="color: black;" >
+                                                   Print
+                                                </button>
+   
+</center>
+</div>
+<!---trial end here-->
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- Bootstrap Datatable js -->
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,125 @@
+
+<html>
+{% load static %}	
+<head>
+<center>
+
+<style>
+
+.signature, .title { 
+
+float:left;
+
+  border-top: 1px solid #000;
+
+  width: 200px; 
+
+  text-align: center;
+
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+</head>
+<body>
+
+<div style="width:800px; height:600px; padding:10px; text-align:center; border: 10px solid #787878">
+
+<div style="width:750px; height:550px; padding:20px; text-align:center; border: 5px solid #787878">
+	 <img src="{% static 'assets\images\mppok.png' %}" style="width:15%; height:15%" alt="mppok" class="center"> 
+
+       <span style="font-size:18px; font-weight:bold">M.P. POORV KSHETRA VIDYUT VITRAN COMPANY LIMITED</span>
+	   <br>
+	   <span style="font-size:16px; font-weight:bold"><i>(Government of M. P. Undertaking)</i></span>
+	   <br>
+	   <span style="font-size:16px; font-weight:bold">Regd. Office: Shakti Bhawan, PO: Vidyut Nagar, Rampur, Jabalpur 482008</span>
+	   <br>
+	   <span style="font-size:16px; font-weight:bold"> 0761 - 2661795, 2702800 Website http://www.mpez.co.in/ </span>
+	   <br>
+	   <span style="font-size:16px; font-weight:bold">CIN NUMBER: U40109MP2002SGC015120</span>
+       
+	   <br><br>
+	          
+		<span style="font-size:20px"><i>***************************</i></span>
+		<br>
+	   
+
+       <span style="font-size:20px"><i>This is to certify that</i></span>
+       <br>
+       <span style="font-size:26px"><b>M/s {{company_name}}</b></span>
+	   <br>
+       <span style="font-size:16px">Registered Office Address: <b>{{UCDM_obj.Company_add_1}} {{UCDM_obj.Company_add_2}}, {{UCDM_obj.Company_dist}}, {{UCDM_obj.Company_state}}, {{UCDM_obj.Company_pin_code}}</b></span>
+	   <br> 	
+       <span style="font-size:20px">Registration number: </span><span style="font-size:26px"><b>{{no}}</b></span>
+	   <br>
+	   <span style="font-size:16px">Is registered as <b>{{tkc_obj.Name}}</b> Class Contractor</span>
+	   <br>
+       <span style="font-size:16px">Date of Issue: {{day| date:"N d, Y"}}</span>
+	   <br>
+       <span style="font-size:16px">Valid up to: {{valid_upto| date:"N d, Y"}}</span><br>
+
+<table style="margin-top:40px;float:left">
+
+<tr>
+
+<td><span><b></b></td>
+
+</tr>
+
+<tr>
+
+<!-- <td style="width:200px;float:left;border:0;border-bottom:1px solid #000;"></td> -->
+
+</tr>
+
+<tr>
+
+<td style="text-align:center"><span><b></b></td>
+
+</tr>
+
+</table>
+
+<table style="margin-top:40px;float:right">
+
+<tr>
+
+<td><span>Signed by: <b>{{Officer_obj.employ_name}}</b>,<br> <b>{{Officer_obj.designation}}</b></td>
+</tr>
+<tr>
+<td><span>Date: <b>{{day}}</b></td>
+</tr>
+<tr>
+<td><span>Time: <b>{{current_time}}</b></td>
+<tr>
+<td><span>Authentication: <b>{{Officer_obj.otp}}</b></td>
+</tr>
+
+<tr>
+
+<td style="width:200px;float:right;border:0;border-bottom:1px solid #000;"></td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:center"><span><b>Signature</b></td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+<body>
+</center>
+</html>
+ 
+
+​
+

@@ -1,0 +1,156 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script>
+</head>
+
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card-body">
+                <table id="example2" class="table table-striped" border="2">
+                    <thead>
+                        <tr>
+                            <h3>Bank Details<h3>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> <label for="exampleInputEmail1">PO number</label> </td>
+                            <td> <label for="exampleInputEmail1">MP{{data.wo.rca_cell.user_zone}}WO{{data.wo.id}} </label> </td>
+
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1">Bank Name </label> </td>
+                            <td> <label for="exampleInputEmail1">{{data.add_bg_bank}} </label> </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1">IFSC </label> </td>
+                            <td> <label for="exampleInputEmail1">{{data.add_ifsc}} </label> </td>
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1">Account No. </label> </td>
+                            <td> <label for="exampleInputEmail1">{{data.add_ac_number}} </label> </td>
+                        </tr>
+
+                        <tr>
+                            <td> <label for="exampleInputEmail1">Account Holder Name </label> </td>
+                            <td> <label for="exampleInputEmail1">{{data.add_Account_Holder_Name}} </label> </td>
+                        </tr>
+
+                    <tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-10">
+           
+                <div class="card-body">
+                    <table id="example2" class="table table-striped" border="2">
+                        <thead>
+                            <tr>
+                                <h3>Bank Guarantee Details<h3>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> <label for="exampleInputEmail1">PO number</label> </td>
+                                <td> <label for="exampleInputEmail1">MP{{data.rca_cell.user_zone}}WO{{data.id}} </label> </td>
+
+                            </tr>
+
+                          
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bank Guarantee No </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_bg_no}} </label> </td>
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Issue Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_issue_date}} </label> </td>
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Valid Upto </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_valid_date}} </label> </td>
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Claim Date </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_claim_date}} </label> </td>
+                            </tr>
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Amount </label> </td>
+                                <td> <label for="exampleInputEmail1">{{data.add_amount}} </label> </td>
+                            </tr>
+
+                          
+
+                            <tr>
+                                <td> <label for="exampleInputEmail1">Bg Document </label> </td>
+                                <td style="text-align: left;"><a href="{{data.add_bg_upload.url}}" target="_blank" class="fas fa-eye text-secondary">View</a></td>    
+                            </tr>
+
+                           
+
+
+                        </tbody>
+                    </table>
+
+                  
+
+
+                </div>
+
+
+
+      
+        </div>
+    </div>
+</div>
+
+<script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#bg_valid_upto1').attr('min', today);
+</script>
+
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends 'po/area_store/areastore_base.html' %} {% load static %} {% block pagetitle %}Gatepass inward{% endblock pagetitle %} {% block gp_inward_rca %}
+<li class="nav-item active" style="list-style-type:none;">
+    {% endblock gp_inward_rca %} {% block fa %}
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="/po/area_process" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Open Stock</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/po/area_stock" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>In Stock</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/gp_inward_rca" class="nav-link">
+                <i class="far fa fa-circle nav-icon"></i>
+                <p>Gatepass Inward RCA</p>
+            </a>
+        </li>
+    </ul>
+    {% endblock fa %} {% block body %}
+
+    <div class="container">
+        <h5 class="font-weight-bolder">All RCA Gate Pass</h5>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">Panel Heading</div>
+<div class="panel-body">Panel Content</div> -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-responsive">
+                    <thead class="table table-dark">
+                        <tr>
+                            <th>Cutomer Ref and Gate Pass number </th>
+                            <th>Date</th>
+                            <th>TRF Id</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for trf in trf_obj %}
+                        <tr>
+                            <td>{{trf.customer_ref_gatepass_no}}</td>
+                            <td>{{trf.dated}}</td>
+                            <td>{{trf.TRF_Id}}</td>
+                            {% if trf.gatepass_gen == 0 %}
+                            <td>
+                                <a class="btn btn-primary btn-sm float-left" onclick="alert('Proceeding to Genarate Gate Pass')" href="/new2_rca/{{trf.TRF_Id}}">Generate Gate Pass</a>
+                            </td>
+                            {% else %}
+                            <td>
+                                <a class="btn btn-primary btn-sm float-left" href="/gp_view_rca/{{trf.TRF_Id}}" style="width: 165px;">View GP</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}

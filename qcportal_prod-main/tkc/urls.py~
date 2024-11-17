@@ -1,0 +1,24 @@
+from django.contrib import admin
+from django.urls import path
+from tkc import views
+
+urlpatterns = [
+    path('login', views.Logout, name='Logout'),
+    path('tkc_reg_seven', views.tkc_reg_seven, name='tkc_reg_seven'),
+    path('tkc_reg_eight', views.tkc_reg_eight, name='tkc_reg_eight'),
+
+    path('tkc_reg_nine', views.tkc_reg_nine, name='tkc_reg_nine'),
+
+    path('tkc_reg_ten', views.tkc_reg_ten, name='tkc_reg_ten'),
+    path('tkc_reg_eleven', views.tkc_reg_eleven, name='tkc_reg_eleven'),
+    path('tkc_reg_twelve', views.tkc_reg_twelve, name='tkc_reg_twelve'),
+
+    path('base', views.base, name='base'),
+    path('updatedata', views.updatedata, name='updatedata'),
+    path('basic', views.basic, name='basic'),
+
+    path('tkc_update', views.tkc_update, name='tkc_update'),
+    path('rejected_doc', views.rejected_doc, name='rejected_doc'),
+    path('message', views.message, name='message'),
+
+]

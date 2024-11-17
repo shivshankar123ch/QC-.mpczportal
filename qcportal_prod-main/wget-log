@@ -1,0 +1,4 @@
+--2022-05-19 18:16:58--  http://google.com/
+Resolving google.com (google.com)... 142.250.195.174, 2404:6800:4007:826::200e
+Connecting to google.com (google.com)|142.250.195.174|:80... failed: Connection timed out.
+Connecting to google.com (google.com)|2404:6800:4007:826::200e|:80... failed: Network is unreachable.

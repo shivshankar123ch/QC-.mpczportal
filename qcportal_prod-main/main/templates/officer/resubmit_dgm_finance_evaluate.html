@@ -1,0 +1,169 @@
+{% extends 'officer/dgm_finance.html' %} {% load static %} {% block body %}
+ 
+        <div class="ed-card-inner">
+            <div class="card-header">
+                <h2>
+                    Uploaded All Document
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="ed-tableinfo-block mb-3">
+                    <h4 class="mb-3">User All Basics Data</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered display text-center" >
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="w-5 text-center">S.No.</th>
+                                    <th class="w-45">
+                                        Report Name
+                                    </th>
+                                    <th class="w-50">
+                                        Value
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Type of Business</td>
+                                    <td>{{data.Type_of_business}}</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Authorised Person Name</td>
+                                    <td>{{data.Authorised_person_E}}</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Company Name</td>
+                                    <td>{{data.CompanyName_E}}</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Contact Number</td>
+                                    <td>{{data.ContactNo}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Email ID</td>
+                                    <td>{{data.Email_Id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Vendor Type</td>
+                                    <td>{{data.User_type}}</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Company GST No</td>
+                                    <td>{{CompanyData.Company_Gst_No}}</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Pan Card No</td>
+                                    <td>{{CompanyData.Company_Pan_No}}</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Company Gumastha No</td>
+                                    <td>{{CompanyData.Company_Gumastha_No}}</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Company Registration_Date</td>
+                                    <td>{{CompanyData.Registration_Date}}</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="3" class="thead text-white"> Company Address</th>
+                                <tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Address 1</td>
+                                    <td>{{CompanyData.Company_add_1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td> Address 2</td>
+                                    <td>{{CompanyData.Company_add_2}}</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Pin Code</td>
+                                    <td>{{CompanyData.Company_pin_code}}</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>District</td>
+                                    <td>{{CompanyData.Company_dist}}</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>State</td>
+                                    <td>{{CompanyData.Company_state}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <form action="/dgm_finance_evaluate_save/{{data.User_Id}}" method="POST">
+                    {% csrf_token %}
+                    <div class="ed-tableinfo-block mb-3">
+                        <h4 class="mb-3">Finance Document</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered display text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="w-50"> Document Name </th>
+                                        <th class="w-25"> View Document</th>
+                                        <th class="w-25"> Status </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% with name=100 %} {% for data in doc1 %}
+                                    <tr>
+                                        <td>{{data.document_name}}</td>
+                                        <!-- {% if data.Status == 1 %}
+                                    <td>{{data.document_name}}</td>
+                                    {% else %}
+                                    <td>{{data.document_name}}</td>
+                                    {% endif %} -->
+                                        <td>
+                                            <a href="{{data.Balance_Sheet.url}} " target=”_blank” class="ed-links">
+                                                <span class="btn btn-info btn-sm">  
+                                                    View
+                                                </span>
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            {% if data.Primary_verification_Status == 1 %}
+                                            <span class="btn btn-success btn-sm">Ok</span>
+                                            {% elif data.Primary_verification_Status == 2 %}
+                                            <span class="btn btn-info btn-sm"> Resubmit </span>
+                                            {% else %}
+                                            <span class="btn btn-warning btn-sm">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <!-- {% if data.Primary_remark %}
+                                    <td colspan="5"><textarea class="form-control" id="task" name={{forloop.counter0}} rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="{{data.Primary_remark}}"></textarea></td>
+                                    {% else %}
+                                    <td colspan="5"><textarea class="form-control" id="task" name={{forloop.counter0}} rows="1" style=" margin-top:-10px; margin-x:-30px;" placeholder="Write Remark"></textarea></td>
+                                    {% endif %}  -->
+                                    </tr>
+                                    {% endfor %} {% endwith %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+ 
+
+
+
+        {% endblock body %}

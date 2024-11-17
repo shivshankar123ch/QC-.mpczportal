@@ -1,0 +1,161 @@
+{% extends 'officer/tmqm_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item active">
+                <a class="nav-link active" href="/tmqm_sample_recv_rca">
+                  <span class="sidenav-mini-icon"> SR </span>
+                  <span class="sidenav-normal">Sample Received</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_sample_return_rca">
+                  <span class="sidenav-mini-icon"> SD/R </span>
+                  <span class="sidenav-normal">Sample Return</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tmqm_job_order_rca">
+                  <span class="sidenav-mini-icon"> JO </span>
+                  <span class="sidenav-normal">Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Report_success_rca">
+                  <span class="sidenav-mini-icon"> TR </span>
+                  <span class="sidenav-normal">Test Report</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+
+{% block body %}
+
+<div class="row mt-6">
+<form method="POST">
+    {% csrf_token %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">sample code: </th>
+            <th scope="col">Reject: </th>
+            <th scope="col">Rejected By: </th>
+            <th scope="col">Rejection Remark: </th>
+            <th scope="col">Rejection Date: </th>
+            <th scope="col">Vehicle No. for dispatch: </th>
+            <th scope="col">Action: </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for smp in sample_obj %}
+            <tr>
+                <td><b><input type="text" name="rejected_sample_code" id="rejected_sample_code" placeholder="{{sc.sample_code}}" value="{{smp.sample_code}}" readonly></b></td>
+                {% if smp.is_rejected == 1 %}
+                <td>
+                    <label>{{ smp.rejection_yes_no }}</label>
+                </td>
+                {% else %}
+                <td>
+                    <div class="form-group">
+                    <select name="rejection_yes_no" id="rejection_yes_no" class="form-select form-select-lg" aria-label=".form-select-lg example">
+                      <option value="" selected="selected">Select </option>
+                      <option value="yes">yes</option>
+                      <option value="no">no</option>
+                    </select>
+                   </div>
+                </td>
+                {% endif %}
+
+                {% if smp.is_rejected == 1 %}
+                <td>
+                    <label>{{ smp.rejected_by_officer.officer_name }}</label>
+                </td>
+                {% else %}
+                <td>
+                   <div class="form-group">
+                    <select name="rejected_by_officer" id="rejected_by_officer" class="form-select form-select-lg" aria-label=".form-select-lg example">
+                      <option value="" selected="selected" >Select</option>
+                      {% for ofc in officer_obj %}
+                      <option value="{{ofc.officer_id}}" >{{ofc.officer_name}}</option>
+                      {% endfor %}
+                    </select>
+                   </div>
+                </td>
+                {% endif %}
+
+                {% if smp.is_rejected == 1 %}
+                <td><label>{{ smp.rejection_remark }}</label></td>
+                {% else %}
+                <td><b><input type="text" name="rejection_remark" id="rejection_remark"></b></td>
+                {% endif %}
+
+                {% if smp.is_rejected == 1 %}
+                <td><label>{{ smp.rejected_date }}</label></td>
+                {% else %}
+                <td><b><input type="date" name="rejected_date" id="rejected_date"></b></td>
+                {% endif %}
+
+                {% if smp.is_rejected == 1 %}
+                <td><label>{{ smp.rejected_date }}</label></td>
+                {% else %}
+                <td><b><input type="text" name="rejected_vehicle_number" id="rejected_vehicle_number"></b></td>
+                {% endif %}
+
+                {% if smp.is_rejected == 1 %}
+                <td>
+                    <a href="#"><button type="button" onclick="alert('Already Rejected')" class="button btn btn-primary">Rejected</button></a>
+                </td>
+                {% else %}
+                <td>
+                    <a href="/tmqm_sample_reject_rca/{{emp.TRF_Id}}"><button type="submit" class="button btn btn-primary">Reject</button></a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    <h5 class="mt-6">Wants to Reject all ?</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Rejection Date: </th>
+                <th scope="col">Rejected By: </th>
+                <th scope="col">Rejection Remark: </th>
+                <th scope="col">Action: </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b><input type="date" name="reject_all_date" id="reject_all_date"></b></td>
+                <td>
+                   <div class="form-group">
+                    <select name="reject_all_by_officer" id="reject_all_by_officer" class="form-select form-select-lg" aria-label=".form-select-lg example">
+                      <option value="" selected="selected" >Select</option>
+                      {% for ofc in officer_obj %}
+                      <option value="{{ofc.officer_id}}" >{{ofc.officer_name}}</option>
+                      {% endfor %}
+                    </select>
+                   </div>
+                </td>
+                <td><b><input type="text" name="reject_all_remark" size="80" id="reject_all_remark"></b></td>
+                <td><a href="/tmqm_sample_reject_rca/{{emp.TRF_Id}}"><button type="submit" onclick="alert('Rejecting all')" class="button btn btn-primary" style="background-color:red;">Reject All</button></a></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+</form>
+    <center>
+        <a href="/tmqm_sample_recv_rca"><button type="button" class="button btn btn-primary">Submit</button></a>
+    </center>
+</div>
+{% endblock body %}

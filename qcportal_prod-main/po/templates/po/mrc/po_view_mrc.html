@@ -1,0 +1,311 @@
+{% extends 'officer/gm_store_base.html' %}
+{% load static %}
+{% block heading %} Add Comment {% endblock heading %}
+{% block body %}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+
+<div class="certificate-info">
+    <div class="card ed-card-block">
+        <div class="card-body">
+            <div id="printid" class="options-print">
+                <tr>
+                    <td colspan="2" style="width:100%">
+                        <div class="cgm-logo-block">
+                            {% if ro.po.discom.Discom_Header %}
+                            <img src="{{ro.po.discom.Discom_Header.url}}" class="cgm-logo" style="width:100%"
+                                alt="User profile" />
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                <h5 class="text-center mb-4">Material receipt certificate (MRC) for good Received</h5>
+
+                <p class="text-right">
+                    Report Date :{{pr.mrc_date|date:"d-M-Y"}}
+                </p>
+
+                <p>
+                    <b>Order : {{ro.di_master.prefix}}/{{ro.di_master.erp_di_number}}</b>
+                    <!-- <p class="m-0 text-left">
+                        {{ro.di_master.prefix}}/{{ro.di_master.erp_di_number}}
+                    </p> -->
+                    <!-- <span class="pl-2">MD/MK/04/P-III/TS-534/ORD/2252/DATED 17.05.2018 </span> -->
+                </p>
+
+                <p>
+                    <b>TO, </b><br>
+                    <b>
+                        {{ro.po.discom.Po_Main_Sign}}
+                        <br>
+                        {{ro.po.discom.Discom_Short_Name}}
+                    </b>
+                </p>
+
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>Subject :</b>
+                    Material receipt certificate (MRC) for good received against PO no:{{ro.po.po_no}}/DI no:{{ro.di_master.erp_di_number}}
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    The consignments as per details given below have been Received
+                </p>
+
+                <p>
+                    <b>PO Subject :</b>
+                    <span class="pl-2">
+                        {{ro.po.po_subject}}
+                    </span>
+                </p>
+
+                <br><br>
+
+
+                <table class="table table-bordered mrctables">
+                    <tr>
+                        <th>Supplier name</th>
+                        <td colspan=2>{{ro.po.vendor.CompanyName_E}}</td>
+                        <th>Supplier work</th>
+                        <td colspan=2>{{ro.areastore}}</td>
+                    </tr>
+                    <tr>
+                        <th>AGAINST Order no.</th>
+                        <td>{{ro.po.po_no}}</td>
+                        <th>Order date</th>
+                        <td>{{ro.po.erp_created_date}}</td>
+                        <th>MRC no.</th>
+                        <td>{{pr.id}}</td>
+                    </tr>
+                    <tr>
+                        <th> Order description</th>
+                        <td colspan=5>
+                            order for supply of DLM compliant three phases whole current statics Energy meter (10-40)
+                            WITH OPTICAL COMMUNICATION PORT ALONG WITH METER BOX AGAINST TS 534
+                        </td>
+                    </tr>
+                </table>
+                <br>
+
+                <table class="table table-bordered mrctables">
+                    <tr>
+                        <th colspan=4 class="text-center">Dispatch instruction details for PO number:{{ro.po.po_no}}</th>
+                    </tr>
+                    
+                    <tr>
+                        <!-- <th>S.N0</th> -->
+                        <th>DI Number</th>
+                        <!-- <th>DI date</th> -->
+                        <th>DI Subject</th>
+                        <th>Remark</th>
+                    </tr>
+                    <tr>
+                        <!-- <td>{{forloop.counter}}</td> -->
+                        <td>{{ro.di_master.erp_di_number}}</td>
+                        <!-- <td>{{ro.di_master.di_create_date}}</td> -->
+                        <td>{{ro.di_master.di_subject}}</td>
+                        <td>Kindly approve the DI NO {{ro.di_master_erp_di_number}} Dated {{ro.di_master.di_create_date}}</td>
+                    </tr>
+                </table>
+                <br>
+
+                <table class="table table-bordered mrctables">
+                    <tr>
+                        <td colspan=6 class="text-center">Good receipt Detail for PO Number:{{ro.po.po_no}}</td>
+                    </tr>
+                    {% for i in grn %}
+                    <!-- <th>S. No.</th> -->
+                        <td>{{forloop.counter}}</td>
+                    <tr>
+                    
+                        <th> G.R. NO</th>
+                        <td>{{i.id}}</td>
+                        <th>G.R.N date</th>
+                        <td>{{i.drr_date}}</td>
+                        <th>D.R.R NO</th>
+                        <td>{{i.drr_challan_no}}</td>
+                    </tr>
+                    <tr>
+                        <th>MTR NO & date</th>
+                        <td></td>
+                        <th>Vehical no.</th>
+                        <td>{{i.drr_vehicle}}</td>
+                        <th>Transport Agency</th>
+                        <td></td>
+                    </tr>
+
+                    
+                    <tr>
+                        <th>Invoice/Challan no. and Date</th>
+                        <td colspan=5> {{i.drr_challan_no}} and {{i.drr_challan_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br>
+
+                <table class="table table-bordered mrctables">
+                    <tr>
+                        <!-- <th> S.N0</th> -->
+                        <th>Item code</th>
+                        <th>Item description</th>
+                        <th>UOM</th>
+                        <th>Quantity Delivered</th>
+                        <th>Manufacturing serial number from-To</th>
+                        <th>Remark</th>
+                    </tr>
+                    <tr>
+                        <!-- <td>1</td> -->
+                        <td>{{ro.offer_item.item_code}}</td>
+                        <td>{{ro.offer_item.item_name }}</td>
+                        <td>NO</td>
+                        <!-- <td>{{ro.deliverable_qty}}</td> -->
+                        <td>{{mrc_count}}</td>
+                        <td>{{ro.deliverable_qty}}</td>
+                        <td>Ok</td>
+                    </tr>
+                </table>
+                <br>
+
+                <table class="mrctables1">
+                    <tr>
+                        <td style="width: 10%;">
+                            <b>NOTE : </b>
+                        </td>
+                        <td style="width: 90%;">
+                            Subject of detailed checking as per technical specification of order.The Entry of
+                            consignment has been taken in the daily receipt Register(of material) as mentioned above.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">
+                            <b>Comment : </b>
+                            <td>{{comment.add_comment}}</td>
+                        </td>
+                        <td style="width: 90%;">
+
+                        </td>
+                    </tr>
+                </table>
+                <br><br>
+
+                <table class="mrctables1 text-left">
+                    <tr>
+                        <!-- <td style="width: 50%">
+                            DRR Details :
+                            <br>
+                            Invoice/challen no. dates :
+                        </td> -->
+
+
+                        <td style="width: 50%;" class="text-right">
+                            <div style="display: inline-block;text-align: left;">
+                                GM/AGM/DGM({{ro.areastore}})
+                                <br>
+                                {{ro.po.discom.Discom_Short_Name}}
+                                <br>
+                                {{ro.areastore}}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <div class="text-center" id="printoptions">
+                    <button class="btn ed-submit btn-info" onclick="windowsprint()">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+
+<script>
+
+function  windowsprint()
+{ 
+    $('#sidenav-main').hide();
+    $('#headerMenu').hide();
+    $('#contantBlock').css('padding','0'); 
+    $('.ed-footer-block').hide(); 
+    $('#printoptions').hide();   
+    window.print();
+    $('#sidenav-main').show();
+    $('#headerMenu').show();
+    $('#contantBlock').css('padding-left','275px'); 
+    $('#contantBlock').css('padding-top','85px'); 
+    $('#contantBlock').css('padding-right','10px');  
+    $('.ed-footer-block').show(); 
+    $('#printoptions').show();  
+}
+
+</script>
+
+
+
+
+<style>
+    p {
+        font-size: 14px;
+        line-height: 26px;
+        margin: 0 0 6px;
+    }
+
+
+    .mrctables {
+        width: 100%;
+    }
+
+    .mrctables th {
+        background-color: #C6D9F1;
+        padding: 2px 6px;
+        vertical-align: middle;
+        text-align: left;
+        text-transform: capitalize;
+    }
+
+    .mrctables td {
+        padding: 2px 6px;
+        vertical-align: middle;
+    }
+
+    .mrctables td,
+    .mrctables th {
+        border: 1px solid #000;
+    }
+
+    .mrctables1 {
+        width: 100%;
+        ;
+    }
+
+    .mrctables1 td {
+        padding: 2px 6px;
+        vertical-align: top;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

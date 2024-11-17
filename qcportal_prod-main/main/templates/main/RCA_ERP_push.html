@@ -1,0 +1,41 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h6>RCA Vendor Data to be pushed in </h2>
+    <div class="panel panel-default">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-cenetr">
+                            Sr.No.
+                        </th>
+                        <th>
+                            Name Of Company
+                        </th>
+                        <th>
+                            Name of Authorised Person
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in usr_obj %}
+                    <tr>
+                        <td class="text-cenetr">{{forloop.counter}}</td>
+                        <td>{{data.CompanyName_E}}</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                        {% if data.erp_cz_id %} 
+                            <td>ERP Id : <b>{{data.erp_cz_id}}</b></td>
+                        {% else %} 
+                            <td><a href="/RCA_ErpPush/{{data.User_Id}}">Push To ERP</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

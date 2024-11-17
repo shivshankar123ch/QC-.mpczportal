@@ -1,0 +1,128 @@
+{% extends 'officer/RoofTop_Viewer_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+ <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+  <script type="text/javascript" src="/static/assets/js/Validation/vendor_sd.js"></script>
+ </head>
+
+  
+
+  <!---trial start here-->
+  <form class="multisteps-form__form mb-8" action="/solar_vendor_bg/{{id}}" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+      <h5 class="font-weight-bolder mb-0">Bank Guarantee Details</h5>
+      <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</p>
+      <div class="multisteps-form__content">
+        <div class="row mt-3">
+        
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+            <label>Bank Guarantee Bank Name<span style="color: red;">*</span></label>
+            <input class="multisteps-form__input form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" type="text" name= "bgbank"  required id="bgbank_1"  onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"/>
+            <span id="bank_Name_1" class="text-danger font-weight-bold"></span>
+          </div>
+         
+            <div class="col-12 col-sm-6">
+              
+                  <label>IFSC code <span style="color: red;">*</span></label>
+                  <!-- <input type="text" id="ifsc" name="ifsc" class="form-control" onfocus="getBankdetails();validateForm()" placeholder="" pattern="^[A-Za-z]{4}[a-zA-Z0-9]{7}$" required > -->
+                  <input type="text" id="ifsc" name="ifsc" minlength="1" maxlength="15" class="form-control" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" style="text-transform: uppercase" placeholder="ABCD0005943">
+                  <span id="ifscCode" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+              </div>
+         
+        </div>
+        
+        <div class="row mt-3">
+          <div class="col-12 col-sm-6">
+            <label>Bank Guarantee No.<span style="color: red;">*</span></label>
+            <input type="text"  maxlength="10"  class="multisteps-form__input form-control" name= "bg_no" id="bg_no" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' placeholder="" required>
+            <span id="bank_no" class="text-danger font-weight-bold"></span>
+          </div>
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+            <label>Issue Date<span style="color: red;">*</span></label>
+            <input type="date"   class="multisteps-form__input form-control"  name= "bg_issu_date" id="bg_issu_date1" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+            <span id="issueDate" class="text-danger font-weight-bold"></span>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12 col-sm-6">
+            <label>Valid Up To<span style="color: red;">*</span></label>
+            <input type="date" class="multisteps-form__input form-control"  name= "bg_valid_upto" id="bg_valid_upto1" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" placeholder="" required>
+          </div>
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+            <label>Amount<span style="color: red;">*</span></label>
+            <input type="text" min="1" maxlength="12" minlength="1" class="multisteps-form__input form-control" name= "amount" id="amount" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()" onkeypress='validate(event)' placeholder="" required>
+            <span id="amount1" class="text-danger font-weight-bold"></span>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12 col-sm-6">
+              <label>Account number <span style="color: red;">*</span></label>
+              <input type="password" id="protocol" name="ac_number" class="form-control" onselectstart="return false" oncopy="return false" onkeypress='validate(event)' onfocus="validateForm()" onchange="validateForm()" placeholder="Enter Account number " pattern="^\d{9,18}$"
+                  maxlength="18" minlength="9" title="Please fill the Account number">
+              <span id="ac_tNumber" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+          </div>
+
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+              <label>Re-enter account number <span style="color: red;">*</span></label>
+              <input type="text" id="re_ac_number" name="re_ac_number" oncopy="return false" onpaste="return false" onfocus="validateForm()" onkeypress='validate(event)' onselectstart="return false" oncopy="return false" onchange="validateForm()" class="form-control"
+                  placeholder="Enter Re-enter Account number" pattern="^\d{9,18}$" maxlength="18" minlength="9" title="Please fill the Re-enter Account number">
+              <span id="Re_ac_Number" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+          </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>BG Document<span style="color: red;">*</span></label>
+                <input type="file" id="protocol" name="bg_image" class="form-control" onselectstart="return false" oncopy="return false" onkeypress='validate(event)' onfocus="validateForm()" onchange="validateForm()" placeholder="Enter Account number " pattern="^\d{9,18}$"
+                    maxlength="18" minlength="9" title="Please fill the Account number">
+                <span id="ac_tNumber" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+  
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Bank Acceptance Letter<span style="color: red;">*</span></label>
+                <input type="file" id="re_ac_number" name="bg_gu_file" oncopy="return false" onpaste="return false" onfocus="validateForm()" onkeypress='validate(event)' onselectstart="return false" oncopy="return false" onchange="validateForm()" class="form-control"
+                    placeholder="Enter Re-enter Account number" pattern="^\d{9,18}$" maxlength="18" minlength="9" title="Please fill the Re-enter Account number">
+                <span id="Re_ac_Number" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+          </div>
+        
+      
+        
+        
+        <div class="button-row d-flex mt-4">
+          <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back(-1)"><a href="/vendor/vendor_purchase_b/">Prev</a></button> -->
+          <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" value="Submit" type="submit" title="Next">Save</button>
+        <!-- </div> -->
+      </form>  
+      </div>
+    <!-- </div> -->
+  <!---trila end here-->
+
+   <script>
+    let dtElem = document.getElementById('bg_issu_date1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+    function formatDate(date) {
+      let dd = String(date.getDate()).padStart(2, '0');
+      let mm = String(date.getMonth() + 1).padStart(2, '0');
+      let yyyy = date.getFullYear();
+      return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#bg_valid_upto1').attr('min',today);
+</script>
+
+       {% endblock body %}

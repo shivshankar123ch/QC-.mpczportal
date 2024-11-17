@@ -1,0 +1,33 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block heading %} ALL RO Order {% endblock heading %}
+{% block body %}
+<table class="table table-striped m-4 " border="2" style="width:80%">
+          <thead class="bg-primary">
+            <tr>
+              <th scope="col-1">S.No</th>
+              <th scope="col-2">Work Order No.</th>
+              <th scope="col-2">Vendor</th>
+              <th scope="col-2">Release Order No.</th>
+              <th scope="col-3">Store Name</th>
+              <th scope="col-3">Action</th>
+              <th scope="col-3">Offer Material</th>
+
+            </tr>
+          </thead>
+          <tbody>
+             {% for info in data %}
+            <tr>
+               <td>{{forloop.counter}}</td>
+               <td><b>MPCZWO{{ info.wo.id}}</b></td>
+                <td><b>{{ info.wo.vendor_id.CompanyName_E}}</b></td>
+              <td><b>RO00{{ info.id}}</b></td>
+              <td></b>{{ info.store.Name }}</b></td>
+              <td><a href="/po/rca_search_xmr1/{{info.id}}" class="fas fa-eye text-secondary">View</a></td>
+              <td><a href="/po/areastore/rca_as_repaired_inward/{{info.id}}" class="fas fa-eye text-secondary">Offer material</a></td>
+               </tr>
+                {% endfor %}
+          </tbody>
+  </table>
+
+{% endblock body %}

@@ -1,0 +1,125 @@
+{% extends 'main/mpeb_base.html' %} {% load static %}
+{% block body %}
+{% block forward_nabl_order %}
+
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock forward_nabl_order %}
+
+    <!---CSS code for disabling the link after one click-->
+    <style>
+        .disabled-link {
+            pointer-events: none;
+        }
+    </style>
+    <style>
+        .ed-tableinfo-block .dataTables_length {
+            display: block;
+        }
+
+        .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+            background: #e5e9ed;
+            color: #fff;
+            border-color: #1b1c1c;
+        }
+    </style>
+
+
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                NABL forward
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center ed-table-block ed-centertable "
+                        id="forward_nabl_order">
+                        <thead>
+                            <tr>
+                                <th class="w-5">
+                                    S.No.
+                                </th>
+                                <th>
+                                    Work Order No.
+                                </th>
+                                <th>
+                                    Vendor
+                                </th>
+                                <th>
+                                    Release Order No.
+                                </th>
+                                <th>
+                                    Store Name
+                                </th>
+                                <th>
+                                    Region name
+                                </th>
+                                <th>
+                                    Sampling Action
+                                </th>
+                                <th>
+                                    Sampling Date
+                                </th>
+                                <th>
+                                    Re-Sampling Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in data %}
+
+                            <tr>
+
+                                <td>{{forloop.counter}}</td>
+                                <td>MP{{ info.rca_cell.user_zone }}WO{{ info.wo.id }}</td>
+                                <td>{{ info.wo.vendor_id.CompanyName_E }}</td>
+                                <td>RO00{{ info.id }}</td>
+                                <td>{{ info.store.Name }}</td>
+                                <td>{{ info.rca_cell.Region.Region_Name_E }}</td>
+                                <!-- <td><a href="/po/forward_nabl_order2/{{info.id}}"
+                        class="fas fa-eye text-primary">View </a></td> -->
+                                {% if info.random_flag == 0 %}
+                                <td>
+                                    <a href="/po/forward_nabl/{{info.id}}" class="ed-links">
+
+                                        <span class="btn ed-submit btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                            Sampling
+                                        </span>
+
+                                    </a>
+                                </td>
+                                {% elif info.random_flag == 1 %}
+                                <td>
+                                    <span class="btn ed-submit btn-info">
+                                        Sampled
+                                    </span>
+                                </td>
+                                {% endif %}
+                                <td>{{ info.ro_sampling_date}}</td>
+                                <td>{{ info.ro_resampling_date}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+
+<script>
+    $(document).ready(function () {
+        $('#forward_nabl_order').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+
+
+{% endblock body %}

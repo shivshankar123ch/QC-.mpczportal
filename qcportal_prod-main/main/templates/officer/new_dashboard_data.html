@@ -1,0 +1,122 @@
+{% extends 'officer/auditor_base.html' %} {% load static %} {% block body %}
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Contractor History
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                        <thead>
+                            <tr>
+                                <th class="w-5 text-center">S.No.</th>
+                                <th>
+                                    Name Of Company
+                                </th>
+                                <th>
+                                    Name of Authorized Person
+                                </th>
+                                <th>
+                                    Registration Date
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Mobile
+                                </th>
+
+                                <th style="width:1%;color: white; ">
+                                    DGM(W&P) Status </th>
+                
+                                    <th style="width:1% ;color: white; ">
+                                    DGM(Finance) Status </th>
+
+                                    <th style="width:1% ;color: white; ">
+                                        GM(Works) Status </th>
+
+                                        <th style="width:1% ;color: white; ">
+                                            Contractor Type </th>
+
+
+                                <th>
+                                    View History
+                                </th>
+                              
+                        </thead>
+                        <tbody>
+                            {% for data in con %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{data.user.CompanyName_E}}</td>
+                                <td>{{data.user.Authorised_person_E}}</td>
+                                <td>{{data.user.reg_date|date:"d-M-Y"}}</td>
+                                <td>{{data.user.Email_Id}}</td>
+                                <td>{{data.user.ContactNo}}</td>
+
+                                {% if data.user.work_approval == 1  %}
+                                <td><span class="badge badge-success badge-sm">Approve</span></td>
+                                    {% elif data.user.work_approval == 2  %}
+                                    <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                                    {% else %}
+                                    <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                    {% endif %}
+            
+                                    {% if data.user.finance_approval == 1  %}
+                                    <td><span class="badge badge-success badge-sm">Approve</span></td>
+                                    {% elif data.user.finance_approval == 2  %}
+                                    <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                                    
+                                    {% else %}
+                                    <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                    {% endif %}
+
+                                    {% if data.user.finance_approval == 1  and data.user.work_approval == 1  %}
+                                        {% if data.user.cgm_approval == 1  %}
+                                        <td><span class="badge badge-success badge-sm">Approve</span></td>
+                                        {% elif data.user.cgm_approval == 2  %}
+                                        <td><span class="badge badge-danger badge-sm">Rejected</span></td>
+                                        
+                                        {% else %}
+                                        <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                                        {% endif %}
+
+                                    {% else %}
+                                      <td>  <h6> </h6></td>
+
+                                    {% endif %}
+    
+
+                                    <td>{% if data.user.upgrade_payment == 1 %}
+                                        <h6>Upgradation</h6></td>
+                                        {% elif data.user.activation_before_expired == 1 or data.user.activation_after_expired == 1 %}
+                                            <h6>Activation</h6> </td>                     
+                                             {% else %}
+                    
+                                        <h6>New</h6></td>
+                                        {% endif %}
+
+                                <td>
+                                    <a href="/new_dashboard_history/{{data.user.CompanyName_E}}" target="_self" class="ed-links">
+                                        <label class="ed-textinfo text-info">
+                                            View Details
+                                        </label>
+                                    </a>
+                                </td>
+                               
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    {% endblock body %}

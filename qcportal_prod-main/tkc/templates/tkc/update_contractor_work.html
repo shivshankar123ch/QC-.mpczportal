@@ -1,0 +1,481 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} {% block update_profile %}
+
+
+<style>
+    {% comment %} .container {
+        margin-top: 20px;
+      } {% endcomment %}
+      
+      #datefield{
+        width: 150px;
+        outline: none;
+        border: 1px solid #aaa;
+        padding: 6px 28px;
+        color: #aaa;
+      }
+      
+      .date-container {
+        position: relative;
+        float: left;
+      }
+        .date-text {
+          position: absolute;
+          top: 6px;
+          left: 12px;
+          color: #aaa;
+        }
+        
+        .date-icon {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          /* pointer-events: none; */
+          cursor: pointer;
+          color: #aaa;
+        }
+      
+ </style>
+<li class="nav-item active" style="list-style-type: none;">
+   <div class="ed-information mb-2">
+      <div class="card ed-card-block">
+         <div class="card-header">
+            <h2>
+               Update Contractor Work Progress
+            </h2>
+         </div>
+         
+         <div class="card-body">
+            <form role="form" method="post" enctype="multipart/form-data" action="{% url 'update_contractor_work' id %} " >
+               {% csrf_token %} 
+               <div class="ed-form-block p-0 border-0 mb-2">
+                <div class="ed-form-body m-0"> 
+                    <div class="form-group">  
+                        <label class="ed-form-label">
+                            Vendor
+                            <span class="text-danger"></span>
+                        </label> 
+                        <select class="form-control ed-textbox"  aria-label=".form-select-lg example" required="required" id="country" name="Material" class="form-control ed-textbox">
+                            <option>Select Vendor</option>
+                        </select>
+                        <span id="country_span" class="d-block text-danger ed-warning"></span>
+                    </div> 
+
+                    <div class="form-group">  
+                        <label class="ed-form-label">
+                            Specification 
+                            <span class="text-danger"></span>
+                        </label>  
+                        <select class="form-control ed-textbox" aria-label=".form-select-lg example" name="Specification"
+                            id="state" required="required" onchange = "getStateSerialNo()">
+                            <option value="">Material Specification</option> 
+                        </select>
+                        <span id="Specification_1" class="d-block text-danger ed-warning"></span>
+                    </div> 
+
+                    <div class="form-group">  
+                        <label class="ed-form-label">
+                            Serial No 
+                            <span class="text-danger"></span>
+                        </label>  
+                        <select class="form-control ed-textbox" aria-label=".form-select-lg example" name="serial_no"
+                            id="state1" required="required">
+                            <option value="">Serial No</option> 
+                        </select>
+                        <span id="Specification_2" class="d-block text-danger ed-warning"></span>
+                    </div> 
+
+                    <div class="form-group"> 
+                        <label  class="form-label">Upload Documents of material testing</label>
+                        <input class="form-control" id="signedpdf_2" type="file"  name="d" accept="application/pdf" onchange="fileTypeChk2(this)"  required />
+                        <p class="text-danger">File size should be less than 1 Mb*.</p>
+                    </div> 
+
+                     <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Work Started 
+                                </label>
+                                <div class="date-container w-100">
+                                    <input id="Work_Started" class="form-control ed-textbox "  value="{{contractor_detail.contractor_work_started}}"  type="text" placeholder="dd/mm/yy" autocomplete="off" name="start_work"  required/>
+                                    <i class="date-icon fa fa-calendar Work_Started " aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="ed-form-label">
+                                Material Handover Date 
+                            </label>
+                            <div class="date-container w-100">
+                                <input id="Material_Handover_Date" value="{{contractor_detail.material_handover_site}}" class="form-control ed-textbox "  type="text" placeholder="dd/mm/yy" autocomplete="off" name="material_handover" required/>
+                                <i class="date-icon fa fa-calendar Material_Handover_Date " aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label class="ed-form-label">
+                                    Material Installation Start 
+                                </label>
+                                <div class="date-container w-100">
+                                    <input id="Material_Installation_Start" value="{{contractor_detail.material_installation_start}}" class="form-control ed-textbox " placeholder="dd/mm/yy" type="text" autocomplete="off" name="material_installation" onkeypress="return false" required/>
+                                    <i class="date-icon fa fa-calendar Material_Installation_Start " aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="ed-form-label">
+                                    Material Installation Finished 
+                                </label>
+                                <div class="date-container col-12">
+                                    <input id="Material_Installation_Finished" value="{{contractor_detail.material_installation_finished}}" class="form-control ed-textbox " placeholder="dd/mm/yy"  type="text" autocomplete="off" name="material_installation_finished" required/>
+                                    <i class="date-icon fa fa-calendar Material_Installation_Finished " aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+
+                  <div class="form-group">
+                            <label class="ed-form-label">
+                                Work Completed
+                            </label>
+                            <div class="date-container w-100">
+                                <input id="Work_Completed" class="form-control ed-textbox"  value="{{contractor_detail.contractor_work_completed}}"  type="text" autocomplete="off" name="work_completed"  placeholder="dd/mm/yy" required/>
+                                <i class="date-icon fa fa-calendar Work_Completed " aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+            </div>   
+                        <div class="form-group">
+                            <div class="text-right"> 
+                                <button type="submit" class="btn ed-submits ed-formSubmit"
+                                data-bs-dismiss="modal">Submit</button> 
+                            </div>
+                        </div> 
+               </div>
+         </div>
+      </div>
+      </form>
+   </div>
+   </div>
+   </div>
+   </script>
+   
+   <style>
+      .ed-textbox{
+      font-size:12px;
+      }
+   </style>
+
+
+<script>
+               
+    $(function() {
+        $('#Material_Handover_Date').datepicker({
+          dateFormat: 'dd-mm-yy',
+         });
+        
+        $('.Material_Handover_Date').on('click', function() {
+          $('#Material_Handover_Date').focus();
+        })
+      })
+</script>
+
+<script>
+               
+    $(function() {
+        $('#Work_Started').datepicker({
+          dateFormat: 'dd-mm-yy',
+         });
+        
+        $('.Work_Started').on('click', function() {
+          $('#Work_Started').focus();
+        })
+      })
+</script>
+
+<script>
+               
+    $(function() {
+        $('#Material_Installation_Start').datepicker({
+          dateFormat: 'dd-mm-yy',
+         });
+        
+        $('.Material_Installation_Start').on('click', function() {
+          $('#Material_Installation_Start').focus();
+        })
+      })
+</script>
+
+<script>
+               
+    $(function() {
+        $('#Material_Installation_Finished').datepicker({
+          dateFormat: 'dd-mm-yy',
+         });
+        
+        $('.Material_Installation_Finished').on('click', function() {
+          $('#Material_Installation_Finished').focus();
+        })
+      })
+</script>
+
+<script>
+               
+    $(function() {
+        $('#Work_Completed').datepicker({
+          dateFormat: 'dd-mm-yy',
+         });
+        
+        $('.Work_Completed').on('click', function() {
+          $('#Work_Completed').focus();
+        })
+      })
+</script>
+   
+   <script type="text/javascript">
+   
+    $(document).ready(function()
+    {
+         $("#add_block_btn").click(function()
+         {
+  
+              var mtt = Math.floor(Math.random() * 20); 
+            $("#add_main_block").append('<div id="add_block'+mtt+'" class="row"><div class="col-sm-10"><div class="form-group"> <label class="ed-form-label"> Vendor <span class="text-danger"></span> </label> <select class="form-control ed-textbox country" aria-label=".form-select-lg example" required="required" id="country'+mtt+'" name="Material" class="form-control ed-textbox" onchange="getStateVender(this.id)"> <option value="">Select Vendor</option> </select> <span id="country_span" class="d-block text-danger ed-warning"></span> </div><div class="form-group"> <label class="ed-form-label"> Specification <span class="text-danger">*</span> </label> <select class="country'+mtt+'  form-control ed-textbox" aria-label=".form-select-lg" name="Specification"  required="required" id="state'+mtt+'"onchange="getStateSerialNoAdd(id)"> <option value="">Material Specification</option> </select> <span id="Specification_1" class="d-block text-danger ed-warning"></span> </div><div class="form-group"><label class="ed-form-label">Serial No <span class="text-danger"></span></label> <select class="form-control ed-textbox state'+mtt+'" aria-label=".form-select-lg example" name="serial_no" id="serial'+mtt+'" required="required"> <option value="">Serial No</option> </select> <span id="Specification_2" class="d-block text-danger ed-warning"></span> </div></div><div class="col-sm-2"><a href="javascript:;" class="btn ed-submits btn-danger del_spe" onclick="add_block_close(this.id)" id="'+mtt+'"> close </a></div></div>');
+  
+                $.ajax({
+                  type: 'get',
+                  {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor', {% endcomment %}
+  
+                  url: 'https://qcportal.mpcz.in/api/get_vendor',
+  
+                  success: function (data1) {
+                      data1.data.forEach(element => {
+                          
+                          $("#country"+mtt).append(`<option value="${element.User_Id}">${element.CompanyName_E}</option>`)
+                      })
+                  },
+                  error: function (error) {
+                      console.log(error);
+                  },
+      
+              })
+              
+        }); 
+    });
+        
+  
+    function add_block_close(id)
+    {
+        
+        $("#add_block"+id).remove(); 
+    } 
+  
+  
+  
+      $(document).ready(function () {
+          $.ajax({
+              type: 'get',
+              // mode:'cros',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor', {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor',
+  
+              success: function (data) {
+                  //console.log(data);
+                  getCountry(auth_token);
+              },
+              error: function (error) {
+                  console.log(error);
+              },
+          })
+          $('#country').change(function () {
+              console.log('countrychange');
+              getState();
+          })
+      })
+  
+  
+      let auth_token;
+  
+      function getCountry() {
+          
+          $.ajax({
+              type: 'get',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor', {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor',
+  
+              success: function (data1) {
+                  data1.data.forEach(element => {
+                      $('#country').append(`<option value="${element.User_Id}">${element.CompanyName_E}</option>`)
+                     
+                  })
+              },
+              error: function (error) {
+                  console.log(error);
+              },
+  
+          })
+      }
+  
+      function getState() {
+          //$("#country").remove(); 
+          let country_id = $('#country').val();
+          $.ajax({
+              type: 'get',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor_material/' + country_id, {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor_material/' + country_id,
+  
+              success: function (data) {
+                  console.log(data)
+  
+                  $('#state').text('')
+                  {% comment %} $('#state1').text('') {% endcomment %}
+                  $('#state').append(`<option value="" Selected disabled >Material Specification</option>`);
+  
+                  data.material_specification.forEach(element => {
+                  $('#state').append(`<option value="${element.id}">${element.Material_Specification}</option>`);
+  
+                
+                  });
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          })
+      }
+  
+      function getStateSerialNo() {
+          let state_id = $('#state').val();
+          $.ajax({
+              type: 'get',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor_material_2/' + state_id, {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor_material_2/' + state_id,
+  
+              success: function (data) {
+                  console.log(data)
+  
+                  $('#state1').text('')
+                  $('#state1').append(`<option value="" Selected disabled >Select Serial Number</option>`);
+  
+                  data.material_specification.forEach(element => {
+                  $('#state1').append(`<option value="${element.item_code}">${element.item_code}</option>`);
+  
+                
+                  });
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          })
+          $("#state1").focus(); 
+      }
+  
+  
+      function getStateVender(id) {
+  
+         
+          var getStateId = id;
+          //alert(getStateId)
+          let country_id = $('#'+getStateId).val();      
+          
+          $.ajax({
+              type: 'get',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor_material/' + country_id, {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor_material/' + country_id,
+  
+              success: function (data) {
+                  $('.'+getStateId).text('')
+                  $('.'+getStateId).append(`<option value="" Selected disabled >Material Specification</option>`);
+                  data.material_specification.forEach(element => {
+                   $('.'+getStateId).append(`<option value="${element.id}">${element.Material_Specification}</option>`);
+                
+  
+                  });
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          })
+      }
+  
+   function getStateSerialNoAdd(id) {
+  
+         
+          var getStateId = id;
+         
+          let serialNo = $('#'+getStateId).val();  
+           
+          
+          $.ajax({
+              type: 'get',
+              {% comment %} url: 'http://127.0.0.1:8000/api/get_vendor_material_2/' + serialNo, {% endcomment %}
+  
+              url: 'https://qcportal.mpcz.in/api/get_vendor_material_2/' + serialNo,
+  
+              success: function (data) {
+                  //console.log(data)
+                  $('.'+getStateId).text('')
+                  $('.'+getStateId).append(`<option value="" Selected disabled >Select Serial Number</option>`);
+                  data.material_specification.forEach(element => {
+                 
+                   $('.'+getStateId).append(`<option value="${element.item_code}">${element.item_code}</option>`);
+  
+                  });
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          })
+      } 
+  </script>
+
+<style>
+    .ed-form-block .ed-form-body .form-group {
+        margin: 0 0 15px;
+        overflow: hidden;
+    }
+</style>
+
+{% comment %} pdf limitation {% endcomment %}
+<script>
+       
+    function fileTypeChk2(el) {
+        var warningel   = document.getElementById('signedpdf_2').value;
+        var maxfilesize = 1024 * 1024 // 1 Mb
+        var filesize    = el.files[0].size
+        var upld = warningel.split('.').pop();
+        if ( filesize > maxfilesize)
+            {
+                alert("File size should be less than 1 mb..")
+                return false;
+            } 
+            else if(upld !=='pdf'){
+                    alert("Please upload only PDF File..")
+                }
+            else
+            {
+                return true;
+            }   
+    }  
+            
+
+    </script>  
+   
+   {% endblock update_profile %}
+   {% endblock body %}

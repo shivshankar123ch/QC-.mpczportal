@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CGM Region | Dashboard</title>
+  {% load static %}
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+
+  <link rel="stylesheet"
+    href="{% static 'dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/jqvmap/jqvmap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dashboard/dist/css/adminlte.min.css' %}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/daterangepicker/daterangepicker.css' %}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'dashboard/plugins/summernote/summernote-bs4.min.css' %}">
+  <link id="pagestyle" href="{% static '/css/rcastyle.css' %}" rel="stylesheet" />
+
+
+
+        <link rel="stylesheet" href="{% static 'assets1/scss/main.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/datatables.css' %}">
+        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"> -->
+        <script src="{% static '/assets/js/Validation/jquery.js' %}"></script>
+        <script src="{% static '/js/select2.min.js' %}"></script>
+</head>
+
+<!-- <body class="hold-transition sidebar-mini layout-fixed">  -->
+
+<body>
+
+  <!-- Brand Logo -->
+  {% if data.user_zone == 'CZ' %}
+  <a href="/home" class="brand-link">
+    <img src="{% static 'dashboard/dist/img/logo.png' %}" alt="mpcz logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light"><b>CGM Region CZ</b></span>
+  </a>
+  {% elif data.user_zone == 'EZ' %}
+  <a href="/home" class="brand-link">
+    <img src="{% static 'dashboard/dist/img/logoez.png' %}" alt="mpcz logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light"><b>CGM Region EZ</b></span>
+  </a>
+  {% elif data.user_zone == 'WZ' %}
+  <a href="/home" class="brand-link">
+    <img src="{% static 'dashboard/dist/img/logowz.png' %}" alt="mpcz logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light"><b>CGM Region WZ</b></span>
+  </a>
+  {% endif %}
+
+
+
+  <aside class="edrca-sidenav-block" id="sidenav-main">
+    <div class="edrca-overlay-block" id="edrca-overlay"></div>
+    <div class="edrca-sidenav-header">
+      <!-- <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i> -->
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'dashboard/dist/img/logo1.png' %}" class="img-fluid" alt="logo">
+        <span class="edrca-text">{{ data.employ_name }} </span>
+      </a>
+    </div>
+    <!-- <div class="edrca-menucontant-block" id="sidenav-collapse-main"> -->
+    <div class="edrca-menucontant-block" id="sidenav-collapse-main">
+      <ul class="navbar-nav edrca-navbar-nav" id="rca-menulist">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="iconbox">
+              <svg version="1.1" x="0px" y="0px" viewBox="0 0 26.39 26.39"
+                style="enable-background:new 0 0 26.39 26.39;" xml:space="preserve">
+                <g>
+                  <g id="c14_house">
+                    <path d="M3.588,24.297c0,0-0.024,0.59,0.553,0.59c0.718,0,6.652-0.008,6.652-0.008l0.01-5.451c0,0-0.094-0.898,0.777-0.898h2.761
+    c1.031,0,0.968,0.898,0.968,0.898l-0.012,5.434c0,0,5.628,0,6.512,0c0.732,0,0.699-0.734,0.699-0.734V14.076L13.33,5.913
+    l-9.742,8.164C3.588,14.077,3.588,24.297,3.588,24.297z" />
+                    <path
+                      d="M0,13.317c0,0,0.826,1.524,2.631,0l10.781-9.121l10.107,9.064c2.088,1.506,2.871,0,2.871,0L13.412,1.504L0,13.317z" />
+                    <polygon points="23.273,4.175 20.674,4.175 20.685,7.328 23.273,9.525 		" />
+                  </g>
+                  <g id="Capa_1_216_">
+                  </g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="textitem">Dashboard</span>
+          </a>
+        </li>
+
+        <!-- <li class="nav-item">
+          <a href="/po/cgmr_rca_ven_cert" class="nav-link">
+            <span class="iconbox">
+              <svg version="1.1" id="Capa_1" x="0px" y="0px" width="31.614px" height="31.614px"
+                viewBox="0 0 31.614 31.614" style="enable-background:new 0 0 31.614 31.614;" xml:space="preserve">
+                <g>
+                  <path d="M4.372,21.711l6.548,5.871l13.889-15.479L18.26,6.229L4.372,21.711z M16.619,13.415l-7.798,8.693
+		c-0.098,0.108-0.234,0.175-0.38,0.183c-0.146,0.009-0.29-0.042-0.398-0.141l-0.387-0.348c-0.226-0.203-0.245-0.551-0.042-0.777
+		l7.798-8.693c0.098-0.109,0.234-0.175,0.38-0.183c0.146-0.008,0.29,0.043,0.398,0.14l0.387,0.347
+		C16.803,12.84,16.821,13.188,16.619,13.415z M18.887,9.282l0.386,0.346c0.228,0.203,0.246,0.552,0.043,0.778l-0.678,0.756
+		c-0.1,0.109-0.235,0.174-0.381,0.183c-0.146,0.008-0.289-0.042-0.398-0.14l-0.387-0.347c-0.108-0.098-0.174-0.234-0.184-0.381
+		c-0.008-0.146,0.043-0.29,0.142-0.398l0.678-0.756C18.312,9.097,18.661,9.078,18.887,9.282z M20.501,3.732l6.547,5.873
+		l-1.608,1.793l-6.546-5.873L20.501,3.732z M29.681,3.817l-3.711-3.33c-0.783-0.703-1.986-0.637-2.688,0.146l-2.188,2.44
+		l6.548,5.872l2.188-2.438c0.336-0.376,0.513-0.871,0.482-1.375C30.284,4.627,30.057,4.154,29.681,3.817z M27.507,6.498
+		l-3.969-3.559l1.146-1.276l3.968,3.558L27.507,6.498z M1.336,30.403c-0.101,0.35,0.007,0.727,0.277,0.968
+		c0.27,0.243,0.656,0.31,0.992,0.173l7.529-3.084l-6.546-5.873L1.336,30.403z M7.991,28.088l-2.958,1.211l-1.73-1.552l0.885-3.071
+		L7.991,28.088z" />
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="textitem">
+              Registered Vendor
+            </span>
+          </a>
+        </li> -->
+
+        <li class="nav-item">
+          <a href="/po/rca_cgm_all_work_order" class="nav-link">
+            <span class="iconbox">
+              <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 60 60"
+                style="enable-background:new 0 0 60 60;" xml:space="preserve">
+                <g>
+                  <path d="M59,0H1C0.448,0,0,0.447,0,1v58c0,0.553,0.448,1,1,1h58c0.552,0,1-0.447,1-1V1C60,0.447,59.552,0,59,0z M18.686,50.828
+		l-3.756-1.975l-3.756,1.975l0.717-4.183l-3.039-2.963l4.2-0.61l1.878-3.806l1.878,3.806l4.2,0.61l-3.039,2.963L18.686,50.828z
+		 M17.968,31.202l0.717,4.183l-3.756-1.975l-3.756,1.975l0.717-4.183l-3.039-2.963l4.2-0.61l1.878-3.806l1.878,3.806l4.2,0.61
+		L17.968,31.202z M17.968,16.119l0.717,4.183l-3.756-1.975l-3.756,1.975l0.717-4.183l-3.039-2.963l4.2-0.61l1.878-3.806l1.878,3.806
+		l4.2,0.61L17.968,16.119z M47,48H23v-4h24V48z M47,33H23v-4h24V33z M47,18H23v-4h24V18z" />
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="textitem">
+              All RCA Order
+            </span>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="/po/rca_cgm_all_release_order" class="nav-link">
+            <span class="iconbox">
+              <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512"
+                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                <g>
+                  <g>
+                    <path d="M434.063,426.667h-23.325V400c0-4.717-3.817-8.533-8.533-8.533s-8.533,3.817-8.533,8.533v26.667h-27.875
+c-4.717,0-8.533,3.817-8.533,8.533s3.817,8.533,8.533,8.533h27.875v24.533c0,4.717,3.817,8.533,8.533,8.533
+s8.533-3.817,8.533-8.533v-24.533h23.325c4.717,0,8.533-3.817,8.533-8.533S438.779,426.667,434.063,426.667z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M399.929,357.333c-42.35,0-76.8,34.45-76.8,76.8c0,42.35,34.45,76.8,76.8,76.8c42.35,0,76.8-34.45,76.8-76.8
+C476.729,391.783,442.279,357.333,399.929,357.333z M399.929,493.867c-32.933,0-59.733-26.8-59.733-59.733
+s26.8-59.733,59.733-59.733c32.933,0,59.733,26.8,59.733,59.733S432.862,493.867,399.929,493.867z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M403.229,0H61.979C47.837,0,35.271,10.4,35.271,24.5v460.867c0,14.1,12.542,26.633,26.65,26.633h257.158
+c4.717,0,8.533-3.817,8.533-8.533s-3.817-8.533-8.533-8.533H61.921c-4.7,0-9.583-4.883-9.583-9.567V24.5
+c0-4.683,4.917-7.433,9.642-7.433h341.25c4.65,0,7.508,2.808,7.508,7.4V323.2c0,4.717,3.817,8.533,8.533,8.533
+c4.717,0,8.533-3.817,8.533-8.533V24.467C427.804,10.392,417.371,0,403.229,0z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M275.271,59.733h-85.333c-4.717,0-8.533,3.817-8.533,8.533c0,4.717,3.817,8.533,8.533,8.533h85.333
+c4.717,0,8.533-3.817,8.533-8.533C283.804,63.55,279.987,59.733,275.271,59.733z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M352.071,119.467H113.138c-4.717,0-8.533,3.817-8.533,8.533c0,4.717,3.817,8.533,8.533,8.533h238.933
+c4.717,0,8.533-3.817,8.533-8.533C360.604,123.283,356.787,119.467,352.071,119.467z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M352.071,179.2H113.138c-4.717,0-8.533,3.817-8.533,8.533c0,4.717,3.817,8.533,8.533,8.533h238.933
+c4.717,0,8.533-3.817,8.533-8.533C360.604,183.017,356.787,179.2,352.071,179.2z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M352.071,238.933H113.138c-4.717,0-8.533,3.817-8.533,8.533c0,4.717,3.817,8.533,8.533,8.533h238.933
+c4.717,0,8.533-3.817,8.533-8.533C360.604,242.75,356.787,238.933,352.071,238.933z"></path>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M352.071,298.667H113.138c-4.717,0-9.6,2.75-9.6,7.467v128c0,4.717,4.883,9.6,9.6,9.6h187.733
+c4.717,0,8.533-3.817,8.533-8.533s-3.817-8.533-8.533-8.533H120.604V315.733h221.867v24.533c0,4.717,3.817,8.533,8.533,8.533
+c4.717,0,8.533-3.817,8.533-8.533v-34.133C359.538,301.417,356.787,298.667,352.071,298.667z"></path>
+                  </g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="textitem">
+              Release order
+            </span>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+                <a href="/vendor_purchase" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Approved PO</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/vendor_purchase" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rejected PO</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/vendor_purchase" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Total PO</p>
+                </a>
+              </li> -->
+
+        <li class="nav-item">
+          <a href="/mpeb_login " class="nav-link edrca-logoutmenu" data-toggle="tooltip" title="Logout!">
+            <span class="iconbox">
+              <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 310 310"
+                style="enable-background:new 0 0 310 310;" xml:space="preserve">
+                <g id="XMLID_15_">
+                  <path id="XMLID_16_" d="M221.742,46.906c-7.28-3.954-16.387-1.259-20.341,6.021c-3.955,7.279-1.259,16.386,6.02,20.341
+C242.937,92.561,265,129.626,265,170c0,60.654-49.346,110-110,110S45,230.654,45,170c0-40.198,21.921-77.186,57.208-96.531
+c7.265-3.982,9.925-13.1,5.943-20.364c-3.983-7.264-13.101-9.925-20.364-5.943C42.891,71.775,15,118.844,15,170
+c0,77.196,62.804,140,140,140s140-62.804,140-140C295,118.62,266.929,71.453,221.742,46.906z"></path>
+                  <path id="XMLID_17_" d="M155,130c8.284,0,15-6.716,15-15V15c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v100
+C140,123.284,146.716,130,155,130z"></path>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+                <g>
+                </g>
+              </svg>
+            </span>
+            <span class="textitem">
+              Logout
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+
+  <main class="">
+    <div class="edrca-header-block" id="headerMenu">
+      <div class="edrca-container-block">
+        <div class="edrca-leftblock">
+          <ul class="navbar-nav">
+            <li class="nav-item mnav-item">
+              <a class="navbar-brand" href="#">
+                <img src="{% static 'dashboard/dist/img/logo1.png' %}" class="img-fluid" alt="logo">
+                <span class="edrca-text">{{ data.employ_name }} </span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMenu">
+                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid" alt="navbar Icon">
+              </a>
+            </li>
+            <li class="nav-item mnav-item">
+              <a href="javascript:;" class="nav-link edrca-toggelmenu" id="toggelMMenu">
+                <img src="{% static 'assets/images/navbarIcon.png' %}" class="img-fluid" alt="navbar Icon">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="edrca-rightblock">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="javascript:;" class="nav-link edrca-profilemenu">
+                <span class="edrca-imgbox">
+                  <img src="{% static 'assets/images/avatar.jpg' %}" class="img-fluid" alt="Profile Icon">
+                </span>
+                <span class="nav-text">{{ data.employ_name }}</span>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+                            <a href="javascript:;" class="nav-link edrca-zones">
+                                {{ data.user_zone }}
+                            </a>
+                        </li> -->
+            <li class="nav-item">
+              <a href="/mpeb_login " class="nav-link edrca-logoutmenu" data-toggle="tooltip" title="Logout!">
+                <img src="{% static 'assets/images/logout.png' %}" class="img-fluid" alt="navbar Icon">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="edrca-contant-block" id="contantBlock">
+      <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+      <!--  ------------------------------------------ Block Body Start -----------------------------   -->
+      <div class="card ed-card-block">
+        <!-- {% block pagetitle %} {% endblock pagetitle %}  -->
+        {% block body %}
+        {% endblock body %}
+      </div>
+      <!--  ------------------------------------------ Block Body End -----------------------------   -->
+      <!--  ------------------------------------------ Block Body End -----------------------------   -->
+      <footer class="ed-footer-block ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="ed-copyright-text text-left">
+                ©
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>, All Rights Reserved By
+                <a href="#" class="links">MPMKVVCL.</a>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="ed-copyright-text text-right">
+                Developed and Maintained by IT Cell, Madhya
+                Pradesh Madhya Kshetra Vidyut Vitran Co. Ltd. Nishtha Parisar Govindpura,
+                Bhopal.
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+
+  <script src="{% static 'dashboard/plugins/jquery/jquery.min.js' %}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{% static 'dashboard/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static 'dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- ChartJS -->
+  <script src="{% static 'dashboard/plugins/chart.js/Chart.min.js' %}"></script>
+  <!-- Sparkline -->
+  <script src="{% static 'dashboard/plugins/sparklines/sparkline.js' %}"></script>
+  <!-- JQVMap -->
+  <script src="{% static 'dashboard/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+  <script src="{% static 'dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{% static 'dashboard/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+  <!-- daterangepicker -->
+  <script src="{% static 'dashboard/plugins/moment/moment.min.js' %}"></script>
+  <script src="{% static 'dashboard/plugins/daterangepicker/daterangepicker.js' %}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{% static 'dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+  <!-- Summernote -->
+  <script src="{% static 'dashboard/plugins/summernote/summernote-bs4.min.js' %}"></script>
+  <!-- overlayScrollbars -->
+  <script src="{% static 'dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'dashboard/dist/js/adminlte.js' %}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{% static 'dashboard/dist/js/demo.js' %}"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="{% static 'dashboard/dist/js/pages/dashboard.js' %}"></script>
+
+  <script src="{% static 'dashboard/vendor/jquery/jquery.min.js"></script>
+
+
+
+
+  <script src="{% static '/assets/js/Validation/datatables.js' %}"></script>
+     <script src="{% static '/assets/js/bootstrap.bundle.min.js' %}"></script>
+
+
+  <script>
+    $(document).ready(function () { 
+       $('#toggelMenu').click(function () { 
+           $('#sidenav-main').toggleClass('ed-header-collpase');
+           $('#headerMenu').toggleClass('ed-sidebar-collpase');
+           $('#contantBlock').toggleClass('ed-wrapper-collpase');
+       });
+       $('#toggelMMenu').click(function () { 
+           $('#sidenav-main').addClass('ed-sidenav-open'); 
+       });
+       $('#edrca-overlay').click(function () { 
+           $('#sidenav-main').removeClass('ed-sidenav-open');  
+       });
+   });
+
+   </script>
+
+
+
+</body>
+
+</html>

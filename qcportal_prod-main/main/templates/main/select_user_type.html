@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <title>MPMKVVCL</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@800&display=swap" rel="stylesheet">
+</head>
+<style>
+     a navbar-nav.img2{
+        margin-right: 0%;
+    }
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        margin-top: 10%;
+        height: 50%;
+    }
+    /* Make the image fully responsive */
+    .carousel-inner img {
+      width: 100%;
+      height: 100%;
+    }
+    .pmc{
+      height: 30%;
+    }
+    .card-img-top{
+      height: 80%;
+    }
+    ul li {
+      list-style: none
+    }
+    /* //trial here */
+    * {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height:200;
+  
+}
+.m-t{
+  margin-top: 5%;
+}
+.container2{
+  width:60%;
+  margin-left: 33%;
+  margin-right: auto;
+  margin-top: 7%;
+}
+
+.btns {
+  background-color: #534caf; /* Green */
+  border: none;
+  color: white;
+  padding: 13px 29px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #15a9ce; 
+  color: white; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: green;
+  color: white;
+}
+li{
+  margin-left: 0%;
+  margin-top: 4%;
+}
+</style>
+<body>
+
+<nav class="navbar navbar-expand-sm  navbar-dark" style="background-color:#15a9ce;">
+  <!-- Brand/logo -->
+ 
+    <img src="{% static 'assets/images/mp.png' %}" alt="logo" style="width:100px;height: 100px;">
+    <ul>
+      <li><h3 style="color: white;font-family: 'Roboto Slab', serif;">MP Power Management Company Ltd Bhopal</h3></li>
+      
+    </ul>
+    <img src="{% static 'assets/images/indianembelem_2.png' %}" alt="logo" style="width:100px;height: 100px;margin-left: auto;color: white;">
+</nav>
+<br>
+  <div class="container container2">
+    <form action="type_of_user" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-lg-6 col-md-12 col-sm-6">
+                <div class="form-group" style="margin-left: 4%;">
+                    <label class="text-light-white fs-14">Select User Type :</label>
+
+                    <select id="stateuser" name="user" class=" form-control form-control-submit registration-cont" required="required">
+                        <option value="select-option-user" disabled selected hidden selected>Select User Type</option>
+                        <!-- <option value="" disabled selected hidden>Select State</option> -->
+                        <option value="VENDOR">VENDOR</option>
+                        <option value="NABL">NABL</option>
+                        <option value="TKC">TKC</option>
+                    </select>
+                </div>
+                
+                <!-- <div class="form-group col-md-6">
+                    <button type="submit" class="btn button btns button1">Sumbit</button>
+                </div> -->
+                <div class="form-group col-md-6">
+                    <button  class="btn button btns button1 " onfocus="myFunction(this)"  style="width: 150px; height: 50px; margin-right: -70%;border-radius: 12px;border: 1px solid black;transition-duration: 0.4s;">Sumbit</button>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+  <script>
+    function myFunction(x) {
+      x.style.background = "green";
+    }
+  </script>
+</body>
+</html>

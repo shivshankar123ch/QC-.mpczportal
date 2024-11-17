@@ -1,0 +1,55 @@
+{% extends 'officer/ta_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item active">
+                <a class="nav-link active" href="/ta_joborder_rca">
+                  <span class="sidenav-mini-icon"> TA </span>
+                  <span class="sidenav-normal">TA Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/gp_outward_base">
+                  <span class="sidenav-mini-icon"> GOP </span>
+                  <span class="sidenav-normal"> Generate Outward Pass </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+{% block body %}
+
+   <table class="table table-bordered table-hover bg-white col-3" cellspacing="1">
+
+    <thead class="bg-dark" >
+      <tr>
+      <th style="width:30%">Sample Code</th>
+      <th style="width:30%">Date</th>
+      <th style="width:40%">Download</th>
+<!--      <th style="width:10%">Enter Employ Name</th>-->
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for sc in sct_obj %}
+        {% if sc.is_rejected == 0 %}
+        <tr class="bg-light">
+        <td><b>{{sc.sample_code}}</b></td>
+        <td><b>{{sc.date}}</b></td>
+<!--        <td><b>{{sc.officer_id}}</b></td>-->
+         <td>
+            <div class="col-sm-3 col-3">
+                <a href="/ta_uploadReport_rca/{{sc.TRF_Id}}"><button type="submit" class="button btn btn-primary">Upload Report </button> </a>
+                <a href="/ta_uploadReport_rca"><button type="submit" class="button btn btn-primary">View Report </button> </a>
+            </div>
+         </td>
+         {% endif %}
+      {% endfor %}
+    </tbody>
+
+  </table>
+{% endblock body %}

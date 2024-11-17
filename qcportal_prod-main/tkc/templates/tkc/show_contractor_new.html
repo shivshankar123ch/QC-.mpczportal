@@ -1,0 +1,133 @@
+
+{% extends 'tkc/creater_base.html' %} {% load static %} 
+{% block body %} 
+<style>
+  .ed-tableinfo-block .dataTables_length{
+      display: block;
+  }
+</style>
+    <title>API Display</title>
+
+     
+
+<div class="ed-information mb-2">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            Details of Contractors
+          </h2>
+        </div>
+        <div class="card-body"> 
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center" id="show_contractors">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Contractor Category</th>
+                    <th>Contractor Name</th>
+                    <th>Application No</th>
+                    <th>Applicant Name</th>
+                    <th>Bid Amount</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for i in con_bid %}
+                  <tr>
+                    <th>{{forloop.counter}}</th>
+                    {% comment %} <th scope="row">{{i.User_Id.User_type}}</th> {% endcomment %}
+                    <td>{{i.contractor_category}}</td>
+                    <td>{{i.User_Id.Authorised_person_E}}</td>
+                    <td>{{i.consumers.consumerApplicationNo}}</td>
+                    <td>{{i.consumers.consumerName}}</td> 
+                    <td>{{i.bid_amount}}</td>
+                    <td scope="row">                        
+                        {% if i.bid_amount is None %}
+                        <span style="color:red; font-size:12px;">Not Participated</span>
+                        {% else %}                        
+                        <span style="color:green; font-size:10px;">Participated</span>
+                        {% endif %}
+                      </td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+<div class="ed-information mb-2">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card ed-card-block">
+        <div class="card-header">
+          <h2>
+            List of Participated & Not Participated Contractors
+          </h2>
+        </div>
+        <div class="card-body"> 
+          <div class="ed-tableinfo-block">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ed-table-block ed-centertable text-center" id="tkc_show_cont">
+                <thead>
+                  <tr> 
+                    <th>S.No</th>
+                    {% comment %} <th>Contractor Category</th> {% endcomment %}
+                    <th>Contractor Name</th>
+                    <th>Status</th>
+                    {% comment %} <th>Bid Amount</th> {% endcomment %}
+                  </tr>
+                </thead>
+                <tbody>
+                   
+                  {% for i in active_contractors %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                   
+                    {% comment %} <th scope="row">{{i.User_type}}</th> {% endcomment %}
+                   
+                    <td>{{i.user_id_id.Authorised_person_E}}</td>
+                      
+                    
+                      <td scope="row">                        
+                        {% if i in bid_exist %}
+                        <span style="color:green; font-size:15px;">Participated</span>
+                        {% else %}                        
+                        <span style="color:red; font-size:15px;">Not Participated</span>
+                        {% endif %}
+                      </td>
+                      
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+</body>
+</html>
+<script>
+  $(document).ready( function () {
+    $('#tkc_show_cont').DataTable();
+} );
+</script>
+<script>
+  $(document).ready( function () {
+    $('#show_contractors').DataTable();
+} );
+</script>
+{% endblock %}

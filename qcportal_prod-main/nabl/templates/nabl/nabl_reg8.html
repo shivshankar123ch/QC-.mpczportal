@@ -1,0 +1,479 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %}
+{% block body %}
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/assets/js/Validation/nabl_req8.js"></script>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+           
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    <h4 class="text-info font-weight-bolder">Documents for NABL empanelment</h4>
+                                    <p class="text-info">All red <span style="color: red;">(*)</span> marks mandatory<p>
+
+                                    <form class="row g-3 needs-validation" action="/nabl/nabl_reg8" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <h6 class="font-weight-bolder text-info">1.Valid NABL Accreditation Certificate<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span
+                            style="color: red;">*</label>
+
+                                                <input type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" name="Accreditation_Certificate_office" id="n_office_name_supply_01" class="form-control" required="required" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()" required="required" value="NABL" readonly>
+                                                <span id="N_office_name_supply_01" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span
+                            style="color: red;">*</label>
+                                                <input type="text" minlength="1" maxlength="20" name="Accreditation_Certificate_doc_name" id="n_office_name_supply_02" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" required="required">
+                                                <span id="N_office_name_supply_02" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Accreditation_Certificate_issue_date1" id="n_office_name_supply_03" class="form-control" required="required" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()" required="required">
+                                                <span id="N_office_name_supply_03" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="inputStatus" class="labelName">Expired Date:<span style="color: red;">*</label>
+                        <input type="date" name="Accreditation_Certificate_expire_date" id="n_office_name_supply_04"
+                          class="form-control" required="required" onfocus="validateForm()" onkeyup="validateForm()"
+                          onchange="validateForm()" required="required">
+                        <span id="N_office_name_supply_04" class="text-danger font-weight-bold text-sm-left"   style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="Accreditation_Certificate_file" id="file_name_supply_05" class="form-control" required="required" onfocus="validateForm()" accept="application/pdf" onkeyup="validateForm()" onchange="validateForm()" required="required">
+                                                <span id="File_name_supply_05" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;" accept="application/pdf"></span>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="font-weight-bolder text-info">2. NABL Scope of Accreditation<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span
+                            style="color: red;">*</label>
+
+                                                <input type="text" name="Accreditation_office" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" id="n_office_name_supply_06" class="form-control" required="required" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()" value="NABL" readonly> 
+                                                <span id="N_office_name_supply_06" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span
+ style="color: red;">*</label>
+                                                <input type="text" maxlength="15" minlength="1" name="Accreditation_Certificate_doc_name_021" id="n_office_name_supply_07" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <!---change name-->
+                                                <span id="N_office_name_supply_07" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Accreditation_issue_date" id="n_office_name_supply_08" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_office_name_supply_08" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Expired Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Accreditation_expire_date" id="n_office_name_supply_09" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_office_name_supply_09" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" accept="application/pdf" name="Accreditation_file" id="n_file_supply_10" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_file_supply_10" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;" accept="application/pdf"></span>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="font-weight-bolder text-info">3. Pan Card Details<span style="color: red;">(*)</span>
+                                        </h6>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span
+                            style="color: red;">*</label>
+
+                                                <input type="text" name="Pan_Card_office" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" id="n_office_name_supply" value="Income Tax Department" class="form-control" required="required"
+                                                    onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" readonly>
+                                                <span id="pancard_office" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span
+                            style="color: red;">*</label>
+                                                <input type="text" maxlength="10" minlength="10" name="Pan_Card_doc_name" id="n_name_supply_11" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="pan_no" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Pan_Card_issue_date" id="n_office_name_supply5" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="issueDate_012" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="Pan_Card_file" accept="application/pdf" id="n_Nabl_Pan_Card_details_013" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_Nabl_Pan_Card_details_013" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="font-weight-bolder text-info">4.Active GST Registration Certificate<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span
+                            style="color: red;">*</label>
+
+                                                <input type="text" name="GST_office" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" id="n_office_name_supply" class="form-control" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()" value="Goods and Services Tax department" readonly>
+                                                <span id="gst_office" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span
+                            style="color: red;">*</label>
+                                                <input type="text" name="GST_doc_name" maxlength="16" minlength="5" id="n_office_name_supply_014" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_office_name_supply_014" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="GST_issue_date" id="n_office_name_supply7" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="N_office_name_supply7" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="GST_file" accept="application/pdf" id="n_Nabl_GST_Certificate_015" class="form-control" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="gstFile_015" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <h6 class="font-weight-bolder text-info">5.Legal Entity Document<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span style="color: red;">*</label>
+
+                                                <input type="text" name="Legal_Entity_office" id="n_office_name_supply" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" class="form-control" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()" class="form-control" required="required">
+                                                <span id="legal_doc" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span style="color: red;">*</label>
+                                                <input type="text" maxlength="50" minlength="1" name="Legal_Entity_doc_name" id="n_office_name_supply" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" class="form-control" required="required">
+                                                <span id="legal_name" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Legal_Entity_issue_date" id="n_office_name_supply9" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" class="form-control" required="required">
+                                                <span id="legalIssue" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Expired Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Legal_Entity_expire_date" id="n_office_name_supply10" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" class="form-control" required="required">
+                                                <span id="legalExpire" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="Legal_Entity_file" accept="application/pdf" id="n_Nabl_Legal_Entity_Document" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()" class="form-control" required="required">
+                                                <span id="legalFIle" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="font-weight-bolder text-info">6.Authorisation Document Details<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span style="color: red;">*</label>
+
+                                                <input type="text" name="Authorisation_office" id="n_office_name_supply" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" class="form-control" required="required" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="auth_doc" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span style="color: red;">*</label>
+                                                <input type="text" name="Authorisation_doc_name" minlength="1" maxlength="15" id="n_office_name_supply" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="auth_name" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Authorisation_issue_date" id="n_office_name_supply11" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="authIssue" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Expired Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Authorisation_expire_date" id="n_office_name_supply12" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="authExpire" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="Authorisation_file" accept="application/pdf" id="n_Nabl_Authorisation_Document_file" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="authFile" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <h6 class="font-weight-bolder text-info">7.Aadhar Card of Authorised Person<span style="color: red;">(*)</span></h6>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label for="inputStatus" class="labelName">Document Issued By:<span style="color: red;">*</label>
+
+                                                <input type="test" onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)" name="Aadhar_office" id="n_office_name_supplyAadhar" class="form-control" required="required" onchange="validateForm()"
+                                                    onfocus="validateForm()" onkeyup="validateForm()" value="UIDAI" readonly>
+                                                <span id="aadharDoc" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Serial No:<span style="color: red;">*</label>
+                                                <input type="text" name="Aadhar_name" maxlength="12" minlength="12" onkeypress='validate(event)' id="n_office_name_supply" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="aadharName" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Issued Date:<span style="color: red;">*</label>
+                                                <input type="date" name="Aadhar_issue_date" id="n_office_name_supply13" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="aadharIssue" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputStatus" class="labelName">Document Upload:<span style="color: red;">*</label>
+                                                <input type="file" name="Aadhar_file" accept="application/pdf" id="n_Nabl_Aadhar_Card" class="form-control" required="required" onchange="validateForm()" onfocus="validateForm()" onkeyup="validateForm()">
+                                                <span id="aadharFile" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="button-row d-flex mt-4">
+                                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev"
+                        onclick="history.back()">Prev</button> -->
+                                            <button class="btn bg-gradient-primary ms-auto mb-0" onclick="validateForm()" type="Submit" value="Submit"> Save & Next</button>
+                                            <span id="Turn_over" class="text-danger font-weight-bold text-sm-left" style="font-size: 80%;"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                      
+                </ul></b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        let dtElem1 = document.getElementById('n_office_name_supply_03');
+        let maxDate = new Date();
+        dtElem1.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem2 = document.getElementById('n_office_name_supply_08');
+        let maxDate1 = new Date();
+        dtElem2.max = formatDate(maxDate1);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem3 = document.getElementById('n_office_name_supply5');
+        let maxDate2 = new Date();
+        dtElem3.max = formatDate(maxDate2);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem4 = document.getElementById('n_office_name_supply7');
+        let maxDate3 = new Date();
+        dtElem4.max = formatDate(maxDate3);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem5 = document.getElementById('n_office_name_supply9');
+        let maxDate4 = new Date();
+        dtElem5.max = formatDate(maxDate4);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem6 = document.getElementById('n_office_name_supply11');
+        let maxDate5 = new Date();
+        dtElem6.max = formatDate(maxDate5);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <script>
+        let dtElem7 = document.getElementById('n_office_name_supply13');
+        let maxDate6 = new Date();
+        dtElem7.max = formatDate(maxDate6);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    <!-- end future date function............................. -->
+
+    <!-- past date not select........................... -->
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply_04').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply_09').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply6').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply8').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply10').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply12').attr('min', today);
+    </script>
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#n_office_name_supply14').attr('min', today);
+    </script>
+</body>
+{% endblock body %}
+{% endblock title %}

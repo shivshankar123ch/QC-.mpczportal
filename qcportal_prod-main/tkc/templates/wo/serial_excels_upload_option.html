@@ -1,0 +1,99 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+mark {
+    background-color: yellow;
+    color: black;
+    font-size: 18px;
+  }
+
+</style>
+
+<div class="card ed-card-block">
+    <div class="card-body">
+
+        <div>
+            <p style="align-items:Center;color: rgb(4, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                {% if msg1 %}
+                {{ msg1 }}
+                {% endif %}
+            </p>
+        </div>
+
+        
+        <div class="forms-informations mb-4">
+            <div class="ed-form-block border-0 p-0">
+                        
+                <div class="ed-form-body">  
+                    
+                    <div class="form-group">
+                        <h4>Upload Excel of Serial No.s for item {{boq_data.item_code}}/{{boq_data.material_name}}</h4>
+                    </div>
+
+                    
+                    <form action="/tkc/upload_wo_material_serial_no_excel/{{offer_data.wo.id}}/{{offer_data.wo_material.item_code}}/{{offer_data.id}}/{{vendor_id}}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %} 
+                            
+                        <div class="form-group">
+                            <label class="ed-radio-block"> Material Serial no.s Excel
+                                    <input type="radio" class="form-check-input" name="excel_type" value="serial_nos" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="ed-radio-block"> Material Batch no.s/Lot no.s/Drum no.s Excel
+                                <input type="radio" class="form-check-input" name="excel_type" value="batch_nos" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group"> 
+                            <input type="file" name="sitestore_excel" required>
+                        </div>
+
+
+                        <div class="form-group mb-5"> 
+                            <button type="submit" class="btn ed-submit ed-formsubmit">submit</button>
+                        </div>   
+                        
+                        <div class="form-group"> 
+                            <label class="ed-form-label">
+                                Click Here to download sample Excel for uploading Serial number of Material
+                                <a href="/vendor/download_demo_excel">
+                                    <b>Download Excel</b>
+                                </a>
+                            </label>
+                        </div>
+
+                        
+                        <div class="form-group"> 
+                            <label class="ed-form-label">
+                                Click Here to download sample Excel for uploading Batch no.s/Lot no.s/Drum no.s of Material
+                                <a href="https://qcportal.mpcz.in/media/batch_demo_excel.xlsx">
+                                    <b>Download Excel</b>
+                                </a>
+                            </label>
+                        </div>
+                    </form>
+                    <br><br>
+                    <center>
+                    <mark>Please download the new formats of excels before uploading the serial numbers !!</mark>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- /.card-body -->
+    <script>
+        function showDiv() {
+            document.getElementById('welcomeDiv').style.display = "block";
+        }
+
+    </script>
+    {% endblock body %}

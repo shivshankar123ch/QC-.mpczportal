@@ -1,0 +1,341 @@
+<html>
+<head>
+    <title> </title>
+</head>
+<style>
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+td {
+    padding: 2px 3px;
+    font-size: 12px;
+    text-transform: capitalize;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.ed-textnone {
+    height: 19px;
+    padding: 1px 3px;
+    font-size: 12px;
+    outline: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    width: 100%;
+}
+
+th{
+    height: 20px;
+    font-size: 12px;
+    font-weight: 350;
+}
+</style>
+<body>
+    <div id="printid" style="width: 100%;height: 100%;"> 
+        
+        <table style="border: 1px solid #ddd; width: 100%; margin: 0 auto;">
+            <tr>
+                <td style="padding: 20px;">
+                    <center>
+                        <h1 style="text-transform: capitalize;font-size: 24px; text-align: center; margin: 0 0 30px;">{{material_obj.DispatcherNameOfEntity}}, {{material_obj.Zone}}</h1>
+                    </center>
+                    <h2 style="text-transform: capitalize;font-size: 18px; text-align: center; margin: 0 0 30px;">
+                        Gate Pass cum Challan
+                    </h2>  
+                    <table style="border: 0px solid #ddd;width: 100%; margin: 0 auto;">
+                        <tr>    
+                            <td style="width: 50%; text-align: left;">
+                                <h4 style="font-size: 16px; text-transform: capitalize;    margin: 0 0 14px;">
+                                    No: {{material_obj.id}}
+                                </h4> 
+                            </td>
+                            <td style="">
+                                <h4 style="font-size: 16px; text-transform: capitalize;    margin: 0 0 14px;text-align: right;">
+                                    Date: {{material_obj.IssueDate}}
+                                </h4>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border: 0px solid #ddd;width: 100%; margin: 0 auto;">
+                        <tr>    
+                            <td style="">
+                                <h4 style="font-size: 18px; text-transform: capitalize;    margin: 0 0 14px;">
+                                    Dispatcher Details
+                                </h4> 
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td style="">
+                                <table style="border: 1px solid #ddd; mb-20">
+                                    <tr>    
+                                        <td style="width:10%; border:1px solid #ddd;">
+                                            Name Of Entity 
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.DispatcherNameOfEntity}}" readonly="readonly" /> 
+                                        </td> 
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            LOA/Order No.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.LoaOrderNo}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Name Of Item
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.NameOfItem}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            LOA/Order date. 
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.LoaOrderDate}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                </table>
+                                <table style="border: 0px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Description Of item
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.DescriptionOfItem}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:15%;border: 1px solid #ddd;">
+                                            Manufacturar /Firm Name
+                                        </td>
+                                        <td style="width:45%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.ManufacturerName}}" readonly="readonly"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Vehicle name & No.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.VehicleNumber}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            DI no & date
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.DINoDate}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Driver Name
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.DriverName}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Driver Contact no.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.DriverContactNo}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Issue Date
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.IssueDate}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:10%;border: 1px solid #ddd;">
+                                            Issued to
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.IssuedTo}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                </table>
+
+                                <h4 style="font-size: 14px; text-transform: capitalize;">
+                                    Material Details
+                                </h4> 
+                                
+                                <table style="border: 1px solid #ddd; margin-bottom: 20px;text-align: center;">
+                                    <tr>    
+                                        <th style="width:10%;border: 1px solid #ddd;">
+                                            S No.
+                                        </th>
+                                        <th style="width:25%;border: 1px solid #ddd;">
+                                            Material S No.
+                                        </th> 
+                                        <th style="width:25%;border: 1px solid #ddd;">
+                                            Material Capacity
+                                        </th>
+                                        <th style="width:25%;border: 1px solid #ddd;">
+                                            Material type
+                                        </th>
+                                        <th style="width:25%;border: 1px solid #ddd;">
+                                            Remark
+                                        </th>
+                                    </tr> 
+                                    
+                                    {% for i, j , k, l in sct_obj %}
+                                    <tr>   
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{i}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{j}}" readonly="readonly"/>
+                                        </td>
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{k}}" readonly="readonly"/>
+                                        </td>
+                                        <td style="width:5%;border: 1px solid #ddd;">
+                                          <input type="text" class="ed-textnone" value="{{l}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    {% endfor %}
+                                </table>
+    
+                                <table style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <th style="width:30%;border: 1px solid #ddd;">
+                                            Verified by
+                                        </th>
+                                        <th style="width:30%;border: 1px solid #ddd;">
+                                            Gatekeeper
+                                        </th> 
+                                        <th style="width:40%;border: 1px solid #ddd;">
+                                            Issuing Authority
+                                        </th> 
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.VerifiedBy}}
+                                            </div>
+                                        </td>
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.Gatekeeper}}
+                                            </div>
+                                        </td>
+                                        <td style="width:40%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.IssuingAuthority}}
+                                            </div>
+                                        </td> 
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.VerifiedByDesignation}}
+                                            </div>
+                                        </td>
+                                        <td style="width:30%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.GatekeeperDesignation}}
+                                            </div>
+                                        </td>
+                                        <td style="width:40%;border: 1px solid #ddd;">
+                                            <div style="display: inline-block">
+                                                {{material_obj.IssuingAuthorityDesignation}}
+                                            </div>
+                                        </td> 
+                                    </tr>  
+                                </table>   
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td style="">
+                                <h4 style="font-size: 18px; text-transform: capitalize; margin: 20px 0 0px;">
+                                    Receiver Details
+                                </h4> 
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td style="">  
+                                <table style="border: 1px solid #ddd;">
+                                    <tr>    
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Name Of Entity
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.ReceiverNameOfEntity}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Contact Person
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.ReceiverContactPerson}}" readonly="readonly"/>
+                                        </td>
+                                    </tr> 
+                                    <tr>    
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Receiver details
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.ReceiverDetails}}" readonly="readonly"/>
+                                        </td> 
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            Contact no.
+                                        </td>
+                                        <td style="width:25%;border: 1px solid #ddd;">
+                                            <input type="text" class="ed-textnone" value="{{material_obj.ReceiverContact}}" readonly="readonly"/>
+                                        </td>
+                                    </tr>  
+                                </table>
+                            </td>
+                        </tr>   
+                    </table>   
+                </td>
+            </tr> 
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var sub = document.getElementById("sub");
+            var digitalCert = document.getElementById("digitalCert");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            sub.style.visibility = 'hidden';
+            digitalCert.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+
+            printButton.style.visibility = 'visible';
+            digitalCert.style.visibility = 'visible';
+            sub.style.visibility = 'visible';
+        }
+    </script>
+    <center>
+        <div id="options">
+            <table class="center" style="border: 2px solid white!important; border-collapse: collapse;">
+                <tr>
+                    <th><input id="printpagebutton" class="btn ed-submit ed-formSubmit mr-2" type="button" value="Print Gatepass Outward" onclick="printpage()" /> 
+                    </th>
+                    <form action="/nabl/uplaod_Outwardgatepass/{{material_obj.id}}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <th><input style="text-align: center; font-size: 20px;" type="file" id="digitalCert" name="digitalCert" required="required"></th>
+                        <th><input type="submit" id="sub" class="btn ed-submit ed-formSubmit mr-2" value="Submit"></th>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+</html>
+

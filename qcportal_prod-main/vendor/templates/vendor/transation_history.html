@@ -1,0 +1,67 @@
+{% extends 'vendor/vendorBase.html' %}
+{% load static %} {% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+    display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+  }
+</style>
+<div class="ed-information mb-4">
+  <!-- <div class="card ed-card-block"> -->
+    <div class="card-header">
+      <h2>
+        Transaction History
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="ed-tableinfo-block mb-4">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped" id="transaction_history">
+            <thead class="table-dark">
+              <tr>
+                <th> Transaction Date </th>
+                <th> Transaction ID </th>
+                <th> Bank Ref Num </th>
+                <th> Payu Moneyid </th>
+                <th>Amount </th>
+                <th>Purpose </th>
+                <th>views </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for data in posted %}
+
+              <td>{{data.date}}</td>
+              <td>{{data.Txdid}}</td>
+              <td>{{data.Bank_Ref_Num}}</td>
+              <td>{{data.Payu_Moneyid}}</td>
+              <td>{{data.Netamount_Debited}}</td>
+              <td>{{data.Productinfo}}</td>
+              <td> <a href="/vendor/transaction_history_copy/{{data.id}}" target="_blank" > <span class="btn btn-info btn-sm">View Detail</span>  </a></td>
+
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+          </div>
+          </div>
+          </div>
+          </div>
+          <!-- </div> -->
+          
+
+          <script>
+            $(document).ready(function () {
+              $('#transaction_history').DataTable({
+                pagingType: 'full_numbers',
+              });
+            });
+          </script>
+          {% endblock body %}

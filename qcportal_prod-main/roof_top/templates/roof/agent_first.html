@@ -1,0 +1,236 @@
+{% extends 'main/base.html' %} {% load static%} {% block title %} {% comment %} {% endcomment %}
+
+<head>
+    <script type="text/javascript" src="{% static '/assets/js/Validation/agent.js' %}"></script>
+</head>
+
+<body>
+    <main class="main-content  mt-0">
+        <section>
+            <div class="page-header min-vh-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-7 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+                            <div class="card card-plain">
+
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    {% if messages %} {% for message in messages %}
+                                    <div class="alert alert-warning {{message.tags}}" role="alert" {% if message.tags %}
+                                        {% endif%}>
+                                        {{message}}
+                                    </div>
+
+
+                                    {% endfor %}{% endif %}
+                                    <form class="row g-3 needs-validation" action="roof_top_one" name="myForm"
+                                        onsubmit="return validateForm()" method="POST">
+                                        {% csrf_token %}
+                                        <div class="multisteps-form__content">
+                                            <div class="row mt-3"><b>
+                                                    <h3 style="color: blue;" class="text-center">AGENCY REGISTRATION
+                                                    </h3>
+                                                </b></div>
+                                                <div class="row mt-3">
+                                                    <div class="col-sm-6">Select Zone</div>
+                                                    <div class="col-sm-6" style="background-color: #ced4da;">
+                                                        <input class="form-check-input" type="radio" name="user" checked id="flexRadioDefault1" value="CZ">
+                                                         <label class="form-check-label font-weight-bold" for="flexRadioDefault1">CZ</label>
+                                                         <input class="form-check-input" type="radio" name="user" checked id="flexRadioDefault1" value="EZ">
+                                                         <label class="form-check-label font-weight-bold" for="flexRadioDefault1">EZ</label>
+                                                         <input class="form-check-input" type="radio" name="user" checked id="flexRadioDefault1" value="WZ">
+                                                         <label class="form-check-label font-weight-bold" for="flexRadioDefault1">WZ</label>
+                                                    </div>
+                                                </div>
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+                                                    <label>
+                                                        <h6>Empanelled AS :
+                                                            <span style="color: red; font-size:15px;">*</span>
+                                                        </h6>
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <select id="inputStatus" name="user_type"
+                                                        class="form-select form-select-lg" 
+                                                        aria-label=".form-select-lg example" required="required"
+                                                        onkeyup="validateForm()" onfocus="validateForm()"
+                                                        onchange="validateForm()">
+                                                        <option selected disabled value="">Select one</option>
+                                                        <option value="Empanelled for solar subsidy"> Empanelled for solar subsidy</option>
+                                                        <option value="Non Empanelled for solar subsidy">Empanelled for non subsidy</option>
+                                                    </select>
+                                                    <span id="slect" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>Agency/Firm Name<span style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                                                        onkeyup="validateForm()" onfocus="validateForm()" minlength="1"
+                                                        maxlength="50" onchange="validateForm()" name="one" id="input1"
+                                                        class="form-control" required="required">
+                                                    <span id="name" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>Name of Authorised Person<span style="color: red;">*</span>
+                                                        </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (event.charCode == 32) || (event.charCode > 96 && event.charCode < 123)"
+                                                        onkeyup="validateForm()" onfocus="validateForm()" minlength="1"
+                                                        maxlength="50" onchange="validateForm()" name="two" id="input2"
+                                                        class="form-control" required="required">
+                                                    <span id="person" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>Mobile No of Authorised Person<span
+                                                                style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        onkeyup="validateForm()" onkeypress='validate(event)'
+                                                        minlength="10" maxlength="10" onfocus="validateForm()"
+                                                        onchange="validateForm()" name="three" id="input3" value="{{mobile}}"
+                                                        class="form-control" readonly>
+                                                    <span id="mobile" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>Email ID of Authorised Person<span
+                                                                style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        onkeyup="validateForm()" onfocus="validateForm()"
+                                                        onchange="validateForm()" name="four" id="input4"
+                                                        class="form-control" required="required">
+                                                    <span id="email" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>PAN Card<span style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        style="text-transform: uppercase" onkeyup="validateForm()"
+                                                        onfocus="validateForm()" minlength="10" maxlength="10"
+                                                        onchange="validateForm()" name="five" id="input5"
+                                                        class="form-control" required="required">
+                                                    <span id="pan_no" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>GST No<span style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input class="multisteps-form__select form-control" type="tel"
+                                                        style="text-transform: uppercase" onkeyup="validateForm()"
+                                                        onfocus="validateForm()" onchange="validateForm()"
+                                                        minlength="15" maxlength="15" name="six" id="input6"
+                                                        class="form-control" required="required">
+                                                    <span id="gst_no" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row mt-3">
+                                                <div class="col-sm-6">
+
+                                                    <label>
+                                                        <h6>Address<span style="color: red;">*</span></h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <textarea rows="4" cols="33" name="address" id="input7"
+                                                        onkeyup="validateForm()" onfocus="validateForm()"
+                                                        onchange="validateForm()"></textarea>
+                                                    <!-- form="usrform" -->
+                                                    <span id="addresss" class="text-danger font-weight-bold"
+                                                        style="font-size: 80%;"></span>
+                                                </div>
+                                            </div><br>
+                                            <hr />
+
+                                            <div class="text-center">
+                                                <button class="btn bg-gradient-primary ms-auto mb-0" value="Submit"
+                                                    onclick="validateForm()" type="Submit"
+                                                    title="Save & Next">Submit</button>
+                                            </div>
+                                        </div>
+                                </div>
+                                </form>
+                                <div
+                                    class="col-md-5 d-lg-flex d-none h-100 my-auto pe-0 position-fixed top-0 end-0 text-center justify-content-center flex-column">
+                                    <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                                        style="background-image: url('{% static '/assets/img/mpeb_wrapper.jpg' %}');
+        background-size: cover;">
+
+                                        <!-- <span class="mask bg-gradient-primary opacity-1"></span> -->
+                                        <h6 class="mt-5 text-white font-weight-bolder position-relative">Instructions
+                                        </h6>
+                                        <p class="text-white position-relative"><b>
+                                                <ul style="list-style-type: square; text-align: left; color:white">
+                                                    <li>All <span style="color: red;">(*)</span> marked fields are
+                                                        mandatory.</li>
+
+                                                    <li>Please provide correct details, if any information is found
+                                                        incorrect during the verification, your application may be
+                                                        cancelled.
+                                                    </li>
+
+                                        </p>
+                                        </ul></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+    </main>
+</body>
+{% endblock title %}

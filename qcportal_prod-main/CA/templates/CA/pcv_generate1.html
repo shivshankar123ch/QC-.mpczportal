@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Invoice</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Raleway:300i,400,500,700&display=swap');
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        h5,
+        h3 {
+            text-transform: capitalize;
+        }
+        
+        img {
+            max-width: 20%;
+        }
+        
+        .b-t {
+            border-top: 1px solid #ddd;
+        }
+        
+        @media(max-width: 768px) {
+            .text-right {
+                text-align: center !important;
+            }
+            .pull-right {
+                float: none;
+                text-align: center;
+            }
+            .center {
+                text-align: center;
+            }
+            .bg-light.p-5:nth-child(1) {
+                padding: 1rem !important;
+            }
+            img {
+                max-width: 30%;
+                margin: 0 auto;
+                display: block;
+            }
+            .p-5 {
+                padding: 1rem !important;
+            }
+            .text-right h5:nth-child(3) {
+                padding-top: 15px !important;
+            }
+            .pt-5 {
+                padding-top: 1rem!important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <h3 class="text-center p-4">Registration Invoice</h3> -->
+        <div class="bg-light p-5">
+            <h1 class="text-center m-0">M.P.MADHYA KSHETRA VIDYUT VITARAN CO. LTD.
+                </br>PETTY CASH VOUCHER</h1>
+            <div class="row pt-3 mb-2">
+                <!-- <div class="col-md-6 pull-left"><img src="static/assets/images/mpmk.png" class="img-responsive"></div> -->
+
+
+                <div class="col-md-6 text-right">
+                    <!-- <h5 class="pt-4">Date:</h5> -->
+                    <h5 class="pt-4">{{data1.Customer_payment_date}}</h5>
+
+                    <!-- <p class="text-muted mb-0"><i>Date: 4 Feb, 2022</i></p> -->
+                </div>
+                <div class="col-md-6 text-right">
+
+                    <!-- <p class="text-muted mb-0"><i>Date: 4 Feb, 2022</i></p> -->
+                </div>
+
+
+            </div>
+            <div>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>CIRCLE - 283</th>
+                        <th>RECEIPT NO:-</th>
+                        <th>Date:</th>
+                        <td>{{data1.updated_date}}</td>
+                        <th>DESPATCH NO:-</th>
+                        <th>Date:-</th>
+
+
+                    </tr>
+                    <tr>
+                        <td>DOC TYPE F 1 2</td>
+                        <td>DOCUMENT:-</td>
+                        <td>Date:</td>
+                        <td>{{data1.updated_date}}</td>
+
+                        <td>LOCN. CODE:-</td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td>REERENCE NO:</td>
+                        <td>{{data1.Customomer_Id}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                </table>
+
+            </div>
+            </br>
+
+
+            <p> <b>Pay to - As Per Attached List-</b></p>
+
+            <h2></h2>
+            <p></p>
+            <p></p>
+
+            <div style="width:100%" border="1">
+                <table style="width:100%" border="1">
+                    <tr>
+                        <th>S.no</th>
+                        <th>Account No.</th>
+                        <th>Account Head</th>
+                        <th>ESTIMATE</th>
+                        <th>D & C</th>
+                        <th>Amount</th>
+                        <th></th>
+                        <th>Bill Reference</th>
+                        <th></th>
+                        <th></th>
+                        <th>Detail</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>24.210</td>
+                        <td>Collection Charges </td>
+                        <td>-</td>
+                        <td>D</td>
+                        <td>rs</td>
+                        <td>prs</td>
+
+                        <td>No.</td>
+                        <td>Date</td>
+                        <td></td>
+                        <td>Towards the Commission</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>94</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>-</td>
+                        <td>TDS</td>
+                        <td>67</td>
+                        <td>C</td>
+                        <td>67</td>
+                        <td></td>
+                        <td>67</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            </br>
+            <p>
+                <b>PREPARED BY : AUTHORISED BY : (SIGNATURE & SEAL)</b></p>
+            <p>
+
+
+                <p> <b>PASS FOR PAYMENT-</b></p>
+
+
+
+                <table class="table">
+                    <tr>
+                        <thead>
+                            <td> Auditor/SO</td>
+                            <td>Accounts Officer</td>
+                            <td>Signature,Received the above payment</td>
+                            <!-- <td>Total</td> -->
+                        </thead>
+                    </tr>
+                    <tr>
+                        <!-- <td>{{data.Netamount_Debited}}</td>
+                <td>₹ 180</td>
+                <td>₹ 180</td>
+                <td>₹ 2360</td> -->
+                    </tr>
+                </table>
+        </div>
+
+    </div>
+    </div>
+    </br>
+
+    <!-- <div class="bg-dark text-white p-5">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-3 text-right">
+                    <h6>Sub - Total amount</h6>
+                    <h3 class="text-center">{{data.Netamount_Debited}}</h3>
+                </div> -->
+    <!-- <div class="col-md-2 text-right">
+            <h6>GST @ 18%</h6>
+            <h3>360</h3>
+            </div> -->
+    <!-- <div class="col-md-3 text-right">
+            <h6>Grand Total</h6>
+            <h3>{{data.Netamount_Debited}}</h3>
+        </div> -->
+
+
+    </div>
+    </div>
+    </div>
+
+
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+
+        }
+    </script>
+    <center>
+        <div>
+            <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+            <a href="/"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to login page</button> </a>
+        </div>
+    </center>
+
+
+</body>
+
+</html>

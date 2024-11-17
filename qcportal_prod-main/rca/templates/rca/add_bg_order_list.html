@@ -1,0 +1,58 @@
+{% extends 'rca/RCA_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %} {% block BG_Submitted %}
+
+    {% endblock BG_Submitted %}
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>BG Submitted</h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block mb-5">
+                <div class="table-reponsive">
+                    <table class="table table-striped table-bordered ed-table-block ed-centertable ">
+                        <thead>
+                            <tr>
+                                <th class="w-5">S.No.</th>
+                                <th>Vendor</th>
+                                <th>Work Order No.</th>
+                                <th>Date</th>
+                                <th>Additional Bg No.</th>
+                                <th>Action</th>
+                                <th>BG Acceptance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for info in data %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{ info.wo.vendor_id.CompanyName_E}}</td>
+                                <td>MP{{info.wo.rca_cell.user_zone}}WO{{ info.wo.id}}</td>
+                                <td>{{ info.wo.ordr_date }}</td>
+                                <td>{{ info.id }}</td>
+                                <td> 
+                                    <a href="/rca/additional_bg_confirm/{{info.id}}" class="ed-links">
+                                        <label class="ed-textinfo">
+                                            <i class="fas fa-eye"></i>
+                                            View
+                                        </label>
+                                    </a>
+                                </td> 
+                                <td>
+                                    {% if info.add_bg_accept == 1 %}
+                                    Accepted
+                                    {% elif info.add_bg_accept == -1 %}
+                                    Rejected 
+                                    {% else %}
+                                    Pending
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %}

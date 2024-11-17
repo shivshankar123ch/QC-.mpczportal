@@ -1,0 +1,149 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %}
+
+<head>
+    <script type="text/javascript" src="{% static 'assets/js/Validation/vendor2.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+
+</head>
+<!---start here-->
+<form class="multisteps-form__form mb-8" id="form1" action="new_material_data" name="myForm" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!--single form panel-->
+    <!-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn"> -->
+    <h5 class="font-weight-bolder mb-0">Add New Material Information Form</h5>
+    <p class="mb-0 text-sm">All <span style="color: red;">(*)</span> marked fields are mandatory.</span>
+    </p>
+    <div class="multisteps-form__content">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>Material<span style="color: red;">*</span></label>
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" required="required" id="country" name="Material" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+          <option value="">Material Name</option>
+        </select>
+                <span id="Material_1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Specification<span style="color: red;">*</span></label>
+                <select class="form-select form-select-lg" aria-label=".form-select-lg example" name="Specification" id="state" required="required" onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()">
+          <option value="">Material Specification</option>
+
+        </select>
+                <span id="Specification_1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>Item Per Month Build Capacity<span style="color: red;">*</span></label>
+                <input type="number" required="required"  name="capacity"
+                     class="form-control">
+                <span id="upload1" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                <label>Item Unit <span style="color: red;">*</span></label>
+                <input type="text" required="required" name="unit"
+                    id="gtp_and_drawing1" class="form-control">
+                <span id="upload2" class="text-danger font-weight-bold" style="font-size: 80%;"></span>
+            </div>
+        </div>
+
+
+        <div class="button-row d-flex mt-4">
+            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Prev</button> -->
+            <button class="btn bg-gradient-primary ms-auto mb-0" onclick="validateForm()" name="submit" value="Submit" value="Submit" type="submit" title="Submit">Submit</button>
+
+
+</form>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            type: 'get',
+            // mode:'cros',
+            url: 'https://qcportal.mpcz.in/api/material_master',
+            success: function(data) {
+                //console.log(data);
+                getCountry(auth_token);
+            },
+            error: function(error) {
+                console.log(error);
+            },
+        })
+        $('#country').change(function() {
+            console.log('countrychange');
+            getState();
+        })
+    })
+
+
+    let auth_token;
+
+    function getCountry(auth_token) {
+        $.ajax({
+            type: 'get',
+            // mode:'cros',
+            url: 'https://qcportal.mpcz.in/api/material_master',
+            success: function(data1) {
+                // console.log(data1.Material_Name);
+                console.log("kkkk");
+                //console.log(data1);
+                //var html = '';
+                data1.data.forEach(element => {
+
+                    $('#country').append(`<option value="${element.Material_Id}">${element.Material_Name}</option>`)
+                })
+            },
+            error: function(error) {
+                console.log(error);
+            },
+
+        })
+    }
+
+    function getState() {
+
+        let country_id = $('#country').val();
+        console.log(country_id);
+        console.log("hii nsss");
+        //country id
+
+        //console.log(country_id);
+
+        $.ajax({
+            type: 'get',
+            url: 'https://qcportal.mpcz.in/api/material_specification_master/' + country_id,
+            //url : 'https://qcportal.mpcz.in/api/material_featch/' + country_id,
+            // console.log('url');
+            success: function(data) {
+                // console.log(url);
+                console.log(data);
+
+                var html = '';
+
+                data.material_specification.forEach(element => {
+                    html = html + (`<option value="${element.Material_Specification_Id}">${element.Material_Specification_Name}</option>`);
+
+                });
+                $('#state').html(html);
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+</script>
+<!----end here-->
+
+
+
+{% endblock body %}

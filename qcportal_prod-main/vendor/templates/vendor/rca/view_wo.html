@@ -1,0 +1,212 @@
+{% extends 'vendor/RCA_vendor_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}</li>
+{% block body %}
+
+<form method="POST" action="/po/procurement_previous_po" style="background: white;">
+    {% csrf_token %}
+    <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+
+    <div class="mx-auto" style="width: 85%;">
+
+        <TABLE cellpadding=0 cellspacing=0 class="t0">
+            <TR>
+                <TD style="width: 650px;" class="tr0 td0">
+                    <P class="p6 ft10">No. <NOBR>MD/MK/TS--<b><b>MPCZWO{{vd.id}}</b></NOBR>
+                    </P>
+                      <!-- <P class="p6 ft10"><NOBR> Work Order No-- <b>MPCZOO{{vd.id}}</b></NOBR>
+                    </P> -->
+                </TD>
+                <TD class="tr0 td1">
+                    <P class="p7 ft10">Bhopal, dated:-<b>{{date}}</b></P>
+                </TD>
+            </TR>
+        </TABLE>
+
+        <TABLE cellpadding=0 cellspacing=0 class="t0">
+            <TR>
+                <TD class="tr1 td0">
+                    <P class="p6 ft11">To,</P>
+                </TD>
+                <TD class="tr1 td1">
+                    <P class="p6 ft12">&nbsp;</P>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="tr2 td0">
+                    <P class="p8 ft0">M/s<b> <b>{{ vd.vendor_id.CompanyName_E }}</b></P>
+                </TD>
+                <TD class="tr2 td1">
+                    <P class="p6 ft12">&nbsp;</P>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="tr3 td0">
+                    <P class="p8 ft11">
+                        <NOBR>{{vd.vendor_id.Company_add_1}}</NOBR>
+                    </P>
+                </TD>
+              </TR>
+              <TR>
+                <TD class="tr3 td1">
+                    <P class="p6 ft0">Email--<A
+                            href="">{{vd.vendor_id.Email_Id}}</A></P>
+                </TD>
+            </TR>
+            <TR>
+                <TD class="tr3 td0">
+                    <P class="p8 ft11">{{address.Company_add_2}} {{address.Company_dist }} {{address.Company_state }}
+                        {{address.Company_pin_code }}</P>
+                </TD>
+                <TD class="tr3 td1">
+                    <P class="p9 ft0"></P>
+                </TD>
+            </TR>
+        </TABLE>
+
+        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+    margin-left:.5in;text-align:justify;text-indent:-.5in;line-height:normal'><b><span
+                    style='font-size:12.0pt;font-family:"Times New Roman",serif'>Sub: Rate contract Award for Repairing
+                    & Testing of <b>{{vd.wo_specification}}"</b> failed distribution transformers against
+                    tendor specification No. MD/MK <b>MPCZWO{{vd.id}}</b> ( Opened on {{vd.bid_open_date}} ).</span></b></p>
+
+
+        <br>
+        <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>Dear
+                Sirs,
+                <br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;This Rate Contract for Repairing & Testing of {{ vd.wo_specification}}" beyond guarantee
+                period failed distribution transformers on lump-sum basis is hereby placed on you on the
+                terms and condition as stipulated in detail under T.S No.<b>{{vd.dispatch_no}}</b> (opened on
+                {{vd.bid_open_date}}) except as modified/laid down in the
+                enclosed schedules and these shall be binding on you and no conditions or stipulation to the contrary
+                which are inconsistent will be
+                applicable.
+            </span></p></span></p>
+        <p>Thanking you !</p>
+        <div style="position:relative; left:600px; top:2px">
+            Yours Sincerely
+        </div>
+        <br>
+
+        <div style="position:relative; left:500px; top:2px">
+            <b>REGIONAL CHIEF GENERAL MANAGER</b>
+        </div>
+        <div style="position:relative; left:600px; top:2px">
+            <b>MPMKVVCL</b>
+        </div>
+
+
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+    <table class="table m-5" style="width:95%">
+            <thead>
+                <tr>
+                    <th style="width:20%">
+                       Encl. As above<br>
+
+                    </th>
+                     <th style="width: 80%">
+                        Schedule Description <br>
+
+                 </tr>
+            </thead>
+            <tbody>
+                {% for name in schedule %}
+                <tr>
+                    <td>
+                        <b>{{name.schedule_name}}</b>
+                    </td>
+                         <td style="
+             overflow: hidden;
+             display: inline-block;
+             white-space: word-wrap;">
+            <div style="width :100% ; white-space: normal; word-wrap: break-word; word-break: break-word;"> {{name.description_name}}</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp; <b>Copy to:-</b></span></p>
+        <table class="table  table-borderless m-5" style="width:95%">
+            <thead>
+                <tr>
+                    <th style="width:10%">
+
+                    </th>
+                     <th style="width: 80%">
+                 </tr>
+            </thead>
+            <tbody>
+               {% for data in copy %}
+                <tr>
+                    <td>
+                        <b>{{forloop.counter}}</b>
+                    </td>
+                         <td style="
+                 overflow: hidden;
+                  display: inline-block;
+                 white-space: word-wrap;">
+                  <div style="width :100% ; white-space: normal; word-wrap: break-word; word-break: break-word;">{{data.copy_name}}</div>
+
+                    </td>
+                </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</form>
+    <center>
+            <div id="options">
+                <input id="printpagebutton"  style="width:200px" class="btn btn-primary m-3" class="btn btn-primary btn" type="button" value="print order"
+                    onclick="printpage()" />
+                <a href="/rca/rca_base"> <button id="printpagebutton1" type="Submit"
+                        style=" width:200px" class="btn btn-primary mt-3"> Go To Home </button>
+                </a>
+            </div>
+        </center>
+        <script>
+            function printpage() {
+                //Get the print button and put it into a variable
+                var printButton1 = document.getElementById("printpagebutton1");
+                var printButton = document.getElementById("printpagebutton");
+                //Set the print button visibility to 'hidden'
+                printButton1.style.visibility = 'hidden';
+                printButton.style.visibility = 'hidden';
+                //Print the page content
+                window.print()
+                printButton.style.visibility = 'visible';
+                printButton1.style.visibility = 'visible';
+            }
+
+            function add_fields() {
+                document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+            }
+
+            function printpage() {
+                //Get the print button and put it into a variable
+                var printButton1 = document.getElementById("printpagebutton1");
+                var printButton = document.getElementById("printpagebutton");
+                //Set the print button visibility to 'hidden'
+                printButton1.style.visibility = 'hidden';
+                printButton.style.visibility = 'hidden';
+                //Print the page content
+                window.print()
+                printButton.style.visibility = 'visible';
+                printButton1.style.visibility = 'visible';
+            }
+            function add_fields1() {
+                document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+            }
+        </script>
+
+{% endblock body %}
+
+

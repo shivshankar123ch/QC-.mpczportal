@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+<title>{% block title %}   {% endblock title %} </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/font-awesome.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap-datepicker.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/plugins/fontawesome-free/css/all.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/adminlte.min.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+     {% block css %}
+     {% endblock css %}
+</style>
+
+
+</head>
+
+{% block body %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}
+<script>
+{% block script %}
+
+{% endblock script %}
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dashboard/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'dashboard/dist/js/adminlte.min.js' %}"></script>
+<script src="{% static 'dashboard/dist/js/demo.js' %}"></script>
+
+</body>
+
+</html>

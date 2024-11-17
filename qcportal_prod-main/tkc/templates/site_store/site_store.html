@@ -1,0 +1,253 @@
+{% extends 'tkc/site_store_base.html' %} {% load static %} {% block body %} 
+
+<style>
+     .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+  .btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+    width: 132px;
+}
+</style>
+
+   <!-- <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                        Received Material
+                                    </h2>
+                                </div>
+               <div class="card-body pb-5">
+                   <div class="ed-tableinfo-block ed-orderinfo-block">
+                       <div class="table-responsive"> -->
+
+
+                        <div class="ed-information">
+                            <div class="card ed-card-block">
+                              <div class="ed-card-inner">
+                                <div class="card-header">
+                                  <h2>
+                                    Received Material
+                                  </h2>
+                                </div>
+                                <div class="card-body">
+                                  <div class="ed-tableinfo-block">
+                                    <div class="table-responsive">
+                <table  class="table table-bordered table-striped display text-center" id="site_store_1">
+                    <thead class="table-dark">
+                      <tr>
+                          <th style="width:10%">
+                               Work Order No
+                          </th>
+                          <th style="width:10%">
+                            DI No
+                       </th>
+                          <th style="width:30%">
+                               DI Description
+                          </th>
+                          <th style="width:30%">
+                            View DI
+                       </th>
+                          <th style="width:30%">
+                        LR/RR Delivery Challan
+                   </th>
+                   <th style="width:30%">
+                    Packing List Of Materials
+               </th>
+               <th style="width:30%">
+                Insurance Policy Certificate
+           </th>
+           <th style="width:30%">
+            Material Guarantee Certificate
+       </th>
+                          <th style="width:20%">
+                               Contractor
+                          </th>
+                           <!-- <th style="width:20%">
+                               Item Name
+                          </th> -->
+<!-- 
+                          <th style="width:20%">
+                        Quantity
+                       </th>
+                          -->
+                         
+                        <th style="width:20%" >Check Receiving</th>
+
+                        <th style="width:20%" >Officer Check Receiving</th>
+
+                        <th style="width:20%" >Officer Details</th>
+                        <!-- <th style="width:20%" >Send For Sampling</th> -->
+                        
+                        </tr>
+                    </thead>
+                <p class=MsoNormal align=center style='margin-right:-.5in;text-align:center;
+       text-indent:-.5in'><b><u><span style='font-size:14.0pt;line-height:115%;
+        font-family:"Times New Roman",serif'>Received Material Details</span></u></b></p>
+                    {% for Supply in offer %}
+                    <tr>
+                         <td>{{Supply.wo.Contract_Number}}</td>
+                            <td>{{Supply.tkc_di.erp_di_number}}</td>
+                            <td>{{Supply.tkc_di.di_subject}}</td>
+                            {% if Supply.tkc_di.tkc_di_doc %}
+                            <td> <a href="{{Supply.tkc_di.tkc_di_doc.url}}" class="btn btn-info btn-sm" target="_blank">View</a></td>
+                            {% else %}
+                            <td>DI not uploaded</td>
+                            {% endif %}
+
+
+                            {% if Supply.tkc_di.lr_copy_or_rr_and_delivery_challan %}
+                            <td> <a href="{{Supply.tkc_di.lr_copy_or_rr_and_delivery_challan.url}}" class="btn btn-info btn-sm"  target="_blank">View</a></td>
+                            {% else %}
+                            <td>Not uploaded</td>
+                            {% endif %}
+
+                            {% if Supply.tkc_di.packing_list_of_materials %}
+                            <td> <a href="{{Supply.tkc_di.packing_list_of_materials.url}}"  class="btn btn-info btn-sm" target="_blank">View</a></td>
+                            {% else %}
+                            <td>Not uploaded</td>
+                            {% endif %}
+
+                            {% if Supply.tkc_di.insurance_policy_certificate %}
+                            <td> <a href="{{Supply.tkc_di.insurance_policy_certificate.url}}" class="btn btn-info btn-sm"  target="_blank">View</a></td>
+                            {% else %}
+                            <td>Not uploaded</td>
+                            {% endif %}
+
+
+                            {% if Supply.tkc_di.material_guarantee_certificate %}
+                            <td> <a href="{{Supply.tkc_di.material_guarantee_certificate.url}}" class="btn btn-info btn-sm"  target="_blank">View</a></td>
+                            {% else %}
+                            <td>Not uploaded</td>
+                            {% endif %}
+
+                       
+                         <td>{{Supply.wo.supplier.CompanyName_E}}</td>
+                        <!-- <td>{{Supply.wo_material.material_name}}</td> -->
+                        <!-- <td><b>{{Supply.quantity}}</b></td> -->
+
+                        {% if Supply.Dispatch_Status == 1%}
+                        
+                         <td><a class="btn btn-info btn-sm" href="/tkc/site_store_item_received/{{Supply.tkc_di_id}}/{{Supply.offer_no}}">View</a></td>
+                         
+                         {% else %}
+                         <td><h6>DI not Approved</h6></td>
+                        {% endif %}
+                     
+
+                        <td>
+                            {% if Supply.Physical_Status == 1 and Supply.Physical_Status_officer == 0 %}
+    
+                                <span><a class="btn btn-info btn-sm" href="/tkc/site_store_item_received_officer/{{Supply.tkc_di_id}}/{{Supply.offer_no}}">Officer Details</a></span>
+    
+                                {% elif Supply.Physical_Status == 1 and Supply.Physical_Status_officer == 1 %}
+                                <span class="btn btn-success btn-sm">Physically Ok</span>
+
+                                {% elif Supply.Physical_Status == -1 and Supply.officer_checked == 0 %}
+                                
+                                <span class="btn btn-danger btn-sm">Physically Not Ok</span>
+                                
+                                {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 1 %}
+                                
+                            <span class="btn btn-info btn-sm">Officer Details Added</span>
+                                
+                                {% else %}
+                                
+                            <span class="btn btn-danger btn-sm">Physically Not Checked</span>
+                            
+                            {% endif %}
+                            </td>
+
+
+                        <td>
+                            {% if Supply.Physical_Status == 1 and Supply.Physical_Status_officer == 1 and Supply.officer_checked == 0 %}
+    
+                                <span><a class="btn btn-info btn-sm" href="/tkc/add_officer_details/{{Supply.tkc_di_id}}/{{Supply.offer_no}}">Officer Details</a></span>
+    
+                                {% elif Supply.Physical_Status == -1 and Supply.officer_checked == 0 %}
+                                
+                                <span class="btn btn-dange btn-sm">Physically Not Ok</span>
+                                
+                                {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 1 %}
+                                
+                            <span class="btn btn-info btn-sm">Officer Details Added</span>
+                                
+                                {% else %}
+                                
+                            <span class="btn btn-danger btn-sm">Physically Not Checked</span>
+                            
+                            {% endif %}
+                            </td>
+
+
+
+{% comment %}
+                        <td>
+                         {% if Supply.Physical_Status == 1 and Supply.final_check == 1 and  Supply.send_to_cgm == 0 %}
+                         
+                         <span><a class="btn btn-primary btn-sm" href="/tkc/tkc_wo_send_to_cgm/{{Supply.tkc_di_id}}/{{Supply.id}}">Send For Sampling</a></td>
+                         
+                         {% elif Supply.Physical_Status == -1 %}
+                         
+                         <span class="btn btn-success btn-sm">Physically Not Ok</span>
+                         
+                          {% elif Supply.Physical_Status == 1 and Supply.send_to_cgm == 1 %}
+                         
+                         <span class="btn btn-primary btn-sm">Sent To CGM</span>
+
+                         {% elif Supply.Physical_Status == 1 and Supply.officer_checked == 0 %}
+                         
+                         <span class="btn btn-warning btn-sm">Officer Not Checked</span>
+                       
+                         
+                         {% else %}
+                         
+
+                         <span class="btn btn-danger btn-sm">Physically Not Checked</span>
+                         
+                         {% endif %}
+                        </td>
+           {% endcomment %}              
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+                    </div>
+   </div>
+
+
+   <script>
+    $(document).ready( function () {
+    $('#site_store_1').DataTable();
+        } );
+   </script>
+{% endblock body %}

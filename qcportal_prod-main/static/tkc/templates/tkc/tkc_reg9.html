@@ -1,0 +1,271 @@
+{% extends 'tkc/tkc_Base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %} {% block css %}
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active,
+.show>.btn-info.dropdown-toggle { color:
+#fff; background-color: #007bff; border-color: #10707f; } label:not(.form-check-label):not(.custom-file-label) {
+font-weight: inherit; } {% endblock css %} {% block body %}
+
+<head>
+    <script type="text/javascript" src="/static/assets/js/Validation/tkc_reg9.js"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <form action="tkc_reg_nine" onsubmit="return validateForm()" name="myForm" method="POST">
+            {% csrf_token %}
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="btn-group w-100 mb-2 ">
+                                        <a class="btn btn-info " href="javascript:void(0)" data-filter="1"
+                                            style="background-color: #007bff;"> Annual Income and Tax Return Details</a>
+
+                                    </div>
+                                    <div>
+
+                                        <div class="filter-container p-3 col-md-12 float-centered">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label> <b>TURN OVER OF LAST THREE YEARS(in lakhs)</b></label>
+                                                    <thead>
+                                                        <br>
+                                                        <tr>
+                                                            <th>
+                                                                <label for="exampleFormControlSelect1">Year 1</label>
+                                                                <select
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"
+                                                                    id="authentication_1" name="v_balance_sheet_1"
+                                                                    onfocus="validateForm()" onkeyup="validateForm()"
+                                                                    onchange="validateForm()">
+                                                                    <option selected  value="">Select One
+                                                                    </option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                                <span id="amount_1" class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </th>
+
+                                                            <th>Income(In lakhs)<input type="text" id="inputName_12" disabled="true"
+                                                                    name="Amount" class="form-control"
+                                                                    onkeyup="validateForm()" onchange="validateForm()" minlength="8" maxlength="10"
+                                                                    onkeypress='validate(event)'><span id="rupess1" class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+
+                                                            </th><br>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        <label for="exampleFormControlSelect1">Year
+                                                                            2</label>
+                                                                        <select
+                                                                            class="form-control op1 form-select form-select-lg"
+                                                                            aria-label=".form-select-lg example"  onkeyup="validateForm()" onchange="validateForm()" onfocus="validateForm()"
+                                                                            id="authentication_78"
+                                                                            name="v_balance_sheet_2">
+                                                                            <option selected  value="">Select
+                                                                                One</option>
+                                                                            <option value="2020-2021">2020-2021</option>
+                                                                            <option value="2019-2020">2019-2020</option>
+                                                                            <option value="2018-2019">2018-2019</option>
+                                                                            <option value="2017-2018">2017-2018</option>
+                                                                        </select>
+                                                                        <span id="amount_1"
+                                                                            class="text-danger font-weight-bold"
+                                                                            style="font-size: 80%;"></span>
+                                                                    </th>
+                                                                    <th>Income(In lakhs)<input type="text"
+                                                                            id="inputName_89" name="Amount2" disabled="true"
+                                                                            class="form-control"
+                                                                            onfocus="validateForm()"
+                                                                            onkeyup="validateForm()"
+                                                                            onchange="validateForm()"
+                                                                            onkeypress='validate(event)' minlength="8" maxlength="10">
+                                                                        <span id="amount_21"
+                                                                            class="text-danger font-weight-bold"
+                                                                            style="font-size: 80%;"></span>
+                                                                    </th><br>
+                                                                    </th>
+
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                <label
+                                                                                    for="exampleFormControlSelect1">Year
+                                                                                    3</label>
+                                                                                <select
+                                                                                    class="form-control op1 form-select form-select-lg"
+                                                                                    aria-label=".form-select-lg example" onfocus="validateForm()"  onkeyup="validateForm()"  onchange="validateForm()"
+                                                                                    id="authentication_23"
+                                                                                    name="v_balance_sheet_3">
+                                                                                    <option selected  value="">
+                                                                                        Select One</option>
+                                                                                    <option value="2020-2021">2020-2021
+                                                                                    </option>
+                                                                                    <option value="2019-2020">2019-2020
+                                                                                    </option>
+                                                                                    <option value="2018-2019">2018-2019
+                                                                                    </option>
+                                                                                    <option value="5">2017-2018</option>
+                                                                                </select>
+                                                                            </th>
+                                                                            <th>Income(In lakhs)<input type="text"
+                                                                                    id="inputName_41" name="Amount3" disabled="true"
+                                                                                    class="form-control"
+                                                                                    onfocus="validateForm()"
+                                                                                    onkeyup="validateForm()"
+                                                                                    onchange="validateForm()"
+                                                                                    onkeypress='validate(event)' minlength="8" maxlength="10">
+                                                                                <span id="amount_36"
+                                                                                    class="text-danger font-weight-bold"></span>
+                                                                            </th><br>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label><b>PREVIOUS LAST THREE YEARS TAX RETURN(in lakhs)
+                                                        </b></label>
+                                                    <thead>
+                                                        <br>
+
+                                                        <tr>
+                                                            <th>
+
+                                                                <label for="exampleFormControlSelect1">Year 1</label>
+                                                                <select
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"
+                                                                    id="authentication_31" name="v_balance_sheet_4" onfocus="validateForm()" onchange="validateForm()"  onkeyup="validateForm()">
+                                                                    <option selected  value="">Select One
+                                                                    </option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                                <span id="amount_4" class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"></span>
+                                                            </th>
+                                                            <th>Tax Return (In lakhs)<input type="text" id="inputName_39"
+                                                                    name="Amount4" class="form-control" disabled="true"
+                                                                    onfocus="validateForm()" onkeyup="validateForm()"
+                                                                    onchange="validateForm()"
+                                                                    onkeypress='validate(event)' minlength="8" maxlength="10">
+                                                                <span id="rupees4" class="text-danger font-weight-bold"
+                                                                    style="font-size: 80%;"> </span><br>
+                                                            </th>
+
+                                                    </thead>
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <label for="exampleFormControlSelect1">Year 2</label>
+                                                                <select
+                                                                    class="form-control op1 form-select form-select-lg"
+                                                                    aria-label=".form-select-lg example"  onfocus="validateForm()" onkeyup="validateForm()"  onchange="validateForm()"
+                                                                    id="authentication_11" name="v_balance_sheet_5">
+                                                                    <option selected  value="">Select One
+                                                                    </option>
+                                                                    <option value="2020-2021">2020-2021</option>
+                                                                    <option value="2019-2020">2019-2020</option>
+                                                                    <option value="2018-2019">2018-2019</option>
+                                                                    <option value="2017-2018">2017-2018</option>
+                                                                </select>
+                                                            </th>
+                                                            <th>Tax Return (In lakhs)<input type="text" id="inputName_34" disabled="true"
+                                                                    name="Amount5" class="form-control"
+                                                                    onfocus="validateForm()" onkeyup="validateForm()"
+                                                                    onchange="validateForm()"
+                                                                    onkeypress='validate(event)' minlength="8" maxlength="10">
+                                                                <span id="amount_52"
+                                                                    class="text-danger font-weight-bold"></span><br>
+                                                            </th>
+
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        <label for="exampleFormControlSelect1">Year
+                                                                            3</label>
+                                                                        <select
+                                                                            class="form-control op1 form-select form-select-lg"
+                                                                            aria-label=".form-select-lg example" onfocus="validateForm()" onkeyup="validateForm()" onchange="validateForm()"
+                                                                            id="authentication_45"
+                                                                            name="v_balance_sheet_6">
+                                                                            <option selected  value="">Select
+                                                                                One</option>
+                                                                            <option value="2020-2021">2020-2021</option>
+                                                                            <option value="2019-2020">2019-2020</option>
+                                                                            <option value="2018-2019">2018-2019</option>
+                                                                            <option value="2017-2018">2017-2018</option>
+                                                                        </select>
+                                                                    </th>
+                                                                    <th>Tax Return (in lakhs)<input type="text"
+                                                                            id="inputName_45" name="Amount6" disabled="true"
+                                                                            class="form-control"
+                                                                            onfocus="validateForm()"
+                                                                            onkeyup="validateForm()"
+                                                                            onchange="validateForm()"
+                                                                            onkeypress='validate(event)' minlength="8" maxlength="10">
+                                                                        <span id="amount_6"
+                                                                            class="text-danger font-weight-bold"></span><br>
+                                                                    </th>
+                                                                    </th>
+
+                                                </div>
+                                                <div class="row card-body">
+
+                                                    <div class="row">
+                                                        <div class="button-row d-flex mt-4 col-12">
+                                                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                                            <button class="btn bg-gradient-primary ms-auto mb-0"
+                                                                type="submit" onclick="validateForm()" title="Send">Save
+                                                                And Next</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- /.content-wrapper -->
+                                            <!-- /.content -->
+                                        </div>
+                                        <!-- /.content-wrapper -->
+                                    </div>
+                                    <!-- ./wrapper -->
+
+
+                                    <script>
+                                        $(function () {
+                                            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                                                event.preventDefault();
+                                                $(this).ekkoLightbox({
+                                                    alwaysShowClose: true
+                                                });
+                                            });
+
+                                            $('.filter-container').filterizr({
+                                                gutterPixels: 3
+                                            });
+                                            $('.btn[data-filter]').on('click', function () {
+                                                $('.btn[data-filter]').removeClass('active');
+                                                $(this).addClass('active');
+                                            });
+                                        })
+                                    </script>
+                                    {% endblock body %}

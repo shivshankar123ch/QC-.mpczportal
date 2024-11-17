@@ -1,0 +1,191 @@
+{% extends 'CA/fi_dashborad.html' %} {% load static %} {% block body %}
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Invoice </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Raleway:300i,400,500,700&display=swap');
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        h5,
+        h3 {
+            text-transform: capitalize;
+        }
+        
+        img {
+            max-width: 20%;
+        }
+        
+        .b-t {
+            border-top: 1px solid #ddd;
+        }
+        
+        @media(max-width: 768px) {
+            .text-right {
+                text-align: center !important;
+            }
+            .pull-right {
+                float: none;
+                text-align: center;
+            }
+            .center {
+                text-align: center;
+            }
+            .bg-light.p-5:nth-child(1) {
+                padding: 1rem !important;
+            }
+            img {
+                max-width: 30%;
+                margin: 0 auto;
+                display: block;
+            }
+            .p-5 {
+                padding: 1rem !important;
+            }
+            .text-right h5:nth-child(3) {
+                padding-top: 15px !important;
+            }
+            .pt-5 {
+                padding-top: 1rem!important
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg-light p-5">
+            <h1 class="text-center m-0">Madhya Pradesh Madhya Kshetra Vidyut Vitran Company Limited</h1>
+            <div class="row pt-3 mb-2">
+                <div class="col-md-5 pull-left"><img src="static/assets/images/mpmk.png" class="img-responsive"></div>
+                <h3 class="text-center text-primary">INVOICE</h3>
+                <!-- <p class="text-muted mb-0"><i>Date: 4 Feb, 2022</i></p> -->
+            </div>
+            <div class="row b-t pt-5">
+                <div class="col-md-6 pt-3 center">
+                    <h5>User Information</h5>
+                    <p>{{data.Name}} <br>MPMKVVCL</p>
+                    <p>{{data.Mobile}}</p>
+                    <p>{{data.Email_Id}}</p>
+                    <!-- <p>Bhopal, Madhya Pradesh<br>462016</p> -->
+                </div>
+                <div class="col-md-6 text-right">
+                    <h5>Payment Details</h5>
+                    <!-- <p>TNX: 1425782</p> -->
+                    <p>TNX ID:{{data.Txdid}}</p>
+                    <p>Payment Type: PayU Online</p>
+                    <p>Receiver: MPMKVVCL</p>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <td>Registration Charge</td>
+                    <td>1000 Rs</td>
+                </tr>
+                <tr>
+                    <td>SGST</td>
+                    <td> 0.0 Rs</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td>CGST</td>
+                    <td> 180 Rs</td>
+                </tr>
+                <tr>
+                    <td><b></b>Total Paid Amount</td>
+                    <td><b>
+                  2.00 Rs</b></td>
+                </tr>
+                <tr></tr>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+
+        }
+    </script>
+
+    <center>
+        {% if user1 %}
+        <div>
+            <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+            <a href="/ca/basic"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+        </div>
+        {% endif %} {% if user2 %}
+        <div>
+            <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+            <a href="/"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+        </div>
+        {% endif %} {% if user3 %}
+        <div>
+            <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+            <a href="/ca/basic"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to Dashboard</button> </a>
+        </div>
+        {% endif %}
+
+    </center>
+
+    </script>
+    <center>
+        <div>
+            <input id="printpagebutton" class="btn btn-primary btn-sm" type="button" value="Print Invoice" onclick="printpage()" />
+            <a href="/"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Return to login page</button> </a>
+            <a href="/ca/commercial"> <button id="printpagebutton1" type="Submit" class="btn btn-primary btn-sm">Go To commericail section</button> </a>
+        </div>
+    </center>
+
+
+
+    <p>Please check and verified by commerical section</p>
+
+    <label for="myCheck">Checkbox:</label>
+    <input type="checkbox" id="myCheck" name="checkbox" onclick="myFunction()">
+
+    <p id="text" style="display:none">verified Go to Finance!</p>
+    <!-- <a href="/ca/finance" style="color:white;"><button type="button" class="button btn btn-success">Save and Next</button></a> -->
+
+    <script>
+        function myFunction() {
+            var checkBox = document.getElementById("myCheck");
+            var text = document.getElementById("text");
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+    </script>
+
+    {% endblock body %}

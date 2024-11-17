@@ -1,0 +1,30 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block Add_Material %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock Add_Material %}
+
+    <div class="venreg-blocks">
+        <div class="ed-card-inner">
+            <div class="card-header">
+                <h2>
+                    Add material    
+                </h2>  
+            </div>
+            <div class="card-body">
+                <h4 class="text-info">
+                    You have to pay 11800 fee for add material
+                </h2>
+                <div class="form-group">
+                    <div class="text-center">
+                        <a href="payu_demo_vendormaterial">
+                            <button class="btn ed-submit ed-submit ed-formSubmit">
+                                Pay
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock body %}

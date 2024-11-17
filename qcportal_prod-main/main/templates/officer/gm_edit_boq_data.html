@@ -1,0 +1,225 @@
+{% extends 'officer/gm_circle_login.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+
+<style>
+    .btn_save {
+        float: right;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+</style>
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Update Order information 
+                   
+
+                </h2>
+            </div>
+
+            <div class="card-body">
+                <p
+                    style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                <form action="/gm_save_boq/{{wo_instance.id}}" method="POST" name="myform" id="myform" onsubmit="return validateForm()">
+                <div class="ed-tableinfo-block ed-orderinfo-block ">
+                    <div class="table-responsive">
+                        <div><label><b>Work Order No:-</b></label>
+                            {{wo_instance.Contract_Number}} <br>
+                        </div>
+                        <div><label><b>Subject:-</b></label>
+                            {{wo_instance.Header.Contract_Description}} <br>
+                        </div>
+                        <div><label><b>Date:-</b></label>
+                            {{wo_instance.Contract_Date}} <br>
+
+                        </div>
+                        
+                        <table class="table table-striped ed-table-block display table-bordered example" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th style="min-width:60px;">Total Order Qty</th>
+                                    <th style="min-width:60px;">{{officer_circle}}</th>
+                                    <th style="min-width:140px;">Verified Quantity</th>
+
+                                    
+                                    
+
+                                </tr>  
+                                
+                               
+                            <tbody>
+                                {% for data in stored_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.item_code}} </td>
+                                    <td>{{data.material_name}}</td>                                 
+                                    <td>{{data.total_order_qty}}</td> 
+                                    <td>{{data.circle_quantity}}</td> 
+                                    <td><input type="text" style="text-align: center;" name="{{data.item_code}}" class="form-control Circle Circle_data" value="{{data.gm_verified_circle_qty}}" readonly>
+                                        </td> 
+                                     
+                            
+
+                                {% endfor %} 
+                                </tr>                             
+                                    
+                                       
+                                   
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                     {% comment %} <div class="row btn_save">
+                        <span id="error_span" class="text-danger"></span>
+                       
+                            <button type="submit" class="btn ed-submit btn-info" >
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Accept
+                                </span>
+                            </button>
+                       
+                        </div> 
+                    </div>
+
+                    <div class="row btn_save">
+                       <span id="error_span" class="text-danger"></span>
+                       <a href="/gm_reject_boq/{{wo_instance.id}}">
+                           <button type="button" class="btn ed-submit btn-info", style="background-Color:red;" >
+                               <span class="ed-submit-text ml-1 mr-2">
+                                   Reject
+                               </span>
+                           </button>
+                        </a>
+                       </div> {% endcomment %}
+
+                        
+                       
+                        {% comment %} </form>         {% endcomment %}
+ 
+                        {% comment %} <table class="table table-striped ed-table-block display table-bordered example">
+                            <thead>
+                                <tr>
+                                    <th class="wc1" style="min-width:15px;">Sr. No.</th>
+                                    <th style="min-width:150px;">Material Name</th>
+                                    <th class="item_code" style="min-width:150px;">Item Code</th>
+                                   
+                                    <th style="min-width:140px;">Circle Name</th>
+                                    <th style="min-width:140px;">Circle Qty.</th>
+
+                                </tr>
+                            </thead>
+                            <form action="/gm_save_requested_boq/{{wo_instance.id}}" method="POST" name="requested_data" id="requested_data">
+                            <tbody>
+                                {% for new_material in requested_data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{new_material.material_name}}</td>   
+                                    <td>{{new_material.item_code}} </td>
+                                                                 
+                                    <td>{{new_material.circles_name}}</td> 
+                                    <td>
+                                        <input type="text" style="text-align: center;" name="{{new_material.item_code}}"  class="form-control Circle Circle_data " value="{{new_material.circle_qty}}"  >                                 
+                                    </td>
+                                </tr> 
+                        {% endfor %}
+                            </tbody>
+                        </table> 
+                        <div class="row btn_save">
+                            <button type="submit" class="btn ed-submit btn-info" >
+                                <span class="ed-submit-text ml-1 mr-2">
+                                    Submit
+                                </span>
+                            </button>
+                        </div> 
+                    </form>                                 {% endcomment %}
+                    </div>
+
+                </div>
+           </div>
+                
+            </div>
+
+           </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+{% comment %} <script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            pagingType: 'full_numbers',
+        });
+       
+    });
+   
+  
+   
+</script> {% endcomment %}
+
+<script>
+    function validate_Form(){
+        let material_name = document.getElementById("material_name").value;
+        let item_code = document.getElementById("item_code").value;
+        let circle_name = document.getElementById("circle_name").value;
+        let circle_qty = document.getElementById("circle_qty").value;
+
+        if( material_name.trim()==""){
+            document.getElementById("material_name_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("material_name_span").innerHTML = "";
+
+        }
+        if(item_code.trim()==""){
+            document.getElementById("item_code_span").innerHTML = "Please fill the required details";
+
+        }
+        else{
+            document.getElementById("item_code_span").innerHTML = "";
+
+        }
+
+        if(circle_name.trim()==""){
+            document.getElementById("circle_name_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("circle_name_span").innerHTML = "";
+
+        }
+
+        if(circle_qty.trim()==""){
+            document.getElementById("circle_qty_span").innerHTML = "Please fill the required details";
+            return false;
+
+        }
+        else{
+            document.getElementById("circle_qty_span").innerHTML = "";
+
+        } 
+        return true;
+
+
+
+    }
+</script>
+{% endblock body %}

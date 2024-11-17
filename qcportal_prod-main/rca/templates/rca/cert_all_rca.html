@@ -1,0 +1,321 @@
+<html>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    var sheet = document.createElement('style')
+    sheet.innerHTML = "div {border: 12px solid red; background-color: blue;}";
+    document.body.appendChild(sheet);
+</script>
+<link rel="stylesheet" type="text/css" media="print">
+
+<head>
+    
+        <!-- <link rel="stylesheet" type="text/css" media="print"> -->
+        <style>
+            .signature,
+            .title {
+                float: left;
+                border-top: 1px solid #000;
+                width: 200px;
+                text-align: center;
+            }
+            
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            #example2 {
+                width: 213px;
+                padding: 10px;
+                height: 66px;
+                border: 1px solid black;
+            }
+            
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+            .table-responsive{
+                width: 97%;
+            }
+            
+            @media print {
+                #btn1 {
+                    display: none;
+                }
+            }
+            .table-bordered-2x {
+    border: 2px solid #000;
+}
+.table-bordered-2x td {
+    border: 2px solid #000;
+}
+
+
+
+.czregular-certifcate {
+    padding: 30px;
+    position: relative;
+}
+
+.czregular-certifcate .czregular-certifcate-items {
+    padding: 40px;
+    position: relative;
+    max-width: 850px;
+    margin: 0 auto;
+    border: 2px solid #000;
+}
+
+.czregular-certifcate .czregular-certifcate-items hr {
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: gray;
+    margin-top: 30px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body {
+    margin: 30px 0 0;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body h6 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0 0 4px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body  .table-bordered-2x {
+    margin: 30px 0 20px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body .table-bordered-2x td {
+    font-size: 14px;
+    line-height: 26px;
+    vertical-align: middle;
+    padding: 6px 8px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body .table-bordered-2x td:first-child {
+    width: 25%;
+}
+
+.czregular-certifcate .czregular-certifcate-items .czregular-certifcate-body h5 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .certificate-footers {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.czregular-certifcate .czregular-certifcate-items .certificate-footers .signatuerbox {
+    width: 260px !important;
+    height: 76px !important;
+    margin: 0 0 10px;
+}
+
+.czregular-certifcate .czregular-certifcate-items .certificate-footers .items-inner {
+    text-align: center;
+}
+
+.czregular-certifcate .czregular-certifcate-items .certificate-footers .items-inner .sign-notes {}
+
+.czregular-certifcate .czregular-certifcate-items .certificate-footers .items-inner .sign-notes p {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0 0 5px;
+}
+        </style>
+</head>
+
+
+<body>
+    <div class="czregular-certifcate">
+        <div class="czregular-certifcate-items"id="b1" class="page-border">
+            {% if cert_u_obj.User_Zone == "CZ" %}
+            <table border="0" style="padding:20px;">
+                <tr>
+                    <td><img src="{% static 'assets\images\mpmk.png' %}" style="width:78%; height:15%" alt="mpmk" class="center"></td>
+                    <td>
+                        <span style="font-size:16px; font-weight:bold;text-align: center;">MADHYA PRADESH MADHYA KSHETRA VIDYUT VITRAN CO. LTD.</span>
+                        <br>
+                        <span style="font-size:16px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                        <br>
+                        <span style="font-size:13px; font-weight:bold;margin-left:37px">Regd. Office: Nishtha Parisar, Govindpura Bhopal 462023</span>
+                        <br>
+                        <span style="font-size:14px; font-weight:bold;margin-left:56px">0755-2601300, Ext-501, Website portal.mpcz.in</span>
+                        <br>
+                        <span style="font-size:16px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015119</span>
+                    </td>
+                </tr>
+            </table>
+            {% elif cert_u_obj.User_Zone == "WZ" %}
+            <table border="0" style="padding:20px;">
+                <tr>
+                    <td><img src="{% static 'assets\images\mppk.png' %}" style="width:78%; height:15%" alt="mpmk" class="center"></td>
+                    <td>
+                        <span style="font-size:16px; font-weight:bold;text-align: center;">MADHYA PRADESH PASCHIM KSHETRA VIDYUT VITRAN CO. LTD.</span>
+                        <br>
+                        <span style="font-size:16px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+                        <br>
+                        <span style="font-size:13px; font-weight:bold;margin-left:37px">Regd. Office: GPH Compound polo ground, Indore 452003</span>
+                        <br>
+                        <span style="font-size:14px; font-weight:bold;margin-left:56px">0731 - 2426109, 2426166 & 2426111/144,</span>
+                        <br>
+                        <span style="font-size:14px; font-weight:bold;margin-left:56px">Website http://www.mpwz.co.in/</span>
+                        <br>
+                        <span style="font-size:16px; font-weight:bold;margin-left:113px">CIN NUMBER: U40109MP2002SGC015121</span>
+                    </td>
+                </tr>
+            </table>
+
+            {% elif cert_u_obj.User_Zone == "EZ" %}
+            <table border="0" style="padding:20px;">
+                <tr>
+                    <td><img src="{% static 'assets\images\mppok.png' %}" style="width:78%; height:15%" alt="mpmk" class="center"></td>
+                    <td>
+                        <span style="font-size:16px; font-weight:bold;text-align: center;">M. P. POORV KSHETRA VIDYUT VITRAN Co. Ltd.</span>
+						<br>
+						<span style="font-size:16px; font-weight:bold;margin-left:144px"><i>(Government of M. P. Undertaking)</i></span>
+						<br>
+						<span style="font-size:13px; font-weight:bold;margin-left:37px">Regd. Office – Block No. 8, 3rd Floor, Shakti Bhawan, Rampur, Jabalpur - 482008 (M.P.)</span>
+						<br>
+						<span style="font-size:14px; font-weight:bold;margin-left:56px">0761- 2666030, Extn. 270-2460) website – http://www.mpez.co.in/</span>
+						<br>
+						<span style="font-size:16px; font-weight:bold;margin-left:113px">CIN: U40109MP2002SGC015120</span></td>
+                    </td>
+                </tr>
+            </table>
+            {% endif %}
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray;" />
+            <div class="czregular-certifcate-body">
+
+                <!-- {% if cert_u_obj.User_type == "RCA(New)" or usr_obj.factory_approval == 1 %}
+                    <h6 class="text-center text-danger"></H6>
+                {% elif cert_u_obj.User_type == "RCA(Regular)" or usr_obj.factory_approval == 0 %}
+                    <h6 class="text-center text-danger">PROVISIONAL CERTIFICATE</H6>
+                {% endif %} -->
+				{% if usr_obj.factory_approval == 1 %}
+                    <h6 class="text-center text-danger"></H6>
+                {% elif usr_obj.factory_approval == 0 %}
+                    <h6 class="text-center text-danger">PROVISIONAL CERTIFICATE</H6>
+                {% endif %}
+
+                <H6 class="text-center text-primary">CERTIFICATE FOR TRANSFORMER REPAIRING UNDER RCA</H6>
+                <table class="table table-bordered table-bordered-2x">
+                    <tbody >
+                        <tr class="text-center">
+                            <td>RCA Vendor Name & Address</td>
+                            <td><span><b>{{cert_u_obj.company_name}}</b></span><br>{{cert_u_obj.Company_add_1}} {{cert_u_obj.Company_add_2}}, {{cert_u_obj.Company_dist}}, {{cert_u_obj.Company_state}}<br>{{cert_u_obj.Company_pin_code}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Registration No</td>
+                            <td>{{cert_u_obj.no}}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td>Date of Issue</td>
+                            <td>{{cert_u_obj.day}}</td>
+                        </tr>
+                        
+                        <!-- {% if cert_u_obj.User_type == "RCA(New)" or usr_obj.factory_approval == 1 %}
+                        <tr class="text-center">
+                            <td>Valid up To</td>
+                            <td>{{cert_u_obj.valid_upto}}</td>
+                        </tr>
+                        {% elif cert_u_obj.User_type == "RCA(Regular)" or usr_obj.factory_approval == 0 %}
+                        {% endif %} -->
+						{% if usr_obj.factory_approval == 1 %}
+                        <tr class="text-center">
+                            <td>Valid up To</td>
+                            <td>{{cert_u_obj.valid_upto}}</td>
+                        </tr>
+                        {% elif usr_obj.factory_approval == 0 %}
+                        {% endif %}
+
+                        <tr class="text-center">
+                            <td rowspan="3" style="margin-top: 10px;">Name of work </td>
+                            <td>Repairing of BGP failed Distribution Transformer (25 KVA to 200 KVA)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- {% if cert_u_obj.User_type == "RCA(New)" or usr_obj.factory_approval == 1 %}
+                <div><h5></h5></div>
+                {% elif cert_u_obj.User_type == "RCA(Regular)" or usr_obj.factory_approval == 0 %}
+                <div><h5>Note: After successful completion of Factory Inspection of RCA Vendor, final certificate shall be issued by Competent Authority.</h5></div>
+                {% endif %} -->
+				{% if usr_obj.factory_approval == 1 %}
+                <div><h5></h5></div>
+                {% elif usr_obj.factory_approval == 0 %}
+                <div><h5>Note: After successful completion of Factory Inspection of RCA Vendor, final certificate shall be issued by Competent Authority.</h5></div>
+                {% endif %}
+                <div class="certificate-footers">
+                    <div class="items-inner">
+                        <div class="signatuerbox" id="example2">
+                        </div>
+                            <div class="sign-notes">
+                                <p>Signed by:<b>{{cert_u_obj.employ_name}}</b><br> <b>{{cert_u_obj.designation}}</b></p>
+                                <p>
+                                    <small> Upload your digital signature </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+        <script>
+            function printpage() {
+                var download_var = document.getElementById("download");
+                var certFile_var = document.getElementById("digitalCert");
+                var sub_var = document.getElementById("sub");
+                var return2dash = document.getElementById("return2dash");
+             
+                download_var.style.visibility = 'hidden';
+                certFile_var.style.visibility = 'hidden';
+                sub_var.style.visibility = 'hidden';
+                return2dash.style.visibility = 'hidden';
+        
+                window.print()
+                
+                download_var.style.visibility = 'visible';
+                certFile_var.style.visibility = 'visible';
+                sub_var.style.visibility = 'visible';  
+                return2dash.style.visibility = 'visible';
+            }
+        </script>
+        
+        <table class="justify-content" style=" width:100%; border:1;">
+            <tbody style="width: 100%;">
+              <tr>
+                <td style="width: 25%; text-align: left;">
+                    <button class="btn btn-primary"  style="text-align: center; font-size: 20px;" id="download" onclick="printpage()">Download Pdf </button>
+                </td>
+                <td  style="width: 50%; text-align: center;"> 
+                <form action="/uplaod_cert_rca/{{cert_u_obj.no}}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}    
+                        <input style="text-align: center; font-size: 16px;" type="file" id="digitalCert" name="digitalCert" required="required">
+                        <input style="text-align: center; font-size: 16px;" type="submit" id="sub" value="Submit">
+                </form>
+                </th>
+                <td style="width: 15%; text-align: right;">
+                    <a style="align-items: right;" href='/digital_sign_cert_rca/RCA/{{cert_u_obj.User_Zone}}'><button class="btn btn-primary" id="return2dash" name="return2dash" style="text-align: center; font-size: 20px;">Return to Dashboard</button></a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+     </body>
+</html>
+​

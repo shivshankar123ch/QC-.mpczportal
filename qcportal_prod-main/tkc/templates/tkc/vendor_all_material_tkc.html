@@ -1,0 +1,104 @@
+
+    {% extends 'tkc/creater_base.html' %} {% load static %} {% block pagetitle %} {% endblock pagetitle %} {% block css %}
+    .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active,
+    .show>.btn-info.dropdown-toggle { color:
+    #fff; background-color: #007bff; border-color: #10707f; } label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: inherit; } {% endblock css %} {% block body %}
+<body>
+
+    {% load cart %}
+    {% load static %}
+  {% block active_tkc %}
+    <li class="nav-item active" style="list-style-type:none;">
+        {% endblock active_tkc %}
+
+        <script>
+            function printpage() {
+                var download_var = document.getElementById("download");
+
+                download_var.style.visibility = 'hidden';
+
+                window.print()
+
+                download_var.style.visibility = 'visible';
+
+            }
+
+        </script>
+
+
+
+
+
+        </form>
+
+        <div class="ed-allcontracterinfo">
+            <div class="container-fluid">
+                <div class="card ed-card-block mt-2">
+                    <div class="ed-card-inner">
+                        <div class="card-header">
+                            <h2>
+                                Vendor Material
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="ed-tableinfo-block">
+                                <div class="table-responsive mt-2">
+                                    <table
+                                        class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                                        <thead>
+                                            <tr>
+                                                <th class="w-5 text-center">S.No.</th>
+                                                <th>Material Code </th>
+                                                <th>Specification </th>
+                                                <th>Material GTP Doc </th>
+                                                <th>Material Test Doc </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in data %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{i.item_code}}</td>
+                                                <td>{{i.Material_Specification}}</td>
+                                                <td>
+                                                    <a href="{{i.Material_GTP_Doc.url}}">
+                                                        <label class="ed-textinfo text-info">
+                                                            View
+                                                        </label>
+                                                    </a>
+                                                </td>
+
+                                                <td>
+                                                    <a href="{{i.Material_Test_Doc.url}}">
+                                                        <label class="ed-textinfo text-info">
+                                                            View
+                                                        </label>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </form>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            {% endblock body %}
+                            <div class="form-group">
+                                <div class="form-action text-right">
+                                    <button onclick="history.back()" class="btn ed-submit ed-next"> Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

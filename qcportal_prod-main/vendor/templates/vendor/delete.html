@@ -1,0 +1,27 @@
+{% extends 'vendor/base1.html' %} {% load static %} 
+
+
+{% block body %}
+
+<div class="mx-auto" style="width: 95%;">
+
+
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+            Are you sure you want to delete "{{ employee.emp_name }}"?
+        </div>
+        
+        <p>
+            <a href="{% url 'employees-list' %}"> Go back</a>
+        </p>
+
+        <p>
+            <input class="btn btn-danger" type="submit" value="Confirm">
+        </p>
+    </form>
+</div>
+    {% endblock body %}

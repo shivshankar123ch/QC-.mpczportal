@@ -1,0 +1,94 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static%} {% block title %}
+{% block body %}
+
+<body>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    
+    
+        <script type="text/javascript"
+        window.onload = () => {
+            const myInput = document.getElementById('myInput');
+            myInput.onpaste = e => e.preventDefault();
+           }
+        </script>
+    </head>
+
+
+    <main class="main-content  mt-0">
+        <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-left" data-offset="0">
+                                    <!-- <h6 class="text-info font-weight-bolder"></h6> -->
+                                    {% if message %}
+        <div class="alert alert-{{class}}">
+            {{message}}
+        </div>
+        {% endif %}
+                                    <form class="row g-3 needs-validation" action="/nabl/basic" method="POST">
+                                        {% csrf_token %}
+                                        <p><b>Your signature has been successfully processed and your application has been accepted. Please proceed to Services Dashboard for further services.</b></p>
+                                        <!-- <div class="col-md-12">
+                                            <div class="form-group">
+                                               <lable>Click here to download PDF of your documents</lable>
+                                                
+                                            </div>
+                                        </div> -->
+                                        
+                                        
+                                    
+                                        <div class="button-row d-flex mt-4">
+                                            <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                                            <!-- <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send">Submit</button> -->
+                                            <button class="btn bg-gradient-primary ms-auto mb-0" type="submit" title="Send">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        let dtElem = document.getElementById('dob');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+        //trial here
+        let dtElem2 = document.getElementById('dir_dob');
+        let maxDate2 = new Date();
+        dtElem2.max = formatDate(maxDate2);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+</body>
+{% endblock body %}
+
+{% endblock title %}

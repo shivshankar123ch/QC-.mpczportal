@@ -1,0 +1,264 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %} {% block wo %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock wo %}
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    
+        <div class="ed-information">
+            <div class="card ed-card-block">
+                <div class="ed-card-inner">
+                    <div class="card-header">
+                        <h2>
+                            
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p
+                            style="align-items:Center;color: rgb(4, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                            {% if msg1 %}
+                            {{ msg1 }}
+                            {% endif %}
+                        </p>
+                        <div class="ed-tableinfo-block">
+
+                            <form action="/tkc/save_tks_site_store" onsubmit="return validateForm()" name="myForm"
+                                method="POST">
+                                {% csrf_token %}
+                                <div class="orderaction-items">
+                                    <div id="divToExport">
+                                        <div>
+                                            <label>Discom :- </label>
+                                            <select id="select_discom" onchange="select_zero()"
+                                                class="form-control ed-textbox formValue" required>
+                                                <option value="">Select Discom </option>
+                                                {% for data in discom_data %}
+                                                <option value="{{data.id}}">{{data.Discom_Name_E}}</option>
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label>Region :- </label>
+                                            <select id="select_region" onchange="select_one()"
+                                                class="form-control ed-textbox formValue" required>
+                                                <option value="">select</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label>Circle :- </label>
+                                            <select id="circle_select" onchange="select_two()"
+                                                class="form-control ed-textbox formValue" required>
+                                                <option value="">select</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label>Division :-</label>
+                                            <select id="division_select" name="division"
+                                                class="form-control ed-textbox formValue" required>
+                                                <option value="">select</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label>Site Store Address :-</label>
+                                            <input type="text" name="sitestore"
+                                                class="form-control ed-textbox formValue" required>
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Rent Agreement Copy :-</label>
+                                            <input type="file" name="rent_copy"
+                                                class="form-control ed-textbox formValue" required
+                                                accept="application/pdf">
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Electricity Bill :-</label>
+                                            <input type="file" name="electricity_bill"
+                                                class="form-control ed-textbox formValue" required
+                                                accept="application/pdf">
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Consumer No :-</label>
+                                            <input type="text" name="consumer_no"
+                                                class="form-control ed-textbox formValue" required>
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Contact No :-</label>
+                                            <input type="number" name="contact_no"
+                                                class="form-control ed-textbox formValue" id="mob_No" required>
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Authorised Person :-</label>
+                                            <input type="text" name="autherised"
+                                                class="form-control ed-textbox formValue" id="autherised_Person"
+                                                required>
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                        <div>
+                                            <label>Man Power :-</label>
+                                            <input type="number" name="man_power"
+                                                class="form-control ed-textbox formValue" required>
+                                            <!-- <select id="division_select" name="division"
+                                                            class="form-control ed-textbox">
+                                                            <option value="">select</option>
+                                                        </select> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-end">
+                                    <button type="submit" class="btn btn-info mt-2">
+                                        Submit
+                                    </button>
+                                </div>
+                                
+                            </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <script>
+
+
+        function select_zero() {
+
+            let select_discom = $('#select_discom').val();
+            let url1 = `https://qcportal.mpcz.in/api/region/${select_discom}`;
+
+            $.ajax({
+                type: 'get',
+                url: url1,
+                success: function (data) {
+                    var html = '';
+                    console.log('select_discom', data);
+                    data.data.forEach(element => {
+                        html = html + (`<option value="${element.id}">${element.Region_Name_E}</option>`);
+
+                    });
+                    $('#select_region').html(html);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            })
+
+        }
+
+
+        function select_one() {
+
+            let select_region = $('#select_region').val();
+            let url1 = `https://qcportal.mpcz.in/api/circle/${select_region}`;
+
+            $.ajax({
+                type: 'get',
+                url: url1,
+                success: function (data) {
+                    var html = '';
+                    console.log('select_region', data);
+                    data.data.forEach(element => {
+                        html = html + (`<option value="${element.id}">${element.Circle_Name_E}</option>`);
+
+                    });
+                    $('#circle_select').html(html);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            })
+
+        }
+        function select_two() {
+            let select_circle = $('#circle_select').val();
+            $.ajax({
+                type: 'get',
+                url: `https://qcportal.mpcz.in/api/division/${select_circle}`,
+                success: function (data) {
+                    var html = '';
+
+                    data.data.forEach(element => {
+                        html = html + (`<option value="${element.id}">${element.Division_Name_E}</option>`);
+
+                    });
+                    $('#division_select').html(html);
+
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            })
+        }
+
+        function validateForm() {
+            let mob_No = document.getElementById('mob_No');
+            let regexp1 = new RegExp(/^[A-Za-z ]+$/);
+            let regex5 = new RegExp(/^\d{10}$/);
+            let autherised_Person = document.getElementById('autherised_Person')
+            let status = true;
+            let allFields = document.getElementsByClassName('formValue');
+
+            if (mob_No.value != "") {
+                let result = regex5.test(mob_No.value);
+                if (result == false) {
+                    alert("Contact Number should be 10 digit only.");
+                    return false;
+                }
+            }
+
+            if (autherised_Person.value != "" || undefined) {
+                let result = regexp1.test(autherised_Person.value);
+                if (result == false) {
+                    alert("Autherised Person name should be in letter only.");
+                    return false;
+                }
+            }
+
+            for (i of allFields) {
+                if (i.value == "" || undefined) {
+                    status = false;
+                    alert("Please Fill All required Fields.")
+                }
+            }
+
+            if (status == true) {
+                return true;
+            }
+        } 
+    </script>
+
+    {% endblock body %}

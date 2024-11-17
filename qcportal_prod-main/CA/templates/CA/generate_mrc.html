@@ -1,0 +1,425 @@
+{% extends 'CA/ca_dashboard.html' %} {% load static %} {% load mathfilters %} 
+{% block a %} <span class="ms-1 font-weight-bold">{{user_data.Name}}</span> {% endblock a %}
+{% block body %}
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    .column {
+        float: left;
+        width: 20%;
+        padding: 5px;
+    }
+    
+    .column1 {
+        float: left;
+        width: 80%;
+        padding: 5px;
+    }
+    /* Clearfix (clear floats) */
+    
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<script type="text/javascript">  
+    function PrintDiv() 
+   {  
+       var divContents = document.getElementById("printdivcontent").innerHTML;  
+       var printWindow = window.open('', '', 'height=200,width=400');  
+       printWindow.document.write('<html><head><title>Print DIV Content</title>');  
+       printWindow.document.write('</head><body >');  
+       printWindow.document.write(divContents);  
+       printWindow.document.write('</body></html>');  
+       printWindow.document.close();  
+       printWindow.print();  
+    }  
+</script> 
+
+<script>
+
+    function printpage() {
+        //Get the print button and put it into a variable
+        var printButton1 = document.getElementById("printpagebutton1");
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden'
+        printButton1.style.visibility = 'hidden';
+        printButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+
+    }
+</script>
+<div class="content" id="printdivcontent">
+<div class="content" id="">
+    <h5 class="font-weight-bolder mb-0 text-center">Tax. Invoice</h5>
+    <div class="multisteps-form__content">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <p><b>{{user_data.Name}}</b></p>
+            </div>
+            <div class="col-12 col-sm-6">
+            </div>
+
+        </div>
+        <div class="row mt-0">
+            <div class="col- col-sm-0 p-0 m-0">
+                <p>Address:{{user_data.Add1}}</p>
+                <p style="margin-top: -19px;">Pincode:- {{user_data.Pincode}}</p>
+                <p style="margin-top: -19px;">Mobile:- {{user_data.Mobile}}</p>
+                <p style="margin-top: -19px;">Email:- {{user_data.Email_Id}}:</p>
+                <p style="margin-top: -19px;">GSTIN:- {{user_data.Gst}}</p>
+            </div>
+            <div class="col-12 col-sm-6">
+
+            </div>
+        </div>
+
+    </div>
+ 
+
+<table style="width:100%" border="1">
+    <tr>
+        <th>Billed To:</th>
+        <th>MPMKVVCL(commerical section)
+
+
+
+        </th>
+        <th>GSTIN:-</th>
+        <th>{{user_data.Gst}}</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Nishtha Parisar,Govindpura</td>
+        <td>State Code:</td>
+        <td>{{data.invoice_user_reg.state}}MP</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>Bhopal</td>
+        <td>SAC/HSN Code:</td>
+        <td>NA</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Madhya Pradesh</td>
+        <td>Invoice No.</td>
+        <td>{{s}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Invoice Date:</td>
+        <td>{{today}}</td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>Payment Terms:</td>
+        <td>Immediate</td>
+
+    </tr>
+    <tr>
+        <td>
+           </td>
+        <td>
+            <b>{{data.Customomer_Id}}<b></td>
+            <td>Service Period:</td>
+            
+            <td>{{Month}}</td>
+
+            <!-- <td>{{data.amount}}3-2021</td> -->
+        </tr>
+    </table></br>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+                <th>S.NO.</th>
+                <th>Discription</th>
+                <th>No. of Transaction</th>
+                <th>Ammount</th>
+            </thead>
+            </tr>
+            <tr>
+                <td>1.</td>
+
+                <td>Commision For Bill Collection</td>
+                <td>{{coun_data}}</td>
+
+                <td onclick="sum()" id="a1">{{sum_of_commison}}</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Add:CGST</td>
+                <td>@9.00%</td>
+                <td id="a2">{{gst_sum|div:2}}</td>
+
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Add:SGST</td>
+                <td>@9.00%</td>
+                <td>{{gst_sum| div:2}}</td>
+
+            </tr>
+
+
+            <tr>
+                <td>4</td>
+                <td>Sub:TDS</td>
+                <td>@2.00%</td>
+                <td>00.00</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"><b>Grand Total</b></td>
+        <td><b>{{ Grand_Total }}</b>
+        </td>
+
+    </tr>
+</table>
+</br>
+
+<div class="table-responsive ">
+    <table class="table table-bordered ">
+        <thead class="font-weight-bold text-light bg-dark table align-items-center " style="font-size: 15px; ">
+
+            <th colspan="2 ">Attached Copy: 1. Transaction List</th><br>
+
+
+        </thead>
+        </b>
+
+        </tr>
+        <tr>
+            <td>
+                <b>Bank Details:</td></b>
+                <td>
+                    <b>Please Make payments to:</b></td>
+        </tr>
+        <tr>
+            <td>
+                <b>Bank Name</td></b>
+                <td>{{user_data.Bank_name}}</td>
+        </tr>
+        <tr>
+
+            <td>
+                <b>Account No.:</td></b>
+                <td>{{user_data.Account_Number}}</td>
+        </tr>
+        <tr>
+            <td>
+                <b>Account Holder Name:</td></b>
+                <td>{{user_data.Account_Holder_Name}}</td>
+        </tr>
+        <tr>
+            <!-- <td>
+                <b>Bank Branch:</b></td>
+            <td></td> -->
+        </tr>
+        <tr>
+
+            <td>
+                <b>IFSC Code:</td></b>
+                <td>{{user_data.IFSC}}</td>
+        </tr>
+        <tr>
+
+
+        </tr>
+
+
+    </table>
+</div>
+
+
+</br>
+
+
+<p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+                    text-indent:0in'></p>
+<table class="table  table-borderless m-1" style="width:50%">
+    <thead>
+        <tr>
+
+            <th style="width:2%">
+
+            </th>
+            <th style="width: 80%">
+
+        </tr>
+    </thead>
+
+</table>
+</div>
+
+<br>
+<div class="width:80%">
+    <p class=MsoBodyTextIndent style='text-align:justify'><span lang=EN-AU>
+                <br><br>
+                <b></b>A*- Tax as applicable, not payble under reverse charges.
+            
+
+
+        <div style="position:relative; left:680px;">
+           
+            <b>Authorised Signatory &nbsp;({{data.invoice_user_reg.Name}})</b>
+        </div>
+
+
+        <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+    <p class=MsoBodyTextIndent style='margin-left:0in;text-align:justify;
+    text-indent:0in'><span lang=EN-AU>&nbsp;</span></p>
+
+    <p class='MsoBodyTextIndent text-center '><span lang=EN-AU>
+            <br><br>
+            <b>Commision Details: </b>
+
+        </span></p>
+    </span>
+    </p>
+    <!-- <p>Thanking you !</p> -->
+    </span>
+    </p>
+    </span>
+    </p>
+</div>
+</div>
+
+<div class="table-responsive" id="one">
+    <table class="table table-bordered">
+        <thead class="font-weight-bold text-light bg-dark table align-items-center" style="font-size: 15px;">
+            <tr>
+                <th scope="col-3" style="text-align: center;"> S.No. </th>
+                <th scope="col-3" style="text-align: center;"> Connection No. </th>
+                <th scope="col-3" style="text-align: center;"> Consumer Name. </th>
+                <th scope="col-3" style="text-align: center;">Bill Paid AMT </th>
+                <th scope="col-9" style="text-align: center;"> Comm AMT</th>
+                <th scope="col-9" style="text-align: center;">CGST AMT</th>
+                <th scope="col-9" style="text-align: center;">SGST AMT</th>
+
+            </tr>
+
+            <tr>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data1 in data2 %}
+            <tr>
+                <td style="text-align: center;">{{forloop.counter}}</td>
+            {% for data in data1 %}
+            
+                <td style="text-align: center;">{{data.Customomer_Id}}</td>
+                <td style="text-align: center;">{{data.Customer_name}}</td>
+                <td style="text-align: center;">{{data.Customer_bill_amount}}</td>
+                <td style="text-align: center;">{{data.commission_amount}}</td>
+                <td style="text-align: center;">{{data.Gst_ammount}} </td>
+                <td style="text-align: center;">{{data.Gst_ammount}} </td>
+<!-- 
+                <td style="text-align: center;">{{data.Gst_ammount | div:2 }} </td>
+                <td style="text-align: center;">{{data.Gst_ammount | div:2 }}</td> -->
+            </tr>
+            {% endfor %}
+            {% endfor %}
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+<p align="justify">
+</p>
+
+</span>
+</p>
+
+
+
+<td style="text-align:center"><span><b></b></span></td>
+
+</tr>
+
+</table>
+<div>
+
+    <table style="margin-top:40px;float:right" >
+        <tr>
+
+            <td><span>Signed by: <b>{{user_data.Name}}</b>,<br>
+                </td>
+</tr>
+<tr>
+<td><span>Date: <b>{{today|date:"d-m-Y"}}</b></span></td>
+        </tr>
+
+        <tr>
+            <td><span>Address: <b>{{user_data.Add1}}</b></span></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+        </tr>
+
+        <tr>
+            <td style="width:200px;float:right;border:0;border-bottom:1px solid rgb(83, 210, 45); "></td>
+        </tr>
+
+
+
+        <tr>
+            <td style="position:relative; left:40px; top:-100px; opacity: 0.2; "><span><b><img style="width:120px; height:120px " src="{% static 'assets\images\ok.jpeg ' %} "/></b></td>
+</tr>
+
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<center>
+     <button class="btn btn-primary me-2   btn-lg"  onclick="PrintDiv();" style="color: black;" >
+                                                   Print
+                                                </button>
+   
+</center>
+</div>
+<script type="text/javascript">
+    function printpagelone(){
+        datqa=document.getElementById('one');
+        console.log(datqa)
+        datqa.disable=true;
+
+        window.print()
+
+    }
+</script>
+
+<script>
+    function sum(){
+        var aa1 = document.getElementById('a1 ').value;
+        console.log("jfsjfslljf ",aa1)
+    }
+</script>
+{% endblock body %}

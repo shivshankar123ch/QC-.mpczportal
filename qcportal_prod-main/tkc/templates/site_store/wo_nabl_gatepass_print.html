@@ -1,0 +1,356 @@
+{% extends 'nabl/nabl_Base.html' %} {% load static %} {% block body %} 
+<form action="/nabl/tkc_nabl_gatepass_letter/{{gate_pass_id}}/{{nabl_gatepass_data.id}}" method="POST" enctype='multipart/form-data' onsubmit="return validation()">
+   
+    
+    {% csrf_token %} 
+    <div class="card-body">
+        <div class="" id="printinfo">
+                
+                
+
+            <table class="table w-100">
+                <tbody>
+                    <tr>
+                        <td class="border-0 p-0">
+                
+                            <img src="{{gate_pass_data.offer.wo.Discom.Discom_Header.url}}" class="cgm-logo"
+                                style="width:100%" alt="User profile" />
+                            
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table w-100 mb-3">
+                <tbody>
+
+                    <tr>
+
+                        <td class="border-0 w-50 p-0" weight="10%">
+                            <p class="text-left mb-2">
+                                <b>
+                                    MP{{gate_pass_data.offer.wo.Discom.Discom_Code}}Nabl Gatepass
+                                </b>
+                            </p>
+                        </td>
+                        <br>
+                        <br>
+                        
+                    
+                        <td class="border-0 w-50 p-0"  weight="70%">
+                            
+                            <p class="text-right mb-2">
+                                <b> {{today}} </b></br>
+                            </p>
+                        </td>
+                 
+                    </tr>
+                    <tr>
+                        <td  weight="20%">
+                            <p>
+                                <b>Driver Name :-</b>{{nabl_gatepass_data.driver_name}}</br>
+                               <b> Vehicle number:-</b>{{nabl_gatepass_data.vehicle_no}}</br>
+                               <b> Driver Contact :-</b>{{nabl_gatepass_data.driver_phone}}
+                            </p>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        
+                      
+                    </tr>
+
+                    
+                   
+                    <tr>
+
+
+                     
+                        </td>
+                    </tr>
+                   
+                        
+                </tbody>
+            </table>
+
+            
+            <div class="table-responsives">
+                <table class="table table-bordered table-responsive" cellspacing="0">
+                    <thead class="bg-primary">
+                    <tr>
+                      <th style="width:5% ">
+                          S NO.</th>
+                          <th style="width:5% ">
+                          Material Name </th>
+                          <th style="width:5% ">
+                          Material Serial Number/Batch Number </th>
+          
+                       
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    {% for data in site_store_gate_passdata %}
+                   
+                    <tr class="bg-light">
+                      <td>{{forloop.counter}}</td>
+                      <td><b>{{data.offer.wo_material.material_name}}</b></td>
+                      
+                      <td class="project_progress">
+                        {% if data.serial_no.serial_no %}
+                        {{data.serial_no.serial_no}}
+                        
+                        {% else %}
+                        {{data.serial_no.batch_no}}
+                        {% endif %}
+                              
+                      </td>
+                      
+                        </tr>
+                 {% endfor %}
+              </tbody>
+              </table>
+            </div>   
+        
+             
+
+
+            <table class="w-100 mb-2">
+                <tr>
+                    
+                    <td class="w-50">
+                        
+                                <p>
+                                   <b> Name of the Contact Person :</b> {{gate_pass_data.offer.site_store_fk.autherised_person}}</br>
+                                   <b> Mob No :</b> {{gate_pass_data.offer.site_store_fk.contact_no}}</br>
+                                  <b> Address:</b> {{gate_pass_data.offer.site_store_fk.Store_Address}}
+                                </p>
+                            
+                        
+                    </td>
+                    
+                </tr>
+            </table>
+            <table class="w-100 mb-2">
+                <tr>
+                    
+                    <td class="w-100">
+                        <div class="text-right">
+                            <p class="text-center mt-4" style="display:inline-block">
+                                {% comment %} <b>
+                                    
+                                    Date of inspection - {{inspection_date}}
+                                    
+                                </b> {% endcomment %}
+                            </p>
+                        </div>
+                    </td>
+                    
+                </tr>
+            </table>
+
+
+        
+
+
+            <table class="w-100 mb-2">
+                <tr>
+                    <td class="w-100">
+                        <div class="text-right">
+                            <p class="text-center mt-4" style="display:inline-block">
+                                <b> __sd__<br>
+                                    <br>
+                                    {{gate_pass_data.offer.nabl_name}}
+                                </b>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <h6>
+                {% comment %} <b>Copy To:- </b> {% endcomment %}
+            </h6>
+            <table class="w-100 mb-2 text-left">
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>
+                                {% comment %} 1. Dy. CGM (RP/UP), RDSS, O/o MD (CZ)<br>
+                                 
+                                {{wo_data.Discom.Discom_Short_Name}} {% endcomment %}
+                            </p>
+                        </td>
+                        
+                        <!-- <th>1.</th>
+                        <td class="w-100">You are hereby advised to take further action in the matter to
+                            dispatch the
+                            aforementioned</td> -->
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            {% comment %} <table class="w-100 mb-2">
+                <tr>
+                    <td class="w-100">
+                        <div class="text-right">
+                            <p class="text-center mt-3" style="display:inline-block">
+                                <b>
+                                    CGMQC<br>
+                                    {{wo_data.Discom.Discom_Short_Name}}
+                                </b>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table> {% endcomment %}
+        </div>
+        <div class="form-group mt-3" id="options">
+            <div class="row">
+                
+                <div class="col-sm-3">
+                    <div class="text-center">
+                        <label class="m-0 opacity-0">ss</label>   <br>
+                        <button class="btn ed-submit ed-formsubmit" onclick="printwindows()">
+                            Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-sm-3">
+                    <div class="text-left">
+                        <label class="m-0">Upload Sign Documents </label> 
+                        <div class="d-flex">
+                        <input type="file" class="" value="Upload" required name= "gatepass" id = "gatepass">
+                        <button type="submit" class="btn ed-submit ed-formsubmit">Submit</button>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="text-center">
+                        <label class="m-0 opacity-0">ss</label>   <br> 
+                    </div>
+                </div>
+                <!-- <div class="col-sm-3">
+                    <div class="text-right">
+                        <label class="d-block mb-4"> </label>
+                    
+                    </div>
+                </div> -->
+                </form>
+
+
+
+  
+<script>
+$(document).ready(function(){
+  $("#myBtn").click(function(){
+    $('.toast').toast('show');
+  });
+});
+</script>
+
+
+{% comment %} <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div> 
+        <div class="modal-body">
+          Modal body..
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div> {% endcomment %}
+
+<style>
+    .resize-none {
+        resize: none;
+        overflow: none;
+        box-shadow: none;
+        box-shadow: none !important;
+        overflow: hidden !important;
+
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+
+<script>
+    {% comment %} var date =document.getElementById('inspection_date').innerHTML;
+    alert(date);
+    var d = new Date(date);
+    console.log(c("2023-12-29").format('MMMM DD YYYY'));
+     {% endcomment %}
+   
+
+
+
+
+    function printwindows() {
+        
+        document.getElementById('sidenav-main').style.display = 'none';
+       
+        document.getElementById('options').style.display = 'none';
+        
+        document.getElementById('headerMenu').style.display = 'none';
+       
+        document.getElementById('contantBlock').style.padding = '10px';
+        
+        {% comment %} document.getElementById('copyArea').style.borderWidth = '1px';
+       
+        document.getElementById('diArea').style.borderWidth = '1px'; {% endcomment %}
+       
+        $('#copyArea').css('border-width','0px');
+        $('.ed-card-block').css('box-shadow','none');
+        $('.ed-card-block').css('padding','0');
+        
+        $('#diArea').css('border-width','0px'); 
+        $('.ed-footer-block').hide();
+        window.print();
+        
+        document.getElementById('options').style.display = 'block';
+        document.getElementById('sidenav-main').style.display = 'block';
+        document.getElementById('headerMenu').style.display = 'block';
+        document.getElementById('contantBlock').style.paddingTop = '85px';
+        document.getElementById('contantBlock').style.paddingLeft = '275px';
+        document.getElementById('copyArea').style.borderWidth = '1px';
+        document.getElementById('diArea').style.borderWidth = '1px';
+        $('#copyArea').css('border-width','1px');
+        $('#diArea').css('border-width','1px');
+        $('.ed-footer-block ').block();
+        $('.ed-card-block').css('box-shadow','0px 0px 6px 1px rgb(30 30 30 / 10%)');
+        $('.ed-card-block').css('padding','15px');
+    }
+
+
+    var textarea = document.getElementById("diArea");
+    var limit = 1000; //height limit
+
+    textarea.oninput = function () {
+        textarea.style.height = "";
+        textarea.style.height = Math.min(textarea.scrollHeight, limit) + "px";
+    };
+
+    var textarea1 = document.getElementById("copyArea");
+    var limit1 = 1000; //height limit 
+    textarea1.oninput = function () {
+        textarea1.style.height = "";
+        textarea1.style.height = Math.min(textarea1.scrollHeight, limit1) + "px";
+    };
+
+</script>
+
+
+{% endblock body%}

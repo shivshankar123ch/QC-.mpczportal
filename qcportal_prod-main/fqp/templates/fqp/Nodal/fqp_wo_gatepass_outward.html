@@ -1,0 +1,208 @@
+{% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+
+
+<style>
+    input.larger {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="card p-5">
+    <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝">
+    <div class="table-responsives">
+        <table class="table table-striped" border="2">
+            <thead class="bg-primary">
+                <tr>
+                    <th colspan="2">GatePass</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>WO No</td>
+                    <td><b>{{ data.TKCVendor.TKCWoInfo.wo_no}}</b></td>
+                </tr>
+                <tr>
+                    <td>Vendor Company name</td>
+                    <td><b>{{ data.TKCVendor.TKCWoInfo.supplier.CompanyName_E}}</b></td>
+                </tr>
+                <tr>
+                    <td> Material </td>
+                    <td><b>{{ data.TKCVendor.Material_id.Material_Specification}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+    <h3 class="card-title m-2 table-responsive"> <b> Gatepass Material Details </b></h3> 
+    <div class="table-responsives">
+        <table class="table table-bordered table-responsive" cellspacing="0">
+            <thead class="bg-primary">
+            <tr>
+              <th style="width:5% ">
+                  S NO.</th>
+                  <th style="width:5% ">
+                  Material Name </th>
+                  <th style="width:5% ">
+                  Material Serial Number </th>
+  
+               
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+           
+            <tr class="bg-light">
+              <td>{{forloop.counter}}</td>
+              <td><b>{{ data.Offer_Material.TKCVendor.Material_id.Material_Specification}}</b></td>
+              <td><b>{{data.Item_Serial_No}}</b></td>
+        
+         {% endfor %}
+      </tbody>
+      </table>
+    </div>   
+
+
+
+    
+    <form action="/fqp/fqp_create_po_gatepass/{{data.id}}" method="POST" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div>
+            <table class="table table-striped mt-2" border="2">
+                <tr>
+                    <th>WO No:<span style="color: red;">*</span></th>
+                    <td><b>{{data.TKCVendor.TKCWoInfo.wo_no}}</b>
+                        <!-- <select name="rel" id="vendor" style="width:250px;"> -->
+                        <!-- <option value="" selected>{{ro.id}}</option>    -->
+                        <!-- </select> -->
+                    </td>
+                </tr>
+                <tr>
+                    <th> Gatepass Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                    <td><input type="date" id="gatepass_date" name="gatepass_date" required="required" onkeyup="validateForm()"
+                            onfocus="validateForm()" onchange="validateForm()" placeholder="" style="width:250px;">
+                        <span id="date" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatepass No: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="gatepass_no" id="gatepass_num" placeholder=""
+                            style="width:250px;" required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>Gatekeeper Name <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="gk_name" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Vehicle No. <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="vehicle_no" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Name: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_name" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Driver Phone: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="driver_phone" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Material Received By: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="mat_rece_by" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                
+                <tr>
+                    <th>Outward Quantity: <span style="color: red;">*</span> </th>
+                    <td scope="row"><input type="text" name="outward_qty" placeholder="" style="width:250px;"
+                            required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                            onchange="validateForm()">
+                        <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                            style="font-size: 100%;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    
+
+                    <td> <label for="driver_aadhar">Driver Aadhar Upload&nbsp;</label></td>
+                    <td> <input type="file" name="driver_aadhar" style="width: 200px"></td>
+                
+                </tr>
+
+            </table>
+            <div class="col-md-12">
+                <input type="submit" name="submit" onclick="validateForm()" value="Generate Gatepass"
+                    class="btn m-2 float-right" autocomplete="off">
+
+            </div>
+        </div>
+    </form>
+</div>
+
+   
+    <!-- <a href=">Next</a> -->
+    <script>
+        let dtElem = document.getElementById('bid_open_date');
+        let maxDate = new Date();
+        dtElem.max = formatDate(maxDate);
+
+        function formatDate(date) {
+            let dd = String(date.getDate()).padStart(2, '0');
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let yyyy = date.getFullYear();
+            return `${yyyy}-${mm}-${dd}`;
+        }
+    </script>
+    {% endblock body %}

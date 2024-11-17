@@ -1,0 +1,422 @@
+{% extends 'po/po_creater/creater_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+   <section class="content bg-white">
+    <!-- Content Header (Page header) -->
+      <div class="container-fluid">
+         <div class="card-body p-0">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th style="width: 70%">
+                        <b>PO Details</b>
+                      </th>
+                      <th style="width:30%">
+                          PO Status
+                      </th>
+                  </tr>
+                    </tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                      <td>
+                            <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="exampleInputEmail1"> Purchase Order No: <b></b></label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.po_no}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+                  <div class="form-group">
+                      <label for="exampleInputEmail1"> PO Subject</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.po_subject}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+
+                       <div class="form-group">
+                      <label for="exampleInputEmail1"> PO Date</label>
+                     <input type="text"  name="category" class="form-control" id="exampleInputEmail1" placeholder="{{data.erp_created_date}}" disabled>
+                  </div>
+                <!-- /.form-group -->
+              
+                 </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+
+        </div>
+
+
+                      </td>
+
+
+
+
+                      <td>
+                        <!-- Timelime example  -->
+
+            <!-- The time line -->
+            <div class="timeline">
+              <!-- timeline time label -->
+              <div class="time-label">
+                <!-- <span class="bg-red">10 Feb. 2014</span> -->
+              </div>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+
+
+                {% if not data.gtp_status and not data.gtp_approved and not data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">GTP Drawing Submit</a> </h3>
+               </div>
+              </div>
+
+              {% elif  data.gtp_status and not data.gtp_approved and not data.temporary_rejection %}
+
+              <div>
+               <i class="fas fa bg-orange"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">GTP Drawing Submitted</a> </h3>
+               </div>
+              </div>
+
+              {% elif data.gtp_status and  data.gtp_approved and not data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">GTP Drawing Approved</a> </h3>
+               </div>
+              </div>
+
+              {% elif data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">GTP Drawing Rejected</a> </h3>
+               </div>
+              </div>
+                {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">GTP Drawing</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+                {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">SD  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif  data.gtp_status and  data.gtp_approved and not data.bg_status  %}
+
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">SD Not Submit</a> </h3>
+               </div>
+              </div>
+
+              {% elif data.gtp_approved and data.bg_status and not data.bg_approved  %}
+              <div>
+               <i class="fas fa bg-orange"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">SD Submitted</a> </h3>
+               </div>
+              </div>
+
+              {% elif data.bg_status and data.bg_approved %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">SD Approved</a> </h3>
+               </div>
+              </div>
+                 {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Security Deposit</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+
+                {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif  data.bg_status and data.bg_approved and not data.vendor_offer %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer</a> </h3>
+               </div>
+              </div>
+
+              {% elif  data.bg_status and data.bg_approved and  data.vendor_offer and not data.offer_approved %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer Submitted</a> </h3>
+               </div>
+              </div>
+
+              {% elif data.bg_status and data.bg_approved and  data.vendor_offer and data.offer_approved and not data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer Accepted</a> </h3>
+               </div>
+              </div>
+                    {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+                {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif  data.vendor_offer and not data.dispatch_status %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Dispatch</a> </h3>
+               </div>
+              </div>
+
+             {% elif  data.vendor_offer and  data.dispatch_status %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Dispatch</a> </h3>
+               </div>
+              </div>
+                    {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Dispatch</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+
+
+                {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif data.dispatch_status and not data.local_store_status %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Wait For Accepting Local Store</a> </h3>
+               </div>
+              </div>
+
+               {% elif  data.dispatch_status and  data.local_store_status %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material IN Local Store</a> </h3>
+               </div>
+              </div>
+                    {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material In Local Store</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+                {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif data.local_store_status and not data.dispatch_for_nabl %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Wait For Test</a> </h3>
+               </div>
+              </div>
+
+               {% elif  data.local_store_status and  data.dispatch_for_nabl %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Ready For Test</a> </h3>
+               </div>
+              </div>
+                    {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material In Testing</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+
+                         {% if  data.temporary_rejection %}
+              <div>
+               <i class="fas fa bg-red"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Offer  Rejected </a></h3>
+               </div>
+              </div>
+
+              {% elif data.local_store_status and not data.dispatch_for_nabl and not data.po_test %}
+              <div>
+               <i class="fas fa bg-blue"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material In Testing In progress</a> </h3>
+               </div>
+              </div>
+
+               {% elif  data.local_store_status and  data.dispatch_for_nabl and data.po_test and not  data.po_store  %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material Test Completed</a> </h3>
+               </div>
+              </div>
+
+                  {% elif  data.local_store_status and  data.dispatch_for_nabl and data.po_test and data.po_store %}
+              <div>
+               <i class="fas fa bg-green"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material In store</a> </h3>
+               </div>
+              </div>
+
+                    {% else %}
+                  <div>
+               <i class="fas fa bg-grey"></i>
+               <div class="timeline-item">
+                 <!-- <span class="time"><i class="fas fa-clock"></i> 12:05</span> -->
+                 <h3 class="timeline-header no border"><a href="#">Material In store</a> </h3>
+               </div>
+              </div>
+              {% endif %}
+
+
+              <div>
+                <i class="fas fa bg-grey"></i>
+                <div class="timeline-item">
+                  <!-- <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span> -->
+                  <h3 class="timeline-header no-border"><a href="#">End of Process</a> </h3>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+         </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  {% endblock body %}

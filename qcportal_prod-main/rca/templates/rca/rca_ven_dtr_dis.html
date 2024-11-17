@@ -1,0 +1,174 @@
+{% extends 'rca/RCA_base.html' %}
+{% load static %}
+{% block heading %} DTR Dispatched By Vendor {% endblock heading %}
+
+{% block body %}
+<!-- <img src="{% static 'assets/images/header.png' %}" style="width:100%;height:220px;" alt="͝"> -->
+
+
+<div class="ed-card-inner">
+  <div class="card-header">
+    <h2>
+      DTR Dispatched By Vendor View
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <tr>
+              <th colspan="2" class="text-left"> RCA Order Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RCA Order No</td>
+              <td>MP{{ro.rca_cell.user_zone}}00{{ ro.wo.id}}</td>
+            </tr>
+            <tr>
+              <td>RCA Vendor Company name</td>
+              <td>{{ ro.wo.vendor_id.CompanyName_E}}</td>
+            </tr>
+            <tr>
+              <td> Material </td>
+              <td>{{ ro.wo.wo_specification}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <tr>
+              <th> Rating </th>
+              <th> Description </th>
+              <th> Quantity </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in material %}
+            <tr>
+              <td>{{data.rating}}</td>
+              <td>{{data.description}}</td>
+              <td>{{data.quantity}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <th>S.No.</th>
+            <th> Rating</th>
+            <th> Vendor Dispatched Quantity </th>
+          </thead>
+          <tbody>
+            {% for i,j in dispatch %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i}}</td>
+              <td>{{j}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ed-tableinfo-block mb-5">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+          <thead>
+            <th> S.No.</th>
+            <th> Release No. </th>
+            <th> XMR Report: </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in rep %}
+            <tr>
+              <td>{{forloop.counter}}</td> 
+              <td>{{data.ro.id}}</td> 
+              <td>
+                <a href="{{data.all_xmr_rprt.url}}" class="ed-links">
+                  <label class="ed-textinfo">
+                    <i class="fas fa-eye"></i>
+                    View File
+                  </label>
+                </a>
+              </td> 
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      </div> 
+
+      <div class="ed-tableinfo-block mb-5">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered ed-table-block ed-centertable text-center ">
+            <thead>
+              <th> S.No.</th>
+              <th> Rating </th>
+              <th> XMR Code </th>
+              <th> XMR Type </th>
+              <th> Repaired/Uneconomical </th> 
+              <th> Dispatch Date </th> 
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in xmr %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{data.material.rating}}</td>
+              <td>{{data.xmr}}</td>
+              <td>
+                {% if data.new_design == 1 %}
+                New Design
+                {% elif data.old_l1 == 1 %}
+                Old L1
+                {% elif data.old_l2 == 1 %}
+                Old L2
+                {% elif data.design_non_star == 1 %}
+                Non Star(Old Design)
+                {% endif %}
+              </td>
+              <td>
+                {% if data.uneco_status == 1 %}
+                Uneconomical
+
+                {% else %}
+                 Repaired
+
+                {% endif %}
+              </td> 
+              
+               <td>
+               {{data.xmr_ven_dispatch_date}}
+               </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+ 
+          <div id="options" class="text-right">
+            <input id="printpagebutton" onclick=window.print() class="btn ed-submit ed-formSubmit mr-2"
+              type="button" value="Print" onclick="printpage()" />
+            <a href="/rca/rca_base"> <button id="printpagebutton1" type="Submit" class="btn ed-submit ed-formSubmit"> Go To Home </button>
+            </a>
+          </div> 
+      </div>
+      </div>
+      
+      {% endblock body %}

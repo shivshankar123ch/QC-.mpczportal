@@ -1,0 +1,268 @@
+{% extends 'main/databaseDB.html' %}
+{% load static %}
+
+{% block zone %}
+    <span class="ms-1 font-weight-bold">{{ usr_obj.User_zone }} Database Dashboard</span>
+{% endblock zone %}
+
+{% block body %}
+<table class="table table-bordered table-hover">
+    <h4 class="heading">Registration Form Details</h4> 
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">User Type:</th>
+      <td>{{usr_obj.User_type}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Discom:</th>
+      <td>{{usr_obj.User_zone}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Telephone:</th>
+      <td>{{usr_obj.ContactNo}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Organization Type:</th>
+        <td>{{usr_obj.User_type}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Firm / Company Name (English):</th>
+        <td>{{usr_obj.CompanyName_E}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Firm / Company Name (Hindi):</th>
+        <td>{{usr_obj.CompanyName_H}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorized person (English):</th>
+        <td>{{usr_obj.Authorised_person_E}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorized person (Hindi):</th>
+        <td>{{usr_obj.Authorised_person_H}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Mobile number:</th>
+        <td>{{usr_obj.ContactNo}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Email ID :</th>
+        <td>{{usr_obj.Email_Id}}</td>
+    </tr>
+</table>
+
+
+
+
+
+<table class="table table-bordered table-hover">
+    <h4 class="heading">Firm / Company's Details</h4>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Firm / Company Name (English):</th>
+      <td>{{cdmu_obj.CompanyName_E}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Firm / Company Name (Hindi):</th>
+      <td>{{cdmu_obj.CompanyName_H}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Contact number:</th>
+        <td>{{cdmu_obj.Company_Contact_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Fax number:</th>
+        <td>{{cdmu_obj.Company_Fax}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Firm/Company's PAN Number:</th>
+        <td>{{cdmu_obj.Company_Pan_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Firm/Company Registration/Gumasta Number:</th>
+        <td>{{cdmu_obj.Company_Gumastha_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Firm/Company's GST Number:</th>
+        <td>{{cdmu_obj.Company_Gst_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Registration Date:</th>
+        <td>{{cdmu_obj.Registration_Date}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company Address Line 1:</th>
+        <td>{{cdmu_obj.Company_add_1}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company Address Line 1:</th>
+        <td>{{cdmu_obj.Company_add_2}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company City:</th>
+        <td>{{cdmu_obj.Company_city}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company District:</th>
+        <td>{{cdmu_obj.Company_dist}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company State:</th>
+        <td>{{cdmu_obj.Company_state}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company Pincode:</th>
+        <td>{{cdmu_obj.Company_pin_code}}</td>
+    </tr>
+
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office Address Line 1:</th>
+        <td>{{cdmu_obj.Company_t_add_1}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office Address Line 1:</th>
+        <td>{{cdmu_obj.Company_t_add_2}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office City:</th>
+        <td>{{cdmu_obj.Company_t_city}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office District:</th>
+        <td>{{cdmu_obj.Company_t_dist}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office State:</th>
+        <td>{{cdmu_obj.Company_t_state}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Company's Registered Office Pincode:</th>
+        <td>{{cdmu_obj.Company_t_pin_code}}</td>
+    </tr>
+</table>
+
+
+
+
+
+<table class="table table-bordered table-hover">
+    <h4 class="heading">Authorised Person Details</h4>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Authorised Person Name (English):</th>
+      <td>{{ap_obj.Authorised_P_Name_E}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Authorised Person Name (Hindi):</th>
+      <td>{{ap_obj.Authorised_P_Name_H}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Authorised Person DOB:</th>
+      <td>{{ap_obj.Authorised_P_DOB}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Number:</th>
+        <td>{{ap_obj.Authorised_P_Number}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Email:</th>
+        <td>{{ap_obj.Authorised_P_Email}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Aadhar Number:</th>
+        <td>{{ap_obj.Authorised_P_Aadhar_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Aadhar Number address Line 1:</th>
+        <td>{{ap_obj.Authorised_P_add_1}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Aadhar Number address Line 2:</th>
+        <td>{{ap_obj.Authorised_P_add_2}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person Pincode:</th>
+        <td>{{ap_obj.Authorised_P_pin_code}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person State:</th>
+        <td>{{ap_obj.Authorised_P_state}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person District:</th>
+        <td>{{ap_obj.Authorised_P_District}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Authorised Person City:</th>
+        <td>{{ap_obj.Authorised_P_City}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Name (English):</th>
+        <td>{{ap_obj.Director_P_Name_E}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Name (Hindi):</th>
+        <td>{{ap_obj.Director_P_Name_H}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person DOB:</th>
+        <td>{{ap_obj.Director_P_DOB}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Number:</th>
+        <td>{{ap_obj.Director_P_Number}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Email:</th>
+        <td>{{ap_obj.Director_P_Email}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Aadhar Number:</th>
+        <td>{{ap_obj.Director_P_Aadhar_No}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Add Line 1:</th>
+        <td>{{ap_obj.Director_P_add_1}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Add Line 2:</th>
+        <td>{{ap_obj.Director_P_add_2}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person Pincode:</th>
+        <td>{{ap_obj.Director_P_pin_code}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person State:</th>
+        <td>{{ap_obj.Director_P_state}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person District:</th>
+        <td>{{ap_obj.Director_P_District}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Director Person City:</th>
+        <td>{{ap_obj.Director_P_City}}</td>
+    </tr>
+</table>
+
+
+
+<table class="table table-bordered table-hover">
+    <h4 class="heading">Bank Details</h4>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Bank  Name:</th>
+      <td>{{bnk_obj.Bank_name}}</td>
+    </tr>
+    <tr>
+      <th class="font-weight-bold text-light bg-dark">Account Holder Name:</th>
+      <td>{{bnk_obj.Account_Holder_Name}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">Account_Number:</th>
+        <td>{{bnk_obj.Account_Number}}</td>
+    </tr>
+    <tr>
+        <th class="font-weight-bold text-light bg-dark">IFSC:</th>
+        <td>{{bnk_obj.IFSC}}</td>
+    </tr>
+</table>
+
+{% endblock body %}

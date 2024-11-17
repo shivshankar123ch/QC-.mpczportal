@@ -1,0 +1,60 @@
+ {% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default width-75">
+          <div class="card-header">
+            <h3 class="card-title">Upload Work order Agreement </h3>
+          </div>
+     <form   action="/fqp/upload_agreement_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Supplier  Id :</label><br>
+                  <b>{{data.supplier.Authentication_id}}</b>
+                    </div>
+              </div>
+              <!-- /.col -->
+
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Supplier Name :</label><br>
+                      <b>{{data.supplier.CompanyName_E}}</b>
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                     <div class="form-group">
+                      <label for="exampleInputEmail1"> NIT Number : </label><br>
+                      <b>{{data.nit_no}}</b>
+                   </div>
+            </div>
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">  LOA Number : </label><br>
+                      <b>MPCZ00{{data.id}}</b>
+                   </div>
+            </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Upload Agreement  </label>
+                     <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder="">
+                   </div>
+                </div>
+            </div>
+              <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1"> Upload Agreement</button>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+
+     </form>
+</div>
+{% endblock body %}

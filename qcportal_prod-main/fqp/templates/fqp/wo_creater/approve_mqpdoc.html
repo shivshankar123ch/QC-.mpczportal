@@ -1,0 +1,118 @@
+{% extends 'fqp/wo_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Work Order {% endblock pagetitle %}
+{% block body %}
+   <div class="ed-information mb-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card ed-card-block">
+                                <div class="card-header">
+                                    <h2>
+                                        Work Order MQp Details
+                                    </h2>
+                                </div>
+   <div class="table-responsive">
+    <table class="table table-striped ed-table-block">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Company Name</th>
+                <th>MQp</th>
+                <th>Action</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for Supply in mqpdoc %}
+            <tr>
+                  <td>
+                    {{forloop.counter}}
+                </td>
+                   <td>
+                    {{Supply.tkcwoinfo.Discom.Discom_Short_Name}}
+                </td>
+                 <td>
+                          <a target="_blank" href="{{Supply.mqpdoc.url}}">
+                                                        <button class="btn ed-submit btn-success">
+                                                            <span class="ed-submit-text">
+                                                                 View mqp documents
+                                                            </span>
+                                                        </button>
+                                                            </a>
+
+                </td>
+                <td>{% if  Supply.mqpdoc_approved_status == 0 %}
+                        <form action="/fqp/mqpdoc_approval/{{Supply.id}}" onsubmit="return validateForm()" name="myForm" method="POST">
+                                    {% csrf_token %}
+                     <div class="orderaction-items">
+                         <div class="radio-groups-items">
+                             <label class="radio-groups">
+                                <input type="radio" name="action" value="1"/>
+                                 Accept
+                             </label>
+                             <label class="radio-groups">
+                           <input type="radio" name="action" value="0"/>
+                                 Reject
+                             </label>
+                         </div>
+                         <div class="form-group">
+                             <input type="text" name="remark" class="form-control ed-textbox">
+                         </div>
+                     </div>
+                    <button type="submit" class="btn ed-submit btn-info">
+                                                            <span class="ed-submit-text">
+                                                                 Submit
+                                                            </span>
+                                                        </button>
+                        </form>
+                    {% elif Supply.mqpdoc_approved_status == -1 %}
+                     <a href=""  class="btn ed-submit btn-danger">
+                                                        <span class="ed-submit-text">
+                                                             Rejected
+                                                        </span>
+                                                       </a>
+                     {% elif Supply.mqpdoc_approved_status == 1 %}
+                     <a href=""  class="btn ed-submit btn-success">
+                                                        <span class="ed-submit-text">
+                                                             Approved
+                                                        </span>
+                                                       </a>
+
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if  Supply.mqpdoc_approved_remark %}
+                     <span class="ed-submit-text">
+                         {{ Supply.mqpdoc_approved_remark}}
+                     </span>
+                     {% endif %}
+                </td>
+            </tr>
+ {% endfor %}
+        </tbody>
+    </table>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                           </form>
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+
+
+                                <!-- --------------------- Step 4 -------------------------------- -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+{% endblock body %}

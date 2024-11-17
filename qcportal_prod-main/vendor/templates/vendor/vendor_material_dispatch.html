@@ -1,0 +1,53 @@
+{% extends 'vendor/vendor_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+<center>
+      <form  action="vendor_material"  method="POST">
+             {% csrf_token %}
+             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Send" class="btn btn-success">
+             </td>
+      <!-- <img src="static/assets/h_images/po.png"  width="1000" height="800"> -->
+      <table  class="table table-striped">
+             <thead>
+                 <tr>
+                     <!-- <th>Id</th> -->
+                     <th>PO Number</th>
+                     
+                     <th>PO</th>
+
+                     <th>SEND DISPATCH</th>
+                 </tr>
+                 <!-- <input type="checkbox" name="vehicle3" value="Boat" checked> -->
+                
+             </thead>
+             <tbody id="data">
+                <!-- <tr> -->
+                  
+                {% for i, j in final %}
+                <tr>
+                  <td>{{i}}</td>
+                  <td><img src={{j}} style="width: 400px;">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <select id="stateuser" name="vehicle3" class=" form-control form-control-submit registration-cont" required="required">
+                            <option value="select-option-user" type="test" disabled selected hidden selected>Select State</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                           
+                            
+                          </select>
+                       
+                    </td>
+                    
+                </tr> 
+                {% endfor %}
+               
+               
+               
+             </tbody>
+          </table>
+         
+</center>
+
+{% endblock body %}

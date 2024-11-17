@@ -1,0 +1,174 @@
+{% extends 'vendor/vendorBase.html' %} {% load static %} {% block body %} {% block rejected_doc %}
+<li class="nav-item active" style="list-style-type: none;">
+    {% endblock rejected_doc %}
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+
+
+
+
+
+    <div class="ed-card-inner">
+        <div class="card-header">
+            <h2>
+                Rejected Material Documents
+            </h2>
+        </div>
+
+        <div class="card-body mb-3">
+            <h5>
+                List Of Rejected Material
+            </h5>
+            <ul class="rejectedlist-bcok">
+                {% with name=100 %} {% for data4 in data3 %}
+                <li class="nav-item">
+                    <form action="/vendor/rejected_new_material_save/{{data4.id}}" method="POST"
+                        enctype="multipart/form-data" name="myForm4" onsubmit="return valid()">
+                        {% csrf_token %}
+
+                        <div class="forms-informations">
+                            <div class="ed-form-block p-0 border-0">
+                                <!-- <div class="ed-form-title">
+                                <h6>
+                                    <span class="ed-text">
+                                        Liaison Info
+                                    </span>
+                                </h6>
+                            </div> -->
+                                <div class="ed-form-body">
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Material Name <span class="pl-2">
+                                                {{data4.Material_Name}}</span>
+                                        </label>
+                                        <input type="text" onkeyup="validateForm()" onfocus="validateForm()"
+                                            onchange="validateForm()" value="{{data4.Material_Name}}"
+                                            class="form-control ed-textbox" readonly>
+                                        <span id="issue" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="ed-form-label">
+                                            Material Specification<span class="pl-2">
+                                                {{data4.Material_Specification}}</span>
+                                        </label>
+                                        <input type="text" onkeyup="validateForm()" onfocus="validateForm()"
+                                            onchange="validateForm()" value="{{data4.Material_Specification}}"
+                                            class="form-control ed-textbox" readonly>
+                                        <span id="issue" class="d-block ed-warningtext text-danger"></span>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="ed-form-label">
+                                                    Material Test Doc<span class="pl-2">
+                                                        {{data4.Material_Specification}}</span>
+                                                </label>
+                                                <input type="file" name="file4" onkeyup="validateForm()"
+                                                    onfocus="validateForm()" onchange="validateForm()" id="file123"
+                                                    accept="application/pdf" class="">
+                                                <span id="upoadFile" class="d-block ed-warningtext text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="ed-form-label">
+                                                    Material GTP Doc<span class="pl-2">
+                                                        {{data4.Material_Specification}}</span>
+                                                </label>
+                                                <input type="file" name="file5" onkeyup="validateForm()"
+                                                    onfocus="validateForm()" onchange="validateForm()" id="file123"
+                                                    accept="application/pdf" class="">
+                                                <span id="upoadFile" class="d-block ed-warningtext text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="ed-form-label">
+                                                    Material Other Doc<span class="pl-2">
+                                                        {{data4.Material_Specification}}</span>
+                                                </label>
+                                                <input type="file" name="file6" onkeyup="validateForm()"
+                                                    onfocus="validateForm()" onchange="validateForm()" id="file123"
+                                                    accept="application/pdf" class="">
+                                                <span id="upoadFile" class="d-block ed-warningtext text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="{{data4.Material_Test_Doc.url}} "
+                                            class="btn ed-submit btn-primary mr-2">Test
+                                            Doc</a>
+
+                                        <a href="{{data4.Material_GTP_Doc.url}} "
+                                            class="btn ed-submit btn-primary mr-2">GTP
+                                            Doc</a>
+
+                                         {% if data4.Material_Other_Doc %}
+                                        <a href="{{data4.Material_Other_Doc.url}} "
+                                            class="btn ed-submit btn-primary mr-2">Other
+                                            Doc</a>
+                                            {% else %}
+                                            <h6>File Not Uploaded </h6>
+                                            {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="task" rows="2" class="form-control ed-textbox" cols="24"
+                                            placeholder='{{data4.DGM_remark}}' disabled></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="btn-actionblock text-right">
+                                            <button type="Submit" value="Submit"
+                                                class="btn ed-submit ed-formsubmit">Resubmit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                {% endfor %} {% endwith %}
+            </ul>
+        </div>
+    </div>
+</li>
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+    let dtElem = document.getElementById('issue_id');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#expire_id').attr('min', today);
+</script>
+<!--second trial end here-->
+
+
+{% endblock body %}

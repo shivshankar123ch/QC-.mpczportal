@@ -1,0 +1,97 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+  <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Material List</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                      <th style="width:5%">
+                           Serial No
+                      </th>
+                      <th style="width: 25%">
+                          Store Name
+                      </th>
+                      <th style="width: 40%">
+                          Store Address
+                      </th>
+                        <th style="width: 5%">
+                         Store Officer Id
+                      </th>
+                      <th style="width:30%">
+                          Store Officer Contact No
+                      </th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>2.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>3.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                  </tr>
+                    <tr>
+                    <td>4.</td>
+                    <td>ABC</td>
+                    <td>Image</td>
+                    <td >
+                          <p class="btn-primary">View</p>
+                      </td>
+                      <td>
+                          <p class="btn-info">Approved</p>
+                      </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+ {% endblock body %}

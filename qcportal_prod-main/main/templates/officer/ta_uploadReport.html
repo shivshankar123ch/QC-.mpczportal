@@ -1,0 +1,91 @@
+{% extends 'officer/ta_base.html' %}
+
+{% load static %}
+
+{% block active %}
+          <div class="collapse show" id="dashboardsExamples">
+            <ul class="nav ms-4">
+              <li class="nav-item ">
+                <a class="nav-link " href="/ta_joborder">
+                  <span class="sidenav-mini-icon"> TA </span>
+                  <span class="sidenav-normal">TA Job Order</span>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link active" href="/gp_outward_base">
+                  <span class="sidenav-mini-icon"> Upload </span>
+                  <span class="sidenav-normal">Upload Details</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+{% endblock active %}
+
+{% block body %}
+
+
+
+<form action="/ta_uploadReport/{{trf_id}}"  method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="row">
+  <div class="col-sm-2 col-2">
+    <label class="form-label mt-4">Item 1 Date {{trf_id}} </label>
+    <input id="firstName" name="firstName" class="form-control" type="date" >
+  </div>
+  <div class="col-sm-3 col-3">
+    <label class="form-label mt-4">Item 2</label>
+    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+  </div>
+  <div class="col-sm-3 col-3">
+    <label class="form-label mt-4">Item 3</label>
+    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+  </div>
+  <div class="col-sm-4 col-4">
+    <label class="form-label mt-4">Item 4</label>
+    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+  </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-2">
+        <label class="form-label mt-4">Item 5</label>
+        <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-4 col-4">
+      <label class="form-label mt-4">Item 6</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-6 col-6">
+      <label class="form-label mt-4">Item 7</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1 col-1">
+        <label class="form-label mt-4">Item 8</label>
+        <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-1 col-1">
+      <label class="form-label mt-4">Item 9</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-1 col-1">
+      <label class="form-label mt-4">Item 10</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-4 col-4">
+      <label class="form-label mt-4">Item 11</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-3 col-3">
+      <label class="form-label mt-4">Item 12</label>
+      <input id="firstName" name="firstName" class="form-control" type="text" placeholder="" >
+    </div>
+    <div class="col-sm-2 col-2">
+        <label class="form-label mt-4">Upload a report file:</label>
+        <input type="file" id="myfile" name="myfile">
+    </div>
+</div>
+<button type="submit" class=" mt-4 btn bg-gradient-primary" onclick="alert('click on this')">Submit</button>
+
+</form>
+{% endblock body %}

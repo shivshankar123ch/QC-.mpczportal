@@ -1,0 +1,280 @@
+{% extends 'tkc/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+
+<div class="card-header">
+    <h2>
+        Material Offer
+    </h2>
+</div>
+<div class="ed-form-body">
+                        
+    <div class="form-group">
+        <label class="ed-form-label">
+            Item Specification
+        </label>
+        <input type="text" class="form-control ed-textbox" value="{{boq_data.material_name}}" autocomplete="off" readonly/>
+    </div>
+
+
+    <div class="form-group">
+        <label class="ed-form-label">
+            Total Ordered Quantity
+        </label>
+        <input type="text" class="form-control ed-textbox" value="{{boq_data.total_order_qty}}" autocomplete="off" readonly/>
+    </div> 
+
+    <div class="form-group">
+        <label class="ed-form-label">
+            Remaining Quantity
+        </label>
+        <input type="text" class="form-control ed-textbox" value="{{boq_data.balance_qty|floatformat:2}}" autocomplete="off" readonly/>
+    </div>
+
+    <!-- <div class="form-group">
+        <label class="ed-form-label">
+            Offered Quantity
+        </label>
+        <input type="text" class="form-control ed-textbox" value="{{offer_material_data.Offer_Quantity}}" autocomplete="off" readonly/>
+    </div> -->
+    <form action="/tkc/save_material_offer_store/{{wo_id}}/{{boq_data.item_code}}/{{vendor_id}}" method="POST"  name="myForm" onsubmit="return validateForm()">
+        {% csrf_token %}
+    <div class="row"> 
+
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Site Stores
+                    <span style="color: red;">* </label> 
+                
+                   <select  class="form-control ed-textbox" id="areastore"  onchange="get_Store_Circles()" onkeypress="validateForm()" onfocus="validateForm()" name="areastore" required>
+                       <option value="" selected disabled >Select Site Stores </option>
+			   {% for data1 in sitestore_data %}
+                    <option value="{{data1.id}}">{{ data1.Store_Address }}</option>
+                    {% endfor %}
+                    </select>
+                <span id="store1" class="text-danger font-weight-bold text-sm-left"style="font-size: 80%;"></span>
+            </div> 
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Store Circles
+                    <span style="color: red;">* </label> 
+                
+                   <select  class="form-control ed-textbox" id="store_circles" onkeypress="validateForm()" onfocus="validateForm()" name="store_circles" required>
+                   <option value="" selected disabled>Select Site Store Circle</option>
+                    </select>
+               
+            </div> 
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Quantity to be Delivered
+                    <span style="color: red;">* </label>
+                <input type="Number" class="form-control ed-textbox" step="any"  autocomplete="off" id="qty" onchange="checkTable()" onkeypress="validateForm()" onfocus="validateForm()" name="qty" required/>
+                <span id="data" class="text-danger font-weight-bold text-sm-left"style="font-size: 80%;"></span>
+            </div> 
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="ed-form-label">
+                    Enter Serial Numbers
+                    <span style="color: red;">* </label>
+                <input type="text" class="form-control ed-textbox"  autocomplete="off" id="qty"  name="serial_number_value" placeholder="From Serial no. - To serial no." required/>
+                <span id="data" class="text-danger font-weight-bold text-sm-left"style="font-size: 80%;"></span>
+            </div> 
+        </div>
+
+
+
+        <div class="col-sm-4">
+            <div class="poaction-info">
+                <button class="btn ed-submit btn-success mt-4" onclick="validateForm()" type="submit"> 
+                    <span class="ed-submit-text">
+                        Submit
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+
+    </div> 
+</div>
+</form>
+		
+	
+<div>
+    <p style="align-items:Center;color: rgb(4, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+        {% if msg1 %}
+        {{ msg1 }}
+        {% endif %}
+    </p>
+</div>
+
+    <div class="ed-tableinfo-block mt-4">
+        <div class="table-responsive">
+            <table class="table table-striped ed-table-block" id="table1" onchange="checkTable()" onmouseover="checkTable()" >
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>WO NO.</th>
+                        <th>Item Name</th>
+                        <th>Site Store</th>
+                        <th>Quantity</th>
+                        <th>Upload Serial No. Excel</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in updated_store_data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.wo.Contract_Number}} </td>
+                        <td>{{data.wo_material.material_name}}</td>
+                        <td>{{data.site_store}}</td>
+                        <td>{{data.quantity}}</td>
+                            <td>
+                                {% if data.is_serial_excel_uploaded == False %}
+                                <a href= "/tkc/upload_excel_options/{{data.wo.id}}/{{data.wo_material.item_code}}/{{data.id}}/{{vendor_id}}">
+                                <button type="submit">Upload Excel</button>
+                                </a>
+                                {% else %}
+                                <button type="submit">Already Uploaded</button>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if data.is_offered == True %}
+                                <button type="submit" class="btn btn-success" >Already Offered</button>
+                                </a>
+                                {% else %}
+                                <button type="submit" class="btn btn-danger">Final offer Pending</button>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if data.is_offered == True  %}
+                                <button type="submit" class="btn btn-success" >Offered</button>
+                                </a>
+                                {% else %}
+                                <a href = "/tkc/remove_added_offer_material/{{wo_id}}/{{boq_data.item_code}}/{{vendor_id}}/{{data.id}}">
+                                <button type="submit" class="btn btn-danger">Remove offer</button>
+                                </a>
+                                {% endif %}
+                            </td>
+                        <!-- <td>
+                            <a href = "/tkc/delete_material_offer_store/{{data.wo.id}}/{{data.wo_material.item_code}}/{{data.id}}/{{vendor_id}}">
+                                <button>Delete Offer</button>
+                            </a>
+                        </td> -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/tkc/wo_approve_vendor_material_list_test/{{boq_data.wo.id}}/{{vendor_id}}/{{boq_data.id}}/{{boq_data.wo.supplier.User_Id}}">
+                <button class="btn  btn-info">Add More Material Offers</button>
+            </a>
+
+
+            <a href="/tkc/wo_approve_vendor_material_list_test/{{boq_data.wo.id}}/{{vendor_id}}/{{boq_data.id}}/{{boq_data.wo.supplier.User_Id}}">
+                <button class="btn  btn-info">Click here to further offer process</button>
+            </a>
+			
+        </div>
+    </div>  
+</div>
+<script>
+    function get_Store_Circles(){
+        var Site_Stores = document.getElementById("areastore").value;
+        //alert(Site_Stores);
+        document.getElementById('store_circles').innerHTML = '';
+        $.ajax({
+                type: 'get',
+                url: `https://qcportal.mpcz.in/tkc/sitestore_circles/${Site_Stores}`,
+                success: function (data) {
+                    //console.log(data)
+                    Object.entries(data).forEach(([_, value]) => {
+                            value.forEach(element => {
+                        var option = document.createElement('option');
+                        option.value = element.circle_id;
+                        option.text = element.circle_name;
+                        var region = document.getElementById('store_circles');
+                        region.add(option);
+                    })
+                })
+                   
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            })
+    }
+</script>
+<script>
+    function checkTable(){
+        var tab1 = document.getElementById("table1").rows.length;
+        //console.log("lennnn",tab1)
+        
+        var cell_value =0;
+        var sumValue =0;
+        
+        for(cell_value=1;cell_value<tab1;cell_value++){
+            var num = document.getElementById("table1").rows[cell_value].cells.length;
+            var total = document.getElementById("one").value;
+            
+            sumValue = sumValue + Number(total);
+        }
+          //console.log("valueeeeeeeeeeeee",sumValue)
+    }
+</script>
+
+<script>
+    function validateForm() {
+            let slect1 = document.forms["myForm"]["store"].value;
+            let select2 = document.forms["myForm"]["qty"].value;
+
+            if (slect1 == "") {
+                document.getElementById('store1').innerHTML = " Please fill the required details";
+            } else {
+                document.getElementById('store1').innerHTML = "";
+            }
+            if (select2 == "") {
+                document.getElementById('data').innerHTML = " Please fill the required details";
+            } else {
+                document.getElementById('data').innerHTML = "";
+            }
+    }
+</script>
+<script>
+    function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)
+
+            ) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+</script>
+{% endblock body %}

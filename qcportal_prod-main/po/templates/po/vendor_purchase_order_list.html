@@ -1,0 +1,104 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Create Purchase Order {% endblock pagetitle %}
+{% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length {
+        display: block;
+    }
+
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+}
+</style>
+<div class="ed-information mb-4">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                All Approved Purchase Order
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="ed-tableinfo-block  mb-4">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered display table-striped text-center" id="vendor_purchase_order">
+                        <thead class="table-dark" >
+                            <tr>
+                                <th>S.No.</th>
+                                <th>PO. No.</th>
+                                <th>Vendor Name</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>View PO</th>
+                                <th>View Details</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for name in data %}
+                            <tr>
+                                <td>
+                                    <p>{{ forloop.counter }}</p>
+                                </td>
+                                <td >
+                                    <span>{{name.po_no}}</span>
+                                </td>
+
+                                <td >
+                                    <span >{{name.vendor.CompanyName_E}}</span>
+                                </td>
+
+                                <td >
+                                    <span >{{name.po_subject}}</span>
+                                </td>
+                                <td>
+                                    <span >{{name.erp_created_date}}</span>
+                                </td>
+                                <td>
+                                    {% if name.Po_doc %}
+                                    <a  href="{{name.Po_doc.url}}" target="_blank">
+                                       <button class="btn btn-info btn-sm">View PO</button></a>
+                                    {% else %}
+                                    <button class="btn btn-danger btn-sm">PO_doc Not Uploaded</button>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <a href="/po/view_po_details/{{name.id}}"> <button class="btn btn-primary btn-sm">Document Details</button>
+                                    </a>
+
+                                </td>
+                                <td>
+                                    <a href="/po/procurement_status/{{name.id}}">
+                                        <button class="btn btn-success btn-sm">Status</button>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#vendor_purchase_order').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+{% endblock body %}

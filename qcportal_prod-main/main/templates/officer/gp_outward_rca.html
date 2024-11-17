@@ -1,0 +1,87 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}Gatepass inward{% endblock pagetitle %}
+
+{% block fa %}
+<ul class="nav nav-treeview">
+  <li class="nav-item">
+    <a href="/po/area_process" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>Open Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="/po/area_stock" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>In Stock</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="far fa fa-circle nav-icon"></i>
+      <p>RCA Gatepass Outward</p>
+    </a>
+  </li>
+</ul>
+{% endblock fa %}
+
+{% block body %}
+<div class="mx-auto mt-6 table-responsive" style="width: 95%;" >
+<form method="POST">
+    {% csrf_token %}    
+<table class="table table-striped" style="width: 50%;">
+        <thead>
+            <tr>
+                <th scope="col">Material View</th>
+                <th scope="col">Specification</th>
+<!--                <th scope="col">Name</th>-->
+
+                <th scope="col">Vehicle_number</th>
+                <th scope="col">Driver_name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Submitted_by</th>
+                <th scope="col">Test_Request_Form_by</th>
+
+                <th scope="col">Material Number List</th>
+                <th scope="col">Allot no.</th>
+                <th scope="col">Material id.</th>
+                <th scope="col">Start date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Outpass date</th>
+                <th scope="col">Outpass Driver Name</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.select_material }}</td>
+
+                    <td>{{ emp.select_specification }}</td>
+
+<!--                    <th scope="row">{{ emp.emp_name }}</th>-->
+
+                    <th scope="row">{{ emp.Vehicle_number }}</th>
+                    <th scope="row">{{ emp.Driver_name }}</th>
+                    <th scope="row">{{ emp.Date }}</th>
+                    <th scope="row">{{ emp.Submitted_by }}</th>
+                    <th scope="row">{{ emp.Test_Request_Form_by }}</th>
+
+                    <td>{{ emp.material_number_list }}</td>
+
+                    <td>{{ emp.Allot_no }}</td>
+                    <td>{{ emp.Material_id }}</td>
+                    <td>{{ emp.Start_date }}</td>
+                    <td>{{ emp.End_Date }}</td>
+                    <td><b><input type="date" name="outpass_date" id="outpass_date"></b></td>
+                    <td><b><input type="text" name="outpass_driver_name" id="outpass_driver_name" placeholder="Outpass Driver Name"></b></td>
+                    <td><a href="/gp_outward_rca/{{trf_id}}"><button type="submit" class="button btn btn-primary">Generate</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,72 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} Order Information {% endblock pagetitle %}
+{% block body %}
+
+{% load mathfilters %}
+    
+
+<body>
+    <div class="container-fluid">
+
+        <div class="card ed-card-block mt-2">
+            <div class="ed-card-inner">
+                <div class="card-header">
+                    <h2>
+                        Vendor Status
+                    </h2>
+                </div>
+                               <div class="card-body">
+                    <div class="ed-tableinfo-block">
+                      
+ 
+                        <div class="table-responsive mt-2">
+                            <table
+                                class="table table-striped table-bordered ed-table-block ed-centertable text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="w-5 text-center">S.No.</th>
+                                        <th>Discom </th>
+                                      
+                                        <th>Firm/Company<br> Name </th>
+                                        <th>Authorised<br> Person<br> Name </th>
+                                        <th>Contact Number</th>
+                                        <th>Valid Up To</th>
+                                        <th>
+                                            View Material
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data,lst_oyt,address in final_lst %}
+
+                                    <tr>
+
+                                        <td class="text-center">{{forloop.counter}}</td>
+                                        <td class="text-center">{{data.User_zone}}</td>
+                                        
+                                        <td style="width=auto;">{{data.CompanyName_E}}</td>
+
+                                        <!--value_expression | slice : start [ : end ]-->
+
+                                        <td style="width=auto;">{{data.Authorised_person_E}}</td>
+                                        <td class="text-center">{{data.ContactNo}}</td>
+                                        <td>{{lst_oyt.valid_upto}}</td>
+                                        <td>
+                                            <a href="/po/vendor_material_po_creater/{{data.User_Id}}">
+                                                <label class="ed-textinfo">
+                                                    Detail View
+                                                </label>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        {% endblock body %}

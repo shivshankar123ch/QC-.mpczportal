@@ -1,0 +1,86 @@
+{% extends 'officer/gm_circle_login.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+<style>
+.nounderline {
+    text-decoration: none !important;
+    color: aliceblue;
+}
+.ed-tableinfo-block .dataTables_length{
+        display: block;
+    }
+.ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+    background: #e5e9ed;
+    color: #fff;
+    border-color: #1b1c1c;
+}
+</style> 
+<div class="ed-infocontant">
+    <div class="ed-information mb-4">
+        <div class="card ed-card-block">
+            <div class="card-header">
+                <h2>
+                    Update Order information
+                </h2>
+            </div>
+            <div class="card-body">
+                <p style="align-items:Center;color: rgb(132, 0, 255);font-size: medium; text-align: center; font-weight: 700;">
+                    {% if msg1 %}
+                    {{ msg1 }}
+                    {% endif %}
+                </p>
+                <div class="ed-tableinfo-block ed-orderinfo-block">
+                    <div class="table-responsive">
+                        <table class="table table-striped ed-table-block" id="gm_list">
+                            <thead>
+                                <tr>
+                                    <th class="wc1">Sr. No.</th>
+                                    <th class="">WO No.</th>
+                                    <th>Subject</th>
+                                    <th>Supplier</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Verify BOQ</th>                                       
+                                </tr>
+                            </thead>
+                            <tbody>                                           
+                            {% for data in wo %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{data.Contract_Number}} </td>
+                                    <td>{{data.Header.Contract_Description}}</td>
+                                    <td>{{data.supplier.Authorised_person_E}}</td>
+                                    <td>{{data.Contract_Date}}</td>
+                                    <td class="text-center">
+                                        <a class="nounderline" href="/gm_verify_boq/{{data.id}}" > 
+                                            <button class="btn ed-submit btn-info" id="{{data.id}}" >
+                                                <span class="ed-submit-text">
+                                                        Verify BOQ 
+                                                </span>
+                                            </button>                                                                                               
+                                        </a>                                                                                                 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>                        
+                        </table>                 
+                    </div>
+                </div> 
+            </div>                                                 
+        </div>
+    </div>
+</div>
+
+    
+<script>
+    $(document).ready(function () {
+        $('#gm_list').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+
+</script>
+{% endblock body %}
+
+
+

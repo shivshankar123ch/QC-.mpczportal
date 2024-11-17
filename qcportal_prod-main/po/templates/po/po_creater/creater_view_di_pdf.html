@@ -1,0 +1,383 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %}  Order Information {% endblock pagetitle %}
+{% block body %}
+
+{% load mathfilters %}
+<html lang="en">
+
+<head>
+    <title>Dispatch Instructions pdf</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+    <style>
+        th,
+        td,
+        p {
+            font-size: 12px;
+            line-height: 24px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+
+
+    <table class="table-main" style="border: 1px solid #000;margin: 10px auto;max-width: 80%;">
+        <tbody>
+            <tr>
+                <td style="padding: 40px;">
+                    <table class="table-header" style="border-bottom: 1px solid #000;margin-bottom: 10px;">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="width:100%">
+                                    <div class="cgm-logo-block">
+                                        {% if po_data.discom.Discom_Header %}
+                                        <img src="{{po_data.discom.Discom_Header.url}}" class="cgm-logo" style="width:100%"
+                                            alt="User profile" />
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table-captions" style="width: 100%;margin: 0 0 10px;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 00px;width: 50%;">
+                                    <p style="margin: 0;text-align: left;font-weight: 600;">
+                                        {{di_update_data.prefix}}/{{di_update_data.erp_di_number}}
+                                    </p>
+                                </td>
+
+                                <td style="padding: 00px;width: 50%;">
+                                    <p style="margin: 0;text-align: right;font-weight: 600;">
+                                        {{po_data.discom.Discom_location}}, Dated: {{date|date:"d-M-Y"}}
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="table-captions" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="padding: 00px;width: 100%;">
+                                    <p style="margin: 0;">
+                                        To,
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 00px;width: 50%;">
+                                    <p style="margin: 0 0 10px; padding-left: 30px;font-weight: 600;">
+                                        {{po_data.vendor.CompanyName_E}},<br>
+                                        {{address.Company_add_1}}<br>
+                                        {{address.Company_add_2}}<br>
+                                        {{address.Company_dist}},{{address.Company_state}} - {{address.Company_pin_code}}<br>
+                                        Reg.no.-{{po_data.vendor.Authentication_id}}
+                                    </p>
+                                </td>
+                                <td style="padding: 0px;width: 50%;">
+                                    <!-- <div style="text-align: right;"> -->
+                                        <p style="margin: 0 0 0px;font-weight: 600;display: block;">
+                                            <b>
+                                                ERP P.O. No. {{di_update_data.po_no}} <br>
+                                                ERP D.I. No. {{di_update_data.erp_di_number}}<br>
+                                                Offer ID: MP{{di_update_data.zone}}{{di_update_data.id}}<br>
+                                                Offer Date: {{date.date}}<br>
+                                                Scheme Name & Code: {{di_update_data.scheme_name}}/{{di_update_data.scheme_code}}
+                                                <!-- {% if di_update_data.scheme_code %}
+                                                Scheme Code: {{di_update_data.scheme_code}}<br>
+                                                {% endif %}
+                                                {% if di_update_data.scheme_name %}
+                                                Scheme Name: {{di_update_data.scheme_name}}<br>
+                                                {% endif %} -->
+                                            </b>
+                                        </p>
+                                        <p style="margin: 0 0 5px;font-weight: 500;display: block;">
+                                            <span style="padding-right:3px;">
+                                                Email:-
+                                            </span>
+                                            <span>
+                                             {{user.Email_Id}}
+                                            </span>
+                                        </p>
+                                    <!-- </div> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table-captions" style="border:0px solid #ccc;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 00px;width: 100%;">
+                                    <p style="margin: 0 0 5px;">
+                                        <b style="padding-right: 9px; ">
+                                            Sub:</b> {{di_update_data.di_subject}}
+                                    </p>
+
+                                    <p>
+                                        <b>Terms and conditions :-</b> <br>
+                                    </p>
+                                    <p style="margin: 0 0 5px;">
+                                        {{di_update_data.term_and_condition|safe}}
+                                    </p>
+                                    <p style="margin: 0 0 5px;">
+                                        <span> <b>Name of Item :-</b>
+                                        </span>
+                                        <span>
+                                            {% for data in AreaStroeData %}
+                                            {{data.offer_item.material.specification}}
+                                            {% endfor %}
+                                        </span>
+                                    </p>
+                                    <p style="margin: 0 0 5px;">
+                                        <b>Total Quantity :-</b>
+                                        <span>
+                                            {% for data in AreaStroeData %}
+                                            {{data.offer_item.material.Quantity}}
+                                            {% endfor %}
+                                        </span>
+                                    </p>
+                                    <p style="margin: 0 0 5px;">
+                                        <b>Remaining Quantity :-</b>
+                                        <span>
+                                            {% for data in AreaStroeData %}
+                                            {{data.offer_item.material.remaining_qty}}
+                                            {% endfor %}
+                                        </span>
+                                    </p>
+                                    <p style="margin: 0 0 5px;">
+                                        <span> <b>Date :-</b>
+                                        </span>
+                                        <span>
+                                            {{date.date}}
+                                        </span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                   
+                   
+                    <table  class="table-captions" style=" border:1px solid #ccc;margin: 5px 0 20px;width: 100%;">
+                        <thead>
+                                           <tr>
+                                               <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                   Sr. No.
+                                               </th>
+                                               <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                   Particulars
+                                               </th>
+                                               <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                   Name of consignee GM/EE (Store) 
+                                               </th>
+                                               <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                   Qty. to be dispatched (nos.)
+                                               </th>
+                                               <!-- <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                Remaining Qty
+                                            </th>
+                                               <th style="padding: 4px; width: 25%; border: 1px solid #ccc;">
+                                                Quantity ordered
+                                            </th> -->
+                                            
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           {% for data in AreaStroeData %}
+                                           <tr>
+                                               <td>{{forloop.counter}}</td>
+                                               <td style="text-align: center;"> {{data.offer_item.material.specification}} </td>
+                                               <td style="text-align: center;"> {{data.areastore}} </td>
+                                               <td style="text-align: center;"> {{data.deliverable_qty}} </td>
+                                               <!-- <td style="text-align: center;">{{data.offer_item.material.remaining_qty}}</td> -->
+                                               <!-- <td>{{data.offer_item.material.Quantity}}</td> -->
+                                           </tr>
+                                           {% endfor %}
+                                       </tbody>
+                                       </table>
+
+
+
+
+
+                
+
+                    <table class="table-captions" style="
+    margin: 15px 0 0;width:100%;
+">
+                        <tbody>
+
+                            <tr>
+                                <td style="padding: 00px;width: 100%; text-align: right;">
+                                    <div style="margin: 5px 0 0; font-weight: 600; text-align: right;display:inline-block;">
+                                        <p style="display:inline-block;text-align: center;font-weight: 600;">
+                                            <!-- Chief General Manager (Proc.) <br> -->
+                                            {{po_data.discom.Po_Main_Sign}}<br>
+<!--                                             O/o  -->
+                                            {{po_data.discom.Discom_Short_Name}}
+                                        </p>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="copytop-block" style="border:0px solid #ccc;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 00px;width: 100%;">
+                                    <p style="margin: 0; font-weight: 600;">
+                                        Copy To:-
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr> <div class="ed-form-body">
+                                <div class="ed-tableinfo-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped ed-table-block" id="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr. No</th>
+                                                    <th>Copy To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in copy %}
+                                                <tr>
+                                                    <td>
+                                                        {{forloop.counter}}
+                                                    </td>
+                                                    <td>
+                                                        {{data.copy}}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                                   
+
+                                    <div style="margin: 35px 0 0;font-weight: 600;text-align: right;">
+                                        <p style="display:inline-block;text-align: center;font-weight: 600;">
+                                            <!-- Dy. General Manager (P-II) <br> -->
+                                            {{po_data.discom.Po_Copy_To_Sign}}<br>
+<!--                                             O/o  -->
+                                            {{po_data.discom.Discom_Short_Name}}
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <div class="print-action-block">
+        <div id="options">
+            <input onclick="printDiv('printid')" type="button" value="Print DI" class="btn btn-primary btn-print">
+    
+            <!--<input id="printpagebutton" class="btn btn-primary btn-print" type="button" value="Print Order"
+                onclick="printpage()" /> -->
+            <!-- <a href="/po/di_approved/{{di_update_data.id}}"> -->
+                <!-- <input id="printpagebutton1" type="Submit" style="width:200px" class="btn btn-primary btn-print" -->
+                    <!-- type="button" value="Approve DI" /> -->
+    
+            <!-- </a> -->
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+        }
+    
+        function add_fields() {
+            document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+        }
+    
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton = document.getElementById("printpagebutton");
+            //Set the print button visibility to 'hidden'
+            printButton1.style.visibility = 'hidden';
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            printButton.style.visibility = 'visible';
+            printButton1.style.visibility = 'visible';
+        }
+        function add_fields1() {
+            document.getElementById("myTable1").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question1" placeholder="Question22" cols="48" </td ></tr>';
+        }
+    </script>
+    <style>
+        .print-action-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .print-action-block .btn-print {
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            font-weight: 300;
+        }
+    </style>
+
+
+{% endblock body %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <title>MPMKVVCL</title>
+  <meta charset="utf-8">
+  </head>
+  <body>
+<form action="/mpeb_alllist/{{data.v_id}}" method="POST">
+    {% csrf_token %}
+    <div class="col-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <!-- <h3 class="card-title">Generate PO List</h3> -->
+                        </div>
+                        <!-- <div class="card-header">
+            <button type="Add Test" id="submit" class="btn btn-success float-right mr-3">Dispatch</button>
+
+
+          </div> -->
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <h3 class=p-3>Vendor All Data</h3>
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20%">
+                                            Serial Number</th>
+                                        <th style="width: 20%">
+                                            Report Name </th>
+                                        <th style="width:20%">
+                                            Docuement Number/Value</th>
+
+                                        <th style="width:35%">
+                                            Document
+                                        </th>
+                                        <!-- <th style="width: 15%">
+                    
+                    Select Vendor
+                  </th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Company Name</td>
+                                        <td>{{userdata.CompanyName_E}}</td>
+                                        <td><button type="button" id="button1" class="btn btn-success mr-3">View</button></td>
+
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Auth Name</td>
+                                        <td>{{userdata.Authorised_person_E}}</td>
+                                        <td><button type="button" id="button1" class="btn btn-success mr-3">View</button></td>
+
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Mobile Number</td>
+                                        <td>{{userdata.ContactNo}}</td>
+                                        <td><button type="button" id="button1" class="btn btn-success mr-3">View</button></td>
+
+
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>4</td>
+                                        <td>EMail</td>
+                                        <td>{{userdata.Email_Id}}</td>
+                                        <td><button type="button" id="button1" class="btn btn-success mr-3">View</button></td>
+
+
+
+                                    </tr>
+
+
+
+
+
+
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+        <div class="card-body text-center">
+            <div class="mb-3">
+                <!-- <button type="Submit" class="btn btn-primary">Accept</button>
+                <button class="btn btn-primary">Reject</button> -->
+            </div>
+        </div>
+    </section>
+
+    </form>
+    </body>
+    </html>

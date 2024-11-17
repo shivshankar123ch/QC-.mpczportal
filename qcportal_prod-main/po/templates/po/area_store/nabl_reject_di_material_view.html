@@ -1,0 +1,78 @@
+{% extends 'po/area_store/areastore_base.html' %}
+{% load static %}
+{% block pagetitle %}  {% endblock pagetitle %}</li>
+{% block body %}
+
+  <!-- Main content -->
+   <section class="content">
+     
+      {% csrf_token %}
+      
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title"> DI Rejected in NABL Testing</h3>
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects table-bordered display text-center">
+             <thead class="table-dark">
+                 <tr>
+                     <th style="width: 1%">Sr No.</th>
+                     <!-- <th>Select Received Materials</th> -->
+                    <th>Item Code</th>
+                    <th>Item Name</th>
+                     <th>Serial No/Batch No</th>
+                  
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                        <td>
+                        <b>{{name.sample_code}}</b>
+                     </td>
+                     <td>
+                      <b>{{name.material_name}}</b>
+                   </td>
+                    {% if name.material_serial_number %}
+                     <td class="project_progress">
+                             {{name.material_serial_number}}
+                     </td>
+                    {% else %}
+                    <td class="project_progress">{{name.batch_no}}</td>
+                    {% endif %}
+                   
+                   
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+         <!-- <div class="text-end">
+          <button class="btn btn-primary btn-sm">Submit</button> 
+         </div> -->
+       
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

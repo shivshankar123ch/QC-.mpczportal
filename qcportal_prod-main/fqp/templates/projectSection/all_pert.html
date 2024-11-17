@@ -1,0 +1,85 @@
+{% extends 'projectSection/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+       <div class="table-responsive">
+          <table class="table table-striped projects table-responsive">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          Work Order ID
+                      </th>
+                      <th style="width:10%">
+                          Supplier
+                      </th>
+                      <th style="width:10%">
+                          NIT NO
+                      </th>
+                       <th style="width:10%">
+                          Total Schedule
+                      </th>
+                      <th class="text-center">
+                       Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for name in data %}
+                  <tr>
+                      <td>
+                         {{ forloop.counter }}
+                      </td>
+                      <td>
+                         <b>MPCZ00{{name.id}}</b>
+                      </td>
+                      <td>
+                          {{name.supplier.CompanyName_E}}
+                      </td>
+                      <td class="project_progress">
+                              {{name.nit_no}}
+                      </td>
+                      <td>
+                           {{name.milestone}}
+                      </td>
+                      <td class="project-actions text-center">
+<!--                          <a class="btn btn-primary btn-sm" href="/fqp/pert_view/{{name.id}}" style="width:120px;">-->
+<!--                               View Details-->
+<!--                          </a>-->
+                          {% if name.Pert.pert_review %}
+                            <a href="#" class="btn btn-primary btn-sm" style="width:130px;"> Pert Reviewed</a>
+                          {% else %}
+                         <a href="/fqp/pert_review/{{name.id}}" class="btn btn-success btn-sm" style="width:130px;">Go To Pert Review</a>
+                          {% endif %}
+                      </td>
+                  </tr>
+              {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div> <!-- Main content -->
+
+
+{% endblock body %}

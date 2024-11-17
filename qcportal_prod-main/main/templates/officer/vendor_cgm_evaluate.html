@@ -1,0 +1,774 @@
+{% extends 'main/mpeb_base.html' %} {% load static %} {% block body %}
+<style>
+    .ed-tableinfo-block .dataTables_length{
+            display: block;
+        }
+    .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+        background: #e5e9ed;
+        color: #fff;
+        border-color: #1b1c1c;
+    }
+
+    .btn:not([class*=btn-outline-]) {
+    border: 0;
+    width: 132px;
+    }
+    </style>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="jquery-3.6.1.min.js"></script>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body table-responsive table-bordered table-hover">
+                    <div class="card-body table-responsive table-bordered">
+                        <h5 class=p-3>User All Data</h5>
+                          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center" width="5%">S.No.</th>
+                        <th>Document Name</th>
+                        <th>Document No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Type of Business</td>
+                        <td>{{data.Type_of_business}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>Authorised Person Name</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Company Name</td>
+                        <td>{{data.CompanyName_E}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td>Contact Number</td>
+                        <td>{{data.ContactNo}}</td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td>Email ID</td>
+                        <td>{{data.Email_Id}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</td>
+                        <td>Vendor Type</td>
+                        <td>{{data.User_type}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">7</td>
+                        <td>Company GST No</td>
+                        <td>{{CompanyData.Company_Gst_No}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">8</td>
+                        <td>Pan Card No</td>
+                        <td>{{CompanyData.Company_Pan_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">9</td>
+                        <td>Company Gumastha No</td>
+                        <td>{{CompanyData.Company_Gumastha_No}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">10</td>
+                        <td>Company Registration_Date</td>
+                        <td>{{CompanyData.Registration_Date}}</td>
+                    </tr>
+                     <tr>
+                       <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;"> Company Address</td>
+                    <tr>
+                        <tr>
+                        <td class="text-center">11</td>
+                        <td>Add 1</td>
+                        <td>{{CompanyData.Company_add_1}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">12</td>
+                        <td> Add 2</td>
+                        <td>{{CompanyData.Company_add_2}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">13</td>
+                        <td>Pin Code</td>
+                        <td>{{CompanyData.Company_pin_code}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">14</td>
+                        <td>District</td>
+                        <td>{{CompanyData.Company_dist}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">15</td>
+                        <td>State</td>
+                        <td>{{CompanyData.Company_state}}</td>
+                    </tr>
+                   <tr>
+                       <td colspan="3" class="font-weight-bold text-light bg-dark text-center" style="font-size: 15px;"> Bank Details</td>
+                    <tr>
+                        <tr>
+                        <td class="text-center">16</td>
+                        <td>Account No</td>
+                        <td>{{BankDetails.Account_Number}}</td>
+                    </tr>
+
+                        <tr>
+                        <td class="text-center">17</td>
+                        <td>Bank Name</td>
+                        <td>{{BankDetails.Bank_name}}</td>
+                    </tr>
+
+                </tr>
+                        <tr>
+                        <td class="text-center">18</td>
+                        <td>IFSC Code</td>
+                        <td>{{BankDetails.IFSC}}</td>
+                    </tr>
+                </tr>
+                        <tr>
+                        <td class="text-center">19</td>
+                        <td>Account Holder Name</td>
+                       <td>{{BankDetails.Account_Holder_Name}}</td>
+                    </tr>
+               </section>
+                <tr></tr>
+            </table>
+        </div>
+        <div class="panel-heading mt-4">
+            <h5> Technical Documents </h5>
+        </div>
+                   <div class="table-responsive">
+                 <table class="table table-bordered table-striped ed-table-block ed-centertable" id="technical_documents">
+                <thead class="table-dark  ">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> Issued Date </th>
+                            <th> Expired Date </th>
+                            <th> View Document</th>
+                            <th> Status </th>
+                            <th> Decision</th>
+                            <th> Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for data in tech_data %}
+                        <tr>
+                            <td>{{data.Types_of_Docs}}</td>
+                            <td>{{data.Document_Number}}</td>
+                            <td>{{data.Doc_issue_date|date:"d-M-Y"}}</td>
+                            <td>{{data.Doc_expiry_date|date:"d-M-Y"}}</td>
+                            {% if data.Document_Doc %}
+                            <td> <a href="{{data.Document_Doc.url}} " target="_blank"><span class="btn btn-info">View</span></a></td>
+                              {% else %}
+                              <td><span>File Not Required</span></td>
+                              {% endif %}
+                            <td>
+                                    {% if data.Primary_verification_Status == 1 %}
+                                    <span class="text-success"> Ok</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class=" btn btn-danger"> Resubmit</span>
+                                {% else %}
+                                <span class="text-warning"> pending</span>
+                                {% endif %}
+                                 </td>
+                                 <td>
+                                     {% if data.Primary_verification_Status == 1 %}
+                                     <span class="text-success"> Accepted</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class=" text-danger"> Rejected</span>
+                                {% else %}
+                                <span class="text-warning"> pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                            {% if data.Primary_remark %}
+                         {{data.Primary_remark}}
+                            {% endif %}
+                        </td>
+                            </tr>
+                        {% endfor %}
+                  
+                    </tbody>
+
+                </table>
+            </div>
+                    <form action="/vendor_cgm_evaluate_save/{{data.User_Id}}" method="POST">
+                        {% csrf_token %}
+                           <div class="panel-heading mt-4">
+                       <h5> Basics Document </h5>
+               </div>
+                   <div class="table-responsive">
+                 <table class="table table-bordered table-hover" id="basic_document">
+                <thead class="table-dark">
+                        <tr>
+                            <th> Document Name </th>
+                            <th> Document Number </th>
+                            <th> Issued Date </th>
+                            <th> Expired Date </th>
+                            <th> View Document</th>
+                            <th> Status </th>
+                            <th> Decision</th>
+                            <th> Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for data in doc %}
+                        <tr>
+                            <td>{{data.Types_of_Docs}}</td>
+                            <td>{{data.Document_Number}}</td>
+                            <td>{{data.Doc_issue_date|date:"d-M-Y"}}</td>
+                            <td>{{data.Doc_expiry_date|date:"d-M-Y"}}</td>
+                            <td class="text-center"> <a href="{{data.Ddocfile.url}} " target="_blank"><span class="btn btn-info">
+                                View
+                            </span></a></td>
+                                <td>
+                                    {% if data.Primary_verification_Status == 1 %}
+                                    <span class="text-success"> Ok</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class="text-danger"> Resubmit</span>
+                                {% else %}
+                                <span class="text-warning"> pending</span>
+                                {% endif %}
+                                 </td>
+                                 <td>
+                                     {% if data.Primary_verification_Status == 1 %}
+                                     <span class="text-success"> Accepted</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class="text-danger"> Rejected</span>
+                                {% else %}
+                                <span class="text-warning"> pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                            {% if data.Primary_remark %}
+                         {{data.Primary_remark}}
+                            {% endif %}
+                        </td>
+                            </tr>
+                        {% endfor %}
+                  
+                    </tbody>
+
+                </table>
+            </div>
+
+
+
+
+                    <div class="panel-heading mt-4">
+                       <h5> Factory Image  </h5>
+                    </div>
+                        <div class="row">
+                             {% for data in fac_image %}
+     <div class="col-md-4 text-center" >
+     <div class="thumbnail">
+      <a target="_blank" href="{{data.Image.url}}">
+        <img src="{{data.Image.url}}" alt="Not Available" style="width:100%;height:100px;">
+        <div class="caption">
+          <p>Image {{forloop.counter}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+                        <div class="panel-heading mt-4">
+            <h5> Material Details</h5>
+        </div>
+         <div class="table-responsive mt-3">
+                <table class="table table-bordered table-hover" id="material_details">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Material Name</th>
+                            <th>Material Specification</th>
+                            <th>Material Test Doc</th>
+                            <th>Material GTP Doc</th>
+                            <th>Material Other Doc</th>
+                            <th>Status</th>
+                            <th>Decision</th>
+                            <th>Remark</th>
+                            <th>Remove Material</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for data in Material %}
+                        <tr>
+                            <td>
+                                {{data.Material_Name}}</h5>
+                            </td>
+                            <td>{{data.Material_Specification}}</td>
+                            {% if data.Material_Test_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_Test_Doc.url}}"  target="_blank"><span class="btn btn-info">View</span></a></td>
+                            {% else %}
+                            <td><span class="btn btn-danger"> Not Required</span> </td>
+                            {% endif %}
+                            {% if data.Material_GTP_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_GTP_Doc.url}}"  target="_blank"><span class="btn btn-info">View</span></a></td>
+                            {% else %}
+                            <td><span class="btn btn-danger"> Not Required</span></td>
+                            {% endif %}
+                             {% if data.Material_Other_Doc %}
+                           <td class="text-center"> <a href="{{data.Material_Other_Doc.url}}"  target="_blank"><span class="btn btn-info">View</span></a></td>
+                            {% else %}
+                            <td><span class="btn btn-danger"> Not Required</span></td>
+                            {% endif %}
+                            <td>
+                                {% if data.Primary_verification_Status == 1 %}
+                                <span class="text-success"> Ok</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class=" btn btn-danger"> Resubmit</span>
+                                {% else %}
+                                <span class="text-warning"> pending</span>
+                                {% endif %}
+                                 </td>
+                                 <td>
+                                {% if data.Primary_verification_Status == 1 %}
+                                <span class="text-success"> Accepted</span>
+                                 {% elif data.Primary_verification_Status == 2 %}
+                                 <span class=" btn btn-danger"> Rejected</span>
+                                {% else %}
+                                <span class="btn btn-primary"> pending</span>
+                                {% endif %}
+                            </td>
+                            {% if data.Primary_remark %}
+                                 <td >{{data.Primary_remark}}</td>
+                            {% else %}
+                                    <td>OK</td>
+                            {% endif %}
+
+                            <!-- <td><a href="/remove_vendor_material/{{data.id}}">Remove</a></td> -->
+                            <!-- <td><button type="button" onclick="removeItemCGM({{data.id}},'{{forloop.counter}}')">Remove</button></td> -->
+
+                            <td>
+                                <form action="/remove_vendor_material/{{data.id}}" method="POST">
+                                 {% csrf_token %}
+                                 <textarea style="min-width:300px;" class="form-control" name="remark_cgm" rows="1"  style=" margin-top:-10px; margin-x:-30px;"></textarea>
+                                 <input type="submit" value="remove">
+                                </form>
+                            </td>
+
+                            <span id="demo"></span>
+
+
+
+                            </tr>
+                        {% endfor %}
+                   
+                    </tbody>
+
+                </table>
+            </div>
+
+                        <div class="panel-heading mt-3">
+          <h5>Factory Technical Report</h5>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center" width="5%">S.No.</th>
+                          <th>Document Name</th>
+                          <th>Value</th>
+                          <th>Remark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Consumer No</td>
+                        <td>{{fi_tech.consumer_no}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>Sanctioned in HP</td>
+                        <td>{{fi_tech.section_id}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Working Load in HP</td>
+                        <td>{{fi_tech.work_load}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td>Load Shading (If any) Please Specify: (if Imposed by Discom)</td>
+                       <td>{{fi_tech.load_shading}}</td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td> Rating of DG Sets in KVA (Quantity Wise)</td>
+                       <td>{{fi_tech.dg_rating}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</td>
+                        <td>Whether Power Back up is appropriate for Testing Section.(Yes)(No)</td>
+                          {% if fi_tech.power_backup  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                        <td>{{fi_tech.power_remark}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">7</td>
+                        <td>Details of Plants and machinery.</td>
+                        <td>{{fi_tech.plant_machinery}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">8</td>
+                        <td>Description, Rating, Make and Quantity (Please fill the details in Part-B)</td>
+                      <td>{{fi_tech.description}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">9</td>
+                        <td>whether latest machinery is or some obsolete Equipments\' are installed in plant.</td>
+                              {% if fi_tech.latest_machinery == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.latest_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">10</td>
+                        <td>Whether firm is having quality plan for manufacturing of goods</td>
+                              {% if fi_tech.manufacturing  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.manufacturing_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">11</td>
+                        <td>inspection and Quality Control of finished products</td>
+                             {% if fi_tech.inspection  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.inspection_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">12</td>
+                        <td> Any sub-standard lying at shop floor during the time of visit (please specify)</td>
+                             {% if fi_tech.sub_stand  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.sub_stand_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">13</td>
+                        <td>Assistance from external agencies</td>
+                             {% if fi_tech.assistance   == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.assistance_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">14</td>
+                        <td>Internal Testing Facilities / Accreditation Details. </td>
+                             {% if fi_tech.internal_testing  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.internal_testing_remark}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">15</td>
+                        <td>Details of Testing carried on (as per routine practice)</td>
+                            {% if fi_tech.details_testing  == '1' %}
+                        <td>Yes</td>
+                        {% else %}
+                       <td>No</td>
+                        {% endif %}
+                            <td>{{fi_tech.details_testing_remark}}</td>
+                    </tr>
+
+               </section>
+                <tr></tr>
+            </table>
+         </div>
+
+                         <div class="panel-heading">
+          <h5>Factory Appraisal Report</h5>
+        </div>
+
+                      <div class="table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="font-weight-bold text-light bg-dark" style="font-size: 15px;">
+                    <tr>
+                        <th class="text-center" width="5%">S.No.</th>
+                        <th>Name</th>
+                        <th width="100px">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Experience, Knowledge and capability of Quality Control Manager </td>
+                        <td class="text-center">{{apprisal.experience}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>Availability quality and quantity of tools gauges measuring and test equipment</td>
+                         <td class="text-center">{{apprisal.availability}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Calibration of instruments and test equipment's</td>
+                        <td class="text-center">{{apprisal.calibration}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</td>
+                        <td>Bought-out items.</td>
+                         <td class="text-center">{{apprisal.bought}}</td>
+
+                    </tr>
+                     <tr>
+                        <td class="text-center">5</td>
+                        <td> In process inspection- Equipment's &amp; Tooling's </td>
+                        <td class="text-center">{{apprisal.inprocess}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</td>
+                        <td> Dispatch Inspection Procedures</td>
+                        <td class="text-center">{{apprisal.dispatch}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</td>
+                        <td>Overall record keeping</td>
+                         <td class="text-center">{{apprisal.overall}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">7</td>
+                        <td>Area there adequate quality control instruction?</td>
+                        <td class="text-center">{{apprisal.control}}</td>
+                    </tr>
+                   <tr>
+                        <td class="text-center">8</td>
+                        <td>ISO &amp; BIS Certification </td>
+                       <td class="text-center">{{apprisal.iso}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">9</td>
+                        <td>Material Handling Facilities </td>
+                          <td class="text-center">{{apprisal.material}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">10</td>
+                        <td>General Observation on the works being exempted at the time of inspection</td>
+                       <td class="text-center">{{apprisal.general}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">11</td>
+                        <td>Packing of final products</td>
+                       <td class="text-center">{{apprisal.packing}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">12</td>
+                        <td> Experience, Knowledge and capability of production in-charge</td>
+                      <td class="text-center">{{apprisal.incharge}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">13</td>
+                        <td>Experience, Knowledge and capability of supervisor.</td>
+                       <td class="text-center">{{apprisal.supervisor}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">14</td>
+                        <td>Effectiveness of Production control system.</td>
+                      <td class="text-center">{{apprisal.controlsystem}}</td>
+                    </tr>
+                        <tr>
+                        <td class="text-center">15</td>
+                     <td>Quality of Plant &amp; Equipment's </td>
+                            <td class="text-center">{{apprisal.qualityofplant}}</td>
+                    </tr>
+
+                        <tr>
+                        <td class="text-center">16</td>
+                        <td>Cleanliness of workshops</td>
+                        <td class="text-center">{{apprisal.workshoap}}</td>
+                    </tr>
+
+                        <tr>
+                        <td class="text-center">17</td>
+                        <td>Safety Equipment's </td>
+                      <td class="text-center">{{apprisal.sefty}}</td>
+                    </tr>
+
+                </tr>
+                        <tr>
+                        <td class="text-center">18</td>
+                        <td>Condition of Stores</td>
+                       <td class="text-center">{{apprisal.store}}</td>
+                    </tr>
+                </tr>
+                        <tr>
+                        <td class="text-center">19</td>
+                        <td>Back-up power facility</td>
+                       <td class="text-center">{{apprisal.faciality}}</td>
+                    </tr>
+                      <tr>
+                        <td class="text-center">20</td>
+                        <td>Adequate Quality control progress</td>
+                       <td class="text-center">{{apprisal.progress}}</td>
+                    </tr>
+                      <tr>
+                        <td class="text-center">21</td>
+                        <td>Overall view of Production section</td>
+                       <td class="text-center">{{apprisal.overallp}}</td>
+                    </tr>
+               </section>
+                <tr></tr>
+            </table>
+                          </div>
+                        </form>
+
+                            <table class="mt-4">
+                                {% if data.factory_approval == 1  %}
+                                <td>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio1" name="action" value="OK" checked required> Accepted
+                                        <label class="form-check-label" for="radio1"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="radio2" name="action" value="NOT"> Rejected
+                                        <label class="form-check-label" for="radio2"></label>
+                                    </div>
+                                </td>
+
+                                <td colspan="5"><textarea class="form-control" id="task" name="remark" rows="1" required="required" style=" margin-top:-10px; margin-x:-30px;" placeholder="{{data.CGM_remark}}"></textarea>
+                                </td>
+
+                                
+                                
+                                 <td class="ml-4">  <button type="Submit" style="float:left" class="btn btn-success" onclick="alert('OTP is generated and sent to the registered mobile number')">Submit</button></td>
+                                 {% else %}
+
+                                 <h5>Factory Inspection Pending</h5>
+                                 {% endif %}
+                            </table>
+                        </tbody>
+                    </tr>
+
+        </div>
+    </div>
+</section>
+<!-- <script type="text/javascript" src="{% static '/assets/js/Validation/main.js' %}"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.3.slim.js"></script>-->
+<script>
+    $(document).ready(function () {
+        $('#technical_documents').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#basic_document').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#material_details').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
+
+<script>
+    function removeItemCGM(id,count){
+        // remark_cgm = $("#remark_cgm"+count).val();
+        // url = "/remove_vendor_material/"+id+"/"+remark_cgm;
+        window.open("https://google.com");
+    }
+
+
+
+
+
+
+
+//         let xhr = new XMLHttpRequest();
+// xhr.open('POST', '/remove_vendor_material/'+id,true);
+
+// // request state change event
+// xhr.onreadystatechange = function() {
+
+//   // request completed?
+//   if (xhr.readyState !== 4) return;
+
+//   if (xhr.status === 200) {
+//     // request successful - show response
+//     console.log(xhr.responseText);
+//   }
+//   else {
+//     // request error
+//     console.log('HTTP error', xhr.status, xhr.statusText);
+//   }
+// };
+
+// // start request
+// xhr.send(POST);
+// document.getElementById("demo").innerHTML = xhr.responseText;
+       
+    }
+        //json_data = {"remark_cgm":remark_cgm}
+
+       // var xhrobj = new XMLHttpRequest();
+    //     xhrobj.open('POST','/remove_vendor_material/'+id,true);
+    //    xhrobj.send(null);
+    // var request = $.ajax({
+    //             type: "POST",
+    //             url: '/remove_vendor_material/'+id,
+                //data: JSON.stringify(json_data),
+                //dataType: "json",
+                // beforeSend: function() {
+                //     //$("#bankTransferModalSubmit").prop('disabled', true);
+                //     //$('#bankTransferModalSubmit').html('<i class="fa fa-spinner fa-spin"></i>');
+                // },
+                // success: function(data) {
+                //     //$("#bankTransferModalSubmit").prop('disabled', false);
+                //     //$('#bankTransferModalSubmit').html('SUBMIT REQUEST');
+                //     setInterval('location.reload()', 2500);
+                // },
+                //error: function (data) {
+                    //pagerefersh();
+                    //refreshBalance();
+                //},
+                //dataType: "json",
+            //})
+   // }
+</script> 
+<!-- /.content -->
+{% endblock body %}

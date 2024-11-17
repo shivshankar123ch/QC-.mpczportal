@@ -1,0 +1,43 @@
+{% extends 'officer/dgm_base.html' %} {% load static %} {% block body %}
+<div class="container">
+    <h2>All Pending Vendor</h2>
+    <div class="panel panel-default">
+        <!-- <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="background-color:#FFFFE0;color:black;">
+                <thead class="font-weight-bold" style="font-size: 15px;">
+                    <tr>
+                        <th style="width:5%">
+                            Serial Number
+                        </th>
+                        <th style="width:30%">
+                            Name Of Company
+                        </th>
+                        <th style="width: 30%">
+                            Name of Authorized Person
+                        </th>
+                        <th style="width:15%">
+                            Registration Date
+                        </th>
+                        <th style="width:20%">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{data.CompanyName_E}}</td>
+                        <td>{{data.Authorised_person_E}}</td>
+                        <td>{{data.Uploaded_Date}}</td>
+                        <td> <a href="/dgm_qc_evaluate/{{data.User_Id}}">Detail View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

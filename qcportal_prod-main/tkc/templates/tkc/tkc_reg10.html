@@ -1,0 +1,820 @@
+{% extends 'tkc/creater_base.html' %} {% load static %} {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"
+    rel="stylesheet" />
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/Validation/tkc_reg10.js"></script>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+</script>
+
+
+
+<div class="ed-information mb-2">
+    <div class="card ed-card-block">
+        <div class="card-header">
+            <h2>
+                Upload Your Document
+            </h2>
+        </div>
+        <div class="card-body">
+            <h6>
+                All <span class="text-danger">(*)</span> marked fields are
+                mandatory
+            </h6>
+            <form action="tkc_reg_ten" name="myForm" method="POST"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+                <ul class="reglistinfo">
+                   
+                    <li class="navitem">
+                        <h4>
+                            ACTIVE GST NO (ALONG WITH COPY OF LATEST PAID
+                            CHALLAN AND ITS RECEIPT
+                        </h4>
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Activate GSt serial number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="six"
+                                                id="v_office_name_supply"
+                                                maxlength="15" minlength="15"
+                                                class="form-control ed-textbox"
+                                                placeholder="11AAAAA1111Z1A1"
+                                                required="required">
+                                            <span id="doc2" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" name="seven"
+                                                id="v_office_name_supply2"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue2" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                    <label> Valid Upto </label>
+                                    <input type="date" name="eight" id="v_office_name_supplyDate_past"
+                                    class="form-control" onfocus="validateForm()" onkeyup="validateForm()">
+                                    <span id="expire2" class="text-danger font-weight-bold"
+                                    style="font-size: 80%;"></span>
+                                    </div>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Uplaod
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file" name="nine"
+                                                id="v_office_name_supplyfile2"
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file2" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                  
+                    <li class="navitem">
+                        <h4>
+                            PAN CARD DETAILS
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                PAN Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="fifty_one"
+                                                id="v_office_name_supplyPAN"
+                                                maxlength="10" minlength="10"
+                                                class="form-control ed-textbox"
+                                                required="required"
+                                                style="text-transform:
+                                                uppercase"
+                                                placeholder="ABCTY1234D">
+                                            <span id="doc11" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" name="fifty_two"
+                                                id="v_office_name_supply19"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue11" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Uplaod
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file"
+                                                name="fifty_three"
+                                                id="v_office_name_supplyfile11"
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file11" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="navitem">
+                        <h4>
+                            ELECTRICAL LICENSE
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Electrical license number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                name="twentee_one"
+                                                id="v_office_name_supply"
+                                                class="form-control ed-textbox"
+                                                minlength="1" maxlength="30"
+                                                required="required">
+                                            <span id="doc5" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date"
+                                                name="twentee_two"
+                                                id="v_office_name_supply7"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue5" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Valid Upto
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date"
+                                                name="twentee_three"
+                                                id="v_office_name_supply8"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="expire5" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Upload
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file"
+                                                name="twentee_four"
+                                                id="v_office_name_supplyfile5"
+                                                class=""
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file5" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="navitem">
+                        <h4>
+                            EPF(ALONG WITH COPY OF LATEST PAID CHALLAN AND ITS
+                            RECEIPT)
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                EPF Registration Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                name="twentee_six"
+                                                id="v_office_name_supply"
+                                                class="form-control ed-textbox"
+                                                required="required">
+                                            <span id="doc6" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date"
+                                                name="twentee_seven"
+                                                id="v_office_name_supply9"
+                                                class="form-control ed-textbox"
+                                                required="required" onkeypress="
+                                                return false ">
+                                            <span id="issue6" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <div class="form-group">
+                                        <label>Valid Upto </label>
+                                        <input type="date" name="twentee_eight" id="v_office_name_supply10"
+                                        class="form-control" onfocus="validateForm()" onkeyup="validateForm()">
+                                        <span id="expire6" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                        </div>
+                                        </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Upload
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file"
+                                                name="twentee_nine"
+                                                id="v_office_name_supplyfile6"
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file6" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="navitem">
+                        <h4>
+                            ESIC REGISTRATION (ALONG WITH COPY OF LATEST PAID
+                            CHALLAN AND ITS RECEIPT)
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                ESIC Registration Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="thiety_one"
+                                                id="v_office_name_supply"
+                                                class="form-control ed-textbox"
+                                                required="required">
+                                            <span id="doc7" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" name="thiety_two"
+                                                id="v_office_name_supply11"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue7" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6">
+                                        <div class="form-group">
+                                        <label>Valid Upto </label>
+                                        <input type="date" name="thiety_three" id="v_office_name_supply12"
+                                        class="form-control" onfocus="validateForm()" onkeyup="validateForm()">
+                                        <span id="expire7" class="text-danger font-weight-bold"
+                                        style="font-size: 80%;"></span>
+                                        </div>
+                                        </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Upload
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file"
+                                                name="thiety_four"
+                                                id="v_office_name_supplyfile7"
+                                                class=""
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file7" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="navitem">
+                        <h4>
+                            EXPERIENCE CERTIFICATE AND RELATED WORKS FOR:3 YEARS
+                            UP TO A3 CLASS AND 7 YEARS
+                            FOR A4 & A5
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                EXP. Certificate Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="thiety_six"
+                                                id="v_office_name_supply"
+                                                class="form-control ed-textbox"
+                                                required="required">
+                                            <span id="doc8" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date"
+                                                name="thiety_seven"
+                                                id="v_office_name_supply13"
+                                                class="form-control ed-textbox "
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue8" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                    <label>Valid Upto </label>
+                                    <input type="date" name="thiety_eight" id="v_office_name_supply14"
+                                    class="form-control" onfocus="validateForm()" onkeyup="validateForm()">
+                                    <span id="expire8" class="text-danger font-weight-bold"
+                                    style="font-size: 80%;"></span>
+                                    </div>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Upload
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file"
+                                                name="thiety_nine"
+                                                id="v_office_name_supplyfile8"
+                                                class=""
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file8" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                  
+                  
+
+                    <li class="navitem">
+                        <h4>
+                            DECLARATION OF CONTRACTOR/SUPERVISOR/RELATIVE
+                            WHETHER EX-EMPLOYEE/EMPLOYEE OF
+                            MPEB/MPSEB/MP DISCOM/OTHER STATE DISCOM
+                        </h4>
+
+                        <div class="ed-form-block p-0 border-0 mt-2">
+                            <div class="ed-form-body m-0">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Identity Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="sixteen"
+                                                id="v_office_name_supply"
+                                                class="form-control ed-textbox"
+                                                required="required">
+                                            <span id="doc4" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Issued Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" name="seventeen"
+                                                id="v_office_name_supply5"
+                                                class="form-control ed-textbox"
+                                                onkeypress=" return false "
+                                                required="required">
+                                            <span id="issue4" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                    <label>Valid Upto </label>
+                                    <input type="date" name="eighteen" id="v_office_name_supply6" class="form-control"
+                                    onfocus="validateForm()" onkeyup="validateForm()">
+                                    <span id="expire4" class="text-danger font-weight-bold"
+                                    style="font-size: 80%;"></span>
+                                    </div>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="ed-form-label">
+                                                Document Upload
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file" name="nineteen"
+                                                id="v_office_name_supplyfile4"
+                                                class="form-control ed-textbox"
+                                                accept="application/pdf"
+                                                required="required">
+                                            <span id="file4" class="d-block
+                                                ed-warningtext text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                 
+
+                <div class="form-group">
+                    <div class="text-right">
+                        <!-- <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev" onclick="history.back()">Prev</button> -->
+                        <button class="btn ed-submits ed-formsubmit"
+                            type="submit" title="Send">
+                            Save And Next
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var month = String(today.getMonth()+4).padStart(2,'0');
+    today = yyyy + '-' + mm + '-' + dd;
+    maxExp = yyyy+3 + '-' + month + '-' + dd;
+    $('#v_office_name_supply1').attr('max', today);
+    $('#v_office_name_supply2').attr('max', today);
+    $('#v_office_name_supply3').attr('max', today);
+    $('#v_office_name_supply19').attr('max', today);
+    $('#v_office_name_supply7').attr('max', today);
+    $('#v_office_name_supply8').attr('max', maxExp);
+    $('#v_office_name_supply11').attr('max', today);
+    $('#v_office_name_supply13').attr('max', today);
+    $('#v_office_name_supply15').attr('max', today);
+    $('#v_office_name_supply17').attr('max', today);
+    $('#v_office_name_supply5').attr('max', today);
+    
+</script>
+<!-- <script>
+    let dtElem = document.getElementById('v_office_name_supply1');
+    let maxDate = new Date();
+    dtElem.max = formatDate(maxDate);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem1 = document.getElementById('v_office_name_supply2');
+    let maxDate1 = new Date();
+    dtElem1.max = formatDate(maxDate1);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem2 = document.getElementById('v_office_name_supply3');
+    let maxDate2 = new Date();
+    dtElem2.max = formatDate(maxDate2);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<script>
+    let dtElem3 = document.getElementById('v_office_name_supply5');
+    let maxDate3 = new Date();
+    dtElem3.max = formatDate(maxDate3);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem4 = document.getElementById('v_office_name_supply7');
+    let maxDate4 = new Date();
+    dtElem4.max = formatDate(maxDate4);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem5 = document.getElementById('v_office_name_supply9');
+    let maxDate5 = new Date();
+    dtElem5.max = formatDate(maxDate5);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem6 = document.getElementById('v_office_name_supply11');
+    let maxDate6 = new Date();
+    dtElem6.max = formatDate(maxDate6);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem7 = document.getElementById('v_office_name_supply13');
+    let maxDate7 = new Date();
+    dtElem7.max = formatDate(maxDate7);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem8 = document.getElementById('v_office_name_supply15');
+    let maxDate8 = new Date();
+    dtElem8.max = formatDate(maxDate8);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem9 = document.getElementById('v_office_name_supply17');
+    let maxDate9 = new Date();
+    dtElem9.max = formatDate(maxDate9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+<script>
+    let dtElem_9 = document.getElementById('v_office_name_supply19');
+    let maxDate_9 = new Date();
+    dtElem_9.max = formatDate(maxDate_9);
+
+    function formatDate(date) {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<!end the future function............. -->
+
+
+<!-- past date not select function................ -->
+
+<!-- <script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supplyDate_past').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply4').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply6').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply8').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply10').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply12').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply14').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply16').attr('min', today);
+</script>
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#v_office_name_supply18').attr('min', today);
+</script>
+
+ -->
+
+
+<!-- end the function of past date........... -->
+<script>
+    $(function () {
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox({
+                alwaysShowClose: true
+            });
+        });
+
+        $('.filter-container').filterizr({
+            gutterPixels: 3
+        });
+        $('.btn[data-filter]').on('click', function () {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
+    })
+</script>
+{% endblock body %}

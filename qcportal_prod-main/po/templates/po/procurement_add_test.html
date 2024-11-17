@@ -1,0 +1,66 @@
+{% extends 'po/procurement_base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}
+ {% block body %}
+<div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Add New Test</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                    <div class="form-group">
+                  <label>Select Product</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">PTR 33/11 KV OFTC </option>
+                    <option>PTR 33/11 KV OLTC Star </option>
+                    <option>PTR 33/11 KV OFTC Star Rating</option>
+                    <option>PTR 33/11 KV OLTC Star Rating</option>
+                  </select>
+                </div>
+                 <div class="form-group">
+                      <label for="exampleInputEmail1">Name Of Material For Testing </label>
+                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Material Name">
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">Is As per Tender</label>
+                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Material Name">
+                </div>
+                    <div class="form-group">
+                  <label>Select Testing</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">1. Breaking Load Test</option>
+                    <option>2. Resistance Test </option>
+                    <option>3. Breaking Load Test</option>
+                    <option>4. Resistance Test</option>
+                  </select>
+                </div>
+                 </div>
+                <!-- /.form-group -->
+
+                <!-- /.form-group -->
+                      </div>
+            <!-- /.row -->
+          <button type="button" class="btn btn-success float-right mr-3">Add Test</button>
+            <!-- /.row -->
+          </div>
+              </div>
+
+          <!-- /.card-body -->
+
+        </div>
+
+
+{% endblock body %}

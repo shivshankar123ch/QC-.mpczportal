@@ -1,0 +1,169 @@
+{% extends 'po/po_creater/creater_base.html' %}
+{% load static %}
+{% block pagetitle %} {% endblock pagetitle %}
+{% block body %}
+<style>
+  .ed-tableinfo-block .dataTables_length {
+      display: block;
+  }
+
+  .ed-tableinfo-block .dataTables_paginate span .paginate_button.current {
+      background: #e5e9ed;
+      color: #fff;
+      border-color: #1b1c1c;
+  }
+  [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    width: 170px;
+}
+.btn:not(:disabled):not(.disabled) {
+    
+    margin-top: 10px;
+}
+
+</style>
+  
+<div class="ed-information mb-4">
+  <div class="card ed-card-block">
+    <div class="card-header">
+      <h2>
+        Bank Guarantee
+      </h2>
+    </div>
+    <div class="card-body" id="formStep3">
+      <div class="ed-tableinfo-block  mb-4">
+        <div class="table-responsive">
+          <table class="table  table-bordered display table-striped text-center" id="vendor_bg_approval">
+            <thead class="table-dark">
+              <tr>
+                <th >Sr No.</th>
+                <th >
+                  PO No
+                </th>
+                <th>
+                  Vendor Name
+                </th>
+                <th>
+                  PO Subject
+                </th>
+                <th>
+                  PO Date
+                </th>
+                <th>Action</th>
+                <!-- <th>
+                  View PO
+                </th>
+                <th>View BG Details</th>
+                <th>
+                  Approve
+                </th>
+                <th>
+                  Reject
+                </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for name in data %}
+              <tr>
+                <td>
+                  {{ forloop.counter }}
+                </td>
+                <td>{{name.po_no}} </td>
+                <td>{{name.vendor.CompanyName_E}} </td>
+                <td>{{name.po_subject}} </td>
+                <td>{{name.erp_created_date}}</td>
+                <td>
+                  {% if name.Po_doc %}
+                  <a  href="{{name.Po_doc.url}}" target="_blank"><button class="btn btn-info btn-sm">View PO</button></a>
+                  {% else %}
+                  <button class="btn  btn-warning btn-sm">PO_doc Not Uploaded</button>
+                  {% endif %}
+                <!-- </td>
+
+                <td> -->
+                  {% if name.bg_status == 1 %}
+                  <a  href="/po/po_sd_detail/{{name.id}}" target="_blank"><button class="btn btn-info btn-sm">View BG</button></a>
+                  {% else %}
+                  <button class="btn btn-danger btn-sm">BG File Not Uploaded</button>
+                  {% endif %}
+                  <!-- </td>
+                <td> -->
+                  {% if name.bg_status == 1 and name.bg_approved == 0%}
+                  <a href="/po/vendor_bg_approved/{{name.id}}"
+                    onclick="return confirm('Are you sure you want to Approve this Bank Guarantee ?');">
+                    <button class="btn btn-primary btn-sm">Approve</button>
+                  </a>
+                  <a href="/po/vendor_bg_rejected/{{name.id}}"
+                    onclick="return confirm('Are you sure you want to Reject this Bank Guarantee ?');">
+                      <button class="btn  btn-danger btn-sm">Reject</button>
+                  </a>
+                  {% elif name.bg_approved == -1 and name.bg_status == 0 %}
+                  <button class="btn btn-danger btn-sm">Rejected</button>
+                  {% elif name.bg_approved == 0 and name.bg_status == 0 %}
+                  <!-- <button class="btn  btn-warning btn-sm">Details Not Fill</button> -->
+                  {% else %}
+                  <button class="btn  btn-success btn-sm">Approved</button>
+                  {% endif %}
+                <!-- </td>
+                <td> -->
+                  <!-- {% if name.bg_status == 1 and name.bg_approved == 0 %}
+                  <a href="/po/vendor_bg_rejected/{{name.id}}"
+                    onclick="return confirm('Are you sure you want to Reject?');">
+                      <button class="btn  btn-danger btn-sm">Reject</button>
+                  </a>
+
+                  {% elif name.bg_approved == -1 and name.bg_status == 0 %}
+
+                  <button class="btn  btn-danger btn-sm">Rejected</button>
+                  {% elif name.bg_approved == 0 and name.bg_status == 0 %}
+                  <button class="btn btn-warning btn-sm">Details Not Fill</button>
+
+                  {% else %}
+                  <button class="btn btn-success btn-sm">Approved</button>
+                  {% endif %} -->
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div id="dialog-container" class="ed-dialog-container">
+  <div class="ed-modal-block" id="dialog-modal">
+    <div class="ed-modal-content">
+      <div class="ed-modal-header">
+        <h4>Custom Alert Dialog</h4>
+      </div>
+      <div id="dialog-body" class="ed-modal-body">
+        <p>
+          This is the custom alert message. Click Ok to close this.
+        </p>
+      </div>
+      <div class="ed-dialog-footer">
+        <button class="btn ed-alertsubmit" onclick="CustomAlert.close()">
+          <span class="ed-submits-text">
+            Ok
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $('#vendor_bg_approval').DataTable({
+        pagingType: 'full_numbers',
+    });
+});
+</script>
+
+{% endblock body %}

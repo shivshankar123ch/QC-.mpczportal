@@ -1,0 +1,66 @@
+ {% extends 'approver/base.html' %}
+ {% load static %}
+ {% block pagetitle %}  {% endblock pagetitle %}</li>
+ {% block body %}
+<div class="card card-default width-75">
+          <div class="card-header">
+            <h3 class="card-title">Upload Letter Of Award Digital Signed Copy</h3>
+          </div>
+     <form   action="/fqp/wo_approved_save/{{data.id}}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label>Selected Contractor Authentication Id :</label><br>
+                  <b>{{data.supplier.Authentication_id}}</b>
+                    </div>
+              </div>
+              <!-- /.col -->
+
+              <!-- /.col -->
+
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Supplier Name :</label><br>
+                     <b>{{data.supplier.CompanyName_E}}</b>
+                  </div>
+
+                 </div>
+                     <div class="col-md-6">
+                     <div class="form-group">
+                      <label for="exampleInputEmail1"> NIT Number : </label><br>
+                      <b>{{data.nit_no}}</b>
+                   </div>
+            </div>
+                       <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1">  LOA Number : </label><br>
+                      <b>{{data.wo_no}}</b>
+                   </div>
+            </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Upload Letter Of Award  </label>
+                     <input type="file" name="loa_file" class="form-control" id="exampleInputEmail1" placeholder="" required>
+                   </div>
+                </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                      <label for="exampleInputEmail1"> Enter Your Remark  </label>
+                     <input type="text" name="remark" class="form-control" id="exampleInputEmail1" placeholder="Remark">
+                   </div>
+                </div>
+            </div>
+              <button type="submit" id="submit" class="btn btn-success full-width float-right m-5 p-1">Approved</button>
+            <!-- /.row -->
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+     </form>
+        </div>
+
+     </form>
+</div>
+{% endblock body %}

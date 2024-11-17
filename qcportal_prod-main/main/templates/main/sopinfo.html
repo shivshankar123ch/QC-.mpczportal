@@ -1,0 +1,292 @@
+{% extends 'main/base.html' %} {% load static%} {% block title %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link id="pagestyle" href="{% static '/css/rcastyle.css' %}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body> -->
+
+
+
+<div class="ed-sopinfo-block">
+    <div class="container-fluid">
+        <div class="card ed-card-block mt-2">
+            <div class="ed-card-inner">
+                <div class="card-header">
+                    <h2>
+                        SOP(Standard Operating Procedure) list
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <ul class="listinfo-block">
+                        <li class="nav-item">
+                            <a href="../../../static/assets/pdf/Contractor_Registration_SOP.pdf" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Contractor Registration standard operating procedure
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="../../../static/assets/pdf/Vendor_Registrations_sop.pdf" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Vendor Registration
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a href="../../../static/assets/pdf/po_sop_vendor.pdf" class="nav-link ed-links"
+                                target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Central Purchase SOP - Vendor Side
+                                </span>
+                            </a>
+                        </li> -->
+
+
+                        <li class="nav-item">
+                            <a href="../../../static/assets/pdf/NABL_Registration_SOP.pdf" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    NABL Registration
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h4 class="mt-2">TKC Process - Contractor Side </h4>
+                    <ul class="listinfo-block">
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/uploading_document_and_selection_of_vendor_contractor.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    After work order creation uploading documents and selection of vendor
+                                </span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/add_site_store_material_offer.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Add site store and material offer after vendor approval from officer
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/Dispatch_DI_and_initialization_of_sampling__TKC_site_store.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Dispatch Di after DI Approval and Receiving Material from site store
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/Selection_of_NABL_and_creation_of_Gatepass_and_TRFs.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Select NABL for testing, create gatepass and TRF for NABL
+                                </span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/TKC_for_FQP_Survey.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Intimation of Work Execution,Completion by TKC for FQP Survey
+
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/TKC_contractor_login.pdf' %}" class="nav-link ed-links"
+                                target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Intimation of Work Execution,Completion by TKC for FQP Survey
+                                </span>
+                            </a>
+                        </li> -->
+
+
+                    </ul>
+
+                    <h4 class="mt-2">Central Purchase </h4>
+                    <ul class="listinfo-block">
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/Central_Purchase_Vendor_Side.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    After creation of purchase order
+                                </spasn>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/central_purchase_DI_material.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Approved by approval side
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/CPO_from_Vendor.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Upload all documents from vendor side
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/cp_Order_NABL_to_Gatepass.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    NABL Test and report submission and create outward gatepass from NABL
+                                </span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{% static 'qcassest/pdf/cp_Order_LAS_to_NABL.pdf' %}" class="nav-link ed-links" target="_blank">
+                                <span class="iconbox">
+                                    <svg viewBox="0 0 1024 1024" class="icon">
+                                        <path fill="currentColor"
+                                            d="M754.752 480H160a32 32 0 100 64h594.752L521.344 777.344a32 32 0 0045.312 45.312l288-288a32 32 0 000-45.312l-288-288a32 32 0 10-45.312 45.312L754.752 480z" />
+                                    </svg>
+                                </span>
+                                <span class="sop-text">
+                                    Creation of gatepass to Nabl from local area store(LAS)
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .ed-sopinfo-block h4 {
+        font-size: 16px;
+        margin: 0 0 12px;
+    }
+</style>
+
+
+
+
+
+
+
+
+{% endblock title %}

@@ -1,0 +1,156 @@
+ {% extends 'fqp/Nodal/nodal_base.html' %}
+{% load static %}
+{% load wo_tag %}
+{% block pagetitle %}  Item Details {% endblock pagetitle %}
+{% block body %}
+ 
+
+  <!-- Main content -->
+   <section class="content">
+     
+    <form action="/fqp/fqp_di_status/{{dataid}}" method="post">
+      {% csrf_token %}
+      <div>
+          <table class="table table-striped m-4" style="width:90%" border="2">
+             
+              <tr>
+                  <th>DRR Date (mm/dd/yyyy): <span style="color: red;">*</span></th>
+                  <td><input type="date" id="drr_date" name="drr_date" required="required" onkeyup="validateForm()"
+                          onfocus="validateForm()" onchange="validateForm()" placeholder="" style="width:250px;">
+                      <span id="date" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+
+              <tr>
+                  <th>Challan No: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" name="challan_no" id="dispatch_num" placeholder=""
+                          style="width:250px;" required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()">
+                      <span id="tendor" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+
+              <tr>
+                  <th>Challan Date:(mm/dd/yyyy)<span style="color: red;">*</span></th>
+                  <td><input type="date" id="order_date1" name="challan_date" placeholder="" required="required"
+                          onkeyup="validateForm()" onfocus="validateForm()" onchange="validateForm()"
+                          style="width:250px;"> <span id="order" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span></td>
+              </tr>
+
+              <tr>
+                  <th>Vehicle No: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" name="vehicle" placeholder="" style="width:250px;"
+                          required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()">
+                      <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+              <tr>
+                  <th>Quantity: <span style="color: red;">*</span> </th>
+                  <td scope="row"><input type="text" name="quantity" placeholder="" style="width:250px;"
+                          required="required" onkeyup="validateForm()" onfocus="validateForm()"
+                          onchange="validateForm()">
+                      <span id="materilall" class="text-danger font-weight-bold text-sm-left"
+                          style="font-size: 100%;"></span>
+                  </td>
+              </tr>
+
+          </table>
+       
+      </div>
+ 
+
+
+     <!-- Default box -->
+     <div class="card">
+       <div class="card-header">
+         <h3 class="card-title">Receive Material</h3>
+
+         
+       </div>
+    
+       <div class="card-body p-0">
+         <table class="table table-striped projects">
+             <thead>
+                 <tr>
+                     <th style="width: 1%">
+                         s No.
+                     </th>
+                    
+                     <th>
+                         item Name 
+                     </th>
+                     <th>
+                         Serial Number
+                     </th>
+                     <th>
+                        Physically Status
+                    </th>
+                    <th>Remark</th>
+                   
+                   
+                 </tr>
+             </thead>
+             <tbody>
+               {% for name in data %}
+                 <tr>
+                     <td>
+                        {{ forloop.counter }}
+                     </td>
+                     <td>
+                        <b>{{name.Offer_Material.TKCVendor.Material_id.Material_Specification}}</b>
+                     </td>
+                    
+                     <td class="project_progress">
+                             {{name.Item_Serial_No}}
+                     </td>
+                   
+                     <td>{% if name.Physical_Status == 1%} Accpected  <input type="radio" name="{{name.id}}" value="1" checked hidden> {% elif name.Physical_Status == -1 %}Rejected  <input type="radio" name="{{name.id}}" value="-1" checked hidden> {% else %}
+                         <input type="radio" name="{{name.id}}" value="1" checked>Accept&nbsp;&nbsp;<input type="radio" name="{{name.id}}" value="-1"> Reject
+                    {% endif %}</td>
+
+                     <td>
+                      {% if name.Physical_Status == 1%}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+                      
+                      {% elif name.Physical_Status == -1 %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" value="{{name.Physical_Remark}}" readonly>
+
+                      {% else %}
+                      <input type="text" name="a{{name.id}}" placeholder="Remark" required>
+                      {% endif %}
+                       
+                     </td>
+                   
+                   
+                   
+
+                    
+                   </tr>
+             {% endfor %}
+           
+
+          </tbody>
+         </table>
+         <br>
+        <center><button class="btn-lg">Submit</button></center>
+         <br>
+       </div>
+       </form>
+       <!-- /.card-body -->
+     </div>
+     <!-- /.card -->
+
+   </section>
+   <!-- /.content -->
+ </div>
+
+
+{% endblock body %}

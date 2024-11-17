@@ -1,0 +1,141 @@
+{% extends 'nabl/nabl_Base.html' %} 
+
+{% load static %}
+
+{% block active %}
+<a data-bs-toggle="collapse" href="#rcaCell" class="nav-link " aria-controls="rcaCell" role="button" aria-expanded="true">
+  <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+      <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
+  </div>
+  <span class="nav-link-text ms-1 font-weight-bold" style="font-weight: bold; font-size: medium; ">Dashboard</span>
+</a>
+<div class="collapse active show" id="rcaCell">
+  <ul class="nav ms-4">
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/basic">
+              <span class="sidenav-mini-icon"> BI </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Basics Info</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/rejected_doc">
+              <span class="sidenav-mini-icon"> RD </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Rejected Document </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link " href="/nabl/UpdateNablProfile">
+              <span class="sidenav-mini-icon"> AS </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Update  Profile </span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/nabl/profile_status">
+            <span class="sidenav-mini-icon">PS</span>
+            <span class="sidenav-normal">Profile Status</span>
+          </a>
+        </li>
+      <li class="nav-item ">
+          <a class="nav-link " href="#">
+              <span class="sidenav-mini-icon"> Noti </span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; "> Notification </span>
+          </a>
+      </li>
+      <li class="nav-item active">
+          <a class="nav-link active" href="/nabl/nabl_trf">
+              <span class="sidenav-mini-icon">T M R</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium;">RCA Material Report </span>
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical">
+          <span class="sidenav-mini-icon">Phy Test Out</span>
+          <span class="sidenav-normal">Physical Tested Outward</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/nabl/nabl_out_physical_view">
+          <span class="sidenav-mini-icon">Phy Test View</span>
+          <span class="sidenav-normal">Physical Tested View <br>Outward</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/">
+              <span class="sidenav-mini-icon">LO</span>
+              <span class="sidenav-normal" style="font-weight: bold; font-size: medium; color: red; ">Logout</span>
+          </a>
+      </li>
+  </ul>
+</div>
+{% endblock active %}
+
+{% block body %}
+<div class="table-responsive" style="vertical-align: text-top">
+  <table class="table table-striped">
+    <thead class="table table-dark" style="vertical-align: top;">
+          <tr class="text-center" style="vertical-align: top;">
+              <!-- <th scope="col">TRF ID</th> -->
+              <!-- <th scope="col">User ID </th> -->
+              <th scope="col">Material S.No. </th>
+              <!-- <th scope="col">Sample Code </th> -->
+              <th scope="col">Date </th>
+              <th scope="col">Verified/Checked<br>by</th>
+              <th scope="col">Remark </th>
+              <th scope="col">Accept/Reject</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody> 
+        <form method="POST" action="/nabl/nabl_sample_reject/{{sc_obj.material_serial_number}}/{{sc_obj.ro_id}}/{{sc_obj.Gatepass.id}}">
+          {% csrf_token %}
+              <tr class="text-center">
+                  <!-- <td><input style="background-color: transparent;border: none;" size="5" type="text" name="TRF_Id" id="TRF_Id" value="{{sc_obj.TRF_Id }}" readonly="readonly"></td> -->
+                  <!-- <td><input style="background-color: transparent;border: none;" size="5" type="text" name="user_id" id="user_id" value="{{sc_obj.user_id }}" readonly="readonly"></td> -->
+                  <td><input style="background-color: transparent;border: none;" size="10"type="text" name="material_serial_number" id="material_serial_number" value="{{sc_obj.material_serial_number }}" readonly="readonly"></td>
+                  <!-- <td><input style="background-color: transparent;border: none;" size="15" type="text" name="sample_code" id="sample_code" value="{{sc_obj.sample_code }}" readonly="readonly"></td> -->
+                  
+                  {% if sc_obj.phy_rejected == 0 and sc_obj.phy_accepted == 0 %}
+                  <td><input style="background-color: white!important;;border: none;" size="5" type="date" name="date" id="date" value="" required="required"></td>
+                  {% else %}
+                  <td><input style="background-color: transparent;border: none;" size="5" type="date" value="{{sc_obj.rejected_date }}" readonly="readonly"></td>
+                  {% endif %} 
+                  
+                  {% if sc_obj.phy_rejected == 0 and sc_obj.phy_accepted == 0 %}
+                  <td><input style="background-color: white;border: none;" size="10" type="text" name="rejected_by" id="rejected_by" value="" required="required"></td>
+                  {% else %}
+                  <td><input style="background-color: transparent;border: none;" size="10" type="text" value="{{sc_obj.officer_id }}" readonly="readonly"></td>
+                  {% endif %}
+
+                  {% if sc_obj.phy_rejected == 0 and sc_obj.phy_accepted == 0 %}
+                  <td><input style="background-color: white !important; border: none;" size="15" type="text" name="remark" id="remark" value="" required="required"></td>
+                  {% else %}
+                  <td><input style="background-color: transparent;border: none;" size="15" type="text" value="{{sc_obj.rejection_remark }}" readonly="readonly"></td>
+                  {% endif %}
+
+                  {% if sc_obj.phy_rejected == 0 and sc_obj.phy_accepted == 0 %}
+                  <td>
+                    <select name="phy_accept_reject" id="phy_accept_reject" required="required">
+                      <option value=1>Accept</option>
+                      <option value=0>Reject</option>
+                    </select>
+                  </td>                  
+                  {% elif sc_obj.phy_rejected == 1 %}
+                  <td><input style="background-color: transparent;border: none;" size="10" type="text" value="Rejected" readonly="readonly"></td>
+                  {% elif sc_obj.phy_accepted == 1 %}
+                  <td><input style="background-color: transparent;border: none;" size="10" type="text" value="Accepted" readonly="readonly"></td>
+                  {% endif %}
+
+                  {% if sc_obj.phy_rejected == 0 and sc_obj.phy_accepted == 0 %}
+                  <td><input type="submit" value="Submit"></td>
+                  {% elif sc_obj.phy_rejected == 1 %}
+                  <td><input type="submit" value="Physical Rejected" disabled></td>
+                  {% elif sc_obj.phy_accepted == 1 %}
+                  <td><input type="submit" value="Physical Accepted" disabled></td>
+                  {% endif %}
+
+                </tr>                  
+        </form>
+      </tbody>
+  </table>
+</div>
+{% endblock body %}
